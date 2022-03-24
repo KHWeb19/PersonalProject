@@ -33,6 +33,11 @@ option value를 배열 형태로 만들어서 클릭하면 그거에 맞는 이�
             return {
                 selectCake : ['birthday', 'lover','family','friend','special']
             }
+        },
+        methods: {
+            chageLangSelect() {
+                
+            }
         }
 
     }

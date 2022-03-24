@@ -1,7 +1,8 @@
 <template>
-    <div>
+    <div class="calenderPage">
+        <h4>픽업일자 & 시간</h4>
+        <v-spacer></v-spacer>
         <calender-test></calender-test>
-        <p>어떻게 하는건가</p>
     </div>
 
     
@@ -23,5 +24,8 @@ export default {
 
 <style scoped>
 
+.calenderPage {
+    padding: 5%;
+}
 
 </style>
