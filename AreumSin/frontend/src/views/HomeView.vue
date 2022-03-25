@@ -1,28 +1,21 @@
 <template>
   <v-container fluid>
     <main-category></main-category>
-    <v-row>
-      <v-col>
-        <v-card height="600" outlined> 캘린더 </v-card>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col>
-        <v-btn class="float-right">
-          mdi-pencil
-        </v-btn>
-      </v-col>
-    </v-row>
+    <CalendarComponents/>
+    <BeforePencilIcon/>
   </v-container>
 </template>
 
 <script>
 
   import MainCategory from "@/components/MainCategory";
+  import CalendarComponents from "@/components/CalendarComponents";
+  import BeforePencilIcon from "@/components/Item/BeforePencilIcon";
   export default {
     name: 'HomeView',
-
     components: {
+      BeforePencilIcon,
+      CalendarComponents,
       MainCategory
 
     },
