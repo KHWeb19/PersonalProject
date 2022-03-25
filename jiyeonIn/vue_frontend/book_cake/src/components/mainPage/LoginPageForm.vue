@@ -1,6 +1,7 @@
 <template>
     <div class="loginForm">
         <form @submit.prevent="onSubmit">
+            <br>
             <h4>로그인</h4>
             <table>
                     <tr>
@@ -22,8 +23,8 @@
                     <router-link :to="{ name : 'HomeView'}">
                         아이디, 비밀번호 찾기
                     </router-link>
-                    <router-link :to="{ name : ''}">
-                        /회원가입
+                    <router-link :to="{ name : 'SignUpPage'}">
+                        / 회원가입
                     </router-link>
                 </span>
             </div>
@@ -80,6 +81,7 @@ router-link{
 
 a {
     text-decoration: none;
+    color : black;
 }
 
 h4 {

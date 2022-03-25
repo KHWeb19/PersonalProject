@@ -1,19 +1,26 @@
 <template>
     <div class="Main">
         <header>
-            <v-row>
-                <v-col class="col-12 col-sm-10" ></v-col>
-                <v-col class="col-12 col-sm-1" >
-                    <router-link :to="{name: 'LoginPage'}" >
-                        <span style="font-size: small; color: black">로그인 </span>
+            <div>
+            <!--<div  v-if="user.id == null" style="text-align: right;">-->
+                 <router-link :to="{name: 'LoginPage'}" >
+                        <span class="mainlog">&nbsp;&nbsp;&nbsp;로그인&nbsp;&nbsp;&nbsp;/ </span>
                     </router-link>
-                </v-col>
-                <v-col class="col-12 col-sm-1" >
                     <router-link :to="{name: 'SignUpPage'}" >
-                        <span style="font-size: small; color: black">회원가입</span>
+                        <span class="mainlog">&nbsp;&nbsp;&nbsp;회원가입&nbsp;&nbsp;&nbsp;</span>
                     </router-link>
-                </v-col>
-            </v-row>
+            </div>
+            <div>
+            <!--<div  v-if="!user.id == null" style="text-align: right;">-->
+                 
+                    <button type="submit" style="font-size: small; color: black;">&nbsp;&nbsp;&nbsp;로그아웃&nbsp;&nbsp;&nbsp;/ 
+                    </button>
+                    
+                    <router-link :to="{name: 'myPage'}" >
+                        <span style="font-size: small; color: black;">&nbsp;&nbsp;&nbsp;My페이지&nbsp;&nbsp;&nbsp;</span>
+                    </router-link>
+            </div>
+            
             
             <router-link style="text-decoration: none;" :to="{name: 'MainHomepage'}" >            
                 <v-img class="MainLogo"
@@ -119,6 +126,11 @@
     border: 1px solid #ff6e6e;
     padding: 10px;
     width: 300;
+}
+.mainlog{
+    font-size: small; 
+    color: black;
+    padding: 15px 0px 15px 0px;
 }
 
 ul{

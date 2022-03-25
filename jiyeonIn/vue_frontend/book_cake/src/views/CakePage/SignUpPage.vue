@@ -47,11 +47,24 @@
                 </v-col>
             </v-row>
         </v-container>
+
+        <div>
+            <div class="signUp" align="center">
+                <sign-up-page-form @submit="onSubmit"/>
+            </div>
+        </div>
+
     </div>
 </template>
 
 <script>
+import SignUpPageForm from '@/components/mainPage/SignUpPageForm.vue'
+
     export default {
+        name: 'SignUpPage',
+        components: {
+            SignUpPageForm
+        }
 
     }
 </script>
@@ -63,6 +76,12 @@
 }
 .MainLogo {
     display: block; margin: 0px auto;
+}
+
+.signUp {
+    margin:2% 10% 3% 10%;
+    padding: 15px;
+    border: 3px ;
 }
 a {
     text-decoration: none;
