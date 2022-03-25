@@ -4,12 +4,12 @@
             <h4>로그인</h4>
             <table>
                     <tr>
-                        <v-icon>mdi-account</v-icon> 
-                        <td><input type="text" v-model="id" /></td>
+                        <td><v-icon>mdi-account</v-icon> </td>
+                        <td><v-text-field type="text" v-model="id" placeholder="아이디 입력" ></v-text-field></td>
                     </tr>
                     <tr>
-                        <v-icon>mdi-lock</v-icon>
-                        <td><input type="password" v-model="pw"></td>
+                        <td><v-icon>mdi-lock</v-icon></td>
+                        <td><v-text-field type="password" v-model="pw" placeholder="비밀번호 입력"></v-text-field></td>
                     </tr>
                 
             </table>
@@ -53,7 +53,7 @@ export default {
 <style scoped>
 
 .loginForm {
-    padding: 8%;
+    padding: 10%;
     margin: 2%;
 }
 
@@ -72,7 +72,10 @@ span {
     width: 200px;
     font-size: 10pt;
     text-align: right;
-    color: rgb(5, 3, 3);
+}
+
+router-link{
+    color : black;
 }
 
 a {
@@ -89,7 +92,7 @@ h4 {
 form {
     border: 3px solid rgb(243, 180, 180);
     width: 306px;
-    height: 170px;
+    height: 300px;
 }
 
 </style>

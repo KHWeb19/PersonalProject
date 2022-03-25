@@ -73,10 +73,10 @@ import axios from 'axios'
                 const {id, pw} = payload
                 axios.post('http://localhost:7777/bookCake/login',{id, pw})
                     .then(() => {
-                        alert('로그인 완료')
+                        alert('안녕하세요! {{id}}님!')
                     })
                     .catch (() => {
-                        alert('로그인 실패')
+                        alert('아이디 및 비밀번호를 잘못 입력하였습니다.')
                     })
             }
         }

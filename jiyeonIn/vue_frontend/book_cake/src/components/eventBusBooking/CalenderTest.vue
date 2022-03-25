@@ -37,7 +37,7 @@
         </v-col>
         
         <v-col>
-          <v-btn>
+          <v-btn class="">
             <v-icon color="black" text type="submit">mdi-check</v-icon>확정
           </v-btn>
         </v-col>
