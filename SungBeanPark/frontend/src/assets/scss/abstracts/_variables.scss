@@ -1,0 +1,164 @@
+// Color Set
+$black: #000000;
+$dark: #191a20;
+$primary: #3f4150;
+$secondary: #8c8d96;
+$tertiary: #b2b3b9;
+$border: #e0e2e7;
+$background: #f7f8fa;
+$white: #ffffff;
+
+$blue: #0071e3;
+$blue-dark: #3186c4;
+$blue-light: #ecf6fe;
+
+$red: #f86d7d;
+$yellow: #fee500;
+$green: #03c75a;
+
+// Font Set
+$font-main: "Noto Sans KR", sans-serif;
+$font-price: "Tahoma", sans-serif;
+
+$font-size-12: 12px;
+$line-height-12: 16px;
+$letter-spacing-12: -0.005em;
+
+$font-size-13: 12px;
+$line-height-13: 20px;
+$letter-spacing-13: -0.01em;
+
+$font-size-14: 14px;
+$line-height-14: 24px;
+$letter-spacing-14: -0.01em;
+
+$font-size-16: 16px;
+$line-height-16: 24px;
+$letter-spacing-16: -0.01em;
+
+$font-size-18: 18px;
+$line-height-18: 28px;
+$letter-spacing-18: -0.02em;
+
+$font-size-24: 24px;
+$line-height-24: 34px;
+$letter-spacing-24: -0.01em;
+
+// BreakPoint
+$md-breakpoint: 768px;
+$lg-breakpoint: 1200px;
+$md-breakpoint-1: 767px;
+$lg-breakpoint-1: 1199px;
+
+// Grids
+$gutter: 20px;
+
+$sm-columns: 4;
+$sm-margin: 5px;
+
+$md-columns: 12;
+$md-margin: 30px;
+$md-max-container: 960px + $md-margin * 2;
+
+$lg-columns: 12;
+$lg-unit: 75px;
+$lg-max-container: ($lg-unit + $gutter) * $lg-columns;
+
+$grid-margin: 15px;
+
+// Globlas
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.sm-only {
+  @media screen and (min-width: $md-breakpoint) {
+    display: none !important;
+  }
+}
+
+.md-only {
+  @media screen and (max-width: $md-breakpoint-1) {
+    display: none !important;
+  }
+
+  @media screen and (min-width: $lg-breakpoint) {
+    display: none !important;
+  }
+}
+
+.lg-only {
+  @media screen and (max-width: $lg-breakpoint-1) {
+    display: none !important;
+  }
+}
+
+.sm-hidden {
+  @media screen and (max-width: $md-breakpoint-1) {
+    display: none !important;
+  }
+}
+
+.md-hidden {
+  @media screen and (min-width: $md-breakpoint) and (max-width: $lg-breakpoint-1) {
+    display: none !important;
+  }
+}
+
+.lg-hidden {
+  @media screen and (min-width: $lg-breakpoint) {
+    display: none !important;
+  }
+}
+
+.container {
+  width: 100%;
+  padding: 0 $sm-margin;
+  margin: 0 auto;
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  // .col-sm-1 .col-md-2 .col-lg-3
+  [class^="col-"] {
+    padding: 0 $gutter/2;
+  }
+
+  @for $i from 1 through $sm-columns {
+    .col-sm-#{$i} {
+      width: percentage($i / $sm-columns);
+    }
+  }
+
+  @include responsive(T) {
+    max-width: $md-max-container;
+    padding: 0 $md-margin;
+
+    @for $i from 1 through $md-columns {
+      .col-md-#{$i} {
+        width: percentage($i / $md-columns);
+      }
+    }
+  }
+
+  @include responsive(D) {
+    max-width: $lg-max-container;
+    padding: 0;
+
+    @for $i from 1 through $lg-columns {
+      .col-lg-#{$i} {
+        width: ($lg-unit + $gutter) * $i;
+      }
+    }
+  }
+}
