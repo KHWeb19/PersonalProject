@@ -12,17 +12,9 @@
       @include flexbox(end);
     }
 
-    .gnb-search-button {
+    .gnb-icon-button.is-search {
       margin-right: 4px;
     }
-  }
-
-  &-icon-button {
-    @include flexbox;
-    width: 32px;
-    height: 32px;
-    font-size: 24px;
-    color: $white;
   }
 
   .logo {
@@ -31,6 +23,73 @@
       display: block;
       width: auto;
       height: 20px;
+    }
+  }
+
+  @include responsive(T) {
+    &-left {
+      @include flexbox(start);
+    }
+
+    &-right {
+      @include flexbox(end);
+
+      .button-group {
+        margin-right: 24px;
+
+        .gnb-icon-button {
+          margin-right: 8px;
+        }
+      }
+    }
+
+    &-wrapper {
+      height: 80px;
+    }
+    &-text {
+      a {
+        @include text-style(18, $tertiary);
+        font-weight: 700;
+
+        &:hover {
+          color: $white;
+          transition: color 300ms ease-in-out;
+        }
+        &:first-child {
+          margin-right: 16px;
+        }
+      }
+    }
+
+    .logo {
+      position: static;
+      margin-right: 40px;
+      transform: none;
+
+      img {
+        height: 24px;
+      }
+    }
+  }
+
+  @include responsive(D) {
+    &-right {
+      .input-group {
+        color: $white;
+        width: 264px;
+        margin-right: 8px;
+        border: 2px solid $tertiary;
+        border-radius: 8px;
+
+        ::placeholder {
+          color: $tertiary;
+        }
+        i {
+          @include text-style(18, $tertiary);
+          margin-right: 8px;
+          margin-left: 8px;
+        }
+      }
     }
   }
 }
