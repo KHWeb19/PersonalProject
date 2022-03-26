@@ -1,12 +1,12 @@
 <template>
-  <v-container>
-
-  </v-container>
+  <div>
+    <h2>아이디 비밀번호 찾기</h2>
+  </div>
 </template>
 
 <script>
 export default {
-  name: "loginPage"
+  name: "IdPwSearchPage"
 }
 </script>
 
