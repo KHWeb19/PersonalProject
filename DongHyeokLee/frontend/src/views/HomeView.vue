@@ -1,15 +1,22 @@
 <template>
-  <hello-world />
+  <div class="home">
+  <div id="header">
+            <router-link style="text-decoration: none;" :to="{ name: 'Home' }">
+               
+            </router-link>
+  </div>
+  </div>
+
 </template>
 
 <script>
-  import HelloWorld from '../components/HelloWorld'
+  
 
   export default {
-    name: 'Home',
+    name: 'HomeView',
 
     components: {
-      HelloWorld,
+    
     },
   }
 </script>
