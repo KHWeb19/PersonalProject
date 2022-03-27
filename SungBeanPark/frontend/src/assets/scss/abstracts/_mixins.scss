@@ -138,3 +138,10 @@ $flex-map: (
     @content;
   }
 }
+
+// Scrollbar
+@mixin no-scrollbar() {
+  &::-webkit-scrollbar {
+    display: none !important;
+  }
+}

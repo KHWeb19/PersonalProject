@@ -66,6 +66,10 @@ $lg-max-container: ($lg-unit + $gutter) * $lg-columns;
 
 $grid-margin: 15px;
 
+// z-indexes
+$overlay-level: 100;
+$sidebar-level: 200;
+
 // Globlas
 .visually-hidden {
   position: absolute !important;
