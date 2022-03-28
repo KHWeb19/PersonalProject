@@ -4,7 +4,7 @@
             <v-app-bar-nav-icon @click="nav_drawer = !nav_drawer">
             </v-app-bar-nav-icon>
             <v-toolbar-title>
-                <span class="font-weight-light">온라인 편집샵</span>
+                <span class="font-weight-light">929SHOP</span>
             </v-toolbar-title>
             <v-toolbar-items>
                 <v-btn text v-for="link in links" :key="link.icon" :to="link.route">
