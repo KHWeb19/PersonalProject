@@ -6,10 +6,10 @@
             <v-layout column class="mx-auto">
                 <v-checkbox
                     class="checkboxSize"
-                    v-model="ex4"
+                    v-model="checkedValues"
+                    value="1"
                     label="개인정보 수집 및 이용 동의"
                     color="red darken-3"
-                    value="red darken-3"
                     hide-details
                 ></v-checkbox>
                 <p/>
@@ -81,10 +81,10 @@
                 <p/>
                 <v-checkbox
                     class="checkboxSize"
-                    v-model="ex4"
+                    v-model="checkedValues"
+                    value="2"
                     label="Vellup 이용약관 동의"
                     color="red darken-3"
-                    value="red darken-3"
                     hide-details
                 ></v-checkbox>
                 <p/>
@@ -217,7 +217,9 @@
                     
                     <router-link to="/main"><v-btn id ="m" color="black" dark>CANCLE</v-btn></router-link> 
                     
-                    <router-link to="/join2"><v-btn color="red darken-3" dark >NEXT</v-btn></router-link> 
+                
+                    <v-btn color="red darken-3" dark @click="ckCheck" >NEXT</v-btn>
+                   
                 </v-flex>
             
             </v-layout>
@@ -228,11 +230,26 @@
 
 <script>
 
+
+
 export default {
     name: 'JoinPage',
-
-    
+    data () {
+        return{
+            checkedValues: []
+        }
+    },
+    methods: {
+        ckCheck () {
+            if (this.checkedValues.length != 2){
+                alert ("모두 동의가 필요합니다.")
+            } else {
+                location.href="/join2"
+            }
+        }
+    }
 }
+
 </script>
 
 <style scoped>
