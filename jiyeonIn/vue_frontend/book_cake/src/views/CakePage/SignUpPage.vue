@@ -59,11 +59,24 @@
 
 <script>
 import SignUpPageForm from '@/components/mainPage/SignUpPageForm.vue'
+import axios from 'axios'
 
     export default {
         name: 'SignUpPage',
         components: {
             SignUpPageForm
+        },
+        methods: {
+            onSubmit (payload) {
+                const { email, pw, name, auth } = payload
+                axios.post('http://localhost:7777/Member/register',{ email, pw, name, auth })
+                    .then(() => {
+                        alert('환영합니다!')
+                    })
+                    .catch(() => {
+                        alert('다시 한번 확인해주세요!')
+                    })
+            }
         }
 
     }

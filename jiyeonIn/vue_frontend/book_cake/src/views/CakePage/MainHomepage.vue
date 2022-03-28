@@ -16,7 +16,7 @@
                     <button type="submit" style="font-size: small; color: black;">&nbsp;&nbsp;&nbsp;로그아웃&nbsp;&nbsp;&nbsp;/ 
                     </button>
                     
-                    <router-link :to="{name: 'myPage'}" >
+                    <router-link :to="{name: 'MyPage'}" >
                         <span style="font-size: small; color: black;">&nbsp;&nbsp;&nbsp;My페이지&nbsp;&nbsp;&nbsp;</span>
                     </router-link>
             </div>

@@ -6,7 +6,7 @@
             <table>
                     <tr>
                         <td><v-icon>mdi-account</v-icon> </td>
-                        <td><v-text-field type="text" v-model="id" placeholder="아이디 입력" ></v-text-field></td>
+                        <td><v-text-field type="text" v-model="id" placeholder="이메일 입력" ></v-text-field></td>
                     </tr>
                     <tr>
                         <td><v-icon>mdi-lock</v-icon></td>
