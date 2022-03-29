@@ -31,7 +31,7 @@ public class Member {
     @UpdateTimestamp
     private Date updDate;
 
-    @OneToMany(mappedBy = "cake_member", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<MemberAuth> authList = new ArrayList<>();
 
     public Member (String userId, String password) {

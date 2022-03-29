@@ -10,6 +10,7 @@
         <hr>
         <v-container >
             <v-row no-gutters class="menu">
+                <v-col class="col-12 col-sm-3"></v-col>
                 <v-col class="col-12 col-sm-2">
                     <router-link :to="{name: 'BookingPage'}">
                         <p>예약하기</p>
@@ -28,21 +29,6 @@
                 <v-col class="col-12 col-sm-2">
                    <router-link :to="{name: 'ReviewPage'}">
                         <p>후기</p>
-                    </router-link>
-                </v-col>
-                <v-col class="col-12 col-sm-2">
-                    <router-link :to="{name: 'MyPage'}">
-                        <p>My페이지</p>
-                    </router-link>
-                </v-col>
-                <v-col class="col-12 col-sm-1">
-                    <router-link :to="{name: 'LoginPage'}">
-                        <p>로그인 </p>
-                    </router-link>
-                </v-col>
-                <v-col class="col-12 col-sm-1">
-                    <router-link :to="{name: 'SignUpPage'}">
-                        <p>회원가입</p>
                     </router-link>
                 </v-col>
             </v-row>
@@ -72,6 +58,10 @@ import axios from 'axios'
                 axios.post('http://localhost:7777/Member/register',{ id, pw, name, auth })
                     .then(() => {
                         alert('환영합니다!')
+                        
+                        this.$router.push({
+                            name: 'LoginPage'
+                        })
                     })
                     .catch(() => {
                         alert('다시 한번 확인해주세요!')
