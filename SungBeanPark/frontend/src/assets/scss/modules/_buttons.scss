@@ -21,6 +21,17 @@
   }
 }
 
+.btn-blue {
+  @extend %btn-base;
+  color: $white;
+  background-color: $blue;
+  transition: background-color 200ms ease-in-out;
+
+  &:not(:disabled):hover {
+    background-color: $blue-hover;
+  }
+}
+
 .btn-46 {
   @include text-style(16);
   height: 46px;
