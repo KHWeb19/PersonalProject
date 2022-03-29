@@ -1,0 +1,147 @@
+// FlexBox
+$flex-map: (
+  start: flex-start,
+  end: flex-end,
+  between: space-between,
+  around: space-around,
+  stretch: stretch,
+  center: center,
+);
+
+@function _get_flex_value($key) {
+  @return map-get($flex-map, $key);
+}
+
+@mixin flexbox($jc: center, $ai: center) {
+  display: flex;
+  align-items: _get_flex_value($ai);
+  justify-content: _get_flex_value($jc);
+}
+
+@mixin inline-flexbox($jc: center, $ai: center) {
+  display: inline-flex;
+  align-items: _get_flex_value($ai);
+  justify-content: _get_flex_value($jc);
+}
+
+@mixin column-inline-flexbox($jc: center, $ai: center) {
+  display: flex;
+  flex-direction: column;
+  align-items: _get_flex_value($ai);
+  justify-content: _get_flex_value($jc);
+}
+
+// Text-Style
+@mixin text-style-12() {
+  font-size: $font-size-12;
+  line-height: $line-height-12;
+  letter-spacing: $letter-spacing-12;
+}
+
+@mixin text-style-13() {
+  font-size: $font-size-13;
+  line-height: $line-height-13;
+  letter-spacing: $letter-spacing-13;
+}
+
+@mixin text-style-14() {
+  font-size: $font-size-14;
+  line-height: $line-height-14;
+  letter-spacing: $letter-spacing-14;
+}
+
+@mixin text-style-16() {
+  font-size: $font-size-16;
+  line-height: $line-height-16;
+  letter-spacing: $letter-spacing-16;
+}
+
+@mixin text-style-18() {
+  font-size: $font-size-18;
+  line-height: $line-height-18;
+  letter-spacing: $letter-spacing-18;
+}
+
+@mixin text-style-24() {
+  font-size: $font-size-24;
+  line-height: $line-height-24;
+  letter-spacing: $letter-spacing-24;
+}
+
+@mixin text-style($size, $color: false) {
+  @if ($size == 12) {
+    @include text-style-12();
+  }
+  @if ($size == 13) {
+    @include text-style-13();
+  }
+  @if ($size == 14) {
+    @include text-style-14();
+  }
+  @if ($size == 16) {
+    @include text-style-16();
+  }
+  @if ($size == 18) {
+    @include text-style-18();
+  }
+  @if ($size == 24) {
+    @include text-style-24();
+  }
+
+  @if (type-of($color) == color) {
+    color: $color;
+  }
+}
+
+// Position
+@mixin pos-center-x($type: absolute) {
+  @if ($type == fixed or $type == absolute) {
+    position: $type;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+@mixin pos-center-y($type: absolute) {
+  @if ($type == fixed or $type == absolute) {
+    position: $type;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+@mixin pos-center($type: absolute) {
+  @if ($type == fixed or $type == absolute) {
+    position: $type;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+// Responsive
+@mixin responsive($screen) {
+  @if ($screen == "T") {
+    @media screen and (min-width: $md-breakpoint) {
+      @content;
+    }
+  }
+  @if ($screen == "D") {
+    @media screen and (min-width: $lg-breakpoint) {
+      @content;
+    }
+  }
+}
+
+@mixin mobile-only() {
+  @media screen and (max-width: $md-breakpoint-1) {
+    @content;
+  }
+}
+
+// Scrollbar
+@mixin no-scrollbar() {
+  &::-webkit-scrollbar {
+    display: none !important;
+  }
+}

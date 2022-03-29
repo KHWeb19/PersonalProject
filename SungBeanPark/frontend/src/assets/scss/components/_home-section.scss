@@ -1,0 +1,15 @@
+.home-section {
+  @include flexbox;
+  height: 40px;
+  background-color: $border;
+  text-align: center;
+  &-content {
+    span {
+      @include text-style(14, $primary);
+      margin: 0px;
+    }
+    a {
+      color: $blue;
+    }
+  }
+}

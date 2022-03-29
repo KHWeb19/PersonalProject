@@ -1,0 +1,118 @@
+.login {
+  @include pos-center;
+  height: 100%;
+
+  &-header {
+    @include text-style(18);
+    text-align: center;
+    margin-top: 72px;
+    margin-bottom: 26px;
+  }
+
+  &-line {
+    width: 280px;
+    height: 1px;
+    background-color: $tertiary;
+    margin-bottom: 16px;
+    margin-left: 32px;
+  }
+
+  &-section {
+    max-width: 320px;
+    margin-left: 32px;
+  }
+
+  &-member-id,
+  &-member-password {
+    margin-left: 14px;
+    margin-bottom: 16px;
+    width: 254px;
+    height: 46px;
+    border: 1px solid $border;
+    border-radius: 4px;
+
+    ::placeholder {
+      color: $tertiary;
+      font-size: 14px;
+    }
+
+    input {
+      padding: 10px;
+    }
+  }
+
+  .btn-black {
+    width: 254px;
+    margin-left: 14px;
+  }
+  &-util {
+    margin-top: 16px;
+    margin-left: 16px;
+    @include inline-flexbox(between);
+
+    input {
+      margin-right: 4px;
+    }
+
+    label {
+      color: $dark;
+      font-size: 14px;
+      display: inline-block;
+    }
+    &-find {
+      @include inline-flexbox(between);
+      margin-left: 4px;
+      .id {
+        ::after {
+          margin: 0 4px;
+          content: "|";
+        }
+      }
+
+      a {
+        @include text-style(14, $tertiary);
+      }
+    }
+  }
+
+  &-btn-kakao {
+    width: 254px;
+    height: 46px;
+    margin-left: 14px;
+    border-radius: 4px;
+    color: $black;
+    background-color: $yellow;
+    font-weight: 700;
+    margin-top: 16px;
+  }
+
+  &-btn-naver {
+    width: 254px;
+    height: 46px;
+    margin-left: 14px;
+    border-radius: 4px;
+    color: $white;
+    background-color: $green;
+    font-weight: 700;
+    margin-top: 16px;
+  }
+
+  &-bottom-text {
+    @include flexbox;
+    margin-top: 40px;
+    margin-right: 40px;
+    span {
+      font-size: 12px;
+      margin-right: 8px;
+      color: $blue;
+    }
+    a {
+      color: $blue;
+      border: 2px solid $blue;
+      padding: 4px;
+      border-radius: 24px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+  }
+}
