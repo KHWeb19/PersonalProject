@@ -1,25 +1,35 @@
 <template>
     <div class="Main">
         <header>
-            <div>
-            <!--<div  v-if="user.id == null" style="text-align: right;">-->
-                 <router-link :to="{name: 'LoginPage'}" >
-                        <span class="mainlog">&nbsp;&nbsp;&nbsp;로그인&nbsp;&nbsp;&nbsp;/ </span>
-                    </router-link>
-                    <router-link :to="{name: 'SignUpPage'}" >
-                        <span class="mainlog">&nbsp;&nbsp;&nbsp;회원가입&nbsp;&nbsp;&nbsp;</span>
-                    </router-link>
-            </div>
-            <div>
-            <!--<div  v-if="!user.id == null" style="text-align: right;">-->
-                 
-                    <button type="submit" style="font-size: small; color: black;">&nbsp;&nbsp;&nbsp;로그아웃&nbsp;&nbsp;&nbsp;/ 
-                    </button>
-                    
-                    <router-link :to="{name: 'MyPage'}" >
-                        <span style="font-size: small; color: black;">&nbsp;&nbsp;&nbsp;My페이지&nbsp;&nbsp;&nbsp;</span>
-                    </router-link>
-            </div>
+            <!--<div  v-if="member.id == null" style="text-align: right;">-->
+            <v-container style="height: 10px">
+                <v-row>
+                    <v-col class="col-12 col-sm-10"></v-col>
+                    <v-col class="col-12 col-sm-1">
+                        <router-link :to="{name: 'LoginPage'}" >
+                            <span class="mainlog">로그인 </span>
+                        </router-link>
+                    </v-col>
+                    <v-col class="col-12 col-sm-1">
+                        <router-link :to="{name: 'SignUpPage'}" >
+                            <span class="mainlog">회원가입</span>
+                        </router-link>
+                    </v-col>
+                </v-row>
+            </v-container>
+            <v-container style="height: 10px">
+                <v-row>
+                    <v-col class="col-12 col-sm-10"></v-col>
+                    <v-col class="col-12 col-sm-1">
+                        <button type="submit" style="font-size: small; color: black;">로그아웃 </button>
+                    </v-col>
+                    <v-col class="col-12 col-sm-1">
+                        <router-link :to="{name: 'MyPage'}" >
+                            <span style="font-size: small; color: black;">My페이지</span>
+                        </router-link>
+                    </v-col>
+                </v-row>
+            </v-container>
             
             
             <router-link style="text-decoration: none;" :to="{name: 'MainHomepage'}" >            
@@ -30,19 +40,20 @@
             
         </header>
         <hr>
-        <v-container >
+         <v-container >
             <v-row no-gutters class="menu">
-                <v-col class="col-12 col-sm-3">
+                <v-col class="col-12 col-sm-3"></v-col>
+                <v-col class="col-12 col-sm-2">
                     <router-link :to="{name: 'BookingPage'}">
                         <p>예약하기</p>
                     </router-link>
                 </v-col>
-                <v-col class="col-12 col-sm-3">
+                <v-col class="col-12 col-sm-2">
                     <router-link :to="{name: 'BookingListPage'}">
                         <p>주문서 보기</p>
                     </router-link>
                 </v-col>
-                <v-col class="col-12 col-sm-3">
+                <v-col class="col-12 col-sm-2">
                     <router-link :to="{name: 'PreviewCakeImg'}">
                         <p>케이크 보기</p>
                     </router-link>
@@ -50,11 +61,6 @@
                 <v-col class="col-12 col-sm-2">
                    <router-link :to="{name: 'ReviewPage'}">
                         <p>후기</p>
-                    </router-link>
-                </v-col>
-                <v-col class="col-12 col-sm-1">
-                    <router-link :to="{name: 'MyPage'}">
-                        <p>My페이지</p>
                     </router-link>
                 </v-col>
             </v-row>
