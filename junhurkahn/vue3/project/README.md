@@ -1,4 +1,4 @@
-# vue3-project
+# frontend_lecture
 
 ## Project setup
 ```

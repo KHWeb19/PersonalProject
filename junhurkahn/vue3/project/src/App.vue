@@ -1,24 +1,61 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <router-link class="navbar-brand" to="/">
-    Kossie Coder
-  </router-link>
+  <v-app>
+    <!--
+    <v-app-bar
+      app
+      color="primary"
+      dark
+    >
+      <div class="d-flex align-center">
+        <v-img
+          alt="Vuetify Logo"
+          class="shrink mr-2"
+          contain
+          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
+          transition="scale-transition"
+          width="40"
+        />
 
-  <ul class="navbar-nav mr-auto">
-    <li class="nav-item active">
-      <router-link class="nav-link" to="/todos">
-        Todos
-      </router-link>
-    </li>
-  </ul>
-</nav>
-  <router-view/>
+        <v-img
+          alt="Vuetify Name"
+          class="shrink mt-1 hidden-sm-and-down"
+          contain
+          min-width="100"
+          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
+          width="100"
+        />
+      </div>
+
+      <v-spacer></v-spacer>
+
+      <v-btn
+        href="https://github.com/vuetifyjs/vuetify/releases/latest"
+        target="_blank"
+        text
+      >
+        <span class="mr-2">Latest Release</span>
+        <v-icon>mdi-open-in-new</v-icon>
+      </v-btn>
+    </v-app-bar> -->
+
+    <v-main>
+      <router-view/>
+    </v-main>
+    <!--
+    <div id="app">
+      <router-view/>
+    </div>
+    -->
+  </v-app>
 </template>
 
 <script>
-export default {
-}
-</script>
 
-<style>
-</style>
+export default {
+  name: 'App',
+
+  data: () => ({
+    //
+  }),
+};
+</script>
