@@ -11,7 +11,7 @@ import java.util.Date;
 @Data
 @Entity
 @NoArgsConstructor
-@Table(name = "member_auth")
+@Table(name = "cake_member_auth")
 public class MemberAuth<z> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -18,7 +18,7 @@ public class MemberController {
 
     @PostMapping("/register")
     public void registerMember (@Validated @RequestBody MemberRequest memberRequest) {
-        log.info("MemeberRegister()" + memberRequest.getEmail() +", "+ memberRequest.getPw() +", "+ memberRequest.getName() +", "+ memberRequest.getAuth());
+        log.info("MemeberRegister()" + memberRequest.getId() +", "+ memberRequest.getPw() +", "+ memberRequest.getName() +", "+ memberRequest.getAuth());
 
         service.register(memberRequest);
 

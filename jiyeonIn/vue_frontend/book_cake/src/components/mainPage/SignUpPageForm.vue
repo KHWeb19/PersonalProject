@@ -4,18 +4,17 @@
         <br>
         <h4>회원가입</h4>
         <br><br>
-        <div class="radio">
-            <v-radio-group v-model="radioGroup" row>
-                <v-radio :label="`${kindsOfMember[0]}`" :value="`${kindsOfMember[0]}`"></v-radio>
-                <v-radio :label="`${kindsOfMember[1]}`" :value="`${kindsOfMember[1]}`"></v-radio>
-            </v-radio-group>
-        </div>
+        <v-radio-group class="radio" v-model="radioGroup" row >
+            <v-radio :label="`${kindsOfMember[0]}`" :value="`${kindsOfMember[0]}`"></v-radio>
+            <v-radio :label="`${kindsOfMember[1]}`" :value="`${kindsOfMember[1]}`"></v-radio>
+        </v-radio-group>
+        
 
         <table border="0">
             <tr>
-                <td style="font-size: 15px;">이메일 주소</td>
-                <td><input type="text" v-model="email"/>
-                <v-btn color="black" text type="button" onclick="checkId()"><v-icon>mdi-check</v-icon></v-btn></td>
+                <td style="font-size: 15px;">아이디</td>
+                <td><input type="text" v-model="id"/>
+                <v-btn color="black" text type="button" onclick="checkId"><v-icon>mdi-check</v-icon></v-btn></td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
@@ -23,7 +22,7 @@
             </tr>
             <tr>
                 <td style="font-size: 15px;">비밀번호</td>
-                <td><input type="password" v-model="password"/></td>
+                <td><input type="password" v-model="pw" /></td>
             </tr>
             <tr>
                 <td></td>
@@ -31,7 +30,7 @@
             </tr>
             <tr>
                 <td style="font-size: 15px;">비밀번호 확인</td>
-                <td><input type="password" v-model="password1"/></td>
+                <td><input type="password" v-model="pw1" @blur="checkDuplicate"/></td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
@@ -51,7 +50,7 @@
         
 
         <div>
-            <v-btn color="black" text type="submit" width="210">
+            <v-btn color="black" text type="submit" width="210" >
                 <v-icon>mdi-login</v-icon>회원가입</v-btn>
         </div>
     </form>
@@ -71,17 +70,31 @@
                     '회원',
                     '관리자'
                 ],
-                email:'',
+                id:'',
                 pw: '',
-                name:'' 
+                name:'',
+                pw1:'',
             }
         },
         methods: {
             onsubmit () {
-                const { email, pw, name } = this
+                const { id, pw, name } = this
                 const auth = (this.radioGroup == '회원' ? '회원' : '관리자')
-                this.$emit('submit', {email, pw, name, auth})
-            }
+                this.$emit('submit', {id, pw, name, auth})
+            },
+            checkDuplicate() {
+                if(this.pw != this.pw1 ){
+                    alert('비밀번호 불일치')
+                    return false;
+                }
+            },
+            // checkId () {
+            //     for(member m : members) //멤버 정보를 어차피 가지고 와야하니까. 그거를 들고와서 for문으로 리스트 돌리고. db id값과 작성한 id값이 동일한지 체크
+            //     if(m.id = this.id) {
+            //         alert('중복된 아이디가 있습니다!')
+            //         break;
+            //     }
+            //}
         }   
     }
 </script>
@@ -91,8 +104,9 @@
     text-align: right;
 }
 
-v-radio-group {
+.radio {
     display: flex;
+    justify-content: center;
 }
 
 p {

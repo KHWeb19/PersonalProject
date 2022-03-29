@@ -49,4 +49,16 @@ public class Member {
     }
 
     public void changeAuth(MemberAuth auth) {}
+
+    public void addAuth (MemberAuth auth) {
+        if (authList == null) {
+            authList = new ArrayList();
+        }
+
+        authList.add(auth);
+    }
+
+    public void clearAuthList () {
+        authList.clear();
+    }
 }

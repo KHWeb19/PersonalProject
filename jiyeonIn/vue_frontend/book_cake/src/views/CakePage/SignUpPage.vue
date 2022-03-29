@@ -68,8 +68,8 @@ import axios from 'axios'
         },
         methods: {
             onSubmit (payload) {
-                const { email, pw, name, auth } = payload
-                axios.post('http://localhost:7777/Member/register',{ email, pw, name, auth })
+                const { id, pw, name, auth } = payload
+                axios.post('http://localhost:7777/Member/register',{ id, pw, name, auth })
                     .then(() => {
                         alert('환영합니다!')
                     })
