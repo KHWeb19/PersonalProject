@@ -2,8 +2,13 @@
     <div id="freeBoard">
         <h2>자유게시판</h2>
         <free-board-list :freeBoards="freeBoards"/>
-        <router-link :to="{ name: 'FreeBoardRegisterPage'}" style="text-decoration: none; margin-left: 1280px; color: red;">
-            등록
+       
+        <router-link :to="{ name: 'FreeBoardRegisterPage'}">
+        
+        <v-btn class="blue" dark>
+            <v-icon>mdi-pencil-plus</v-icon>
+            <span>등록</span>
+        </v-btn>
         </router-link>
         
         
@@ -39,5 +44,12 @@ h2 {
     text-align: center;
     padding: 15px;
 }
+
+a {
+    text-decoration: none;
+    margin-left: 1230px;
+
+}
+
     
 </style>

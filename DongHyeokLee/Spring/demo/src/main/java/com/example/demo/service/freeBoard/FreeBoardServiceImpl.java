@@ -9,6 +9,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Slf4j
@@ -26,5 +27,27 @@ public class FreeBoardServiceImpl implements FreeBoardService {
     @Override
     public List<FreeBoard> list() {
         return repository.findAll(Sort.by(Sort.Direction.DESC, "boardNo"));
+    }
+
+    @Override
+    public FreeBoard read(Integer boardNo) {
+        Optional<FreeBoard> maybeReadBoard = repository.findById(Long.valueOf(boardNo));
+
+        if (maybeReadBoard.equals(Optional.empty())){
+            log.info("Can't read board!!");
+            return null;
+        }
+        return maybeReadBoard.get();
+    }
+
+    @Override
+    public void modify(FreeBoard board) {
+        repository.save(board);
+
+    }
+
+    @Override
+    public void remove(Integer boardNo) {
+        repository.deleteById(Long.valueOf(boardNo));
     }
 }
