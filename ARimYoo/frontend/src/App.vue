@@ -12,9 +12,7 @@
         </v-layout>
       </v-container>
       <div class="header">
-            
           <router-link to="main"><img src ="@/assets/main/banner.png" width="250"></router-link>
-          
       </div>
       <div class="menuBar">  
           <main-toolbar/>
@@ -48,7 +46,7 @@ export default {
 .header {
     position: relative;
     left: 20%;
-    padding-top: 10px;
+    padding-top: 5px;
     padding-bottom: 5px;
 }
 .btnSet{
@@ -59,17 +57,14 @@ export default {
 #m {
   margin-right:5px;
 }
-a:visited{
-    color: black;
-}
-a:link{
-    color: black;
-}
 
 </style>
 
 <style>
 a {
     text-decoration: none;
+}
+a:linked{
+  color:white;
 }
 </style>

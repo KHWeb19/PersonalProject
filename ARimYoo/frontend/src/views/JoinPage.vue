@@ -11,7 +11,11 @@
                     label="개인정보 수집 및 이용 동의"
                     color="red darken-3"
                     hide-details
-                ></v-checkbox>
+                >
+                </v-checkbox>
+                <div class="must">
+                    필수
+                </div>
                 <p/>
                 <div class="article">
                     <div id="a">
@@ -86,7 +90,11 @@
                     label="Vellup 이용약관 동의"
                     color="red darken-3"
                     hide-details
-                ></v-checkbox>
+                >
+                </v-checkbox>
+                <div class="must2">
+                    필수
+                </div>
                 <p/>
                 <div class="article">
                     <div id="a">
@@ -214,10 +222,7 @@
             </v-layout>
             <v-layout row wrap class="mx-auto" >
                 <v-flex class="btnSet">
-                    
                     <router-link to="/main"><v-btn id ="m" color="black" dark>CANCLE</v-btn></router-link> 
-                    
-                
                     <v-btn color="red darken-3" dark @click="ckCheck" >NEXT</v-btn>
                    
                 </v-flex>
@@ -261,6 +266,7 @@ export default {
 }
 .checkboxSize {
    zoom : 1.3;
+   width:51%;
 }
 .article{
     display:flex;
@@ -279,6 +285,18 @@ export default {
 }
 #m {
     margin-right:65%;
+}
+.must {
+    position: absolute;
+    left:52%;
+    top:6%;
+    color: rgb(211, 4, 4);
+}
+.must2{
+    position: absolute;
+    left:42%;
+    top: 57%;
+    color: rgb(211, 4, 4);
 }
 
 </style>
