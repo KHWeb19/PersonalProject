@@ -1,0 +1,100 @@
+<template>
+    <div class="loginForm">
+        <form @submit.prevent="onSubmit">
+            <br>
+            <h4>로그인</h4>
+            <table>
+                    <tr>
+                        <td><v-icon>mdi-account</v-icon> </td>
+                        <td><v-text-field type="text" v-model="id" placeholder="이메일 입력" ></v-text-field></td>
+                    </tr>
+                    <tr>
+                        <td><v-icon>mdi-lock</v-icon></td>
+                        <td><v-text-field type="password" v-model="pw" placeholder="비밀번호 입력"></v-text-field></td>
+                    </tr>
+                
+            </table>
+
+            <div>
+                <v-btn color="black" text type="submit" width="210">
+                    <v-icon>mdi-login</v-icon>login</v-btn>
+                <br>
+                <span>
+                    <router-link :to="{ name : 'HomeView'}">
+                        아이디, 비밀번호 찾기
+                    </router-link>
+                    <router-link :to="{ name : 'SignUpPage'}">
+                        / 회원가입
+                    </router-link>
+                </span>
+            </div>
+        </form>
+    </div>
+</template>
+
+<script>
+export default {
+    name : 'LoginPageForm',
+    data() {
+        return {
+            id: '',
+            pw: ''
+        }
+    },
+    methods: {
+        onSubmit () {
+            const {id,pw} = this
+            this.$emit('submit',{id,pw})
+        }
+    }
+}
+    
+</script>
+
+<style scoped>
+
+.loginForm {
+    padding: 10%;
+    margin: 2%;
+}
+
+
+input {
+    border: double 1px black;
+    border-radius:5px;
+    outline: none;
+    background-color: rgb(245, 190, 190);
+}
+
+span {
+    text-decoration: none;
+    display: inline-block;
+    height: 20px;
+    width: 200px;
+    font-size: 10pt;
+    text-align: right;
+}
+
+router-link{
+    color : black;
+}
+
+a {
+    text-decoration: none;
+    color : black;
+}
+
+h4 {
+    display: inline-block;
+    height: 30px;
+    width: 200px;
+    text-align: left;
+}
+
+form {
+    border: 3px solid rgb(243, 180, 180);
+    width: 306px;
+    height: 300px;
+}
+
+</style>
