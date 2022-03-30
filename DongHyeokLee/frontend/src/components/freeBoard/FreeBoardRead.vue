@@ -1,12 +1,7 @@
 <template>
-    <div>
-        <table>
-            <tr>
-                <td>게시물 번호</td>
-                <td>
-                    <input type="text" :value="freeBoard.boardNo" readonly/>
-                </td>
-            </tr>
+    <div >
+        <table border="1">
+     
             <tr>
                 <td>제목</td>
                 <td>
@@ -33,10 +28,15 @@
                 </td>
             </tr>
         </table>
+        
+        <comments-register-page></comments-register-page>
     </div>
 </template>
 
 <script>
+
+
+import CommentsRegisterPage from '@/views/comments/CommentsRegisterPage.vue'
 
 export default {
     name: 'FreeBoardRead',
@@ -45,6 +45,18 @@ export default {
             type: Object,
             required: true
         }
+    },
+    components: {
+       
+        CommentsRegisterPage
     }
 }
 </script>
+
+<style scoped>
+    div {
+        margin-left: 30%;
+    }
+    
+  
+</style>

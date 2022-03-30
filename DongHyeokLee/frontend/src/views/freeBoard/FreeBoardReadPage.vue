@@ -1,5 +1,8 @@
 <template>
-    <div align="center">
+    <div>
+        <router-link :to= "{ name: 'FreeBoardListPage' }">
+            <p>자유게시판</p>
+        </router-link>
         <free-board-read v-if="freeBoard" :freeBoard="freeBoard"/>
         <p v-else>로딩중 ....... </p>
         <router-link :to="{ name: 'FreeBoardModifyPage', params: { boardNo } }">
@@ -56,3 +59,19 @@ export default {
 }
 
 </script>
+
+<style scoped>
+
+a{
+    text-decoration: none;
+    
+}
+
+p{
+    font-size: 1em;
+    padding:  15px;
+    margin-left:400px;
+}
+
+    
+</style>

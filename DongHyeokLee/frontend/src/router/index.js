@@ -2,11 +2,12 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
-
 import FreeBoardReigster from '@/views/freeBoard/FreeBoardRegisterPage.vue'
 import FreeBoardListPage from '@/views/freeBoard/FreeBoardListPage.vue'
 import FreeBoardReadPage from '@/views/freeBoard/FreeBoardReadPage.vue'
 import FreeBoardModifyPage from '@/views/freeBoard/FreeBoardModifyPage.vue'
+
+
 
 Vue.use(VueRouter)
 

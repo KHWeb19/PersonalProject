@@ -39,7 +39,6 @@ export default {
       hihi() {
           this.$router.push('/boardList')
       }
-
     },
      data() {
         return{
@@ -56,21 +55,19 @@ export default {
 
 <style scoped>
    
-
     section{
         background-image: url(@/assets/img/homeBackground.png);
         background-size: cover;
         background-repeat: no-repeat;
         display: block;
-        height: 250px;
+        height: 400px;
         color:#ffffff;
         text-align: center;
          
      }
-
     section h1{
         font-size: 2.5em;
-        padding:  75px;
+        padding:  140px;
         
     }
     
