@@ -32,4 +32,33 @@ public class FreeBoardController {
 
         return service.list();
     }
+
+
+    @GetMapping("/{boardNo}")
+    public FreeBoard freeBoardRead (
+            @PathVariable("boardNo") Integer boardNo) {
+        log.info("freeBoardRead()");
+
+        return service.read(boardNo);
+    }
+
+    @PutMapping("/{boardNo}")
+    public FreeBoard freeBoardModify (
+            @PathVariable("boardNo") Integer boardNo,
+            @RequestBody FreeBoard jpaBoard) {
+        log.info("freeBoardModify(): " + jpaBoard);
+
+        jpaBoard.setBoardNo(Long.valueOf(boardNo));
+        service.modify(jpaBoard);
+
+        return jpaBoard;
+    }
+
+    @DeleteMapping("/{boardNo}")
+    public void freeBoardRemove (
+            @PathVariable("boardNo") Integer boardNo) {
+        log.info("freeBoardRemove()");
+
+        service.remove(boardNo);
+    }
 }

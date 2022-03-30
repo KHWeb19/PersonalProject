@@ -1,6 +1,6 @@
 import {
     FETCH_FREE_BOARD_LIST,
-    //FETCH_FREE_BOARD,
+    FETCH_FREE_BOARD
    
 } from './mutation-types'
 
@@ -13,10 +13,10 @@ export default {
                     commit(FETCH_FREE_BOARD_LIST, res.data)
                 })
     },
-    /*fetchFreeBoard ({ commit }, boardNo) {
+    fetchFreeBoard ({ commit }, boardNo) {
         return axios.get(`http://localhost:7777/freeBoard/${boardNo}`)
                 .then((res) => {
                     commit(FETCH_FREE_BOARD, res.data)
                 })
-    }    */
+    }    
 }

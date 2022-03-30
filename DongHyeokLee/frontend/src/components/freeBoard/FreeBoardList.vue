@@ -18,7 +18,7 @@
                     {{ freeBoard.boardNo }}
                 </td>
                 <td align="center">
-                    <router-link :to="{ name: 'JpaBoardReadPage',
+                    <router-link :to="{ name: 'FreeBoardReadPage',
                                         params: { boardNo: freeBoard.boardNo.toString() } }" style="text-decoration: none; color: black; ">
                         {{ freeBoard.title }}
                     </router-link>
