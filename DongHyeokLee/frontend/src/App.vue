@@ -1,12 +1,10 @@
 <template>
 
   <v-app>
-    
    
-   <member-bar :members="memberLists"></member-bar>
+   <top-nav-bar></top-nav-bar>
    <nav-bar></nav-bar>
     
-
     <v-main>
       <router-view/>
     </v-main>
@@ -17,17 +15,13 @@
 <script>
 
 import NavBar from '@/views/bar/NavBar.vue'
-import MemberBar from '@/views/bar/MemberBar.vue'
-
-import { mapActions, mapState } from 'vuex'
-
-
+import TopNavBar from '@/views/bar/TopNavBar.vue'
 
 export default {
   name: 'App',
   components: {
     NavBar,
-    MemberBar
+    TopNavBar
     
   },
   data () {
@@ -35,17 +29,6 @@ export default {
          
      
     }
-  },
-  computed: {
-        ...mapState(['memberLists'])
-    },
-  mounted () {
-        this.fetchMemberList()
-    },
-  methods: {
-    ...mapActions(['fetchMemberList'])
- 
-        }  
-    
+  }
 }
 </script>

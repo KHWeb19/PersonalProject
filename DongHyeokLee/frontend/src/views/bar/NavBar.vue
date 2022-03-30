@@ -35,6 +35,7 @@
 
 <script>
 export default {
+    name: 'NavBar',
     methods: {
       hihi() {
           this.$router.push('/boardList')
@@ -45,7 +46,8 @@ export default {
             nav_drawer: false,
             links: [
                 { icon: 'mdi-home', text: 'Home', name: 'HomeView', route: '/' },
-                { icon: 'mdi-pencil-plus-outline', text:'자유게시판', name:'FreeBoardListPage', route:'/freeBoardList'}
+                { icon: 'mdi-pencil-plus-outline', text:'자유게시판', name:'FreeBoardListPage', route:'/freeBoardList'},
+                
             ],
      
         }

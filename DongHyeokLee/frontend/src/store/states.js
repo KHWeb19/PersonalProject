@@ -26,7 +26,8 @@ export default {
     //
     freeBoards: [],
     freeBoard: null,
-    memberLists: []
+    memberLists: [],
+    userInfo: null
     
   
 }
