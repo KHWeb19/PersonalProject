@@ -1,8 +1,8 @@
 <template>
     <div class="Main">
         <header>
-            <!--<div  v-if="member.id == null" style="text-align: right;">-->
-            <v-container style="height: 10px">
+            <!--<div  v-if="this.$store.state.userInfo == null "" style="text-align: right;">-->
+            <v-container>
                 <v-row>
                     <v-col class="col-12 col-sm-10"></v-col>
                     <v-col class="col-12 col-sm-1">
@@ -16,6 +16,8 @@
                         </router-link>
                     </v-col>
                 </v-row>
+
+            <!--<div  v-if="member.id != 'null'" style="text-align: right;">
             </v-container>
             <v-container style="height: 10px">
                 <v-row>
@@ -29,6 +31,7 @@
                         </router-link>
                     </v-col>
                 </v-row>
+                -->
             </v-container>
             
             

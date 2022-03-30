@@ -47,25 +47,59 @@
 
 import LoginPageForm from '@/components/mainPage/LoginPageForm.vue'
 import axios from 'axios'
+import Vue from 'vue'
+import cookies from 'vue-cookies'
+
+Vue.use(cookies)
 
     export default {
         name: 'LoginPage',
         components: {
             LoginPageForm
         },
+        data () {
+            return {
+                isLogin: false
+            }
+        },
+        mounted() {
+            this.$store.state.userInfo = this.$cookies.get("user")
+
+            if(this.$store.state.userInfo != null) {
+                this.isLogin = true
+            }else {
+                this.isLogin = false
+            }
+        },
         methods: {
             onSubmit (payload) {
-                const {id, pw} = payload
-                axios.post('http://localhost:7777/bookCake/login',{id, pw})
-                    .then(() => {
-                        alert('안녕하세요! {{id}}님!')
+                if(!this.isLogin){
+                    const {id, pw} = payload
+                    axios.post('http://localhost:7777/Member/login', {id, pw})
+                        .then(res => {
+                            if(res.data) {
+                                alert('안녕하세요!' +res.data.id+'님!')
+                                this.$store.state.userInfo = res.data
+                                this.$cookies.set("user", res.data, 3600)
+                                this.isLogin = true
+                                this.$router.push({
+                                    name: 'MainHomepage'
+                                })
+                            }
+                        })
+                        .catch (() => {
+                            alert('아이디 및 비밀번호를 잘못 입력하였습니다.')
+                        })
+                }else if(this.isLogin){
+                     alert('이미 로그인 되어 있습니다!')
+                    this.$router.push({
+                        name: 'MainHomepage'
                     })
-                    .catch (() => {
-                        alert('아이디 및 비밀번호를 잘못 입력하였습니다.')
-                    })
-            }
+                }
+            }   
         }
     }
+
 </script>
 
 <style scoped>
