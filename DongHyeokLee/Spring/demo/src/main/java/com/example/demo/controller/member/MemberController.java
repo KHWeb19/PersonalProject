@@ -21,19 +21,32 @@ public class MemberController {
     @Autowired
     private MemberService memberService;
 
-    @PostMapping("register")
+    @PostMapping("/register")
     public void memberRegister(@Validated @RequestBody MemberRequest memberRequest){
         log.info("memberRegister request" + memberRequest);
 
         memberService.register(memberRequest);
     }
 
-
     @GetMapping("/list")
     public List<Member> memberList () {
         log.info("MemberList()");
 
-
         return memberService.list();
+    }
+
+    @PostMapping("/login")
+    public MemberRequest memberLogin (@RequestBody MemberRequest memberRequest) {
+        log.info("MemberLogin()" + memberRequest);
+
+        MemberRequest memberResponse = memberService.login(memberRequest);
+
+        if (memberResponse != null){
+            log.info("Login Success");
+        }else{
+            log.info("Login Fail");
+        }
+
+        return memberResponse;
     }
 }

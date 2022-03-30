@@ -2,6 +2,7 @@ package com.example.demo.controller.member.request;
 
 import lombok.Data;
 
+
 @Data
 public class MemberRequest {
     private String userId;

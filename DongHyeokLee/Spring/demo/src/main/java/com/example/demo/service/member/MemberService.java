@@ -7,5 +7,7 @@ import java.util.List;
 
 public interface MemberService {
     public void register (MemberRequest memberRequest);
-    public List<Member> list () ;
+    public List<Member> list();
+    public MemberRequest login (MemberRequest memberRequest);
+
 }
