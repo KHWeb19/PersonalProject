@@ -1,7 +1,7 @@
 <template>
   <div id="header">
-      <router-link style="text-decoration: none;" :to="{ name: 'Home' }">
-        &nbsp;메인페이지 입장&nbsp;
+      <router-link style="text-decoration: none;" :to="{ name: 'MainPage' }">
+        &nbsp;온라인 편집샵&nbsp;
       </router-link>
   </div>
 </template>

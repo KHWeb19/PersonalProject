@@ -3,17 +3,28 @@
         <v-toolbar dense dark>
             <v-app-bar-nav-icon @click="nav_drawer = !nav_drawer">
             </v-app-bar-nav-icon>
-            <v-toolbar-title>
-                <span class="font-weight-light">온라인 편집샵</span>
+            
+            <!-- 로고 버튼 누르면 메인페이지로 이동하는거 구현하고 싶은데 모르겠음-->
+             <v-toolbar-title class="text-uppercase grey--text">
+                <v-icon left>
+                    mdi-home
+                </v-icon>
+                <span>HOME</span>
             </v-toolbar-title>
+
+            <v-spacer></v-spacer>
+
             <v-toolbar-items>
-                <v-btn text v-for="link in links" :key="link.icon" :to="link.route">
-                    {{ link.text }}
+                <v-btn v-for="link in links" :key="link.icon" :to="link.route">
+                    <v-icon left>
+                        {{ link.icon }}
+                    </v-icon>
+                    <span> {{ link.text }}</span>
                 </v-btn>
             </v-toolbar-items>
         </v-toolbar>
 
-        <v-navigation-drawer app v-model="nav_drawer" temporary>
+        <!-- <v-navigation-drawer app v-model="nav_drawer" temporary>
             <v-list nav dense>
                 <v-list-item v-for="link in links" :key="link.name" router :to="link.route">
                     <v-list-item-action>
@@ -28,7 +39,7 @@
                     </v-list-item-content>
                 </v-list-item>
             </v-list>
-        </v-navigation-drawer>
+        </v-navigation-drawer> -->
 
     </div>
 </template>
@@ -39,9 +50,10 @@ export default {
         return {
           nav_drawer: false,
           links: [
-              { icon: 'mdi-home', text: 'Home', name: 'home', route: '/' },
-              { icon: 'mdi-account', text: '로그인', name: 'login', route: '/logInPage' },
-              { icon: 'mdi-cart', text: '장바구니', name: 'cart', route: '/cartPage' }
+              { icon: 'mdi-home', text: 'HOME', name: 'logo', route: '/mainPage' },
+              { icon: 'mdi-login-variant', text: 'LOGIN', name: 'login', route: '/loginPage' },
+              { icon: 'mdi-account-plus-outline', text: 'JOIN', name: 'join', route: '/joinPage' },
+              { icon: 'mdi-cart', text: 'CART', name: 'cart', route: '/cartPage' }
           ]  
         }
     }
