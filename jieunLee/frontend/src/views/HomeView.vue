@@ -1,8 +1,6 @@
 <template>
-  <div class="home">
-    <router-link style="text-decoration: none;" :to="{name: 'HomeView'}">
-      &nbsp;Home&nbsp;
-    </router-link>
+  <div>
+    <menu-bar/>
     <router-link style="text-decoration: none;" :to="{name: 'LoginPage'}">
       &nbsp;Login&nbsp;
     </router-link>
@@ -14,12 +12,16 @@
 </template>
 
 <script>
-
+import MenuBar from '../components/MenuBar.vue'
 
 export default {
-  name: 'Home',
   components: {
-
+    MenuBar
   }
 }
 </script>
+
+<style>
+
+
+</style>

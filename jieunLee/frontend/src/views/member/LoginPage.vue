@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-container style="width: 350px; height: 382px; margin-top: 70px;">
+        <v-container style="text-align: center; width: 350px; height: 382px; margin-top: 70px;">
             <v-flex>
                 <v-card>
                     <form @submit.prevent="onSubmit"  >
@@ -53,14 +53,11 @@ export default {
 }
 </script>
 
-<style>
-#app {
+<style scoped>
+/* #app {
   text-align: center;
-}
+} */
 
-.v-main {
-    background-color: #fafafa;
 
-}
 
 </style>
