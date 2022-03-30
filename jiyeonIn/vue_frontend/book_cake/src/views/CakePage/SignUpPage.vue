@@ -1,56 +1,25 @@
 <template>
     <div class="Main">
-        <header>
-            <router-link style="text-decoration: none;" :to="{name: 'MainHomepage'}">            
-                <v-img class="MainLogo"
-                max-height="200" max-width="250" 
-                src="@/assets/img/check.png"/>
-            </router-link>
-        </header>
-        <hr>
-        <v-container >
-            <v-row no-gutters class="menu">
-                <v-col class="col-12 col-sm-3"></v-col>
-                <v-col class="col-12 col-sm-2">
-                    <router-link :to="{name: 'BookingPage'}">
-                        <p>예약하기</p>
-                    </router-link>
-                </v-col>
-                <v-col class="col-12 col-sm-2">
-                    <router-link :to="{name: 'BookingListPage'}">
-                        <p>주문서 보기</p>
-                    </router-link>
-                </v-col>
-                <v-col class="col-12 col-sm-2">
-                    <router-link :to="{name: 'PreviewCakeImg'}">
-                        <p>케이크 보기</p>
-                    </router-link>
-                </v-col>
-                <v-col class="col-12 col-sm-2">
-                   <router-link :to="{name: 'ReviewPage'}">
-                        <p>후기</p>
-                    </router-link>
-                </v-col>
-            </v-row>
-        </v-container>
+        <main-page-form></main-page-form>
 
-        <div>
-            <div class="signUp" align="center">
-                <sign-up-page-form @submit="onSubmit"/>
-            </div>
+        <div class="signUp" align="center">
+            <sign-up-page-form @submit="onSubmit"/>
         </div>
+        
 
     </div>
 </template>
 
 <script>
 import SignUpPageForm from '@/components/mainPage/SignUpPageForm.vue'
+import MainPageForm from '@/components/mainPage/MainPageForm.vue'
 import axios from 'axios'
 
     export default {
         name: 'SignUpPage',
         components: {
-            SignUpPageForm
+            SignUpPageForm,
+            MainPageForm
         },
         methods: {
             onSubmit (payload) {
