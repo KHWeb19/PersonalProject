@@ -4,12 +4,12 @@
       <table>
         <tr>
           <td>I D</td>
-          <td><input class="underline" type="text" v-model="id"></td>
+          <td><input class="underline" name="id" type="text" v-model="id"></td>
         </tr>
         <br/>
         <tr>
           <td>PASSWORD</td>
-          <td><input class="underline" type="password" v-model="pw"></td>
+          <td><input class="underline" name="pw" type="password" v-model="pw"></td>
         </tr>
       </table>
 
