@@ -3,7 +3,7 @@
       <router-link to="/join">
         <v-btn
             color="white"
-            height="25"
+            height="20"
             v-bind="attrs"
             v-on="on"
         >
