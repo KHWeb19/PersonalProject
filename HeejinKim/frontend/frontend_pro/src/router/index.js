@@ -21,9 +21,9 @@ const routes = [
     } 
   },
   {
-    path: '/',
+    path: '/register',
     name: 'RegisterPage',
-    components: RegisterPage
+    component: RegisterPage
   },
   
 ]
