@@ -2,7 +2,7 @@
 <div align: right>
     <v-list-item-action>
         <v-icon>
-            mdi-group-add
+            mdi-group_add
         </v-icon>
     </v-list-item-action>
     <v-list-item-action>
