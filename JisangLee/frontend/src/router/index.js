@@ -1,7 +1,13 @@
 import Vue from 'vue'
+// import Vee-Validate from 'vee-validate'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 
+import RegisterPage from '@/views/stockMember/RegisterPage.vue'
+import LoginPage from '@/views/stockMember/LoginPage.vue'
+import AwesomeSwiperPage from '@/views/ui/AwesomeSwiperPage.vue'
+
+// Vue.use(VeeValidate)
 Vue.use(VueRouter)
 
 const routes = [
@@ -11,12 +17,25 @@ const routes = [
     component: Home
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path: '/stock/register',
+    name: 'RegisterPage',
+    components: {
+      default: RegisterPage
+    }
+  },
+  {
+    path: '/stock/login',
+    name: 'LoginPage',
+    components: {
+      default: LoginPage
+    }
+  },
+  {
+    path: '/awesomeSwiper',
+    name: 'AwesomeSwiperPage',
+    components: {
+      default: AwesomeSwiperPage
+    }
   }
 ]
 
