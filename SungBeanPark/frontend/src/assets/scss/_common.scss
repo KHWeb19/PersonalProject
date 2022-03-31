@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+@import // Vendors
+  "~@/assets/scss/vendors/normalize",
+  "~@/assets/scss/vendors/reset";
+
+@import // Base
+  "~@/assets/scss/base/fonts";
+
+@import // components
+  "~@/assets/scss/components/gnb-nav",
+  "~@/assets/scss/components/gnb-icon-buttons",
+  "~@/assets/scss/components/home-section", "~@/assets/scss/components/swiper";
+
+@import // layout
+  "~@/assets/scss/layout/header",
+  "~@/assets/scss/layout/sidebar", 
+  "~@/assets/scss/layout/overlay";
+
+@import // Modules
+  "~@/assets/scss/modules/buttons";
