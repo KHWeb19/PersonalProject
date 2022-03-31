@@ -15,7 +15,7 @@
 
 <script>
 import BookingCakeForm from '@/components/mainPage/BookingCakeForm.vue'
-import MainPageForm from '@/components/mainPage/MainPageForm.vue'
+import MainPageForm from '@/components/layout/MainPageForm.vue'
 
     export default {
         name: 'BookingPage',

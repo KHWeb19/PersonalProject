@@ -17,11 +17,11 @@
 
             <div>
                 <br>
-                <v-btn onclick="checklogin" color="black" text type="submit" width="210">
+                <v-btn color="black" text type="submit" width="210">
                     <v-icon>mdi-login</v-icon>login</v-btn>
                 <br>
                 <span>
-                    <router-link :to="{ name : 'HomeView'}">
+                    <router-link :to="{ name : 'FindIdPw'}">
                         아이디, 비밀번호 찾기
                     </router-link>
                     <router-link :to="{ name : 'SignUpPage'}">
@@ -52,9 +52,6 @@ export default {
         onSubmit () {
             const {id,pw} = this
             this.$emit('submit',{id,pw})
-        },
-        checklogin() {
-            
         }
     }
 }

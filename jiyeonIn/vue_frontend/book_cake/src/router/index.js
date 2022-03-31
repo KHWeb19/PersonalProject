@@ -10,7 +10,7 @@ import ReviewPage from '@/views/CakePage/ReviewPage.vue'
 import MyPage from '@/views/CakePage/MyPage.vue'
 import LoginPage from '@/views/CakePage/LoginPage.vue'
 import SignUpPage from '@/views/CakePage/SignUpPage.vue'
-
+import FindIdPw from '@/views/CakePage/FindIdPw.vue'
 
 Vue.use(VueRouter)
 
@@ -62,6 +62,12 @@ const routes = [
     path: '/signUpPage',
     name: 'SignUpPage',
     component: SignUpPage
+  }
+  ,
+  {
+    path: '/findId',
+    name: 'FindIdPw',
+    component: FindIdPw
   }
 
   ,
