@@ -3,20 +3,21 @@
         <form @submit.prevent="onSubmit">
             <br>
             <h4>로그인</h4>
-            <table>
-                    <tr>
-                        <td><v-icon>mdi-account</v-icon> </td>
-                        <td><v-text-field type="text" v-model="id" placeholder="이메일 입력" ></v-text-field></td>
-                    </tr>
-                    <tr>
-                        <td><v-icon>mdi-lock</v-icon></td>
-                        <td><v-text-field type="password" v-model="pw" placeholder="비밀번호 입력"></v-text-field></td>
-                    </tr>
-                
-            </table>
+            
+            <v-container >
+                <v-row style="width: 80%; padding: 20px 0 0 0;">
+                    <v-icon>mdi-account</v-icon>
+                    <v-text-field flat v-model="id" type="text"  dense required placeholder="아이디 입력" :rules="rules_id" ></v-text-field>
+                </v-row>
+                <v-row style="width: 80%; padding: 20px 0 0 0;">
+                    <v-icon>mdi-lock</v-icon>
+                    <v-text-field flat v-model="pw" type="password"  dense required placeholder="비밀번호 입력" :rules="rules_pw" ></v-text-field>
+                </v-row>
+            </v-container>
 
             <div>
-                <v-btn color="black" text type="submit" width="210">
+                <br>
+                <v-btn onclick="checklogin" color="black" text type="submit" width="210">
                     <v-icon>mdi-login</v-icon>login</v-btn>
                 <br>
                 <span>
@@ -38,13 +39,22 @@ export default {
     data() {
         return {
             id: '',
-            pw: ''
+            pw: '',
+            rules_id: [
+                    v => !!v || '아이디를 입력해주세요'
+            ],
+            rules_pw: [
+                v => !!v || '비밀번호를 입력해주세요',
+            ]
         }
     },
     methods: {
         onSubmit () {
             const {id,pw} = this
             this.$emit('submit',{id,pw})
+        },
+        checklogin() {
+            
         }
     }
 }
