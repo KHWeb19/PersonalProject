@@ -54,9 +54,20 @@ public class MemberServiceImpl implements MemberService {
                 return null;
             }
 
-            MemberRequest response = new MemberRequest(memberRequest.getUserId(), null,
-                    memberRequest.getNickname(), memberRequest.getEmail() );
+            MemberRequest response = new MemberRequest(loginMember.getUserId(), null,
+                    loginMember.getNickname(), loginMember.getEmail() );
 
             return response;
     }
+
+    @Override
+    public void modify(Member member) {
+       String encodedPassword = passwordEncoder.encode(member.getPassword());
+       member.setPassword(encodedPassword);
+
+
+        memberRepository.save(member);
+    }
+
+
 }

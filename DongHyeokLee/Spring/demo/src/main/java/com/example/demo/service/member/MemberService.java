@@ -9,5 +9,5 @@ public interface MemberService {
     public void register (MemberRequest memberRequest);
     public List<Member> list();
     public MemberRequest login (MemberRequest memberRequest);
-
+    public void modify (Member member);
 }
