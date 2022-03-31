@@ -18,7 +18,21 @@
           </v-card-title>
           <br/>
           <v-card-text>
-            <login-form @submit="onSubmit"/>
+              <v-container>
+                <form name="loginForm" @submit.prevent="onSubmit">
+                  <table>
+                    <tr>
+                      <td>I D</td>
+                      <td><input class="underline" name="id" type="text" v-model="id"></td>
+                    </tr>
+                    <br/>
+                    <tr>
+                      <td>PASSWORD</td>
+                      <td><input class="underline" name="pw" type="password" v-model="pw"></td>
+                    </tr>
+                  </table>
+                </form>
+              </v-container>
             <div class="loginImg">
             <img src="@/assets/main/homebanner_ghost.png" height="80">
             </div>
@@ -31,7 +45,8 @@
             <v-btn
               color="red darken-3"
               text
-              @click="dialog = false"
+              type="submit"
+              @click="checkValue"
             >
               ENTER
             </v-btn>
@@ -49,10 +64,30 @@
 </template>
 
 <script>
-import LoginForm from '../form/LoginForm.vue'
 export default {
-  components: { LoginForm },
+
     name: 'LoginButton',
+    data: () => ({
+      dialog: false,
+    }),
+    methods: {
+        checkValue () {
+          var inputForm = eval("document.loginForm")
+
+          if(!inputForm.id.value){
+            alert ("아이디를 입력하세요")
+            inputForm.id.focus()
+            return false
+          } else if(!inputForm.pw.value){
+            alert ("비밀번호를 입력하세요")
+            inputForm.pw.focus()
+            return false
+          } else {
+            const { id, pw } = this
+            this.$emit('submit', { id, pw })
+          }
+        }
+    }
 
 }
 </script>
