@@ -21,7 +21,7 @@
              <pre>
             <h1>생활편의</h1>
              </pre>
-            <router-link style="text-decoration: none;" :to="{ name: 'VuetifyMemberJoinColumnTestPage' }">
+            <router-link style="text-decoration: none;" :to="{ name: 'JpaBoardListPage1' }">
               <h4>계좌번호관리</h4> 
              </router-link>
              <p>
@@ -50,7 +50,7 @@
               <h1>일반메모</h1>
             </pre>
 
-               <router-link style="text-decoration: none;" :to="{ name: 'VuetifyMemberJoinColumnTestPage' }">
+               <router-link style="text-decoration: none;" :to="{ name: 'JpaBoardListPage' }">
               <h4>텍스트 메모</h4> 
              </router-link>
 

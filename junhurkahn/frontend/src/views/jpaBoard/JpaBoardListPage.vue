@@ -1,7 +1,7 @@
 <template>
 <div align="center">
     <div id="board">
-        <h1>텍스트 메모</h1>
+        <h1>텍스트메모</h1>
         <router-link :to="{ name: 'JpaBoardRegisterPage' }">
             게시물 작성
         </router-link>
