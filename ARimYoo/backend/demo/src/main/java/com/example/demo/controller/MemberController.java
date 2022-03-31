@@ -38,7 +38,10 @@ public class MemberController {
             log.info ("로그인 실패!");
         }
 
+
         return memberResponse;
+
+
     }
 
 
