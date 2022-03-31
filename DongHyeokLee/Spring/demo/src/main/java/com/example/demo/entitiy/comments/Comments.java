@@ -1,30 +1,27 @@
-package com.example.demo.entitiy.freeBoard;
+package com.example.demo.entitiy.comments;
 
-
-import com.example.demo.entitiy.comments.Comments;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
-
 
 @Data
 @Entity
-public class FreeBoard {
+public class Comments {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long boardNo;
+    private Long commentNo;
 
-    @Column(length = 128, nullable = false)
-    private String title;
+    @Column(name= "board_no")
+    private Long boardNo;
 
     @Column(length = 32, nullable = false)
     private String writer;
 
-    @Lob
+    @Column(length = 64, nullable = false)
     private String content;
 
     @CreationTimestamp
@@ -33,7 +30,11 @@ public class FreeBoard {
     @UpdateTimestamp
     private Date updDate;
 
-
+    public Comments (String writer, String content, Long boardNo){
+            this.writer = writer;
+            this.content = content;
+            this.boardNo = boardNo;
+    }
 
 
 }

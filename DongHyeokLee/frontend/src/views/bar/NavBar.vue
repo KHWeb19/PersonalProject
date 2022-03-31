@@ -35,18 +35,19 @@
 
 <script>
 export default {
+    name: 'NavBar',
     methods: {
       hihi() {
           this.$router.push('/boardList')
       }
-
     },
      data() {
         return{
             nav_drawer: false,
             links: [
                 { icon: 'mdi-home', text: 'Home', name: 'HomeView', route: '/' },
-                { icon: 'mdi-pencil-plus-outline', text:'자유게시판', name:'FreeBoardListPage', route:'/freeBoardList'}
+                { icon: 'mdi-pencil-plus-outline', text:'자유게시판', name:'FreeBoardListPage', route:'/freeBoardList'},
+                
             ],
      
         }
@@ -56,21 +57,19 @@ export default {
 
 <style scoped>
    
-
     section{
         background-image: url(@/assets/img/homeBackground.png);
         background-size: cover;
         background-repeat: no-repeat;
         display: block;
-        height: 250px;
+        height: 400px;
         color:#ffffff;
         text-align: center;
          
      }
-
     section h1{
         font-size: 2.5em;
-        padding:  75px;
+        padding:  140px;
         
     }
     

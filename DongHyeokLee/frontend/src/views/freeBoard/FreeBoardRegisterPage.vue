@@ -12,7 +12,7 @@ import FreeBoardRegisterForm from '@/components/freeBoard/FreeBoardRegisterForm.
 
 
 export default {
-    name: 'BoardRegisterPage',
+    name: 'FreeBoardRegisterPage',
     components: {
         FreeBoardRegisterForm
     },

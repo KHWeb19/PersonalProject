@@ -1,10 +1,10 @@
 <template>
 
   <v-app>
-    
+   
+   <top-nav-bar></top-nav-bar>
    <nav-bar></nav-bar>
     
-
     <v-main>
       <router-view/>
     </v-main>
@@ -15,12 +15,20 @@
 <script>
 
 import NavBar from '@/views/bar/NavBar.vue'
+import TopNavBar from '@/views/bar/TopNavBar.vue'
 
 export default {
   name: 'App',
   components: {
-    NavBar
+    NavBar,
+    TopNavBar
+    
+  },
+  data () {
+    return {
+         
+     
+    }
   }
-
 }
 </script>

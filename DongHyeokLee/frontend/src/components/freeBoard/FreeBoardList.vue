@@ -19,7 +19,7 @@
                 </td>
                 <td align="center">
                     <router-link :to="{ name: 'FreeBoardReadPage',
-                                        params: { boardNo: freeBoard.boardNo.toString() } }" style="text-decoration: none; color: black; ">
+                                        params: { boardNo: freeBoard.boardNo.toString() } }" style=" color:black;">
                         {{ freeBoard.title }}
                     </router-link>
                 </td>
@@ -59,4 +59,16 @@ export default {
       margin-bottom: 10px;
 
   }
+
+  a{
+      text-decoration: none;
+
+  }
+
+  a:hover{
+       text-decoration: underline; 
+       color: black;
+    
+  }
+
 </style>
