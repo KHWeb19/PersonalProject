@@ -1,60 +1,63 @@
 <template>
     <div>
-        <v-toolbar dense dark>
-            <v-app-bar-nav-icon @click="nav_drawer = !nav_drawer">
-            </v-app-bar-nav-icon>
-            
-            <!-- 로고 버튼 누르면 메인페이지로 이동하는거 구현하고 싶은데 모르겠음-->
-             <v-toolbar-title class="text-uppercase grey--text">
-                <v-icon left>
-                    mdi-home
-                </v-icon>
-                <span>HOME</span>
-            </v-toolbar-title>
-
-            <v-spacer></v-spacer>
-
-            <v-toolbar-items>
-                <v-btn v-for="link in links" :key="link.icon" :to="link.route">
-                    <v-icon left>
-                        {{ link.icon }}
-                    </v-icon>
-                    <span> {{ link.text }}</span>
-                </v-btn>
-            </v-toolbar-items>
-        </v-toolbar>
-
-        <!-- <v-navigation-drawer app v-model="nav_drawer" temporary>
-            <v-list nav dense>
-                <v-list-item v-for="link in links" :key="link.name" router :to="link.route">
-                    <v-list-item-action>
-                        <v-icon left>
-                            {{ link.icon }}
-                        </v-icon>
-                    </v-list-item-action>
-                    <v-list-item-content>
-                        <v-list-item-title>
-                            {{ link.text}}
-                        </v-list-item-title>
-                    </v-list-item-content>
-                </v-list-item>
-            </v-list>
-        </v-navigation-drawer> -->
-
+        <Header/>
+        
+        <div class="slide">
+            <v-app id="inspire">
+                <v-container>
+                    <swiper class="swiper" :options="swiperOption">
+                        <swiper-slide :key="banner" v-for="banner in banners">
+                            <img :src="banner">
+                        </swiper-slide>
+                        <div class="swiper-pagination" slot="pagination">
+                        </div>
+                    </swiper>
+                </v-container>
+            </v-app>
+        </div>
+        
     </div>
 </template>
 
 <script>
+import Header from '@/components/layout/Header.vue'
+
+import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+import 'swiper/css/swiper.css'
+
 export default {
+    components: {
+        Header,
+        Swiper,
+        SwiperSlide
+    },
     data() {
         return {
-          nav_drawer: false,
-          links: [
-              { icon: 'mdi-home', text: 'HOME', name: 'logo', route: '/mainPage' },
-              { icon: 'mdi-login-variant', text: 'LOGIN', name: 'login', route: '/loginPage' },
-              { icon: 'mdi-account-plus-outline', text: 'JOIN', name: 'join', route: '/joinPage' },
-              { icon: 'mdi-cart', text: 'CART', name: 'cart', route: '/cartPage' }
-          ]  
+            banners: [ 'http://img.ouimerci.co.kr/20fw/25.jpg', 
+            'http://img.ouimerci.co.kr/20fw/22.jpg', 'http://img.ouimerci.co.kr/20fw/17.jpg', 
+            'http://img.ouimerci.co.kr/20fw/5.jpg'],
+            swiperOption: {
+                loop: true,
+                effect: 'coverflow',
+                grabCursor: true,
+                centeredSlides: true,
+                slidesPerView: 'auto',
+                coverflowEffect: {
+                    rotation: 50,
+                    stretch: 0,
+                    depth: 100,
+                    // 회전을 많이 먹이고 싶은 경우 높이도록 한다.
+                    modifier: 1,
+                    slideShadows: true
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    dynamicBullets: true
+                },
+                autoplay: {
+                    delay: 3000
+                }
+            }
         }
     }
 }

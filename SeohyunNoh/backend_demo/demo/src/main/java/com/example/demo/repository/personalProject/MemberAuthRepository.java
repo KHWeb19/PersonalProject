@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.Optional;
 
-public interface MemberAuthCheckRepository extends JpaRepository<MemberAuth, Long> {
+public interface MemberAuthRepository extends JpaRepository<MemberAuth, Long> {
     @Query("select ma.auth from MemberAuth ma where ma.memberNo = :memberNo")
     Optional<MemberAuth> findByMemberNo(Long memberNo);
 }
