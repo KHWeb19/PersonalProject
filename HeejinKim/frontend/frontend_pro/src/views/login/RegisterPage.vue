@@ -8,8 +8,11 @@
 </template>
 
 <script>
+
+
 import RegisterForm from '@/components/login/RegisterForm.vue'
 import axios from 'axios'
+//import {mapActions, mapState } from 'vuex';
 
 export default {
    name: "RegisterPage",
@@ -18,20 +21,38 @@ export default {
    },
    methods:{
        onSubmit(payload){
-           const { userId, password, passwordCheck, email ,auth } = payload
-         
-           axios.post('http://localhost:7777/jpaMember/register',{userId, password, passwordCheck, email, auth})
+            const { userId, password, passwordCheck, email ,auth } = payload
+
+
+            if(password == passwordCheck) {
+            axios.post('http://localhost:7777/jpaMember/register',{userId, password, passwordCheck, email, auth})
                 .then(res => {
-                    alert('회원가입 성공' + res)
-                    this.$router.push({
-                        name: 'Home'
-                    }) 
-                }).catch(res => {
+                    if(res.data) {
+                        alert('회원가입 성공' + res)
+                        this.$router.push({
+                            name: 'Home'
+                        })
+                    } else { alert('중복된 아이디입니다')
+                    }
+                })
+                .catch(res => {
                     alert(res.response.data.message)
                 })
-                
-                
-        }
-    }
+            }else {
+                alert('비밀번호가 일치하지 않습니다.')
+                return false
+            }        
+        } /*,
+        ...mapActions(['fetchMemberList']),   ----members: member/
+    },
+    computed:{
+        ...mapState(['members'])
+    },
+    mounted(){
+        this.fetchMemberlist()
+    } */
+   }
+
 }
 </script>
+

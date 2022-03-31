@@ -17,8 +17,8 @@
                     <router-link style="text-decoration: none;" :to="{name: 'RegisterPage'}">
                          <h3 class="font-weight-light pa-6 pl-6 pr-2">Login</h3>
                     </router-link>   
-                    <router-link style="text-decoration: none;" :to="{name: 'RegisterPage'}">
-                        <h3 class="font-weight-light pa-6 pl-6 pr-2">Register</h3>
+                    <router-link style="text-decoration: none;" :to="{name: 'RegisterPage'}" >
+                        <h3 class="font-weight-light pa-6 pl-6 pr-2">Register</h3>    
                     </router-link>   
                   
                 </v-toolbar-items>
