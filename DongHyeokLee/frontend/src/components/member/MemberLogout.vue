@@ -24,7 +24,7 @@ export default {
 
         alert('로그아웃 성공!')
          this.$router.push({
-        name: 'HomeView'
+         name: 'HomeView'
          })
         }
     }

@@ -111,9 +111,9 @@ export default {
                 }
             }else{
             alert('다시 입력 해주세요')
-        }
+            }
         }
 
-        }
+    }
 }
 </script>

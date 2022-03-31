@@ -23,19 +23,19 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public void register(MemberRequest memberRequest) {
-        String encodedPassword = passwordEncoder.encode(memberRequest.getPassword());
-        memberRequest.setPassword(encodedPassword);
+            String encodedPassword = passwordEncoder.encode(memberRequest.getPassword());
+            memberRequest.setPassword(encodedPassword);
 
-        Member memberEntity = new Member(memberRequest.getUserId(), memberRequest.getPassword(),
-                memberRequest.getNickname(),memberRequest.getEmail());
+            Member memberEntity = new Member(memberRequest.getUserId(), memberRequest.getPassword(),
+                    memberRequest.getNickname(),memberRequest.getEmail());
 
-        memberRepository.save(memberEntity);
-    }
+            memberRepository.save(memberEntity);
+        }
 
     @Override
     public List<Member> list()  {
-
-        return memberRepository.findAll();
+        //현재 password가 암호화 되어있긴한데 이것도 같이 나감
+            return memberRepository.findAll();
     }
 
     @Override
@@ -62,12 +62,15 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public void modify(Member member) {
-       String encodedPassword = passwordEncoder.encode(member.getPassword());
-       member.setPassword(encodedPassword);
+           String encodedPassword = passwordEncoder.encode(member.getPassword());
+           member.setPassword(encodedPassword);
 
-
-        memberRepository.save(member);
+            memberRepository.save(member);
     }
 
-
+    @Override
+    public void remove(Member member) {
+            log.info("memberNo" + member.getMemberNo() );
+            memberRepository.deleteById(member.getMemberNo());
+    }
 }

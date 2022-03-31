@@ -38,6 +38,9 @@
         </v-card-text>
         <v-card-actions class="grey lighten-5">
                     <v-spacer></v-spacer> 
+            <v-btn text @click="remove()">
+                회원탈퇴
+            </v-btn>  
             <v-btn class="grey--text" text @click="myPageDialog = false">
                     취소
                 </v-btn>
@@ -86,31 +89,51 @@ export default {
     methods: {
         modify () {
             const { password } = this
-        for(var i = 0; i < this.members.length; i++){
-            if(this.members[i].userId === this.userId){
-                if(password.length >=8 && password.length <=15) {   
-                    axios.put(`http://localhost:7777/member/modify`,
-                    { userId: this.userId, password, nickname: this.nickname, email: this.email, 
-                    regDate: this.members[i].regDate, memberNo: this.members[i].memberNo })
+            for(var i = 0; i < this.members.length; i++){
+                if(this.members[i].userId === this.userId){
+                    if(password.length >=8 && password.length <=15) {   
+                        axios.put(`http://localhost:7777/member/modify`,
+                        { userId: this.userId, password, nickname: this.nickname, email: this.email, 
+                        regDate: this.members[i].regDate, memberNo: this.members[i].memberNo })
+                            .then(() => {
+                                alert('비밀번호 변경 성공! 로그아웃 됩니다')
+                                this.$cookies.remove("user")
+                                this.$store.state.isLogin = false
+                                this.$store.state.userInfo = null
+                                this.$router.push({
+                                    name: 'HomeView'
+                                
+                                })
+                                })
+                            .catch(() => {
+                                alert('게시물 수정 실패!')
+                            })
+                    }else{
+                        alert('비밀번호는 8~15자 입니다.')
+                    }
+                }
+            }
+        },
+        
+        remove () {
+            for(var i = 0; i < this.members.length; i++){
+                if(this.members[i].userId === this.userId){
+                        axios.delete(`http://localhost:7777/member/remove`,{ data:{ memberNo: this.members[i].memberNo } })
                         .then(() => {
-                            alert('비밀번호 변경 성공! 로그아웃 됩니다')
+                            alert('회원 탈퇴 되었습니다.')
                             this.$cookies.remove("user")
                             this.$store.state.isLogin = false
                             this.$store.state.userInfo = null
                             this.$router.push({
                                 name: 'HomeView'
                             
-                             })
                             })
+                        })
                         .catch(() => {
                             alert('게시물 수정 실패!')
                         })
-                }else{
-                    alert('비밀번호는 8~15자 입니다.')
                 }
             }
-        }
-
         }
     }
 }

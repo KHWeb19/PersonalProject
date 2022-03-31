@@ -68,12 +68,12 @@ export default {
                     if (res.data) {
                         alert('로그인 성공!')
                         this.$store.state.userInfo = res.data
-                        this.$cookies.set("user", res.data, 30)
+                        this.$cookies.set("user", res.data, 300)
                         this.$store.state.isLogin = true
               }
             })
             .catch(res => {
-              alert(res.respnse.data.message + '입력이 잘못 되었습니다')
+              alert(res.respse.data.message + '입력이 잘못 되었습니다')
             })
       } else {
         alert('이미 로그인이 되어 있습니다!')

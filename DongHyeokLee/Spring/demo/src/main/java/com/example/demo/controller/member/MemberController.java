@@ -50,7 +50,7 @@ public class MemberController {
     }
 
     @PutMapping("/modify")
-    public Member memberModify (@RequestBody Member member) {
+    public Member memberInformationModify (@RequestBody Member member) {
         log.info("memberModify(): " + member);
 
         log.info(""+ member.getMemberNo());
@@ -59,5 +59,12 @@ public class MemberController {
         memberService.modify(member);
 
         return member;
+    }
+
+    @DeleteMapping("/remove")
+    public void MemberInformationRemove(@RequestBody Member member) {
+        log.info("MemberRemove()" + member.getMemberNo());
+
+        memberService.remove(member);
     }
 }

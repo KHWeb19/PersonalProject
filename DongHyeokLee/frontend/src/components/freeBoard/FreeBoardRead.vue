@@ -29,14 +29,13 @@
             </tr>
         </table>
         
-        <comments-register-page></comments-register-page>
+       
     </div>
 </template>
 
 <script>
 
 
-import CommentsRegisterPage from '@/views/comments/CommentsRegisterPage.vue'
 
 export default {
     name: 'FreeBoardRead',
@@ -48,7 +47,7 @@ export default {
     },
     components: {
        
-        CommentsRegisterPage
+      
     }
 }
 </script>
