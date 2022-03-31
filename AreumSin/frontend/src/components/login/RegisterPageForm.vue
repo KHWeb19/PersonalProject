@@ -4,35 +4,35 @@
       <v-card-title style="font-size: 50px; margin-bottom: 15px; margin-top: 15px">회원가입<br/></v-card-title>
     </v-row>
     <v-row justify="center">
-      <form>
+      <form @submit="onSubmit">
         <table>
           <tr>
             <td colspan="2">&nbsp;ID</td>
           </tr>
           <tr>
-            <td><input type="text"></td>
-            <td><v-btn height="40px" id="checkDouble">중복 확인</v-btn></td>
+            <td><input type="text" v-model="id"></td>
+            <td><v-btn height="40px" id="checkDouble" @click="checkDouble">중복 확인</v-btn></td>
           </tr>
 
           <tr>
             <td colspan="2">PW</td>
           </tr>
           <tr>
-            <td colspan="2"><input type="password"></td>
+            <td colspan="2"><input type="password" v-model="pw"></td>
           </tr>
 
           <tr>
             <td colspan="2">이름</td>
           </tr>
           <tr>
-            <td  colspan="2"><input type="text"></td>
+            <td  colspan="2"><input type="text" v-model="name"></td>
           </tr>
 
           <tr>
             <td  colspan="2">생년월일</td>
           </tr>
           <tr>
-            <td colspan="2"><input type="text" placeholder=" ex) 940114"></td>
+            <td colspan="2"><input type="text" placeholder=" ex) 940114" v-model="birth"></td>
           </tr>
 
           <tr>
@@ -96,13 +96,13 @@
 
           <tr>
             <td rowspan="2" colspan="2">
-              <v-btn width="100%" height="50px" id="registerBtn">가입</v-btn>
+              <v-btn width="100%" height="50px" id="registerBtn" type="submit">가입</v-btn>
             </td>
           </tr>
         </table>
       </form>
     </v-row>
-  </v-card>
+  </v-card>일정
 </template>
 
 <script>
@@ -110,7 +110,22 @@ export default {
   name: "RegisterPageForm",
   data() {
     return{
-      colorGroup: ''
+      colorGroup: 0,
+      id: '',
+      pw: '',
+      name: '',
+      birth: '',
+    }
+  },
+  methods: {
+    onSubmit() {
+      const { id, pw, name, birth, colorGroup} = this;
+      const color = colorGroup;
+      this.$emit('submit', {id, pw, name, birth, color})
+    },
+    checkDouble(){
+      const {id} = this;
+      this.$emit('check', {id})
     }
   }
 }
