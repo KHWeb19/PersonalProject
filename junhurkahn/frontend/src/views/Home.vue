@@ -1,17 +1,21 @@
 <template>
   <DaumNewsCrawlerPage>
     <template #menubar>
-      <v-btn @click="start('foreign')" text color="black" style="padding: 10px; width: 90px;">로그인</v-btn>
-      <v-btn @click="start('culture')" text color="black" style="padding: 10px; width: 90px;">회원가입</v-btn>
+       <router-link style="text-decoration: none;" :to="{ name: 'LoginTestPage' }">
+      <h3>&nbsp;&nbsp;&nbsp;&nbsp;로그인&nbsp;&nbsp;&nbsp;&nbsp;</h3>
+    </router-link>
+       <router-link style="text-decoration: none;" :to="{ name: 'VuetifyMemberJoinColumnTestPage' }">
+      <h3>&nbsp;회원가입&nbsp;</h3>
+    </router-link>
     </template>
     <template #content>
+        <h1>PersonalProject</h1>
       <v-simple-table>
         <template v-slot:default>
           <thead>
             <tr>
-              <th class="text-left">No.</th>
-              <th class="text-left">제목</th>
-            </tr>
+            
+           </tr>
           </thead>
           <tbody>
             <tr v-for="(list, index) of crawlLists" :key="index">
@@ -47,6 +51,8 @@ export default {
 </script>
 
 <style scoped>
+
+h3{color: white;}
 
 </style>
 

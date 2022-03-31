@@ -1,11 +1,13 @@
 <template>
+<div align="center">
     <div id="board">
-        <h2>텍스트 메모</h2>
+        <h1>텍스트 메모</h1>
         <router-link :to="{ name: 'JpaBoardRegisterPage' }">
             게시물 작성
         </router-link>
         <jpa-board-list :jpaBoards="jpaBoards"/>
     </div>
+</div>
 </template>
 
 <script>
