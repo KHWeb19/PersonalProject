@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <!--
     <v-app-bar
       app
       color="primary"
@@ -35,18 +36,17 @@
         <span class="mr-2">Latest Release</span>
         <v-icon>mdi-open-in-new</v-icon>
       </v-btn>
-    </v-app-bar>
+    </v-app-bar> -->
 
     <v-main>
-      <router-view/>
+      <router-view />
     </v-main>
   </v-app>
 </template>
 
 <script>
-
 export default {
-  name: 'App',
+  name: "App",
 
   data: () => ({
     //
