@@ -1,11 +1,11 @@
 <template>
     <div>
-        <v-container style="width: 350px; height: 382px; margin-top: 70px;">
+        <v-container style="text-align: center; width: 350px; height: 382px; margin-top: 70px;">
             <v-flex>
                 <v-card>
                     <form @submit.prevent="onSubmit"  >
-                        <img style="margin-top: 40px" src="@/assets/vuelogo.png"/>
-                        <h4 style="color: #8E8E8E;">친구들의 사진과 동영상을 보려면 가입하세요.</h4>
+                        <img style="margin: 40px 0px 18px 0px;" src="@/assets/vuelogo.png"/>
+                        <h3>친구들의 어쩌구 가입하세요</h3>
                         <br/>
                         <div>
                             <input style="background-color: #fafafa; 
@@ -15,7 +15,7 @@
                                 width: 268px; 
                                 height: 38px;
                                 padding-left: 5px;" 
-                            type="text" placeholder="성명"/>
+                            type="text" placeholder="성명" />
                         </div>
                         <div>
                             <input style="background-color: #fafafa; 
@@ -25,7 +25,7 @@
                                 width: 268px; 
                                 height: 38px;
                                 padding-left: 5px;" 
-                            type="text" placeholder="아이디"/>
+                            type="text" placeholder="아이디" />
                         </div>
                         <div>
                             <input style="background-color: #fafafa; 
@@ -35,11 +35,10 @@
                                 width: 268px; 
                                 height: 38px;
                                 padding-left: 5px;" 
-                            type="text" placeholder="비밀번호"/>
+                            type="text" placeholder="비밀번호" />
                         </div>
                         <div><v-btn style="margin: 10px; width: 268px; height: 30px;" color="blue" class="white--text" type="submit">가입</v-btn></div>
                     </form>
-                    <br/>
                     <br/>
                 </v-card>
                 <br/>
@@ -65,14 +64,11 @@ export default {
 }
 </script>
 
-<style>
-#app {
+<style scoped>
+/* #app {
   text-align: center;
-}
+} */
 
-.v-main {
-    background-color: #fafafa;
 
-}
 
 </style>
