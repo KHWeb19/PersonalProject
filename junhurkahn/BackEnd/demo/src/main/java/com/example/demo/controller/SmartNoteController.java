@@ -1,4 +1,4 @@
-package com.example.demo.controller.order63;
+package com.example.demo.controller;
 
 import com.example.demo.entity.jpa.JpaBoards;
 
