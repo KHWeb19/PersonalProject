@@ -1,5 +1,3 @@
-
-
 <template>
   <v-app id="inspire">
     <v-app-bar app clipped-right color="blue" dark>
@@ -17,16 +15,62 @@
       <v-list dense>
         <v-list-item @click.stop="left = !left">
           <v-list-item-action>
-            <v-icon>
-              mdi-exit-to-app
-            </v-icon>
+           
           </v-list-item-action>
           <v-list-item-action>
-            <v-list-item-title @click="category">생활편의</v-list-item-title>
-          </v-list-item-action>
+             <pre>
+            <h1>생활편의</h1>
+             </pre>
+            <router-link style="text-decoration: none;" :to="{ name: 'JpaBoardListPage1' }">
+              <h4>계좌번호관리</h4> 
+             </router-link>
+             <p>
+             </p>
+             
+             <router-link style="text-decoration: none;" :to="{ name: 'VuetifyMemberJoinColumnTestPage' }">
+              <h4>장보기 목록</h4> 
+             </router-link>
+
+               <p>
+             </p>
+           
+           
+              <router-link style="text-decoration: none;" :to="{ name: 'VuetifyMemberJoinColumnTestPage' }">
+              <h4>생일 관리</h4> 
+             </router-link>
+
+               <p>
+             </p>
+           <router-link style="text-decoration: none;" :to="{ name: 'VuetifyMemberJoinColumnTestPage' }">
+              <h4>사이트 아이디 관리</h4> 
+             </router-link>
+               <p>
+             </p>
+            <pre>
+              <h1>일반메모</h1>
+            </pre>
+
+               <router-link style="text-decoration: none;" :to="{ name: 'JpaBoardListPage' }">
+              <h4>텍스트 메모</h4> 
+             </router-link>
+
+
+
+            
+   
+
+            
+
+
+          </v-list-item-action>          
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
+
+    
+
+
+
     <v-container>
       <v-content id="content">
         <slot name="content" class="font">
@@ -41,9 +85,7 @@
 </template>
 
 <script>
-
 import router from '@/router'
-
 export default {
   name: "Layout.vue",
   data () {
@@ -61,13 +103,9 @@ export default {
     }
   }
 }
-
-
 </script>
 
 <style scoped>
-
 h3{color: white;}
-
 </style>
 
