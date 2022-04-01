@@ -8,15 +8,17 @@
             </div>
         </div>
         
+        <footer-form></footer-form>
     </div>
 </template>
 
 <script>
-import MainPageForm from '@/components/mainPage/MainPageForm.vue'
+import MainPageForm from '@/components/layout/MainPageForm.vue'
 import LoginPageForm from '@/components/mainPage/LoginPageForm.vue'
 import axios from 'axios'
 import Vue from 'vue'
 import cookies from 'vue-cookies'
+import FooterForm from '@/components/layout/FooterForm.vue'
 
 Vue.use(cookies)
 
@@ -24,7 +26,8 @@ Vue.use(cookies)
         name: 'LoginPage',
         components: {
             LoginPageForm,
-            MainPageForm
+            MainPageForm,
+                FooterForm
         },
         data () {
             return {

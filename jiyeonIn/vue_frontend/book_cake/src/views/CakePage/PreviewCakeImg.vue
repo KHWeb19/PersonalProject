@@ -10,7 +10,7 @@
 
 <script>
 import PreviewCakeForm from '@/components/mainPage/PreviewCakeForm.vue'
-import MainPageForm from '@/components/mainPage/MainPageForm.vue'
+import MainPageForm from '@/components/layout/MainPageForm.vue'
 
     export default {
         name: 'PreviewCakeImg',

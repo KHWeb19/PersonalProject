@@ -65,6 +65,8 @@
                 </v-col>
             </v-row>
         </v-container>
+
+        
     </div>
 </template>
 
@@ -81,9 +83,7 @@
                 this.$store.state.userInfo = null
 
                 alert('로그아웃 되었습니다!')
-                this.$router.push({
-                        name: 'MainHomepage'
-                    })
+                this.$router.go()
             }
         }
 
