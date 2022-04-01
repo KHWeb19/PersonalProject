@@ -82,15 +82,15 @@ export default {
         
         signUp () {
         const { userId, password, email, nickname } = this
-        if((userId.length >= 5 && userId.length <=15) && ( password.length >=8 && password.length <=15) &&
-            (nickname.length >= 3 && nickname.length <= 10) && email.length>=10){
+        if((userId.length >= 5 && userId.length <=15) && ( password.length >= 8 && password.length <= 15) &&
+            (nickname.length >= 3 && nickname.length <= 10) && email.length>= 10){
                 let coin = null;
         for(var i = 0; i < this.members.length; i++){
             if(this.members[i].userId === userId){
-                alert('아이디 중복입니다')
+                alert('중복 된 아이디 입니다')
                 coin = 1;
             }else if(this.members[i].nickname === nickname){
-                alert('닉네임 중복입니다')
+                alert('중복 된 닉네임 입니다')
                 coin = 1;
             }else if(this.members[i].email === email){
                 alert('중복 된 이메일 입니다.')

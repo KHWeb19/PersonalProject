@@ -5,10 +5,10 @@
                 <v-icon style="font-size: 1.3em;">
                     mdi-account
                 </v-icon>
-                Mypage
+                    Mypage
             </v-btn>  
         </template>
- <v-card dark>
+    <v-card dark>
             <v-card-title class="headline">
         <span>
             MyPage
@@ -36,19 +36,33 @@
                 </v-row>
             </v-container>
         </v-card-text>
-        <v-card-actions class="grey lighten-5">
+            <v-card-actions class="grey lighten-5">
                     <v-spacer></v-spacer> 
-            <v-btn text @click="remove()">
-                회원탈퇴
-            </v-btn>  
-            <v-btn class="grey--text" text @click="myPageDialog = false">
-                    취소
-                </v-btn>
-                <v-btn text @click="modify()">
-                변경
-            </v-btn>    
-            </v-card-actions>
-    
+                <v-dialog v-model="memberRemove" persisten max-width="500px">
+                    <template v-slot:activator="{ on }">
+                            <v-btn text class="red--text" v-on="on">
+                                탈퇴
+                            </v-btn>  
+                        </template>
+                        <v-card dark >
+                            <v-container>
+                                    <v-btn text class="red--text" @click="remove()">
+                                        탈퇴
+                                    </v-btn>
+                                    <v-btn text @click="memberRemove = false">
+                                        취소    
+                                    </v-btn>
+                            </v-container>
+                        </v-card>
+                </v-dialog>
+                        <v-btn class="grey--text" text @click="myPageDialog = false">
+                            취소
+                        </v-btn>
+                        <v-btn text @click="modify()">
+                            변경
+                        </v-btn> 
+
+            </v-card-actions>   
     </v-dialog>
 </template>
 
@@ -65,6 +79,7 @@ export default {
     data () {
         return {
             myPageDialog: false,
+            memberRemove:false,
             userId:'',
             password:'',
             nickname: '',
@@ -91,7 +106,7 @@ export default {
             const { password } = this
             for(var i = 0; i < this.members.length; i++){
                 if(this.members[i].userId === this.userId){
-                    if(password.length >=8 && password.length <=15) {   
+                    if(password.length >= 8 && password.length <= 15) {   
                         axios.put(`http://localhost:7777/member/modify`,
                         { userId: this.userId, password, nickname: this.nickname, email: this.email, 
                         regDate: this.members[i].regDate, memberNo: this.members[i].memberNo })
@@ -100,10 +115,9 @@ export default {
                                 this.$cookies.remove("user")
                                 this.$store.state.isLogin = false
                                 this.$store.state.userInfo = null
-                                this.$router.push({
-                                    name: 'HomeView'
+                                this.$router.go()
                                 
-                                })
+                                
                                 })
                             .catch(() => {
                                 alert('게시물 수정 실패!')
@@ -124,13 +138,12 @@ export default {
                             this.$cookies.remove("user")
                             this.$store.state.isLogin = false
                             this.$store.state.userInfo = null
-                            this.$router.push({
-                                name: 'HomeView'
+                            this.$router.go()
                             
-                            })
+                            
                         })
                         .catch(() => {
-                            alert('게시물 수정 실패!')
+                            alert('문제 발생!')
                         })
                 }
             }

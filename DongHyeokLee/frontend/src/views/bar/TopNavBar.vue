@@ -65,15 +65,17 @@ export default {
                 const { userId, password } = payload
                 axios.post('http://localhost:7777/member/login', { userId, password })
                  .then(res => {
-                    if (res.data) {
+                    if (res.data != "") {
                         alert('로그인 성공!')
                         this.$store.state.userInfo = res.data
-                        this.$cookies.set("user", res.data, 300)
+                        this.$cookies.set("user", res.data, 30)
                         this.$store.state.isLogin = true
+                    }else{
+                        alert('다시 입력 하세요')
               }
             })
             .catch(res => {
-              alert(res.respse.data.message + '입력이 잘못 되었습니다')
+                alert(res.response.data.message)  
             })
       } else {
         alert('이미 로그인이 되어 있습니다!')
