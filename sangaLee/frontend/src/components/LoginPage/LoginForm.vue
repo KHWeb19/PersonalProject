@@ -3,6 +3,25 @@
     <div class="color"></div>
     <div class="color"></div>
     <div class="color"></div>
+    <div class="box"></div>
+      <div class="container">
+        <div class="form">
+          <h2>Login Form</h2>
+          <form>
+            <div class="inputBox">
+              <input type="text" placeholder="ID">
+            </div>
+            <div class="inputBox">
+              <input type="password" placeholder="Password">
+            </div>
+            <div class="inputBox">
+              <input type="submit" value="Login">
+            </div>
+            <p class="forget">Forgot Password ? <a href="#">Click Here</a></p>
+            <p class="forget">Don't have an account? <a href="#">Sign Up</a></p>
+          </form>
+        </div>
+      </div>
   </section>
 
 </template>
@@ -25,6 +44,4 @@ export default {
 }
 </script>
 
-<style>
-  @import url("./assets/css/MainLoginStyle.css");
-</style>
+<style scoped src="../../assets/css/MainLoginStyle.css"></style>
