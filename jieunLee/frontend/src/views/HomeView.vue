@@ -7,16 +7,37 @@
     <router-link style="text-decoration: none;" :to="{name: 'RegisterPage'}">
       &nbsp;Register&nbsp;
     </router-link>
-
+    <div>
+    로그인 아이디: {{id}}
+    </div>
+    <member-list :members="members"/>
   </div>
 </template>
 
 <script>
-import MenuBar from '../components/MenuBar.vue'
+import MemberList from '@/components/member/MemberList.vue'
+import MenuBar from '@/components/MenuBar.vue'
+import { mapState, mapActions } from 'vuex'
 
 export default {
+  name: 'HomeView',
   components: {
-    MenuBar
+    MenuBar,
+    MemberList
+  },
+      computed: {
+        ...mapState(['members'])
+    },
+    mounted () {
+        this.fetchMemberList()
+    },
+    methods: {
+        ...mapActions(['fetchMemberList'])
+    },
+  data() {
+    return {
+    id: this.$store.state.memberId
+    }
   }
 }
 </script>

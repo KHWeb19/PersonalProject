@@ -10,6 +10,7 @@
 import MenuBar from '@/components/MenuBar.vue'
 
 export default {
+    name: 'MyProfilePage',
   components: {
     MenuBar
   }

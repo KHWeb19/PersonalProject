@@ -39,7 +39,7 @@ const routes = [
     component: MyProfilePage
   },
   {
-    path: '/accounts/edit',
+    path: '/accounts/edit/:memberNo',
     name: 'AccountsEditPage',
     component: AccountsEditPage
   }
