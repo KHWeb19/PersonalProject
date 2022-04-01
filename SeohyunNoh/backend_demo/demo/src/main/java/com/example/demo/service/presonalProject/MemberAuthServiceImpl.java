@@ -44,7 +44,7 @@ public class MemberAuthServiceImpl implements MemberAuthService{
     public MemberRequest login(MemberRequest memberRequest) {
         Optional<MemberAuthCheckId> maybeMember = memberAuthCheckIdRepository.findByUserId(memberRequest.getId());
 
-        if (maybeMember == null) {
+        if (maybeMember.equals(Optional.empty())) {
             log.info("There are no person who has this id!");
             return null;
         }
@@ -59,7 +59,7 @@ public class MemberAuthServiceImpl implements MemberAuthService{
         Optional<MemberAuth> maybeMemberAuth =
                 memberAuthRepository.findByMemberNo(loginMember.getMemberNo());
 
-        if (maybeMemberAuth == null) {
+        if (maybeMemberAuth.equals(Optional.empty())) {
             log.info("no auth");
             return null;
         }

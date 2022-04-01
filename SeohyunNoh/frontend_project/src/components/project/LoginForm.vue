@@ -24,6 +24,10 @@
                             <v-btn color="grey" depressed block type="submit">
                                 로그인
                             </v-btn>
+                            <br>
+                            <v-btn color="grey" depressed block @click="joinPageForm">
+                                회원가입
+                            </v-btn>
                             <!-- <v-btn color="grey" depressed>
                                 <router-link :to="{ name: 'MainPage' }">
                                     취소
@@ -61,6 +65,9 @@ export default {
             '관리자')
 
             this.$emit('submit', { id, pw, auth })
+        },
+        joinPageForm () {
+        this.$router.push({ path: 'joinPage' })
         }
     }
 }

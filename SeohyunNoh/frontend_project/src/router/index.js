@@ -6,6 +6,10 @@ import MainPage from '@/views/project/MainPage.vue'
 import LoginPage from '@/views/project/LoginPage.vue'
 import JoinPage from '@/views/project/JoinPage.vue'
 
+import WomenCategoryPage from '@/views/project/WomenCategoryPage.vue'
+import MenCategoryPage from '@/views/project/MenCategoryPage.vue'
+import SaleCategoryPage from '@/views/project/SaleCategoryPage.vue'
+
 
 Vue.use(VueRouter)
 
@@ -29,6 +33,21 @@ const routes = [
     path: '/joinPage',
     name: 'JoinPage',
     component: JoinPage
+  },
+  {
+    path: '/womenCategoryPage',
+    name: 'WomenCategoryPage',
+    component: WomenCategoryPage
+  },
+  {
+    path: '/menCategoryPage',
+    name: 'MenCategoryPage',
+    component: MenCategoryPage
+  },
+  {
+    path: '/saleCategoryPage',
+    name: 'SaleCategoryPage',
+    component: SaleCategoryPage
   }
 
 ]
