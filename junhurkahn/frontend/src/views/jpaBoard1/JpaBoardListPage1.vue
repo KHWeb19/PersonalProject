@@ -1,6 +1,6 @@
 <template>
 <div align="center">
-    <div id="board">
+    <div id="board1">
         <h1>계좌번호</h1>
         <router-link :to="{ name: 'JpaBoardRegisterPage1' }">
             게시물 작성
@@ -21,13 +21,13 @@ export default {
       JpaBoardList1
     },
     computed: {
-        ...mapState(['jpaBoards'])
+        ...mapState(['jpaBoards1'])
     },
     mounted () {
-        this.fetchJpaBoardList()
+        this.fetchJpaBoardList1()
     },
     methods: {
-        ...mapActions(['fetchJpaBoardList'])
+        ...mapActions(['fetchJpaBoardList1'])
     }
 }
 

@@ -6,7 +6,9 @@ import {
     FETCH_JPA_BOARD_LIST,
     FETCH_JPA_BOARD,
     FETCH_BUSINESS_MEMBER,
-    CRAWL_START
+    CRAWL_START,
+    FETCH_JPA_BOARD_LIST1,
+    FETCH_JPA_BOARD1
 } from './mutation-types'
 
 import axios from 'axios'
@@ -49,7 +51,21 @@ export default {
             .then((res) => {
                 commit(FETCH_JPA_BOARD, res.data)
             })
-    },
+        },
+
+        fetchJpaBoardList1 ({ commit }) {
+                return axios.get('http://localhost:7777/62th/board1/list1')
+                    .then((res) => {
+                        commit(FETCH_JPA_BOARD_LIST1, res.data)
+                    })
+            },
+            fetchJpaBoard1 ({ commit }, boardNo1) {
+                return axios.get(`http://localhost:7777/62th/board1/${boardNo1}`)
+                    .then((res) => {
+                        commit(FETCH_JPA_BOARD1, res.data)
+                    })
+            },
+
     fetchBusinessMember ({ commit }) {
         return axios.get('http://localhost:7777/63th/jpaMember/checkBusiness')
             .then((res) => {
@@ -67,3 +83,4 @@ export default {
             })
     }
 }
+

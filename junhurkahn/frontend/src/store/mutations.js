@@ -5,6 +5,11 @@ import {
     FETCH_PRODUCT_BOARD,
     FETCH_JPA_BOARD_LIST,
     FETCH_JPA_BOARD,
+    FETCH_JPA_BOARD_LIST1,
+    FETCH_JPA_BOARD1,
+
+ 
+
     FETCH_BUSINESS_MEMBER,
     CRAWL_START
 } from './mutation-types'
@@ -33,5 +38,14 @@ export default {
     },
     [CRAWL_START] (state, payload) {
         state.crawlLists = payload
-    }
+    },
+
+    [FETCH_JPA_BOARD_LIST1] (state, boards1) {
+        state.jpaBoards1 = boards1
+    },
+    [FETCH_JPA_BOARD1] (state, board1) {
+        state.jpaBoard1 = board1
+
+
+}
 }

@@ -1,12 +1,12 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.jpa.JpaBoards;
 
-import com.example.demo.service.order63.JpaBoardServices;
+import com.example.demo.service.order62.JpaBoardServices1;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import com.example.demo.entity.jpa.JpaBoards1;
 
 import java.util.List;
 
@@ -17,47 +17,47 @@ import java.util.List;
 public class SmartNoteController1 {
 
     @Autowired
-    private JpaBoardServices service;
+    private JpaBoardServices1 service;
 
     @PostMapping("/register1")
-    public void jpaBoardRegister (@Validated @RequestBody JpaBoards board) {
+    public void jpaBoardRegister (@Validated @RequestBody JpaBoards1 board) {
         log.info("jpaBoardRegister1()");
 
         service.register(board);
     }
 
     @GetMapping("/list1")
-    public List<JpaBoards> jpaBoardList () {
+    public List<JpaBoards1> jpaBoardList () {
         log.info("jpaBoardList1()");
 
         return service.list();
     }
 
-    @GetMapping("/{boardNo1}")
-    public JpaBoards jpaBoardRead (
-            @PathVariable("boardNo1") Integer boardNo) {
+    @GetMapping("/{boardNo}")
+    public JpaBoards1 jpaBoardRead (
+            @PathVariable("boardNo") Integer boardNo1) {
         log.info("jpaBoardRead1()");
 
-        return service.read(boardNo);
+        return service.read(boardNo1);
     }
 
-    @PutMapping("/{boardNo1}")
-    public JpaBoards jpaBoardModify (
-            @PathVariable("boardNo1") Integer boardNo,
-            @RequestBody JpaBoards jpaBoard) {
-        log.info("jpaBoardModify1(): " + jpaBoard);
+    @PutMapping("/{boardNo}")
+    public JpaBoards1 jpaBoardModify (
+            @PathVariable("boardNo") Integer boardNo1,
+            @RequestBody JpaBoards1 jpaBoard1) {
+        log.info("jpaBoardModify1(): " + jpaBoard1);
 
-        jpaBoard.setBoardNo(Long.valueOf(boardNo));
-        service.modify(jpaBoard);
+        jpaBoard1.setBoardNo(Long.valueOf(boardNo1));
+        service.modify(jpaBoard1);
 
-        return jpaBoard;
+        return jpaBoard1;
     }
 
-    @DeleteMapping("/{boardNo1}")
+    @DeleteMapping("/{boardNo}")
     public void jpaBoardRemove (
-            @PathVariable("boardNo1") Integer boardNo) {
+            @PathVariable("boardNo") Integer boardNo1) {
         log.info("jpaBoardRemove1()");
 
-        service.remove(boardNo);
+        service.remove(boardNo1);
     }
 }

@@ -17,7 +17,7 @@ export default {
         JpaBoardModifyForm1
     },
     props: {
-        boardNo: {
+        boardNo1: {
             type: String,
             required: true
         }
@@ -31,12 +31,12 @@ export default {
             const { title, content } = payload
 
             axios.put(`http://localhost:7777/62th/board1/${this.boardNo1}`,
-                { title, writer: this.jpaBoard.writer, content, regDate: this.jpaBoard.regDate })
+                { title, writer: this.jpaBoard.writer, content, regDate: this.jpaBoard1.regDate })
                     .then(res => {
                         alert('게시물 수정 성공!')
                         this.$router.push({
-                            name: 'JpaBoardReadPage',
-                            params: { boardNo: res.data.boardNo.toString() }
+                            name: 'JpaBoardReadPage1',
+                            params: { boardNo1: res.data.boardNo1.toString() }
                         })
                     })
                     .catch(() => {
@@ -45,7 +45,7 @@ export default {
         }
     },
     created () {
-        this.fetchJpaBoard(this.boardNo)
+        this.fetchJpaBoard(this.boardNo1)
                 .catch(() => {
                     alert('게시물 DB 조회 실패!')
                     this.$router.back()

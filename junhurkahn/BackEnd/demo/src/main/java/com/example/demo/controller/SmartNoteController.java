@@ -2,7 +2,8 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.jpa.JpaBoards;
 
-import com.example.demo.service.order63.JpaBoardServices;
+
+import com.example.demo.service.order62.JpaBoardServices;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;

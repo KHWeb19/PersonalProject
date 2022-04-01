@@ -23,7 +23,7 @@ export default {
                         alert('게시물 등록 성공!')
 
                         this.$router.push({
-                            name: 'JpaBoardListPage'
+                            name: 'JpaBoardListPage1'
                         })
                     })
                     .catch(() => {

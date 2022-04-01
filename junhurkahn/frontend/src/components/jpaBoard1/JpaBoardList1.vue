@@ -8,12 +8,12 @@
                 <th align="center" width="150">계좌번호</th>
                 <th align="center" width="240">소유자이름</th>
             </tr>
-            <tr v-if="!jpaBoards || (Array.isArray(jpaBoards) && jpaBoards.length === 0)">
+            <tr v-if="!jpaBoards1 || (Array.isArray(jpaBoards1) && jpaBoards1.length === 0)">
                 <td colspan="4">
                     현재 등록된 게시물이 없습니다!
                 </td>
             </tr>
-            <tr v-else v-for="board in jpaBoards" :key="board.boardNo">
+            <tr v-else v-for="board in jpaBoards1" :key="board.boardNo">
                 <td align="center">
                     {{ board.boardNo }}
                 </td>
@@ -39,7 +39,7 @@
 export default {
     name: 'JpaBoardList1',
     props: {
-      jpaBoards: {
+      jpaBoards1: {
             type: Array
         }
     }

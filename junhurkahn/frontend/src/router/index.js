@@ -8,15 +8,25 @@ import JpaBoardListPage1 from '@/views/jpaBoard1/JpaBoardListPage1.vue'
 
 
 
-import JpaBoardRegisterPage1 from '@/views/jpaBoard1/JpaBoardRegisterPage1.vue'
 
 import JpaBoardRegisterPage from '@/views/jpaBoard/JpaBoardRegisterPage.vue'
+import JpaBoardRegisterPage1 from '@/views/jpaBoard1/JpaBoardRegisterPage1.vue'
+
+
 import JpaBoardReadPage from '@/views/jpaBoard/JpaBoardReadPage.vue'
+import JpaBoardReadPage1 from '@/views/jpaBoard1/JpaBoardReadPage1.vue'
+
+
 import JpaBoardModifyPage from '@/views/jpaBoard/JpaBoardModifyPage.vue'
+import JpaBoardModifyPage1 from '@/views/jpaBoard1/JpaBoardModifyPage1.vue'
 
 import JpaMemberAuthTestPage from '@/views/jpaMember/JpaMemberAuthTestPage.vue'
 import VuetifyMemberJoinColumnTestPage from '@/views/jpaMember/VuetifyMemberJoinColumnTestPage.vue'
 import DaumNewsCrawlerPage from '@/views/crawl/DaumNewsCrawlerPage.vue'
+
+
+
+
 
 Vue.use(VueRouter)
 
@@ -62,6 +72,7 @@ const routes = [
   },
   
 
+  
   {
     path: '/jpaBoardRegister1',
     name: 'JpaBoardRegisterPage1',
@@ -79,6 +90,20 @@ const routes = [
       default: true
     }
   },
+
+
+  {
+    path: '/jpaBoardRead1/:boardNo1',
+    name: 'JpaBoardReadPage1',
+    components: {
+      default: JpaBoardReadPage1
+    },
+    props: {
+      default: true
+    }
+  },
+
+
   {
     path: '/jpaBoardModify/:boardNo',
     name: 'JpaBoardModifyPage',
@@ -89,6 +114,19 @@ const routes = [
       default: true
     }
   },
+
+  {
+    path: '/jpaBoardModify1/:boardNo1',
+    name: 'JpaBoardModifyPage1',
+    components: {
+      default: JpaBoardModifyPage1
+    },
+    props: {
+      default: true
+    }
+  },
+
+
   {
     path: '/jpaMemberAuthTest',
     name: 'JpaMemberAuthTestPage',

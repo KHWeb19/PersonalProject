@@ -6,6 +6,8 @@ export default {
     userInfo: null,
     jpaBoards: [],
     jpaBoard: null,
+    jpaBoards1: [],
+    jpaBoard1: null,
     businessMembers: [],
     crawlLists: []
     
