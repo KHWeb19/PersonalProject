@@ -13,7 +13,7 @@
           <v-card width="460">
             <v-card-text class="text-center px-12 py-16">
               <validation-observer ref="observer" v-slot="{ invalid }">
-                <v-form @submit.prevent="LogIn">
+                <v-form @submit.prevent="onSubmit">
                   <div class="text-h4 font-weight-black mb-10">로그인</div>
                   <validation-provider
                     v-slot="{ errors }"
@@ -75,16 +75,14 @@ export default {
   name: "LoginForm",
   data() {
     return {
-      id: null,
-      pw: null,
+      id: "",
+      pw: "",
     };
   },
   methods: {
-    async LogIn() {
-      const res = await this.$refs.observer.validate();
-      if (res) {
-        alert("로그인 프로세스");
-      }
+    onSubmit() {
+      const { id, pw } = this;
+      this.$emit("submit", { id, pw });
     },
   },
 };

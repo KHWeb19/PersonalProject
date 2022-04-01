@@ -87,6 +87,22 @@
                     />
                   </validation-provider>
                   <v-btn
+                    width="100px"
+                    style="font-size: 13px"
+                    class="mt-3 mr-5"
+                    color="orange lighten-1"
+                    @click="checkDuplicateId"
+                    >아이디 <br />중복 확인</v-btn
+                  >
+                  <v-btn
+                    width="100px"
+                    style="font-size: 13px"
+                    class="mt-3 ml-5"
+                    color="orange lighten-1"
+                    @click="checkDuplicateNickName"
+                    >닉네임 <br />중복 확인</v-btn
+                  >
+                  <v-btn
                     type="submit"
                     block
                     x-large
@@ -125,6 +141,8 @@ export default {
       const { id, pw, nickName, email, auth } = this;
       this.$emit("submit", { id, pw, nickName, email, auth });
     },
+    checkDuplicateId() {},
+    checkDuplicateNickName() {},
   },
 };
 </script>

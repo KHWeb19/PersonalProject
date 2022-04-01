@@ -17,7 +17,7 @@ export default {
     onSubmit(payload) {
       const { id, pw, nickName, email, auth } = payload;
       axios
-        .post("http://localhost:7777/signUp/register", {
+        .post("http://localhost:7777/member/register", {
           id,
           pw,
           nickName,

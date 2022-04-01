@@ -34,23 +34,45 @@
           </v-btn>
         </v-toolbar-items>
 
-        <v-btn
-          text
-          class="orange lighten-2"
-          style="margin-right: 15px; font-family: fantasy; font-size: 20px"
-        >
-          <router-link to="/login" class="font-weight-light white--text"
-            >로그인</router-link
+        <div v-if="!this.$store.state.userInfo">
+          <v-btn
+            text
+            class="orange lighten-2"
+            style="margin-right: 15px; font-family: fantasy; font-size: 20px"
           >
-        </v-btn>
-        <v-btn text class="orange lighten-2">
-          <router-link
-            to="/signup"
-            class="font-weight-light white--text"
-            style="font-family: fantasy; font-size: 20px"
-            >회원가입</router-link
+            <router-link to="/login" class="font-weight-light white--text"
+              >로그인</router-link
+            >
+          </v-btn>
+          <v-btn text class="orange lighten-2">
+            <router-link
+              to="/signup"
+              class="font-weight-light white--text"
+              style="font-family: fantasy; font-size: 20px"
+              >회원가입</router-link
+            >
+          </v-btn>
+        </div>
+
+        <div v-if="this.$store.state.userInfo">
+          <v-btn
+            text
+            class="orange lighten-2"
+            style="margin-right: 15px; font-family: fantasy; font-size: 20px"
           >
-        </v-btn>
+            <router-link to="/myPage" class="font-weight-light white--text"
+              >마이페이지</router-link
+            >
+          </v-btn>
+          <v-btn text class="orange lighten-2">
+            <span
+              class="font-weight-light white--text"
+              style="font-family: fantasy; font-size: 20px"
+              @click="logout"
+              >로그아웃</span
+            >
+          </v-btn>
+        </div>
       </v-toolbar>
     </template>
   </div>
@@ -66,7 +88,23 @@ export default {
         { text: "인기 순위", route: "/best" },
         { text: "레시피", route: "/recipe" },
       ],
+      isLogin: false,
     };
+  },
+  mounted() {
+    this.$store.state.userInfo = this.$cookies.get("user");
+    if (this.$store.state.userInfo != null) {
+      this.isLogin = true;
+    }
+  },
+  methods: {
+    logout() {
+      this.$cookies.remove("user");
+      this.isLogin = false;
+      this.$store.state.userInfo = null;
+
+      alert("로그아웃 성공");
+    },
   },
 };
 </script>
