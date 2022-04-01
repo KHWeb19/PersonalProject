@@ -1,6 +1,6 @@
 <template>
   <v-container class="spacing-playground pa-16">
-    <register-page-form @submit="onSubmit" @check="checkDouble"></register-page-form>
+    <register-page-form @submit="onSubmit" @check="checkDouble" v-bind:checkId="checkDoubleId" :checkJoin="checkJoin"></register-page-form>
   </v-container>
 
 </template>
@@ -13,35 +13,31 @@ export default {
   components: {RegisterPageForm},
   data() {
     return{
-      title: '',
+      checkDoubleId: true,
+      checkJoin: false
     }
   },
   methods:{
     onSubmit(payload){
       const {id, pw, name, birth, color} = payload
-      axios.post('http://localhost:7777/join/register', {id, pw, name, birth, color})
-        .then(() => {
-          alert('가입완료')
-          this.$router.push({name: 'HomeView'})
-        })
-        .catch(res => {
-          alert(res.response.data.message)
-        })
-    },
-    checkDouble(payload){
-      const {id} = payload;
-
-      axios.get(`http://localhost:7777/join/${id}`)
-      .then((res) => {
-        this.check = res;
-      })
-
-      if(this.check) {
-        alert("중복아님")
-      }else{
-        alert("중복")
+      try{
+        axios.post('http://localhost:7777/join/register', {id, pw, name, birth, color});
+        alert('가입 축하드립니다.')
+        this.$router.push({name: 'LoginPage'});
+      }catch (error){
+        console.log(error);
       }
-
+    },
+    async checkDouble(payload){
+      const {id} = payload;
+      let response = await axios.get(`http://localhost:7777/join/${id}`)
+          if(response.data === true){
+            alert('중복입니다.')
+            this.checkDoubleId = true;
+          }else{
+            alert('중복이 아닙니다.')
+            this.checkDoubleId = false;
+          }
     }
   }
 }
