@@ -1,6 +1,7 @@
 package com.example.demo.entitiy.member;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -21,6 +22,7 @@ public class Member {
     private String userId;
 
     @Column(length = 256, nullable = false)
+    @JsonIgnore
     private String password;
 
     @Column(length = 10, nullable = false)

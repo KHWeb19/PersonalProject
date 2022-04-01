@@ -18,14 +18,19 @@
     </v-card>
         <v-card-text class="grey lighten-5" dense dark>
             <v-container>
+                <v-form ref="form" lazy-validation>
                 <v-row>
+                   <v-radio-group v-if="this.$store.state.userInfo != null" v-model="radioGroup" row>
+                     <v-radio :label="auth"></v-radio>
+                    </v-radio-group>
+
                     <v-text-field  class="pl-3 pr-3" :rules="userIdRules" v-model="userId"
                         label="아이디" type="text" prepend-icon="mdi-account" flat solo>
                     </v-text-field>
                     <v-text-field  class="pl-3 pr-3"  :rules="passwordRules" required  v-model="password"
                         label="비밀번호" type="password" prepend-icon="mdi-lock" flat solo>
                     </v-text-field>
-                    <v-text-field  class="pl-3 pr-3"  :rules="passwordCheck" required  v-model="passwordChecking"
+                    <v-text-field  class="pl-3 pr-3"  :rules="passwordCheckRules" required  v-model="passwordChecking"
                         label="비밀번호확인" type="password" prepend-icon="mdi-lock" flat solo>
                     </v-text-field>
                     <v-text-field class="pl-3 pr-3" :rules="emailRules" required v-model="email"
@@ -35,6 +40,7 @@
                         label="닉네임" type="text" prepend-icon="mdi-account" flat solo>
                     </v-text-field>
                 </v-row>
+                </v-form>
             </v-container>
         </v-card-text>
         <v-card-actions class="grey lighten-5">
@@ -52,7 +58,7 @@
 <script>
 
 import axios from 'axios'
-import { mapState } from 'vuex'
+
 
 export default {  
     name: 'MemberSignUp',
@@ -68,49 +74,67 @@ export default {
             password: '',
             nickname: '',
             email: '', 
+            auth:'User',
             passwordChecking: '',
-            passwordCheck: [
-            v => this.password ===v || '비밀번호가 일치하지않습니다'
+            passwordCheckRules: [v => this.password ===v || '비밀번호가 일치하지않습니다' ],
+            userIdRules:[
+                            v => !!v || 'ID를 작성해주세요',
+                            v => !/[~!@#$%^&*()_+{}]/.test(v) || 'ID에는 특수문자를 넣을수없습니다.',
+                            v => !(v && v.length > 15) || 'ID는 15자를 넘길수없습니다.'
+
+            ],
+            emailRules: [
+                            v => !! v || '이메일을 작성해주세요.',
+                            v => /.+@.+\..+/.test(v) || '이메일 형식으로 작성해주세요',
+            ],
+            nicknameRules: [
+                            v => !!v || '닉네임을 작성해주세요',
+                            v => !/[~!@#$%^&*()_+{}]/.test(v) || '특수문자를 넣을수없습니다.',
+                            v => !(v && v.length > 10) || '10자리를 넘길수없습니다.',
+                            v => !(v && v.length < 2) || '2자리이상으로해주세요'
+
+            ],
+            passwordRules: [
+                            v => !! v || '비밀번호를 작성해주세요.',
+                            v =>  /^[a-zA-Z0-9]*$/.test(v) || '영문+숫자로만 입력해주세요',
+                            v => !(v && v.length < 8) || '8자리이상으로해주세요' ,
+                            v => !(v && v.length > 15) || '15자리를 넘길수없습니다.' 
             ]
         }
     },
-    computed:{
-        ...mapState(['userIdRules','passwordRules','nicknameRules','emailRules'])
-
-    },
     methods: {
-        
         signUp () {
         const { userId, password, email, nickname } = this
-        if((userId.length >= 5 && userId.length <=15) && ( password.length >= 8 && password.length <= 15) &&
-            (nickname.length >= 3 && nickname.length <= 10) && email.length>= 10){
-                let coin = null;
-        for(var i = 0; i < this.members.length; i++){
-            if(this.members[i].userId === userId){
-                alert('중복 된 아이디 입니다')
-                coin = 1;
-            }else if(this.members[i].nickname === nickname){
-                alert('중복 된 닉네임 입니다')
-                coin = 1;
-            }else if(this.members[i].email === email){
-                alert('중복 된 이메일 입니다.')
-                coin = 1;
-            }
-                
-            
-        }
+        const validate = this.$refs.form.validate();
+            if (validate){
+                    let coin = null;
+                for(var i = 0; i < this.members.length; i++){
+                    console.log(this.members[i].password)
+                    if(this.members[i].userId === userId){
+                        alert('중복 된 아이디 입니다')
+                        coin = 1;
+                    }else if(this.members[i].nickname === nickname){
+                        alert('중복 된 닉네임 입니다')
+                        coin = 1;
+                    }else if(this.members[i].email === email){
+                        alert('중복 된 이메일 입니다.')
+                        coin = 1;
+                    }
+                        
+                    
+                }
             if(coin === null){ 
                 axios.post('http://localhost:7777/member/register', { userId, password, email, nickname })
-                .then(res => {
-                alert('등록 성공! - ' + res)
-                this.$router.go()
-                })
-                .catch(res => {
-                alert(res.response.data.message)
-                    })
-                }
+                    .then(res => {
+                        alert('등록 성공! - ' + res)
+                        this.$router.go()
+                        })
+                        .catch(res => {
+                        alert(res.response.data.message)
+                            })
+                        }
             }else{
-            alert('다시 입력 해주세요')
+                alert('다시 입력 해주세요')
             }
         }
 

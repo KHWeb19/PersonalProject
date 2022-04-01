@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+
 import java.util.List;
 import java.util.Optional;
 
@@ -35,7 +36,8 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public List<Member> list()  {
         //현재 password가 암호화 되어있긴한데 이것도 같이 나감
-            return memberRepository.findAll();
+       return memberRepository.findAll();
+
     }
 
     @Override

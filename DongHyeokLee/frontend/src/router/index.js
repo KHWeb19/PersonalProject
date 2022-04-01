@@ -6,6 +6,9 @@ import FreeBoardReigster from '@/views/freeBoard/FreeBoardRegisterPage.vue'
 import FreeBoardListPage from '@/views/freeBoard/FreeBoardListPage.vue'
 import FreeBoardReadPage from '@/views/freeBoard/FreeBoardReadPage.vue'
 import FreeBoardModifyPage from '@/views/freeBoard/FreeBoardModifyPage.vue'
+import store from '@/store'
+
+
 
 
 
@@ -45,7 +48,8 @@ const routes = [
   {
     path: '/freeBoardList',
     name: 'FreeBoardListPage',
-    component: FreeBoardListPage
+    component: FreeBoardListPage,
+    meta: {isLogin: true}
   }
   
 ]
@@ -57,3 +61,13 @@ const router = new VueRouter({
 })
 
 export default router
+
+router.beforeEach((to, from, next) => {
+  if(to.meta.isLogin && !store.state.isLogin){
+    alert('로그인 해주세요!')
+
+  }else{
+    next();
+  }
+  
+})
