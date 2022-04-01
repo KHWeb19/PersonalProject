@@ -40,4 +40,13 @@ public class MemberController {
 
         return memberResponse;
     }
+
+    @GetMapping("/check/{id}")
+    public Boolean checkDuplicateId (@PathVariable("id") String id){
+        log.info("checkDuplicateId(): " + id);
+
+        Boolean checkDupId = service.checkDuplicate(id);
+
+        return checkDupId;
+    }
 }

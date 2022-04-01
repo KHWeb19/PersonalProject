@@ -102,7 +102,6 @@ export default {
       this.$cookies.remove("user");
       this.isLogin = false;
       this.$store.state.userInfo = null;
-
       alert("로그아웃 성공");
     },
   },

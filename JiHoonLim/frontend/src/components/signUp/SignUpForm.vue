@@ -18,7 +18,7 @@
                   <validation-provider
                     v-slot="{ errors }"
                     name="아이디"
-                    :rules="{ max: 12, required: true }"
+                    :rules="{ max: 12, required: true, alpha_num: true }"
                   >
                     <v-text-field
                       v-model="id"
@@ -92,6 +92,7 @@
                     class="mt-3 mr-5"
                     color="orange lighten-1"
                     @click="checkDuplicateId"
+                    :disabled="id == ''"
                     >아이디 <br />중복 확인</v-btn
                   >
                   <v-btn
@@ -100,6 +101,7 @@
                     class="mt-3 ml-5"
                     color="orange lighten-1"
                     @click="checkDuplicateNickName"
+                    :disabled="nickName == ''"
                     >닉네임 <br />중복 확인</v-btn
                   >
                   <v-btn
@@ -124,6 +126,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "SignUpForm",
   data() {
@@ -141,8 +144,30 @@ export default {
       const { id, pw, nickName, email, auth } = this;
       this.$emit("submit", { id, pw, nickName, email, auth });
     },
-    checkDuplicateId() {},
-    checkDuplicateNickName() {},
+    checkDuplicateId() {
+      const { id } = this;
+      axios.get(`http://localhost:7777/member/check/${id}`).then((res) => {
+        this.temp = res.data;
+        if (res.data) {
+          alert("사용 가능한 아이디 입니다.");
+        } else {
+          alert("중복된 아이디 입니다.");
+        }
+      });
+    },
+    checkDuplicateNickName() {
+      const { nickName } = this;
+      axios
+        .get(`http://localhost:7777/member/check/${nickName}`)
+        .then((res) => {
+          this.temp = res.data;
+          if (res.data) {
+            alert("사용 가능한 닉네임 입니다.");
+          } else {
+            alert("중복된 닉네임 입니다.");
+          }
+        });
+    },
   },
 };
 </script>

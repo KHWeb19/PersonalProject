@@ -18,7 +18,7 @@
                   <validation-provider
                     v-slot="{ errors }"
                     name="아이디"
-                    :rules="{ max: 12, required: true }"
+                    :rules="{ max: 12, required: true, alpha_num: true }"
                   >
                     <v-text-field
                       v-model="id"
@@ -34,6 +34,7 @@
                     :rules="{ max: 15, required: true }"
                   >
                     <v-text-field
+                      type="password"
                       v-model="pw"
                       label="비밀번호"
                       clearable
