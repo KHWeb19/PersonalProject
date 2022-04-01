@@ -13,7 +13,7 @@ import java.util.List;
 @Data
 @Entity
 @NoArgsConstructor
-public class MemberWithAuth {
+public class MemberAuthCheckId {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_no")
@@ -35,7 +35,7 @@ public class MemberWithAuth {
     @JoinColumn(name = "member_no")
     private List<MemberAuth> authList;
 
-    public MemberWithAuth (String userId, String password) {
+    public MemberAuthCheckId (String userId, String password) {
         this.userId = userId;
         this.password = password;
     }
