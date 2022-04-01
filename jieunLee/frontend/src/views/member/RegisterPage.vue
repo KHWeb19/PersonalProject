@@ -8,6 +8,7 @@
 import RegisterForm from '@/components/member/RegisterForm'
 import axios from 'axios'
 export default {
+    name: 'RegisterPage.',
     components: {
         RegisterForm
     },

@@ -5,9 +5,11 @@ import com.example.backend.entity.Member;
 import com.example.backend.repository.MemberRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -19,6 +21,12 @@ public class MemberServiceImpl implements MemberService{
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Override
+    public List<Member> list() {
+        return memberRepository.findAll(Sort.by(Sort.Direction.DESC, "memberNo"));
+    }
+
 
     @Override
     public void register(MemberRequest memberRequest) {
@@ -52,5 +60,17 @@ public class MemberServiceImpl implements MemberService{
                 null);
 
         return response;
+    }
+
+    @Override
+    public Member read(Integer memberNo) {
+        Optional<Member> maybeReadMember = memberRepository.findById(Long.valueOf(memberNo));
+
+        if (maybeReadMember.equals(Optional.empty())) {
+
+            return null;
+        }
+
+        return maybeReadMember.get();
     }
 }

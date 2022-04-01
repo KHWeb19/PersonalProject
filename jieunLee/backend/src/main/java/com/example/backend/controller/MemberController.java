@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @RestController
 @RequestMapping("/member")
@@ -15,6 +17,13 @@ public class MemberController {
 
     @Autowired
     private MemberService service;
+
+    @PostMapping("/list")
+    public List<Member> memberList() {
+        log.info("memberList()");
+
+        return service.list();
+    }
 
     @PostMapping("/register")
     public void MemberRegister(@Validated @RequestBody MemberRequest memberRequest) {
@@ -40,7 +49,11 @@ public class MemberController {
         return memberResponse;
     }
 
+    @GetMapping("/{memberNo}")
+    public Member memberRead(@PathVariable("memberNo") Integer memberNo) {
+        log.info("memberRead()");
 
-
+        return service.read(memberNo);
+    }
 
 }

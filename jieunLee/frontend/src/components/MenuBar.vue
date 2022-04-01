@@ -59,6 +59,23 @@
           </v-list-item-icon>
           <v-list-item-title>{{ item.title }}</v-list-item-title>
         </v-list-item>
+          <v-list-item-title>   
+            
+            <router-link :to="{
+                        name: 'AccountsEditPage',
+                        }">
+                   설정
+
+                    </router-link>
+
+
+
+                       </v-list-item-title>
+          <v-list-item-title>        
+            <v-btn @click="logout">
+              로그아웃
+            </v-btn>
+        </v-list-item-title>
       </v-list>
     </v-menu>
     <v-spacer></v-spacer>
@@ -70,13 +87,26 @@
 </template>
 
 <script>
+import Vue from 'vue'
+import cookies from 'vue-cookies'
+
+Vue.use(cookies)
+
   export default {
+
     data: () => ({
       items: [
         { icon:'mdi-account-circle-outline', title: '프로필', link:'/profile'},
         { icon:'mdi-cog-outline', title: '설정', link:'/accounts/edit' },
-        { icon:'mdi-logout', title: '로그아웃', link:'/login' }
       ],
+      isLogin: true
     }),
+    logout() {
+      this.$cookies.remove("user")
+      this.isLogin = false
+      this.$store.state.userInfo = null
+
+      alert('로그아웃 성공!')
+    }
   }
 </script>

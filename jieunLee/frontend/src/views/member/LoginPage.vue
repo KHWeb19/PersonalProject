@@ -21,6 +21,7 @@ import cookies from 'vue-cookies'
 Vue.use(cookies)
 
 export default {
+    name: 'LoginPage',
     components: {
         LoginForm,
         MenuBar
@@ -46,11 +47,12 @@ export default {
                     .then(res => {
                         if(res.data) {
                             this.$store.state.userInfo = res.data
-                            this.$cookies.set("user", res.data, 30)
+                            this.$cookies.set("user", res.data, 300)
                             this.isLogin = true
                             this.$router.push({
                                 name: 'HomeView'
                                 })
+                            this.$store.state.memberId = id
                         } else {
                             alert('로그인 실패!')
                         }

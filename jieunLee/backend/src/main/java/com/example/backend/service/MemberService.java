@@ -1,8 +1,13 @@
 package com.example.backend.service;
 
 import com.example.backend.controller.MemberRequest;
+import com.example.backend.entity.Member;
+
+import java.util.List;
 
 public interface MemberService {
+    public List<Member> list ();
     public void register (MemberRequest memberRequest);
     public MemberRequest login (MemberRequest memberRequest);
+    public Member read (Integer memberNo);
 }
