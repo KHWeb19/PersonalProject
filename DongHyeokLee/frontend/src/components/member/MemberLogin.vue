@@ -1,7 +1,7 @@
 <template>
-    <v-dialog v-model="loginDialog" persisten max-width="400px">
+    <v-dialog v-if="this.$store.state.userInfo == null" v-model="loginDialog" persisten max-width="400px">
         <template v-slot:activator="{ on }">
-            <v-btn color="cyan lighten-3" style="font-size: 0.7em; margin: 10px;" dark v-on="on">
+            <v-btn color="cyan lighten-3" style="font-size: 0.7em; margin: 7px;" dark v-on="on">
                 <v-icon style="font-size: 1.5em;">
                     mdi-login
                 </v-icon>
@@ -37,6 +37,10 @@
             </v-btn>
             </v-card-actions>
     </v-dialog> 
+
+    
+
+  
 </template>
 
 <script>
@@ -46,6 +50,7 @@ export default {
         return {
             userId: '',
             password: '',
+            loginDialog: false
             
         }
     },
