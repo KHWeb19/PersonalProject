@@ -3,7 +3,12 @@
     <div class="color"></div>
     <div class="color"></div>
     <div class="color"></div>
-    <div class="box"></div>
+    <div class="box">
+    <div class="square" style="--i:0;"></div>
+    <div class="square" style="--i:1;"></div>
+    <div class="square" style="--i:2;"></div>
+    <div class="square" style="--i:3;"></div>
+    <div class="square" style="--i:4;"></div>
       <div class="container">
         <div class="form">
           <h2>Login Form</h2>
@@ -22,8 +27,8 @@
           </form>
         </div>
       </div>
+    </div>
   </section>
-
 </template>
 
 <script>
