@@ -31,6 +31,7 @@ Vue.use(cookies)
         },
         data () {
             return {
+                
                 isLogin: false
             }
         },
@@ -50,9 +51,11 @@ Vue.use(cookies)
                     axios.post('http://localhost:7777/Member/login', {id, pw})
                         .then(res => {
                             if(res.data) {
-                                alert('안녕하세요!' +res.data.id+'님!')
+                                alert('안녕하세요! ' +res.data.auth+'님!')
                                 this.$store.state.userInfo = res.data
                                 this.$cookies.set("user", res.data, 3600)
+                                this.$store.state.authInfo = res.data.auth
+                                this.$store.state.idInfo = res.data.id
                                 this.isLogin = true
                                 this.$router.push({
                                     name: 'MainHomepage'

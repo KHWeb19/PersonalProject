@@ -1,23 +1,6 @@
 <template>
     <div>
-        <form>
-            <h4>케이크 보기</h4><br>
-            <span>디자인&nbsp;:&nbsp;&nbsp;</span>
-            <select class="selectCake" onchange="chageLangSelect()">
-                <option value="none">==== 선택 ====
-                    
-                </option><v-icon>mdi-lock</v-icon>
-                <option value="selectCake[0]">생일</option>
-                <option value="selectCake[1]">연인</option>
-                <option value="selectCake[2]">가족</option>
-                <option value="selectCake[3]">친구</option>
-                <option value="selectCake[4]">스페셜</option>
-            </select>
-        </form> 
-
-        <div>
-            
-        </div>
+        <h4>케이크 보기</h4><br>
     </div>
 </template>
 
@@ -31,13 +14,9 @@ option value를 배열 형태로 만들어서 클릭하면 그거에 맞는 이�
         name: 'PreviewCakeForm',
         data () {
             return {
-                selectCake : ['birthday', 'lover','family','friend','special']
             }
         },
         methods: {
-            chageLangSelect() {
-                
-            }
         }
 
     }

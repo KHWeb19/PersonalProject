@@ -3,7 +3,9 @@
         <header>
             <v-container v-if="this.$store.state.userInfo == null">
                 <v-row>
-                    <v-col class="col-12 col-sm-10"></v-col>
+                    <v-col class="col-12 col-sm-10">
+                        
+                    </v-col>
                     <v-col class="col-12 col-sm-1">
                         <router-link :to="{name: 'LoginPage'}" >
                             <span class="mainlog">로그인 </span>
@@ -19,7 +21,8 @@
 
             <v-container v-if="this.$store.state.userInfo != null">
                 <v-row>
-                    <v-col class="col-12 col-sm-10"></v-col>
+                    <v-col class="col-12 col-sm-10">
+                    </v-col>
                     <v-col class="col-12 col-sm-1">
                         <button @click="logout" type="submit" style="font-size: small; color: black;">로그아웃 </button>
                     </v-col>

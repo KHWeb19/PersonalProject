@@ -3,7 +3,7 @@
         <main-page-form></main-page-form>
 
         <div class="signUp" align="center">
-            <sign-up-page-form @submit="onSubmit" :members="members"/>
+            <sign-up-page-form @submit="onSubmit"/>
         </div>
         
         <footer-form></footer-form>
@@ -15,7 +15,6 @@ import SignUpPageForm from '@/components/mainPage/SignUpPageForm.vue'
 import MainPageForm from '@/components/layout/MainPageForm.vue'
 import axios from 'axios'
 import FooterForm from '@/components/layout/FooterForm.vue'
-import { mapState, mapActions } from 'vuex'
 
     export default {
         name: 'SignUpPage',
@@ -24,14 +23,7 @@ import { mapState, mapActions } from 'vuex'
             MainPageForm,
             FooterForm
         },
-        computed: {
-            ...mapState(['members'])
-        },
-        mounted () {
-            this.fetchMemberList()
-        },
         methods: {
-            ...mapActions(['fetchMemberList']),
             onSubmit (payload) {
                 const { id, pw, name, auth } = payload
                 axios.post('http://localhost:7777/Member/register',{ id, pw, name, auth })
