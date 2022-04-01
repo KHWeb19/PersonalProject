@@ -16,6 +16,7 @@ section {
     min-height: 100vh;
     background: linear-gradient(to bottom, #f1f4f9, #dff1ff);
 }
+/* 배경 작업시 건들이기로
 section .color{
     position: absolute;
     filter: blur(150px);
@@ -40,6 +41,7 @@ section .color:nth-child(3) {
     height: 300px;
     background: #00d2ff;
 }
+*/
 .box {
     position: relative;
 }
@@ -55,6 +57,7 @@ section .color:nth-child(3) {
     animation: animate 10s linear infinite;
     animation-delay: calc(-1s * var(--i));
 }
+/* 배경 작업시 건들이기로
 @keyframes animate {
     0%, 100%
     {
@@ -97,6 +100,7 @@ section .color:nth-child(3) {
     width: 60px;
     height: 60px;
 }
+*/
 .container{
     position: relative;
     width: 400px;
@@ -119,12 +123,14 @@ section .color:nth-child(3) {
 }
 .form h2 {
     position: relative;
-    color: #fff;
+    color: #666;
     font-size: 24px;
     font-weight: 600;
     letter-spacing: 1px;
     margin-bottom: 40px;
+    text-align: center;
 }
+/* LOGO 밑에 줄 
 .form h2::before {
     content: '';
     position: absolute;
@@ -133,7 +139,7 @@ section .color:nth-child(3) {
     width: 80px;
     height: 4px;
     background: #fff;
-}
+}*/
 .form .inputBox {
     width: 100%;
     margin-top: 20px;
@@ -154,21 +160,45 @@ section .color:nth-child(3) {
     box-shadow: 0 5px 15px rgba(0,0,0,0.05);
 }
 .form .inputBox input::placeholder {
-    color: #fff;
+    color: #015C92;
 }
 .form .inputBox input[type="submit"] {
     background: #fff;
     color: #666;
-    max-width: 100px;
+    max-width: 100%;
     cursor: pointer;
     margin-bottom: 20px;
     font-weight: 600;
 }
+.loginfunction {
+    padding-top: 15px;
+    text-align: center;
+}
+.signup {
+    display: inline;
+    color: #000;
+}
+.signup a {
+    color: #000;
+    font-weight: 600;
+    text-decoration: none;
+}
+p::before {
+    content: '';
+    position: absolute;
+    left: 47%;
+    bottom: 40px;
+    width: 1px;
+    height: 25px;
+    background: #fff;
+}
 .forget {
-    margin-top: 5px;
+    margin-left: 70px;
+    display: inline;
     color: #fff;
 }
 .forget a {
-    color: #fff;
+    color: #000;
     font-weight: 600;
+    text-decoration: none;
 }

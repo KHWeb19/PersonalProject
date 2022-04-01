@@ -11,7 +11,7 @@
     <div class="square" style="--i:4;"></div>
       <div class="container">
         <div class="form">
-          <h2>Login Form</h2>
+          <h2>LOGO</h2>
           <form>
             <div class="inputBox">
               <input type="text" placeholder="ID">
@@ -22,8 +22,10 @@
             <div class="inputBox">
               <input type="submit" value="Login">
             </div>
-            <p class="forget">Forgot Password ? <a href="#">Click Here</a></p>
-            <p class="forget">Don't have an account? <a href="#">Sign Up</a></p>
+            <div class="loginfunction">
+            <p class="signup"><a href="#">회원가입</a></p>
+            <p class="forget"><a href="#">비밀번호 찾기</a></p>
+            </div>
           </form>
         </div>
       </div>
