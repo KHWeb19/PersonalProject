@@ -79,6 +79,11 @@
         name: 'MainPageForm',
         components: {
         },
+        data () {
+            return {
+                
+            }
+        },
         methods: {
             logout() {
                 this.$cookies.remove("user")

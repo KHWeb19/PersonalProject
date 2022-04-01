@@ -3,7 +3,7 @@
         <main-page-form></main-page-form>
 
         <div class="cakeImg">
-            <div v-if="$store.state.authInfo !== '관리자'">
+            <div v-if="$store.state.authInfo === '개인'">
                 <preview-cake-form></preview-cake-form>
             </div>
 
@@ -22,18 +22,26 @@
                         <v-col class="d-flex" cols="12" sm="3">
                             <v-text-field label="가격 작성" v-model="storeData.price"></v-text-field>
                         </v-col>
+                            <v-col class="d-flex" cols="12" sm="2">
+                        <v-btn color="black" text @click="onSubmit"><v-icon>mdi-check</v-icon></v-btn>
+                        </v-col>
                     </v-row>
                     <v-row justify="center">
                         <v-col class="d-flex" cols="12" sm="5">
-                            <v-file-input type="file" id="files" label="파일 선택" ref="files" v-on:change="handleFileUpload()"></v-file-input>
+                            <input type="file" id="files" ref="files" 
+                            multiple v-on:change="handleFileUpload()"/>
                         </v-col>
                     </v-row>
                     <v-row justify="center">
                         <v-col class="d-flex" cols="12" sm="2">
-                            <v-btn color="black" text @click="onSubmit"><v-icon>mdi-check</v-icon>올리기!</v-btn>
+                            <v-btn color="black" text @click="submitFiles()"><v-icon>mdi-check</v-icon>올리기!</v-btn>
                         </v-col>
                     </v-row>
                 </v-container>
+            </div>
+
+            <div>
+
             </div>
            
         </div>
@@ -52,16 +60,19 @@ import axios from 'axios'
         name: 'PreviewCakeImg',
         data () {
             return {
+                files: '',
+                response: '',
                 storeData: {
                     design: '',
                     size: '',
                     price:''
-                }
-                ,
-                selectCake : ['birthday', 'lover','family','friend','special'],
+                },
+                selectCake : ['birthday', 'lover','family','friend'],
                 selectSize : ['도시락 케이크','1호','2호','3호']
-            }
-        },
+                
+                }
+            },
+        
         components: {
             PreviewCakeForm,
             MainPageForm,
@@ -72,43 +83,81 @@ import axios from 'axios'
             this.files = this.$refs.files.files
             },
             onSubmit () {
-                submitDetail(),
-                submitFiles()
-            },    
-            submitDetail() {
                 let vm = this
                 axios.post('http://localhost:7777/upload/register',vm.storeData)
                     .then(() => {
                         alert('케이크 정보 등록 완료!')
-                        this.$router.go()
+                        
                     })
                     .catch(() =>{
                         alert('문제발생')
                     })
             },
             submitFiles () {
-                 let formData = new FormData()
+                let formData = new FormData()
 
-                formData.append('fileList', this.files[0])
-                
+                for (let idx = 0; idx < this.files.length; idx++) {
+                    formData.append('fileList', this.files[idx])
+                 }
 
-                axios.post(`http://localhost:7777/upload/uploadImg/${design}`, {formData, design:this.storeData.design}, {
+                let dm =this.storeData.design
+
+                if(dm === 'family'){
+                    axios.post('http://localhost:7777/upload/uploadImgFamily', formData , {
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }
-                })
-                .then (res => {
-                    alert('처리 결과: ' + res.data)
-                })
-                .catch (res => {
-                    alert('처리 결과: ' + res.message)
-                })
+                    })
+                    .then (res => {
+                        alert('처리 결과: ' + res.data)
+                    })
+                    .catch (res => {
+                        alert('처리 결과: ' + res.message)
+                    })
+                }else if(dm === 'birthday'){
+                    axios.post('http://localhost:7777/upload/uploadImgBirthday', formData , {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                    })
+                    .then (res => {
+                        alert('처리 결과: ' + res.data)
+                    })
+                    .catch (res => {
+                        alert('처리 결과: ' + res.message)
+                    })
+                }else if(dm === 'friend'){
+                    axios.post('http://localhost:7777/upload/uploadImgFriend', formData , {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                    })
+                    .then (res => {
+                        alert('처리 결과: ' + res.data)
+                    })
+                    .catch (res => {
+                        alert('처리 결과: ' + res.message)
+                    })
+                }else if(dm === 'lover'){
+                    axios.post('http://localhost:7777/upload/uploadImgLover', formData , {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                    })
+                    .then (res => {
+                        alert('처리 결과: ' + res.data)
+                    })
+                    .catch (res => {
+                        alert('처리 결과: ' + res.message)
+                    })
+                }
             }
+            
         }
     }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 
 .Main {
     background: rgb(255, 186, 186);
@@ -136,4 +185,6 @@ hr{
     background: #e69191;
     height: 3px;
 }
+
+
 </style>

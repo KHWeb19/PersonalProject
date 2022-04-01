@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
 
 import MainHomepage from '@/views/CakePage/MainHomepage.vue'
 import BookingPage from '@/views/CakePage/BookingPage.vue'
@@ -16,11 +15,6 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'HomeView',
-    component: HomeView
-  },
-  {
-    path: '/MainHomepage',
     name: 'MainHomepage',
     component: MainHomepage
   },

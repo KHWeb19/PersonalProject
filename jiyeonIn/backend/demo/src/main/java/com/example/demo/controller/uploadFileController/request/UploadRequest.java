@@ -13,4 +13,8 @@ public class UploadRequest {
         this.size = size;
         this.price = price;
     }
+
+    public UploadRequest() {
+
+    }
 }

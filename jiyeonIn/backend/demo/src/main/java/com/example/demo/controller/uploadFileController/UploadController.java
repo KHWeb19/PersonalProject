@@ -18,6 +18,10 @@ import java.util.List;
 @RequestMapping("/upload")
 @CrossOrigin(origins = "http://localhost:8080", allowedHeaders = "*")
 public class UploadController {
+    private int couontFa = 0;
+    private int countB = 0;
+    private int couontL = 0;
+    private int countFr = 0;
 
     @Autowired
     UploadCakeService service;
@@ -30,27 +34,26 @@ public class UploadController {
     }
 
     @ResponseBody
-    @PostMapping("/uploadImg/{design}")
+    @PostMapping("/uploadImgFamily")
     public String requestUploadFile (
-            @RequestParam("fileList") List<MultipartFile> fileList,
-            @PathVariable("design") String design ) {
+            @RequestParam("fileList") List<MultipartFile> fileList) {
 
-        log.info("requestUploadFile(): " + fileList);
+        log.info("uploadImgFamily(): " + fileList );
 
+        couontFa++;
         try {
             for (MultipartFile multipartFile : fileList) {
                 log.info("requestUploadFile() - Make file: " +
                         multipartFile.getOriginalFilename());
 
-                if(design.equals("family")){
+
+                int count=1;
                     FileOutputStream writer = new FileOutputStream(
-                            "../../vue_frontend/book_cake/src/assets/uploadImg/famaily" + multipartFile.getOriginalFilename());
+                            "../../vue_frontend/book_cake/src/assets/uploadImg/family/" + couontFa );
                     log.info("디렉토리에 파일 배치 성공!");
 
                     writer.write(multipartFile.getBytes());
                     writer.close();
-                }
-
             }
         } catch (Exception e) {
             return "Upload Fail!!!";
@@ -61,4 +64,93 @@ public class UploadController {
         return "Upload Success!!!";
 
     }
+
+    @ResponseBody
+    @PostMapping("/uploadImgFriend")
+    public String uploadImgFriend (
+            @RequestParam("fileList") List<MultipartFile> fileList) {
+
+        log.info("uploadImgFriend(): " + fileList );
+
+        countFr++;
+        try {
+            for (MultipartFile multipartFile : fileList) {
+                log.info("requestUploadFile() - Make file: " +
+                        multipartFile.getOriginalFilename());
+
+                FileOutputStream writer = new FileOutputStream(
+                        "../../vue_frontend/book_cake/src/assets/uploadImg/friend/" + countFr );
+                log.info("디렉토리에 파일 배치 성공!");
+
+                writer.write(multipartFile.getBytes());
+                writer.close();
+            }
+        } catch (Exception e) {
+            return "Upload Fail!!!";
+        }
+
+        log.info("requestUploadFile(): Success!!!");
+
+        return "Upload Success!!!";
+
+    }
+    @ResponseBody
+    @PostMapping("/uploadImgLover")
+    public String uploadImgLover (
+            @RequestParam("fileList") List<MultipartFile> fileList) {
+
+        log.info("uploadImgLover(): " + fileList );
+
+        couontL++;
+        try {
+            for (MultipartFile multipartFile : fileList) {
+                log.info("requestUploadFile() - Make file: " +
+                        multipartFile.getOriginalFilename());
+
+                FileOutputStream writer = new FileOutputStream(
+                        "../../vue_frontend/book_cake/src/assets/uploadImg/lover/" + couontL);
+                log.info("디렉토리에 파일 배치 성공!");
+
+                writer.write(multipartFile.getBytes());
+                writer.close();
+            }
+        } catch (Exception e) {
+            return "Upload Fail!!!";
+        }
+
+        log.info("requestUploadFile(): Success!!!");
+
+        return "Upload Success!!!";
+
+    }
+    @ResponseBody
+    @PostMapping("/uploadImgBirthday")
+    public String uploadImgBirthday (
+            @RequestParam("fileList") List<MultipartFile> fileList) {
+
+        log.info("uploadImgBirthday(): " + fileList );
+
+        countB++;
+        try {
+            for (MultipartFile multipartFile : fileList) {
+                log.info("requestUploadFile() - Make file: " +
+                        multipartFile.getOriginalFilename());
+
+                FileOutputStream writer = new FileOutputStream(
+                        "../../vue_frontend/book_cake/src/assets/uploadImg/birthday/" + countB );
+                log.info("디렉토리에 파일 배치 성공!");
+
+                writer.write(multipartFile.getBytes());
+                writer.close();
+            }
+        } catch (Exception e) {
+            return "Upload Fail!!!";
+        }
+
+        log.info("requestUploadFile(): Success!!!");
+
+        return "Upload Success!!!";
+
+    }
+
 }
