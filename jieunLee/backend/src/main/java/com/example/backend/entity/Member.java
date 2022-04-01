@@ -6,9 +6,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Data
 @Entity
@@ -35,38 +33,9 @@ public class Member {
     @UpdateTimestamp
     private Date updDate;
 
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<MemberAuth> authList = new ArrayList();
-
-    public Member (String memberName, String memberId, String password) {
+    public Member(String memberName, String memberId, String password) {
         this.memberName = memberName;
         this.memberId = memberId;
         this.password = password;
-    }
-
-    public Member (String memberName, String memberId, String password, MemberAuth auth) {
-        this.memberName = memberName;
-        this.memberId = memberId;
-        this.password = password;
-
-        if (auth != null) {
-            changeAuth(auth);
-        }
-    }
-
-    public void changeAuth(MemberAuth auth) {
-
-    }
-
-    public void addAuth (MemberAuth auth) {
-        if (authList == null) {
-            authList = new ArrayList();
-        }
-
-        authList.add(auth);
-    }
-
-    public void clearAuthList () {
-        authList.clear();
     }
 }

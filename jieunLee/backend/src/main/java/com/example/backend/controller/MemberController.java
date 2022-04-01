@@ -7,9 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Slf4j
 @RestController
 @RequestMapping("/member")
@@ -21,11 +18,10 @@ public class MemberController {
 
     @PostMapping("/register")
     public void MemberRegister(@Validated @RequestBody MemberRequest memberRequest) {
-        log.info("MemberRegister():" +
+        log.info("MemberRegister():" + "," +
+                memberRequest.getName() + ", " +
                 memberRequest.getId() + ", " +
-                memberRequest.getPw() + ", " +
-                (memberRequest.getAuth().equals("관리자") ? "ROLE_BUSINESS" : "ROLE_INDIVIDUAL"));
-
+                memberRequest.getPw());
         service.register(memberRequest);
     }
 
@@ -44,17 +40,7 @@ public class MemberController {
         return memberResponse;
     }
 
-    @GetMapping("/checkBusiness")
-    public List<MemberResponse> checkBusinessMember () {
-        log.info("checkBusiness() ===> findBusinessMember!!!");
 
-        List<Member> businessMember = service.findBusiness();
-        List<MemberResponse> responses = new ArrayList<>();
 
-        for (Member member : businessMember) {
-            responses.add(new MemberResponse(member.getMemberId()));
-        }
 
-        return responses;
-    }
 }
