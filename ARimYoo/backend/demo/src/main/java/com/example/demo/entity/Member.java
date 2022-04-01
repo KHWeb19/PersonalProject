@@ -29,6 +29,12 @@ public class Member {
     @Column(nullable = false)
     private String birth;
 
+    @Column(length = 500)
+    private String intro;
+
+    @Column
+    private String profilePic;
+
     @CreationTimestamp
     private Date createdDate;
 

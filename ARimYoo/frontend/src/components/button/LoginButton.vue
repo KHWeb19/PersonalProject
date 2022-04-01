@@ -55,7 +55,7 @@ export default {
           axios.post ('http://localhost:7777/Member/login', {id, pw})
             .then(res => {
               if (res.data) {
-                alert ('로그인 성공!')
+                alert ('Welcome!')
                 this.$store.state.userInfo = res.data
                 this.$cookies.set("user", res.data, 30)
                 this.isLogin = true
