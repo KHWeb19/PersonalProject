@@ -25,4 +25,19 @@ public class MemberController {
 
         service.register(memberRequest);
     }
+
+    @PostMapping("/login")
+    public MemberRequest MemberLogin(@RequestBody MemberRequest memberRequest) {
+        log.info("MemberLogin(): " + memberRequest);
+
+        MemberRequest memberResponse = service.login(memberRequest);
+
+        if (memberResponse != null){
+            log.info("Login Success");
+        }else {
+            log.info("Login Fail");
+        }
+
+        return memberResponse;
+    }
 }
