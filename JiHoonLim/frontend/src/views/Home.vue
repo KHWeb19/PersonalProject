@@ -12,22 +12,22 @@
     </v-container>
 
     <div class="bottom_box">
-      <sapn class="img_box">
+      <span class="img_box">
         <v-img class="responseive-img" src="@/assets/img/bjw.jpg"></v-img>
-      </sapn>
+      </span>
       <span class="text_box">
         <h2>백종원</h2>
         <h3>( 골목식당 -- 명언 -- )</h3>
         <p>" 이 사회는 자기가 좋아하는 <br />일을 해야 행복하다. "</p>
         <p>" 자신이 좋아하는 일에 <br />도전하길 바란다. "</p>
       </span>
-      <sapn class="img_box">
+      <span class="img_box">
         <v-img
-          class="responseive-img"
+          class="responsive-img"
           src="@/assets/img/bjw.jpg"
           style="transform: scaleX(-1)"
         ></v-img>
-      </sapn>
+      </span>
     </div>
   </div>
 </template>
