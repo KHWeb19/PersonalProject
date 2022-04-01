@@ -34,11 +34,9 @@ public class Member {
 
     @UpdateTimestamp
     private Date lastModifiedDate;
-    
+
     public Member (String userId, String password) {
         this.id = userId;
         this.pw = password;
     }
-
-
 }

@@ -6,6 +6,7 @@ import MainVellupPage from '../views/MainVellupPage.vue'
 import JoinPage from '../views/JoinPage.vue'
 import JoinPage2 from '../views/JoinPage2.vue'
 
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -19,6 +20,7 @@ const routes = [
     name: 'MainVellupPage',
     component: MainVellupPage
   },
+
   {
     path: '/join',
     name: 'JoinPage',
