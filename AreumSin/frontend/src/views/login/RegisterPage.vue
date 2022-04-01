@@ -31,13 +31,13 @@ export default {
     async checkDouble(payload){
       const {id} = payload;
       let response = await axios.get(`http://localhost:7777/join/${id}`)
-          if(response.data === true){
-            alert('중복입니다.')
-            this.checkDoubleId = true;
-          }else{
-            alert('중복이 아닙니다.')
-            this.checkDoubleId = false;
-          }
+        if(response.data === true){
+          alert('중복입니다.')
+          this.checkDoubleId = true;
+        }else{
+          alert('중복이 아닙니다.')
+          this.checkDoubleId = false;
+        }
     }
   }
 }
