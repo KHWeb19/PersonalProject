@@ -1,7 +1,7 @@
 <template>
     <div align="center">
-        <h2>게시물 작성</h2>
-        <jpa-board-register-form @submit="onSubmit"/>
+        <h2>계좌관리</h2>
+        <jpa-board-register-form-1 @submit="onSubmit"/>
     </div>
 </template>
 

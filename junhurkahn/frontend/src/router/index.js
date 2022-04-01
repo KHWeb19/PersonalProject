@@ -8,6 +8,7 @@ import JpaBoardListPage1 from '@/views/jpaBoard1/JpaBoardListPage1.vue'
 
 
 
+import JpaBoardRegisterPage1 from '@/views/jpaBoard1/JpaBoardRegisterPage1.vue'
 
 import JpaBoardRegisterPage from '@/views/jpaBoard/JpaBoardRegisterPage.vue'
 import JpaBoardReadPage from '@/views/jpaBoard/JpaBoardReadPage.vue'
@@ -59,6 +60,15 @@ const routes = [
     name: 'JpaBoardRegisterPage',
     component: JpaBoardRegisterPage
   },
+  
+
+  {
+    path: '/jpaBoardRegister1',
+    name: 'JpaBoardRegisterPage1',
+    component: JpaBoardRegisterPage1
+  },
+
+
   {
     path: '/jpaBoardRead/:boardNo',
     name: 'JpaBoardReadPage',
