@@ -1,0 +1,27 @@
+%btn-base {
+  @include inline-flexbox;
+  padding: 11 0px;
+  font-weight: 700;
+  border-radius: 4px;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+  }
+}
+
+.btn-black {
+  @extend %btn-base;
+  color: $white;
+  background-color: $black;
+  transition: background-color 200ms ease-in-out;
+
+  &:not(:disabled):hover {
+    background-color: $primary;
+  }
+}
+
+.btn-46 {
+  @include text-style(16);
+  height: 46px;
+}

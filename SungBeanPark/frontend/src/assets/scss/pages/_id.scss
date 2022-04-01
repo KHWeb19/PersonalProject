@@ -1,0 +1,21 @@
+.id {
+  @include pos-center;
+  height: 100%;
+
+  &-header {
+    text-align: center;
+    margin-top: 72px;
+    margin-bottom: 26px;
+  }
+
+  input {
+    display: block;
+    margin-top: 16px;
+    margin-left: 12px;
+    margin-bottom: 16px;
+    width: 256px;
+    height: 46px;
+    border: 1px solid $border;
+    border-radius: 4px;
+  }
+}
