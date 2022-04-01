@@ -1,9 +1,13 @@
 <template>
-    <div id="mainbar">
+    <div>
+        <main-bar></main-bar>
+        <!--
         <v-banner>
             <v-toolbar flat white>
+                
                 <v-app-bar-nav-icon @click="nav_drawer = !nav_drawer">
                 </v-app-bar-nav-icon>
+                
 
                 <div id="logo" >     
                     <router-link style="text-decoration: none;" :to="{name: 'Home'}">
@@ -13,16 +17,42 @@
 
                 <v-spacer></v-spacer>
 
-                <v-toolbar-items>
-                    <router-link style="text-decoration: none;" :to="{name: 'RegisterPage'}">
-                         <h3 class="font-weight-light pa-6 pl-6 pr-2">Login</h3>
+                <v-toolbar-items >
+                    <router-link class="login" :to="{name: 'LoginPage'}">
+                         Login 
                     </router-link>   
-                    <router-link style="text-decoration: none;" :to="{name: 'RegisterPage'}" >
-                        <h3 class="font-weight-light pa-6 pl-6 pr-2">Register</h3>    
-                    </router-link>   
-                  
-                </v-toolbar-items>
+                    
+        
+                    <router-link class="register" :to="{name: 'RegisterPage'}" >
+                        <v-btn text v-bind="attrs" v-on="on">Register   </v-btn>
+                    </router-link>  
 
+                    
+                    
+                </v-toolbar-items>
+                <v-dialog v-model="loginDialog" persisten max-width="400px" >
+                    <template v-slot:activator="{ on, attrs }">
+                        <v-btn text v-bind="attrs" v-on="on" icon class="float-right">
+                            <h4 router :to="{name: 'RegisterPage'}">Register </h4>
+                        </v-btn>
+                    </template>
+                </v-dialog>
+
+
+                
+                <v-dialog v-model="loginDialog" persisten max-width="400px" >
+                    <template v-slot:activator="{ attrs, on }">
+                        <v-btn  text v-bind="attrs" v-on="on" router :to="{name: 'RegisterPage'}" icon class="float-right">Register</v-btn>
+                    </template>
+                    
+                <v-list>
+                    <v-list-item router :to="{name: 'RegisterPage'}">
+                                <v-list-item-title>회원가입</v-list-item-title>
+                            </v-list-item>
+                </v-list> 
+               
+                </v-dialog>
+                
             </v-toolbar>
 
             <v-navigation-drawer app v-model="nav_drawer" temporary>
@@ -44,7 +74,7 @@
                     </v-list-item-group>
                 </v-list>
             </v-navigation-drawer>
-        </v-banner>
+        -->
 
         <v-container fluid>
             <v-window show-arrows>
@@ -106,24 +136,30 @@
                     </v-col>
                 </v-row>
             </v-sheet>  -->
+     
+</div>
    
-    </div>
 </template>
          
-
-
 
 <script>
 
 //import Weather from '@/components/home/Weather'
+import MainBar from '@/view/main/MainBar.vue'
+
 
 export default {
-  name: 'MainPage',
 
- // components:{Weather},
+    name: 'MainPage',
+
+ // components:{Weather},//components:{MainBar},
+    components:{MainBar},
+
+    
 
   data() {
     return {
+        /*
         nav_drawer: false,
         group: false,
         
@@ -163,13 +199,16 @@ export default {
                 
             ]
            
-        }
+        } */
     }
 }
+}
+
 
 //@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap');'Dancing Script', cursive;
 //@import url('https://fonts.googleapis.com/css2?family=Parisienne&display=swap'); color: rgba(230, 215, 89, 0.897);
 //font-family: 'Cinzel', serif;  @import url('https://fonts.googleapis.com/css2?family=Cinzel&display=swap');
+
 </script>
 
 
@@ -181,7 +220,7 @@ export default {
     padding: 0;
     box-sizing: border-box;
 }
-
+/*
 #logo {
     font-family: 'Poiret One', cursive;
     text-align:center; 
@@ -200,7 +239,7 @@ h1 {
     margin-inline-start: 0px;
     margin-inline-end: 0px;        
 }
-
+*/
 /* v-bar 패딩 넣기
 .v-application--is-ltr .v-banner__wrapper {
      padding: 6px 5px 6px 5px; 
@@ -303,7 +342,20 @@ h1 {
 .screen2:hover::after{
     opacity: 1;
 }
+.login{
+    text-decoration: none;  
+    
+    font-size: 20px;
+    padding-top: 23px;
+    margin-right: 30px;
+}
+.register{
+    text-decoration: none;  
+    font-weight: light; 
+    font-size: 20px;
+    padding-top: 23px
 
+}
 
 </style>
 
