@@ -10,12 +10,15 @@
 @import // components
   "~@/assets/scss/components/gnb-nav",
   "~@/assets/scss/components/gnb-icon-buttons",
-  "~@/assets/scss/components/home-section", "~@/assets/scss/components/swiper";
+  "~@/assets/scss/components/home-section", "~@/assets/scss/components/swiper",
+  "~@/assets/scss/components/overlay";
 
 @import // layout
   "~@/assets/scss/layout/header",
-  "~@/assets/scss/layout/sidebar", 
-  "~@/assets/scss/layout/overlay";
+  "~@/assets/scss/layout/sidebar", "~@/assets/scss/layout/overlay",
+  "~@/assets/scss/layout/figcaption", "~@/assets/scss/layout/figure",
+  "~@/assets/scss/layout/footer", "~@/assets/scss/layout/product",
+  "~@/assets/scss/layout/product-section", "~@/assets/scss/layout/global-header";
 
 @import // Modules
   "~@/assets/scss/modules/buttons";
