@@ -5,6 +5,7 @@
     height: 240px;
     width: 100%;
     border-radius: 8px;
+    transition: transform 200ms ease-in-out;
   }
 
   &:before,
@@ -53,6 +54,14 @@
         color: #fff;
         background: #000;
       }
+    }
+  }
+}
+
+@include responsive(D) {
+  .swiper a:hover {
+    img {
+      transform: translate(0%, 0%) scale(1.1);
     }
   }
 }
