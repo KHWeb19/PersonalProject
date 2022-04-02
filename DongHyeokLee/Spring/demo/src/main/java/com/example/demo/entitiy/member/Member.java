@@ -8,12 +8,17 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 
 @Data
 @Entity
 @NoArgsConstructor
+@Table(name = "memberBoth")
 public class Member {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long memberNo;
@@ -25,7 +30,7 @@ public class Member {
     @JsonIgnore
     private String password;
 
-    @Column(length = 10, nullable = false)
+    @Column(length = 20, nullable = false)
     private String nickname;
 
     @Column(length = 20, nullable = false)
@@ -37,11 +42,38 @@ public class Member {
     @UpdateTimestamp
     private Date updDate;
 
-    public Member(String userId, String password, String nickname, String email){
+    //mappedBy ="member" 헀더니 생성이 안되서 tabled이랑 이름변경함
+
+    @OneToMany(mappedBy = "memberBoth", cascade = CascadeType.ALL)
+    private List<MemberAuth> authList = new ArrayList<>();
+
+    public Member(String userId, String password, String nickname, String email) {
         this.userId = userId;
         this.password = password;
         this.nickname = nickname;
         this.email = email;
     }
 
+    public Member(String userId, String password, MemberAuth auth) {
+        this.userId = userId;
+        this.password = password;
+
+        if(auth != null){
+            changeAuth(auth);
+        }
+    }
+
+    public void changeAuth (MemberAuth auth){}
+
+    public void addAuth (MemberAuth auth) {
+        if(authList == null) {
+            authList = new ArrayList<>();
+        }
+
+        authList.add(auth);
+    }
+
+    public void clearAuthList() {
+        authList.clear();
+    }
 }

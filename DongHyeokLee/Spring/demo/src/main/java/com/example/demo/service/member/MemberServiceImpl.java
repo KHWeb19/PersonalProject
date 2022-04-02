@@ -2,6 +2,8 @@ package com.example.demo.service.member;
 
 import com.example.demo.controller.member.request.MemberRequest;
 import com.example.demo.entitiy.member.Member;
+import com.example.demo.entitiy.member.MemberAuth;
+import com.example.demo.repository.member.MemberAuthRepository;
 import com.example.demo.repository.member.MemberRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,7 +23,11 @@ public class MemberServiceImpl implements MemberService {
     private MemberRepository memberRepository;
 
     @Autowired
+    private MemberAuthRepository memberAuthRepository;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
+
 
     @Override
     public void register(MemberRequest memberRequest) {
@@ -31,14 +38,20 @@ public class MemberServiceImpl implements MemberService {
                     memberRequest.getNickname(),memberRequest.getEmail());
 
             memberRepository.save(memberEntity);
+
+            MemberAuth authEntity = new MemberAuth(memberRequest.getAuth(), memberEntity);
+
+            memberAuthRepository.save(authEntity);
         }
 
+    @Transactional
     @Override
     public List<Member> list()  {
         //현재 password가 암호화 되어있긴한데 이것도 같이 나감
        return memberRepository.findAll();
 
     }
+
 
     @Override
     public MemberRequest login(MemberRequest memberRequest) {
@@ -57,7 +70,7 @@ public class MemberServiceImpl implements MemberService {
             }
 
             MemberRequest response = new MemberRequest(loginMember.getUserId(), null,
-                    loginMember.getNickname(), loginMember.getEmail() );
+                    loginMember.getNickname(), loginMember.getEmail(), memberRequest.getAuth());
 
             return response;
     }

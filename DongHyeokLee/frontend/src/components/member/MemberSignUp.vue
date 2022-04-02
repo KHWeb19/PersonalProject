@@ -19,11 +19,10 @@
         <v-card-text class="grey lighten-5" dense dark>
             <v-container>
                 <v-form ref="form" lazy-validation>
+                  <v-radio-group v-if="this.$store.state.userInfo != null" v-model="radioGroup" row>
+                     <v-radio label="사용자"></v-radio>
+                  </v-radio-group>
                 <v-row>
-                   <v-radio-group v-if="this.$store.state.userInfo != null" v-model="radioGroup" row>
-                     <v-radio :label="auth"></v-radio>
-                    </v-radio-group>
-
                     <v-text-field  class="pl-3 pr-3" :rules="userIdRules" v-model="userId"
                         label="아이디" type="text" prepend-icon="mdi-account" flat solo>
                     </v-text-field>
@@ -74,12 +73,13 @@ export default {
             password: '',
             nickname: '',
             email: '', 
-            auth:'User',
+            auth: '',
+            radioGroup: '사용자',
             passwordChecking: '',
             passwordCheckRules: [v => this.password ===v || '비밀번호가 일치하지않습니다' ],
             userIdRules:[
                             v => !!v || 'ID를 작성해주세요',
-                            v => !/[~!@#$%^&*()_+{}]/.test(v) || 'ID에는 특수문자를 넣을수없습니다.',
+                            v =>  /^[a-zA-Z0-9]*$/.test(v) || '영문+숫자로만 입력해주세요',
                             v => !(v && v.length > 15) || 'ID는 15자를 넘길수없습니다.'
 
             ],
@@ -104,27 +104,27 @@ export default {
     },
     methods: {
         signUp () {
-        const { userId, password, email, nickname } = this
+        const { userId, password, email, nickname} = this
+        const auth = this.radioGroup
         const validate = this.$refs.form.validate();
             if (validate){
                     let coin = null;
                 for(var i = 0; i < this.members.length; i++){
-                    console.log(this.members[i].password)
                     if(this.members[i].userId === userId){
                         alert('중복 된 아이디 입니다')
-                        coin = 1;
+                        coin = 1
                     }else if(this.members[i].nickname === nickname){
                         alert('중복 된 닉네임 입니다')
-                        coin = 1;
+                        coin = 1
                     }else if(this.members[i].email === email){
                         alert('중복 된 이메일 입니다.')
-                        coin = 1;
+                        coin = 1
                     }
                         
                     
                 }
             if(coin === null){ 
-                axios.post('http://localhost:7777/member/register', { userId, password, email, nickname })
+                axios.post('http://localhost:7777/member/register', { userId, password, email, nickname, auth })
                     .then(res => {
                         alert('등록 성공! - ' + res)
                         this.$router.go()

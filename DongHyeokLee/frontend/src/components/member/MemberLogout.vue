@@ -21,6 +21,7 @@ export default {
             this.$cookies.remove("user")
             this.$store.state.isLogin = false
             this.$store.state.userInfo = null
+            
 
         alert('로그아웃 성공!')
          this.$router.push({

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 
@@ -21,6 +22,7 @@ public class MemberController {
     @Autowired
     private MemberService memberService;
 
+    @Transactional
     @PostMapping("/register")
     public void memberRegister(@Validated @RequestBody MemberRequest memberRequest){
         log.info("memberRegister request" + memberRequest);
@@ -28,6 +30,7 @@ public class MemberController {
         memberService.register(memberRequest);
     }
 
+    @Transactional
     @GetMapping("/list")
     public List<Member> memberList () {
         log.info("MemberList()");
@@ -52,9 +55,6 @@ public class MemberController {
     @PutMapping("/modify")
     public Member memberInformationModify (@RequestBody Member member) {
         log.info("memberModify(): " + member);
-
-        log.info(""+ member.getMemberNo());
-
 
         memberService.modify(member);
 

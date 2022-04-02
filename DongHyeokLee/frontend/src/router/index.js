@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-
 import FreeBoardReigster from '@/views/freeBoard/FreeBoardRegisterPage.vue'
 import FreeBoardListPage from '@/views/freeBoard/FreeBoardListPage.vue'
 import FreeBoardReadPage from '@/views/freeBoard/FreeBoardReadPage.vue'
@@ -13,7 +12,6 @@ import store from '@/store'
 
 
 Vue.use(VueRouter)
-
 const routes = [
   {
     path: '/',
@@ -51,9 +49,8 @@ const routes = [
     component: FreeBoardListPage,
     meta: {isLogin: true}
   }
-  
-]
 
+]
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
@@ -69,5 +66,5 @@ router.beforeEach((to, from, next) => {
   }else{
     next();
   }
-  
-})
+
+}) 
