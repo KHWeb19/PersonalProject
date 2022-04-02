@@ -12,6 +12,6 @@ public interface JoinMemberRepository extends JpaRepository<Member, Long> {
     @Query("select m from Member m where m.id = :id")
     Optional<Member> findById(String id);
 
-    @Query("select m from Member m where m.memberNo = :memberNo")
-    Optional<Member> findByMemberNo(Integer memberNo);
+    @Query("select m from Member m where m.sessionKey = :sessionKey")
+    Optional<Member> findBySessionKey(String sessionKey);
 }

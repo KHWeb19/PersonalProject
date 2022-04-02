@@ -9,6 +9,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 @Slf4j
 @RestController
 @RequestMapping("/join")
@@ -19,10 +23,15 @@ public class  JoinMemberController {
     private JoinMemberService service;
 
     @PostMapping("/register")
-    public Member register (@Validated @RequestBody Member member){
+    public Member register (@Validated @RequestBody Member member, HttpSession session, HttpServletRequest request){
         log.info("register" + member);
 
-        service.register(member);
+        HttpSession userSession = request.getSession();
+
+        service.register(member, userSession);
+
+        System.out.println("register Page ");
+        System.out.println("session id : " + session.getId());
 
         return member;
     }

@@ -1,1 +1,1 @@
-
+export const FETCH_COOKIE_MEMBER = 'FETCH_COOKIE_MEMBER'

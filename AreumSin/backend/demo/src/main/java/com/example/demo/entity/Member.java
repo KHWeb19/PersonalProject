@@ -33,9 +33,16 @@ public class Member {
     @Column(name = "USER_COLOR")
     private String color;
 
+    @Column(name = "USER_SESSION_KEY")
+    private String sessionKey;
+/*
+    @CreationTimestamp
+    @Column(name = "USER_SESSION_LIMIT")
+    private Date session_limit;*/
+
     @CreationTimestamp
     private Date createdDate;
 
     @UpdateTimestamp
-    private Date lastModifiedDate;
+    private Date userLoginDate;
 }

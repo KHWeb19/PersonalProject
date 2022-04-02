@@ -9,6 +9,7 @@ import LoginPageForm from "@/components/login/LoginPageForm";
 import axios from "axios";
 import cookies from 'vue-cookies'
 import Vue from "vue";
+import {FETCH_COOKIE_MEMBER} from "@/store/mutation-types";
 
 Vue.use(cookies)
 
@@ -30,21 +31,21 @@ export default {
       this.isLogin = false
     }
   },
-  methods:{
-    onSubmit(payload){
-      if(!this.checkUserInfo(payload.id, this.$store.state.userInfo)) {
-      //if(!this.isLogin) {
+  methods: {
+    async onSubmit(payload) {
+      if (!this.checkUserInfo(payload, this.$store.state.userInfo) && !this.isLogin) {
+        //if(!this.isLogin) {
         const {id, pw} = payload;
-        axios.post('http://localhost:7777/join/login', {id, pw})
+        await axios.post('http://localhost:7777/join/login', {id, pw})
             .then(res => {
               console.log(res.data)
-              this.$store.state.cookieNum += this.count;
-              console.log(this.$store.state.cookieNum);
               if (!res.data.checkId) {
                 alert('아이디나 비밀번호가 틀렸습니다.')
               } else {
-                this.$store.state.userInfo = res.data;
+                //this.$store.state.userInfo = res.data;
+                this.$store.commit([FETCH_COOKIE_MEMBER], payload.id);
                 this.$cookies.set("user", res.data.id, 120)
+                this.updateCookie(res.data.id);
                 this.isLogin = true
                 this.$router.push({name: 'HomeView'})
               }
@@ -57,13 +58,22 @@ export default {
       }
     },
     checkUserInfo(payloadId, userInfo) {
-      if(userInfo !== null){
+
+      if(userInfo !== null) {
+        userInfo.forEach(user => {
+          if (user.id === payloadId.id)
+            return true;
+        })
+        return false;
+      }
+      /*if(userInfo !== null){
         if(userInfo === payloadId){
           return true;
         }
         return false;
       }
       return false;
+    }  */
     }
   }
 }
