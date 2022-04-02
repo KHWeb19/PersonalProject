@@ -22,4 +22,10 @@
       border-radius: 980px;
     }
   }
+
+  @include responsive(T) {
+    h2 {
+      @include text-style(32);
+    }
+  }
 }
