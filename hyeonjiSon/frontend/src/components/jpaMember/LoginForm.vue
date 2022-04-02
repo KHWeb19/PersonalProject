@@ -1,12 +1,7 @@
 <template>
 <div>
-    <v-list-item-action>
+    <v-list-item-action> 
         <v-icon> mdi-login </v-icon>
-    </v-list-item-action>
-    <v-list-item-action>
-        <v-icon>
-            mdi-logout
-        </v-icon>
     </v-list-item-action>
     
   </div>

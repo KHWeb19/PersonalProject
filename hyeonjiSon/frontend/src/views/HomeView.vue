@@ -101,8 +101,8 @@ name: 'Discount'
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 300px;
-        height: 300px;
+        width: 800px;
+        height: 600px;
         text-align: center;
         font-weight: bold;
         font-size: 1.7rem;

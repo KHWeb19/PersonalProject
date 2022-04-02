@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <default-layout/>
+    <layout/>
       <v-main>
         <router-view/>
       </v-main>    
@@ -8,10 +8,10 @@
 </template>
 
 <script>
-import DefaultLayout from './views/DefaultLayout.vue'
+import Layout from '@/views/LayOut.vue'
 
 export default {
-  components: { DefaultLayout },
+  components: { Layout },
   name: 'App',
 }
 
