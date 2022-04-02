@@ -20,9 +20,24 @@ public class MemberController {
     public void memberRegister(@Validated @RequestBody MemberRequest memberRequest) {
         log.info("memberRegister() : " + memberRequest.getUserId() + ", " + memberRequest.getPassword() + ", " +
                 memberRequest.getEmail() +", " +memberRequest.getPasswordCheck() + ", " +
-                (memberRequest.getAuth().equals("개인") ? "ROLE_INDIVIDUAL" : "ROLE_MANAGER"));
+                (memberRequest.getAuth().equals("user") ? "ROLE_INDIVIDUAL" : "ROLE_MANAGER"));
         service.register(memberRequest);
 
+    }
+
+    @PostMapping("/login")
+    public MemberRequest memberLogin (@RequestBody MemberRequest memberRequest) {
+        log.info("memberLogin(): " + memberRequest);
+
+        MemberRequest memberResponse = service.login(memberRequest);
+
+        if (memberResponse != null) {
+            log.info("Login Success");
+        } else {
+            log.info("Login Failure");
+        }
+
+        return memberResponse;
     }
 
 

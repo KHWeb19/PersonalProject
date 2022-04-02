@@ -13,11 +13,9 @@ public class MemberRequest {
     private String email;
     private String auth;
 
-    public MemberRequest (String userId, String password, String passwordCheck,String email,String auth) {
+    public MemberRequest (String userId, String password,String auth) {
         this.userId = userId;
         this.password = password;
-        this.passwordCheck = passwordCheck;
-        this.email = email;
         this.auth = auth;
     }
 

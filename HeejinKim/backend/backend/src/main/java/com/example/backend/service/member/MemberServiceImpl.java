@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -47,4 +48,54 @@ public class MemberServiceImpl implements MemberService{
         memberAuthRepository.save(authEntity);
 
     }
+
+    @Transactional
+    @Override
+    public MemberRequest login(MemberRequest memberRequest) {
+
+        //로그인시 아이디 확인
+        Optional<Member> maybeMember = memberRepository.findByUserId(memberRequest.getUserId());
+
+        if(maybeMember.equals(Optional.empty())){
+            log.info("There are no person who has this id!");
+            return null;
+        }
+        Member loginMember = maybeMember.get();
+
+        if (!passwordEncoder.matches(memberRequest.getPassword(), loginMember.getPassword())) {
+            log.info("Entered wrong password!");
+            return null;
+        }
+
+        //권한 매칭
+        Optional<MemberAuth> maybeMemberAuth =
+                memberAuthRepository.findByMemberNo(loginMember.getMemberNo());
+
+        if (maybeMemberAuth.equals(Optional.empty())) {
+            log.info("no auth");
+            return null;
+        }
+
+        MemberAuth memberAuth = maybeMemberAuth.get();
+
+        MemberRequest response = new MemberRequest( memberRequest.getUserId(),null,  memberAuth.getAuth());
+
+        return response;
+    }
+
+    @Transactional
+    @Override
+    public Boolean checkUserIdValidation(String userId) {
+        Optional<Member> maybeMember = memberRepository.findByUserId(userId);
+
+        if(maybeMember.isPresent()) {
+            log.info("login(): there is no id");
+            return false;
+        }
+
+        else {
+            return true;
+        }
+    }
+
 }
