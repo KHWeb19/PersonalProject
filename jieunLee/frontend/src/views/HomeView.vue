@@ -8,8 +8,13 @@
       &nbsp;Register&nbsp;
     </router-link>
     <div>
-    로그인 아이디: {{id}}
+    로그인 넘버: {{id}}
     </div>
+    <router-link :to="{
+                        path: `accounts/edit/${no}`,
+}">
+                    회원정보
+                    </router-link>
     <member-list :members="members"/>
   </div>
 </template>
@@ -24,8 +29,8 @@ export default {
   components: {
     MenuBar,
     MemberList
-  },
-      computed: {
+    },
+    computed: {
         ...mapState(['members'])
     },
     mounted () {
@@ -34,11 +39,14 @@ export default {
     methods: {
         ...mapActions(['fetchMemberList'])
     },
-  data() {
-    return {
-    id: this.$store.state.memberId
+    data() {
+      return {
+      id: this.$store.state.memberId,
+      no: 8
+      }
+      
     }
-  }
+  
 }
 </script>
 

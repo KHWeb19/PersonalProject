@@ -14,8 +14,8 @@ export default {
     },
     methods: {
         onSubmit (payload) {
-        const { name, id, pw } = payload
-        axios.post('http://localhost:7777/member/register', { name, id, pw })
+        const { memberName, memberId, password } = payload
+        axios.post('http://localhost:7777/member/register', { memberName, memberId, password })
             .then(res => {
             alert('등록 성공! - ' + res)
             })

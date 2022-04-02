@@ -15,7 +15,7 @@
                                 width: 268px; 
                                 height: 38px;
                                 padding-left: 5px;" 
-                            type="text" placeholder="성명" v-model="name"/>
+                            type="text" placeholder="성명" v-model="memberName"/>
                         </div>
                         <div>
                             <input style="background-color: #fafafa; 
@@ -25,7 +25,7 @@
                                 width: 268px; 
                                 height: 38px;
                                 padding-left: 5px;" 
-                            type="text" placeholder="아이디" v-model="id"/>
+                            type="text" placeholder="아이디" v-model="memberId"/>
                         </div>
                         <div>
                             <input style="background-color: #fafafa; 
@@ -35,7 +35,7 @@
                                 width: 268px; 
                                 height: 38px;
                                 padding-left: 5px;" 
-                            type="password" placeholder="비밀번호" v-model="pw"/>
+                            type="password" placeholder="비밀번호" v-model="password"/>
                         </div>
                         <div><v-btn style="margin: 10px; width: 268px; height: 30px;" color="blue" class="white--text" type="submit">가입</v-btn></div>
                     </form>
@@ -59,14 +59,14 @@
 export default {
     data () {
     return {
-      id: '',
-      pw: ''
+      memberId: '',
+      password: ''
     }
   },
   methods: {
     onSubmit () {
-      const { name, id, pw } = this
-      this.$emit('submit', { name, id, pw })
+      const { memberName, memberId, password } = this
+      this.$emit('submit', { memberName, memberId, password })
     }
   }
 }

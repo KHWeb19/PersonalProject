@@ -30,17 +30,17 @@ public class MemberServiceImpl implements MemberService{
 
     @Override
     public void register(MemberRequest memberRequest) {
-        String encodedPassword = passwordEncoder.encode(memberRequest.getPw());
-        memberRequest.setPw(encodedPassword);
+        String encodedPassword = passwordEncoder.encode(memberRequest.getPassword());
+        memberRequest.setPassword(encodedPassword);
 
-        Member memberEntity = new Member(memberRequest.getName(), memberRequest.getId(), memberRequest.getPw());
+        Member memberEntity = new Member(memberRequest.getMemberName(), memberRequest.getMemberId(), memberRequest.getPassword());
 
         memberRepository.save(memberEntity);
     }
 
     @Override
     public MemberRequest login(MemberRequest memberRequest) {
-        Optional<Member> maybeMember = memberRepository.findByUserId(memberRequest.getId());
+        Optional<Member> maybeMember = memberRepository.findByUserId(memberRequest.getMemberId());
 
         if (maybeMember.equals(Optional.empty())) {
             log.info("이런 사람 없다!");
@@ -49,14 +49,14 @@ public class MemberServiceImpl implements MemberService{
 
         Member loginMember = maybeMember.get();
 
-        if (!passwordEncoder.matches(memberRequest.getPw(), loginMember.getPassword())) {
+        if (!passwordEncoder.matches(memberRequest.getPassword(), loginMember.getPassword())) {
             log.info("비밀번호를 잘못 입력했습니다!");
             return null;
         }
 
         MemberRequest response = new MemberRequest(
-                memberRequest.getName(),
-                memberRequest.getId(),
+                memberRequest.getMemberName(),
+                memberRequest.getMemberId(),
                 null);
 
         return response;
