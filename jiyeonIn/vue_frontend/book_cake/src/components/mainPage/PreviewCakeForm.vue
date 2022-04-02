@@ -1,6 +1,9 @@
 <template>
     <div>
         <h4>케이크 보기</h4><br>
+
+        <swiper-page></swiper-page>
+        
     </div>
 </template>
 
@@ -9,9 +12,11 @@ option value를 배열 형태로 만들어서 클릭하면 그거에 맞는 이�
  -->
 
 <script>
+import SwiperPage from '@/components/mainPage/SwiperPage.vue'
     
     export default {
         name: 'PreviewCakeForm',
+        components: { SwiperPage },
         data () {
             return {
             }
@@ -25,7 +30,4 @@ option value를 배열 형태로 만들어서 클릭하면 그거에 맞는 이�
 
 <style scoped>
 
-.selectCake {
-    border: solid 1px black;
-}
 </style>
