@@ -12,7 +12,7 @@
                                 width: 268px; 
                                 height: 38px;
                                 padding-left: 5px;" 
-                            type="text" placeholder="아이디" v-model="id"/>
+                            type="text" placeholder="아이디" v-model="memberId"/>
                         </div>
                         <div>
                             <input style="background-color: #fafafa; 
@@ -22,7 +22,7 @@
                                 width: 268px; 
                                 height: 38px;
                                 padding-left: 5px;" 
-                            type="password" placeholder="비밀번호" v-model="pw"/>
+                            type="password" placeholder="비밀번호" v-model="password"/>
                         </div>
                         <div><v-btn style="margin: 10px; width: 268px; height: 30px;" color="blue" class="white--text" type="submit">로그인</v-btn></div>
                     </form>
@@ -48,14 +48,14 @@ export default {
     name: "LoginForm.vue",
     data() {
         return {
-            id: '',
-            pw: ''
+            memberId: '',
+            password: ''
         }
     },
     methods: {
         onSubmit() {
-            const {id, pw} = this
-            this.$emit('submit', {id, pw})
+            const {memberId, password} = this
+            this.$emit('submit', {memberId, password})
         }
     }
 }

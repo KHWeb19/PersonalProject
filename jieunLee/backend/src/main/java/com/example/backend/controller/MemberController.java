@@ -18,19 +18,21 @@ public class MemberController {
     @Autowired
     private MemberService service;
 
-    @PostMapping("/list")
+    @GetMapping("/list")
     public List<Member> memberList() {
         log.info("memberList()");
 
         return service.list();
     }
 
+
+
     @PostMapping("/register")
     public void MemberRegister(@Validated @RequestBody MemberRequest memberRequest) {
         log.info("MemberRegister():" + "," +
-                memberRequest.getName() + ", " +
-                memberRequest.getId() + ", " +
-                memberRequest.getPw());
+                memberRequest.getMemberName() + ", " +
+                memberRequest.getMemberId() + ", " +
+                memberRequest.getPassword());
         service.register(memberRequest);
     }
 

@@ -42,8 +42,8 @@ export default {
     methods: {
         onSubmit(payload) {
             if (!this.isLogin) {
-                const {id, pw} = payload
-                axios.post('http://localhost:7777/member/login', {id, pw})
+                const {memberId, password} = payload
+                axios.post('http://localhost:7777/member/login', {memberId, password})
                     .then(res => {
                         if(res.data) {
                             this.$store.state.userInfo = res.data
@@ -52,7 +52,7 @@ export default {
                             this.$router.push({
                                 name: 'HomeView'
                                 })
-                            this.$store.state.memberId = id
+                            this.$store.state.memberId = memberId
                         } else {
                             alert('로그인 실패!')
                         }

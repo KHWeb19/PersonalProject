@@ -1,9 +1,9 @@
 <template>
-    <accounts-edit-form v-if="member" :member="member"/>
+    <accounts-edit-form :member="member"/>
 </template>
 
 <script>
-import AccountsEditForm from '../../components/member/AccountsEditForm.vue'
+import AccountsEditForm from '@/components/member/AccountsEditForm.vue'
 import axios from 'axios'
 import { mapActions, mapState } from 'vuex'
 
@@ -33,13 +33,13 @@ export default {
       onDelete() {
         const {memberNo} = this.member
         axios.delete(`http://localhost:7777/member/${memberNo}`)
-          // .then(()=> {
-          //     alert('삭제 성공')
-          //     this.$router.push({name: 'JpaBoardListPage'})
-          // })
-          // .catch(()=> {
-          //     alert('삭제실패 문제발생')
-          // })
+          .then(()=> {
+              alert('삭제 성공')
+              this.$router.push({name: 'JpaBoardListPage'})
+          })
+          .catch(()=> {
+              alert('삭제실패 문제발생')
+          })
       }
     }
 }

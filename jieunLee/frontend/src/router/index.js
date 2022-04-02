@@ -21,7 +21,7 @@ const routes = [
   {
     path: '/register',
     name: 'RegisterPage',
-    component: RegisterPage
+    component: RegisterPage,
   },
   {
     path: '/',
@@ -41,8 +41,13 @@ const routes = [
   {
     path: '/accounts/edit/:memberNo',
     name: 'AccountsEditPage',
-    component: AccountsEditPage
-  }
+    components: {
+      default: AccountsEditPage
+    },
+    props: {
+      default: true
+    }
+  },
 ]
 
 const router = new VueRouter({

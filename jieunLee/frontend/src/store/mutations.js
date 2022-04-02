@@ -1,7 +1,6 @@
 import {
     FETCH_MEMBER_LIST,
     FETCH_MEMBER,
-    FETCH_MEMBER_ID
 } from './mutation-types'
 
 export default {
@@ -10,8 +9,5 @@ export default {
     },
     [FETCH_MEMBER] (state, member) {
         state.member = member
-    },
-    [FETCH_MEMBER_ID] (state, memberId) {
-        state.memberId = memberId
-    },
+    }
 }

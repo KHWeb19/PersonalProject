@@ -30,7 +30,7 @@
                     width: 300px; 
                     height: 30px;
                     padding-left: 5px;" 
-                    type="text"/>
+                    type="text" :value="member.memberName"/>
                   </td>
               </tr>
               <br/>
@@ -58,7 +58,7 @@
                       width: 300px; 
                       height: 30px;
                       padding-left: 5px;" 
-                  type="text"/>
+                  type="text" :value="member.memberId"/>
                   </td>
               </tr>
               <br/>
@@ -94,15 +94,16 @@
 import MenuBar from '@/components/MenuBar.vue'
 
 export default {
-  components: {
-    MenuBar
-  },
-  props: {
-        member: {
-            type: Object,
-            require:true
+    name: 'AccountsEditForm',
+    components: {
+        MenuBar
+    },
+    props: {
+            member: {
+                type: Object,
+                require:true
+            }
         }
-    }
 }
 </script>
 
