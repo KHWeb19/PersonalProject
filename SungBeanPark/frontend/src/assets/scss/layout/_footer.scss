@@ -1,7 +1,7 @@
 .global-footer {
   padding: 24px 0;
   padding-bottom: 32px;
-  background-color: $border;
+  background-color: $background;
 
   &-title {
     @include text-style(13, $dark);
