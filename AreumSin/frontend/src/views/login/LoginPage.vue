@@ -9,7 +9,7 @@ import LoginPageForm from "@/components/login/LoginPageForm";
 import axios from "axios";
 import cookies from 'vue-cookies'
 import Vue from "vue";
-import {FETCH_COOKIE_MEMBER} from "@/store/mutation-types";
+// import {FETCH_COOKIE_MEMBER} from "@/store/mutation-types";
 
 Vue.use(cookies)
 
@@ -43,9 +43,9 @@ export default {
                 alert('아이디나 비밀번호가 틀렸습니다.')
               } else {
                 //this.$store.state.userInfo = res.data;
-                this.$store.commit([FETCH_COOKIE_MEMBER], payload.id);
+                //this.$store.commit([FETCH_COOKIE_MEMBER], payload.id);
                 this.$cookies.set("user", res.data.id, 120)
-                this.updateCookie(res.data.id);
+                //this.updateCookie(res.data.id);
                 this.isLogin = true
                 this.$router.push({name: 'HomeView'})
               }
@@ -58,22 +58,22 @@ export default {
       }
     },
     checkUserInfo(payloadId, userInfo) {
-
+      /*
       if(userInfo !== null) {
         userInfo.forEach(user => {
           if (user.id === payloadId.id)
             return true;
         })
         return false;
-      }
-      /*if(userInfo !== null){
+      }*/
+
+      if(userInfo !== null){
         if(userInfo === payloadId){
           return true;
         }
         return false;
       }
       return false;
-    }  */
     }
   }
 }
