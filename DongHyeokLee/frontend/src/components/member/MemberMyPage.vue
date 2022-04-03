@@ -27,7 +27,7 @@
                     <v-text-field  class="pl-3 pr-3"  :rules="passwordCheck" required  v-model="passwordChecking"
                         label="비밀번호확인" type="password" prepend-icon="mdi-lock" flat solo>
                     </v-text-field>
-                    <v-text-field class="pl-3 pr-3" v-model="auth"  
+                    <v-text-field class="pl-3 pr-3" v-model="email" label="email"
                         disabled type="text" prepend-icon="mdi-email-multiple" flat solo>
                     </v-text-field>
                     <v-text-field class="pl-3 pr-3" v-model="nickname"  label = "nickname"
@@ -97,7 +97,7 @@ export default {
         this.userId = this.$store.state.userInfo.userId
         this.nickname = this.$store.state.userInfo.nickname
         this.email = this.$store.state.userInfo.email
-        this.auth = this.$store.state.userInfo.auth
+        
         
     },
     computed :{

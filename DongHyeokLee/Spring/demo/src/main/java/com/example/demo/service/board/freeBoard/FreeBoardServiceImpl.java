@@ -1,8 +1,8 @@
-package com.example.demo.service.freeBoard;
+package com.example.demo.service.board.freeBoard;
 
 
-import com.example.demo.entitiy.freeBoard.FreeBoard;
-import com.example.demo.repository.freeBoard.FreeBoardRepository;
+import com.example.demo.entitiy.board.freeBoard.FreeBoard;
+import com.example.demo.repository.board.freeBoard.FreeBoardRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;

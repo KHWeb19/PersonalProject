@@ -12,6 +12,10 @@
         <router-link :to="{ name: 'FreeBoardListPage' }">
             게시물 보기
         </router-link>
+        
+            <free-board-comments-list-form :freeBoardComments="freeBoardComments" @submit="onSubmit"/>
+        
+        
     </div>
 </template>
 
@@ -20,9 +24,17 @@
 import axios from 'axios'
 import { mapActions, mapState } from 'vuex'
 import FreeBoardRead from '@/components/freeBoard/FreeBoardRead.vue'
+import FreeBoardCommentsListForm from '@/components/comments/freeBoard/FreeBoardCommentsListForm.vue'
 
 export default {
     name: 'FreeBoardReadPage',
+    data () {
+        return {
+            writer:'',
+            content:''
+
+        }
+    },
     props: {
         boardNo: {
             type: String,
@@ -30,10 +42,12 @@ export default {
         }
     },
     components: {
-        FreeBoardRead
+        FreeBoardRead,
+        FreeBoardCommentsListForm
     },
     computed: {
-        ...mapState(['freeBoard'])
+        ...mapState(['freeBoard']),
+        ...mapState(['freeBoardComments'])
     },
     created () {
         this.fetchFreeBoard(this.boardNo)
@@ -42,8 +56,12 @@ export default {
                     this.$router.push()
                 })
     },
+    mounted () {
+        this.fetchFreeBoardCommentsList()
+    },
     methods: {
         ...mapActions(['fetchFreeBoard']),
+        ...mapActions(['fetchFreeBoardCommentsList']),
         onDelete () {
             const { boardNo } = this.freeBoard
             axios.delete(`http://localhost:7777/freeBoard/${boardNo}`)
@@ -53,6 +71,18 @@ export default {
                     })
                     .catch(() => {
                         alert('삭제 실패! 문제 발생!')
+                    })
+        },
+        onSubmit (payload) {
+            const { writer, content } = payload
+            const boardNo = this.freeBoard
+            axios.post('http://localhost:7777/freeBoardComments/register', { writer, content, boardNo })
+                    .then(() => {
+                        alert('게시물 등록 성공!')
+                        this.$router.go()
+                    })
+                    .catch(() => {
+                        alert('문제 발생!')
                     })
         }
     }

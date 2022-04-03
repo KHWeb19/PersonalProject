@@ -1,15 +1,14 @@
 package com.example.demo.controller.member;
 
-
 import com.example.demo.controller.member.request.MemberRequest;
-import com.example.demo.entitiy.member.Member;
+import com.example.demo.entitiy.member.MemberInfo;
 import com.example.demo.service.member.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 
@@ -22,7 +21,7 @@ public class MemberController {
     @Autowired
     private MemberService memberService;
 
-    @Transactional
+
     @PostMapping("/register")
     public void memberRegister(@Validated @RequestBody MemberRequest memberRequest){
         log.info("memberRegister request" + memberRequest);
@@ -30,13 +29,13 @@ public class MemberController {
         memberService.register(memberRequest);
     }
 
-    @Transactional
     @GetMapping("/list")
-    public List<Member> memberList () {
+    public List<MemberInfo> memberList () {
         log.info("MemberList()");
 
         return memberService.list();
     }
+
 
     @PostMapping("/login")
     public MemberRequest memberLogin (@RequestBody MemberRequest memberRequest) {
@@ -53,7 +52,7 @@ public class MemberController {
     }
 
     @PutMapping("/modify")
-    public Member memberInformationModify (@RequestBody Member member) {
+    public MemberInfo memberInformationModify (@RequestBody MemberInfo member) {
         log.info("memberModify(): " + member);
 
         memberService.modify(member);
@@ -62,7 +61,7 @@ public class MemberController {
     }
 
     @DeleteMapping("/remove")
-    public void MemberInformationRemove(@RequestBody Member member) {
+    public void MemberInformationRemove(@RequestBody MemberInfo member) {
         log.info("MemberRemove()" + member.getMemberNo());
 
         memberService.remove(member);

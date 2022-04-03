@@ -11,6 +11,7 @@ import store from '@/store'
 
 
 
+
 Vue.use(VueRouter)
 const routes = [
   {
@@ -47,7 +48,14 @@ const routes = [
     path: '/freeBoardList',
     name: 'FreeBoardListPage',
     component: FreeBoardListPage,
-    meta: {isLogin: true}
+    beforeEnter(to, from, next) {
+      if(store.state.isLogin){
+        next();
+      }else{
+        alert('로그인 하세요')
+        next('/')
+      }
+    }
   }
 
 ]
@@ -59,12 +67,3 @@ const router = new VueRouter({
 
 export default router
 
-router.beforeEach((to, from, next) => {
-  if(to.meta.isLogin && !store.state.isLogin){
-    alert('로그인 해주세요!')
-
-  }else{
-    next();
-  }
-
-}) 

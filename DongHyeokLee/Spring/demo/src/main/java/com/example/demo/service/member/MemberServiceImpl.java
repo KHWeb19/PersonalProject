@@ -1,7 +1,7 @@
 package com.example.demo.service.member;
 
 import com.example.demo.controller.member.request.MemberRequest;
-import com.example.demo.entitiy.member.Member;
+import com.example.demo.entitiy.member.MemberInfo;
 import com.example.demo.entitiy.member.MemberAuth;
 import com.example.demo.repository.member.MemberAuthRepository;
 import com.example.demo.repository.member.MemberRepository;
@@ -11,7 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
-import javax.transaction.Transactional;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -29,54 +29,66 @@ public class MemberServiceImpl implements MemberService {
     private PasswordEncoder passwordEncoder;
 
 
+
+
     @Override
     public void register(MemberRequest memberRequest) {
             String encodedPassword = passwordEncoder.encode(memberRequest.getPassword());
             memberRequest.setPassword(encodedPassword);
 
-            Member memberEntity = new Member(memberRequest.getUserId(), memberRequest.getPassword(),
+            MemberAuth authEntity = new MemberAuth(memberRequest.getAuth());
+            MemberInfo memberEntity = new MemberInfo(memberRequest.getUserId(), memberRequest.getPassword(),
                     memberRequest.getNickname(),memberRequest.getEmail());
 
+            memberEntity.addAuth(authEntity);
+
             memberRepository.save(memberEntity);
-
-            MemberAuth authEntity = new MemberAuth(memberRequest.getAuth(), memberEntity);
-
-            memberAuthRepository.save(authEntity);
         }
 
-    @Transactional
+
+
     @Override
-    public List<Member> list()  {
+    public List<MemberInfo> list()  {
         //현재 password가 암호화 되어있긴한데 이것도 같이 나감
        return memberRepository.findAll();
 
     }
 
 
+
     @Override
     public MemberRequest login(MemberRequest memberRequest) {
-            Optional<Member> maybeMember = memberRepository.findByUserId(memberRequest.getUserId());
+            Optional<MemberInfo> maybeMember = memberRepository.findByUserId(memberRequest.getUserId());
 
             if(maybeMember.equals(Optional.empty())){
                 log.info("There are no person who has this id!");
                 return null;
             }
 
-            Member loginMember =maybeMember.get();
+            MemberInfo loginMember =maybeMember.get();
 
             if(!passwordEncoder.matches(memberRequest.getPassword(), loginMember.getPassword())) {
                 log.info("Entered wrong password!");
                 return null;
             }
 
+            Optional<MemberAuth> maybeMemberAuth =
+                memberAuthRepository.findByMemberNo(loginMember.getMemberNo());
+
+            if (maybeMemberAuth.equals(Optional.empty())) {
+                log.info("no auth");
+                return null;
+            }
+
+            MemberAuth memberAuth = maybeMemberAuth.get();
             MemberRequest response = new MemberRequest(loginMember.getUserId(), null,
-                    loginMember.getNickname(), loginMember.getEmail(), memberRequest.getAuth());
+                    loginMember.getNickname(), loginMember.getEmail(), memberAuth.getAuth());
 
             return response;
     }
 
     @Override
-    public void modify(Member member) {
+    public void modify(MemberInfo member) {
            String encodedPassword = passwordEncoder.encode(member.getPassword());
            member.setPassword(encodedPassword);
 
@@ -84,7 +96,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public void remove(Member member) {
+    public void remove(MemberInfo member) {
             log.info("memberNo" + member.getMemberNo() );
             memberRepository.deleteById(member.getMemberNo());
     }

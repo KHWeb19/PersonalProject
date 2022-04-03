@@ -1,6 +1,6 @@
-package com.example.demo.service.freeBoard;
+package com.example.demo.service.board.freeBoard;
 
-import com.example.demo.entitiy.freeBoard.FreeBoard;
+import com.example.demo.entitiy.board.freeBoard.FreeBoard;
 
 import java.util.List;
 

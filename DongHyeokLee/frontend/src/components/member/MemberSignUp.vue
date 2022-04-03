@@ -104,7 +104,7 @@ export default {
     },
     methods: {
         signUp () {
-        const { userId, password, email, nickname} = this
+        const { userId, password, email, nickname } = this
         const auth = this.radioGroup
         const validate = this.$refs.form.validate();
             if (validate){

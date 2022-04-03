@@ -3,7 +3,6 @@ export default {
     freeBoard: null,
     memberLists: [],
     userInfo: null,
-    isLogin: false
     
   
 }

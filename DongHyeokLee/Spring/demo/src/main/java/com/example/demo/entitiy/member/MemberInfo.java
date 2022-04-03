@@ -13,14 +13,15 @@ import java.util.Date;
 import java.util.List;
 
 
+
 @Data
 @Entity
 @NoArgsConstructor
-@Table(name = "memberBoth")
-public class Member {
+public class MemberInfo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "member_no")
     private Long memberNo;
 
     @Column(length = 15, nullable = false)
@@ -42,19 +43,19 @@ public class Member {
     @UpdateTimestamp
     private Date updDate;
 
-    //mappedBy ="member" 헀더니 생성이 안되서 tabled이랑 이름변경함
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "member_no")
+    private List<MemberAuth> authList;
 
-    @OneToMany(mappedBy = "memberBoth", cascade = CascadeType.ALL)
-    private List<MemberAuth> authList = new ArrayList<>();
 
-    public Member(String userId, String password, String nickname, String email) {
+    public MemberInfo(String userId, String password, String nickname, String email) {
         this.userId = userId;
         this.password = password;
         this.nickname = nickname;
         this.email = email;
     }
 
-    public Member(String userId, String password, MemberAuth auth) {
+    public MemberInfo(String userId, String password, MemberAuth auth) {
         this.userId = userId;
         this.password = password;
 
@@ -76,4 +77,6 @@ public class Member {
     public void clearAuthList() {
         authList.clear();
     }
+
+
 }

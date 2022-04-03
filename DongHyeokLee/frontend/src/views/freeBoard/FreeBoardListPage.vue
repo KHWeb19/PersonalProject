@@ -10,29 +10,34 @@
             <span>등록</span>
         </v-btn>
         </router-link>
-        
-        
     </div>
 </template>
 
 <script>
 
+
 import { mapActions, mapState } from 'vuex'
 import FreeBoardList from '@/components/freeBoard/FreeBoardList.vue'
+
+
 
 export default {
     name: 'FreeBoardListPage',
     components: {
-        FreeBoardList
+        FreeBoardList,
+        
     },
     computed: {
         ...mapState(['freeBoards'])
+        
     },
     mounted () {
         this.fetchFreeBoardList()
+        
     },
     methods: {
         ...mapActions(['fetchFreeBoardList'])
+       
     }
 
 }
