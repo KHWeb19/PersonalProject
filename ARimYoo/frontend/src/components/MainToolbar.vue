@@ -10,7 +10,6 @@
                         v-for="item in items"
                         :key="item.title" 
                         :to ="item.route"
-                        @click="checkLogin"
                     >
                         {{ item.title }}
                     </v-tab>
@@ -74,11 +73,6 @@ export default {
         )
         this.more.push(...removed)
         },
-        checkLogin () {
-            if (this.$store.state.token == null){
-                alert ('로그인이 필요한 서비스입니다.')
-            }
-        }
     
         
     }

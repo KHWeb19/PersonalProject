@@ -8,13 +8,15 @@ import JoinPage from '../views/JoinPage.vue'
 import JoinPage2 from '../views/JoinPage2.vue'
 import MemberModifyPage from '../views/MemberModifyPage.vue'
 import CommunityPage from '../views/CommunityPage.vue'
-
+import MyPage from '../views/MyPage.vue'
 
 Vue.use(VueRouter)
 
 const requireLogin = () => (to, from, next) => {
     if (store.state.token !== null) {
         return next()
+    } else {
+        alert('로그인이 필요한 서비스입니다.')
     }
 } 
 
@@ -44,6 +46,12 @@ const routes = [
         path: '/memberModify',
         name: 'MemberModifyPage',
         component: MemberModifyPage
+    },
+    {
+        path: '/myPage',
+        name: 'MyPage',
+        component: MyPage,
+        beforeEnter: requireLogin()
     },
     {
         path: '/community',
