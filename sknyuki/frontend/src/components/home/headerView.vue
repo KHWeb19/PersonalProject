@@ -13,7 +13,7 @@
     </div>
     <v-row align="center" justify="center">
   <router-link :to="{name:'homeView'}"><v-img
-  class="log"
+    class="log"
     src="@/assets/mainlog/LnT log.png"
     max-height="120"
     max-width="120"
@@ -53,7 +53,7 @@ export default {
       tab: null,
       tabs: [ 
           { name: "Home", route: `/` }, 
-          { name: "명품 판별", route: `/awesomeSwiperTest` }, 
+          { name: "명품 판별", route: `/Test` }, 
           { name: "질문 게시판", route: `/` }, 
           { name: "판매 중", route: `/` }, 
           { name: "판매 완료", route: `/` }, 
@@ -63,8 +63,6 @@ export default {
       }
   }
 }
-
 </script>
 <style>
-
 </style>

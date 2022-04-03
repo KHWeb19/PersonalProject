@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '@/views/MainPage/HomeView.vue'
-import AwesomeSwiperTestPage from '@/views/testView.vue'
+import TestPage from '@/views/TestPage.vue'
 
 Vue.use(VueRouter)
 
@@ -12,11 +12,9 @@ const routes = [
     component: HomeView
   },
   {
-    path: '/awesomeSwiperTest',
-    name: 'AwesomeSwiperTestPage',
-    components: {
-      default: AwesomeSwiperTestPage
-    },
+    path: '/Test',
+    name: 'TestPage',
+    component: TestPage
   }
   
 ]
