@@ -77,6 +77,9 @@
 
     export default {
         name: 'MainPageForm',
+        props:{
+            checklogin : String,
+        },
         components: {
         },
         data () {
