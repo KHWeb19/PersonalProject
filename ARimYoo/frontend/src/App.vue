@@ -2,14 +2,14 @@
   <v-app>
     <div v-if="$route.name !=='EnterVellup' && $route.name !== 'JoinPage' && $route.name !== 'JoinPage2'">
         <v-container>
-            <v-layout row wrap>
+            <v-row colum wrap>
                 <div v-if="$store.state.token">
-                    <div>
-                    <logout-button class="logOutButton"/>
-                    </div>
-                    <div class="userMessage">
-                     {{ user.message }} 님
-                    </div>
+                    <v-col  class="userMessage">
+                         <v-text>{{ user.message }} 님</v-text>
+                    </v-col>
+                    <v-col class="logOutButton">
+                    <logout-button/>
+                    </v-col>
                 </div>
                 <div v-else class="btnSet"> 
                     <div class="float">
@@ -19,10 +19,10 @@
                         <join-button/>
                     </div>
                 </div>
-            </v-layout>
+            </v-row>
         </v-container>
       <div class="header">
-          <router-link to="main"><img src ="@/assets/main/banner.png" width="250"></router-link>
+          <button><img src ="@/assets/main/banner.png" width="250" @click="goToMain"></button>
       </div>
       <div class="menuBar">  
           <main-toolbar/>
@@ -52,14 +52,13 @@ export default {
      user: {
          message: decodeURIComponent(this.$store.state.userInfo.id)
      },
-     login : true,
-     notlogin: true
     }
   },
-   computed: {
-   },
-   
   methods : {
+      goToMain () {
+          this.$router.push("/main")
+          history.go(0)
+      }
 
   }
 }
@@ -83,6 +82,7 @@ export default {
 .logOutButton{
   position: absolute;
   left: 80%;
+  float:left;
   padding-top:1%;
 }
 .float {
@@ -91,8 +91,9 @@ export default {
 }
 .userMessage {
   position: absolute;
-  left: 73%;
+  left: 74%;
   padding-top:1.1%;
+  float: left;
 }
 .profileImg{
     position: absolute;

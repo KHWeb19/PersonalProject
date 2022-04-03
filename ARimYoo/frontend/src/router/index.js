@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import store from '../store/index'
 
 import EnterVellup from '../views/EnterVellup.vue'
 import MainVellupPage from '../views/MainVellupPage.vue'
@@ -10,6 +11,12 @@ import CommunityPage from '../views/CommunityPage.vue'
 
 
 Vue.use(VueRouter)
+
+const requireLogin = () => (to, from, next) => {
+    if (store.state.token !== null) {
+        return next()
+    }
+} 
 
 const routes = [
   {
@@ -41,7 +48,8 @@ const routes = [
     {
         path: '/community',
         name: 'CommunityPage',
-        component: CommunityPage
+        component: CommunityPage,
+        beforeEnter: requireLogin()
     }
 
   

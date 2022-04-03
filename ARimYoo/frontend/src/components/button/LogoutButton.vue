@@ -18,7 +18,6 @@ export default {
     methods: {
         logout() {
             localStorage.removeItem("token") 
-            //this.$cookies.remove("user")
             alert ('로그아웃되셨습니다.')
             history.go(0)
         }

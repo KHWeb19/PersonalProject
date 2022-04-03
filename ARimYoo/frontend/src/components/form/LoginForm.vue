@@ -52,7 +52,6 @@
 </template>
 
 <script>
-import router from '@/router'
 
 export default {
   name: "LoginForm",
@@ -91,7 +90,6 @@ export default {
             const { id, pw } = this
             this.$emit('submit', { id, pw })
             this.$emit('close')
-            router.push("/main")
           }
 
         },

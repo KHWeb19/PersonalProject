@@ -3,13 +3,14 @@
         <v-toolbar color="black" dark class="mx-auto" height="46">
             <v-layout row wrap>
                 <v-tabs v-model="tabs">
-                        <!-- <v-tab v-show="neverNoShow">
-                        <router-link to="/main"></router-link>
-                    </v-tab> --> 
+                    <v-tab v-show="neverNoShow">
+                        <router-link to="/main">Home</router-link>
+                    </v-tab> 
                     <v-tab 
                         v-for="item in items"
                         :key="item.title" 
                         :to ="item.route"
+                        @click="checkLogin"
                     >
                         {{ item.title }}
                     </v-tab>
@@ -63,6 +64,7 @@ export default {
         more: [
             {title: 'Project', route:'/project'}
       ],
+        neverNoShow: false
     }),
     methods: {
         addItem (item) {
@@ -71,6 +73,11 @@ export default {
           ...this.more.splice(this.more.indexOf(item), 1),
         )
         this.more.push(...removed)
+        },
+        checkLogin () {
+            if (this.$store.state.token == null){
+                alert ('로그인이 필요한 서비스입니다.')
+            }
         }
     
         
