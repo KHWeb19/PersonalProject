@@ -49,7 +49,7 @@ public class MemberServiceImpl implements MemberService {
     public MemberRequest login(MemberRequest memberRequest) {
         Optional<Member> maybeMember = memberRepository.findByUserId(memberRequest.getId());
 
-        if(maybeMember == null) {
+        if(maybeMember.equals(Optional.empty())) {
             log.info("no Id");
             return null;
         }

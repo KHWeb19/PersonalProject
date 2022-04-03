@@ -1,6 +1,6 @@
 <template>
     <div class="Main">
-        <main-page-form></main-page-form>
+        <main-page-form v-bind:checklogin="checklogin"></main-page-form>
 
         <div>
             <div class="login" align="center">
@@ -27,11 +27,10 @@ Vue.use(cookies)
         components: {
             LoginPageForm,
             MainPageForm,
-                FooterForm
+            FooterForm
         },
         data () {
             return {
-                
                 isLogin: false
             }
         },
@@ -57,15 +56,13 @@ Vue.use(cookies)
                                 this.$store.state.authInfo = res.data.auth
                                 this.$store.state.idInfo = res.data.id
                                 this.isLogin = true
-                                this.$router.push({
-                                    name: 'MainHomepage'
-                                })
+                                this.$router.push({ name: 'MainHomepage'})
                             }
                         })
-                        .catch (() => {
-                            alert('아이디 및 비밀번호를 잘못 입력하였습니다.')
+                        .catch(res => {
+                            alert(res.response.data.message)
                         })
-                }else if(this.isLogin){
+                } else {
                      alert('이미 로그인 되어 있습니다!')
                     this.$router.push({
                         name: 'MainHomepage'
