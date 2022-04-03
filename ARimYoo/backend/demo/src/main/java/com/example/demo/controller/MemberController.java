@@ -37,13 +37,8 @@ public class MemberController {
         } else {
             log.info ("로그인 실패!");
         }
-
-
         return memberResponse;
-
-
     }
-
 
 
 

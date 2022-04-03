@@ -18,8 +18,7 @@
 export default {
     name: 'MainVellupPage',
     components: {
-    
-     
+
     },
 
 

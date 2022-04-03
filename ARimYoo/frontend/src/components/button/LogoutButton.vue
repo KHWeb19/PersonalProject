@@ -17,9 +17,10 @@ export default {
     name:  'LogoutButton',
     methods: {
         logout() {
-            this.$cookies.remove("user")
-            this.$store.state.userInfo = null
+            localStorage.removeItem("token") 
+            //this.$cookies.remove("user")
             alert ('로그아웃되셨습니다.')
+            history.go(0)
         }
     }
 }

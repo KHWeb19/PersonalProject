@@ -3,16 +3,13 @@
     <div v-if="$route.name !=='EnterVellup' && $route.name !== 'JoinPage' && $route.name !== 'JoinPage2'">
         <v-container>
             <v-layout row wrap>
-                <div v-if="isCookie">
+                <div v-if="$store.state.token">
                     <div>
                     <logout-button class="logOutButton"/>
                     </div>
                     <div class="userMessage">
-                    <p> {{ user.message }} 님 </p>
+                     {{ user.message }} 님
                     </div>
-                </div>
-                <div v-if="isCookie">
-                    
                 </div>
                 <div v-else class="btnSet"> 
                     <div class="float">
@@ -53,18 +50,19 @@ export default {
   data () {
     return {
      user: {
-         message: decodeURIComponent(this.$store.state.userInfo.id )
-     }
+         message: decodeURIComponent(this.$store.state.userInfo.id)
+     },
+     login : true,
+     notlogin: true
     }
   },
-  computed: {
-    isCookie () {
-     return  this.$store.state.userInfo 
-    }
-  },
+   computed: {
+   },
+   
   methods : {
+
   }
-};
+}
 </script>
 
 <style scoped>
@@ -95,9 +93,6 @@ export default {
   position: absolute;
   left: 73%;
   padding-top:1.1%;
-}
-p {
-  font-family: 'Nanum Gothic', sans-serif;
 }
 .profileImg{
     position: absolute;

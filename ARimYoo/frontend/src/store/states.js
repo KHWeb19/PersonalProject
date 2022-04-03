@@ -1,5 +1,9 @@
 export default {
-    boards: [],
-    board: null,
-    userInfo: null
+
+    members: [],
+    member: null,
+
+    token: localStorage.getItem('token'),
+    userInfo: JSON.parse(localStorage.getItem('userInfo'))
+
 }

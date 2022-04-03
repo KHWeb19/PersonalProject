@@ -16,6 +16,7 @@ import LoginForm from '../form/LoginForm.vue'
 import Vue from 'vue'
 import axios from 'axios'
 import cookies from 'vue-cookies'
+import { mapState } from 'vuex'
 
 Vue.use(cookies)
 
@@ -27,50 +28,40 @@ export default {
       return {
         loginForm: { 
           dialog : false,
-        },
-        isLogin: false
+        }
       }
     },
-    mounted() {
-      this.$store.state.userInfo = this.$cookies.get("user")
-
-      if (this.$store.state.userInfo != null) {
-        this.isLogin = true
-      } else {
-        this.isLogin = false
-      }
+    computed: {
+        ...mapState(['isLogin'])
     },
     methods: {
       open(){
         this.loginForm.dialog = true
-      
         
       },
       close () {
         this.loginForm.dialog = false
       },
       onSubmit (payload) {
-        if(!this.isLogin){
+          if( localStorage.getItem("token") == null){
           const {id,pw} = payload
           axios.post ('http://localhost:7777/Member/login', {id, pw})
             .then(res => {
               if (res.data) {
-                alert ('Welcome!')
-                this.$store.state.userInfo = res.data
-                this.$cookies.set("user", res.data, 30)
-                this.isLogin = true
+                 console.log(res.data)
+                 localStorage.setItem("userInfo", JSON.stringify(res.data))
+                 localStorage.setItem("token", res.data.token)
+                 alert ('Welcome!')
+                 history.go(0)
               }
             })
             .catch(res => {
               alert(res.response.data.message)
             })
         } else {
-          alert ('이미 로그인이 되어 있습니다!')
+            alert('이미 로그인 되었습니다 !')
         }
-
       }
-    },
-
+    }
 }
-
 </script>

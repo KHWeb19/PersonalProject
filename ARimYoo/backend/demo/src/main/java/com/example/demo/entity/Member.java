@@ -11,11 +11,12 @@ import java.util.Date;
 @Data
 @Entity
 @NoArgsConstructor
+@Table(name="member")
 public class Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer memberNo;
+    private Long memberNo;
 
     @Column(length = 12, nullable = false)
     private String id;
@@ -41,8 +42,12 @@ public class Member {
     @UpdateTimestamp
     private Date lastModifiedDate;
 
-    public Member (String userId, String password) {
+    public Member (String userId, String password, String name, String birth, String intro, String profilePic) {
         this.id = userId;
         this.pw = password;
+        this.name = name;
+        this.birth = birth;
+        this.intro = intro;
+        this.profilePic = profilePic;
     }
 }
