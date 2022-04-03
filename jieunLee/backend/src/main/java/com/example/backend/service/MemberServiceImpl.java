@@ -33,7 +33,7 @@ public class MemberServiceImpl implements MemberService{
         String encodedPassword = passwordEncoder.encode(memberRequest.getPassword());
         memberRequest.setPassword(encodedPassword);
 
-        Member memberEntity = new Member(memberRequest.getMemberName(), memberRequest.getMemberId(), memberRequest.getPassword());
+        Member memberEntity = new Member(memberRequest.getMemberNo(), memberRequest.getMemberName(), memberRequest.getMemberId(), memberRequest.getPassword());
 
         memberRepository.save(memberEntity);
     }
@@ -55,6 +55,7 @@ public class MemberServiceImpl implements MemberService{
         }
 
         MemberRequest response = new MemberRequest(
+                memberRequest.getMemberNo(),
                 memberRequest.getMemberName(),
                 memberRequest.getMemberId(),
                 null);

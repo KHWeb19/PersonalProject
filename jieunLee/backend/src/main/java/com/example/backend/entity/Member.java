@@ -33,7 +33,8 @@ public class Member {
     @UpdateTimestamp
     private Date updDate;
 
-    public Member(String memberName, String memberId, String password) {
+    public Member(Long memberNo, String memberName, String memberId, String password) {
+        this.memberNo = memberNo;
         this.memberName = memberName;
         this.memberId = memberId;
         this.password = password;
