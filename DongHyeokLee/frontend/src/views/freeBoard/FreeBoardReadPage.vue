@@ -76,7 +76,7 @@ export default {
         onSubmit (payload) {
             const { writer, content } = payload
             const boardNo = this.freeBoard
-            axios.post('http://localhost:7777/freeBoardComments/register', { writer, content, boardNo })
+            axios.post(`http://localhost:7777/freeBoardComments/register/${boardNo}`, { writer, content })
                     .then(() => {
                         alert('게시물 등록 성공!')
                         this.$router.go()

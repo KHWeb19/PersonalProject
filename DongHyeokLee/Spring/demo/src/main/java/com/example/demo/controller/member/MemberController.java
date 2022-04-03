@@ -1,6 +1,7 @@
 package com.example.demo.controller.member;
 
 import com.example.demo.controller.member.request.MemberRequest;
+import com.example.demo.duplication.DuplicationCheck;
 import com.example.demo.entitiy.member.MemberInfo;
 import com.example.demo.service.member.MemberService;
 import lombok.extern.slf4j.Slf4j;
@@ -23,10 +24,12 @@ public class MemberController {
 
 
     @PostMapping("/register")
-    public void memberRegister(@Validated @RequestBody MemberRequest memberRequest){
+    public DuplicationCheck memberRegister(@Validated @RequestBody MemberRequest memberRequest){
         log.info("memberRegister request" + memberRequest);
 
-        memberService.register(memberRequest);
+
+        return memberService.register(memberRequest);
+
     }
 
     @GetMapping("/list")
@@ -52,12 +55,12 @@ public class MemberController {
     }
 
     @PutMapping("/modify")
-    public MemberInfo memberInformationModify (@RequestBody MemberInfo member) {
-        log.info("memberModify(): " + member);
+    public MemberRequest memberInformationModify (@RequestBody MemberRequest memberRequest) {
+        log.info("memberModify(): " + memberRequest.getPassword());
 
-        memberService.modify(member);
+        memberService.modify(memberRequest);
 
-        return member;
+        return memberRequest;
     }
 
     @DeleteMapping("/remove")

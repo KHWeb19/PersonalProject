@@ -1,6 +1,7 @@
 package com.example.demo.service.member;
 
 import com.example.demo.controller.member.request.MemberRequest;
+import com.example.demo.duplication.DuplicationCheck;
 import com.example.demo.entitiy.member.MemberInfo;
 import com.example.demo.entitiy.member.MemberAuth;
 import com.example.demo.repository.member.MemberAuthRepository;
@@ -32,7 +33,26 @@ public class MemberServiceImpl implements MemberService {
 
 
     @Override
-    public void register(MemberRequest memberRequest) {
+    public DuplicationCheck register(MemberRequest memberRequest) {
+
+            Optional<MemberInfo> checkUserId = memberRepository.checkUserId(memberRequest.getUserId());
+            if(!checkUserId.equals(Optional.empty())){
+                DuplicationCheck message = new DuplicationCheck("아이디 중복입니다");
+                return message;
+            }
+
+            Optional<MemberInfo> checkNickname = memberRepository.checkNickname(memberRequest.getNickname());
+            if(!checkNickname.equals(Optional.empty())){
+                DuplicationCheck message = new DuplicationCheck("닉네임 중복입니다");
+                return message;
+            }
+
+            Optional<MemberInfo> checkEmail = memberRepository.checkEmail(memberRequest.getEmail());
+            if(!checkEmail.equals(Optional.empty())){
+                DuplicationCheck message = new DuplicationCheck("이메일 중복입니다");
+                return message;
+            }
+
             String encodedPassword = passwordEncoder.encode(memberRequest.getPassword());
             memberRequest.setPassword(encodedPassword);
 
@@ -43,6 +63,10 @@ public class MemberServiceImpl implements MemberService {
             memberEntity.addAuth(authEntity);
 
             memberRepository.save(memberEntity);
+
+            DuplicationCheck message = new DuplicationCheck("가입 되었습니다");
+
+            return message;
         }
 
 
@@ -88,16 +112,22 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public void modify(MemberInfo member) {
-           String encodedPassword = passwordEncoder.encode(member.getPassword());
-           member.setPassword(encodedPassword);
+    public void modify(MemberRequest memberRequest) {
+            Optional<MemberInfo> maybeMember =memberRepository.findMemberNo(memberRequest.getUserId());
+            MemberInfo memberInfo =  maybeMember.get();
 
-            memberRepository.save(member);
+            String encodedPassword = passwordEncoder.encode(memberRequest.getPassword());
+            memberInfo.setPassword(encodedPassword);
+
+
+
+            memberRepository.save(memberInfo);
     }
 
     @Override
     public void remove(MemberInfo member) {
-            log.info("memberNo" + member.getMemberNo() );
-            memberRepository.deleteById(member.getMemberNo());
+            Optional<MemberInfo> maybeMember = memberRepository.findMemberNo(member.getUserId());
+            MemberInfo removeMember = maybeMember.get();
+            memberRepository.deleteById(removeMember.getMemberNo());
     }
 }
