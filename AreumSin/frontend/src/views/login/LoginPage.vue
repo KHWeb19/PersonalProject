@@ -9,7 +9,8 @@ import LoginPageForm from "@/components/login/LoginPageForm";
 import axios from "axios";
 import cookies from 'vue-cookies'
 import Vue from "vue";
-// import {FETCH_COOKIE_MEMBER} from "@/store/mutation-types";
+//import {FETCH_COOKIE_MEMBER} from "@/store/mutation-types";
+import {mapState} from "vuex";
 
 Vue.use(cookies)
 
@@ -19,21 +20,22 @@ export default {
   data(){
     return{
       isLogin: false,
-      count: 1
+      userId: this.$cookies.get("user"),
     }
   },
   mounted() {
+
     this.$store.state.userInfo = this.$cookies.get("user")
 
-    if (this.$store.state.userInfo != null) {
+/*    if (this.$store.state.userInfo != null) {
       this.isLogin = true
     } else {
       this.isLogin = false
-    }
+    }*/
   },
   methods: {
     async onSubmit(payload) {
-      if (!this.checkUserInfo(payload, this.$store.state.userInfo) && !this.isLogin) {
+      if (!this.checkUserInfo(payload, this.$store.state.userInfo)) {
         //if(!this.isLogin) {
         const {id, pw} = payload;
         await axios.post('http://localhost:7777/join/login', {id, pw})
@@ -42,8 +44,9 @@ export default {
               if (!res.data.checkId) {
                 alert('아이디나 비밀번호가 틀렸습니다.')
               } else {
-                //this.$store.state.userInfo = res.data;
-                //this.$store.commit([FETCH_COOKIE_MEMBER], payload.id);
+                this.$store.state.userInfo += res.data;
+                // this.$store.commit([FETCH_COOKIE_MEMBER], res.data.id);
+                this.$cookies.keys();
                 this.$cookies.set("user", res.data.id, 120)
                 //this.updateCookie(res.data.id);
                 this.isLogin = true
@@ -68,13 +71,16 @@ export default {
       }*/
 
       if(userInfo !== null){
-        if(userInfo === payloadId){
+        if(userInfo === payloadId.id){
           return true;
         }
         return false;
       }
       return false;
     }
+  },
+  computed: {
+    ...mapState(['userInfo'])
   }
 }
 </script>

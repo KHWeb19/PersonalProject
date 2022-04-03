@@ -4,7 +4,6 @@ import {
 
 export default {
     [FETCH_COOKIE_MEMBER] (state, payload){
-        state.userInfo[this.count] = payload;
-        state.count++;
+        state.userInfo = payload;
     }
 }
