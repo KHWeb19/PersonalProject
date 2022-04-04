@@ -2,7 +2,7 @@
   <v-container>
     <v-row>
       <v-col align="start" align-self="center">
-        <v-btn @click="prev(month, year)">
+        <v-btn @click="prev">
           <v-icon> mdi-chevron-left</v-icon>
         </v-btn>
       </v-col>
@@ -11,21 +11,19 @@
         <h2>{{ month }}월</h2>
       </v-col>
       <v-col align="end" align-self="center">
-        <v-btn @click="next(month, year)">
+        <v-btn @click="next">
           <v-icon> mdi-chevron-right</v-icon>
         </v-btn>
       </v-col>
     </v-row>
 
     <v-row class="calendar-title">
-     <v-col align="center" style="border: solid 1px black;" v-for="day in days" :key="day">{{day}}</v-col>
+     <v-col align="center" v-for="day in days" :key="day">{{day}}</v-col>
     </v-row>
 
-    <v-row v-for="(date, idx) in dates" :key="idx" class="calendar-days">
-      <v-col class="calendar-days" style="border: solid 1px black;" v-for="(day, secondIdx) in lastMonthDay" :key="secondIdx">{{day}}</v-col>
-      <v-col class="calendar-days" style="border: solid 1px black;" v-for="(day, secondIdx) in date" :key="secondIdx">{{day}}</v-col>
-      <v-col class="calendar-days" style="border: solid 1px black;" v-for="(day, secondIdx) in nextMonthDay" :key="secondIdx">{{day}}</v-col>
-    </v-row>
+    <v-row v-for="(date, idx) in dates" :key="idx">
+      <v-col class="calendar-days" style="height: 100px; width: 100px" v-for="(day, secondIdx) in date" :key="secondIdx" v-on:mouseup.left="doMouseOver">{{day}}</v-col>
+      </v-row>
   </v-container>
 </template>
 
@@ -57,29 +55,32 @@ export default {
 
     this.year = date.getFullYear(); //연도(네 자릿수)를 반환
     this.month = date.getMonth() +1; //월을 반환 (0 이상 11 이하)
-    this.calendarData(this.year, this.month);
+    this.calendarData();
   },
   methods: {
-    prev(month, year) {
-      if(month !== 1){
-        this.month = month -1;
-      }else{
-        this.month = 12;
-        this.year = year -1;
-      }
-      this.calendarData(this.year, this.month-1)
+    doMouseOver(){
+      alert('로그인 확인 후에 눌렀다!')
     },
-    next(month, year){
-      if(month !== 12){
-        this.month = month +1;
+    prev() {
+      if(this.month !== 1){
+        this.month = this.month -1;
+      }else if(this.month ===1){
+        this.month = 12;
+        this.year = this.year-1;
+      }
+      this.calendarData()
+      alert(+" "+this.month)
+    },
+    next(){
+      if(this.month !== 12){
+        this.month = this.month +1;
       }else{
         this.month = 1;
-        this.year = year +1;
+        this.year = this.year +1;
       }
-      this.calendarData(this.year, this.month+1)
     },
-    calendarData(year, month) {
-      const [monthFirstDay, monthLastDate, lastMonthLastDate] = this.getFirstDayLastDate(year, month);
+    calendarData() {
+      const [monthFirstDay, monthLastDate, lastMonthLastDate] = this.getFirstDayLastDate(this.year, this.month);
       this.dates = this.getMonthOfDays(monthFirstDay, monthLastDate, lastMonthLastDate);
     },
     getFirstDayLastDate(year, month) {
@@ -98,32 +99,30 @@ export default {
     },
     getMonthOfDays(monthFirstDay, monthLastDate, prevMonthLastDate) {
       let day = 1;
-      let prevDay = (prevMonthLastDate - monthFirstDay) + 1; // 28
+      let prevDay = (prevMonthLastDate - monthFirstDay) + 1;
       const dates = [];
-      let lastMonthDay = [];
       let weekOfDays = [];
-      let nextMonthDay = [];
-      while (day <= monthLastDate) { /// day <= 31
+      while (day <= monthLastDate) {
         if (day === 1) {
-          // 1일이 어느 요일인지에 따라 테이블에 그리기 위한 지난 셀의 날짜들을 구할 필요가 있다.
-          for (let j = 0; j < monthFirstDay; j += 1) { // 여기서 저번달 보여줌. 2일정도
-            lastMonthDay.push(prevDay);
+          for (let j = 0; j < monthFirstDay; j += 1) {
+            weekOfDays.push(prevDay);
             prevDay += 1;
           }
-          this.lastMonthDay = lastMonthDay;
         }
         weekOfDays.push(day);
-
+        if (weekOfDays.length === 7) {
+          // 일주일 채우면
+          dates.push(weekOfDays);
+          weekOfDays = []; // 초기화
+        }
         day += 1;
       }
-      const len = weekOfDays.length + lastMonthDay.length;
-      if (len % 7 !== 0) {
-        //let num = len % 7;
-        //let res = ((num+1)*7) - len;
-        //alert(num)
-        //nextMonthDay.push(res);
+      const len = weekOfDays.length;
+      if (len > 0 && len < 7) {
+        for (let k = 1; k <= 7 - len; k += 1) {
+          weekOfDays.push(k);
+        }
       }
-      this.nextMonthDay = nextMonthDay;
       if (weekOfDays.length > 0) dates.push(weekOfDays); // 남은 날짜 추가
       return dates;
     },
@@ -140,8 +139,14 @@ export default {
   color: #485152;
 }
 .calendar-days{
+  width: 50px;
+  height: 50px;
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  cursor: pointer;
+  border: solid 1px black;
+}
+
+.calendar-days:hover {
+  color: blue;
+
 }
 </style>
