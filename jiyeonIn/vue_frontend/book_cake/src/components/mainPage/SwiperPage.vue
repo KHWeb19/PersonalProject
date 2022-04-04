@@ -5,7 +5,11 @@
                     <v-col>
                         <br><h3>Birthday</h3>
                         <swiper class="swiper" :options="swiperOption">
-                            <swiper-slide> <img src = "@/assets/img/cake2.jpg"/></swiper-slide>
+                            <swiper-slide> <img src = "@/assets/uploadImg/birthday/1.birhday.png"></swiper-slide>
+                            <swiper-slide> <img src = "@/assets/uploadImg/birthday/2.birhday(2).png"></swiper-slide>
+                            <swiper-slide> <img src = "@/assets/uploadImg/birthday/3.birhday(3).png"></swiper-slide>
+                            <swiper-slide> <img src = "@/assets/uploadImg/birthday/4.birhday(4).png"></swiper-slide>
+                            <swiper-slide> <img src = "@/assets/uploadImg/birthday/5.birhday(5).png"></swiper-slide>
                             <div class="swiper-pagination" slot="pagination">
                             </div>
                         </swiper>
@@ -16,7 +20,11 @@
                     <v-col>
                         <br><h3>Family</h3>
                         <swiper class="swiper" :options="swiperOption">
-                            <swiper-slide> <img src = "@/assets/img/cake2.jpg"/></swiper-slide>
+                            <swiper-slide> <img src = "@/assets/uploadImg/family/1.famaily cake.png"></swiper-slide>
+                            <swiper-slide> <img src = "@/assets/uploadImg/family/2.famaily cake(2).png"></swiper-slide>
+                            <swiper-slide> <img src = "@/assets/uploadImg/family/3.famaily cake(3).png"></swiper-slide>
+                            <swiper-slide> <img src = "@/assets/uploadImg/family/4.famaily cake(4).png"></swiper-slide>
+                            <swiper-slide> <img src = "@/assets/uploadImg/family/5.famaily cake(5).png"></swiper-slide>
                             <div class="swiper-pagination" slot="pagination">
                             </div>
                         </swiper>
@@ -27,7 +35,11 @@
                     <v-col>
                         <br><h3>Friend</h3>
                         <swiper class="swiper" :options="swiperOption">
-                            <swiper-slide> <img src = "@/assets/img/cake2.jpg"/></swiper-slide>
+                            <swiper-slide> <img src = "@/assets/uploadImg/friend/1.friend cake.png"></swiper-slide>
+                            <swiper-slide> <img src = "@/assets/uploadImg/friend/2.friend cake(2).png"></swiper-slide>
+                            <swiper-slide> <img src = "@/assets/uploadImg/friend/3.friend cake(3).png"></swiper-slide>
+                            <swiper-slide> <img src = "@/assets/uploadImg/friend/4.friend cake(4).png"></swiper-slide>
+                            <swiper-slide> <img src = "@/assets/uploadImg/friend/5.friend cake(5).png"></swiper-slide>
                             <div class="swiper-pagination" slot="pagination">
                             </div>
                         </swiper>
@@ -36,9 +48,13 @@
 
                 <v-row>
                     <v-col>
-                        <br><h3>lover</h3>
+                        <br><h3>Lover</h3>
                         <swiper class="swiper" :options="swiperOption">
-                            <swiper-slide> <img src = "@/assets/img/cake2.jpg"/></swiper-slide>
+                            <swiper-slide> <img src = "@/assets/uploadImg/lover/1.lover.png"></swiper-slide>
+                            <swiper-slide> <img src = "@/assets/uploadImg/lover/2.lover(2).png"></swiper-slide>
+                            <swiper-slide> <img src = "@/assets/uploadImg/lover/3.lover(3).png"></swiper-slide>
+                            <swiper-slide> <img src = "@/assets/uploadImg/lover/4.lover(4).png"></swiper-slide>
+                            <swiper-slide> <img src = "@/assets/uploadImg/lover/5.lover(5).png"></swiper-slide>
                             <div class="swiper-pagination" slot="pagination">
                             </div>
                         </swiper>

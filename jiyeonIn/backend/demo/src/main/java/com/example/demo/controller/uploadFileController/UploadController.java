@@ -49,7 +49,7 @@ public class UploadController {
 
                 int count=1;
                     FileOutputStream writer = new FileOutputStream(
-                            "../../vue_frontend/book_cake/src/assets/uploadImg/family/" + couontFa );
+                            "../../vue_frontend/book_cake/src/assets/uploadImg/family/" + couontFa +"."+multipartFile.getOriginalFilename());
                     log.info("디렉토리에 파일 배치 성공!");
 
                     writer.write(multipartFile.getBytes());
@@ -79,7 +79,7 @@ public class UploadController {
                         multipartFile.getOriginalFilename());
 
                 FileOutputStream writer = new FileOutputStream(
-                        "../../vue_frontend/book_cake/src/assets/uploadImg/friend/" + countFr );
+                        "../../vue_frontend/book_cake/src/assets/uploadImg/friend/" + countFr +"."+multipartFile.getOriginalFilename());
                 log.info("디렉토리에 파일 배치 성공!");
 
                 writer.write(multipartFile.getBytes());
@@ -108,7 +108,7 @@ public class UploadController {
                         multipartFile.getOriginalFilename());
 
                 FileOutputStream writer = new FileOutputStream(
-                        "../../vue_frontend/book_cake/src/assets/uploadImg/lover/" + couontL);
+                        "../../vue_frontend/book_cake/src/assets/uploadImg/lover/" + couontL +"."+multipartFile.getOriginalFilename());
                 log.info("디렉토리에 파일 배치 성공!");
 
                 writer.write(multipartFile.getBytes());
@@ -137,7 +137,7 @@ public class UploadController {
                         multipartFile.getOriginalFilename());
 
                 FileOutputStream writer = new FileOutputStream(
-                        "../../vue_frontend/book_cake/src/assets/uploadImg/birthday/" + countB );
+                        "../../vue_frontend/book_cake/src/assets/uploadImg/birthday/" + countB +"."+multipartFile.getOriginalFilename());
                 log.info("디렉토리에 파일 배치 성공!");
 
                 writer.write(multipartFile.getBytes());
