@@ -1,56 +1,51 @@
 <template>
     <div class="slide-3d" >
-        <v-app id="inspire">
-            
-            
-            <br><h3>Birthday</h3>
-            <swiper class="swiper" :options="swiperOption">
-                <swiper-slide> <img src = "@/assets/uploadImg/birthday/1.famaily cake.png"/></swiper-slide>
-                <swiper-slide><img src = "@/assets/uploadImg/birthday/1.famaily cake.png"/></swiper-slide>
-                <swiper-slide><img src = "@/assets/uploadImg/birthday/1.famaily cake.png"/></swiper-slide>
-                <swiper-slide><img src = "@/assets/uploadImg/birthday/1.famaily cake.png"/></swiper-slide>
-                <div class="swiper-pagination" slot="pagination">
-                </div>
-            </swiper>
-        
+            <v-container>
+                <v-row>
+                    <v-col>
+                        <br><h3>Birthday</h3>
+                        <swiper class="swiper" :options="swiperOption">
+                            <swiper-slide> <img src = "@/assets/img/cake2.jpg"/></swiper-slide>
+                            <div class="swiper-pagination" slot="pagination">
+                            </div>
+                        </swiper>
+                    </v-col>
+                </v-row>
 
-    <br><h3>Family</h3>
-    
-            <swiper class="swiper" :options="swiperOption">
-                <swiper-slide> <img src = "@/assets/uploadImg/birthday/1.famaily cake.png"/></swiper-slide>
-                <swiper-slide><img src = "@/assets/uploadImg/birthday/1.famaily cake.png"/></swiper-slide>
-                <swiper-slide><img src = "@/assets/uploadImg/birthday/1.famaily cake.png"/></swiper-slide>
-                <swiper-slide><img src = "@/assets/uploadImg/birthday/1.famaily cake.png"/></swiper-slide>
-                <div class="swiper-pagination" slot="pagination">
-                </div>
-            </swiper>
-    
+                <v-row>
+                    <v-col>
+                        <br><h3>Family</h3>
+                        <swiper class="swiper" :options="swiperOption">
+                            <swiper-slide> <img src = "@/assets/img/cake2.jpg"/></swiper-slide>
+                            <div class="swiper-pagination" slot="pagination">
+                            </div>
+                        </swiper>
+                    </v-col>
+                </v-row>
 
-    <br><h3>Friend</h3>
-    
-            <swiper class="swiper" :options="swiperOption">
-                <swiper-slide> <img src = "@/assets/uploadImg/birthday/1.famaily cake.png"/></swiper-slide>
-                <swiper-slide><img src = "@/assets/uploadImg/birthday/1.famaily cake.png"/></swiper-slide>
-                <swiper-slide><img src = "@/assets/uploadImg/birthday/1.famaily cake.png"/></swiper-slide>
-                <swiper-slide><img src = "@/assets/uploadImg/birthday/1.famaily cake.png"/></swiper-slide>
-                <div class="swiper-pagination" slot="pagination">
-                </div>
-            </swiper>
-    
-    <br><h3>lover</h3>
-    
-            <swiper class="swiper" :options="swiperOption">
-                <swiper-slide> <img src = "@/assets/uploadImg/birthday/1.famaily cake.png"/></swiper-slide>
-                <swiper-slide><img src = "@/assets/uploadImg/birthday/1.famaily cake.png"/></swiper-slide>
-                <swiper-slide><img src = "@/assets/uploadImg/birthday/1.famaily cake.png"/></swiper-slide>
-                <swiper-slide><img src = "@/assets/uploadImg/birthday/1.famaily cake.png"/></swiper-slide>
-                <div class="swiper-pagination" slot="pagination">
-                </div>
-            </swiper>
-              
+                <v-row>
+                    <v-col>
+                        <br><h3>Friend</h3>
+                        <swiper class="swiper" :options="swiperOption">
+                            <swiper-slide> <img src = "@/assets/img/cake2.jpg"/></swiper-slide>
+                            <div class="swiper-pagination" slot="pagination">
+                            </div>
+                        </swiper>
+                    </v-col>
+                </v-row>
 
+                <v-row>
+                    <v-col>
+                        <br><h3>lover</h3>
+                        <swiper class="swiper" :options="swiperOption">
+                            <swiper-slide> <img src = "@/assets/img/cake2.jpg"/></swiper-slide>
+                            <div class="swiper-pagination" slot="pagination">
+                            </div>
+                        </swiper>
+                    </v-col>
+                </v-row>
+            </v-container>
             
-        </v-app>
     </div>
 </template>
 
@@ -95,16 +90,10 @@ export default {
 <style lang="scss" scoped>
 
 .slide-3d {
-    width: 100%;
-    height: 400px;
     padding-top: 0px;
     padding-bottom: 0px;
-}
-
-.cakeImg {
-    margin:2% 10% 3% 10%;
-    padding: 15px;
-    border: 3px solid rgb(243, 180, 180);background: rgb(255, 186, 186);
+    background: rgb(255, 186, 186);
+    color: rgb(0, 0, 0);
 }
 
 .swiper {
@@ -128,5 +117,6 @@ export default {
         }
     }
 }
+
 
 </style>

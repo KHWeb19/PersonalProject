@@ -1,12 +1,15 @@
 <template>
     <div class="Main">
-        <main-page-form></main-page-form>
+
+        <div>
+            <main-page-form></main-page-form>
+        </div>
 
         <div class="cakeImg">
             <div v-if="($store.state.authInfo !== '관리자') || (this.$store.state.userInfo == null)">
                 <h4>케이크 보기</h4><br>
-                
             </div>
+            
             
 
             <div v-if="$store.state.authInfo === '관리자'">
@@ -42,39 +45,16 @@
                 </v-container>
             </div>
 
-            <div class="slide-3d" >
-            <v-app id="inspire">
-            
-            
-            <br><h3>Birthday</h3>
-            <swiper class="swiper" :options="swiperOption">
-                <swiper-slide> <img src = "@/assets/uploadImg/birthday/1.famaily cake.png"/></swiper-slide>
-                <swiper-slide><img src = "@/assets/uploadImg/birthday/1.famaily cake.png"/></swiper-slide>
-                <swiper-slide><img src = "@/assets/uploadImg/birthday/1.famaily cake.png"/></swiper-slide>
-                <swiper-slide><img src = "@/assets/uploadImg/birthday/1.famaily cake.png"/></swiper-slide>
-                <div class="swiper-pagination" slot="pagination">
-                </div>
-            </swiper>
-
-            <br><h3>Family</h3>
-    
-            <swiper class="swiper" :options="swiperOption">
-                <swiper-slide> <img src = "@/assets/uploadImg/birthday/1.famaily cake.png"/></swiper-slide>
-                <swiper-slide><img src = "@/assets/uploadImg/birthday/1.famaily cake.png"/></swiper-slide>
-                <swiper-slide><img src = "@/assets/uploadImg/birthday/1.famaily cake.png"/></swiper-slide>
-                <swiper-slide><img src = "@/assets/uploadImg/birthday/1.famaily cake.png"/></swiper-slide>
-                <div class="swiper-pagination" slot="pagination">
-                </div>
-            </swiper>
-            
-            </v-app>
-            </div>
              
-            
+            <swiper-page></swiper-page><br><br><br>
+
         </div>
         
-        
-        <footer-form></footer-form>
+
+        <div>
+            <footer-form></footer-form>
+        </div>
+
     </div>
     
 </template>
@@ -83,10 +63,7 @@
 import MainPageForm from '@/components/layout/MainPageForm.vue'
 import FooterForm from '@/components/layout/FooterForm.vue'
 import axios from 'axios'
-
-import { swiper, swiperSlide } from 'vue-awesome-swiper'
-import 'swiper/dist/css/swiper.css'
-
+import SwiperPage from '@/components/mainPage/SwiperPage.vue'
 
     export default {
         name: 'PreviewCakeImg',
@@ -94,28 +71,6 @@ import 'swiper/dist/css/swiper.css'
             return {
                 files: '',
                 response: '',
-
-                swiperOption: {
-                loop: false, //무한반복원하면 true, 아니면 false
-                effect: 'coverflow',
-                grabCursor: true, // 사용자가 잡아서 끌수있게 만들어줌, 근데 false랑 true랑 비슷한것같음..
-                centeredSlides: false, //센터에서 슬라이드 할수있게 도와줌
-                slidesPerView: 'auto',
-                coverflowEffect: {
-                    rotation: 50, //뭔차이인지 모르겟음
-                    stretch: 50, // 센터랑 사이드의 거리..? 클수록 센터랑 딱 달라붙어있다. 별로 보기엔 좋지 않음
-                    depth: 100, // 센터랑 사이드의 굴절도?  솔직히 별로 필요는 없는것같다.
-                    // 회전을 많이 먹이고 싶은 경우 높이도록 한다.
-                    modifier: 0, //0으로 해야 상품들옆으로 넘기는 것 같은 효화를 준다.
-                    slideShadows: false //사이드에 그림자가 있냐없냐 체크 가능. true : 그림자있음 / false:없음 // 솔직히 그림자 촌스러움
-                },
-                pagination: { // 이 단어 자체가 페이지 숨기기 였던 듯
-                    el: '.swiper-pagination',
-                    dynamicBullets: true //총 몇개가 있는지 밑에가 true면 center와 사이드 몇개만 보이고, false면 전체 개수가 보인다.
-                }
-                },
-
-
                 storeData: {
                     design: '',
                     size: '',
@@ -130,8 +85,7 @@ import 'swiper/dist/css/swiper.css'
         components: {
             MainPageForm,
             FooterForm,
-             swiper,
-            swiperSlide
+            SwiperPage
         },
         methods: {
             handleFileUpload () {
@@ -216,6 +170,7 @@ import 'swiper/dist/css/swiper.css'
 
 .Main {
     background: rgb(255, 186, 186);
+    color: rgb(0, 0, 0);
 }
 .MainLogo {
     display: block; margin: 0px auto;
@@ -239,35 +194,6 @@ p {
 hr{ 
     background: #e69191;
     height: 3px;
-}
-
-.slide-3d {
-    width: 100%;
-    height: 400px;
-    padding-top: 0px;
-    padding-bottom: 0px;
-}
-
-.swiper {
-    height: 100%;
-    width: 100%;
-    
-
-    .swiper-slide {
-        display: flex;
-        align-items: center;
-        width: 300px;
-        height: 300px;
-        text-align: center;
-        background-position: center;
-        background-size: cover;
-
-        img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-    }
 }
 
 </style>
