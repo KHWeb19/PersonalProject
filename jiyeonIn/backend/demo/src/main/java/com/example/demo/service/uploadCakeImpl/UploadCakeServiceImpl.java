@@ -18,10 +18,41 @@ public class UploadCakeServiceImpl implements UploadCakeService{
 
     @Transactional
     @Override
-    public void register(UploadRequest uploadRequest) {
+    public void register(UploadRequest uploadRequest, String originalFilename) {
 
-        UploadCake uploadcake = new UploadCake(uploadRequest.getDesign(), uploadRequest.getSize(),uploadRequest.getPrice());
+        String findLink = null;
+        if(uploadRequest.getDesign().equals("birthday")) {
+            findLink = "@/assets/uploadImg/birthday/" + originalFilename;
+        } else if(uploadRequest.getDesign().equals("family")) {
+            findLink = "@/assets/uploadImg/family/" + originalFilename;
+        } else if(uploadRequest.getDesign().equals("friend")) {
+            findLink = "@/assets/uploadImg/friend/" + originalFilename;
+        } else if(uploadRequest.getDesign().equals("lover")) {
+            findLink = "@/assets/uploadImg/lover/" + originalFilename;
+        }
+
+        UploadCake uploadcake = new UploadCake(uploadRequest.getDesign(), uploadRequest.getSize(),uploadRequest.getPrice(), findLink);
 
         uploadRepository.save(uploadcake);
+    }
+
+    @Override
+    public void familyImg(String originalFilename) {
+        String familyname = "@/assets/uploadImg/birthday/" + originalFilename;
+    }
+
+    @Override
+    public void friendImg(String originalFilename) {
+
+    }
+
+    @Override
+    public void loverImg(String originalFilename) {
+
+    }
+
+    @Override
+    public void birthdayImg(String originalFilename) {
+
     }
 }

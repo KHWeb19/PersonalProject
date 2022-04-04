@@ -2,6 +2,8 @@ package com.example.demo.controller.uploadFileController.request;
 
 import lombok.Data;
 
+import java.io.File;
+
 @Data
 public class UploadRequest {
     private String design;

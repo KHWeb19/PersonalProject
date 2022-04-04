@@ -33,7 +33,7 @@
                     </v-row>
                     <v-row justify="center">
                         <v-col class="d-flex" cols="12" sm="5">
-                            <input type="file" id="files" ref="files" 
+                            <input type="file" id="storeData.files" ref="files" 
                             multiple v-on:change="handleFileUpload()"/>
                         </v-col>
                     </v-row>
@@ -92,16 +92,26 @@ import SwiperPage from '@/components/mainPage/SwiperPage.vue'
             this.files = this.$refs.files.files
             },
             onSubmit () {
-                let vm = this
-                axios.post('http://localhost:7777/upload/register',vm.storeData)
-                    .then(() => {
-                        alert('케이크 정보 등록 완료!')
-                        
+                let formData = new FormData()
+
+                for (let idx = 0; idx < this.files.length; idx++) {
+                    formData.append('fileList', this.files[idx])
+                 }
+
+                axios.post('http://localhost:7777/upload/register',{ storeData: this.storeData, formData },{
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
                     })
-                    .catch(() =>{
-                        alert('문제발생')
+                    .then (res => {
+                        alert('처리 결과: ' + res.data)
                     })
-            },
+                    .catch (res => {
+                        alert('처리 결과: ' + res.message)
+                    })
+                },
+                    
+            /*
             submitFiles () {
                 let formData = new FormData()
 
@@ -112,7 +122,7 @@ import SwiperPage from '@/components/mainPage/SwiperPage.vue'
                 let dm =this.storeData.design
 
                 if(dm === 'family'){
-                    axios.post('http://localhost:7777/upload/uploadImgFamily', formData , {
+                    axios.post('http://localhost:7777/upload/uploadImgFamily', {formData, dm }, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }
@@ -160,7 +170,7 @@ import SwiperPage from '@/components/mainPage/SwiperPage.vue'
                         alert('처리 결과: ' + res.message)
                     })
                 }
-            }
+            }*/
             
         }
     }
