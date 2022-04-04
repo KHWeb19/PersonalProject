@@ -1,5 +1,11 @@
 <template>
-    <v-card>
+    <v-dialog v-model="register_dialog" max-width="350">
+        <template v-slot:activator="{ on, attrs }">
+            <v-btn text color="black" class="btn-flat" v-on="on" v-bind="attrs">
+                Register
+            </v-btn>
+        </template>
+        <v-card>
             <v-container >
                 <form @submit.prevent="onSubmit">
                     
@@ -32,7 +38,7 @@
 
 
                             <div class="btn-size pt-5">
-                                <v-btn width="300" height="50px" type="submit" color="black" style="margin-top:10%;"
+                                <v-btn width="300" height="50px" type="submit" color="black" style="margin-top:3%;"
                                 class="white--text" rounded >
                                 SIGN UP
                                 </v-btn>
@@ -42,7 +48,7 @@
                 </form>
             </v-container>
         </v-card>
-    
+    </v-dialog>
 </template>
 
 <script>
@@ -58,7 +64,7 @@ export default {
 
         data(){
             return {
-                registerDialog: false,
+                register_dialog: false,
                 userId : '',
                 password: '',
                 passwordCheck : '',
@@ -106,9 +112,11 @@ export default {
 
 @import url('https://fonts.googleapis.com/css2?family=Poiret+One&display=swap');
 
-
+.theme--light.v-card {
+    background-color:#f3f3f3;
+}
 .card_box{
-   background: rgba(131, 130, 130, 0.116);
+    
     height: 700px;
     text-align: center;
     position: relative;

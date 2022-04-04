@@ -1,2 +1,10 @@
 export const FETCH_MEMBER_LIST = 'FETCH_MEMBER_LIST'
 export const FETCH_MEMBER = 'FETCH_MEMBER'
+
+export const SET_IS_LOGIN = 'SET_IS_LOGIN'
+export const COOKIE_SESSION = 'COOKIE_SESSION'
+export const REMOVE_SESSION = 'REMOVE_SESSION'
+export const REMOVE_IS_LOGIN = 'REMOVE_IS_LOGIN'
+
+export const SET_MEMBER_NO = 'SET_MEMBER_NO'
+export const SET_AUTH = 'SET_AUTH'

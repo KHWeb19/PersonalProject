@@ -1,6 +1,7 @@
 <template>
     <div class="main_bar">
-        <v-toolbar flat white>
+        <v-toolbar white height="120px">
+
             <v-app-bar-nav-icon @click="nav_drawer = !nav_drawer">
             </v-app-bar-nav-icon>
 
@@ -11,32 +12,16 @@
             </div>
 
             <v-spacer></v-spacer>
-            
-            <register-form></register-form>
 
-            <!--
-            <v-toolbar-items class="loginMember">
-                <v-btn icon class="float-right" router :to="'/register'">
-                    <h4> 회원가입 </h4>    
-                </v-btn>
-                
-                <v-menu disabled topoffset-y>
-                     <template v-slot:activator="{ on, attrs }">
-                       <v-btn text v-bind="attrs" v-on="on">
-                                <v-icon>mid-account_circle</v-icon>
-                        </v-btn>
-                    </template>
-                    <v-list>
-                        <v-list-item >
-                            <v-list-item-title>My</v-list-item-title>
-                        </v-list-item>
-                        <v-list-item>
-                                <v-list-item-title>logout</v-list-item-title>
-                        </v-list-item>
-                    </v-list>
-                </v-menu>
-            </v-toolbar-items>    
-        </v-toolbar>-->
+            <div v-if="!LoginCheck" >
+
+                <login-form></login-form>
+                <register-form> </register-form>
+
+            </div>
+
+        
+        </v-toolbar>
 
         <v-navigation-drawer app v-model="nav_drawer" temporary>
             <v-list nav dense>
@@ -53,6 +38,7 @@
                                 {{ link.text }}
                             </v-list-item-title>
                         </v-list-item-content>
+                        
                     </v-list-item>
                 </v-list-item-group>
             </v-list>
@@ -64,23 +50,38 @@
 
 <script>
 
-//import { mapActions } from 'vuex'
-import RegisterForm from "@/components/login/RegisterForm";
+import {mapActions, mapState} from "vuex";
+import LoginForm from '../../components/login/LoginForm.vue';
+import RegisterForm from '../../components/login/RegisterForm.vue';
+
 
 export default {
     name: 'MainPage',
     components:{
-
-        RegisterForm
-    }
+        
+        RegisterForm,
+        LoginForm,
+        //LoginForm,
+        
+    },
+    computed:
+         {
+        ...mapState(['isLogin', 'session']),
+        LoginCheck(){
+        return this.isLogin
+        }
+    },
 
     data () {
         return {
-          nav_drawer: false,
-          group: false, /*,
-          cookie: this.$cookies.isKey('user'),
-          individual: this.$cookies.get('auth'),
-          userId: this.$cookies.get('user'),*/
+            login_dialog: false, 
+            nav_drawer: false,
+            group: false,
+           /*
+            cookie: this.$cookies.isKey('user'),
+            individual: this.$cookies.get('auth'),
+            userId: this.$cookies.get('user'),*/
+
             category: [
                 {  
                     icon: 'mdi-home',
@@ -124,8 +125,9 @@ export default {
         }
     },
      methods: {
-        //...mapActions(['logout'])
+    ...mapActions(['setIsLogin', 'logout']),
     }
+    
 }
 </script>
 
@@ -149,7 +151,7 @@ export default {
 }
 h1 {
     display: block;
-    font-size: 3.4em;
+    font-size: 4em;
     letter-spacing:0.3vw;
     margin-block-start: 0.3 em;
     margin-block-end: 0.3 em;
@@ -171,6 +173,11 @@ h1 {
     padding-top: 23px
 
 }
+/* v-bar 패딩 넣기
+.v-application--is-ltr .v-banner__wrapper {
+     padding: 6px 5px 6px 5px; 
+}
+    */
 
 </style>
 

@@ -1,81 +1,26 @@
 <template>
-    <div>
-        <main-bar></main-bar>
-        <!--
-        <v-banner>
-            <v-toolbar flat white>
-                
-                <v-app-bar-nav-icon @click="nav_drawer = !nav_drawer">
-                </v-app-bar-nav-icon>
-                
+    <body>     
+        <v-navigation-drawer app v-model="nav_drawer" temporary>
+            <v-list nav dense>
+                <v-list-item-group v-model="group" active-class="grey--text  ">
+                    <v-list-item v-for="link in category" :key="link.name" router :to="link.route">
+                        <v-list-item-action>
+                            <v-icon left>
+                                {{ link.icon }}
+                            </v-icon>
+                        </v-list-item-action>
 
-                <div id="logo" >     
-                    <router-link style="text-decoration: none;" :to="{name: 'Home'}">
-                        <h1>The Village</h1>
-                    </router-link>
-                </div>
+                        <v-list-item-content>
+                            <v-list-item-title>
+                                {{ link.text }}
+                            </v-list-item-title>
+                        </v-list-item-content>
+                    </v-list-item>
+                </v-list-item-group>
+            </v-list>
+        </v-navigation-drawer>
 
-                <v-spacer></v-spacer>
-
-                <v-toolbar-items >
-                    <router-link class="login" :to="{name: 'LoginPage'}">
-                         Login 
-                    </router-link>   
-                    
         
-                    <router-link class="register" :to="{name: 'RegisterPage'}" >
-                        <v-btn text v-bind="attrs" v-on="on">Register   </v-btn>
-                    </router-link>  
-
-                    
-                    
-                </v-toolbar-items>
-                <v-dialog v-model="loginDialog" persisten max-width="400px" >
-                    <template v-slot:activator="{ on, attrs }">
-                        <v-btn text v-bind="attrs" v-on="on" icon class="float-right">
-                            <h4 router :to="{name: 'RegisterPage'}">Register </h4>
-                        </v-btn>
-                    </template>
-                </v-dialog>
-
-
-                
-                <v-dialog v-model="loginDialog" persisten max-width="400px" >
-                    <template v-slot:activator="{ attrs, on }">
-                        <v-btn  text v-bind="attrs" v-on="on" router :to="{name: 'RegisterPage'}" icon class="float-right">Register</v-btn>
-                    </template>
-                    
-                <v-list>
-                    <v-list-item router :to="{name: 'RegisterPage'}">
-                                <v-list-item-title>회원가입</v-list-item-title>
-                            </v-list-item>
-                </v-list> 
-               
-                </v-dialog>
-                
-            </v-toolbar>
-
-            <v-navigation-drawer app v-model="nav_drawer" temporary>
-                <v-list nav dense>
-                    <v-list-item-group v-model="group" active-class="grey--text  ">
-                        <v-list-item v-for="link in category" :key="link.name" router :to="link.route">
-                            <v-list-item-action>
-                                <v-icon left>
-                                    {{ link.icon }}
-                                </v-icon>
-                            </v-list-item-action>
-
-                            <v-list-item-content>
-                                <v-list-item-title>
-                                    {{ link.text }}
-                                </v-list-item-title>
-                            </v-list-item-content>
-                        </v-list-item>
-                    </v-list-item-group>
-                </v-list>
-            </v-navigation-drawer>
-        -->
-
         <v-container fluid>
             <v-window show-arrows>
                
@@ -137,7 +82,7 @@
                 </v-row>
             </v-sheet>  -->
      
-</div>
+    </body>
    
 </template>
          
@@ -145,61 +90,18 @@
 <script>
 
 //import Weather from '@/components/home/Weather'
-import MainBar from '@/view/main/MainBar.vue'
+
 
 
 export default {
 
     name: 'MainPage',
 
- // components:{Weather},//components:{MainBar},
-    components:{MainBar},
-
-    
-
+ // components:{Weather}
+   
   data() {
     return {
-        /*
-        nav_drawer: false,
-        group: false,
-        
-          category: [
-                {  
-                    icon: 'mdi-home',
-                    name: 'MainPage',
-                    route: '/MainPage'
-                  
-                },
-                {   
-                    text: 'About us',
-                    name: 'AboutUs',
-                    // route: '/main'
-                },
-                { 
-                    text: 'Community',
-                    name: 'Community',
-                    //route: '/'
-                },
-                {
-                    text: 'Reservation',
-                    name: 'Reservation',
-                },
-                {
-                    text: 'Notice',
-                    name: 'Notice',
-                },
-                {
-                    text: 'News',
-                    name: 'News',
-                },
-                {
-                    text: 'Service Center',
-                    name: 'ServiceCenter',
-                }
-                
-            ]
-           
-        } */
+      
     }
 }
 }
@@ -220,31 +122,7 @@ export default {
     padding: 0;
     box-sizing: border-box;
 }
-/*
-#logo {
-    font-family: 'Poiret One', cursive;
-    text-align:center; 
-    width: 1500vw;  
-    
-}
-.v-application a {
-      color:black;
-}
-h1 {
-    display: block;
-    font-size: 3.4em;
-    letter-spacing:0.3vw;
-    margin-block-start: 0.3 em;
-    margin-block-end: 0.3 em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;        
-}
-*/
-/* v-bar 패딩 넣기
-.v-application--is-ltr .v-banner__wrapper {
-     padding: 6px 5px 6px 5px; 
-}
-    */
+
 .contents {
     font-family: 'Poiret One', cursive;
     text-align: center;
