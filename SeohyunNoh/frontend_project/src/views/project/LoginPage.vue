@@ -46,7 +46,7 @@ export default {
         }
     },
     methods: {
-        onSubmit(payload) {
+        async onSubmit(payload) {
             if(!this.isLogin) {
                 const { id, pw, auth } = payload
                 axios.post('http://localhost:7777/memberAuth/login', { id, pw, auth })

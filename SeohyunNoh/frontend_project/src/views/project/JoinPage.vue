@@ -23,7 +23,7 @@ export default {
         JoinPageForm
     },
     methods: {
-        onSubmit (payload) {
+       async onSubmit (payload) {
             const { auth, name, gender, birthDay, id, pw, address } = payload
 
                 axios.post('http://localhost:7777/member/register', {  auth, name, gender, birthDay, id, pw, address })
