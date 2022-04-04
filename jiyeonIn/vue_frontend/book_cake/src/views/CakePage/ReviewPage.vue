@@ -1,16 +1,19 @@
 <template>
     <div class="Main">
         <main-page-form></main-page-form>
+        <footer-form></footer-form>
     </div>
 </template>
 
 <script>
-import MainPageForm from '@/components/mainPage/MainPageForm.vue'
+import MainPageForm from '@/components/layout/MainPageForm.vue'
+import FooterForm from '@/components/layout/FooterForm.vue'
 
     export default {
         name: 'ReviewPage',
         components: {
-            MainPageForm
+            MainPageForm,
+                FooterForm
         }
     }
 </script>

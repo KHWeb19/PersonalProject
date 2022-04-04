@@ -3,8 +3,12 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 
 import LoginTestPage from '@/views/jpaMember/LoginTestPage.vue'
-
 import JpaBoardListPage from '@/views/jpaBoard/JpaBoardListPage.vue'
+import JpaBoardListPage1 from '@/views/jpaBoard1/JpaBoardListPage1.vue'
+
+
+
+
 import JpaBoardRegisterPage from '@/views/jpaBoard/JpaBoardRegisterPage.vue'
 import JpaBoardReadPage from '@/views/jpaBoard/JpaBoardReadPage.vue'
 import JpaBoardModifyPage from '@/views/jpaBoard/JpaBoardModifyPage.vue'
@@ -42,6 +46,14 @@ const routes = [
     name: 'JpaBoardListPage',
     component: JpaBoardListPage
   },
+  {
+    path: '/jpaBoardList1',
+    name: 'JpaBoardListPage1',
+    component: JpaBoardListPage1
+  },
+
+
+
   {
     path: '/jpaBoardRegister',
     name: 'JpaBoardRegisterPage',

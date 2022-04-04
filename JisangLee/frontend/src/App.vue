@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar
+    <!-- <v-app-bar
       app
       color="primary"
       dark
@@ -35,7 +35,7 @@
         <span class="mr-2">Latest Release</span>
         <v-icon>mdi-open-in-new</v-icon>
       </v-btn>
-    </v-app-bar>
+    </v-app-bar> -->
 
     <v-main>
       <router-view/>
@@ -46,10 +46,21 @@
 <script>
 
 export default {
-  name: 'App',
-
-  data: () => ({
+name: 'App',
+ data: () => ({
     //
   }),
-};
+ created () {
+  //         sessionStorage
+  if (sessionStorage.getItem('store')) {
+   this.$store.replaceState(Object.assign({}, this.$store.state, JSON.parse(sessionStorage.getItem('store'))))
+  }
+  //        store   sessionStorage 
+  window.addEventListener('beforeunload', () => {
+   sessionStorage.setItem('store', JSON.stringify(this.$store.state))
+  })
+ }
+}
 </script>
+
+ 

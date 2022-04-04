@@ -9,7 +9,8 @@ public class MemberRequest {
     private String name;
     private String auth;
 
-    public MemberRequest(String id, String pw, String name) {
+
+    public MemberRequest(String id, String pw, String name, String auth) {
         this.id = id;
         this.pw = pw;
         this.name = name;

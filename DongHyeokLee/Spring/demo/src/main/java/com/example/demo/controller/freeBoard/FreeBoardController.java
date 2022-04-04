@@ -45,13 +45,13 @@ public class FreeBoardController {
     @PutMapping("/{boardNo}")
     public FreeBoard freeBoardModify (
             @PathVariable("boardNo") Integer boardNo,
-            @RequestBody FreeBoard jpaBoard) {
-        log.info("freeBoardModify(): " + jpaBoard);
+            @RequestBody FreeBoard freeBoard) {
+        log.info("freeBoardModify(): " + freeBoard);
 
-        jpaBoard.setBoardNo(Long.valueOf(boardNo));
-        service.modify(jpaBoard);
+        freeBoard.setBoardNo(Long.valueOf(boardNo));
+        service.modify(freeBoard);
 
-        return jpaBoard;
+        return freeBoard;
     }
 
     @DeleteMapping("/{boardNo}")

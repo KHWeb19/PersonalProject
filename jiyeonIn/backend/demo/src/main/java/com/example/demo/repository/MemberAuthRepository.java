@@ -10,4 +10,5 @@ public interface MemberAuthRepository extends JpaRepository<MemberAuth, Long> {
 
     @Query(value = "select * from cake_member_auth where for_member_no = :memberNo",nativeQuery = true)
     Optional<MemberAuth> findByMemberNo(Long memberNo);
+
 }

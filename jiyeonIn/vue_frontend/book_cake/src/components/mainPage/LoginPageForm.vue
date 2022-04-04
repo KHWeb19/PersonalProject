@@ -17,17 +17,16 @@
 
             <div>
                 <br>
-                <v-btn onclick="checklogin" color="black" text type="submit" width="210">
+                <v-btn color="black" text type="submit" width="210">
                     <v-icon>mdi-login</v-icon>login</v-btn>
+                
                 <br>
-                <span>
-                    <router-link :to="{ name : 'HomeView'}">
-                        아이디, 비밀번호 찾기
-                    </router-link>
-                    <router-link :to="{ name : 'SignUpPage'}">
-                        / 회원가입
-                    </router-link>
-                </span>
+                <br>
+                
+                <v-btn @click="signUp" color="black" text type="button" width="210">
+                <v-icon>mdi-account-circle</v-icon>회원가입</v-btn>
+                    
+                
             </div>
         </form>
     </div>
@@ -53,8 +52,10 @@ export default {
             const {id,pw} = this
             this.$emit('submit',{id,pw})
         },
-        checklogin() {
-            
+        signUp () {
+            this.$router.push({
+                    name: 'SignUpPage'
+                })
         }
     }
 }
@@ -104,7 +105,7 @@ h4 {
 form {
     border: 3px solid rgb(243, 180, 180);
     width: 306px;
-    height: 300px;
+    height: 350px;
 }
 
 </style>

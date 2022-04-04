@@ -25,6 +25,9 @@ public class Member {
     @Column(length = 128, nullable = false)
     private String password;
 
+    @Column(length = 32, nullable = false)
+    private String userName;
+
     @CreationTimestamp
     private Date regDate;
 
@@ -34,14 +37,16 @@ public class Member {
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<MemberAuth> authList = new ArrayList<>();
 
-    public Member (String userId, String password) {
+    public Member (String userId, String password, String userName) {
         this.userId = userId;
         this.password = password;
+        this.userName = userName;
     }
 
-    public Member (String userId, String password, MemberAuth auth) {
+    public Member (String userId, String password, String userName, MemberAuth auth) {
         this.userId = userId;
         this.password = password;
+        this.userName = userName;
 
         if(auth != null) {
             changeAuth(auth);
