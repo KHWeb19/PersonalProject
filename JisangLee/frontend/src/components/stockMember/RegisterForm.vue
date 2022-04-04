@@ -1,4 +1,4 @@
-<style>
+<style scope>
 table {
   position: absolute;
   top: 50%;
@@ -31,7 +31,7 @@ table {
   font-size: 18px;
   height: 50px;
   left: 40%;
-  margin: -120px 0 0 -120px;
+  margin: -120px 0 0 -100px;
   padding: 10px 0px;
   position: relative;
   top: 50%;
@@ -54,10 +54,35 @@ input[class=input]::placeholder {
   font-size: 0.7em;
 }
 </style>
+<style scoped>
+img { background:#ffe993; display: block;  margin: 0 auto;}
+</style>
 <template>
+<div class="Main">
+  <header>
+  <a href="http://localhost:8080/stock/"><img src='../../assets/img/logo.png'></a>
+   <br>
+   <hr>
+     <div id=article>      
+        <v-btn class="grey darken-1 white--text" width="325px">국내 주식 분석</v-btn>
+        <v-btn class="grey darken-2 white--text" width="325px">해외 주식 분석</v-btn>
+        <v-btn class="grey darken-3 white--text" width="325px">질문</v-btn>
+        <v-btn class="grey darken-4 white--text" width="325px">하소연</v-btn>
+     </div>
+     <div id=vb>
+     <v-container v-if="this.$store.state.userInfo == null">
+                <v-btn tile color="grey darken-3 white--text" onclick="location.href='http://localhost:8080/stock/register'" width="125">
+                    <v-icon left>mdi-account-plus-outline</v-icon>
+                    회원 가입 
+                </v-btn> 
+                <v-btn tile color="grey darken-2 white--text" onclick="location.href='http://localhost:8080/stock/login'" width="100"> 
+                    <v-icon left>mdi-login</v-icon>
+                    로그인 
+                </v-btn>
+    </v-container>
+    </div>
   <v-container aline>
     <form @submit.prevent="onSubmit">
-    <!-- <form @submit="formSubmit" method="post">   -->
      <div class="wrapper" align="center">
        <table> 
          <br>
@@ -89,18 +114,20 @@ input[class=input]::placeholder {
         <hr>
         <br>
         <div id="wrapper">
-        <button type="submit" style="width:230px; border: 0; background-color: #3c3d3e">
-        <v-icon color="white" left>mdi-account-plus-outline</v-icon>가입하기</button>
+        <button type="submit" style="width:230px; border: 0; background-color: #3c3d3e" onclick="location.href='http://localhost:8080/stock/'">
+        <v-icon color="white" left >mdi-account-plus-outline</v-icon>가입하기</button>
         </div> 
         <br>                                                                      
       </table>
-
-      </div>
+    </div>
     </form>
   </v-container>
+   </header>
+  </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
     name: "RegisterForm.vue",
     data() {
@@ -115,19 +142,35 @@ export default {
     },
     methods: {
       idCheck() {
-        if(!/userId/.test(this.id))
-        alert("사용 가능한 아이디입니다.")
-        else
-        alert("해당 아이디는 사용하실 수 없습니다.")
+         const { id } =this
+                axios.get(`http://localhost:7777/vueJpaMember/check/${id}`)
+                    .then(res => {
+                        this.temp = res.data;
+                        if(res.data == true){
+                            alert("사용 가능한 아이디입니다!")
+                            this.valid = res.data;
+                        }else {
+                            alert("중복된 아이디입니다!")
+                            this.valid = false;
+                        }
+                    })
       },
       nicknameCheck(){
-        if(!/userNickname/.test(this.nickname))
-        alert("사용 가능한 닉네임입니다.")
-        else
-        alert("해당 닉네임은 사용하실 수 없습니다.")
+         const { nickname } =this
+                axios.get(`http://localhost:7777/vueJpaMember/checkto/${nickname}`)
+                    .then(res => {
+                        this.temp = res.data;
+                        if(res.data == true){
+                            alert("사용 가능한 닉네임입니다!")
+                            this.valid = res.data;
+                        }else {
+                            alert("중복된 닉네임입니다!")
+                            this.valid = false;
+                        }
+                    })
       },
       pwCheck(){
-        if(!/pw/.test(this.pwc))
+        if(this.pw!=this.pwc)
         alert("입력한 2개의 비밀번호가 일치하지 않습니다.")
       },
 
@@ -153,5 +196,13 @@ export default {
 </script>
 
 <style scoped>
-
+.Main{
+  height: 100vh;
+  overflow: hidden;
+  margin:0;
+  background-color: #ffe993;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;  
+}
 </style>

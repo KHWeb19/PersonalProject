@@ -3,6 +3,9 @@
     <router-link style="text-decoration: none;" :to="{ name: 'Home' }">
         &nbsp;Home&nbsp;
     </router-link>
+    <router-link style="text-decoration: none;" :to="{ name: 'MainPage' }">
+            &nbsp;Main&nbsp;
+    </router-link>
     <router-link style="text-decoration: none;" :to="{ name: 'RegisterPage' }">
             &nbsp;Register&nbsp;
     </router-link>

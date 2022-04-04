@@ -1,5 +1,6 @@
 package com.example.demo.controller.jpa;
 
+import com.example.demo.controller.jpa.request.MemberRequest;
 import com.example.demo.entity.jpa.VueJpaMember;
 import com.example.demo.service.jpa.VueJpaMemberService;
 import lombok.extern.slf4j.Slf4j;
@@ -24,4 +25,36 @@ public class VueJPAMemberController {
 
         return member;
     }
+
+    @PostMapping("/login")
+    public MemberRequest jpaMemberLogin (@RequestBody MemberRequest memberRequest) {
+        log.info("jpaMemberLogin(): " + memberRequest);
+
+        MemberRequest memberResponse = service.login(memberRequest);
+
+        if (memberResponse != null) {
+            log.info("로그인 성공!");
+        } else {
+            log.info("로그인 실패!");
+        }
+
+        return memberResponse;
+    }
+    @GetMapping("/check/{id}")
+    public Boolean findId (@PathVariable("id") String id) {
+        log.info("findId()" + id);
+
+        Boolean maybeMember = service.checkUserIdValidation(id);
+
+        return maybeMember;
+    }
+    @GetMapping("/checkto/{nickname}")
+    public Boolean findNickname (@PathVariable("nickname") String nickname) {
+        log.info("findNickname()" + nickname);
+
+        Boolean maybeMember = service.checkUserNicknameValidation(nickname);
+
+        return maybeMember;
+    }
 }
+

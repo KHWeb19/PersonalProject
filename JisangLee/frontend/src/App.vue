@@ -46,10 +46,21 @@
 <script>
 
 export default {
-  name: 'App',
-
-  data: () => ({
+name: 'App',
+ data: () => ({
     //
   }),
-};
+ created () {
+  //         sessionStorage
+  if (sessionStorage.getItem('store')) {
+   this.$store.replaceState(Object.assign({}, this.$store.state, JSON.parse(sessionStorage.getItem('store'))))
+  }
+  //        store   sessionStorage 
+  window.addEventListener('beforeunload', () => {
+   sessionStorage.setItem('store', JSON.stringify(this.$store.state))
+  })
+ }
+}
 </script>
+
+ 

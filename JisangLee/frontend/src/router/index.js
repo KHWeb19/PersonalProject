@@ -1,13 +1,12 @@
 import Vue from 'vue'
-// import Vee-Validate from 'vee-validate'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import MainPage from '../components/main/MainPage.vue'
 
 import RegisterPage from '@/views/stockMember/RegisterPage.vue'
 import LoginPage from '@/views/stockMember/LoginPage.vue'
 import AwesomeSwiperPage from '@/views/ui/AwesomeSwiperPage.vue'
 
-// Vue.use(VeeValidate)
 Vue.use(VueRouter)
 
 const routes = [
@@ -15,6 +14,13 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/stock',
+    name: 'MainPage',
+    components: {
+      default: MainPage
+    }
   },
   {
     path: '/stock/register',

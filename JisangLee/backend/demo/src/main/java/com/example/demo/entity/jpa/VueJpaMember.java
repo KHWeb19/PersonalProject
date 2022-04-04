@@ -1,18 +1,21 @@
 package com.example.demo.entity.jpa;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
+@NoArgsConstructor
 public class VueJpaMember {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer memberNo;
+    private Integer member_No;
 
     @Column(length = 32, nullable = false)
     private String id;
@@ -34,7 +37,9 @@ public class VueJpaMember {
 
     @UpdateTimestamp
     private Date lastModifiedDate;
+
 }
+
 
 
 
