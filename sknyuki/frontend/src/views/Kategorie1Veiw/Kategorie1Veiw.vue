@@ -1,15 +1,20 @@
 <template>
     <v-container>
         <header-view></header-view>
-        <h1>TestPage</h1>
-        
+        <br>
+        <drop-down></drop-down>
+
+
     </v-container>
 </template>
 <script>
 import HeaderView from '@/components/home/headerView.vue'
+import DropDown from '@/components/KategoriePage1/DropDown.vue'
 export default {
-    name:'TestView',
-    components:{ HeaderView,
+    name:'Kategorie1View',
+    components:{ 
+    HeaderView,
+    DropDown,
         
     }
 

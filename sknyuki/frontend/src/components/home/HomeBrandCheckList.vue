@@ -4,7 +4,7 @@
      <p>proto type</p>
     <v-row align="center" justify="center">
         <!--name:homeview변경예정-->
-    <router-link style="text-decoration: none;" :to="{name:'homeView'}">
+    <router-link style="text-decoration: none;" :to="{name:'Kategorie1Veiw'}">
     <v-btn class="blue lighten-5">상품 판별 보러가기 </v-btn>
     </router-link></v-row>
 <br>
