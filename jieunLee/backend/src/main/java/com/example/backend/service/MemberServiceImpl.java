@@ -74,4 +74,10 @@ public class MemberServiceImpl implements MemberService{
 
         return maybeReadMember.get();
     }
+
+    @Override
+    public void modify(Member member) {
+
+        memberRepository.save(member);
+    }
 }

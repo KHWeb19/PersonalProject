@@ -10,4 +10,5 @@ public interface MemberService {
     public void register (MemberRequest memberRequest);
     public MemberRequest login (MemberRequest memberRequest);
     public Member read (Integer memberNo);
+    public void modify (Member member);
 }

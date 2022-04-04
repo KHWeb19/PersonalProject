@@ -58,4 +58,12 @@ public class MemberController {
         return service.read(memberNo);
     }
 
+    @PutMapping("/modify")
+    public Member memberModify (@RequestBody Member member) {
+        log.info("memberModify(): " + member);
+
+        service.modify(member);
+
+        return member;
+    }
 }

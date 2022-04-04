@@ -52,7 +52,7 @@ export default {
                             this.$router.push({
                                 name: 'HomeView'
                                 })
-                            this.$store.state.memberId = memberId
+                            this.$store.state.loginId = res.data
                         } else {
                             alert('로그인 실패!')
                         }
