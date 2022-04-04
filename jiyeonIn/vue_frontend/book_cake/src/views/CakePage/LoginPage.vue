@@ -57,10 +57,13 @@ Vue.use(cookies)
                                 this.$store.state.idInfo = res.data.id
                                 this.isLogin = true
                                 this.$router.push({ name: 'MainHomepage'})
+                            } else {
+                                alert('비밀번호, 아이디가 올바르지 않습니다.')
                             }
                         })
                         .catch(res => {
                             alert(res.response.data.message)
+
                         })
                 } else {
                      alert('이미 로그인 되어 있습니다!')
