@@ -21,54 +21,53 @@
         </v-menu>
       </v-btn>
 
-      <v-dialog max-width="500" v-model="makePlan">
+      <v-dialog max-width="800" v-model="makePlan">
         <v-card>
           <v-card-title>
-            <span class="text-h5">User Profile</span>
+            <span style="font-size: 40px; color: darkolivegreen"><br/>여행 계획을 작성해보아요! </span>
           </v-card-title>
 
           <v-card-text>
             <v-container>
-              <v-row>
-                <v-col cols="12" sm="6" md="4" align-self="center" >
-                  여행 이름
-                </v-col>
+              <form @submit="onSubmit">
+                <table>
+                  <tr>
+                    <td colspan="2" class="plan">여행 이름</td>
+                  </tr>
 
-                <v-col cols="12">
-                  <v-text-field label="make trip name!"></v-text-field>
-                </v-col>
+                  <tr>
+                    <td colspan="2">&nbsp;&nbsp;<input class="inputBox" type="text" placeholder="make trip name!" v-model="tripName" required></td>
+                  </tr>
+                  <tr></tr>
+                  <tr>
+                    <td> <v-btn @click="showDatePicker" fab><v-icon x-large>mdi-calendar-multiselect</v-icon></v-btn> &nbsp;&nbsp;&nbsp;&nbsp;</td>
+                    <td> <input type="text" readonly v-model="dateRangeText" placeholder="range date" required></td>
+                  </tr>
+                  <tr></tr>
+                  <tr></tr>
+                  <tr>
+                    <td colspan="2" class="plan">여행 장소</td>
+                  </tr>
 
-                <v-col cols="6" sm="6" md="6">
-                  출발하는 날
-                </v-col>
-                <v-col cols="6" sm="6" md="6">
-                  마지막 날
-                </v-col>
+                  <tr>
+                    <td colspan="2">&nbsp;&nbsp;<input type="text" class="inputBox" placeholder="trip place!" required></td>
+                  </tr>
 
-                <v-col cols="6">
-                  <v-text-field label="Start Day" required></v-text-field>
-                </v-col>
-                <v-col cols="6">
-                  <v-text-field label="End Day" required></v-text-field>
-                </v-col>
+                </table>
+              </form>
 
-                <v-col cols="12" sm="6" md="4" align-self="center" >
-                  여행 장소
-                </v-col>
+              <v-dialog max-width="400" v-model="pickDate" light>
+                <v-date-picker v-model="dates" range></v-date-picker>
+              </v-dialog>
 
-                <v-col cols="12">
-                  <v-text-field label="Trip Place" hint="example of helper text only on focus"></v-text-field>
-                </v-col>
-
-              </v-row>
             </v-container>
-            <small>여행 계획을 작성해봐요</small>
+
           </v-card-text>
 
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn color="green darken-1" text @click="makePlan = false">Close</v-btn>
-            <v-btn color="green darken-1" text @click="makePlan = false">Save</v-btn>
+            <v-btn type="submit" color="green darken-1" text>Save</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -86,6 +85,10 @@ export default {
         {text: '친구초대', icon: 'mdi-clock'}
       ],
       makePlan: false,
+      pickDate: false,
+      dates: ['', ''],
+      tripName: '',
+      tripPlace: ''
     }
   },
   methods: {
@@ -98,12 +101,40 @@ export default {
     },
     showDialog() {
       this.makePlan = true
-    }
+    },
+    showDatePicker(){
+      this.pickDate = true
+    },
+    onSubmit(){
+      const {tripName, dates, tripPlace} = this;
 
-  }
+      //console.log({tripName, dates, tripPlace});
+
+      this.$emit({tripName, dates, tripPlace});
+    }
+  },
+  computed: {
+    dateRangeText () {
+      return this.dates.join(' ~ ')
+    },
+  },
 }
 </script>
 
 <style scoped>
+table {
+  border-collapse:  separate;
+  border-spacing: 0 1rem;
+}
+.plan{
+  font-size: 30px;
+}
+input{
+  font-size: 20px;
+}
+/*td{
+  border: 1px solid black;
+  font-size: 20px;
+}*/
 
 </style>
