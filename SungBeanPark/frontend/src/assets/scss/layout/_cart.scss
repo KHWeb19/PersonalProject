@@ -1,0 +1,56 @@
+.cart {
+  padding-top: 8px;
+  width: 100%;
+
+  &-content {
+    &-header {
+      @include flexbox(between);
+      height: 32px;
+
+      &.left {
+        @include text-style(16, $dark);
+      }
+      &.right {
+        @include text-style(14, $dark);
+      }
+    }
+    &-footer {
+      button {
+        ::after {
+          margin: 0 4px;
+          content: "|";
+        }
+      }
+    }
+  }
+
+  &-sidebar-wrap {
+    position: relative;
+    display: block;
+  }
+
+  &-sidebar {
+    &-price {
+      @include flexbox(between);
+      margin-top: 16px;
+      margin-bottom: 16px;
+
+      &.total {
+        @include text-style(16, $black);
+        font-weight: 700;
+
+        .number {
+          @include text-style(24, $black);
+        }
+      }
+    }
+
+    &-delivery {
+      @include text-style(18, $dark);
+      text-align: center;
+    }
+  }
+  .btn-black {
+    width: 100%;
+  }
+}
