@@ -10,7 +10,7 @@
             <tr>
                 <td>작성자</td>
                 <td>
-                    <input type="text" v-model="writer"/>
+                    {{ this.writer }} 
                 </td>
             </tr>
             <tr>
@@ -37,9 +37,9 @@ export default {
     name: 'FreeBoardRegisterForm',
     data () {
         return {
-            title: '제목을 작성하세요.',
-            writer: '너님',
-            content: '본문을 작성하세요.'
+            title: '',
+            writer: this.$store.state.userInfo.nickname,
+            content: ''
         }
     },
     methods: {

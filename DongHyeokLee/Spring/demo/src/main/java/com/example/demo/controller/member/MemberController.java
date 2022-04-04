@@ -32,14 +32,6 @@ public class MemberController {
 
     }
 
-    @GetMapping("/list")
-    public List<MemberInfo> memberList () {
-        log.info("MemberList()");
-
-        return memberService.list();
-    }
-
-
     @PostMapping("/login")
     public MemberRequest memberLogin (@RequestBody MemberRequest memberRequest) {
         log.info("MemberLogin()" + memberRequest);

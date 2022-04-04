@@ -69,17 +69,6 @@ public class MemberServiceImpl implements MemberService {
             return message;
         }
 
-
-
-    @Override
-    public List<MemberInfo> list()  {
-        //현재 password가 암호화 되어있긴한데 이것도 같이 나감
-       return memberRepository.findAll();
-
-    }
-
-
-
     @Override
     public MemberRequest login(MemberRequest memberRequest) {
             Optional<MemberInfo> maybeMember = memberRepository.findByUserId(memberRequest.getUserId());
@@ -113,13 +102,11 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public void modify(MemberRequest memberRequest) {
-            Optional<MemberInfo> maybeMember =memberRepository.findMemberNo(memberRequest.getUserId());
+            Optional<MemberInfo> maybeMember =memberRepository.findByUserId(memberRequest.getUserId());
             MemberInfo memberInfo =  maybeMember.get();
 
             String encodedPassword = passwordEncoder.encode(memberRequest.getPassword());
             memberInfo.setPassword(encodedPassword);
-
-
 
             memberRepository.save(memberInfo);
     }

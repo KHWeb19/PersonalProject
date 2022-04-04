@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-toolbar v-if="this.$store.state.userInfo == null" class="black" dense dark>
+        <v-toolbar v-if="!this.$store.state.isLogin" class="black" dense dark>
             <v-spacer></v-spacer>
             <v-toolbar-title>         
                 <member-sign-up/>
@@ -8,7 +8,7 @@
             </v-toolbar-title>
         </v-toolbar>
 
-        <v-toolbar v-if="this.$store.state.userInfo != null" class="black" dense dark>
+        <v-toolbar v-if="this.$store.state.isLogin" class="black" dense dark>
             <v-spacer></v-spacer>
             <v-toolbar-title>         
                 <member-my-page/>

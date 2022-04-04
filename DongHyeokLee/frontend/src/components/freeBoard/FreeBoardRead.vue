@@ -1,30 +1,20 @@
 <template>
     <div >
-        <table border="1">
-     
+        
+        <div class="title">
+            <h2> {{ freeBoard.title }} </h2>
+            <div class="subtitle">
+                <p>{{ freeBoard.writer }}</p>
+                <span> {{ freeBoard.regDate.substring(0, 10) }}</span>
+                <span> {{new Date(freeBoard.regDate).toLocaleString("ko-KR", {timeZone: "Asia/Seoul"}).toString().substr(11, 8)}}</span>
+            </div>
+        </div>
+        
+        <table>
             <tr>
-                <td>제목</td>
                 <td>
-                    <input type="text" :value="freeBoard.title" readonly/>
-                </td>
-            </tr>
-            <tr>
-                <td>작성자</td>
-                <td>
-                    <input type="text" :value="freeBoard.writer" readonly/>
-                </td>
-            </tr>
-            <tr>
-                <td>등록일자</td>
-                <td>
-                    <input type="text" :value="freeBoard.regDate" readonly/>
-                </td>
-            </tr>
-            <tr>
-                <td>본문</td>
-                <td>
-                    <textarea cols="50" rows="20" :value="freeBoard.content" readonly>
-                    </textarea>
+                   <div> {{ freeBoard.content }}</div>
+                   
                 </td>
             </tr>
         </table>
@@ -53,9 +43,35 @@ export default {
 </script>
 
 <style scoped>
-    div {
-        margin-left: 30%;
+   
+
+    .title{
+       margin-left: 30%; 
+       margin-bottom: 20px;
+       
     }
+
+    .subtitle{
+        margin-top: 10px;
+    }
+
+    
+
+     table {
+    margin-left: 30%; 
+    border-top: 1px solid ;
+    border-collapse: collapse;
+  }
+  th {
+    border-bottom: 1px solid ;
+    border-left: 1px solid;
+    padding: 10px;
+  }
+
+  td {    
+    border-bottom: 1px solid;
+    padding: 10px;
+  }
     
   
 </style>

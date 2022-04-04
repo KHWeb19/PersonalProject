@@ -31,10 +31,18 @@ public class FreeBoardCommentsController {
         service.register(commentsRequest);
     }
 
-    @GetMapping("/list")
-    public List<FreeBoardComments> FreeBoardCommentsList () {
+    @GetMapping("/list/{boardNo}")
+    public List<FreeBoardComments> FreeBoardCommentsList (@PathVariable("boardNo") Integer boardNo) {
         log.info("FreeBoardCommentsList()");
 
-        return service.list();
+        return service.list(boardNo);
+    }
+
+    @DeleteMapping("/{commentNo}")
+    public void freeBoardCommentRemove (
+            @PathVariable("commentNo") Integer commentNo) {
+        log.info("commentRemove()");
+
+        service.remove(commentNo);
     }
 }

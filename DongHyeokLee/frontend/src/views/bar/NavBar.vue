@@ -11,7 +11,7 @@
                 <v-spacer></v-spacer>
                 <v-app-bar-nav-icon @click="nav_drawer = !nav_drawer">
                 </v-app-bar-nav-icon> 
-            </v-toolbar>
+        </v-toolbar>
 
             <v-navigation-drawer app v-model="nav_drawer" temporary>
             <v-list nav dense>

@@ -61,16 +61,10 @@ export default {
 
 
 <style scoped>
+    
   h3 {
       margin-left: 200px;
   }  
-
-  table{
-      margin-left: 180px;
-      margin-top: 10px;
-      margin-bottom: 10px;
-
-  }
 
   a{
       text-decoration: none;
@@ -84,7 +78,10 @@ export default {
   }
 
   table {
-    
+     margin-left: 180px;
+    margin-top: 10px;
+      margin-bottom: 10px;
+
     border-top: 1px solid ;
     border-collapse: collapse;
   }
@@ -96,7 +93,6 @@ export default {
 
   td {    
     border-bottom: 1px solid;
-    
     padding: 10px;
   }
 

@@ -1,7 +1,6 @@
 import {
     FETCH_FREE_BOARD_LIST,
     FETCH_FREE_BOARD,
-    FETCH_MEMBER_LIST,
     FETCH_FREE_BOARD_COMMENTS_LIST
    
 } from './mutation-types'
@@ -21,14 +20,8 @@ export default {
                     commit(FETCH_FREE_BOARD, res.data)
                 })
     },
-    fetchMemberList  ({ commit }) {
-        return axios.get('http://localhost:7777/member/list')
-                .then((res) => {
-                    commit(FETCH_MEMBER_LIST, res.data)
-                })
-    },
-    fetchFreeBoardCommentsList({ commit }) {
-        return axios.get('http://localhost:7777/freeBoardComments/list')
+    fetchFreeBoardCommentsList({ commit }, boardNo ) {
+        return axios.get(`http://localhost:7777/freeBoardComments/list/${boardNo}`)
                 .then((res) => {
                     commit(FETCH_FREE_BOARD_COMMENTS_LIST, res.data)
                 })

@@ -1,8 +1,8 @@
 export default {
     freeBoards: [],
     freeBoard: null,
-    memberLists: [],
     userInfo: null,
-    
+    freeBoardComments:[],
+    isLogin: false
   
 }

@@ -1,11 +1,14 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+
 import FreeBoardReigster from '@/views/freeBoard/FreeBoardRegisterPage.vue'
 import FreeBoardListPage from '@/views/freeBoard/FreeBoardListPage.vue'
 import FreeBoardReadPage from '@/views/freeBoard/FreeBoardReadPage.vue'
 import FreeBoardModifyPage from '@/views/freeBoard/FreeBoardModifyPage.vue'
+
 import store from '@/store'
+
 
 
 
@@ -48,12 +51,12 @@ const routes = [
     path: '/freeBoardList',
     name: 'FreeBoardListPage',
     component: FreeBoardListPage,
+    //접근제제한
     beforeEnter(to, from, next) {
       if(store.state.isLogin){
         next();
       }else{
         alert('로그인 하세요')
-        
       }
     }
   }

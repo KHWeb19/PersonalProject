@@ -8,7 +8,6 @@ import java.util.List;
 
 public interface MemberService {
     public DuplicationCheck register (MemberRequest memberRequest);
-    public List<MemberInfo> list();
     public MemberRequest login (MemberRequest memberRequest);
     public void modify (MemberRequest memberRequest);
     public void remove (MemberInfo member);

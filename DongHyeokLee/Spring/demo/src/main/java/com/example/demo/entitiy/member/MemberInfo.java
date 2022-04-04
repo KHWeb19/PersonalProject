@@ -28,7 +28,6 @@ public class MemberInfo {
     private String userId;
 
     @Column(length = 256, nullable = false)
-    @JsonIgnore
     private String password;
 
     @Column(length = 20, nullable = false)
