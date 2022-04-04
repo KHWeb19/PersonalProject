@@ -1,1 +1,0 @@
-export const FETCH_MEMBER_LIST = 'FETCH_MEMBER_LIST'

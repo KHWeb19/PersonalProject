@@ -1,7 +1,6 @@
 <template>
   <v-app>
-    <!--
-    <v-app-bar
+    <!--<v-app-bar
       app
       color="primary"
       dark
@@ -41,11 +40,6 @@
     <v-main>
       <router-view/>
     </v-main>
-    <!--
-    <div id="app">
-      <router-view/>
-    </div>
-    -->
   </v-app>
 </template>
 

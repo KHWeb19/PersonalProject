@@ -1,6 +1,7 @@
 <template>
     <div class="Main">
-        <main-page-form></main-page-form>
+        
+        <main-page-form ></main-page-form>
         
         <v-container>
             <v-row no-gutters>

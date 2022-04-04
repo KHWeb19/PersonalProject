@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
 
 import MainHomepage from '@/views/CakePage/MainHomepage.vue'
 import BookingPage from '@/views/CakePage/BookingPage.vue'
@@ -10,18 +9,12 @@ import ReviewPage from '@/views/CakePage/ReviewPage.vue'
 import MyPage from '@/views/CakePage/MyPage.vue'
 import LoginPage from '@/views/CakePage/LoginPage.vue'
 import SignUpPage from '@/views/CakePage/SignUpPage.vue'
-import FindIdPw from '@/views/CakePage/FindIdPw.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'HomeView',
-    component: HomeView
-  },
-  {
-    path: '/MainHomepage',
     name: 'MainHomepage',
     component: MainHomepage
   },
@@ -62,12 +55,6 @@ const routes = [
     path: '/signUpPage',
     name: 'SignUpPage',
     component: SignUpPage
-  }
-  ,
-  {
-    path: '/findId',
-    name: 'FindIdPw',
-    component: FindIdPw
   }
 
   ,
