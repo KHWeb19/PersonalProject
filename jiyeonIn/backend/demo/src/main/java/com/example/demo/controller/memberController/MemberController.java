@@ -32,7 +32,7 @@ public class MemberController {
     }
 
     @PostMapping("/login")
-    public MemberRequest memberLogin (@Validated @RequestBody MemberRequest memberRequest) {
+    public MemberRequest memberLogin ( @RequestBody MemberRequest memberRequest) {
         log.info("MemberLogin()" + memberRequest);
 
         MemberRequest memberResponse = service.login(memberRequest);
