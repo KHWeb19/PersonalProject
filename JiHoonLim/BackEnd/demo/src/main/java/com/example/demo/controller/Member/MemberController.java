@@ -20,7 +20,7 @@ public class MemberController {
     @PostMapping("/register")
     public void MemberRegister(@Validated @RequestBody MemberRequest memberRequest){
         log.info("MemberRegister(): " + memberRequest.getId() + "," +
-                memberRequest.getPw() + "," + memberRequest.getNickName() + "," + memberRequest.getEmail() + "," +
+                memberRequest.getPw() + "," +memberRequest.getName() + "," + memberRequest.getNickName() + "," + memberRequest.getEmail() + "," +
                 (memberRequest.getAuth().equals("개인") ? "ROLE_INDIVIDUAL" : "ROLE_MANAGER"));
 
         service.register(memberRequest);
@@ -41,12 +41,23 @@ public class MemberController {
         return memberResponse;
     }
 
-    @GetMapping("/check/{id}")
+    @GetMapping("/checkId/{id}")
     public Boolean checkDuplicateId (@PathVariable("id") String id){
         log.info("checkDuplicateId(): " + id);
 
-        Boolean checkDupId = service.checkDuplicate(id);
+        Boolean checkDupId = service.checkDuplicateId(id);
 
         return checkDupId;
     }
+
+    @GetMapping("/checkNickName/{nickName}")
+    public Boolean checkDuplicateNickName (@PathVariable("nickName") String nickName){
+        log.info("checkDuplicate(): " + nickName);
+
+        Boolean checkDupNickName = service.checkDuplicateNickName(nickName);
+
+        return checkDupNickName;
+    }
+
+
 }

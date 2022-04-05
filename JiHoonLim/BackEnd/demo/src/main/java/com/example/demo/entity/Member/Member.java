@@ -27,6 +27,9 @@ public class Member {
     private String pw;
 
     @Column(length = 64,nullable = false)
+    private String name;
+
+    @Column(length = 64,nullable = false)
     private String nickName;
 
     @Column(length = 64,nullable = false)
@@ -42,9 +45,10 @@ public class Member {
     @JoinColumn(name = "member_no")
     private List<MemberAuth> authList;
 
-    public Member(String id, String pw, String nickName, String email){
+    public Member(String id, String pw, String name ,String nickName, String email){
         this.id = id;
         this.pw = pw;
+        this.name = name;
         this.nickName = nickName;
         this.email = email;
     }

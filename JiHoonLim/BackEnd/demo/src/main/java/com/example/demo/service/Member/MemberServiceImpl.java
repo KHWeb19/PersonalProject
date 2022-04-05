@@ -32,7 +32,7 @@ public class MemberServiceImpl implements MemberService {
         memberRequest.setPw(encodedPassword);
 
         MemberAuth authEntity = new MemberAuth(memberRequest.getAuth());
-        Member memberEntity = new Member(memberRequest.getId(), memberRequest.getPw(), memberRequest.getNickName(),
+        Member memberEntity = new Member(memberRequest.getId(), memberRequest.getPw(), memberRequest.getName() ,memberRequest.getNickName(),
                 memberRequest.getEmail());
 
         memberEntity.addAuth(authEntity);
@@ -45,7 +45,7 @@ public class MemberServiceImpl implements MemberService {
     public MemberRequest login(MemberRequest memberRequest) {
         Optional<Member> maybeMember = memberRepository.findByUserId(memberRequest.getId());
 
-        if (maybeMember == null){
+        if (maybeMember.equals(Optional.empty())){
             log.info("No Id");
             return null;
         }
@@ -58,12 +58,12 @@ public class MemberServiceImpl implements MemberService {
         }
 
         MemberRequest response = new MemberRequest(
-                memberRequest.getId(),null,memberRequest.getNickName(),memberRequest.getEmail(),memberRequest.getAuth());
+                memberRequest.getId(),null,memberRequest.getName() ,memberRequest.getNickName(),memberRequest.getEmail(),memberRequest.getAuth());
         return response;
     }
 
     @Override
-    public Boolean checkDuplicate(String id) {
+    public Boolean checkDuplicateId(String id) {
         Optional<Member> checkDupId = memberRepository.findByUserId(id);
 
         if (checkDupId.isPresent()){
@@ -72,4 +72,17 @@ public class MemberServiceImpl implements MemberService {
             return true;
         }
     }
+
+    @Override
+    public Boolean checkDuplicateNickName(String nickName) {
+        Optional<Member> checkDupNickName = memberRepository.findByUserNickName(nickName);
+
+        if (checkDupNickName.isPresent()){
+            return false;
+        }else {
+            return true;
+        }
+    }
+
+
 }
