@@ -35,7 +35,7 @@
 
 <script>
 export default {
-  name: "MainLoginForm.vue",
+  name: "MainLoginForm",
   data () {
     return {
       id: '',
