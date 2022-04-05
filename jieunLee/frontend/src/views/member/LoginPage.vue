@@ -28,7 +28,8 @@ export default {
     },
     data() {
         return {
-            isLogin: false
+            isLogin: false,
+            
         }
     },
     mounted() {
@@ -46,13 +47,15 @@ export default {
                 axios.post('http://localhost:7777/member/login', {memberId, password})
                     .then(res => {
                         if(res.data) {
+                           
                             this.$store.state.userInfo = res.data
                             this.$cookies.set("user", res.data, 300)
                             this.isLogin = true
+                            
                             this.$router.push({
                                 name: 'HomeView'
                                 })
-                            this.$store.state.loginId = res.data
+                             localStorage.setItem("loginId", memberId )
                         } else {
                             alert('로그인 실패!')
                         }
@@ -68,6 +71,7 @@ export default {
             this.$cookies.remove("user")
             this.isLogin = false
             this.$store.state.userInfo = null
+            localStorage.removeItem("loginId")
 
             alert('로그아웃 성공!')
         }

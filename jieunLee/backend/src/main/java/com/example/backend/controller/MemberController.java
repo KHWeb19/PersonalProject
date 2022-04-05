@@ -51,11 +51,11 @@ public class MemberController {
         return memberResponse;
     }
 
-    @GetMapping("/{memberNo}")
-    public Member memberRead(@PathVariable("memberNo") Integer memberNo) {
+    @GetMapping("/{memberId}")
+    public Member memberRead(@PathVariable("memberId") String memberId) {
         log.info("memberRead()");
 
-        return service.read(memberNo);
+        return service.read(memberId);
     }
 
     @PutMapping("/modify")

@@ -10,11 +10,12 @@
 
     <member-list :members="members"/>
 
-    <router-link :to="{
-        name: 'AccountsEditPage',
-        params: {memberNo: mem.toString()}}">
-        로그인멤버 {{mem}}
-    </router-link>
+      <router-link :to="{
+          name: 'AccountsEditPage',
+          params: {memberId: memberId.toString()}}">
+          로그인회원넘버: {{memberId}}
+          
+      </router-link>
 
   </div>
 </template>
@@ -30,27 +31,24 @@ export default {
     MenuBar,
     MemberList
     },
-    computed: {
-        ...mapState(['members'])
-    },
-    mounted () {
-        this.fetchMemberList(),
-        this.fetchMember()
-    },
-    methods: {
-        ...mapActions(['fetchMemberList'])
-    },
     data() {
       return {
-      loginNo: 8,
-      // loginNo: this.$store.state.userInfo.memberNo,
-      mem: this.$store.state.member.memberNo,
-      // mem: 8
+      // loginNo: this.$store.state.member.memberNo,
+      // loginNo: 8
+      memberId: localStorage.getItem("loginId")
+      // memberId: 'test'
       }
-      
     },
-
-  
+    computed: {
+        ...mapState(['members']),
+        
+    },
+    mounted () {
+        this.fetchMemberList()
+    },
+    methods: {
+        ...mapActions(['fetchMemberList']),
+    },
 }
 </script>
 

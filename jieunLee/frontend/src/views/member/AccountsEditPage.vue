@@ -1,16 +1,17 @@
 <template>
-    <accounts-edit-form :member="member"/>
+    <accounts-edit-form v-if="member" :member="member"/>
+     <p v-else>로딩중......</p>
 </template>
 
 <script>
 import AccountsEditForm from '@/components/member/AccountsEditForm.vue'
-import axios from 'axios'
+// import axios from 'axios'
 import { mapActions, mapState } from 'vuex'
 
 export default {
   name: 'AccountsEditPage',
   props: {
-    memberNo: {
+    memberId: {
         type: String,
         required: true
     }
@@ -18,29 +19,35 @@ export default {
   components: {
     AccountsEditForm
   },
+
   computed: {
-    ...mapState(['member'])
+    ...mapState(['member']),
+    
   },
   created() {
-    this.fetchMember(this.memberNo)
+    this.fetchMember(this.memberId)
       .catch(()=>{
-          alert('회원정보 요청 실패')
+          alert('로그인 정보 요청 실패')
           this.$router.push()
       })
   },
+  // mounted() {
+  //   this.fetchMember()
+  // },
   methods: {
       ...mapActions(['fetchMember']),
-      onDelete() {
-        const {memberNo} = this.member
-        axios.delete(`http://localhost:7777/member/${memberNo}`)
-          .then(()=> {
-              alert('삭제 성공')
-              this.$router.push({name: 'JpaBoardListPage'})
-          })
-          .catch(()=> {
-              alert('삭제실패 문제발생')
-          })
-      }
+      
+      // onDelete() {
+      //   const {memberId} = this.member
+      //   axios.delete(`http://localhost:7777/member/${memberId}`)
+      //     .then(()=> {
+      //         alert('삭제 성공')
+      //         this.$router.push({name: 'JpaBoardListPage'})
+      //     })
+      //     .catch(()=> {
+      //         alert('삭제실패 문제발생')
+      //     })
+      // }
     }
 }
 </script>

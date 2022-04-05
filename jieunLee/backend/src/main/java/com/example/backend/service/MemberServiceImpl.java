@@ -64,8 +64,8 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public Member read(Integer memberNo) {
-        Optional<Member> maybeReadMember = memberRepository.findById(Long.valueOf(memberNo));
+    public Member read(String memberId) {
+        Optional<Member> maybeReadMember = memberRepository.findByUserId(memberId);
 
         if (maybeReadMember.equals(Optional.empty())) {
 

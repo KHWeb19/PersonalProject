@@ -58,7 +58,7 @@
                       width: 300px; 
                       height: 30px;
                       padding-left: 5px;" 
-                  type="text" :value="member.memberId"/>
+                  type="text" />
                   </td>
               </tr>
               <br/>
@@ -99,11 +99,28 @@ export default {
         MenuBar
     },
     props: {
-            member: {
-                type: Object,
-                require:true
-            }
-        }
+      member: {
+        type: Object,
+        require:true
+      }
+    },
+    // data() {
+    //   return {
+    //     memberName: '',
+    //     memberId: ''
+    //   }
+    // },
+    // methods: {
+    //   onSubmit() {
+    //     const {memberName, memberId} = this
+    //     this.$emit('submit', {memberName, memberId})
+    //   }
+    // },
+    // created() {
+    //   this.memberName = this.member.memberName
+    //   this.memberId = this.member.memberId
+    // }
+
 }
 </script>
 
