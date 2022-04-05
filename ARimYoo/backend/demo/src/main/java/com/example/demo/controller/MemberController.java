@@ -52,14 +52,16 @@ public class MemberController {
     }
 
     // 회원정보 수정
-    @PutMapping ("/modify")
-    public MemberRequest modify (@RequestBody Member member){
-        log.info ("modify(): " + member);
+    @PutMapping("/{memberNo}")
+    public Member jpaBoardModify (
+            @PathVariable("memberNo") Long memberNo,
+            @RequestBody Member member) {
+        log.info("jpaBoardModify(): " + member);
 
+        member.setMemberNo(Long.valueOf(memberNo));
         service.modify(member);
 
-        return new MemberRequest();
-
+        return member;
     }
 
 

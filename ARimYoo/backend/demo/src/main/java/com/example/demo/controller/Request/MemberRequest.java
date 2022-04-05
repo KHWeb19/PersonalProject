@@ -15,12 +15,15 @@ public class MemberRequest {
     private String intro;
     private String profilePic;
 
-    public MemberRequest(Long memberNo, String userId, String password
-                        ) {
+    public MemberRequest(Long memberNo, String userId, String password,
+                         String userName, String userBirth,
+                         String userIntro) {
         this.memberNo = memberNo;
         this.id = userId;
         this.pw = password;
-
+        this.name = userName;
+        this.birth = userBirth;
+        this.intro = userIntro;
 
     }
 }
