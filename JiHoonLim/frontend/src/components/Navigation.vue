@@ -86,7 +86,7 @@ export default {
       links: [
         { text: "공지사항", route: "/announcement" },
         { text: "인기 순위", route: "/best" },
-        { text: "레시피", route: "/recipe" },
+        { text: "레시피", route: "/foodList" },
       ],
       isLogin: false,
     };
@@ -103,6 +103,7 @@ export default {
       this.isLogin = false;
       this.$store.state.userInfo = null;
       alert("로그아웃 성공");
+      this.$router.push("/login");
     },
   },
 };

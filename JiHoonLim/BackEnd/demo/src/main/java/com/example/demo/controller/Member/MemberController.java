@@ -4,8 +4,12 @@ import com.example.demo.controller.Member.request.MemberRequest;
 import com.example.demo.service.Member.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @Slf4j
@@ -52,12 +56,35 @@ public class MemberController {
 
     @GetMapping("/checkNickName/{nickName}")
     public Boolean checkDuplicateNickName (@PathVariable("nickName") String nickName){
-        log.info("checkDuplicate(): " + nickName);
+        log.info("checkDuplicateNickName(): " + nickName);
 
         Boolean checkDupNickName = service.checkDuplicateNickName(nickName);
 
         return checkDupNickName;
     }
 
+    @GetMapping("/checkEmail/{email}")
+    public Boolean checkDuplicateEmail (@PathVariable("email") String email){
+        log.info("checkDuplicateEmail(): " + email);
 
+        Boolean checkDupEmail = service.checkDuplicateEmail(email);
+
+        return checkDupEmail;
+    }
+
+    @PostMapping("/findUserId")
+    public ResponseEntity<List> findUserId (@Validated @RequestBody MemberRequest memberRequest){
+        log.info("findUserId()"+memberRequest);
+
+
+        String email = memberRequest.getEmail();
+
+        List result = service.findUserId(email);
+
+        if (result == null){
+            return null;
+        }
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
 }

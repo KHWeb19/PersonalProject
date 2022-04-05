@@ -55,10 +55,24 @@
                   >
                   <div class="mt-5">
                     <router-link
-                      class="text-decoration-none orange--text"
+                      class="text-decoration-none orange--text mr-5"
                       to="/signup"
                     >
                       회원가입
+                    </router-link>
+                    |
+                    <router-link
+                      class="text-decoration-none orange--text ml-5 mr-5"
+                      to="/searchUserId"
+                    >
+                      ID 찾기
+                    </router-link>
+                    |
+                    <router-link
+                      class="text-decoration-none orange--text ml-5 mr-5"
+                      to="/searchUserPw"
+                    >
+                      PW 찾기
                     </router-link>
                   </div>
                 </v-form>

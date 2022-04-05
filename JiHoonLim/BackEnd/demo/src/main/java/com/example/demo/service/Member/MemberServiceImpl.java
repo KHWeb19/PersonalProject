@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.swing.text.html.Option;
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -82,6 +83,23 @@ public class MemberServiceImpl implements MemberService {
         }else {
             return true;
         }
+    }
+
+    @Override
+    public Boolean checkDuplicateEmail(String email) {
+        Optional<Member> checkDupEmail = memberRepository.findByUserEmail(email);
+
+        if (checkDupEmail.isPresent()){
+            return false;
+        }else {
+            return true;
+        }
+    }
+
+    @Override
+    public List findUserId(String email) {
+
+        return memberRepository.searchUserId(email);
     }
 
 

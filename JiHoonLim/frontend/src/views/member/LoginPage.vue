@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import LoginForm from "@/components/login/LoginForm.vue";
+import LoginForm from "@/components/member/LoginForm.vue";
 import Vue from "vue";
 import axios from "axios";
 import cookies from "vue-cookies";
@@ -44,6 +44,8 @@ export default {
               this.$cookies.set("user", res.data, 3600);
               this.isLogin = true;
               this.$router.push("/");
+            } else {
+              alert("아이디 혹은 비밀번호가 존재하지 않거나 틀렸습니다.");
             }
           })
           .catch((res) => {
