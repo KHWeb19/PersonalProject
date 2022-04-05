@@ -1,6 +1,5 @@
 export default {
 
-    members: [],
     member: null,
 
     token: localStorage.getItem('token'),

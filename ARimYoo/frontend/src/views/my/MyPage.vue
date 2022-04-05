@@ -3,6 +3,9 @@
         <v-row justify="center">
             <img class="align-center" src="@/assets/title/MyPageTitle.png" width=250 >
         </v-row>
+        <br/>
+        <v-divider/>
+        <br/>
         <v-row>
             <member-info :userInfo="userInfo"/>
         </v-row>

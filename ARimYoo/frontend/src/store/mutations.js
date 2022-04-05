@@ -4,8 +4,8 @@
 
 export default {
 
-    [FETCH_MEMBER](state, member) {
-        state.member = member
+    [FETCH_MEMBER](state, userInfo) {
+        state.userInfo = userInfo
     },
 
 }
