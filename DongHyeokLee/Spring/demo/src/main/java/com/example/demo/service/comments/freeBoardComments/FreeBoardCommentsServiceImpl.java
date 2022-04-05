@@ -3,6 +3,7 @@ package com.example.demo.service.comments.freeBoardComments;
 
 
 import com.example.demo.controller.comments.freeBoardComments.request.FreeBoardCommentsRequest;
+import com.example.demo.entitiy.board.freeBoard.FreeBoard;
 import com.example.demo.entitiy.board.freeBoard.comments.FreeBoardComments;
 import com.example.demo.entitiy.member.MemberInfo;
 import com.example.demo.repository.comments.freeBoardComments.FreeBoardCommentsRepository;
@@ -25,16 +26,25 @@ public class FreeBoardCommentsServiceImpl implements FreeBoardCommentsService {
     @Override
     public void register(FreeBoardCommentsRequest commentsRequest) {
 
-        FreeBoardComments commentsEntity = new FreeBoardComments(commentsRequest.getWriter(), commentsRequest.getContent(),commentsRequest.getBoardNo());
+        FreeBoardComments commentsEntity = new FreeBoardComments(commentsRequest.getWriter(),
+                    commentsRequest.getContent(),commentsRequest.getBoardNo());
 
         commentsRepository.save(commentsEntity);
     }
 
     @Override
-    public List<FreeBoardComments> list(Integer num) {
-        List<FreeBoardComments> checkComments =commentsRepository.findComment(Long.valueOf(num));
+    public List<FreeBoardComments> list(Integer boardNo) {
+        List<FreeBoardComments> checkComments =commentsRepository.findComment(Long.valueOf(boardNo));
 
         return checkComments;
+    }
+
+    @Override
+    public void modify(FreeBoardComments freeBoardComments) {
+
+
+        commentsRepository.save(freeBoardComments);
+
     }
 
     @Override

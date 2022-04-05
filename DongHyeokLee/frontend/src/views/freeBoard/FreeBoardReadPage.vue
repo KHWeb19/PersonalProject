@@ -6,7 +6,7 @@
         <free-board-read v-if="freeBoard" :freeBoard="freeBoard"/>
         <p v-else>로딩중 ....... </p>
         <!-- 댓글-->
-        <free-board-comments-list :boardNo="this.boardNo"/>  
+        <free-board-comment :boardNo="this.boardNo"/>  
         <!--게시판 수정 -->
         <div class = "button">
         <router-link :to="{ name: 'FreeBoardModifyPage', params: { boardNo } }">
@@ -27,7 +27,7 @@
 import axios from 'axios'
 import { mapActions, mapState } from 'vuex'
 import FreeBoardRead from '@/components/freeBoard/FreeBoardRead.vue'
-import FreeBoardCommentsList from '@/views/comments/freeBoard/FreeBoardCommentsList.vue'
+import FreeBoardComment from '@/views/comments/freeBoard/FreeBoardComment.vue'
 
 export default {
     name: 'FreeBoardReadPage',
@@ -46,7 +46,7 @@ export default {
     },
     components: {
         FreeBoardRead,
-        FreeBoardCommentsList
+        FreeBoardComment
     },
      computed: {
         ...mapState(['freeBoard'])

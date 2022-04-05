@@ -51,7 +51,7 @@ const routes = [
     path: '/freeBoardList',
     name: 'FreeBoardListPage',
     component: FreeBoardListPage,
-    //접근제제한
+    //접근제한
     beforeEnter(to, from, next) {
       if(store.state.isLogin){
         next();
