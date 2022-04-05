@@ -5,7 +5,7 @@
                 <tr>
                     <td>게시물 번호</td>
                     <td>
-                        <input type="text" :value="jpaBoard.boardNo" disabled/>
+                        <input type="text" :value="jpaBoard1.boardNo" disabled/>
                     </td>
                 </tr>
                 <tr>
@@ -17,13 +17,13 @@
                 <tr>
                     <td>작성자</td>
                     <td>
-                        <input type="text" :value="jpaBoard.writer" disabled/>
+                        <input type="text" :value="jpaBoard1.writer" disabled/>
                     </td>
                 </tr>
                 <tr>
                     <td>등록일자</td>
                     <td>
-                        <input type="text" :value="jpaBoard.regDate" disabled/>
+                        <input type="text" :value="jpaBoard1.regDate" disabled/>
                     </td>
                 </tr>
                 <tr>
@@ -37,8 +37,8 @@
 
             <div>
                 <button type="submit">수정 완료</button>
-                <router-link :to="{ name: 'JpaBoardReadPage',
-                                    params: { boardNo: jpaBoard.boardNo.toString() } }">
+                <router-link :to="{ name: 'JpaBoardReadPage1',
+                                    params: { boardNo: jpaBoard1.boardNo.toString() } }">
                     취소
                 </router-link>
             </div>
@@ -51,7 +51,7 @@
 export default {
     name: 'JpaBoardModifyForm1',
     props: {
-        jpaBoard: {
+        jpaBoard1: {
             type: Object,
             required: true
         }
@@ -69,8 +69,8 @@ export default {
         }
     },
     created () {
-        this.title = this.jpaBoard.title
-        this.content = this.jpaBoard.content
+        this.title = this.jpaBoard1.title
+        this.content = this.jpaBoard1.content
     }
 }
 </script>

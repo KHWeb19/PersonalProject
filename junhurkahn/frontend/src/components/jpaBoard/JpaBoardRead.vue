@@ -4,31 +4,31 @@
             <tr>
                 <td>게시물 번호</td>
                 <td>
-                    <input type="text" :value="jpaBoard.boardNo" readonly/>
+                    <input type="text" :value="jpaBoard1.boardNo" readonly/>
                 </td>
             </tr>
             <tr>
                 <td>제목</td>
                 <td>
-                    <input type="text" :value="jpaBoard.title" readonly/>
+                    <input type="text" :value="jpaBoard1.title" readonly/>
                 </td>
             </tr>
             <tr>
                 <td>작성자</td>
                 <td>
-                    <input type="text" :value="jpaBoard.writer" readonly/>
+                    <input type="text" :value="jpaBoard1.writer" readonly/>
                 </td>
             </tr>
             <tr>
                 <td>등록일자</td>
                 <td>
-                    <input type="text" :value="jpaBoard.regDate" readonly/>
+                    <input type="text" :value="jpaBoard1.regDate" readonly/>
                 </td>
             </tr>
             <tr>
                 <td>본문</td>
                 <td>
-                    <textarea cols="50" rows="20" :value="jpaBoard.content" readonly>
+                    <textarea cols="50" rows="20" :value="jpaBoard1.content" readonly>
                     </textarea>
                 </td>
             </tr>

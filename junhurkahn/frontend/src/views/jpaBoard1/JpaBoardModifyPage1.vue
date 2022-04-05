@@ -1,7 +1,7 @@
 <template>
     <div align="center">
-        <h2>Vue + Spring 게시물 수정</h2>
-        <jpa-board-modify-form v-if="jpaBoard" :jpaBoard="jpaBoard" @submit="onSubmit"/>
+        <h2>계좌번호 수정 페이지</h2>
+        <jpa-board-modify-form-1 v-if="jpaBoard1" :jpaBoard1="jpaBoard1" @submit="onSubmit"/>
         <p v-else>로딩중 .......</p>
     </div>
 </template>
@@ -9,34 +9,36 @@
 <script>
 import axios from 'axios'
 import { mapActions, mapState } from 'vuex'
+
 import JpaBoardModifyForm1 from '@/components/jpaBoard1/JpaBoardModifyForm1.vue'
 
 export default {
     name: 'JpaBoardModifyPage1',
     components: {
+        
         JpaBoardModifyForm1
     },
     props: {
-        boardNo1: {
+        boardNo: {
             type: String,
             required: true
         }
     },
     computed: {
-        ...mapState(['jpaBoard'])
+        ...mapState(['jpaBoard1'])
     },
     methods: {
-        ...mapActions(['fetchJpaBoard']),
+        ...mapActions(['fetchJpaBoard1']),
         onSubmit (payload) {
             const { title, content } = payload
 
-            axios.put(`http://localhost:7777/62th/board1/${this.boardNo1}`,
-                { title, writer: this.jpaBoard.writer, content, regDate: this.jpaBoard1.regDate })
+            axios.put(`http://localhost:7777/62th/board1/${this.boardNo}`,
+                { title, writer: this.jpaBoard1.writer, content, regDate: this.jpaBoard1.regDate })
                     .then(res => {
                         alert('게시물 수정 성공!')
                         this.$router.push({
                             name: 'JpaBoardReadPage1',
-                            params: { boardNo1: res.data.boardNo1.toString() }
+                            params: { boardNo: res.data.boardNo.toString() }
                         })
                     })
                     .catch(() => {
@@ -45,7 +47,7 @@ export default {
         }
     },
     created () {
-        this.fetchJpaBoard(this.boardNo1)
+        this.fetchJpaBoard1(this.boardNo)
                 .catch(() => {
                     alert('게시물 DB 조회 실패!')
                     this.$router.back()

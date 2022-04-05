@@ -59,8 +59,8 @@ export default {
                         commit(FETCH_JPA_BOARD_LIST1, res.data)
                     })
             },
-            fetchJpaBoard1 ({ commit }, boardNo1) {
-                return axios.get(`http://localhost:7777/62th/board1/${boardNo1}`)
+            fetchJpaBoard1 ({ commit }, boardNo) {
+                return axios.get(`http://localhost:7777/62th/board1/${boardNo}`)
                     .then((res) => {
                         commit(FETCH_JPA_BOARD1, res.data)
                     })
