@@ -29,29 +29,29 @@ public class MemberServiceImpl implements MemberService {
         repository.save(member);
     }
 
-//    @Override
-//    public MemberRequest login (MemberRequest memberRequest) {
-//        Optional<Member> maybeMember = repository.findByUserid(memberRequest.getId());
-//
-//        if (maybeMember.equals(Optional.empty())) {
-//            log.info("There are no person who has this id!");
-//            return null;
-//        }
-//
-//        Member loginMember = maybeMember.get();
-//
-//        if (!passwordEncoder.matches(memberRequest.getPw(), loginMember.getPw()))
-//        {
-//            log.info("Entered wrong password!");
-//            return null;
-//        }
-//
-//        MemberRequest response = new MemberRequest(
-//                memberRequest.getId(),
-//                null);
-//
-//        return response;
-//    }
+    @Override
+    public MemberRequest login(MemberRequest memberRequest) {
+        Optional<Member> maybeMember = repository.findByUserId(memberRequest.getId());
+
+        if (maybeMember.equals(Optional.empty())) {
+            log.info("Id값이 없습니다.");
+            return null;
+        }
+
+        Member loginMember = maybeMember.get();
+
+        if (!passwordEncoder.matches(memberRequest.getPw(), loginMember.getPw())) {
+            log.info("Entered wrong password!");
+            return null;
+        }
+
+        MemberRequest response = new MemberRequest(
+                memberRequest.getId(),
+                null);
+
+        return response;
+    }
+
 }
 
 

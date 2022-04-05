@@ -1,24 +1,19 @@
 <template>
 <div>
-        <v-toolbar-title>
-        <div @click="home">로고들어갈자리</div>
-         <login-form/>
-         <register-form/> 
-      </v-toolbar-title>
+  <login-form/>
 </div>
 </template>
 
 <script>
 
 import router from '@/router'
-import LoginForm from '@/components/jpaMember/LoginForm.vue'
-import RegisterForm from '@/components/jpaMember/RegisterForm.vue'
+import LoginForm from '../jpaMember/LoginForm.vue'
+
 
 export default {
   name: "NavHeader",
   components: {
-    LoginForm,
-    RegisterForm,
+    LoginForm
    },
   data () {
     return {

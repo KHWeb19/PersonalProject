@@ -8,4 +8,6 @@ export default {
     jpaBoard: null,
     businessMembers: [],
     crawlLists: []
+    
+
 }

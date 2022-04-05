@@ -28,7 +28,7 @@ public class MemberAuth {
     @UpdateTimestamp
     private Date updDate;
 
-    public MemberAuth (String auth) {
+    public MemberAuth(String auth) {
         this.auth = auth;
     }
 }

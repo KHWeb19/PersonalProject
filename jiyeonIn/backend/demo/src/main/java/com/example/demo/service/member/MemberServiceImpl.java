@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -34,7 +35,7 @@ public class MemberServiceImpl implements MemberService {
         memberRequest.setPw(encodedPassword);
 
         Member memberEntity = new Member(
-                memberRequest.getId(), memberRequest.getPw());
+                memberRequest.getId(), memberRequest.getPw(),memberRequest.getName());
 
         memberRepository.save(memberEntity);
 
@@ -48,7 +49,7 @@ public class MemberServiceImpl implements MemberService {
     public MemberRequest login(MemberRequest memberRequest) {
         Optional<Member> maybeMember = memberRepository.findByUserId(memberRequest.getId());
 
-        if(maybeMember == null) {
+        if(maybeMember.equals(Optional.empty())) {
             log.info("no Id");
             return null;
         }
@@ -73,11 +74,22 @@ public class MemberServiceImpl implements MemberService {
         MemberRequest response = new MemberRequest(
                 memberRequest.getId(),
                 null,
+                memberRequest.getName(),
                 memberAuth.getAuth());
 
         return response;
+    }
 
+    @Transactional
+    @Override
+    public Boolean checkUserIdValidation(String id) {
+        Optional<Member> maybeMember = memberRepository.findByUserId(id);
 
+        if(maybeMember.isPresent()) {
+            return false;
+        }else {
+            return true;
+        }
     }
 
 

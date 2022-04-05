@@ -34,7 +34,7 @@ export default {
       this.$router.push({name: 'BoardView'})
     },
     myPage(){
-      this.$router.push({name: 'MyPage'})
+      this.$router.push({name: 'LoginPage'})
     }
   }
 }

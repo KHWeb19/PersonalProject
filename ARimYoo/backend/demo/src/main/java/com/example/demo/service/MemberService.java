@@ -7,5 +7,6 @@ import com.example.demo.entity.Member;
 public interface MemberService {
     public void register(Member member);
 
-    //public MemberRequest login(MemberRequest member);
+    public MemberRequest login (MemberRequest memberRequest);
+
 }

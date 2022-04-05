@@ -10,18 +10,17 @@ import java.util.Date;
 @Data
 @Entity
 public class Member {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer memberNo;
 
-    @Column(length = 20, nullable = false)
+    @Column(length = 10, nullable = false)
     private String name;
 
-    @Column(length = 20, nullable = false)
+    @Column(length = 10, nullable = false)
     private String gender;
 
-    @Column(length = 20, nullable = false)
+    @Column(length = 10, nullable = false)
     private Date birthDay;
 
     @Column(length = 20, nullable = false)
@@ -30,7 +29,7 @@ public class Member {
     @Column(length = 20, nullable = false)
     private String pw;
 
-    @Column(length = 100, nullable = false)
+    @Column(length = 200, nullable = false)
     private String address;
 
     @CreationTimestamp
