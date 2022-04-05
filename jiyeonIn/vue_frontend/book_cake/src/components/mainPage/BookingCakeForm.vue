@@ -10,47 +10,57 @@
 
         <!--
         <div>
-            <v-container class="px-0" fluid>
-                    <v-radio-group row>
-                    <v-radio label="케이크 선택" value="select" @click="sss()"></v-radio>
-                    <v-radio label="직접 디자인 올리기" value="own" onclick="ownCake(this.value,'own')"></v-radio>
-                    </v-radio-group>
-            </v-container>
-        </div>
-
-        
-        <div class="selectShop">
-            <p>되라 이것아</p>
-        </div>
-        <div id="own" style="display:none;">
-            <p>얍 이것아</p>
-        </div>
-        -->
-
-        <v-container>
-            <v-row style="height: 55px">
-                <v-col class="col-12 col-sm-4">
-                    <v-checkbox  label="케이크 선택" v-model="selectCake"></v-checkbox>
-                </v-col>
-                <v-col class="col-12 col-sm-5">
-                    <v-checkbox label="직접 디자인 올리기" v-model="selectOwnCake"></v-checkbox>
-                </v-col>
-            </v-row>
-            <v-row>
-                <v-col class="col-12 col-sm-6">
-                    <p style="font-size: 13px">*두개 선택지 중 1개 필수 선택 입니다!</p>
-                </v-col>
-            </v-row>
             
+                    <v-radio-group row>
+                    <v-radio label="케이크 선택" value="now" name="sendType2" v-model="toggleSendType"></v-radio>
+                    <v-radio label="직접 디자인 올리기" value="reserve" name="sendType" v-model="toggleSendType"></v-radio>
+                    </v-radio-group>
+            
+        </div>-->
+        <v-container>
+            <v-row style="height: 55px;">
+                <v-col class="col-12 col-sm-4">
+                    <div class="radio">
+                        <label>
+                            <input
+                            type="radio"
+                            value="now"
+                            name="sendType2"
+                            v-model="toggleSendType"
+                            />
+                            케이크 선택
+                        </label>
+                        
+                    </div>
+                </v-col>
+                <v-col v-col class="col-12 col-sm-3">
+                    <div class="radio">
+                        <label>
+                            <input
+                            type="radio"
+                            value="reserve"
+                            name="sendType"
+                            id="sendType"
+                            v-model="toggleSendType"
+                            />
+                            직접 디자인 올리기
+                        </label>
+                        
+                    </div>
+                </v-col>
+            </v-row>
         </v-container>
         
-        <div v-if="selectCake" class="selectCakes">
+        
+        <div class="input-group" v-show="sendType2">
+            <div class="input-group-text">
+            
             <br>
             <v-select class="selectCake" v-model="findDgn" :items="selectCakeDesign" label="디자인 선택" style="width: 200px;" onchange="findDesign"></v-select>
             <v-virtual-scroll
                 :bench="benched"
                 :items="items"
-                height="450" width="750" item-height="250" 
+                height="600" width="750" item-height="250" 
                 class="virtualScroll">
 
                 <template v-slot:default="{ item }">
@@ -76,13 +86,15 @@
                 </template>
             </v-virtual-scroll>
             <br><p>선택한 케이크 : {{item}}</p>
-        </div>
 
-
-        <div v-if="selectOwnCake">
-            <p style="font-size: 15px">*아래 파일선택에 원하는 디자인을 첨부해 주세요!</p>
+            </div>
         </div>
-        <br><hr>
+        <div class="input-group" v-show="sendType">
+            <div class="input-group-text">
+               <p style="font-size: 15px">*아래 파일선택에 원하는 디자인을 첨부해 주세요!</p>
+            </div>
+        </div>
+       <br><hr>
 
 
         
@@ -95,7 +107,11 @@
                         placeholder="케이크 위 레터링 글자는 최대 10자 이내 
 케이크 보드 위 레터링 글자는 최대 15자 이내입니다. 
 비용은 추후 레터링 및 추가 요구사항 확인 후 확정됩니다." 
-                        style="font-size: 14px">
+                        style="font-size: 14px;">
+                        레터링 글자 : ( 케이크 위 레터링 글자는 최대 10자 이내 ) 
+                        보드 글자 : ( 케이크 위 레터링 글자는 최대 15자 이내 이내 ) 
+                        추가 요청사항 : 
+                        비용은 추후 레터링 및 추가 요구사항 확인 후 확정됩니다.
                     </textarea>
                 </v-col>
                 <v-col class="col-12 col-sm-3">
@@ -140,12 +156,23 @@ export default {
                 {image:'@/assets/uploadImg/family/1.famaily cake.png',design : 'birthday', size: '1호', price: 15000},
                 {image:'assets/uploadImg/family/1.famaily cake.png',design : 'birthday', size: '1호', price: 15000},
                 {image:'@/assets/uploadImg/birthday/1.birhday.png',design : 'birthday', size: '1호', price: 15000},
-                {image:'assets/uploadImg/family/1.famaily cake.png',design : 'birthday', size: '1호', price: 15000},
+                {image:'@/assets/uploadImg/family/1.famaily cake.png',design : 'birthday', size: '1호', price: 15000},
             ],
             selectCakeDesign : ['birthday', 'lover','family','friend'],
-            findDgn:''
-            
+            findDgn:'',
+            sendType: false,
+            sendType2: false,
+            toggleSendType: ["now", "reserve"],
+        
         }
+    },
+    watch: {
+        toggleSendType: function (data) {
+            if (data == "now") this.sendType2 = true
+            else this.sendType2 = false
+            if (data == "reserve") this.sendType = true
+            else this.sendType = false
+        },
     },
     components: { 
         CalenderTest 
@@ -158,10 +185,6 @@ export default {
         })
     },
     methods: {
-        sss () {
-            this.selectShop = !this.selectShop
-            
-        },
         findDesign () {
             for(let i=0; i< this.items.length ; i++) {
                 if(this.items[i].design != this.findDgn){
@@ -171,9 +194,6 @@ export default {
         }
     }
     
-        
-
-
 }
     
 </script>

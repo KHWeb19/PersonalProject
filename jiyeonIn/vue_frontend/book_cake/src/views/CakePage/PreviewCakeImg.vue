@@ -43,8 +43,6 @@
                 </v-container>
             </div>
 
-            <p>여기야 : {{design}},{{size}},{{price}}</p>
-             
             <swiper-page></swiper-page><br><br><br>
 
         </div>
