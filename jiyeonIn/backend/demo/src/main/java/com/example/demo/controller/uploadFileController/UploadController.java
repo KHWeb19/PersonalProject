@@ -25,24 +25,53 @@ public class UploadController {
     @PostMapping("/register")
     public String uploadCakeDetail (@Validated @RequestBody UploadRequest uploadRequest,
                                   @RequestParam("fileList") List<MultipartFile> fileList) {
-        log.info("uploadCakeDetail()");
+        log.info("uploadCakeDetail()" + uploadRequest);
         log.info("uploadImgFamily(): " + fileList );
+
 
         try {
             for (MultipartFile multipartFile : fileList) {
                 log.info("requestUploadFile() - Make file: " +
                         multipartFile.getOriginalFilename());
 
+                if(uploadRequest.getDesign().equals("family")) {
+                    FileOutputStream writer = new FileOutputStream(
+                            "../../vue_frontend/book_cake/src/assets/uploadImg/family/" +multipartFile.getOriginalFilename());
+                    log.info("디렉토리에 파일 배치 성공!");
 
+                    writer.write(multipartFile.getBytes());
+                    writer.close();
+                    service.register(uploadRequest, multipartFile.getOriginalFilename());
+                }else if (uploadRequest.getDesign().equals("birthday")) {
+                    FileOutputStream writer = new FileOutputStream(
+                            "../../vue_frontend/book_cake/src/assets/uploadImg/birthday/" +multipartFile.getOriginalFilename());
+                    log.info("디렉토리에 파일 배치 성공!");
 
-                FileOutputStream writer = new FileOutputStream(
-                        "../../vue_frontend/book_cake/src/assets/uploadImg/family/" +multipartFile.getOriginalFilename());
-                log.info("디렉토리에 파일 배치 성공!");
+                    writer.write(multipartFile.getBytes());
+                    writer.close();
+                    service.register(uploadRequest, multipartFile.getOriginalFilename());
+                }else if (uploadRequest.getDesign().equals("friend")) {
+                    FileOutputStream writer = new FileOutputStream(
+                            "../../vue_frontend/book_cake/src/assets/uploadImg/friend/" +multipartFile.getOriginalFilename());
+                    log.info("디렉토리에 파일 배치 성공!");
 
-                writer.write(multipartFile.getBytes());
-                writer.close();
-                service.register(uploadRequest, multipartFile.getOriginalFilename());
+                    writer.write(multipartFile.getBytes());
+                    writer.close();
+                    service.register(uploadRequest, multipartFile.getOriginalFilename());
+                }else if (uploadRequest.getDesign().equals("lover")) {
+                    FileOutputStream writer = new FileOutputStream(
+                            "../../vue_frontend/book_cake/src/assets/uploadImg/lover/" +multipartFile.getOriginalFilename());
+                    log.info("디렉토리에 파일 배치 성공!");
+
+                    writer.write(multipartFile.getBytes());
+                    writer.close();
+                    service.register(uploadRequest, multipartFile.getOriginalFilename());
+                }
             }
+
+
+
+
         } catch (Exception e) {
             return "Upload Fail!!!";
         }

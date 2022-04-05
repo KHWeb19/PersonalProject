@@ -17,19 +17,17 @@
                 <v-container>
                     <v-row justify="center">
                         <v-col class="d-flex" cols="12" sm="3">
-                            <v-select class="selectCake" v-model="storeData.design" :items="selectCake" label="디자인 선택">
+                            <v-select class="selectCake" v-model="design" :items="selectCake" label="디자인 선택">
                             </v-select>
                         </v-col>
                         <v-col class="d-flex" cols="12" sm="3">
-                            <v-select class="selectSize" v-model="storeData.size" :items="selectSize" label="사이즈 선택">
+                            <v-select class="selectSize" v-model="size" :items="selectSize" label="사이즈 선택">
                             </v-select>
                         </v-col>
                         <v-col class="d-flex" cols="12" sm="3">
-                            <v-text-field label="가격 작성" v-model="storeData.price"></v-text-field>
+                            <v-text-field label="가격 작성" v-model="price"></v-text-field>
                         </v-col>
-                            <v-col class="d-flex" cols="12" sm="2">
-                        <v-btn color="black" text @click="onSubmit"><v-icon>mdi-check</v-icon></v-btn>
-                        </v-col>
+                        
                     </v-row>
                     <v-row justify="center">
                         <v-col class="d-flex" cols="12" sm="5">
@@ -39,12 +37,13 @@
                     </v-row>
                     <v-row justify="center">
                         <v-col class="d-flex" cols="12" sm="2">
-                            <v-btn color="black" text @click="submitFiles()"><v-icon>mdi-check</v-icon>올리기!</v-btn>
+                            <v-btn color="black" text @click="onSubmit()"><v-icon>mdi-check</v-icon>올리기!</v-btn>
                         </v-col>
                     </v-row>
                 </v-container>
             </div>
 
+            <p>여기야 : {{design}},{{size}},{{price}}</p>
              
             <swiper-page></swiper-page><br><br><br>
 
@@ -71,11 +70,10 @@ import SwiperPage from '@/components/mainPage/SwiperPage.vue'
             return {
                 files: '',
                 response: '',
-                storeData: {
-                    design: '',
-                    size: '',
-                    price:'',
-                },
+                design: '',
+                size: '',
+                price:'',  
+                
                 selectCake : ['birthday', 'lover','family','friend'],
                 selectSize : ['도시락 케이크','1호','2호','3호']
                 
@@ -98,7 +96,9 @@ import SwiperPage from '@/components/mainPage/SwiperPage.vue'
                     formData.append('fileList', this.files[idx])
                  }
 
-                axios.post('http://localhost:7777/upload/register',{ storeData: this.storeData, formData },{
+                let why = {design : this.design, size: this.size, price: this.price }
+
+                axios.post('http://localhost:7777/upload/register',{ why, formData },{
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }

@@ -16,7 +16,4 @@ public class UploadRequest {
         this.price = price;
     }
 
-    public UploadRequest() {
-
-    }
 }
