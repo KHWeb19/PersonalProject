@@ -1,7 +1,8 @@
 <template>
      <div id="app">
-  <v-app id="inspire">
     <v-container fluid>
+      <v-divider></v-divider>
+      <br>
       <v-row align="center">
        
   
@@ -27,10 +28,21 @@
           ></v-select>
         </v-col>
       </v-row>
+    <v-row align="center" justify="center" >
+       <v-btn width="400"
+    class="blue lighten-5" 
+    onclick="submit">검색</v-btn>
+    </v-row>
     </v-container>
+    <br>
+    <v-divider></v-divider>
     
-    <v-btn class="blue lighten-5" onclick="submit">검색</v-btn>
-  </v-app>
+
+     
+    
+    <!--submit을 누르면 e7의 정보를 갖고 components/kategorie1List페이지로 이동-->
+
+
 </div>
 </template>
 <script>
@@ -38,7 +50,6 @@ export default {
     name:'DropDown',
     data(){
         return{
-       e6: [],
        e7: [],
       states: [
         'HEMES', 'VITTON', 'CHANEL', 'GUCCI',

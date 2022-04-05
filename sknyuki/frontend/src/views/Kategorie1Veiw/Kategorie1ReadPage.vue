@@ -3,9 +3,6 @@
         <header-view></header-view>
         <br>
         <drop-down></drop-down>
-        <kategorie-1-list></kategorie-1-list>
-        <br>
-        
 
 
     </v-container>
@@ -13,16 +10,11 @@
 <script>
 import HeaderView from '@/components/home/headerView.vue'
 import DropDown from '@/components/KategoriePage1/DropDown.vue'
-//import Kategorie1Read from'@/components/BrandCheckBoard/Kategorie1Read.vue'
-import Kategorie1List from '@/components/BrandCheckBoard/Kategorie1List.vue'
-
 export default {
-    name:'Kategorie1View',
+    name:'Kategorie1ReadPage',
     components:{ 
     HeaderView,
     DropDown,
-   // Kategorie1Read,
-    Kategorie1List,
         
     }
 

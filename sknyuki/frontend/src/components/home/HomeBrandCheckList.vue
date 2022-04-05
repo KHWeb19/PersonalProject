@@ -8,9 +8,11 @@
     <v-btn class="blue lighten-5">상품 판별 보러가기 </v-btn>
     </router-link></v-row>
 <br>
- <div class="gallery-wrap">
+ <div class="brand-img">
      <!-- 가변링크 달아줄 예정-->
-                    <div class="item hover item1"></div>
+                
+                    <div onclick ="location.href='http://localhost:8080/kategorie1'" class="item hover item1"></div>
+             
                     <div class="item hover item2"></div>
                     <div class="item hover item3"></div>
                     <div class="item hover item4"></div>
@@ -30,7 +32,7 @@ export default {
 </script>
 
 <style scoped>
-.gallery-wrap {
+.brand-img{
    width: 100%;
   height: 300px;
   
@@ -57,7 +59,7 @@ export default {
   background-image: url('https://i.pinimg.com/564x/3f/50/df/3f50dfb5a9ab81e54e30378252a9bfc3.jpg');
 }
 .item2 { 
-    background-image: url('https://i.pinimg.com/564x/16/eb/21/16eb218c3ba8e96de14141f9101998e6.jpg');
+  background-image: url('https://i.pinimg.com/564x/16/eb/21/16eb218c3ba8e96de14141f9101998e6.jpg');
 }
 .item3 { 
   background-image: url('https://i.pinimg.com/564x/41/65/69/416569694aaad562c6505b8d60e31379.jpg');
