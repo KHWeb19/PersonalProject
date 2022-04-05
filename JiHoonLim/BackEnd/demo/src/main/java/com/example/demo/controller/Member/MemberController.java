@@ -87,4 +87,13 @@ public class MemberController {
 
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
+
+    @PostMapping("/idMatchEmail")
+    public ResponseEntity<Boolean> idMatchEmail(@Validated @RequestBody MemberRequest memberRequest){
+        log.info("idMatchEmail: " + memberRequest.getId() + " , " + memberRequest.getEmail());
+
+        Boolean result = service.idMatchEmail(memberRequest);
+
+        return new ResponseEntity<>(result,HttpStatus.OK);
+    }
 }

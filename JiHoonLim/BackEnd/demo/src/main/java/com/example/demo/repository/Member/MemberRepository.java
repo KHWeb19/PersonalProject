@@ -22,4 +22,6 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     @Query("select m.id from Member m where m.email = :email")
     List searchUserId(@Param("email") String email);
 
+
+
 }

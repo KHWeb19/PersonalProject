@@ -14,8 +14,21 @@
             <v-card-text class="text-center px-12 py-16">
               <validation-observer ref="observer" v-slot="{ invalid }">
                 <v-form @submit.prevent="onSubmit">
-                  <div class="text-h4 font-weight-black mb-10">ID 찾기</div>
-
+                  <div class="text-h4 font-weight-black mb-10">PW 찾기</div>
+                  <validation-provider
+                    v-slot="{ errors }"
+                    name="아이디"
+                    :rules="{ max: 12, required: true, alpha_num: true }"
+                  >
+                    <v-text-field
+                      v-model="id"
+                      label="아이디"
+                      clearable
+                      prepend-icon="mdi-account-outline"
+                      :error-messages="errors"
+                      :counter="12"
+                    />
+                  </validation-provider>
                   <validation-provider
                     v-slot="{ errors }"
                     name="이메일"
@@ -54,24 +67,24 @@
 import axios from "axios";
 
 export default {
-  name: "SearchUserIdPageForm",
+  name: "SearchUserPwPageForm",
   data() {
     return {
+      id: "",
       email: "",
     };
   },
   methods: {
     findUserId() {
-      const { email } = this;
+      const { id, email } = this;
       axios
-        .post("http://localhost:7777/member/findUserId", { email })
+        .post("http://localhost:7777/member/idMatchEmail", { id, email })
         .then((res) => {
-          this.userId = res.data;
-          if (this.userId != "") {
-            alert(`아이디는 ${this.userId} 입니다.`);
-            this.$router.push("/login");
+          if (res.data) {
+            alert("인증이 완료되었습니다. 비밀번호 변경 페이지로 이동합니다.");
+            this.$router.push("/pwReset");
           } else {
-            alert("찾으시는 아이디가 없습니다.");
+            alert("입력하신 정보로 가입된 정보가 없습니다.");
           }
         });
     },

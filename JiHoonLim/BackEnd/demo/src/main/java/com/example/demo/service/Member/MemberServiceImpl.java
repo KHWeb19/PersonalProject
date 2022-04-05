@@ -102,5 +102,20 @@ public class MemberServiceImpl implements MemberService {
         return memberRepository.searchUserId(email);
     }
 
+    @Override
+    public Boolean idMatchEmail(MemberRequest memberRequest) {
+        Optional<Member> maybeMember = memberRepository.findByUserId(memberRequest.getId());
+        Member loginMember = maybeMember.get();
+
+        String UserEmail = loginMember.getEmail();
+
+        String MaybeEmail = memberRequest.getEmail();
+
+        if (UserEmail.equals(MaybeEmail)){
+            return true;
+        }
+        return false;
+    }
+
 
 }

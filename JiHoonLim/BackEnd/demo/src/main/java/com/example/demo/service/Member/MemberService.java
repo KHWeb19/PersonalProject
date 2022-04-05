@@ -11,4 +11,5 @@ public interface MemberService {
     public Boolean checkDuplicateNickName(String nickName);
     public Boolean checkDuplicateEmail(String email);
     public List findUserId(String email);
+    public Boolean idMatchEmail(MemberRequest memberRequest);
 }
