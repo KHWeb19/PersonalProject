@@ -13,12 +13,14 @@
 
             <v-spacer></v-spacer>
 
-            <div v-if="!LoginCheck" >
 
-                <login-form></login-form>
-                <register-form> </register-form>
+            <login-form @submit="onLogin" v-if="!isLogin"></login-form>
 
-            </div>
+
+            <register-form @submit="onRegister" v-if="!isLogin"></register-form>
+
+            
+           
 
         
         </v-toolbar>
@@ -50,25 +52,37 @@
 
 <script>
 
-import {mapActions, mapState} from "vuex";
-import LoginForm from '../../components/login/LoginForm.vue';
-import RegisterForm from '../../components/login/RegisterForm.vue';
+import { mapState} from "vuex";
+import LoginForm from '@/components/login/LoginForm.vue'
+import RegisterForm from '@/components/login/RegisterForm.vue'
+import MemberBar from '@/components/login/MemberBar.vue'
+import Vue from "vue";
+import axios from "axios";
+import cookies from "vue-cookies";
 
 
+Vue.use(cookies)
 export default {
     name: 'MainPage',
+
     components:{
-        
-        RegisterForm,
         LoginForm,
-        //LoginForm,
+        RegisterForm,
+        MemberBar
         
     },
     computed:
-         {
-        ...mapState(['isLogin', 'session']),
-        LoginCheck(){
-        return this.isLogin
+    {
+        ...mapState(['session']),    
+    },
+    mounted() {
+
+        this.$store.state.session = this.$cookies.get("user")
+        
+        if(this.$store.state.session != null) {
+            this.isLogin = true
+        }else {
+            this.isLogin = false
         }
     },
 
@@ -77,10 +91,10 @@ export default {
             login_dialog: false, 
             nav_drawer: false,
             group: false,
-           /*
-            cookie: this.$cookies.isKey('user'),
-            individual: this.$cookies.get('auth'),
-            userId: this.$cookies.get('user'),*/
+            isLogin: false,
+           
+            cookies: this.$cookies.isKey('user'),
+            userId: this.$cookies.get('user'),
 
             category: [
                 {  
@@ -114,19 +128,85 @@ export default {
                 {
                     text: 'Service Center',
                     name: 'ServiceCenter',
-                }
+                },
                 
-            ]
+            ],
         }
     },
-    watch: {
-        group () {
-            this.nav_drawer = false
-        }
-    },
-     methods: {
-    ...mapActions(['setIsLogin', 'logout']),
+    
+
+   
+    methods: {
+        onRegister (payload) {
+            const {  userId, password, passwordCheck, email ,auth } = payload
+
+                if(password == passwordCheck) {
+
+                    axios.post(`http://localhost:7777/jpaMember/register`, { userId, password, passwordCheck, email, auth})
+                    .then( res => {
+                        if(res.data != null ) {
+                            alert('Successful!')
+                            this.userId = ''
+                            this.password = ''
+                            this.passwordCheck=''
+                            this.email = ''
+                            this.auth = ''
+                            this.$router.push({
+                                name: 'MainPage'
+                            })
+                        } else { 
+                        alert('중복된 아이디입니다')
+                    }
+                    })
+                    .catch(res => {
+                        alert(res.response.data.message)
+                    })
+                }
+                else {
+                    alert('비밀번호가 일치하지 않습니다.')
+                return false
+                }        
+        },
+        onLogin (payload) {
+
+            if(this.$store.state.session == null) {
+
+                const {userId, password} = payload
+                
+                axios.post('http://localhost:7777/jpaMember/login', {userId, password})
+                    .then(res => {
+
+                        if (res.data != "") {
+                            
+                            alert(res.data.userId + "님 환영합니다.")
+                            this.isLogin = true;
+                            this.$store.state.session = res.data    
+                            this.$cookies.set("user", res.data, 30)
+                            this.$router.push({ name: 'MainPage'})
+                            
+                        } else {
+                            alert('아이디와 비밀번호를 확인해주세요. ' + res.data)
+                        }
+                        })
+
+                    .catch(res => {
+                        console.log(res)
+                        alert('아이디와 비밀번호를 확인해주세요. ')
+                    })
+            } 
+            else {
+                alert("이미 로그인 되어 있습니다. 아이디 : " +this.$store.state.session.userId)
+            }
+        },     
+        logout () {
+            this.$cookies.remove('user')
+            this.isLogin = false
+            this.$store.state.session = null
+            window.location.reload();
+        },
     }
+
+    
     
 }
 </script>

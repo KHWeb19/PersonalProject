@@ -1,14 +1,14 @@
 import {
     FETCH_MEMBER_LIST,
     FETCH_MEMBER,
-
+/*
     COOKIE_SESSION,
     REMOVE_IS_LOGIN,
     REMOVE_SESSION,
     SET_IS_LOGIN,
 
     SET_MEMBER_NO,
-    SET_AUTH
+    SET_AUTH*/
 
 
 }from './mutation-types'
@@ -21,7 +21,7 @@ export default {
         state.board = member
     },
 
-
+/*
     [COOKIE_SESSION](state, payload) {
         state.session = payload;
     },
@@ -39,6 +39,6 @@ export default {
     },
     [REMOVE_IS_LOGIN](state, payload) {
     state.isLogin = payload;
-    }
+    }*/
   
 }

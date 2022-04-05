@@ -3,13 +3,13 @@ import{
     //FETCH_MEMBER_LIST,
     //FETCH_MEMBER,
     
-    COOKIE_SESSION,
-    REMOVE_IS_LOGIN,
-    REMOVE_SESSION,
-    SET_IS_LOGIN,
+    //COOKIE_SESSION,
+    //REMOVE_IS_LOGIN,
+   // REMOVE_SESSION,
+    //SET_IS_LOGIN,
 
-    SET_AUTH,
-    SET_MEMBER_NO
+    //SET_AUTH,
+    //SET_MEMBER_NO
 
 
 } from './mutation-types'
@@ -22,7 +22,8 @@ import cookies from 'vue-cookies'
 Vue.use(cookies)
 
 export default {
-    /*fetchMemberList ({ commit }) {
+    /*
+    fetchMemberList ({ commit }) {
         return axios.get(`http://localhost:7777/jpaMember/register/${memberNo}`)
                 .then((res) => {
                     commit(FETCH_MEMBER_LIST, res.data)
@@ -33,7 +34,7 @@ export default {
                 .then((res) => {
                     commit(FETCH_MEMBER, res.data)
                 })
-    },*/
+    }, 
     cookieSession({ commit }) {
 
         let data;
@@ -89,5 +90,5 @@ export default {
         commit(SET_AUTH, null);
         commit(REMOVE_SESSION, null);
         commit(REMOVE_IS_LOGIN, false);
-    }
+    }*/
 }

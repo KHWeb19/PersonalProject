@@ -1,4 +1,4 @@
-<template>
+<!--<template>
     <div align ="center">
           <login-form v-if="session ==null" @submit="onSubmit"/>
     </div>
@@ -24,7 +24,7 @@ export default {
    },
    data () {
         return {
-            res:''
+            res:'',
         }
     },
    computed: { 
@@ -84,4 +84,4 @@ export default {
 //뷰에서 아이디와 비번이 일치하지 않습니다
 //로그인을 했을 때 메뉴바 변하기 
 
-</script> 
+</script> -->

@@ -7,7 +7,7 @@
         </template>
         <v-card>
             <v-container >
-                <form @submit.prevent="onSubmit">
+                <form @submit.prevent="onRegister">
                     
                     <v-card class="card_box">
                         <h1 class="text-center"> Create Account </h1>
@@ -71,7 +71,7 @@ export default {
                 email : '',
                 radioGroup: 1,
                 kindsOfMember: [
-                    'user',
+                    'individaul',
                     'manager'
                 ],
                 rulesId:[
@@ -97,10 +97,10 @@ export default {
             }
         },
     methods: {
-        onSubmit () {
+        onRegister () {
                       
             const {  userId, password, passwordCheck, email, radioGroup } = this
-            const auth = (radioGroup == 'user' ? 'user' : 'manager')
+            const auth = (radioGroup == 'individaul' ? 'individaul' : 'manager')
             this.$emit('submit', { userId, password, passwordCheck, email, auth})
             
         }

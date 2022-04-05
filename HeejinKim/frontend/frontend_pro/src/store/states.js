@@ -3,11 +3,12 @@ export default{
 members:[],
 member:null,
 
-
+/*
 session: null,
 isLogin: false,
 loginMemberNo: null,
-auth: null
+auth: null */
+session: [],
 
 
 

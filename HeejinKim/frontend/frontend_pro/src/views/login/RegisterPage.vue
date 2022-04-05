@@ -1,4 +1,4 @@
-<template>
+<!--<template>
     <div align ="center">
           <register-form @submit="onSubmit" :memberList="memberList"/>
         
@@ -55,5 +55,5 @@ export default {
 
     }
 }
-</script>
+</script>-->
 

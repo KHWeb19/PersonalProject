@@ -1,51 +1,43 @@
 <template>
-    <div>
-    <!--
-   <v-dialog v-model="login_dialog" max-width="350">
-        <template v-slot:activator="{ on, attrs }"> </template> </v-dialog>-->
-            <v-btn text color="black" class="btn-flat" v-on="on" v-bind="attrs">
-                Login
-            </v-btn>
-        
-        <v-card>
-            <v-container >
-                <form @submit.prevent="onSubmit">
-                    
-                    <v-card class="card_box">
-                        <h1 class="text-center"> Hello </h1>
-                        <div class="input" justify-center>
-                            
-                            <div class="input_area">
-                            <v-text-field class="pl-4 pr-4" flat solo v-model="userId" type="text" label="userId" :rules="rulesId"> 
-                            </v-text-field></div>
+   <div>
+        <v-dialog v-model="login_dialog" max-width="350">
+            <template v-slot:activator="{ on, attrs }"> 
+                <v-btn text color="black" class="btn-flat" v-on="on" v-bind="attrs">Login
+                </v-btn>
+            </template>    
+            <v-card>
+                <v-container >
+                    <form @submit.prevent="onLogin">
+                        
+                        <v-card class="card_box">
+                            <h1 class="text-center"> Hello </h1>
+                            <div class="input" justify-center>
+                                
+                                <div class="input_area">
+                                <v-text-field class="pl-4 pr-4" flat solo v-model="userId" type="text" label="userId" :rules="rulesId"> 
+                                </v-text-field></div>
 
-                            <div class="input_area">
-                            <v-text-field class="pl-4 pr-4" flat solo v-model="password" type="password" label="password"
-                            :rules="rulesPassword"> </v-text-field></div>
-                            
-                            <div class="row">
-                                <v-radio-group v-model="radioGroup" row>
-                                    <v-radio v-for="kinds in kindsOfMember" :key="kinds" :label="`${kinds}`" :value="kinds"></v-radio>
-                                </v-radio-group>
-                            </div>
+                                <div class="input_area">
+                                <v-text-field class="pl-4 pr-4" flat solo v-model="password" type="password" label="password"
+                                :rules="rulesPassword"> </v-text-field></div>
 
-                            <div class="forgot_pw pt-5 " >
-                                <h5> FORGOT PASSWORD?</h5>
-                            </div>
+                                <div class="forgot_pw pt-5 " >
+                                    <h5> FORGOT PASSWORD?</h5>
+                                </div>
 
-                            <div class="btn-size pt-2">
-                                <v-btn width="200" height="50px" type="submit" color="black" style="margin-top:10%;"
-                                class="white--text" rounded >
-                                    login
-                                </v-btn>
+                                <div class="btn-size pt-2">
+                                    <v-btn width="200" height="50px" type="submit" color="black" style="margin-top:10%;"
+                                    class="white--text" rounded >
+                                        login
+                                    </v-btn>
+                                </div>
                             </div>
-                        </div>
-                    </v-card>
-                </form>
-            </v-container>
-        </v-card>
+                        </v-card>
+                    </form>
+                </v-container>
+            </v-card>
+        </v-dialog>
    </div>
-    
 </template>
 
 <script>
@@ -56,12 +48,9 @@ export default {
                       
             userId: '',
             password: '',
+            login_dialog: false,
             
-            radioGroup: 1,
-                kindsOfMember: [
-                    'user',
-                    'manager'
-                ],
+            
             rulesId:[
                     v => !!v || 'Enter your id'
             ],
@@ -74,9 +63,10 @@ export default {
         }
     },
     methods:{
-        onSubmit  () {
+        onLogin  () {
             const { userId, password } = this
-            this.$emit('submit', { userId, password })
+           
+            this.$emit('submit', { userId, password})
         }
 
     }

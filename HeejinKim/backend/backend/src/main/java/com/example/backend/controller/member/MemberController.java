@@ -20,7 +20,7 @@ public class MemberController {
     public void memberRegister(@Validated @RequestBody MemberRequest memberRequest) {
         log.info("memberRegister() : " + memberRequest.getUserId() + ", " + memberRequest.getPassword() + ", " +
                 memberRequest.getEmail() +", " +memberRequest.getPasswordCheck() + ", " +
-                (memberRequest.getAuth().equals("user") ? "ROLE_INDIVIDUAL" : "ROLE_MANAGER"));
+                (memberRequest.getAuth().equals("INDIVIDUAL") ? "ROLE_INDIVIDUAL" : "ROLE_MANAGER"));
         service.register(memberRequest);
 
     }

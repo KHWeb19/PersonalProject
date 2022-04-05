@@ -101,6 +101,9 @@ export default {
    
   data() {
     return {
+        nav_drawer:'',
+        group:'',
+        category:''
       
     }
 }
