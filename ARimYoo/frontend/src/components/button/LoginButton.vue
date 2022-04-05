@@ -49,10 +49,14 @@ export default {
             .then(res => {
               if (res.data) {
                  console.log(res.data)
+                 this.$store.state.member = res.data
                  localStorage.setItem("userInfo", JSON.stringify(res.data))
                  localStorage.setItem("token", res.data.token)
                  alert ('Welcome!')
                  history.go(0)
+              } else {
+                  alert('아이디와 비밀번호를 확인해주세요.')
+                  return this.loginForm.dialog = true
               }
             })
             .catch(res => {

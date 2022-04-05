@@ -1,6 +1,5 @@
 <template>
     <div>
-    
         <v-btn
             color="white"
             height="20"

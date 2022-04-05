@@ -45,13 +45,34 @@ public class MemberServiceImpl implements MemberService {
             return null;
         }
 
-        MemberRequest response = new MemberRequest(
-                memberRequest.getId(),
-                null);
+        // 로그인 하는 순간 해당 회원의 멤버번호 가져오기
+        if (loginMember.getId().equals(memberRequest.getId())){
+
+            memberRequest.setMemberNo(loginMember.getMemberNo());
+//            memberRequest.setName(loginMember.getName());
+//            memberRequest.setBirth(loginMember.getBirth());
+//            memberRequest.setIntro(loginMember.getIntro());
+//            memberRequest.setProfilePic(loginMember.getProfilePic());
+
+        }
+
+        MemberRequest response = new MemberRequest(memberRequest.getMemberNo(), memberRequest.getId(), null);
 
         return response;
     }
 
-}
+    @Override
+    public Member read (Long memberNo) {
+        Optional<Member> getMemberInfo = repository.findById(Long.valueOf(memberNo));
+
+        return getMemberInfo.get();
+    }
+    @Override
+    public void modify(Member member) {
+        repository.save(member); }
+    }
+
+
+
 
 

@@ -1,33 +1,27 @@
 <template>
-    <v-dialog :value="dialog"  width="500" persistent>
+    <v-dialog :value="dialog"  width="470" persistent>
       <v-card >
               <v-card-title class="text-h4 grey lighten-2">
                 <img id="loginTitle" src="@/assets/main/Login.png">
               </v-card-title>
-              <br/>
               <v-card-text>
                   <v-container>
                     <form name="loginForm" @submit.prevent="onSubmit">
-                      <table>
-                        <tr>
-                          <td>I D</td>
-                          <td><input class="underline"  id="id1" name="id" type="text" v-model="id" ></td>
-                        </tr>
-                        <br/>
-                        <tr>
-                          <td>PASSWORD</td>
-                          <td><input class="underline"  name="pw" type="password" v-model="pw"></td>
-                        </tr>
-                      </table>
+                        <v-col cols="7">
+                            <v-text-field  label="I D" color="red darken-2" name="id" type="text" v-model="id" ></v-text-field>
+                        </v-col>
+                        <v-col cols="7">
+                          <v-text-field  label="PASSWORD" color="red darken-2"  name="pw" type="password" v-model="pw"></v-text-field>
+                        </v-col>
                     </form>
                   </v-container>
                 <div class="loginImg">
                 <img src="@/assets/main/homebanner_ghost.png" height="80">
                 </div>
               </v-card-text>
-
+              
               <v-divider></v-divider>
-
+              
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn
@@ -95,6 +89,7 @@ export default {
         },
         close(){
           this.$emit('close')
+           return this.id='', this.pw=''
         }
   }
 }
@@ -103,21 +98,9 @@ export default {
 
 <style scoped>
 
-input.underline {
-  border-bottom:solid 2px;
-  margin-left:1px;
-}
-td{
-  font-weight: bold;
-  text-align: center;
-  padding-right:10px;
-}
-.loginCard {
-  text-align: center;
-}
 .loginImg {
   position: absolute;
-  left:73%;
+  left:70%;
   top:42%;
 }
 #loginTitle{

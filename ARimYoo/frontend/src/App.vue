@@ -17,8 +17,8 @@
                                 <v-list-item
                                     class="black"
                                     dark
-                                    v-for="item in items"
-                                    :key="item"
+                                    v-for="(item,idx) in items"
+                                    :key="idx"
                                     :to ="item.route"
                                     >
                                     {{ item.title }}
@@ -62,6 +62,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import JoinButton from './components/button/JoinButton.vue';
 import LoginButton from './components/button/LoginButton.vue';
 import LogoutButton from './components/button/LogoutButton.vue';
@@ -74,13 +75,17 @@ export default {
   data () {
     return {
      user: {
-         message: decodeURIComponent(this.$store.state.userInfo.id)
+         message: decodeURIComponent(this.$store.state.userInfo.id),
+        
      },
      items: [
          {title: 'My Page', route:'/myPage'},
          {title: 'My With', route:'/myWith'}
      ]
     }
+  },
+  computed: {
+      ...mapState(['userInfo'])
   },
   methods : {
       goToMain () {

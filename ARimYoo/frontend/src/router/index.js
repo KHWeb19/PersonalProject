@@ -2,13 +2,12 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from '../store/index'
 
-import EnterVellup from '../views/EnterVellup.vue'
-import MainVellupPage from '../views/MainVellupPage.vue'
-import JoinPage from '../views/JoinPage.vue'
-import JoinPage2 from '../views/JoinPage2.vue'
-import MemberModifyPage from '../views/MemberModifyPage.vue'
-import CommunityPage from '../views/CommunityPage.vue'
-import MyPage from '../views/MyPage.vue'
+import EnterVellup from '../views/main/EnterVellup.vue'
+import MainVellupPage from '../views/main/MainVellupPage.vue'
+import JoinPage from '../views/main/JoinPage.vue'
+import JoinPage2 from '../views/main/JoinPage2.vue'
+import CommunityPage from '../views/board/CommunityPage.vue'
+import MyPage from '../views/my/MyPage.vue'
 
 Vue.use(VueRouter)
 
@@ -43,11 +42,6 @@ const routes = [
     component: JoinPage2
     },
     {
-        path: '/memberModify',
-        name: 'MemberModifyPage',
-        component: MemberModifyPage
-    },
-    {
         path: '/myPage',
         name: 'MyPage',
         component: MyPage,
@@ -58,7 +52,7 @@ const routes = [
         name: 'CommunityPage',
         component: CommunityPage,
         beforeEnter: requireLogin()
-    }
+    },
 
   
 ]

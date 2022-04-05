@@ -42,12 +42,15 @@ public class Member {
     @UpdateTimestamp
     private Date lastModifiedDate;
 
-    public Member (String userId, String password, String name, String birth, String intro, String profilePic) {
+    public Member (Long memberNo, String userId, String password, String userName, String userBirth,
+                   String userIntro, String userProfilePic) {
+        this.memberNo = memberNo;
         this.id = userId;
         this.pw = password;
-        this.name = name;
-        this.birth = birth;
-        this.intro = intro;
-        this.profilePic = profilePic;
+        this.name = userName;
+        this.birth = userBirth;
+        this.intro = userIntro;
+        this.profilePic = userProfilePic;
+
     }
 }
