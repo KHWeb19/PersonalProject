@@ -25,6 +25,15 @@ public class MemberAuthCheckId {
     @Column(length = 128, nullable = false)
     private String password;
 
+    @Column(length = 10, nullable = false)
+    private String gender;
+
+    @Column(length = 10, nullable = false)
+    private Date birthDay;
+
+    @Column(length = 200, nullable = false)
+    private String address;
+
     @CreationTimestamp
     private Date regDate;
 

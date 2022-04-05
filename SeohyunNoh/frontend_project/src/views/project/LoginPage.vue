@@ -5,12 +5,13 @@
         </div>
 
         <login-form @submit="onSubmit"/>
-        <v-btn tile color="teal lighten" @click="logout">
+        
+        <!-- <v-btn tile color="teal lighten" @click="logout">
             <v-icon left>
                 mdi-logout
             </v-icon>
             로그아웃
-        </v-btn>
+        </v-btn> -->
     </div>
 </template>
 

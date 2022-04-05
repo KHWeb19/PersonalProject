@@ -3,7 +3,6 @@
         <form @submit.prevent="onSubmit">
             <v-layout align-center row wrap>
                 <v-flex xs12>
-                    <v-card>
                         <v-toolbar flat>
                             <v-toolbar-title>회원가입</v-toolbar-title>
                         </v-toolbar>
@@ -40,12 +39,13 @@
                             <!-- 주소 --> 
                             <address-api v-model="address"/>
 
+                            <br>
+
                             <!-- 회원가입 버튼 클릭 --> 
-                            <v-btn color="grey" depressed block type="submit">
+                            <v-btn color="basil" depressed block type="submit">
                                 회원가입
                             </v-btn>
                         </div>
-                    </v-card>
                 </v-flex>
             </v-layout>
         </form>
@@ -82,7 +82,7 @@ export default {
         }
     },
     methods: {
-        onSubmit () {
+        async onSubmit () {
             const { radioGroup, name, radioGender, birthDay, id, pw, address } = this
 
             const auth = (radioGroup == '개인' ? '개인' :

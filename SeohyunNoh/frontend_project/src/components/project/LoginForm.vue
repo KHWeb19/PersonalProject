@@ -1,9 +1,8 @@
 <template>
-    <v-container fill-height stlye="max-width:600px;">
+    <v-container fluid fill-height stlye="max-width:600px;">
         <form @submit.prevent="onSubmit">
-            <v-layout align-center row wrap>
-                <v-flex xs12>
-                    <v-card>
+            <v-layout align-content-center>
+                <v-flex md12>               
                         <v-toolbar flat>
                             <v-toolbar-title>로그인</v-toolbar-title>
                         </v-toolbar>
@@ -21,11 +20,11 @@
                             </v-text-field>
                             <v-text-field v-model="pw" type="password" label="패스워드">
                             </v-text-field>
-                            <v-btn color="grey" depressed block type="submit">
+                            <v-btn color="basil" depressed block type="submit">
                                 로그인
                             </v-btn>
                             <br>
-                            <v-btn color="grey" depressed block @click="joinPageForm">
+                            <v-btn color="basil" depressed block @click="joinPageForm">
                                 회원가입
                             </v-btn>
                             <!-- <v-btn color="grey" depressed>
@@ -34,7 +33,6 @@
                                 </router-link>
                             </v-btn> -->
                         </div>
-                    </v-card>
                 </v-flex>
             </v-layout>
         </form>
