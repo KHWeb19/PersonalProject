@@ -10,18 +10,22 @@
 
         </div>
         
+        <footer-form></footer-form>
+
     </div>
 </template>
 
 <script>
 import BookingCakeForm from '@/components/mainPage/BookingCakeForm.vue'
 import MainPageForm from '@/components/layout/MainPageForm.vue'
+import FooterForm from '../../components/layout/FooterForm.vue'
 
     export default {
         name: 'BookingPage',
         components: {
             BookingCakeForm,
-            MainPageForm
+            MainPageForm,
+                FooterForm
         }
 
     }
