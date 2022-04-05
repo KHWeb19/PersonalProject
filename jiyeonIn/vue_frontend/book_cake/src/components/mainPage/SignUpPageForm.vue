@@ -12,7 +12,7 @@
         <v-container>
             <v-row style="width: 60%; height: 20%;">
             <v-text-field flat v-model="id" type="text"  dense required placeholder="아이디 입력" :rules="rules_id" ></v-text-field>
-            <v-btn color="black" text type="button" onclick="checkId"><v-icon>mdi-check</v-icon></v-btn>
+            <v-btn color="black" text type="button" @click="checkValid"><v-icon>mdi-check</v-icon></v-btn>
             </v-row>
             <v-text-field flat v-model="pw" type="password"  dense required placeholder="비밀번호 입력" :rules="rules_pw" style="width: 60%; padding: 15px 0 0 0;"></v-text-field>
             <v-text-field flat v-model="pw1" type="password"  dense required placeholder="비밀번호 확인" :rules="rules_pw1" style="width: 60%;"></v-text-field>
@@ -25,15 +25,19 @@
                 <v-icon>mdi-login</v-icon>회원가입</v-btn>
         </div>
     </form>
-
-
     </div>
     
 </template>
 
 <script>
+import axios from 'axios'
     export default {
         name: 'SignUpPageForm',
+        props:{
+            members: {
+                type: Array
+            }
+        },
         data() {
             return {
                 radioGroup: 1,
@@ -44,7 +48,8 @@
                 id:'',
                 pw: '',
                 name:'',
-                pw1:'',                
+                pw1:'',
+                valid: false,                
                 rules_id: [
                     v => !!v || '아이디를 입력해주세요'
                 ],
@@ -67,16 +72,22 @@
                 const auth = (this.radioGroup == '회원' ? '회원' : '관리자')
                 this.$emit('submit', {id, pw, name, auth})
             },
-            
-
-
-            // checkId () {
-            //     for(member m : members) //멤버 정보를 어차피 가지고 와야하니까. 그거를 들고와서 for문으로 리스트 돌리고. db id값과 작성한 id값이 동일한지 체크
-            //     if(m.id = this.id) {
-            //         alert('중복된 아이디가 있습니다!')
-            //         break;
-            //     }
-            //}
+            checkValid () { 
+                const { id } =this
+                axios.get(`http://localhost:7777/Member/check/${id}`)
+                    .then(res => {
+                        this.temp = res.data;
+                        if(res.data == true){
+                            alert("사용 가능한 아이디 입니다!")
+                            this.valid = res.data;
+                        }else {
+                            alert("중복된 아이디 입니다!")
+                            this.valid = false;
+                        }
+                    })
+                
+                
+            }
         }   
     }
 </script>

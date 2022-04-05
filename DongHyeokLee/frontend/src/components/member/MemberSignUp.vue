@@ -3,7 +3,7 @@
     <v-dialog v-model="signUpDialog" persisten max-width="400px">
         <template v-slot:activator="{ on }">
             <v-btn color="cyan lighten-3" style="font-size: 0.7em;" dark v-on="on">
-                <v-icon style="font-size: 1.5em;">
+                <v-icon style="font-size: 1.3em;">
                 mdi-account-plus
                 </v-icon>
                     회원가입
@@ -55,7 +55,7 @@ import axios from 'axios'
 import { mapState } from 'vuex'
 
 export default {  
-    name: 'TopNavBar',
+    name: 'MemberSignUp',
     props: {
         members: {
             type: Array
@@ -64,7 +64,6 @@ export default {
     data () {
         return {
             signUpDialog: false,
-            loginDialog: false,
             userId: '',
             password: '',
             nickname: '',
@@ -80,15 +79,18 @@ export default {
 
     },
     methods: {
+        
         signUp () {
         const { userId, password, email, nickname } = this
-            let coin = null;
+        if((userId.length >= 5 && userId.length <=15) && ( password.length >= 8 && password.length <= 15) &&
+            (nickname.length >= 3 && nickname.length <= 10) && email.length>= 10){
+                let coin = null;
         for(var i = 0; i < this.members.length; i++){
             if(this.members[i].userId === userId){
-                alert('아이디 중복입니다')
+                alert('중복 된 아이디 입니다')
                 coin = 1;
             }else if(this.members[i].nickname === nickname){
-                alert('닉네임 중복입니다')
+                alert('중복 된 닉네임 입니다')
                 coin = 1;
             }else if(this.members[i].email === email){
                 alert('중복 된 이메일 입니다.')
@@ -107,8 +109,11 @@ export default {
                 alert(res.response.data.message)
                     })
                 }
+            }else{
+            alert('다시 입력 해주세요')
             }
-
         }
+
+    }
 }
 </script>

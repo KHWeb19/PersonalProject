@@ -46,7 +46,25 @@ public class MemberController {
         }else{
             log.info("Login Fail");
         }
-
         return memberResponse;
+    }
+
+    @PutMapping("/modify")
+    public Member memberInformationModify (@RequestBody Member member) {
+        log.info("memberModify(): " + member);
+
+        log.info(""+ member.getMemberNo());
+
+
+        memberService.modify(member);
+
+        return member;
+    }
+
+    @DeleteMapping("/remove")
+    public void MemberInformationRemove(@RequestBody Member member) {
+        log.info("MemberRemove()" + member.getMemberNo());
+
+        memberService.remove(member);
     }
 }

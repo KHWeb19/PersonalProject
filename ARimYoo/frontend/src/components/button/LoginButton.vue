@@ -1,109 +1,76 @@
 <template>
     <div>
-      <v-dialog v-model="dialog" width="500">
-        <template v-slot:activator="{ on, attrs }" >
+          <login-form :loginForm="this.loginForm" @close="close" @submit="onSubmit"/>
           <v-btn
             color="white"
             height="20"
-            v-bind="attrs"
-            v-on="on"
+            @click="open"
           >
             Login
           </v-btn>
-        </template>
-
-        <v-card>
-          <v-card-title class="text-h4 grey lighten-2">
-            <img id="loginTitle" src="@/assets/main/Login.png">
-          </v-card-title>
-          <br/>
-          <v-card-text>
-              <v-container>
-                <form name="loginForm" @submit.prevent="onSubmit">
-                  <table>
-                    <tr>
-                      <td>I D</td>
-                      <td><input class="underline" name="id" type="text" v-model="id"></td>
-                    </tr>
-                    <br/>
-                    <tr>
-                      <td>PASSWORD</td>
-                      <td><input class="underline" name="pw" type="password" v-model="pw"></td>
-                    </tr>
-                  </table>
-                </form>
-              </v-container>
-            <div class="loginImg">
-            <img src="@/assets/main/homebanner_ghost.png" height="80">
-            </div>
-          </v-card-text>
-
-          <v-divider></v-divider>
-
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn
-              color="red darken-3"
-              text
-              type="submit"
-              @click="checkValue"
-            >
-              ENTER
-            </v-btn>
-            <v-btn
-              color="black"
-              text
-              @click="dialog = false"
-            >
-              CANCLE
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
   </div>
 </template>
 
 <script>
+import LoginForm from '../form/LoginForm.vue'
+import Vue from 'vue'
+import axios from 'axios'
+import cookies from 'vue-cookies'
+
+Vue.use(cookies)
+
 export default {
+  components: { LoginForm },
 
     name: 'LoginButton',
-    data: () => ({
-      dialog: false,
-    }),
+    data () {
+      return {
+        loginForm: { 
+          dialog : false,
+        },
+        isLogin: false
+      }
+    },
+    mounted() {
+      this.$store.state.userInfo = this.$cookies.get("user")
+
+      if (this.$store.state.userInfo != null) {
+        this.isLogin = true
+      } else {
+        this.isLogin = false
+      }
+    },
     methods: {
-        checkValue () {
-          var inputForm = eval("document.loginForm")
-
-          if(!inputForm.id.value){
-            alert ("아이디를 입력하세요")
-            inputForm.id.focus()
-            return false
-          } else if(!inputForm.pw.value){
-            alert ("비밀번호를 입력하세요")
-            inputForm.pw.focus()
-            return false
-          } else {
-            const { id, pw } = this
-            this.$emit('submit', { id, pw })
-          }
+      open(){
+        this.loginForm.dialog = true
+      
+        
+      },
+      close () {
+        this.loginForm.dialog = false
+      },
+      onSubmit (payload) {
+        if(!this.isLogin){
+          const {id,pw} = payload
+          axios.post ('http://localhost:7777/Member/login', {id, pw})
+            .then(res => {
+              if (res.data) {
+                alert ('로그인 성공!')
+                this.$store.state.userInfo = res.data
+                this.$cookies.set("user", res.data, 30)
+                this.isLogin = true
+              }
+            })
+            .catch(res => {
+              alert(res.response.data.message)
+            })
+        } else {
+          alert ('이미 로그인이 되어 있습니다!')
         }
-    }
+
+      }
+    },
 
 }
+
 </script>
-
-<style scoped>
-.loginCard {
-  text-align: center;
-}
-
-.loginImg {
-  position: absolute;
-  left:73%;
-  top:42%;
-}
-#loginTitle{
-  position: relative;
-  width:20%;
-}
-</style>

@@ -1,11 +1,18 @@
 package com.example.demo.controller.memberController;
 
+import com.example.demo.controller.memberController.Response.MemberResponse;
 import com.example.demo.controller.memberController.request.MemberRequest;
+import com.example.demo.entity.member.Member;
+import com.example.demo.entity.member.MemberAuth;
 import com.example.demo.service.member.MemberService;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -16,6 +23,7 @@ public class MemberController {
     @Autowired
     private MemberService service;
 
+
     @PostMapping("/register")
     public void registerMember (@Validated @RequestBody MemberRequest memberRequest) {
         log.info("MemeberRegister()" + memberRequest.getId() +", "+ memberRequest.getPw() +", "+ memberRequest.getName() +", "+ memberRequest.getAuth());
@@ -24,7 +32,7 @@ public class MemberController {
     }
 
     @PostMapping("/login")
-    public MemberRequest memberLogin (@Validated @RequestBody MemberRequest memberRequest) {
+    public MemberRequest memberLogin ( @RequestBody MemberRequest memberRequest) {
         log.info("MemberLogin()" + memberRequest);
 
         MemberRequest memberResponse = service.login(memberRequest);
@@ -36,5 +44,14 @@ public class MemberController {
         }
 
         return memberResponse;
+    }
+
+    @GetMapping("/check/{id}")
+    public Boolean findId (@PathVariable("id") String id) {
+        log.info("findId()" + id);
+
+        Boolean maybeMember = service.checkUserIdValidation(id);
+
+        return maybeMember;
     }
 }

@@ -26,17 +26,26 @@ public class MemberController {
         return member;
     }
 
-//    @PostMapping("/login")
-//    public MemberRequest login (@RequestBody MemberRequest memberRequest){
-//        log.info ("Login(): " + memberRequest);
-//
-//        MemberRequest memberResponse = service.login(memberRequest);
-//
-//        if(memberResponse != null) {
-//            log.info ("로그인 성공!");
-//        }else {
-//            log.info("로그인 실패");
-//        }
-//        return memberResponse;
-//    }
+    @PostMapping ("/login")
+    public MemberRequest login (@RequestBody MemberRequest memberRequest){
+        log.info ("login(): " + memberRequest);
+
+        MemberRequest memberResponse = service.login(memberRequest);
+
+        if (memberResponse != null) {
+            log.info ("로그인 성공!");
+        } else {
+            log.info ("로그인 실패!");
+        }
+
+
+        return memberResponse;
+
+
+    }
+
+
+
+
+
 }

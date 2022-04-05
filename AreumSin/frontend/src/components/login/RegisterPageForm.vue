@@ -4,35 +4,35 @@
       <v-card-title style="font-size: 50px; margin-bottom: 15px; margin-top: 15px">회원가입<br/></v-card-title>
     </v-row>
     <v-row justify="center">
-      <form>
+      <form @submit.prevent="onSubmit">
         <table>
           <tr>
             <td colspan="2">&nbsp;ID</td>
           </tr>
           <tr>
-            <td><input type="text"></td>
-            <td><v-btn height="40px" id="checkDouble">중복 확인</v-btn></td>
+            <td><input type="text" v-model="id"></td>
+            <td><v-btn height="40px" id="checkDouble" @click="checkDouble" >중복 확인</v-btn></td>
           </tr>
 
           <tr>
             <td colspan="2">PW</td>
           </tr>
           <tr>
-            <td colspan="2"><input type="password"></td>
+            <td colspan="2"><input type="password" v-model="pw"></td>
           </tr>
 
           <tr>
             <td colspan="2">이름</td>
           </tr>
           <tr>
-            <td  colspan="2"><input type="text"></td>
+            <td  colspan="2"><input type="text" v-model="name"></td>
           </tr>
 
           <tr>
             <td  colspan="2">생년월일</td>
           </tr>
           <tr>
-            <td colspan="2"><input type="text" placeholder=" ex) 940114"></td>
+            <td colspan="2"><input type="text" placeholder=" ex) 940114" v-model="birth"></td>
           </tr>
 
           <tr>
@@ -96,7 +96,7 @@
 
           <tr>
             <td rowspan="2" colspan="2">
-              <v-btn width="100%" height="50px" id="registerBtn">가입</v-btn>
+              <v-btn width="100%" height="50px" id="registerBtn" type="submit" v-bind:disabled="checkId === true">가입</v-btn>
             </td>
           </tr>
         </table>
@@ -110,7 +110,44 @@ export default {
   name: "RegisterPageForm",
   data() {
     return{
-      colorGroup: ''
+      colorGroup: 0,
+      id: '',
+      pw: '',
+      name: '',
+      birth: '',
+    }
+  },
+  watch:{
+    id: function (){
+      return this.id = this.id.replace(/[^a-z]/g, '');
+    },
+    pw: function (){
+      return this.pw = this.pw.replace(/[^a-z]/g, '');
+    },
+    birth: function (){
+      return this.birth = this.birth.replace(/[^0-9]/g, '');
+    }
+  },
+  props: ['checkId', 'checkJoin'],
+  methods: {
+    onSubmit() {
+      const { id, pw, name, birth, colorGroup} = this;
+      const color = colorGroup;
+
+      if(pw.length < 8 || pw.length > 20){
+        alert('8자리 ~ 20자리 이내로 입력해주세요.')
+        this.pw = ''
+      }else if(birth.length !== 6){
+        alert('생년월일은 6자리로 입력해주세요.')
+        this.birth = ''
+      }
+      else{
+        this.$emit('submit', {id, pw, name, birth, color})
+      }
+    },
+    checkDouble(){
+      const {id} = this;
+      this.$emit('check', {id})
     }
   }
 }

@@ -4,16 +4,16 @@
       <v-card-title style="font-size: 30px; margin-bottom: 15px">로그인<br/></v-card-title>
     </v-row>
     <v-row justify="center">
-      <form>
+      <form @submit.prevent="onSubmit">
         <table>
           <tr>
             <td style="font-size: 20px">&nbsp;ID &nbsp;</td>
-            <td><input type="text" style="border: 1px solid black;"></td>
-            <td rowspan="2"><v-btn height="60px">다음</v-btn></td>
+            <td><input type="text" style="border: 1px solid black;" v-model="id"></td>
+            <td rowspan="2"><v-btn height="60px" type="submit">로그인</v-btn></td>
           </tr>
           <tr>
             <td style="font-size: 20px">PW &nbsp;</td>
-            <td><input type="password" style="border: 1px solid black;"></td>
+            <td><input type="password" style="border: 1px solid black;" v-model="pw"></td>
           </tr>
 
           <tr align="center">
@@ -32,7 +32,19 @@
 
 <script>
 export default {
-  name: "LoginPageForm"
+  name: "LoginPageForm",
+  data() {
+    return{
+      id: '',
+      pw: '',
+    }
+  },
+  methods: {
+    onSubmit() {
+      const {id, pw} = this;
+      this.$emit('submit', {id, pw});
+    }
+  }
 }
 </script>
 

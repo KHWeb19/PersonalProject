@@ -14,6 +14,5 @@ public class MemberRequest {
         this.id = userId;
         this.pw = password;
 
-
     }
 }

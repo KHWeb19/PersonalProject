@@ -1,6 +1,7 @@
 <template>
     <div class="Main">
-        <main-page-form></main-page-form>
+        
+        <main-page-form ></main-page-form>
         
         <v-container>
             <v-row no-gutters>
@@ -39,16 +40,19 @@
                 </v-col>
             </v-row>
         </v-container>
+        <footer-form></footer-form>
     </div>
 </template>
 
 <script>
-import MainPageForm from '@/components/mainPage/MainPageForm.vue'
+import MainPageForm from '@/components/layout/MainPageForm.vue'
+import FooterForm from '@/components/layout/FooterForm.vue'
 
     export default {
         name: 'MainHomepage',
         components: {
-                MainPageForm
+                MainPageForm,
+                FooterForm
         }
     }
     
