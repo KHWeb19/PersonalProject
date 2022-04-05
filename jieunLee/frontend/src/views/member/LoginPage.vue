@@ -1,6 +1,5 @@
 <template>
     <div>
-        <menu-bar />
         <login-form @submit="onSubmit"/>
                 <v-btn tile color="teal lighten-4" @click="logout">
             <v-icon left>
@@ -12,7 +11,6 @@
 </template>
 
 <script>
-import MenuBar from '@/components/MenuBar'
 import LoginForm from '@/components/member/LoginForm'
 import axios from 'axios'
 import Vue from 'vue'
@@ -24,7 +22,6 @@ export default {
     name: 'LoginPage',
     components: {
         LoginForm,
-        MenuBar
     },
     data() {
         return {
@@ -47,15 +44,11 @@ export default {
                 axios.post('http://localhost:7777/member/login', {memberId, password})
                     .then(res => {
                         if(res.data) {
-                           
                             this.$store.state.userInfo = res.data
                             this.$cookies.set("user", res.data, 300)
                             this.isLogin = true
-                            
-                            this.$router.push({
-                                name: 'HomeView'
-                                })
-                             localStorage.setItem("loginId", memberId )
+                            this.$router.push({name: 'HomeView'})
+                            localStorage.setItem("loginId", memberId )
                         } else {
                             alert('로그인 실패!')
                         }

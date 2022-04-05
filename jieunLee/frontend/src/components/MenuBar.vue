@@ -53,32 +53,30 @@
       </template>
 
       <v-list>
-        <v-list-item v-for="(item, index) in items" :key="index" :to="item.link" link>
-          <v-list-item-icon>
-            <v-icon color="black">{{ item.icon }}</v-icon>
-          </v-list-item-icon>
-          <v-list-item-title>{{ item.title }}</v-list-item-title>
-        </v-list-item>
-          <v-list-item-title>   
-            
+          <v-list-item-title> 
             <router-link :to="{
-                        name: 'AccountsEditPage',
-                        }">
-                   설정
+              name: 'MyProfilePage',
+              params: {memberId: loginId.toString()}}">
+              프로필
+            </router-link>
+          </v-list-item-title>
 
-                    </router-link>
+          <v-list-item-title> 
+            <router-link :to="{
+              name: 'AccountsEditPage',
+              params: {memberId: loginId.toString()}}">
+              설정
+            </router-link>
+          </v-list-item-title>
 
-
-
-                       </v-list-item-title>
-          <v-list-item-title>        
-            <v-btn @click="logout">
-              로그아웃
-            </v-btn>
-        </v-list-item-title>
-      </v-list>
-    </v-menu>
-    <v-spacer></v-spacer>
+            <v-list-item-title>        
+              <v-btn @click="logout">
+                로그아웃
+              </v-btn>
+          </v-list-item-title>
+        </v-list>
+      </v-menu>
+      <v-spacer></v-spacer>
     </v-app-bar>
     
   
@@ -95,16 +93,14 @@ Vue.use(cookies)
   export default {
 
     data: () => ({
-      items: [
-        { icon:'mdi-account-circle-outline', title: '프로필', link:'/profile'},
-        { icon:'mdi-cog-outline', title: '설정', link:'/accounts/edit' },
-      ],
-      isLogin: true
+      isLogin: true,
+      loginId: localStorage.getItem("loginId")
     }),
     logout() {
       this.$cookies.remove("user")
       this.isLogin = false
       this.$store.state.userInfo = null
+      localStorage.removeItem("loginId")
 
       alert('로그아웃 성공!')
     }

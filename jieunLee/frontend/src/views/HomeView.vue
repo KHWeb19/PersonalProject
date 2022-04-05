@@ -1,21 +1,17 @@
 <template>
   <div>
     <menu-bar/>
-    <router-link style="text-decoration: none;" :to="{name: 'LoginPage'}">
-      &nbsp;Login&nbsp;
-    </router-link>
-    <router-link style="text-decoration: none;" :to="{name: 'RegisterPage'}">
-      &nbsp;Register&nbsp;
-    </router-link>
-
-    <member-list :members="members"/>
-
-      <router-link :to="{
-          name: 'AccountsEditPage',
-          params: {memberId: memberId.toString()}}">
-          로그인회원넘버: {{memberId}}
-          
+    <v-container style="width: 1000px; margin-top: 20px;">
+      <router-link style="text-decoration: none;" :to="{name: 'LoginPage'}">
+        &nbsp;Login&nbsp;
       </router-link>
+      <router-link style="text-decoration: none;" :to="{name: 'RegisterPage'}">
+        &nbsp;Register&nbsp;
+      </router-link>
+
+      <member-list :members="members"/>
+
+    </v-container>
 
   </div>
 </template>
@@ -33,10 +29,7 @@ export default {
     },
     data() {
       return {
-      // loginNo: this.$store.state.member.memberNo,
-      // loginNo: 8
-      memberId: localStorage.getItem("loginId")
-      // memberId: 'test'
+        memberId: localStorage.getItem("loginId")
       }
     },
     computed: {

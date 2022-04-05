@@ -34,12 +34,17 @@ const routes = [
     component: BoardRegisterPage
   },
   {
-    path: '/profile',
+    path: '/:memberId',
     name: 'MyProfilePage',
-    component: MyProfilePage
+    components: {
+      default: MyProfilePage
+    },
+    props: {
+      default: true
+    }
   },
   {
-    path: '/accounts/edit/:memberNo',
+    path: '/accounts/edit/:memberId',
     name: 'AccountsEditPage',
     components: {
       default: AccountsEditPage

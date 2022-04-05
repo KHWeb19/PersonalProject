@@ -9,9 +9,11 @@
           <form @submit.prevent="onSubmit"  >
             <table>
               <tr>
-                  <td style="text-align: right; padding-right: 10px">사진</td>
+                  <td style="text-align: right; padding-right: 10px">                    
+                    <v-img style=" margin-left: 25px" width="38" src="@/assets/logo.png"/>
+                  </td>
                   <td>
-                      아이디
+                      {{member.memberId}}
                       <br/>
                       <div class="filebox"> 
                         <label style="cursor: pointer; color: blue" for="ex_file">프로필 사진 바꾸기</label>

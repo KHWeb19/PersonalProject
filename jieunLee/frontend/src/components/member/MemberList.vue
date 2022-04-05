@@ -10,11 +10,11 @@
                     현재 등록된 회원이 없습니다!
                 </td>
             </tr>
-            <tr v-else v-for="board in members" :key="board.memberNo">
+            <tr v-else v-for="board in members" :key="board.memberId">
                 <td align="left">
                     <router-link :to="{
                         name: 'AccountsEditPage',
-                        params: {memberNo: board.memberNo.toString()}}">
+                        params: {memberId: board.memberId.toString()}}">
                     {{ board.memberId }}
                     </router-link>
                 </td>
