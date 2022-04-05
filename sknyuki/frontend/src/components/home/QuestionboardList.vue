@@ -3,7 +3,7 @@
  <p>proto type</p>
     <v-row align="center" justify="center">
         <!--name:homeview변경예정-->
-    <router-link style="text-decoration: none;" :to="{name:'homeView'}">
+    <router-link style="text-decoration: none;" :to="{name:'K1QuestionView'}">
     <v-btn class="blue lighten-5"> 질문 게시판 보러가기</v-btn>
     </router-link></v-row>
     <br>

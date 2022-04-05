@@ -4,7 +4,7 @@
      <p>proto type</p>
     <v-row align="center" justify="center">
         <!--name:homeview변경예정-->
-    <router-link style="text-decoration: none;" :to="{name:'Kategorie1Veiw'}">
+    <router-link style="text-decoration: none;" :to="{name:'K1CheckBrandView'}">
     <v-btn class="blue lighten-5">상품 판별 보러가기 </v-btn>
     </router-link></v-row>
 <br>
@@ -12,7 +12,6 @@
      <!-- 가변링크 달아줄 예정-->
                 
                     <div onclick ="location.href='http://localhost:8080/kategorie1'" class="item hover item1"></div>
-             
                     <div class="item hover item2"></div>
                     <div class="item hover item3"></div>
                     <div class="item hover item4"></div>

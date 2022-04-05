@@ -1,8 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '@/views/MainPage/HomeView.vue'
-import Kategorie1Veiw from '@/views/Kategorie1Veiw/Kategorie1Veiw'
-import Kategorie1ReadPage from '@/views/Kategorie1Veiw/Kategorie1ReadPage'
+import K1CheckBrandView from '@/views/K1CheckBrandVeiw/K1CheckBrandView.vue'
+import K1CheckBrandReadPage from '@/views/K1CheckBrandVeiw/K1CheckBrandReadPage.vue'
+import K1QuestionReadPage from '@/views/K1QuestionVeiw/K1QuestionReadPage.vue'
+import K1QuestionView from '@/views/K1QuestionVeiw/K1QuestionView.vue'
 
 Vue.use(VueRouter)
 
@@ -13,16 +15,25 @@ const routes = [
     component: HomeView
   },
   {
-    path: '/kategorie1',
-    name: 'Kategorie1Veiw',
-    component: Kategorie1Veiw
+    path: '/K1CheckBrandView',
+    name: 'K1CheckBrandView',
+    component: K1CheckBrandView
   },
   {
-    path:'/kategorieReadPage',
-    name:'Kategorie1ReadPage',
-    component: Kategorie1ReadPage
-  }
-  
+    path:'/K1CheckBrandReadPage',
+    name:'K1CheckBrandReadPage',
+    component: K1CheckBrandReadPage
+  },
+  {
+    path:'/K1QuestionReadPage',
+    name:'K1QuestionReadPage',
+    component: K1QuestionReadPage
+  },
+  {
+    path:'/K1QuestionView',
+  name:'K1QuestionView',
+  component: K1QuestionView
+}
 ]
 
 const router = new VueRouter({

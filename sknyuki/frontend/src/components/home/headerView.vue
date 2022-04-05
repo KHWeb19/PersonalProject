@@ -53,8 +53,8 @@ export default {
       tab: null,
       tabs: [ 
           { name: "Home", route: `/` }, 
-          { name: "명품 판별", route: `/kategorie1` }, 
-          { name: "질문 게시판", route: `/` }, 
+          { name: "명품 판별", route: `/K1CheckBrandView` }, 
+          { name: "질문 게시판", route: `/K1QuestionView` }, 
           { name: "판매 중", route: `/` }, 
           { name: "판매 완료", route: `/` }, 
           { name: "시장 가격", route: `/` }, 
