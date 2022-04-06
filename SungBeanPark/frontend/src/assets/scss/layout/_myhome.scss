@@ -1,0 +1,48 @@
+.myhome-edit {
+  padding-top: 16px;
+
+  &-header {
+    @include flexbox(between);
+    &.title {
+      @include text-style(24);
+      font-weight: 700;
+    }
+    &.link {
+      @include text-style(14, $tertiary);
+    }
+  }
+
+  &-item {
+    @include text-style(14);
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 8px;
+    &.title {
+      display: block;
+      width: 100px;
+    }
+
+    &.title-require {
+      @include text-style(13, $dark);
+      display: block;
+    }
+  }
+
+  input {
+    width: 100%;
+    display: block;
+    border: 1px solid $border;
+    padding: 0 15px;
+    border-radius: 4px;
+    height: 40px;
+  }
+
+  &-inputgroup {
+    max-width: 100%;
+    flex: 50px;
+
+    &-email {
+      flex: 110px;
+    }
+  }
+}
