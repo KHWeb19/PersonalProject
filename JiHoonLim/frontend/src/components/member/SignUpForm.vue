@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <v-container>
+  <div class="grey lighten-3">
+    <v-container class="white">
       <v-row justify="center">
         <v-col cols="auto" style="padding-bottom: 90px">
           <router-link to="/">
@@ -20,7 +20,11 @@
                     <validation-provider
                       v-slot="{ errors }"
                       name="아이디"
-                      :rules="{ max: 12, required: true, alpha_num: true }"
+                      :rules="{
+                        max: 12,
+                        required: true,
+                        alpha_num: true,
+                      }"
                     >
                       <v-text-field
                         v-model="id"

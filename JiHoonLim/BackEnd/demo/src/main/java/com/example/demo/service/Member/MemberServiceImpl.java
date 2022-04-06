@@ -105,16 +105,26 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public Boolean idMatchEmail(MemberRequest memberRequest) {
         Optional<Member> maybeMember = memberRepository.findByUserId(memberRequest.getId());
-        Member loginMember = maybeMember.get();
+        if (!maybeMember.isPresent()){
+            return false;
+        }
+        Member DbMember = maybeMember.get();
 
-        String UserEmail = loginMember.getEmail();
+        String UserEmail = DbMember.getEmail();
 
         String MaybeEmail = memberRequest.getEmail();
 
         if (UserEmail.equals(MaybeEmail)){
             return true;
+        }else{
+            return false;
         }
-        return false;
+    }
+
+    @Override
+    public void modifyPw(String id, String pw) {
+        String encodedPassword = passwordEncoder.encode(pw);
+        memberRepository.modifyPw(id, encodedPassword);
     }
 
 

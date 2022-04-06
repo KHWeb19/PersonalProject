@@ -1,7 +1,7 @@
 <template>
   <div>
     <template>
-      <v-toolbar color="orange lighten-1" dark>
+      <v-toolbar color="orange lighten-1" dark height="90px">
         <v-toolbar-title>
           <router-link to="/">
             <v-img

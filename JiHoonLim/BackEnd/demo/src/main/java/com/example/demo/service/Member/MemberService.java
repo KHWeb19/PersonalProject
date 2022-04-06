@@ -12,4 +12,5 @@ public interface MemberService {
     public Boolean checkDuplicateEmail(String email);
     public List findUserId(String email);
     public Boolean idMatchEmail(MemberRequest memberRequest);
+    public void modifyPw(String id, String pw);
 }

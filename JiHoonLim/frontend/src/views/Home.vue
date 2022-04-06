@@ -15,7 +15,7 @@
       <span class="img_box">
         <v-img class="responseive-img" src="@/assets/img/bjw.jpg"></v-img>
       </span>
-      <span class="text_box">
+      <span class="text_box grey lighten-5">
         <h2>백종원</h2>
         <h3>( 골목식당 -- 명언 -- )</h3>
         <p>" 이 사회는 자기가 좋아하는 <br />일을 해야 행복하다. "</p>
@@ -84,7 +84,7 @@ export default {
   flex-direction: column;
   width: 30%;
   text-align: center;
-  background-color: whitesmoke;
+
   background-size: cover;
 }
 .text_box h2 {

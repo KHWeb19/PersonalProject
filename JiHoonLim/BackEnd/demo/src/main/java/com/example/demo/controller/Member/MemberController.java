@@ -73,7 +73,7 @@ public class MemberController {
     }
 
     @PostMapping("/findUserId")
-    public ResponseEntity<List> findUserId (@Validated @RequestBody MemberRequest memberRequest){
+    public List findUserId (@Validated @RequestBody MemberRequest memberRequest){
         log.info("findUserId()"+memberRequest);
 
 
@@ -85,15 +85,22 @@ public class MemberController {
             return null;
         }
 
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        return result;
     }
 
     @PostMapping("/idMatchEmail")
-    public ResponseEntity<Boolean> idMatchEmail(@Validated @RequestBody MemberRequest memberRequest){
+    public Boolean idMatchEmail(@Validated @RequestBody MemberRequest memberRequest){
         log.info("idMatchEmail: " + memberRequest.getId() + " , " + memberRequest.getEmail());
 
         Boolean result = service.idMatchEmail(memberRequest);
 
-        return new ResponseEntity<>(result,HttpStatus.OK);
+        return result;
+    }
+
+    @PostMapping("/resetPw/{id}")
+    public void ModifyPw(@PathVariable("id") String id, @Validated @RequestBody MemberRequest memberRequest) {
+        String pw = memberRequest.getPw();
+
+        service.modifyPw(id, pw);
     }
 }

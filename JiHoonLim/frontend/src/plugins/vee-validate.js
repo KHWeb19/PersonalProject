@@ -1,10 +1,14 @@
 import Vue from 'vue'
 import { extend, ValidationObserver, ValidationProvider } from "vee-validate";
-import { max, required, numeric, digits, email, confirmed, alpha_num} from "vee-validate/dist/rules";
+import { max, min,required, numeric, digits, email, confirmed, alpha_num} from "vee-validate/dist/rules";
 
 extend("max", {
   ...max,
   message: `{_field_}는 {length}자를 초과할 수 없습니다.`,
+});
+extend("min", {
+  ...min,
+  message: `{_field_}는 {length}자 이상 입력하세요.`,
 });
 extend("required", {
   ...required,
