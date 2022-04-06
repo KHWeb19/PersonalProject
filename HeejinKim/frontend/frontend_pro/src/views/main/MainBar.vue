@@ -19,8 +19,11 @@
 
             <register-form @submit="onRegister" v-if="!isLogin"></register-form>
 
-            
-           
+            <member-bar :session="session" v-if="isLogin" @logout="logout"></member-bar>
+
+
+
+ 
 
         
         </v-toolbar>
@@ -99,8 +102,8 @@ export default {
             category: [
                 {  
                     icon: 'mdi-home',
-                    name: 'MainPage',
-                    route: '/MainPage'
+                    name: 'Home',
+                    route: '/'
                   
                 },
                 {   
@@ -151,9 +154,7 @@ export default {
                             this.passwordCheck=''
                             this.email = ''
                             this.auth = ''
-                            this.$router.push({
-                                name: 'MainPage'
-                            })
+                            window.location.reload();
                         } else { 
                         alert('중복된 아이디입니다')
                     }
@@ -167,6 +168,7 @@ export default {
                 return false
                 }        
         },
+
         onLogin (payload) {
 
             if(this.$store.state.session == null) {
@@ -178,11 +180,11 @@ export default {
 
                         if (res.data != "") {
                             
-                            alert(res.data.userId + "님 환영합니다.")
+                            alert("Welcome" +"  "+res.data.userId )
                             this.isLogin = true;
                             this.$store.state.session = res.data    
                             this.$cookies.set("user", res.data, 30)
-                            this.$router.push({ name: 'MainPage'})
+                            window.location.reload();
                             
                         } else {
                             alert('아이디와 비밀번호를 확인해주세요. ' + res.data)

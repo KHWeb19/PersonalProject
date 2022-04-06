@@ -39,6 +39,14 @@ public class MemberController {
 
         return memberResponse;
     }
+    @GetMapping("/check/{userId}")
+    public Boolean findId (@PathVariable("userId") String userId) {
+        log.info("findId()" +", " + userId);
+
+        Boolean maybeMember = service.checkUserIdValidation(userId);
+
+        return maybeMember;
+    }
 
 
 

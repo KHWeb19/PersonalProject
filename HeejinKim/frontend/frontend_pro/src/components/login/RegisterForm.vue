@@ -14,11 +14,12 @@
                         <div class="input" justify-center>
                             
                             <div class="input_area">
-                            <v-text-field class="pl-4 pr-4" flat solo v-model="userId" type="text" label="userId" :rules="rulesId"> 
-                            </v-text-field></div>
+                            <v-text-field class="pl-4 pr-4" flat solo v-model="userId" :disabled="valid" type="text" label="userId" :rules="rulesId">
+                                 
+                            </v-text-field><v-btn @click="checkValid" font-weight>check</v-btn> </div>
 
                             <div class="input_area">
-                            <v-text-field class="pl-4 pr-4" flat solo v-model="password" type="password" label="password"
+                            <v-text-field class="pl-4 pr-4 pt-3" flat solo v-model="password" type="password" label="password"
                             :rules="rulesPassword"> </v-text-field></div>
 
                             <div class="input_area">
@@ -38,7 +39,7 @@
 
 
                             <div class="btn-size pt-5">
-                                <v-btn width="300" height="50px" type="submit" color="black" style="margin-top:3%;"
+                                <v-btn width="250" height="40px" type="submit" color="black" style="margin-top:-4%;"
                                 class="white--text" rounded >
                                 SIGN UP
                                 </v-btn>
@@ -52,6 +53,8 @@
 </template>
 
 <script>
+
+import axios from "axios";
 
 export default {
     name: 'RegisterForm',
@@ -69,6 +72,7 @@ export default {
                 password: '',
                 passwordCheck : '',
                 email : '',
+                valid: false,
                 radioGroup: 1,
                 kindsOfMember: [
                     'individaul',
@@ -103,8 +107,25 @@ export default {
             const auth = (radioGroup == 'individaul' ? 'individaul' : 'manager')
             this.$emit('submit', { userId, password, passwordCheck, email, auth})
             
+        },
+        checkValid() {
+            const { userId } = this
+            let temp;
+            axios.get(`http://localhost:7777/jpaMember/check/${userId}`)
+                .then(res => {
+                    this.temp = res.data;
+                    if(this.temp){
+                        alert("Valid Id")
+                        this.valid = res.data;
+                    }else {
+                        alert("Duplicate Id")
+                        this.valid = false;
+                    }
+                })
+            return temp
         }
-    }
+    },
+    
 }
 </script>
 
@@ -130,7 +151,7 @@ export default {
 
     font-family: 'Poiret One', cursive;
     font-size: 50px;
-    margin-top: 30px;
+    margin-top: 20px;
     color: black;
     text-align: center;
     
@@ -141,12 +162,15 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 50px;  
+    margin-top: 40px;  
 
 }
 .v-input{  
     font-size: 20px;
 }
+
+
+
 
 /* 입력칸 배경색
 .theme--light.v-text-field--solo > .v-input__control > .v-input__slot {
