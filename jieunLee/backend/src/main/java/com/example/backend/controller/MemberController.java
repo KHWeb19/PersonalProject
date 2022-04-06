@@ -51,17 +51,20 @@ public class MemberController {
         return memberResponse;
     }
 
-    @GetMapping("/{memberId}")
-    public Member memberRead(@PathVariable("memberId") String memberId) {
+    @GetMapping("/{memberNo}")
+    public Member memberRead(@PathVariable("memberNo") Long memberNo) {
         log.info("memberRead()");
 
-        return service.read(memberId);
+        return service.read(memberNo);
     }
 
-    @PutMapping("/modify")
-    public Member memberModify (@RequestBody Member member) {
+    @PutMapping("/{memberNo}")
+    public Member memberModify (
+            @PathVariable("memberNo") Long memberNo,
+            @RequestBody Member member) {
         log.info("memberModify(): " + member);
 
+        member.setMemberNo(Long.valueOf(memberNo));
         service.modify(member);
 
         return member;

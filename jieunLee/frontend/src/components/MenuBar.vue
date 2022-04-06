@@ -2,6 +2,7 @@
     <v-app-bar
       color="white"
     >
+          <v-spacer></v-spacer>
       <v-spacer></v-spacer>
       <v-app-bar-title>
         <router-link style="text-decoration: none;" :to="{name: 'HomeView'}">
@@ -54,18 +55,18 @@
 
       <v-list>
           <v-list-item-title> 
-            <router-link :to="{
+            <router-link style="text-decoration: none;" :to="{
               name: 'MyProfilePage',
-              params: {memberId: loginId.toString()}}">
-              프로필
+              params: {memberNo: loginInfo.memberNo.toString()}}">
+              <v-btn>프로필</v-btn>
             </router-link>
           </v-list-item-title>
 
           <v-list-item-title> 
-            <router-link :to="{
+            <router-link style="text-decoration: none;" :to="{
               name: 'AccountsEditPage',
-              params: {memberId: loginId.toString()}}">
-              설정
+              params: {memberNo: loginInfo.memberNo.toString()}}">
+              <v-btn>설정</v-btn>
             </router-link>
           </v-list-item-title>
 
@@ -77,6 +78,7 @@
         </v-list>
       </v-menu>
       <v-spacer></v-spacer>
+            <v-spacer></v-spacer>
     </v-app-bar>
     
   
@@ -91,16 +93,20 @@ import cookies from 'vue-cookies'
 Vue.use(cookies)
 
   export default {
-
+    props: {
+      member: {
+          type: Object,
+          require: true
+      }
+    },
     data: () => ({
       isLogin: true,
-      loginId: localStorage.getItem("loginId")
+      loginInfo: JSON.parse(localStorage.getItem('loginInfo'))
     }),
     logout() {
       this.$cookies.remove("user")
       this.isLogin = false
-      this.$store.state.userInfo = null
-      localStorage.removeItem("loginId")
+      localStorage.removeItem("loginInfo")
 
       alert('로그아웃 성공!')
     }

@@ -33,7 +33,14 @@ public class MemberServiceImpl implements MemberService{
         String encodedPassword = passwordEncoder.encode(memberRequest.getPassword());
         memberRequest.setPassword(encodedPassword);
 
-        Member memberEntity = new Member(memberRequest.getMemberNo(), memberRequest.getMemberName(), memberRequest.getMemberId(), memberRequest.getPassword());
+        Member memberEntity = new Member(
+                memberRequest.getMemberNo(),
+                memberRequest.getMemberName(),
+                memberRequest.getMemberId(),
+                memberRequest.getPassword(),
+                memberRequest.getMemberWeb(),
+                memberRequest.getMemberIntro()
+        );
 
         memberRepository.save(memberEntity);
     }
@@ -54,18 +61,29 @@ public class MemberServiceImpl implements MemberService{
             return null;
         }
 
+        if (loginMember.getMemberId().equals(memberRequest.getMemberId())) {
+
+            memberRequest.setMemberNo(loginMember.getMemberNo());
+            memberRequest.setMemberName(loginMember.getMemberName());
+            memberRequest.setMemberId(loginMember.getMemberId());
+            memberRequest.setMemberWeb(loginMember.getMemberWeb());
+            memberRequest.setMemberIntro(loginMember.getMemberIntro());
+        }
+
         MemberRequest response = new MemberRequest(
                 memberRequest.getMemberNo(),
                 memberRequest.getMemberName(),
                 memberRequest.getMemberId(),
-                null);
+                null,
+                memberRequest.getMemberWeb(),
+                memberRequest.getMemberIntro());
 
         return response;
     }
 
     @Override
-    public Member read(String memberId) {
-        Optional<Member> maybeReadMember = memberRepository.findByUserId(memberId);
+    public Member read(Long memberNo) {
+        Optional<Member> maybeReadMember = memberRepository.findById(Long.valueOf(memberNo));
 
         if (maybeReadMember.equals(Optional.empty())) {
 
@@ -77,6 +95,10 @@ public class MemberServiceImpl implements MemberService{
 
     @Override
     public void modify(Member member) {
+
+
+//        String encodedPassword = passwordEncoder.encode(member.getPassword());
+//        member.setPassword(encodedPassword);
 
         memberRepository.save(member);
     }

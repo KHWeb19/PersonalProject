@@ -9,6 +9,6 @@ public interface MemberService {
     public List<Member> list ();
     public void register (MemberRequest memberRequest);
     public MemberRequest login (MemberRequest memberRequest);
-    public Member read (String memberId);
+    public Member read (Long memberNo);
     public void modify (Member member);
 }

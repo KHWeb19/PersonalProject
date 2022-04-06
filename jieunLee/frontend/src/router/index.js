@@ -5,9 +5,11 @@ import LoginPage from '@/views/member/LoginPage'
 import RegisterPage from '@/views/member/RegisterPage'
 
 import HomeView from '@/views/HomeView.vue'
-import BoardRegisterPage from '@/views/board/BoardRegisterPage'
 import MyProfilePage from '@/views/member/MyProfilePage'
 import AccountsEditPage from '@/views/member/AccountsEditPage'
+import PasswordEditPage from '@/views/member/PasswordEditPage'
+
+import BoardRegisterPage from '@/views/board/BoardRegisterPage'
 
 
 Vue.use(VueRouter)
@@ -29,12 +31,7 @@ const routes = [
     component: HomeView
   },
   {
-    path: '/board/register',
-    name: 'BoardRegisterPage',
-    component: BoardRegisterPage
-  },
-  {
-    path: '/:memberId',
+    path: '/:memberNo',
     name: 'MyProfilePage',
     components: {
       default: MyProfilePage
@@ -44,7 +41,7 @@ const routes = [
     }
   },
   {
-    path: '/accounts/edit/:memberId',
+    path: '/accounts/edit/:memberNo',
     name: 'AccountsEditPage',
     components: {
       default: AccountsEditPage
@@ -52,6 +49,16 @@ const routes = [
     props: {
       default: true
     }
+  },
+  {
+    path: '/password/edit',
+    name: 'PasswordEditPage',
+    component: PasswordEditPage
+  },
+  {
+    path: '/board/register',
+    name: 'BoardRegisterPage',
+    component: BoardRegisterPage
   },
 ]
 

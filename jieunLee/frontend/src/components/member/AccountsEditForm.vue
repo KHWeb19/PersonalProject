@@ -1,9 +1,8 @@
 <template>
     <div>
-    <menu-bar/>
-      <v-container style="width: 500px; margin-top: 20px;">
+      <v-container style="width: 750px; margin-top: 20px; padding-left: 0px">
       <v-flex>
-        <v-card>
+          <v-card style="height: 600px">
           <br/>
           <div style="display: flex; justify-content: center;">
           <form @submit.prevent="onSubmit"  >
@@ -12,7 +11,7 @@
                   <td style="text-align: right; padding-right: 10px">                    
                     <v-img style=" margin-left: 25px" width="38" src="@/assets/logo.png"/>
                   </td>
-                  <td>
+                  <td style="padding-left: 10px">
                       {{member.memberId}}
                       <br/>
                       <div class="filebox"> 
@@ -30,37 +29,55 @@
                     border: 1px solid #d6d6d6; 
                     border-radius: 3px; 
                     width: 300px; 
-                    height: 30px;
+                    height: 35px;
                     padding-left: 5px;" 
-                    type="text" :value="member.memberName"/>
+                    type="text" :value="member.memberName" :v-model="memberName"/>
                   </td>
+              </tr>
+              <tr>
+                  <td></td>
+                  <td style="width: 300px; font-size: 12px; padding-top: 10px">사람들이 이름, 별명 또는 비즈니스 이름 등 회원님의 알려진 이름을 사용하여 회원님의 계정을 찾을 수 있도록 도와주세요.</td>
               </tr>
               <br/>
               <tr>
                   <td style="text-align: right; padding-right: 10px">아이디</td>
                   <td>
-                      <input style="
-                      margin: 3px;
-                      border: 1px solid #d6d6d6; 
-                      border-radius: 3px; 
-                      width: 300px; 
-                      height: 30px;
-                      padding-left: 5px;" 
-                  type="text" :value="member.memberId"/>
+                    <input style="
+                    margin: 3px;
+                    border: 1px solid #d6d6d6; 
+                    border-radius: 3px; 
+                    width: 300px; 
+                    height: 35px;
+                    padding-left: 5px;" 
+                    type="text" :value="member.memberId" :v-model="memberId"/>
                   </td>
               </tr>
               <br/>
               <tr>
                   <td style="text-align: right; padding-right: 10px">비밀번호</td>
                   <td>
-                      <input style="
-                      margin: 3px;
-                      border: 1px solid #d6d6d6; 
-                      border-radius: 3px; 
-                      width: 300px; 
-                      height: 30px;
-                      padding-left: 5px;" 
-                  type="text" />
+                    <input style="
+                    margin: 3px;
+                    border: 1px solid #d6d6d6; 
+                    border-radius: 3px; 
+                    width: 300px; 
+                    height: 35px;
+                    padding-left: 5px;" 
+                    type="text" :value="member.password" disabled/>
+                  </td>
+              </tr>
+              <br/>
+              <tr>
+                  <td style="text-align: right; padding-right: 10px">웹사이트</td>
+                  <td>
+                    <input style="
+                    margin: 3px;
+                    border: 1px solid #d6d6d6; 
+                    border-radius: 3px; 
+                    width: 300px; 
+                    height: 35px;
+                    padding-left: 5px;" 
+                    type="text"/>
                   </td>
               </tr>
               <br/>
@@ -72,7 +89,7 @@
                       border: 1px solid #d6d6d6; 
                       border-radius: 3px; 
                       width: 300px; 
-                      min-height: 60px;
+                      min-height: 70px;
                       padding-left: 5px;" 
                   type="text">
                   </textarea>
@@ -93,35 +110,30 @@
 </template>
 
 <script>
-import MenuBar from '@/components/MenuBar.vue'
-
 export default {
     name: 'AccountsEditForm',
-    components: {
-        MenuBar
-    },
     props: {
       member: {
         type: Object,
         require:true
       }
     },
-    // data() {
-    //   return {
-    //     memberName: '',
-    //     memberId: ''
-    //   }
-    // },
-    // methods: {
-    //   onSubmit() {
-    //     const {memberName, memberId} = this
-    //     this.$emit('submit', {memberName, memberId})
-    //   }
-    // },
-    // created() {
-    //   this.memberName = this.member.memberName
-    //   this.memberId = this.member.memberId
-    // }
+    data() {
+      return {
+        memberName: '',
+        memberId: ''
+      }
+    },
+    methods: {
+      onSubmit() {
+        const { memberName, memberId} = this
+        this.$emit('submit', { memberName, memberId})
+      }
+    },
+    created() {
+      this.memberName = this.member.memberName
+      this.memberId = this.membmer.memberId
+    }
 
 }
 </script>

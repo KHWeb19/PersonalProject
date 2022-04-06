@@ -8,12 +8,16 @@ public class MemberRequest {
     private String memberName;
     private String memberId;
     private String password;
+    private String memberWeb;
+    private String memberIntro;
 
-    public MemberRequest (Long memberNo, String memberName, String memberId, String password) {
+    public MemberRequest (Long memberNo, String memberName, String memberId, String password, String memberWeb, String memberIntro) {
         this.memberNo = memberNo;
         this.memberName = memberName;
         this.memberId = memberId;
         this.password = password;
+        this.memberWeb = memberWeb;
+        this.memberIntro = memberIntro;
     }
 
 
