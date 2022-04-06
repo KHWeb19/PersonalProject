@@ -8,48 +8,46 @@
             <hr>
         </div>
 
-        <!--
+
+
+
+
         <div>
-            
-                    <v-radio-group row>
-                    <v-radio label="케이크 선택" value="now" name="sendType2" v-model="toggleSendType"></v-radio>
-                    <v-radio label="직접 디자인 올리기" value="reserve" name="sendType" v-model="toggleSendType"></v-radio>
-                    </v-radio-group>
-            
-        </div>-->
-        <v-container>
-            <v-row style="height: 55px;">
-                <v-col class="col-12 col-sm-4">
-                    <div class="radio">
-                        <label>
-                            <input
-                            type="radio"
-                            value="now"
-                            name="sendType2"
-                            v-model="toggleSendType"
-                            />
-                            케이크 선택
-                        </label>
-                        
-                    </div>
-                </v-col>
-                <v-col v-col class="col-12 col-sm-3">
-                    <div class="radio">
-                        <label>
-                            <input
-                            type="radio"
-                            value="reserve"
-                            name="sendType"
-                            id="sendType"
-                            v-model="toggleSendType"
-                            />
-                            직접 디자인 올리기
-                        </label>
-                        
-                    </div>
-                </v-col>
-            </v-row>
-        </v-container>
+            <v-container>
+                <v-row style="height: 55px;">
+                    <v-col class="col-12 col-sm-4">
+                        <div class="radio">
+                            <label>
+                                <input
+                                type="radio"
+                                value="now"
+                                name="sendType2"
+                                v-model="toggleSendType"
+                                />
+                                케이크 선택
+                            </label>
+                            
+                        </div>
+                    </v-col>
+                    <v-col v-col class="col-12 col-sm-5">
+                        <div class="radio">
+                            <label>
+                                <input
+                                type="radio"
+                                value="reserve"
+                                name="sendType"
+                                id="sendType"
+                                v-model="toggleSendType"
+                                />
+                                직접 디자인 올리기
+                            </label>
+                            
+                        </div>
+                    </v-col>
+                </v-row>
+            </v-container>
+        </div>
+        
         
         
         <div class="input-group" v-show="sendType2">
@@ -57,9 +55,9 @@
             
             <br>
             <v-select class="selectCake" v-model="findDgn" :items="selectCakeDesign" label="디자인 선택" style="width: 200px;" onchange="findDesign"></v-select>
+            
             <v-virtual-scroll
-                :bench="benched"
-                :items="items"
+                :items="cakeArr"
                 height="600" width="750" item-height="250" 
                 class="virtualScroll">
 
@@ -69,8 +67,11 @@
                             <v-radio ></v-radio> 
                         </v-list-item-action>
 
+                        <v-list-item-content style="width:230px; height:250px;">
+                            <v-img v-bind:src="item.image" cover/>
+                        </v-list-item-content>
+                        
                         <v-list-item-content>
-                            <img :src="item.image" width="200" height="200">
                         </v-list-item-content>
                         
                         <v-list-item-content>
@@ -107,11 +108,7 @@
                         placeholder="케이크 위 레터링 글자는 최대 10자 이내 
 케이크 보드 위 레터링 글자는 최대 15자 이내입니다. 
 비용은 추후 레터링 및 추가 요구사항 확인 후 확정됩니다." 
-                        style="font-size: 14px;">
-                        레터링 글자 : ( 케이크 위 레터링 글자는 최대 10자 이내 ) 
-                        보드 글자 : ( 케이크 위 레터링 글자는 최대 15자 이내 이내 ) 
-                        추가 요청사항 : 
-                        비용은 추후 레터링 및 추가 요구사항 확인 후 확정됩니다.
+                        style="font-size: 14px;" wrap="soft">
                     </textarea>
                 </v-col>
                 <v-col class="col-12 col-sm-3">
@@ -148,15 +145,15 @@ export default {
             selectCake: false,
             soso1: false,
             selectOwnCake: false,
-            items: [
-                {image:'@/assets/uploadImg/birthday/1.birhday.png', design : 'family', size: '1호', price: 22000},
-                {image:'@/assets/uploadImg/birthday/1.birhday.png',design : 'lover', size: '도시락', price: 12000},
-                {image:'@/assets/uploadImg/birthday/1.birhday.png',design : 'birthday', size: '1호', price: 15000},
-                {image:'@/assets/uploadImg/birthday/1.birhday.png',design : 'birthday', size: '1호', price: 15000},
-                {image:'@/assets/uploadImg/family/1.famaily cake.png',design : 'birthday', size: '1호', price: 15000},
-                {image:'assets/uploadImg/family/1.famaily cake.png',design : 'birthday', size: '1호', price: 15000},
-                {image:'@/assets/uploadImg/birthday/1.birhday.png',design : 'birthday', size: '1호', price: 15000},
-                {image:'@/assets/uploadImg/family/1.famaily cake.png',design : 'birthday', size: '1호', price: 15000},
+            cakeArr: [
+                {image: require('@/assets/uploadImg/family/1.famaily cake.png'), design : 'family', size: '1호', price: 22000},
+                {image: require('@/assets/uploadImg/lover/1.lover.png'), design : 'lover', size: '도시락', price: 12000},
+                {image: require('@/assets/uploadImg/birthday/1.birhday.png'), design : 'birthday', size: '1호', price: 15000},
+                {image: require('@/assets/uploadImg/birthday/2.birhday(2).png'), design : 'birthday', size: '1호', price: 15000},
+                {image: require('@/assets/uploadImg/birthday/3.birhday(3).png'), design : 'birthday', size: '1호', price: 15000},
+                {image: require('@/assets/uploadImg/birthday/4.birhday(4).png'), design : 'birthday', size: '1호', price: 15000},
+                {image: require('@/assets/uploadImg/birthday/5.birhday(5).png'), design : 'birthday', size: '1호', price: 15000},
+                {image: require('@/assets/uploadImg/lover/2.lover(2).png'), design : 'lover', size: '도시락', price: 12000},
             ],
             selectCakeDesign : ['birthday', 'lover','family','friend'],
             findDgn:'',
@@ -191,6 +188,9 @@ export default {
                     continue
                 }
             }
+        },
+        submitBooking () {
+
         }
     }
     
