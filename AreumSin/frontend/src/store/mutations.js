@@ -3,7 +3,7 @@ import {
 } from './mutation-types'
 
 export default {
-    [FETCH_COOKIE_MEMBER] (state, payload){
-        state.userInfo = payload;
+    [FETCH_COOKIE_MEMBER](state, payload){
+        state.members = payload;
     }
 }
