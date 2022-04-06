@@ -4,6 +4,13 @@ import HomewView from '../views/HomeView.vue'
 
 // 메인페이지
 import MainPage from '@/views/main/MainPage.vue'
+import MenuBar from '@/views/MenuBar.vue'
+
+// 로그인
+import MemberLogin from '@/views/member/MemberLogin.vue'
+
+// 회원가입
+import MemberRegister from '@/views/member/MemberRegister.vue'
 
 Vue.use(VueRouter)
 
@@ -17,6 +24,21 @@ const routes = [
     path: '/',
     name: 'MainPage',
     component: MainPage
+  },
+  {
+    path: '/',
+    name: 'MenuBar',
+    component: MenuBar
+  },
+  {
+    path: '/',
+    name: 'MemberLogin',
+    component: MemberLogin
+  },
+  {
+    path: '/',
+    name: 'MemberRegister',
+    component: MemberRegister
   },
 ]
 
