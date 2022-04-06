@@ -8,15 +8,10 @@
             <hr>
         </div>
 
-
-
-
-
         <div>
             <v-container>
                 <v-row style="height: 55px;">
                     <v-col class="col-12 col-sm-4">
-                        <div class="radio">
                             <label>
                                 <input
                                 type="radio"
@@ -27,10 +22,9 @@
                                 케이크 선택
                             </label>
                             
-                        </div>
                     </v-col>
+
                     <v-col v-col class="col-12 col-sm-5">
-                        <div class="radio">
                             <label>
                                 <input
                                 type="radio"
@@ -41,38 +35,36 @@
                                 />
                                 직접 디자인 올리기
                             </label>
-                            
-                        </div>
                     </v-col>
                 </v-row>
             </v-container>
         </div>
         
         
-        
         <div class="input-group" v-show="sendType2">
             <div class="input-group-text">
             
             <br>
-            <v-select class="selectCake" v-model="findDgn" :items="selectCakeDesign" label="디자인 선택" style="width: 200px;" onchange="findDesign"></v-select>
+            <v-select class="selectCake" v-model="findDgn" :items="selectCakeDesign" label="디자인 선택" style="width: 200px;" @change="findDesign"></v-select>
             
             <v-virtual-scroll
                 :items="cakeArr"
                 height="600" width="750" item-height="250" 
-                class="virtualScroll">
+                class="virtualScroll"
+                v-if="this.chooseDesBol != 'mine'">
 
-                <template v-slot:default="{ item }">
-                    <v-list-item :key="item">
+                <template v-slot="{ item, index }">
+                    <v-list-item :key="index">
                         <v-list-item-action>
-                            <v-radio ></v-radio> 
+                            <input type="radio" @change="confirmCake" v-model="checkIndex" :value="index" name="checkOwnCake"/> 
                         </v-list-item-action>
 
                         <v-list-item-content style="width:230px; height:250px;">
                             <v-img v-bind:src="item.image" cover/>
                         </v-list-item-content>
-                        
-                        <v-list-item-content>
-                        </v-list-item-content>
+
+                        <v-list-item-action>
+                        </v-list-item-action>
                         
                         <v-list-item-content>
                             <v-list-item-title>
@@ -86,8 +78,40 @@
                     <v-divider></v-divider>
                 </template>
             </v-virtual-scroll>
-            <br><p>선택한 케이크 : {{item}}</p>
 
+            <v-virtual-scroll
+                :items="chooseDesignArr"
+                height="600" width="750" item-height="250" 
+                class="virtualScroll"
+                v-if="this.chooseDesBol == 'mine'">
+
+                <template v-slot="{ item,index }">
+                    <v-list-item :key="item">
+                        <v-list-item-action>
+                            <input type="radio" @change="confirmCake2" v-model="checkIndex2" :value="index" name="checkSelectCake"/> 
+                        </v-list-item-action>
+
+                        <v-list-item-content style="width:260px; height:260px;">
+                            <v-img v-bind:src="item.image" cover/>
+                        </v-list-item-content>
+
+                        <v-list-item-action>
+                        </v-list-item-action>
+
+                        <v-list-item-content>
+                            <v-list-item-title>
+                                design : {{item.design}} <br> 
+                                size : {{item.size}} <br> 
+                                price: {{item.price}}
+                            </v-list-item-title>
+                        </v-list-item-content>
+                        
+                    </v-list-item>
+                    <v-divider></v-divider>
+                </template>
+            </v-virtual-scroll>
+
+            <p>여기야{{this.outDesign}}+{{this.outSize}}+{{this.outPrice}}+{{this.outImg}}+</p>
             </div>
         </div>
         <div class="input-group" v-show="sendType">
@@ -95,40 +119,27 @@
                <p style="font-size: 15px">*아래 파일선택에 원하는 디자인을 첨부해 주세요!</p>
             </div>
         </div>
-       <br><hr>
-
-
-        
-        <br>
-        <h4>요청사항 입력</h4><br>
-        <v-container>
-            <v-row>
-                <v-col class="col-12 col-sm-12">
-                    <textarea 
-                        placeholder="케이크 위 레터링 글자는 최대 10자 이내 
+       
+        <div>
+            <br><hr><br>
+            <h4>요청사항 입력</h4><br>
+            <textarea 
+                placeholder="케이크 위 레터링 글자는 최대 10자 이내 
 케이크 보드 위 레터링 글자는 최대 15자 이내입니다. 
 비용은 추후 레터링 및 추가 요구사항 확인 후 확정됩니다." 
-                        style="font-size: 14px;" wrap="soft">
-                    </textarea>
-                </v-col>
-                <v-col class="col-12 col-sm-3">
-                    <input type="file" id="files" ref="files" 
-                        multiple v-on:change="handleFileUpload()"/>
-                </v-col>
-            </v-row>
-        </v-container><hr><br>
-        
+                    style="font-size: 14px;" wrap="soft">
+            </textarea>
+
+            <input type="file" id="files" ref="files" 
+                multiple v-on:change="handleFileUpload()"/>
+        </div>
 
         <div style="text-align: center;">
             <v-btn color="black" text type="submit" @click="submitBooking" style="font-size:19px;" width="260">
                 <v-icon color="black" text type="submit" >mdi-check</v-icon>예약하기
             </v-btn>
-        </div>
-        
-            
+        </div>   
     </div>
-
-    
 </template>
 
 <script>
@@ -146,21 +157,45 @@ export default {
             soso1: false,
             selectOwnCake: false,
             cakeArr: [
-                {image: require('@/assets/uploadImg/family/1.famaily cake.png'), design : 'family', size: '1호', price: 22000},
-                {image: require('@/assets/uploadImg/lover/1.lover.png'), design : 'lover', size: '도시락', price: 12000},
-                {image: require('@/assets/uploadImg/birthday/1.birhday.png'), design : 'birthday', size: '1호', price: 15000},
-                {image: require('@/assets/uploadImg/birthday/2.birhday(2).png'), design : 'birthday', size: '1호', price: 15000},
-                {image: require('@/assets/uploadImg/birthday/3.birhday(3).png'), design : 'birthday', size: '1호', price: 15000},
-                {image: require('@/assets/uploadImg/birthday/4.birhday(4).png'), design : 'birthday', size: '1호', price: 15000},
-                {image: require('@/assets/uploadImg/birthday/5.birhday(5).png'), design : 'birthday', size: '1호', price: 15000},
-                {image: require('@/assets/uploadImg/lover/2.lover(2).png'), design : 'lover', size: '도시락', price: 12000},
+                {image: require('@/assets/uploadImg/birthday/1.birhday.png'), design : 'birthday', size: '1호', price: '21,000'},
+                {image: require('@/assets/uploadImg/birthday/2.birhday(2).png'), design : 'birthday', size: '1호', price: '23,000'},
+                {image: require('@/assets/uploadImg/birthday/3.birhday(3).png'), design : 'birthday', size: '도시락 케이크', price: '15,000'},
+                {image: require('@/assets/uploadImg/birthday/4.birhday(4).png'), design : 'birthday', size: '도시락 케이크', price: '16,000'},
+                {image: require('@/assets/uploadImg/birthday/5.birhday(5).png'), design : 'birthday', size: '2호', price: '26,000'},
+
+                {image: require('@/assets/uploadImg/family/1.famaily cake.png'), design : 'family', size: '1호', price: '22,000'},
+                {image: require('@/assets/uploadImg/family/2.famaily cake(2).png'), design : 'family', size: '1호', price: '22,500'},
+                {image: require('@/assets/uploadImg/family/3.famaily cake(3).png'), design : 'family', size: '2호', price: '26,500'},
+                {image: require('@/assets/uploadImg/family/4.famaily cake(4).png'), design : 'family', size: '1호', price: '223,000'},
+                {image: require('@/assets/uploadImg/family/5.famaily cake(5).png'), design : 'family', size: '2호', price: '35,000'},
+
+                {image: require('@/assets/uploadImg/friend/1.friend cake.png'), design : 'friend', size: '도시락 케이크', price: '15,000'},
+                {image: require('@/assets/uploadImg/friend/2.friend cake(2).png'), design : 'friend', size: '2호', price: '29,000'},
+                {image: require('@/assets/uploadImg/friend/3.friend cake(3).png'), design : 'friend', size: '1호', price: '30,000'},
+                {image: require('@/assets/uploadImg/friend/4.friend cake(4).png'), design : 'friend', size: '1호', price: '24,000'},
+                {image: require('@/assets/uploadImg/friend/5.friend cake(5).png'), design : 'friend', size: '1호', price: '24,000'},
+
+                {image: require('@/assets/uploadImg/lover/1.lover.png'), design : 'lover', size: '1호', price: '22,000'},
+                {image: require('@/assets/uploadImg/lover/2.lover(2).png'), design : 'lover', size: '1호', price: '22,000'},
+                {image: require('@/assets/uploadImg/lover/3.lover(3).png'), design : 'lover', size: '1호', price: '23,000'},
+                {image: require('@/assets/uploadImg/lover/4.lover(4).png'), design : 'lover', size: '2호', price: '27,000'},
+                {image: require('@/assets/uploadImg/lover/5.lover(5).png'), design : 'lover', size: '도시락', price: '15,000'},
             ],
-            selectCakeDesign : ['birthday', 'lover','family','friend'],
+            selectCakeDesign : ['birthday', 'family','friend' , 'lover'],
             findDgn:'',
             sendType: false,
             sendType2: false,
             toggleSendType: ["now", "reserve"],
-        
+            chooseDesignArr: [],
+            chooseDesBol: ['notMine', 'mine'],
+            checkIndex:'',
+            selectEachCake:[],
+            inputIndex:'',
+            outDesign:'',
+            outSize:'',
+            outPrice:'',
+            outImg:'',
+            DesignArrIndex:''
         }
     },
     watch: {
@@ -183,10 +218,76 @@ export default {
     },
     methods: {
         findDesign () {
-            for(let i=0; i< this.items.length ; i++) {
-                if(this.items[i].design != this.findDgn){
+            this.chooseDesignArr = new Array();
+
+            for(let i=0; i< this.cakeArr.length ; i++) {
+                if(this.cakeArr[i].design == this.findDgn) {
+                    this.chooseDesignArr.push(this.cakeArr[i])
+                    this.DesignArrIndex = i
+                    
+                }else {
                     continue
                 }
+            }
+            this.chooseDesBol = 'mine'
+        },
+        confirmCake(){
+            console.log(this.checkIndex)
+
+            for(let i=0; i< this.cakeArr.length ; i++) {
+                if(this.checkIndex == i) {
+                    this.outDesign = this.cakeArr[i].design
+                    this.outSize = this.cakeArr[i].size 
+                    this.outPrice = this.cakeArr[i].price
+                    this.outImg = this.cakeArr[i].image 
+                    break
+                }
+            }
+        },
+        confirmCake2(){
+            console.log(this.checkIndex2)
+
+            for(let i=0; i< this.chooseDesignArr.length ; i++) {
+                if(this.chooseDesignArr[this.DesignArrIndex].design == 'brithday'){
+                    if(this.checkIndex2 == i) {
+                        this.outDesign = this.cakeArr[i].design
+                        this.outSize = this.cakeArr[i].size 
+                        this.outPrice = this.cakeArr[i].price
+                        this.outImg = this.cakeArr[i].image 
+                        break
+                    }
+                }else if(this.chooseDesignArr[this.DesignArrIndex].design == 'family'){
+                    
+                    if(this.checkIndex2 == i) {
+                        let sum = ( this.checkIndex2 + 5 )
+                        this.outDesign = this.cakeArr[sum].design
+                        this.outSize = this.cakeArr[sum].size 
+                        this.outPrice = this.cakeArr[sum].price
+                        this.outImg = this.cakeArr[sum].image 
+                        break
+                    }
+                }else if(this.chooseDesignArr[this.DesignArrIndex].design == 'friend'){
+                    
+                    if(this.checkIndex2 == i) {
+                        let sum1 = (this.checkIndex2 + 5 + 5 )
+                        this.outDesign = this.cakeArr[sum1].design
+                        this.outSize = this.cakeArr[sum1].size 
+                        this.outPrice = this.cakeArr[sum1].price
+                        this.outImg = this.cakeArr[sum1].image 
+                        break
+                    }
+                }else if(this.chooseDesignArr[this.DesignArrIndex].design == 'lover'){
+                    
+                    if(this.checkIndex2 == i) {
+                        let sum2 = (this.checkIndex2 + 5 + 5 + 5)
+                        this.outDesign = this.cakeArr[sum2].design
+                        this.outSize = this.cakeArr[sum2].size 
+                        this.outPrice = this.cakeArr[sum2].price
+                        this.outImg = this.cakeArr[sum2].image 
+                        break
+                    }
+                }
+                    
             }
         },
         submitBooking () {
