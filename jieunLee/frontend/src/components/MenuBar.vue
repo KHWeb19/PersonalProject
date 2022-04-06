@@ -71,7 +71,7 @@
           </v-list-item-title>
 
             <v-list-item-title>        
-              <v-btn @click="logout">
+              <v-btn>
                 로그아웃
               </v-btn>
           </v-list-item-title>
@@ -103,12 +103,12 @@ Vue.use(cookies)
       isLogin: true,
       loginInfo: JSON.parse(localStorage.getItem('loginInfo'))
     }),
-    logout() {
-      this.$cookies.remove("user")
-      this.isLogin = false
-      localStorage.removeItem("loginInfo")
+    // logout() {
+    //   this.$cookies.remove("user")
+    //   this.isLogin = false
+    //   localStorage.removeItem("loginInfo")
 
-      alert('로그아웃 성공!')
-    }
+    //   alert('로그아웃 성공!')
+    // }
   }
 </script>

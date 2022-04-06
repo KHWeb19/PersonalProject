@@ -66,8 +66,10 @@ public class MemberServiceImpl implements MemberService{
             memberRequest.setMemberNo(loginMember.getMemberNo());
             memberRequest.setMemberName(loginMember.getMemberName());
             memberRequest.setMemberId(loginMember.getMemberId());
+            memberRequest.setPassword(loginMember.getPassword());
             memberRequest.setMemberWeb(loginMember.getMemberWeb());
             memberRequest.setMemberIntro(loginMember.getMemberIntro());
+            memberRequest.setRegData(loginMember.getRegDate());
         }
 
         MemberRequest response = new MemberRequest(
@@ -76,7 +78,8 @@ public class MemberServiceImpl implements MemberService{
                 memberRequest.getMemberId(),
                 null,
                 memberRequest.getMemberWeb(),
-                memberRequest.getMemberIntro());
+                memberRequest.getMemberIntro(),
+                memberRequest.getRegData());
 
         return response;
     }
@@ -97,8 +100,8 @@ public class MemberServiceImpl implements MemberService{
     public void modify(Member member) {
 
 
-//        String encodedPassword = passwordEncoder.encode(member.getPassword());
-//        member.setPassword(encodedPassword);
+        String encodedPassword = passwordEncoder.encode(member.getPassword());
+        member.setPassword(encodedPassword);
 
         memberRepository.save(member);
     }

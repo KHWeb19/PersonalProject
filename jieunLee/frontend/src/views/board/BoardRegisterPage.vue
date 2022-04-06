@@ -1,17 +1,18 @@
 <template>
   <div>
     <menu-bar/>
-    새 게시물 만들기
-
+    <board-register-form/>
   </div>
 </template>
 
 <script>
 import MenuBar from '@/components/MenuBar.vue'
+import BoardRegisterForm from '../../components/board/BoardRegisterForm.vue'
 
 export default {
   components: {
-    MenuBar
+    MenuBar,
+    BoardRegisterForm
   }
 }
 </script>

@@ -18,38 +18,22 @@ import MenuBar from '../../components/MenuBar.vue'
 
 export default {
   name: 'AccountsEditPage',
-  props: {
-    memberNo: {
-        type: String,
-        required: true
-    }
-  },
+
   components: {
     AccountsEditForm,
     AccountsCategory,
     MenuBar
   },
-
+      props: {
+        memberNo: {
+            type: String,
+            require: true
+        }
+        
+    },
   computed: {
     ...mapState(['member']),
-    
   },
-  methods: {
-    ...mapActions(['fetchMember']),
-    onSubmit(payload) {
-      const {memberName, memberId} = payload
-      axios.put(`http://localhost:7777/member/${this.memberNo}`, {memberName, memberId, password: this.member.password})
-        .then(res => {
-            alert('회원정보 수정 성공')
-            this.$router.push({
-                name: 'MyProfilePage',
-                params: {memberNo: res.data.memberNo.toString()}
-            })
-        })
-        .catch(()=>{
-            alert('회원정보 수정 실패')
-        })
-      },
   created() {
     this.fetchMember(this.memberNo)
       .catch(()=>{
@@ -57,6 +41,25 @@ export default {
           this.$router.back()
       })
   },
+  methods: {
+    ...mapActions(['fetchMember']),
+    onSubmit(payload) {
+      const {memberName, memberId} = payload
+      axios.put(`http://localhost:7777/member/${this.memberNo}`, {memberName, memberId, password: this.member.password, regDate: this.member.regDate})
+        .then(res => {
+            alert('프로필 수정 성공')
+            // localStorage.removeItem("userInfo")
+            // localStorage.setItem("userInfo", JSON.stringify(res.data))
+              this.$router.push({
+                  name: 'MyProfilePage',
+                  params: {memberNo: res.data.memberNo.toString()}
+            })
+        })
+        .catch(()=>{
+            alert('프로필 수정 실패')
+        })
+      },
+
       // onDelete() {
       //   const {memberId} = this.member
       //   axios.delete(`http://localhost:7777/member/${memberId}`)

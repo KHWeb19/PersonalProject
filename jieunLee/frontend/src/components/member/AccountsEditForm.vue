@@ -31,7 +31,7 @@
                     width: 300px; 
                     height: 35px;
                     padding-left: 5px;" 
-                    type="text" :value="member.memberName" :v-model="memberName"/>
+                    type="text" v-model="memberName" />
                   </td>
               </tr>
               <tr>
@@ -49,10 +49,23 @@
                     width: 300px; 
                     height: 35px;
                     padding-left: 5px;" 
-                    type="text" :value="member.memberId" :v-model="memberId"/>
+                    type="text" v-model="memberId"  />
                   </td>
               </tr>
-              <br/>
+              <!-- <br/>
+              <tr>
+                  <td style="text-align: right; padding-right: 10px">등록날짜</td>
+                  <td>
+                    <input style="
+                    margin: 3px;
+                    border: 1px solid #d6d6d6; 
+                    border-radius: 3px; 
+                    width: 300px; 
+                    height: 35px;
+                    padding-left: 5px;" 
+                    type="text" :value="member.regDate" disabled/>
+                  </td>
+              </tr>
               <tr>
                   <td style="text-align: right; padding-right: 10px">비밀번호</td>
                   <td>
@@ -65,7 +78,7 @@
                     padding-left: 5px;" 
                     type="text" :value="member.password" disabled/>
                   </td>
-              </tr>
+              </tr> -->
               <br/>
               <tr>
                   <td style="text-align: right; padding-right: 10px">웹사이트</td>
@@ -132,7 +145,7 @@ export default {
     },
     created() {
       this.memberName = this.member.memberName
-      this.memberId = this.membmer.memberId
+      this.memberId = this.member.memberId
     }
 
 }

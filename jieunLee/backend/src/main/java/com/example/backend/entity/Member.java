@@ -27,10 +27,10 @@ public class Member {
     @Column(length = 128)
     private String memberWeb;
 
-    @Column(length = 256)
+    @Lob
     private String memberIntro;
 
-    @Column(length = 64)
+    @Column(length = 64, nullable = false)
     private String password;
 
     @CreationTimestamp
