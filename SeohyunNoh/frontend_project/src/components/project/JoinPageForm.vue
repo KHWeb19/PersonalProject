@@ -37,7 +37,7 @@
                             <v-text-field type="password" v-model="pw" label="패스워드" required>
                             </v-text-field>
                             <!-- 주소 --> 
-                            <address-api v-model="address"/>
+                            <address-api v-model="address" @address="addrSelected" required/>
 
                             <br>
 
@@ -78,7 +78,7 @@ export default {
             id: '',
             pw: '',
             birthDay: '',
-            address: ''
+            address:''
         }
     },
     methods: {
@@ -91,10 +91,17 @@ export default {
 
             const gender = (radioGender == '남성' ? '남성' : '여성')
 
-            console.log(auth, name, gender, birthDay, id, pw, address)
-
             this.$emit('submit', { auth, name, gender, birthDay, id, pw, address })
-        }
+
+            console.log(auth, name, gender, birthDay, id, pw, address)
+        },
+        search(){
+            
+        },
+        addrSelected(detail) {  // 주소 확인
+            console.log("선택된 주소", detail);
+            this.address = detail
+        },
     }
 }
 </script>

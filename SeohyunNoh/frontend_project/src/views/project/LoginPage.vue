@@ -47,10 +47,10 @@ export default {
         }
     },
     methods: {
-        async onSubmit(payload) {
+        onSubmit(payload) {
             if(!this.isLogin) {
                 const { id, pw, auth } = payload
-                axios.post('http://localhost:7777/memberAuth/login', { id, pw, auth })
+                axios.post('http://localhost:7777/', { id, pw, auth })
                     .then(res => {
                         if(res.data) {
                             alert('반갑습니다' + id + ' 님')

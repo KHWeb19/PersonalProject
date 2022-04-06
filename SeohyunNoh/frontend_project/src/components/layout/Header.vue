@@ -144,6 +144,11 @@ export default {
         }
 
     },
+    computed: {
+         logoLink() {
+           return this.$store.getters.isLogin ? '/mainPage' : '/loginPage';
+          }
+    },
     methods: {
         mainPageLink() {
             this.$router.push({ path: '/mainPage' })

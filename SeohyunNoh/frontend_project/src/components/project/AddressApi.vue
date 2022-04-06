@@ -1,5 +1,5 @@
 <template>
-  <div class="address">
+  <div class="selectAddress">
     <h5>주소</h5>
     <input type="text" id="postcode" placeholder="우편번호">
     <button @click="search()">우편번호 찾기</button><br>
@@ -15,7 +15,7 @@
 <script>
 
 export default {
-    name: "AddressApi.vue",
+    name: "AddressApi",
     methods : {
         search(){ //@click을 사용할 때 함수는 이렇게 작성해야 한다.
             new window.daum.Postcode({
@@ -68,8 +68,10 @@ export default {
                     guideTextBox.innerHTML = '';
                     guideTextBox.style.display = 'none';
                 }
+
+                this.$emit("address", data);   
             }
-        }).open()       
+        }).open() 
         }
     }
 }
