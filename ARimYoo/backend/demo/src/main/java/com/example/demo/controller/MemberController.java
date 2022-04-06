@@ -53,15 +53,24 @@ public class MemberController {
 
     // 회원정보 수정
     @PutMapping("/{memberNo}")
-    public Member jpaBoardModify (
+    public Member modify (
             @PathVariable("memberNo") Long memberNo,
             @RequestBody Member member) {
-        log.info("jpaBoardModify(): " + member);
+        log.info("modify(): " + member);
 
         member.setMemberNo(Long.valueOf(memberNo));
         service.modify(member);
 
         return member;
+    }
+
+    // 회원 탈퇴
+    @DeleteMapping("/{memberNo}")
+    public void remove (
+            @PathVariable("memberNo") Long memberNo) {
+        log.info("remove()");
+
+        service.remove(memberNo);
     }
 
 

@@ -75,6 +75,11 @@ public class MemberServiceImpl implements MemberService {
 
         repository.save(member);
     }
+
+    @Override
+    public void remove(Long memberNo) {
+        repository.deleteById(Long.valueOf(memberNo));
+    }
 }
 
 

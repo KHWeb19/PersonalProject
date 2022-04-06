@@ -11,6 +11,7 @@ public interface MemberService {
 
     public Member read (Long memberNo);
     public void modify (Member member);
+    public void remove (Long memberNo);
 
 
 }

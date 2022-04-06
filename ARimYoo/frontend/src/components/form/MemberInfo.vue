@@ -39,7 +39,7 @@
                     <tr>
                         <td><img src="@/assets/form/formIntro.png" width="96" style="margin-left:48px"> </td>
                         <td>
-                            <v-textarea color="red darken-3" outlined cols="40" rows="5" v-model="intro" >
+                            <v-textarea color="red darken-3" outlined cols="40" rows="5" placeholder="현재 등록된 자기소개가 없습니다." v-model="intro" >
                             </v-textarea>
                         </td>
                     </tr>
@@ -74,7 +74,7 @@ export default {
                 alert ("비밀번호가 일치하지 않습니다.")
                 pw2.value=''
                 pw2.focus()
-            } else if ( pw == null) {
+            } else if (pw == null) {
                 alert ("비밀번호를 확인해주세요.")
             }
             else if (name == null ) {

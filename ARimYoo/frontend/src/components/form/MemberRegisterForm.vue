@@ -150,6 +150,7 @@ export default {
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap');
 .label {
     position: relative;
     left:20%;
@@ -171,7 +172,11 @@ input {
     margin-right:56%;
 }
 .error_next_box{
-    font-size: 13px;
+    font-size: 14px;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+.v-text-field {
+     font-family: 'Noto Sans KR', sans-serif;
 }
 </style>>
 
