@@ -1,5 +1,5 @@
 <template>
-   <div>
+   <div >
       <v-layout justify-center>
          <p>비밀번호를 잊어버렸나요?
             <v-dialog  v-model="findPw" resisten max-width="500px">
@@ -9,16 +9,18 @@
                </v-btn>
                </template>
                <v-card >
-               <v-card-title>
-                  가입정보를 대조하여 비밀번호를 찾습니다.
-               </v-card-title>
-               <input id="findPwInput" v-model="id" type="text" placeholder="  *ID를 입력하세요">
-               <input id="findPwInput" v-model="pwConfirm" type="text" placeholder="  *가장 좋아하는 과일은?">
+                  <v-card-title>
+                     가입정보를 대조하여 비밀번호를 찾습니다.
+                  </v-card-title>
+                  <input id="findPwInput" v-model="id" type="text" placeholder="  *ID를 입력하세요">
+                  <input id="findPwInput" v-model="pwConfirm" type="text" placeholder="  *가장 좋아하는 과일은?">
 
                <br>
-               <v-btn color="blue" text @click.native="btn_click($event)">
-                     비밀번호 찾기
-               </v-btn>
+                  <v-card-actions>
+                     <v-btn color="blue" text @click.native="btn_click($event)">
+                           비밀번호 찾기
+                     </v-btn>
+                  </v-card-actions>
                </v-card>
             </v-dialog>
          </p>
@@ -34,7 +36,7 @@ export default {
    methods: {
    btn_click (payload) {
        const { id, pwConfirm } = payload
-      axios.post('http://localhost:7777/vueJpaMember/findPw', { id, pwConfirm }) //Spring Controller에 연동하여 전달
+      axios.post('http://localhost:7777/jpaMember/findPw', { id, pwConfirm }) //Spring Controller에 연동하여 전달
       .then(res => { //then 정상적으로 데이터를 받았을 경우 동작
          alert(' 비밀번호는 ' + res)
       })

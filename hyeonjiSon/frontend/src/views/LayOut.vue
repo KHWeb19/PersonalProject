@@ -7,35 +7,28 @@
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items>
-        <!-- router-link에 생기는 하이퍼링크 밑줄은 stype scope에서 decoration:none;설정하여 지움 -->
+        <!-- router-link에 생기는 하이퍼링크 밑줄은 stype scope에서 decoration:none;설정하여 지움 <-v-btn에 하이퍼링크 넣기로 해결!-->
         <v-col> 
-          <router-link :to="{ name: 'memberLoginPage'}">
-            <v-btn v-if="!isLogin">
+            <v-btn v-if="!isLogin" onclick="location.href='http://localhost:8080/memberLoginPage'">
                 <v-icon>
                     mdi-login
                 </v-icon>
             </v-btn>
-          </router-link>
             <v-btn v-if="isLogin" @click="logout">
                 <v-icon>
                     mdi-logout
                 </v-icon>
             </v-btn>
-
-          <router-link :to="{ name: 'memberRegisterPage'}">
-            <v-btn v-if="!isLogin">
+            <v-btn v-if="!isLogin" onclick="location.href='http://localhost:8080/memberRegisterPage'">
                     <v-icon>
                         mdi-account-multiple-plus-outline
                     </v-icon>
             </v-btn>
-          </router-link>
-          <router-link :to="{ name: 'memberMyPage'}">
-            <v-btn v-if="isLogin">
+            <v-btn v-if="isLogin" onclick="location.href='http://localhost:8080/memberMyPage'">
                 <v-icon>
                     mdi-clipboard-account-outline
                 </v-icon>
             </v-btn>
-          </router-link>
 
         </v-col>
       </v-toolbar-items>

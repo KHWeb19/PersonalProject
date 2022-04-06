@@ -22,7 +22,7 @@ export default {
     methods: {
        onSubmit (payload) {
           const { id, pw } = payload
-         axios.post('http://localhost:7777/vueJpaMember/login', { id, pw }) //Spring Controller에 연동하여 전달
+         axios.post('http://localhost:7777/jpaMember/login', { id, pw }) //Spring Controller에 연동하여 전달
         .then(res => { //then 정상적으로 데이터를 받았을 경우 동작
           alert(' 로그인 성공! ' + res)
         })
