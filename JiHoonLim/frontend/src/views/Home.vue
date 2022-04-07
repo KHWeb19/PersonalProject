@@ -1,34 +1,42 @@
 <template>
-  <div>
+  <div class="grey lighten-3">
     <v-container class="slide">
       <swiper class="swiper" :options="swiperOption">
         <swiper-slide v-for="image in images" :key="image">
-          <v-img :src="image" max-width="100%"></v-img>
+          <v-img :src="image"></v-img>
         </swiper-slide>
         <div class="swiper-pagination" slot="pagination"></div>
         <div class="swiper-button-prev" slot="button-prev"></div>
         <div class="swiper-button-next" slot="button-next"></div>
       </swiper>
     </v-container>
+    <v-container class="pt-0 pb-0">
+      <v-row>
+        <v-col>
+          <v-card>
+            <div class="bottom_box">
+              <v-img
+                class="responseive-img img_box"
+                src="@/assets/img/bjw.jpg"
+              ></v-img>
 
-    <div class="bottom_box">
-      <span class="img_box">
-        <v-img class="responseive-img" src="@/assets/img/bjw.jpg"></v-img>
-      </span>
-      <span class="text_box grey lighten-5">
-        <h2>백종원</h2>
-        <h3>( 골목식당 -- 명언 -- )</h3>
-        <p>" 이 사회는 자기가 좋아하는 <br />일을 해야 행복하다. "</p>
-        <p>" 자신이 좋아하는 일에 <br />도전하길 바란다. "</p>
-      </span>
-      <span class="img_box">
-        <v-img
-          class="responsive-img"
-          src="@/assets/img/bjw.jpg"
-          style="transform: scaleX(-1)"
-        ></v-img>
-      </span>
-    </div>
+              <div class="text_box grey lighten-5">
+                <h2>백종원</h2>
+                <h3>( 골목식당 -- 명언 -- )</h3>
+                <p>" 이 사회는 자기가 좋아하는 <br />일을 해야 행복하다. "</p>
+                <p>" 자신이 좋아하는 일에 <br />도전하길 바란다. "</p>
+              </div>
+
+              <v-img
+                class="responsive-img img_box"
+                src="@/assets/img/bjw.jpg"
+                style="transform: scaleX(-1)"
+              ></v-img>
+            </div>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
   </div>
 </template>
 
@@ -50,7 +58,6 @@ export default {
         "https://t1.daumcdn.net/cfile/tistory/995BAE345C17421B11",
       ],
       swiperOption: {
-        loopedSlides: 2,
         grabCursor: true,
         centeredSlides: true,
         slidesPerView: "auto",
@@ -77,7 +84,7 @@ export default {
 }
 
 .img_box {
-  width: 38%;
+  width: 35%;
 }
 .text_box {
   display: flex;
@@ -107,12 +114,12 @@ export default {
 .slide {
   padding: 0;
   height: 700px;
-  margin-left: 0;
+  margin: auto;
 }
 
 .swiper {
   height: 100%;
-  width: 99.8vw;
+  width: 100%;
 
   .swiper-slide {
     display: flex;
@@ -120,10 +127,6 @@ export default {
     width: 100%;
     height: 100%;
     text-align: center;
-    font-weight: bold;
-    font-size: 3rem;
-    background-position: center;
-    background-size: center;
   }
 }
 </style>

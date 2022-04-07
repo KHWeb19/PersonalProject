@@ -140,7 +140,7 @@ export default {
         .post("http://localhost:7777/member/idMatchEmail", { id, email })
         .then((res) => {
           if (res.data) {
-            alert("인증이 완료되었습니다. 비밀번호 변경 페이지로 이동합니다.");
+            alert("인증이 완료되었습니다.");
             this.isPass = true;
           } else {
             alert("입력하신 정보로 가입된 정보가 없습니다.");

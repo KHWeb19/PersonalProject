@@ -1,6 +1,7 @@
 package com.example.demo.controller.Member;
 
 import com.example.demo.controller.Member.request.MemberRequest;
+import com.example.demo.entity.Member.Member;
 import com.example.demo.service.Member.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,20 @@ public class MemberController {
 
     @Autowired
     private MemberService service;
+
+    @GetMapping("/list")
+    public List<Member> memberList(){
+        log.info("memberList()");
+
+        return service.list();
+    }
+
+    @GetMapping("/{memberNo}")
+    public Member memberRead(@PathVariable("memberNo") Long memberNo){
+        log.info("memberRead()" + memberNo);
+
+        return service.read(memberNo);
+    }
 
     @PostMapping("/register")
     public void MemberRegister(@Validated @RequestBody MemberRequest memberRequest){
@@ -72,6 +87,7 @@ public class MemberController {
         return checkDupEmail;
     }
 
+
     @PostMapping("/findUserId")
     public List findUserId (@Validated @RequestBody MemberRequest memberRequest){
         log.info("findUserId()"+memberRequest);
@@ -96,6 +112,8 @@ public class MemberController {
 
         return result;
     }
+
+
 
     @PostMapping("/resetPw/{id}")
     public void ModifyPw(@PathVariable("id") String id, @Validated @RequestBody MemberRequest memberRequest) {

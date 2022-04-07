@@ -7,6 +7,7 @@ import com.example.demo.repository.Member.MemberAuthRepository;
 import com.example.demo.repository.Member.MemberRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +27,24 @@ public class MemberServiceImpl implements MemberService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Override
+    public List<Member> list() {
+        return memberRepository.findAll(Sort.by(Sort.Direction.DESC, "memberNo"));
+    }
+
+    @Override
+    public Member read(Long memberNo) {
+        Optional<Member> maybeReadMember = memberRepository.findById(Long.valueOf(memberNo));
+
+
+        if (maybeReadMember.equals(Optional.empty())){
+
+            return null;
+        }
+        log.info("info " + maybeReadMember);
+        return maybeReadMember.get();
+    }
 
     @Override
     public void register(MemberRequest memberRequest) {
@@ -58,8 +77,16 @@ public class MemberServiceImpl implements MemberService {
             return null;
         }
 
+        if (loginMember.getId().equals(memberRequest.getId())){
+            memberRequest.setMemberNo(loginMember.getMemberNo());
+            memberRequest.setName(loginMember.getName());
+            memberRequest.setNickName(loginMember.getNickName());
+            memberRequest.setEmail(loginMember.getEmail());
+        }
+
         MemberRequest response = new MemberRequest(
-                memberRequest.getId(),null,memberRequest.getName() ,memberRequest.getNickName(),memberRequest.getEmail(),memberRequest.getAuth());
+                memberRequest.getMemberNo(),memberRequest.getId(),null,memberRequest.getName() ,memberRequest.getNickName(),memberRequest.getEmail(),memberRequest.getAuth());
+        log.info("info response" + response);
         return response;
     }
 
@@ -95,6 +122,8 @@ public class MemberServiceImpl implements MemberService {
             return true;
         }
     }
+
+
 
     @Override
     public List findUserId(String email) {

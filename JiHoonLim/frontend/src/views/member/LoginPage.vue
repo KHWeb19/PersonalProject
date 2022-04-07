@@ -42,6 +42,7 @@ export default {
               alert("로그인 성공!");
               this.$store.state.userInfo = res.data;
               this.$cookies.set("user", res.data, 3600);
+              localStorage.setItem("userInfo", JSON.stringify(res.data));
               this.isLogin = true;
               this.$router.push("/");
             } else {

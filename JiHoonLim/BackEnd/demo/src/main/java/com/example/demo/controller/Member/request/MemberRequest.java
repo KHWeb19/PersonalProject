@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class MemberRequest {
+    private Long memberNo;
     private String id;
     private String pw;
     private String name;
@@ -12,7 +13,8 @@ public class MemberRequest {
     private String auth;
 
 
-    public MemberRequest (String id, String pw, String name, String nickName, String email, String auth) {
+    public MemberRequest (Long memberNo, String id, String pw, String name, String nickName, String email, String auth) {
+        this.memberNo = memberNo;
         this.id = id;
         this.pw = pw;
         this.name = name;

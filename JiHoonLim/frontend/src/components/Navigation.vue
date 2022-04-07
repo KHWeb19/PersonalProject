@@ -55,6 +55,7 @@
         </div>
 
         <div v-if="this.$store.state.userInfo">
+          <!--
           <v-btn
             text
             class="orange lighten-2"
@@ -64,6 +65,39 @@
               >마이페이지</router-link
             >
           </v-btn>
+          -->
+          <span class="text-center">
+            <v-menu open-on-hover offset-y>
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  text
+                  class="orange lighten-2"
+                  dark
+                  v-bind="attrs"
+                  v-on="on"
+                  style="
+                    margin-right: 15px;
+                    font-family: fantasy;
+                    font-size: 20px;
+                  "
+                >
+                  마이페이지
+                </v-btn>
+              </template>
+
+              <v-list>
+                <v-list-item
+                  v-for="(item, index) in items"
+                  :key="index"
+                  :to="item.link"
+                  link
+                >
+                  <v-list-item-title>{{ item.title }}</v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-menu>
+          </span>
+
           <v-btn text class="orange lighten-2">
             <span
               class="font-weight-light white--text"
@@ -87,6 +121,10 @@ export default {
         { text: "공지사항", route: "/announcement" },
         { text: "인기 순위", route: "/best" },
         { text: "레시피", route: "/foodList" },
+      ],
+      items: [
+        { title: "내 보관함", link: "/" },
+        { title: "회원 정보 수정", link: "/memberModify" },
       ],
       isLogin: false,
     };
