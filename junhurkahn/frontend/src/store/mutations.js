@@ -7,6 +7,8 @@ import {
     FETCH_JPA_BOARD,
     FETCH_JPA_BOARD_LIST1,
     FETCH_JPA_BOARD1,
+    FETCH_JPA_BOARD_LIST2,
+    FETCH_JPA_BOARD2,
 
  
 
@@ -45,7 +47,21 @@ export default {
     },
     [FETCH_JPA_BOARD1] (state, board1) {
         state.jpaBoard1 = board1
+    },
+     [FETCH_JPA_BOARD_LIST2] (state, boards2) {
+            state.jpaBoards2 = boards2
+    },
+    [FETCH_JPA_BOARD2] (state, board2) {
+            state.jpaBoard2 = board2
+
+
+
+
+
 
 
 }
 }
+    
+
+

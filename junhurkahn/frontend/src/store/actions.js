@@ -8,7 +8,11 @@ import {
     FETCH_BUSINESS_MEMBER,
     CRAWL_START,
     FETCH_JPA_BOARD_LIST1,
-    FETCH_JPA_BOARD1
+    FETCH_JPA_BOARD1,
+    FETCH_JPA_BOARD_LIST2,
+    FETCH_JPA_BOARD2
+
+
 } from './mutation-types'
 
 import axios from 'axios'
@@ -46,6 +50,28 @@ export default {
                 commit(FETCH_JPA_BOARD_LIST, res.data)
             })
     },
+
+    fetchJpaBoardList1 ({ commit }) {
+        return axios.get('http://localhost:7777/62th/board1/list1')
+            .then((res) => {
+                commit(FETCH_JPA_BOARD_LIST1, res.data)
+            })
+    },
+
+          
+    fetchJpaBoardList2 ({ commit }) {
+        return axios.get('http://localhost:7777/62th/board2/list2')
+            .then((res) => {
+                commit(FETCH_JPA_BOARD_LIST2, res.data)
+            })
+    },
+
+
+
+
+
+
+
     fetchJpaBoard ({ commit }, boardNo) {
         return axios.get(`http://localhost:7777/62th/board/${boardNo}`)
             .then((res) => {
@@ -53,18 +79,25 @@ export default {
             })
         },
 
-        fetchJpaBoardList1 ({ commit }) {
-                return axios.get('http://localhost:7777/62th/board1/list1')
-                    .then((res) => {
-                        commit(FETCH_JPA_BOARD_LIST1, res.data)
-                    })
-            },
+
             fetchJpaBoard1 ({ commit }, boardNo) {
                 return axios.get(`http://localhost:7777/62th/board1/${boardNo}`)
                     .then((res) => {
                         commit(FETCH_JPA_BOARD1, res.data)
                     })
             },
+
+              
+            fetchJpaBoard2 ({ commit }, boardNo) {
+                return axios.get(`http://localhost:7777/62th/board2/${boardNo}`)
+                    .then((res) => {
+                        commit(FETCH_JPA_BOARD2, res.data)
+                    })
+            },
+
+
+
+
 
     fetchBusinessMember ({ commit }) {
         return axios.get('http://localhost:7777/63th/jpaMember/checkBusiness')
