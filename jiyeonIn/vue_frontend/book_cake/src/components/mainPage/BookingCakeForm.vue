@@ -24,7 +24,7 @@
                             
                     </v-col>
 
-                    <v-col v-col class="col-12 col-sm-5">
+                    <v-col class="col-12 col-sm-5">
                             <label>
                                 <input
                                 type="radio"
@@ -48,7 +48,7 @@
             <v-select class="selectCake" v-model="findDgn" :items="selectCakeDesign" label="디자인 선택" style="width: 200px;" @change="findDesign"></v-select>
             
             <v-virtual-scroll
-                :items="cakeArr"
+                :items="cakeLists"
                 height="600" width="750" item-height="250" 
                 class="virtualScroll"
                 v-if="this.chooseDesBol != 'mine'">
@@ -59,8 +59,8 @@
                             <input type="radio" @change="confirmCake" v-model="checkIndex" :value="index" name="checkOwnCake"/> 
                         </v-list-item-action>
 
-                        <v-list-item-content style="width:230px; height:250px;">
-                            <v-img v-bind:src="item.image" cover/>
+                        <v-list-item-content style="width:200px; height:260px;">
+                            <v-img v-bind:src="require(`@/assets/uploadImg/${item.linkInfo}`)" contain />
                         </v-list-item-content>
 
                         <v-list-item-action>
@@ -81,18 +81,18 @@
 
             <v-virtual-scroll
                 :items="chooseDesignArr"
-                height="600" width="750" item-height="250" 
+                height="600" width="750" item-height="270" 
                 class="virtualScroll"
                 v-if="this.chooseDesBol == 'mine'">
 
-                <template v-slot="{ item,index }">
-                    <v-list-item :key="item">
+                <template v-slot="{ item, index }">
+                    <v-list-item :key="index">
                         <v-list-item-action>
                             <input type="radio" @change="confirmCake2" v-model="checkIndex2" :value="index" name="checkSelectCake"/> 
                         </v-list-item-action>
 
-                        <v-list-item-content style="width:260px; height:260px;">
-                            <v-img v-bind:src="item.image" cover/>
+                        <v-list-item-content style="width:220px; height:220px;">
+                            <v-img v-bind:src="require(`@/assets/uploadImg/${item.linkInfo}`)" contain />
                         </v-list-item-content>
 
                         <v-list-item-action>
@@ -110,16 +110,17 @@
                     <v-divider></v-divider>
                 </template>
             </v-virtual-scroll>
-
-            <p>여기야{{this.outDesign}}+{{this.outSize}}+{{this.outPrice}}+{{this.outImg}}+</p>
             </div>
         </div>
+
         <div class="input-group" v-show="sendType">
             <div class="input-group-text">
                <p style="font-size: 15px">*아래 파일선택에 원하는 디자인을 첨부해 주세요!</p>
             </div>
         </div>
-       
+
+        <div style="font-size: 14px;"><br><p v-show="isShow">선택한 디자인 & 사이즈 & 가격 : <strong>{{ outDesign }} & {{ outSize }} & {{ outPrice }} </strong>  </p></div>
+
         <div>
             <br><hr><br>
             <h4>요청사항 입력</h4><br>
@@ -134,11 +135,11 @@
                 multiple v-on:change="handleFileUpload()"/>
         </div>
 
-        <div style="text-align: center;">
+        <!-- <div style="text-align: center;">
             <v-btn color="black" text type="submit" @click="submitBooking" style="font-size:19px;" width="260">
                 <v-icon color="black" text type="submit" >mdi-check</v-icon>예약하기
             </v-btn>
-        </div>   
+        </div>    -->
     </div>
 </template>
 
@@ -149,38 +150,18 @@ import EventBus from '@/eventBus.js'
 
 export default {
     name : 'BookingCakeForm',
+    props: {
+        cakeLists: {
+            type: Array
+        }
+    },
     data () {
         return {
-            date:[],
-            time:[],
+            date:'',
+            time:'',
             selectCake: false,
             soso1: false,
             selectOwnCake: false,
-            cakeArr: [
-                {image: require('@/assets/uploadImg/birthday/1.birhday.png'), design : 'birthday', size: '1호', price: '21,000'},
-                {image: require('@/assets/uploadImg/birthday/2.birhday(2).png'), design : 'birthday', size: '1호', price: '23,000'},
-                {image: require('@/assets/uploadImg/birthday/3.birhday(3).png'), design : 'birthday', size: '도시락 케이크', price: '15,000'},
-                {image: require('@/assets/uploadImg/birthday/4.birhday(4).png'), design : 'birthday', size: '도시락 케이크', price: '16,000'},
-                {image: require('@/assets/uploadImg/birthday/5.birhday(5).png'), design : 'birthday', size: '2호', price: '26,000'},
-
-                {image: require('@/assets/uploadImg/family/1.famaily cake.png'), design : 'family', size: '1호', price: '22,000'},
-                {image: require('@/assets/uploadImg/family/2.famaily cake(2).png'), design : 'family', size: '1호', price: '22,500'},
-                {image: require('@/assets/uploadImg/family/3.famaily cake(3).png'), design : 'family', size: '2호', price: '26,500'},
-                {image: require('@/assets/uploadImg/family/4.famaily cake(4).png'), design : 'family', size: '1호', price: '223,000'},
-                {image: require('@/assets/uploadImg/family/5.famaily cake(5).png'), design : 'family', size: '2호', price: '35,000'},
-
-                {image: require('@/assets/uploadImg/friend/1.friend cake.png'), design : 'friend', size: '도시락 케이크', price: '15,000'},
-                {image: require('@/assets/uploadImg/friend/2.friend cake(2).png'), design : 'friend', size: '2호', price: '29,000'},
-                {image: require('@/assets/uploadImg/friend/3.friend cake(3).png'), design : 'friend', size: '1호', price: '30,000'},
-                {image: require('@/assets/uploadImg/friend/4.friend cake(4).png'), design : 'friend', size: '1호', price: '24,000'},
-                {image: require('@/assets/uploadImg/friend/5.friend cake(5).png'), design : 'friend', size: '1호', price: '24,000'},
-
-                {image: require('@/assets/uploadImg/lover/1.lover.png'), design : 'lover', size: '1호', price: '22,000'},
-                {image: require('@/assets/uploadImg/lover/2.lover(2).png'), design : 'lover', size: '1호', price: '22,000'},
-                {image: require('@/assets/uploadImg/lover/3.lover(3).png'), design : 'lover', size: '1호', price: '23,000'},
-                {image: require('@/assets/uploadImg/lover/4.lover(4).png'), design : 'lover', size: '2호', price: '27,000'},
-                {image: require('@/assets/uploadImg/lover/5.lover(5).png'), design : 'lover', size: '도시락', price: '15,000'},
-            ],
             selectCakeDesign : ['birthday', 'family','friend' , 'lover'],
             findDgn:'',
             sendType: false,
@@ -189,14 +170,18 @@ export default {
             chooseDesignArr: [],
             chooseDesBol: ['notMine', 'mine'],
             checkIndex:'',
+            checkIndex2:'',
             selectEachCake:[],
-            inputIndex:'',
             outDesign:'',
             outSize:'',
             outPrice:'',
             outImg:'',
-            DesignArrIndex:''
+            isShow:false,
+            cakeArrNo:'' //이거 가지고 갈거임
         }
+    },
+    components: { 
+        CalenderTest 
     },
     watch: {
         toggleSendType: function (data) {
@@ -206,9 +191,7 @@ export default {
             else this.sendType = false
         },
     },
-    components: { 
-        CalenderTest 
-    },
+    
     created () {
         EventBus.$on('calendarInform', (payload) => {
             this.date =  payload[0]
@@ -220,79 +203,94 @@ export default {
         findDesign () {
             this.chooseDesignArr = new Array();
 
-            for(let i=0; i< this.cakeArr.length ; i++) {
-                if(this.cakeArr[i].design == this.findDgn) {
-                    this.chooseDesignArr.push(this.cakeArr[i])
-                    this.DesignArrIndex = i
+            for(let i=0; i< this.cakeLists.length ; i++) {
+                if(this.cakeLists[i].design == this.findDgn) {
+                    this.chooseDesignArr.push(this.cakeLists[i])
                     
                 }else {
                     continue
                 }
             }
             this.chooseDesBol = 'mine'
+            this.isShow = false
         },
         confirmCake(){
             console.log(this.checkIndex)
-
-            for(let i=0; i< this.cakeArr.length ; i++) {
+            
+            for(let i=0; i< this.cakeLists.length ; i++) {
                 if(this.checkIndex == i) {
-                    this.outDesign = this.cakeArr[i].design
-                    this.outSize = this.cakeArr[i].size 
-                    this.outPrice = this.cakeArr[i].price
-                    this.outImg = this.cakeArr[i].image 
+                    this.outDesign = this.cakeLists[i].design
+                    this.outSize = this.cakeLists[i].size 
+                    this.outPrice = this.cakeLists[i].price
+                    this.cakeArrNo = ((this.checkIndex) +1)
+                    
                     break
                 }
             }
-        },
-        confirmCake2(){
-            console.log(this.checkIndex2)
 
-            for(let i=0; i< this.chooseDesignArr.length ; i++) {
-                if(this.chooseDesignArr[this.DesignArrIndex].design == 'brithday'){
-                    if(this.checkIndex2 == i) {
-                        this.outDesign = this.cakeArr[i].design
-                        this.outSize = this.cakeArr[i].size 
-                        this.outPrice = this.cakeArr[i].price
-                        this.outImg = this.cakeArr[i].image 
-                        break
+            console.log(this.cakeArrNo)
+            this.isShow = true
+
+        },
+         confirmCake2(){
+             console.log(this.checkIndex2)
+             this.isShow = true
+        
+            if((this.chooseDesignArr[0].design) == 'birthday'){
+                for(let i=0 ; i< this.chooseDesignArr.length ; i++){
+                    if((this.checkIndex2) == (i)){
+                        let num = ((this.chooseDesignArr[i].cakeNo) - 1)
+                         this.outDesign = this.cakeLists[num].design
+                         this.outSize = this.cakeLists[num].size 
+                         this.outPrice = this.cakeLists[num].price
+                         this.cakeArrNo = (this.chooseDesignArr[i].cakeNo)
+
+                        console.log(this.cakeArrNo)
+                         break
                     }
-                }else if(this.chooseDesignArr[this.DesignArrIndex].design == 'family'){
-                    
-                    if(this.checkIndex2 == i) {
-                        let sum = ( this.checkIndex2 + 5 )
-                        this.outDesign = this.cakeArr[sum].design
-                        this.outSize = this.cakeArr[sum].size 
-                        this.outPrice = this.cakeArr[sum].price
-                        this.outImg = this.cakeArr[sum].image 
-                        break
+                }          
+            }else if(this.chooseDesignArr[0].design == 'family'){
+                for(let i=0 ; i< this.chooseDesignArr.length ; i++){
+                    if((this.checkIndex2) == (i)){
+                        let num = ((this.chooseDesignArr[i].cakeNo) - 1)
+                         this.outDesign = this.cakeLists[num].design
+                         this.outSize = this.cakeLists[num].size 
+                         this.outPrice = this.cakeLists[num].price
+                         this.cakeArrNo = (this.chooseDesignArr[i].cakeNo)
+
+                        console.log(this.cakeArrNo)
+                         break
                     }
-                }else if(this.chooseDesignArr[this.DesignArrIndex].design == 'friend'){
-                    
-                    if(this.checkIndex2 == i) {
-                        let sum1 = (this.checkIndex2 + 5 + 5 )
-                        this.outDesign = this.cakeArr[sum1].design
-                        this.outSize = this.cakeArr[sum1].size 
-                        this.outPrice = this.cakeArr[sum1].price
-                        this.outImg = this.cakeArr[sum1].image 
-                        break
-                    }
-                }else if(this.chooseDesignArr[this.DesignArrIndex].design == 'lover'){
-                    
-                    if(this.checkIndex2 == i) {
-                        let sum2 = (this.checkIndex2 + 5 + 5 + 5)
-                        this.outDesign = this.cakeArr[sum2].design
-                        this.outSize = this.cakeArr[sum2].size 
-                        this.outPrice = this.cakeArr[sum2].price
-                        this.outImg = this.cakeArr[sum2].image 
-                        break
-                    }
-                }
-                    
+                }            
             }
-        },
-        submitBooking () {
+            else if(this.chooseDesignArr[0].design == 'friend'){
+                for(let i=0 ; i< this.chooseDesignArr.length ; i++){
+                    if((this.checkIndex2) == (i)){
+                        let num = ((this.chooseDesignArr[i].cakeNo) - 1)
+                         this.outDesign = this.cakeLists[num].design
+                         this.outSize = this.cakeLists[num].size 
+                         this.outPrice = this.cakeLists[num].price
+                         this.cakeArrNo = (this.chooseDesignArr[i].cakeNo)
 
-        }
+                        console.log(this.cakeArrNo)
+                         break
+                    }
+                }           
+            }else if(this.chooseDesignArr[0].design == 'lover'){
+                for(let i=0 ; i< this.chooseDesignArr.length ; i++){
+                    if((this.checkIndex2) == (i)){
+                        let num = ((this.chooseDesignArr[i].cakeNo) - 1)
+                         this.outDesign = this.cakeLists[num].design
+                         this.outSize = this.cakeLists[num].size 
+                         this.outPrice = this.cakeLists[num].price
+                         this.cakeArrNo = (this.chooseDesignArr[i].cakeNo)
+
+                        console.log(this.cakeArrNo)
+                         break
+                    }
+                }          
+            }
+         }
     }
     
 }
