@@ -6,13 +6,12 @@
         </div>
 
         <div class="cakeImg">
-            <div v-if="($store.state.authInfo !== '관리자') || (this.$store.state.userInfo == null)">
+            
+            <div v-if="(dbrAction != 'manager') || (checkuserInfo == null)">
                 <h4>케이크 보기</h4><br>
             </div>
-            
-            
 
-            <div v-if="$store.state.authInfo === '관리자'">
+            <div v-show="(dbrAction == 'manager') && (checkuserInfo != null)">
                 <h4>케이크 보기</h4><br>
                 <v-container>
                     <v-row justify="center">
@@ -72,10 +71,11 @@ import { mapState, mapActions} from 'vuex'
                 design: '',
                 size: '',
                 price:'',  
-                
                 selectCake : ['birthday', 'lover','family','friend'],
-                selectSize : ['도시락 케이크','1호','2호','3호']
-                
+                selectSize : ['도시락 케이크','1호','2호','3호'],
+                dbrAction: (window.localStorage.getItem('id')),
+                checkuserInfo: window.localStorage.getItem('token')
+
                 }
             },
         
@@ -89,6 +89,7 @@ import { mapState, mapActions} from 'vuex'
         },
         mounted () {
             this.fetchCakeLists()
+            
         },
         methods: {
             ...mapActions(['fetchCakeLists']),
@@ -116,9 +117,11 @@ import { mapState, mapActions} from 'vuex'
                 axios.post('http://localhost:7777/upload/register', formData) 
                     .then (res => {
                         alert('처리 결과: ' + res.data)
+                        this.$router.go()
                     })
                     .catch (res => {
                         alert('처리 결과: ' + res.message)
+                        this.$router.go()
                     })
             }
                     

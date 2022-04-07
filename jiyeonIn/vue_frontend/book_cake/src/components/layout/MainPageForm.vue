@@ -1,7 +1,7 @@
 <template>
     <div class="Main">
         <header>
-            <v-container v-if="this.$store.state.userInfo == null">
+            <v-container v-if="checkuserInfo == null">
                 <v-row>
                     <v-col class="col-12 col-sm-10">
                         
@@ -19,7 +19,7 @@
                 </v-row>
             </v-container>
 
-            <v-container v-if="this.$store.state.userInfo != null">
+            <v-container v-if="checkuserInfo != null">
                 <v-row>
                     <v-col class="col-12 col-sm-10">
                     </v-col>
@@ -77,14 +77,11 @@
 
     export default {
         name: 'MainPageForm',
-        props:{
-            checklogin : String,
-        },
         components: {
         },
         data () {
             return {
-                
+                checkuserInfo: window.localStorage.getItem('token')
             }
         },
         methods: {
@@ -92,9 +89,10 @@
                 this.$cookies.remove("user")
                 this.isLogin = false
                 this.$store.state.userInfo = null
-
+                window.localStorage.removeItem("token")
+                history.go(0)
                 alert('로그아웃 되었습니다!')
-                this.$router.go()
+                
             }
         }
 
