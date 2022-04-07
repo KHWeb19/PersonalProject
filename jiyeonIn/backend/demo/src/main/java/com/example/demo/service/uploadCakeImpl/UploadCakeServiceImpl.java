@@ -25,13 +25,13 @@ public class UploadCakeServiceImpl implements UploadCakeService{
         //require('@/assets/uploadImg/birthday/1.birhday.png')
         String findLink = null;
         if(uploadRequest.getDesign().equals("birthday")) {
-            findLink = "@/assets/uploadImg/birthday/" + originalFilename ;
+            findLink = "birthday/" + originalFilename;
         } else if(uploadRequest.getDesign().equals("family")) {
-            findLink = "@/assets/uploadImg/family/" + originalFilename ;
+            findLink = "family/" + originalFilename;
         } else if(uploadRequest.getDesign().equals("friend")) {
-            findLink = "@/assets/uploadImg/friend/" + originalFilename ;
+            findLink = "friend/" + originalFilename;
         } else if(uploadRequest.getDesign().equals("lover")) {
-            findLink = "@/assets/uploadImg/lover/" + originalFilename ;
+            findLink = "lover/" + originalFilename;
         }
 
         UploadCake uploadcake = new UploadCake(uploadRequest.getDesign(), uploadRequest.getSize(),uploadRequest.getPrice(), findLink);
@@ -41,6 +41,6 @@ public class UploadCakeServiceImpl implements UploadCakeService{
 
     @Override
     public List<UploadCake> list() {
-        return uploadRepository.findAll(Sort.by(Sort.Direction.DESC,"cakeNo"));
+        return uploadRepository.findAll(Sort.by(Sort.Direction.ASC,"cakeNo"));
     }
 }

@@ -71,7 +71,7 @@ import { mapState, mapActions} from 'vuex'
                 design: '',
                 size: '',
                 price:'',  
-                selectCake : ['birthday', 'lover','family','friend'],
+                selectCake : ['birthday', 'family','friend' , 'lover'],
                 selectSize : ['도시락 케이크','1호','2호','3호'],
                 dbrAction: (window.localStorage.getItem('id')),
                 checkuserInfo: window.localStorage.getItem('token')
@@ -88,8 +88,8 @@ import { mapState, mapActions} from 'vuex'
             ...mapState(['cakeLists'])
         },
         mounted () {
-            this.fetchCakeLists()
-            
+            this.fetchCakeLists(),
+            window.localStorage.getItem('cakeList')
         },
         methods: {
             ...mapActions(['fetchCakeLists']),
@@ -117,11 +117,11 @@ import { mapState, mapActions} from 'vuex'
                 axios.post('http://localhost:7777/upload/register', formData) 
                     .then (res => {
                         alert('처리 결과: ' + res.data)
-                        this.$router.go()
+                        window.localStorage.setItem("cakeList", this.cakeLists)
                     })
-                    .catch (res => {
-                        alert('처리 결과: ' + res.message)
-                        this.$router.go()
+                    .catch (() => {
+                        alert('파일을 추가해주세요!')
+                        
                     })
             }
                     

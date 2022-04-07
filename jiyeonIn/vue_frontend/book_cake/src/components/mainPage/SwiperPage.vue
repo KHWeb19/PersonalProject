@@ -5,7 +5,9 @@
                     <v-col>
                         <br><h3>Birthday</h3>
                         <swiper class="swiper" :options="swiperOption">
-                            <swiper-slide v-for="item in cakeLists" :key="item.cakeNo" > <v-img v-bind:src="item.linkInfo" /> </swiper-slide>
+                            <swiper-slide v-for="item in cakeBirthday" :key="item.cakeNo" > 
+                                <v-img v-bind:src="require(`@/assets/uploadImg/${item.linkInfo}`)" cover/> 
+                            </swiper-slide>
                             <div class="swiper-pagination" slot="pagination">
                             </div>
                         </swiper>
@@ -16,7 +18,9 @@
                     <v-col>
                         <br><h3>Family</h3>
                         <swiper class="swiper" :options="swiperOption">
-                            <swiper-slide v-for="item in cakeLists" :key="item.cakeNo" > <v-img v-bind:src="item.linkInfo" /></swiper-slide>
+                            <swiper-slide v-for="item in cakeFamily" :key="item.cakeNo" > 
+                                <v-img v-bind:src="require(`@/assets/uploadImg/${item.linkInfo}`)" cover/> 
+                            </swiper-slide>
                             <div class="swiper-pagination" slot="pagination">
                             </div>
                         </swiper>
@@ -27,7 +31,9 @@
                     <v-col>
                         <br><h3>Friend</h3>
                         <swiper class="swiper" :options="swiperOption">
-                            <swiper-slide v-for="item in cakeLists" :key="item.cakeNo" > <v-img v-bind:src="item.linkInfo" /></swiper-slide>
+                            <swiper-slide v-for="item in cakeFriend" :key="item.cakeNo" > 
+                                <v-img v-bind:src="require(`@/assets/uploadImg/${item.linkInfo}`)" cover/> 
+                            </swiper-slide>
                             <div class="swiper-pagination" slot="pagination">
                             </div>
                         </swiper>
@@ -38,14 +44,16 @@
                     <v-col>
                         <br><h3>Lover</h3>
                         <swiper class="swiper" :options="swiperOption">
-                            <swiper-slide v-for="item in cakeLists" :key="item.cakeNo" > <v-img v-bind:src="item.linkInfo" /></swiper-slide>
+                            <swiper-slide v-for="item in cakeLover" :key="item.cakeNo" > 
+                                <v-img v-bind:src="require(`@/assets/uploadImg/${item.linkInfo}`)" cover/> 
+                            </swiper-slide>
                             <div class="swiper-pagination" slot="pagination">
                             </div>
                         </swiper>
                     </v-col>
-                </v-row>
+                </v-row> 
             </v-container>
-            
+           
     </div>
 </template>
 
@@ -87,25 +95,25 @@ export default {
                 }
             },
             cakeBirthday: [],
-            cakeFamily:[],
-            cakeFriend:[],
-            cakeLover:[],
+            cakeFamily: [],
+            cakeFriend: [],
+            cakeLover: [],
         }
     },
-    // mounted () {
-    //     for(let i = 0 ; i < this.cakeArray.length ; i++) {
-    //         if(this.cakeArray[i].design == 'birthday'){
-    //             this.cakeBirthday.push(this.cakeArr[i].image)
-    //         } else if(this.cakeArray[i].design == 'family'){
-    //             this.cakeFamily.push(this.cakeArr[i].image)
-    //         } else if(this.cakeArray[i].design == 'friend'){
-    //             this.cakeFriend.push(this.cakeArr[i].image)
-    //         } else if(this.cakeArray[i].design == 'lover'){
-    //             this.cakeLover.push(this.cakeArr[i].image)
-    //         }
-    //     }
+    mounted () {
+        for(let i = 0 ; i < this.cakeLists.length ; i++) {
+            if(this.cakeLists[i].design == 'birthday'){
+                this.cakeBirthday.push(this.cakeLists[i])
+            } else if(this.cakeLists[i].design == 'family'){
+                this.cakeFamily.push(this.cakeLists[i])
+            } else if(this.cakeLists[i].design == 'friend'){
+                this.cakeFriend.push(this.cakeLists[i])
+            } else if(this.cakeLists[i].design == 'lover'){
+                this.cakeLover.push(this.cakeLists[i])
+            }
+        }
         
-    // }
+    }
 }
 
 </script>
