@@ -1,6 +1,6 @@
 <template>
     <div align="center">
-        <h2>생일관리</h2>
+        <h2>생일관리 등록</h2>
         <jpa-board-register-form-3 @submit="onSubmit"/>
     </div>
 </template>

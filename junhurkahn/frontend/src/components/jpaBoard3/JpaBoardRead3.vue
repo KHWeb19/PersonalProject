@@ -2,19 +2,19 @@
     <div>
         <table>
             <tr>
-                <td>장보기 목록 읽기</td>
+                <td>생일관리 읽기</td>
                 <td>
                     <input type="text" :value="jpaBoard3.boardNo" readonly/>
                 </td>
             </tr>
             <tr>
-                <td>가게이름</td>
+                <td>이름</td>
                 <td>
                     <input type="text" :value="jpaBoard3.title" readonly/>
                 </td>
             </tr>
             <tr>
-                <td>장보기 목록</td>
+                <td>생년월일</td>
                 <td>
                     <input type="text" :value="jpaBoard3.writer" readonly/>
                 </td>

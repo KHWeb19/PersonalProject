@@ -1,6 +1,6 @@
 <template>
     <div align="center">
-        <h2>게시물 작성</h2>
+        <h2>메모 작성</h2>
         <jpa-board-register-form @submit="onSubmit"/>
     </div>
 </template>

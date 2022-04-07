@@ -41,7 +41,7 @@
 
                <p>
              </p>
-           <router-link style="text-decoration: none;" :to="{ name: 'VuetifyMemberJoinColumnTestPage' }">
+           <router-link style="text-decoration: none;" :to="{ name: 'JpaBoardListPage4' }">
               <h4>사이트 아이디 관리</h4> 
              </router-link>
                <p>

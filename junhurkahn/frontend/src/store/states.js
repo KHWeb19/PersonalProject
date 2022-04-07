@@ -12,6 +12,8 @@ export default {
     jpaBoard2: null,
     jpaBoards3: [],
     jpaBoard3: null,
+    jpaBoards4: [],
+    jpaBoard4: null,
     
  
 

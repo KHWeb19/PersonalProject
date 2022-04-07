@@ -7,6 +7,8 @@ import JpaBoardListPage from '@/views/jpaBoard/JpaBoardListPage.vue'
 import JpaBoardListPage1 from '@/views/jpaBoard1/JpaBoardListPage1.vue'
 import JpaBoardListPage2 from '@/views/jpaBoard2/JpaBoardListPage2.vue'
 import JpaBoardListPage3 from '@/views/jpaBoard3/JpaBoardListPage3.vue'
+import JpaBoardListPage4 from '@/views/jpaBoard4/JpaBoardListPage4.vue'
+
 
 
 
@@ -15,6 +17,8 @@ import JpaBoardRegisterPage from '@/views/jpaBoard/JpaBoardRegisterPage.vue'
 import JpaBoardRegisterPage1 from '@/views/jpaBoard1/JpaBoardRegisterPage1.vue'
 import JpaBoardRegisterPage2 from '@/views/jpaBoard2/JpaBoardRegisterPage2.vue'
 import JpaBoardRegisterPage3 from '@/views/jpaBoard3/JpaBoardRegisterPage3.vue'
+import JpaBoardRegisterPage4 from '@/views/jpaBoard4/JpaBoardRegisterPage4.vue'
+
 
 
 
@@ -22,6 +26,7 @@ import JpaBoardReadPage from '@/views/jpaBoard/JpaBoardReadPage.vue'
 import JpaBoardReadPage1 from '@/views/jpaBoard1/JpaBoardReadPage1.vue'
 import JpaBoardReadPage2 from '@/views/jpaBoard2/JpaBoardReadPage2.vue'
 import JpaBoardReadPage3 from '@/views/jpaBoard3/JpaBoardReadPage3.vue'
+import JpaBoardReadPage4 from '@/views/jpaBoard4/JpaBoardReadPage4.vue'
 
 
 
@@ -29,6 +34,8 @@ import JpaBoardModifyPage from '@/views/jpaBoard/JpaBoardModifyPage.vue'
 import JpaBoardModifyPage1 from '@/views/jpaBoard1/JpaBoardModifyPage1.vue'
 import JpaBoardModifyPage2 from '@/views/jpaBoard2/JpaBoardModifyPage2.vue'
 import JpaBoardModifyPage3 from '@/views/jpaBoard3/JpaBoardModifyPage3.vue'
+import JpaBoardModifyPage4 from '@/views/jpaBoard4/JpaBoardModifyPage4.vue'
+
 
 
 
@@ -89,6 +96,14 @@ const routes = [
     component: JpaBoardListPage3
   },
 
+  {
+    path: '/jpaBoardList4',
+    name: 'JpaBoardListPage4',
+    component: JpaBoardListPage4
+  },
+
+
+
 
   {
     path: '/jpaBoardRegister',
@@ -115,6 +130,15 @@ const routes = [
     name: 'JpaBoardRegisterPage3',
     component: JpaBoardRegisterPage3
   },
+
+  {
+    path: '/jpaBoardRegister4',
+    name: 'JpaBoardRegisterPage4',
+    component: JpaBoardRegisterPage4
+  },
+
+
+
 
 
   {
@@ -163,6 +187,19 @@ const routes = [
     }
   },
 
+  {
+    path: '/jpaBoardRead4/:boardNo4',
+    name: 'JpaBoardReadPage4',
+    components: {
+      default: JpaBoardReadPage4
+    },
+    props: {
+      default: true
+    }
+  },
+
+  
+
 
 
 
@@ -210,6 +247,19 @@ const routes = [
       default: true
     }
   },
+
+  {
+    path: '/jpaBoardModify4/:boardNo4',
+    name: 'JpaBoardModifyPage4',
+    components: {
+      default: JpaBoardModifyPage4
+    },
+    props: {
+      default: true
+    }
+  },
+
+
 
 
 
