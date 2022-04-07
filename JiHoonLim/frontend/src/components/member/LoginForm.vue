@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <v-container>
+  <div class="grey lighten-3">
+    <v-container class="white">
       <v-row justify="center">
         <v-col cols="auto" style="padding-bottom: 90px">
           <router-link to="/">
@@ -13,12 +13,12 @@
           <v-card width="460">
             <v-card-text class="text-center px-12 py-16">
               <validation-observer ref="observer" v-slot="{ invalid }">
-                <v-form @submit.prevent="LogIn">
+                <v-form @submit.prevent="onSubmit">
                   <div class="text-h4 font-weight-black mb-10">로그인</div>
                   <validation-provider
                     v-slot="{ errors }"
                     name="아이디"
-                    :rules="{ max: 12, required: true }"
+                    :rules="{ max: 12, required: true, alpha_num: true }"
                   >
                     <v-text-field
                       v-model="id"
@@ -34,6 +34,7 @@
                     :rules="{ max: 15, required: true }"
                   >
                     <v-text-field
+                      type="password"
                       v-model="pw"
                       label="비밀번호"
                       clearable
@@ -54,10 +55,24 @@
                   >
                   <div class="mt-5">
                     <router-link
-                      class="text-decoration-none orange--text"
+                      class="text-decoration-none orange--text mr-5"
                       to="/signup"
                     >
                       회원가입
+                    </router-link>
+                    |
+                    <router-link
+                      class="text-decoration-none orange--text ml-5 mr-5"
+                      to="/searchUserId"
+                    >
+                      ID 찾기
+                    </router-link>
+                    |
+                    <router-link
+                      class="text-decoration-none orange--text ml-5 mr-5"
+                      to="/searchUserPw"
+                    >
+                      PW 찾기
                     </router-link>
                   </div>
                 </v-form>
@@ -75,16 +90,14 @@ export default {
   name: "LoginForm",
   data() {
     return {
-      id: null,
-      pw: null,
+      id: "",
+      pw: "",
     };
   },
   methods: {
-    async LogIn() {
-      const res = await this.$refs.observer.validate();
-      if (res) {
-        alert("로그인 프로세스");
-      }
+    onSubmit() {
+      const { id, pw } = this;
+      this.$emit("submit", { id, pw });
     },
   },
 };

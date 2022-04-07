@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <v-container>
+  <div class="grey lighten-3">
+    <v-container class="white">
       <v-row justify="center">
         <v-col cols="auto" style="padding-bottom: 90px">
           <router-link to="/">
@@ -10,15 +10,15 @@
               class="mx-auto mb-6"
             ></v-img>
           </router-link>
-          <v-card width="460">
+          <v-card width="460" v-if="!isPass">
             <v-card-text class="text-center px-12 py-16">
-              <validation-observer v-slot="{ invalid }">
-                <v-form @submit.prevent="onSubmit">
-                  <div class="text-h4 font-weight-black mb-10">회원가입</div>
+              <validation-observer ref="observer" v-slot="{ invalid }">
+                <v-form>
+                  <div class="text-h4 font-weight-black mb-10">PW 찾기</div>
                   <validation-provider
                     v-slot="{ errors }"
                     name="아이디"
-                    :rules="{ max: 12, required: true }"
+                    :rules="{ max: 12, required: true, alpha_num: true }"
                   >
                     <v-text-field
                       v-model="id"
@@ -29,6 +29,43 @@
                       :counter="12"
                     />
                   </validation-provider>
+                  <validation-provider
+                    v-slot="{ errors }"
+                    name="이메일"
+                    :rules="{ email: true, required: true }"
+                  >
+                    <v-text-field
+                      v-model="email"
+                      label="이메일"
+                      clearable
+                      prepend-icon="mdi-email"
+                      :error-messages="errors"
+                    />
+                  </validation-provider>
+                  <v-btn
+                    block
+                    x-large
+                    rounded
+                    color="orange lighten-1"
+                    class="mt-6"
+                    @click="findUserId"
+                    :disabled="invalid"
+                  >
+                    찾기</v-btn
+                  >
+                </v-form>
+              </validation-observer>
+            </v-card-text>
+          </v-card>
+
+          <v-card width="460" v-if="isPass">
+            <v-card-text class="text-center px-12 py-16">
+              <validation-observer v-slot="{ invalid }">
+                <v-form>
+                  <div class="text-h4 font-weight-black mb-10">
+                    비밀번호 재설정
+                  </div>
+
                   <validation-provider
                     v-slot="{ errors }"
                     name="비밀번호"
@@ -59,33 +96,7 @@
                       :counter="15"
                     />
                   </validation-provider>
-                  <validation-provider
-                    v-slot="{ errors }"
-                    name="닉네임"
-                    :rules="{ max: 10, required: true }"
-                  >
-                    <v-text-field
-                      v-model="nickName"
-                      label="닉네임"
-                      clearable
-                      prepend-icon="mdi-badge-account-outline"
-                      :error-messages="errors"
-                      :counter="10"
-                    />
-                  </validation-provider>
-                  <validation-provider
-                    v-slot="{ errors }"
-                    name="이메일"
-                    :rules="{ email: true, required: true }"
-                  >
-                    <v-text-field
-                      v-model="email"
-                      label="이메일"
-                      clearable
-                      prepend-icon="mdi-email"
-                      :error-messages="errors"
-                    />
-                  </validation-provider>
+
                   <v-btn
                     type="submit"
                     block
@@ -93,9 +104,10 @@
                     rounded
                     color="orange lighten-1"
                     class="mt-6"
+                    @click="resetPw"
                     :disabled="invalid"
                   >
-                    가입하기</v-btn
+                    비밀번호 변경</v-btn
                   >
                 </v-form>
               </validation-observer>
@@ -108,22 +120,41 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
-  name: "SignUpForm",
+  name: "SearchUserPwPageForm",
   data() {
     return {
       id: "",
+      email: "",
+      isPass: false,
       pw: "",
       pwConfirm: "",
-      nickName: "",
-      email: "",
-      auth: "개인",
     };
   },
   methods: {
-    onSubmit() {
-      const { id, pw, nickName, email, auth } = this;
-      this.$emit("submit", { id, pw, nickName, email, auth });
+    findUserId() {
+      const { id, email } = this;
+      axios
+        .post("http://localhost:7777/member/idMatchEmail", { id, email })
+        .then((res) => {
+          if (res.data) {
+            alert("인증이 완료되었습니다.");
+            this.isPass = true;
+          } else {
+            alert("입력하신 정보로 가입된 정보가 없습니다.");
+            this.isPass = false;
+          }
+        });
+    },
+    resetPw() {
+      const { id, email, pw } = this;
+      axios
+        .post(`http://localhost:7777/member/resetPw/${id}`, { id, email, pw })
+        .then(() => {
+          alert("비밀번호가 변경되었습니다.");
+        });
     },
   },
 };

@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import SignUpForm from "@/components/signUp/SignUpForm.vue";
+import SignUpForm from "@/components/member/SignUpForm.vue";
 import axios from "axios";
 
 export default {
@@ -15,17 +15,19 @@ export default {
   },
   methods: {
     onSubmit(payload) {
-      const { id, pw, nickName, email, auth } = payload;
+      const { id, pw, name, nickName, email, auth } = payload;
       axios
-        .post("http://localhost:7777/signUp/register", {
+        .post("http://localhost:7777/member/register", {
           id,
           pw,
+          name,
           nickName,
           email,
           auth,
         })
         .then((res) => {
           alert("회원가입 완료" + res);
+          this.$router.push("/login");
         })
         .catch((res) => {
           alert(res.response.data.message);

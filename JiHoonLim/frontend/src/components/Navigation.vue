@@ -1,7 +1,7 @@
 <template>
   <div>
     <template>
-      <v-toolbar color="orange lighten-1" dark>
+      <v-toolbar color="orange lighten-1" dark height="90px">
         <v-toolbar-title>
           <router-link to="/">
             <v-img
@@ -34,23 +34,79 @@
           </v-btn>
         </v-toolbar-items>
 
-        <v-btn
-          text
-          class="orange lighten-2"
-          style="margin-right: 15px; font-family: fantasy; font-size: 20px"
-        >
-          <router-link to="/login" class="font-weight-light white--text"
-            >로그인</router-link
+        <div v-if="!this.$store.state.userInfo">
+          <v-btn
+            text
+            class="orange lighten-2"
+            style="margin-right: 15px; font-family: fantasy; font-size: 20px"
           >
-        </v-btn>
-        <v-btn text class="orange lighten-2">
-          <router-link
-            to="/signup"
-            class="font-weight-light white--text"
-            style="font-family: fantasy; font-size: 20px"
-            >회원가입</router-link
+            <router-link to="/login" class="font-weight-light white--text"
+              >로그인</router-link
+            >
+          </v-btn>
+          <v-btn text class="orange lighten-2">
+            <router-link
+              to="/signup"
+              class="font-weight-light white--text"
+              style="font-family: fantasy; font-size: 20px"
+              >회원가입</router-link
+            >
+          </v-btn>
+        </div>
+
+        <div v-if="this.$store.state.userInfo">
+          <!--
+          <v-btn
+            text
+            class="orange lighten-2"
+            style="margin-right: 15px; font-family: fantasy; font-size: 20px"
           >
-        </v-btn>
+            <router-link to="/myPage" class="font-weight-light white--text"
+              >마이페이지</router-link
+            >
+          </v-btn>
+          -->
+          <span class="text-center">
+            <v-menu open-on-hover offset-y>
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  text
+                  class="orange lighten-2"
+                  dark
+                  v-bind="attrs"
+                  v-on="on"
+                  style="
+                    margin-right: 15px;
+                    font-family: fantasy;
+                    font-size: 20px;
+                  "
+                >
+                  마이페이지
+                </v-btn>
+              </template>
+
+              <v-list>
+                <v-list-item
+                  v-for="(item, index) in items"
+                  :key="index"
+                  :to="item.link"
+                  link
+                >
+                  <v-list-item-title>{{ item.title }}</v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-menu>
+          </span>
+
+          <v-btn text class="orange lighten-2">
+            <span
+              class="font-weight-light white--text"
+              style="font-family: fantasy; font-size: 20px"
+              @click="logout"
+              >로그아웃</span
+            >
+          </v-btn>
+        </div>
       </v-toolbar>
     </template>
   </div>
@@ -64,9 +120,29 @@ export default {
       links: [
         { text: "공지사항", route: "/announcement" },
         { text: "인기 순위", route: "/best" },
-        { text: "레시피", route: "/recipe" },
+        { text: "레시피", route: "/foodList" },
       ],
+      items: [
+        { title: "내 보관함", link: "/" },
+        { title: "회원 정보 수정", link: "/memberModify" },
+      ],
+      isLogin: false,
     };
+  },
+  mounted() {
+    this.$store.state.userInfo = this.$cookies.get("user");
+    if (this.$store.state.userInfo != null) {
+      this.isLogin = true;
+    }
+  },
+  methods: {
+    logout() {
+      this.$cookies.remove("user");
+      this.isLogin = false;
+      this.$store.state.userInfo = null;
+      alert("로그아웃 성공");
+      this.$router.push("/login");
+    },
   },
 };
 </script>

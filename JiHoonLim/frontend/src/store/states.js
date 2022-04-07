@@ -1,3 +1,5 @@
 export default {
-   
+    userInfo: JSON.parse(localStorage.getItem('userInfo')),
+    member: null,
+    
 }
