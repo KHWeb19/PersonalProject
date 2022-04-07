@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+
 import java.util.Optional;
 
 @Slf4j
@@ -44,14 +45,42 @@ public class MemberServiceImpl implements MemberService {
             log.info("Entered wrong password!");
             return null;
         }
+        // 로그인 하는 순간 해당 회원의 멤버번호 가져오기
+        if (loginMember.getId().equals(memberRequest.getId())) {
 
-        MemberRequest response = new MemberRequest(
-                memberRequest.getId(),
-                null);
+            memberRequest.setMemberNo(loginMember.getMemberNo());
+            memberRequest.setName(loginMember.getName());
+            memberRequest.setBirth(loginMember.getBirth());
+            memberRequest.setIntro(loginMember.getIntro());
+        }
+
+        MemberRequest response = new MemberRequest(memberRequest.getMemberNo(), memberRequest.getId(), null,
+                memberRequest.getName(),memberRequest.getBirth(),memberRequest.getIntro());
 
         return response;
     }
 
+    @Override
+    public Member read(Long memberNo) {
+        Optional<Member> getMemberInfo = repository.findById(Long.valueOf(memberNo));
+
+        return getMemberInfo.get();
+    }
+
+    @Override
+    public void modify(Member member) {
+
+        String encodedPassword = passwordEncoder.encode(member.getPw());
+        member.setPw(encodedPassword);
+
+        repository.save(member);
+    }
+
+    @Override
+    public void remove(Long memberNo) {
+        repository.deleteById(Long.valueOf(memberNo));
+    }
 }
+
 
 

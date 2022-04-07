@@ -4,8 +4,6 @@
         <v-btn
             color="white"
             height="20"
-            v-bind="attrs"
-            v-on="on"
         >
             Join
           </v-btn>

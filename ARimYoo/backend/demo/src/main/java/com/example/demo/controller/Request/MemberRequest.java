@@ -7,12 +7,23 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MemberRequest {
 
+    private Long memberNo;
     private String id;
     private String pw;
+    private String name;
+    private String birth;
+    private String intro;
+    private String profilePic;
 
-    public MemberRequest(String userId, String password) {
+    public MemberRequest(Long memberNo, String userId, String password,
+                         String userName, String userBirth,
+                         String userIntro) {
+        this.memberNo = memberNo;
         this.id = userId;
         this.pw = password;
+        this.name = userName;
+        this.birth = userBirth;
+        this.intro = userIntro;
 
     }
 }

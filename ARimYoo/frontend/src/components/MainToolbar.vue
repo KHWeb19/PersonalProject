@@ -1,17 +1,17 @@
 <template>
     <v-container>
-        <v-toolbar color="black" dark class="mx-auto" height="46">
+        <v-toolbar color="black" dark class="mx-auto" height="55">
             <v-layout row wrap>
                 <v-tabs v-model="tabs">
                     <v-tab v-show="neverNoShow">
-                        <router-link to="/main"></router-link>
-                    </v-tab>
+                        <router-link to="/main">Home</router-link>
+                    </v-tab> 
                     <v-tab 
                         v-for="item in items"
                         :key="item.title" 
-                        :to="item.route"
+                        :to ="item.route"
                     >
-                        {{item.title}}
+                        {{ item.title }}
                     </v-tab>
                 
                         <v-menu open-on-hover bottom left>
@@ -48,12 +48,14 @@
 </template>
 
 <script>
+
 export default {
+    
     name: "MainToolbar",
     data: () => ({
         tabs:null,
         items: [
-            {title: 'Community', route:'/community'},
+            {title: 'Community', route: '/community'},
             {title: 'Market', route:'/market'},
             {title:'Review', route:'/review'},
             {title: 'Study', route:'/study'},
@@ -61,6 +63,7 @@ export default {
         more: [
             {title: 'Project', route:'/project'}
       ],
+        neverNoShow: false
     }),
     methods: {
         addItem (item) {
@@ -69,8 +72,8 @@ export default {
           ...this.more.splice(this.more.indexOf(item), 1),
         )
         this.more.push(...removed)
-      },
-
+        },
+    
         
     }
 }

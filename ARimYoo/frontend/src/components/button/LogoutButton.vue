@@ -1,6 +1,5 @@
 <template>
     <div>
-    
         <v-btn
             color="white"
             height="20"
@@ -17,9 +16,9 @@ export default {
     name:  'LogoutButton',
     methods: {
         logout() {
-            this.$cookies.remove("user")
-            this.$store.state.userInfo = null
+            localStorage.removeItem("token") 
             alert ('로그아웃되셨습니다.')
+            history.go(0)
         }
     }
 }

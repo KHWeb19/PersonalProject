@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.sun.istack.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -15,19 +16,29 @@ public class Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer memberNo;
+    private Long memberNo;
 
-    @Column(length = 12, nullable = false)
+    @NotNull
+    @Column(length = 12)
     private String id;
 
-    @Column(nullable = false)
+    @NotNull
+    @Column
     private String pw;
 
-    @Column(length = 7, nullable = false)
+    @NotNull
+    @Column(length = 7)
     private String name;
 
-    @Column(nullable = false)
+    @NotNull
+    @Column
     private String birth;
+
+    @Column(length = 500)
+    private String intro;
+
+    @Column
+    private String profilePic;
 
     @CreationTimestamp
     private Date createdDate;
@@ -35,8 +46,15 @@ public class Member {
     @UpdateTimestamp
     private Date lastModifiedDate;
 
-    public Member (String userId, String password) {
+    public Member (Long memberNo, String userId, String password, String userName, String userBirth,
+                   String userIntro, String userProfilePic) {
+        this.memberNo = memberNo;
         this.id = userId;
         this.pw = password;
+        this.name = userName;
+        this.birth = userBirth;
+        this.intro = userIntro;
+        this.profilePic = userProfilePic;
+
     }
 }
