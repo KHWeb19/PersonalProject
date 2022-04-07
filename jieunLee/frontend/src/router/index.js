@@ -51,9 +51,14 @@ const routes = [
     }
   },
   {
-    path: '/password/edit',
+    path: '/accounts/password/:memberNo',
     name: 'PasswordEditPage',
-    component: PasswordEditPage
+    components: {
+      default: PasswordEditPage
+    },
+    props: {
+      default: true
+    }
   },
   {
     path: '/board/register',

@@ -59,8 +59,9 @@
 export default {
     data () {
     return {
-      memberId: '',
-      password: ''
+        memberName: '',
+        memberId: '',
+        password: ''
     }
   },
   methods: {

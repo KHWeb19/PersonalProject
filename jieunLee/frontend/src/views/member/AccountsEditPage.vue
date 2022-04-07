@@ -4,7 +4,7 @@
               <div style="display: flex; justify-content: center;">
     <accounts-category/>
     <accounts-edit-form v-if="member" :member="member" @submit="onSubmit"/>
-      <p v-else>로딩중......</p>
+    <p v-else>로딩중......</p>
               </div>
   </div>
 </template>
@@ -37,15 +37,16 @@ export default {
   created() {
     this.fetchMember(this.memberNo)
       .catch(()=>{
-          alert('회원정보 요청 실패')
+          alert('프로필 요청 실패')
           this.$router.back()
       })
   },
   methods: {
     ...mapActions(['fetchMember']),
     onSubmit(payload) {
-      const {memberName, memberId} = payload
-      axios.put(`http://localhost:7777/member/${this.memberNo}`, {memberName, memberId, password: this.member.password, regDate: this.member.regDate})
+      const {memberName, memberId, memberWeb, memberIntro} = payload
+      axios.put(`http://localhost:7777/member/${this.memberNo}`, 
+      {memberName, memberId, password: this.member.password, memberWeb, memberIntro, regDate: this.member.regDate})
         .then(res => {
             alert('프로필 수정 성공')
             // localStorage.removeItem("userInfo")

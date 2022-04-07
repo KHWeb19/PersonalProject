@@ -52,33 +52,6 @@
                     type="text" v-model="memberId"  />
                   </td>
               </tr>
-              <!-- <br/>
-              <tr>
-                  <td style="text-align: right; padding-right: 10px">등록날짜</td>
-                  <td>
-                    <input style="
-                    margin: 3px;
-                    border: 1px solid #d6d6d6; 
-                    border-radius: 3px; 
-                    width: 300px; 
-                    height: 35px;
-                    padding-left: 5px;" 
-                    type="text" :value="member.regDate" disabled/>
-                  </td>
-              </tr>
-              <tr>
-                  <td style="text-align: right; padding-right: 10px">비밀번호</td>
-                  <td>
-                    <input style="
-                    margin: 3px;
-                    border: 1px solid #d6d6d6; 
-                    border-radius: 3px; 
-                    width: 300px; 
-                    height: 35px;
-                    padding-left: 5px;" 
-                    type="text" :value="member.password" disabled/>
-                  </td>
-              </tr> -->
               <br/>
               <tr>
                   <td style="text-align: right; padding-right: 10px">웹사이트</td>
@@ -90,7 +63,7 @@
                     width: 300px; 
                     height: 35px;
                     padding-left: 5px;" 
-                    type="text"/>
+                    type="text" v-model="memberWeb"/>
                   </td>
               </tr>
               <br/>
@@ -104,14 +77,14 @@
                       width: 300px; 
                       min-height: 70px;
                       padding-left: 5px;" 
-                  type="text">
+                  type="text" v-model="memberIntro">
                   </textarea>
                   </td>
               </tr>
             </table>
             <br/>
             <div style="text-align: center">
-              <v-btn style="width: 35px; height: 30px;" color="blue" class="white--text" type="submit">제출</v-btn>
+              <v-btn style="height: 30px;" color="blue" class="white--text" type="submit">제출</v-btn>
             </div>
           </form>
           </div>
@@ -139,13 +112,15 @@ export default {
     },
     methods: {
       onSubmit() {
-        const { memberName, memberId} = this
-        this.$emit('submit', { memberName, memberId})
+        const { memberName, memberId, memberWeb, memberIntro } = this
+        this.$emit('submit', { memberName, memberId, memberWeb, memberIntro})
       }
     },
     created() {
       this.memberName = this.member.memberName
       this.memberId = this.member.memberId
+      this.memberWeb = this.member.memberWeb
+      this.memberIntro = this.member.memberIntro
     }
 
 }

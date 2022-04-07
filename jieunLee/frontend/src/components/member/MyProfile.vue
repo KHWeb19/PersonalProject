@@ -20,11 +20,9 @@
                     <div style="font-weight: bold">
                         {{member.memberName}}
                     </div>
-                    안녕하세요 
+                    {{member.memberWeb}} 
                     <br/>
-                    웹사이트주소와 소개글이 들어갈 자리
-                    <br/>
-                    어쩌구저쩌구 소개글입니다
+                    {{member.memberIntro}} 
                 </div>
             </div>
             <br/>
@@ -66,10 +64,6 @@ export default {
                 require('@/assets/logo.png'),
                 require('@/assets/vuelogo.png'),
                 'https://w.namu.la/s/6d229410e3814f0113aa79f1d1ff269d0445aaa0d6dfe50223a65d5b8260cfecf5d926136fb31c18d75a2eb8b4ecccc3e6c8a5bc2a5fa9712162c9d99585db47b545c3d079fbd142bf18798129b3cb997c4cd8dcde54dc8cf7dcc802261025f6',
-                'https://w7.pngwing.com/pngs/622/549/png-transparent-pokemon-black-white-pikachu-pachirisu-pokemon-minccino-pikachu.png',
-                'https://w7.pngwing.com/pngs/622/549/png-transparent-pokemon-black-white-pikachu-pachirisu-pokemon-minccino-pikachu.png',
-                'https://w7.pngwing.com/pngs/622/549/png-transparent-pokemon-black-white-pikachu-pachirisu-pokemon-minccino-pikachu.png',
-                'https://w7.pngwing.com/pngs/622/549/png-transparent-pokemon-black-white-pikachu-pachirisu-pokemon-minccino-pikachu.png',
                 'https://w7.pngwing.com/pngs/622/549/png-transparent-pokemon-black-white-pikachu-pachirisu-pokemon-minccino-pikachu.png',
 
             ],

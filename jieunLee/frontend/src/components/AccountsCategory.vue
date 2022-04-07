@@ -11,7 +11,7 @@
                     <br/>
                     <router-link style="text-decoration: none;" :to="{
                         name: 'PasswordEditPage',
-                        }">
+                        params: {memberNo: loginInfo.memberNo.toString()}}">
                         <v-btn>비밀번호 변경</v-btn>
                     </router-link>
                     <br/>
