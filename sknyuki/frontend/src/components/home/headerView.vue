@@ -57,7 +57,6 @@ export default {
           { name: "질문 게시판", route: `/K1QuestionView` }, 
           { name: "판매 중", route: `/` }, 
           { name: "판매 완료", route: `/` }, 
-          { name: "시장 가격", route: `/` }, 
           { name: "마이 페이지", route: `/` }, 
         ]
       }

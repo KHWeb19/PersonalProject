@@ -5,6 +5,8 @@ import K1CheckBrandView from '@/views/K1CheckBrandVeiw/K1CheckBrandView.vue'
 import K1CheckBrandReadPage from '@/views/K1CheckBrandVeiw/K1CheckBrandReadPage.vue'
 import K1QuestionReadPage from '@/views/K1QuestionVeiw/K1QuestionReadPage.vue'
 import K1QuestionView from '@/views/K1QuestionVeiw/K1QuestionView.vue'
+import K1CheckBrandRegisterPage from '@/views/K1CheckBrandVeiw/K1CheckBrandRegisterPage.vue'
+
 
 Vue.use(VueRouter)
 
@@ -33,6 +35,11 @@ const routes = [
     path:'/K1QuestionView',
   name:'K1QuestionView',
   component: K1QuestionView
+},
+{
+  path:'/K1CheckBrandRegisterPage',
+  name:'K1CheckBrandRegisterPage',
+  component:K1CheckBrandRegisterPage
 }
 ]
 

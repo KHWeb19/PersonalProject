@@ -52,7 +52,7 @@
                  
   <v-row  justify="end">
        <!--name:homeview-> register로 변경예정-->
-    <router-link style="text-decoration: none;" :to="{name:'homeView'}">   
+    <router-link style="text-decoration: none;" :to="{name:'K1CheckBrandRegisterPage'}">   
     <v-btn class="blue lighten-5">
       <v-icon small>mdi-pencil</v-icon> 글쓰기</v-btn>
     </router-link></v-row>
@@ -71,12 +71,6 @@
               </div>
 </div>
               
-  
-    
-  
-  
-
-
 
 </template>
 
@@ -106,7 +100,7 @@ function: {
             this.$router.push({
                             name: 'BoardReadPage',
                             params: { boardNo: String(idx.item.boardNo) }
-                         })
+                         })//실행 안될시  params->query: { boardNo: boardNo, id: id }
         }
     },
     mounted () {

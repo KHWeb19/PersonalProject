@@ -1,8 +1,8 @@
 <template>
-     <div class="글작성">
+     <div class="app">
         <h3 style="padding:30px 0px 30px 0px; font-weight:bold" align="left">YOUMUSTHEAR1001</h3>
 
-                <!-- <input type="text" :value="board.boardNo" readonly> -->
+                
 
                 
                 <h6 align="left">등록일자 : </h6>
@@ -43,7 +43,7 @@ export default {
 }
 </script>
 <style scoped>
-.글작성 {
+.app {
   padding:0px 200px 0px 200px;
 }
 </style>
