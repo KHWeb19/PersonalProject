@@ -8,9 +8,10 @@
   background-color: rgbar($primary, 0.5);
   opacity: 0;
   visibility: hidden;
+  backdrop-filter: blur(10px);
   transition: opacity 300ms ease-in-out, visibility 300ms ease-in-out;
 
-  &.is-active {
+  &.active {
     opacity: 1;
     visibility: visible;
   }

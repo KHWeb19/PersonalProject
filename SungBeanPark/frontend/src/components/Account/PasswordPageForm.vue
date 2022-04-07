@@ -52,7 +52,9 @@
   </body>
 </template>
 <script>
-export default {}
+export default {
+  name: "PasswordPageForm",
+}
 </script>
 <style lang="scss" scoped>
 @import "~@/assets/scss/pages/password";

@@ -24,7 +24,11 @@
                         type="text"
                         placeholder="휴대전화(-없이)"
                       />
-                      <button class="id-input-button" type="button">
+                      <button
+                        @click="test"
+                        class="id-input-button"
+                        type="button"
+                      >
                         인증 요청
                       </button>
                     </div>
@@ -32,6 +36,7 @@
                 </div>
                 <div class="id-button">
                   <button class="btn-black btn-46" type="button">다음</button>
+                  <span :class="{ active: isActive }">ssss</span>
                 </div>
               </section>
             </div>
@@ -42,8 +47,23 @@
   </body>
 </template>
 <script>
-export default {}
+export default {
+  name: "IdPageForm",
+  data() {
+    return {
+      isActive: false,
+    }
+  },
+  methods: {
+    test() {
+      this.isActive = !this.isActive
+    },
+  },
+}
 </script>
 <style lang="scss" scoped>
+.active {
+  color: red;
+}
 @import "~@/assets/scss/pages/id";
 </style>

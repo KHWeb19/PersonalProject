@@ -1,0 +1,79 @@
+.checkout-card {
+  position: relative;
+  padding: 8px 10px 8px 12px;
+  background-color: $background;
+  border-radius: 4px;
+
+  .checkout-header {
+    margin-bottom: 8px;
+  }
+
+  .checkout-title {
+    @include text-style(14, $primary);
+    padding-right: 36px - 10px;
+    font-weight: 400;
+  }
+
+  .delete-button {
+    @include inline-flexbox;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 20px;
+    height: 20px;
+    font-size: 20px;
+    color: $secondary;
+
+    &:hover,
+    &:active {
+      opacity: 0.4;
+    }
+  }
+
+  .checkout-select {
+    position: relative;
+    display: inline-block;
+
+    &:hover {
+      select {
+        border-color: $tertiary;
+      }
+
+      i {
+        color: $secondary;
+      }
+    }
+
+    select {
+      @include text-style(14, $primary);
+      width: 72px;
+      height: 24px;
+      padding: 0 8px;
+      line-height: 1;
+      background-color: $white;
+      border: 1px solid $border;
+      border-radius: 3px;
+      transition: border-color 100ms ease-in-out;
+      appearance: none;
+    }
+
+    i {
+      @include pos-center-y;
+      right: 2px;
+      font-size: 20px;
+      color: $tertiary;
+      pointer-events: none;
+      transition: color 100ms ease-in-out;
+    }
+  }
+
+  .checkout-footer {
+    @include flexbox(between);
+  }
+
+  @include responsive(D) {
+    .checkout-title {
+      @include text-style(16);
+    }
+  }
+}

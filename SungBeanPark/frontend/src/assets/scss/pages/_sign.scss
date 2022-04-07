@@ -3,8 +3,9 @@
   height: 100%;
 
   &-header {
+    @include text-style(18);
     text-align: center;
-    margin-top: 72px;
+    margin-top: 64px;
     margin-bottom: 26px;
   }
 
@@ -15,7 +16,7 @@
     margin-bottom: 16px;
   }
 
-  &-member-email,
+  &-member-id,
   &-member-password,
   &-member-password-confirm,
   &-member-name {
@@ -27,6 +28,7 @@
     border-radius: 4px;
 
     ::placeholder {
+      color: $tertiary;
       font-size: 14px;
     }
 
