@@ -1,9 +1,8 @@
-package com.example.demo.service.comments.freeBoardComments;
+package com.example.demo.service.board.freeBoard;
 
 
-import com.example.demo.controller.comments.freeBoardComments.request.FreeBoardCommentsRequest;
-import com.example.demo.entitiy.board.freeBoard.FreeBoard;
-import com.example.demo.entitiy.board.freeBoard.comments.FreeBoardComments;
+import com.example.demo.controller.board.freeBoard.request.FreeBoardCommentsRequest;
+import com.example.demo.entitiy.board.freeBoard.FreeBoardComments;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package com.example.demo.controller.member;
 
 import com.example.demo.controller.member.request.MemberRequest;
-import com.example.demo.duplication.DuplicationCheck;
+import com.example.demo.response.DuplicationCheck;
 import com.example.demo.entitiy.member.MemberInfo;
 import com.example.demo.service.member.MemberService;
 import lombok.extern.slf4j.Slf4j;
@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 
 @RestController

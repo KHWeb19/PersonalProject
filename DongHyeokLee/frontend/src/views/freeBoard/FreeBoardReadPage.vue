@@ -1,21 +1,27 @@
 <template>
     <div>
+        <!-- 리스트로 돌아가기 -->
         <router-link :to="{ name: 'FreeBoardListPage' }">
             <p>자유게시판</p>
         </router-link>
+        
         <free-board-read v-if="freeBoard" :freeBoard="freeBoard"/>
         <p v-else>로딩중 ....... </p>
         <!-- 댓글-->
+        
         <free-board-comment :boardNo="this.boardNo"/>  
-        <!--게시판 수정 -->
+        
         <div class = "button">
-        <router-link :to="{ name: 'FreeBoardModifyPage', params: { boardNo } }">
-            게시물 수정
-        </router-link>
-        <button @click="onDelete">삭제</button>
-        <router-link :to="{ name: 'FreeBoardListPage' }">
-            게시물 보기
-        </router-link>
+            <router-link v-if="$store.state.userInfo.nickname == freeBoard.writer" 
+                            :to="{ name: 'FreeBoardModifyPage', params: { boardNo } }">
+                게시물 수정
+            </router-link>
+            
+            <button v-if="$store.state.userInfo.nickname == freeBoard.writer" @click="onDelete">삭제</button>
+            
+            <router-link :to="{ name: 'FreeBoardListPage' }">
+                목록 보기
+            </router-link>
         </div>
     
         
@@ -27,7 +33,7 @@
 import axios from 'axios'
 import { mapActions, mapState } from 'vuex'
 import FreeBoardRead from '@/components/freeBoard/FreeBoardRead.vue'
-import FreeBoardComment from '@/views/comments/freeBoard/FreeBoardComment.vue'
+import FreeBoardComment from '@/views/freeBoard/FreeBoardComment.vue'
 
 export default {
     name: 'FreeBoardReadPage',

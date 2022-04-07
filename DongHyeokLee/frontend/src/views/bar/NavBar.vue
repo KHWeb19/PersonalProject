@@ -13,7 +13,7 @@
                 </v-app-bar-nav-icon> 
         </v-toolbar>
 
-            <v-navigation-drawer app v-model="nav_drawer" temporary>
+            <v-navigation-drawer app v-model="nav_drawer" src="" right temporary>
             <v-list nav dense>
                 <v-list-item v-for="link in links" :key="link.name" router :to="link.route">
                     <v-list-item-action>
@@ -37,9 +37,8 @@
 export default {
     name: 'NavBar',
     methods: {
-      hihi() {
-          this.$router.push('/boardList')
-      }
+    
+      
     },
      data() {
         return{
@@ -47,7 +46,7 @@ export default {
             links: [
                 { icon: 'mdi-home', text: 'Home', name: 'HomeView', route: '/' },
                 { icon: 'mdi-pencil-plus-outline', text:'자유게시판', name:'FreeBoardListPage', route:'/freeBoardList'},
-                
+                { icon: 'mdi-image-multiple', text: '사진게시판', name: 'PhotoBoardListPage', route: '/photoBoardList'}
             ],
      
         }

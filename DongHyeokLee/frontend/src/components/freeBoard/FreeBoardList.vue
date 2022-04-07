@@ -28,11 +28,11 @@
                 </th>
                 <th align="center">
                     {{ freeBoard.regDate.substring(0, 10) }}
-                    <!--{{new Date(freeBoard.regDate).toLocaleString("ko-KR", {timeZone: "Asia/Seoul"}).toString().substr(11, 8)}} -->
                     
                 </th>
             </tr>
         </table>
+        
     </div>
 </template>
 

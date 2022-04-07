@@ -1,13 +1,17 @@
 import {
+    //자유게시판
     FETCH_FREE_BOARD_LIST,
     FETCH_FREE_BOARD,
-    FETCH_FREE_BOARD_COMMENTS_LIST
+    FETCH_FREE_BOARD_COMMENTS_LIST,
+    //사진게시판
+    FETCH_PHOTO_BOARD_LIST
    
 } from './mutation-types'
 
 import axios from 'axios'
 
 export default {
+    //자유게시판
     fetchFreeBoardList ({ commit }) {
         return axios.get('http://localhost:7777/freeBoard/list')
                 .then((res) => {
@@ -25,5 +29,12 @@ export default {
                 .then((res) => {
                     commit(FETCH_FREE_BOARD_COMMENTS_LIST, res.data)
                 })
-    }
+    },
+    //사진게시판
+    fetchPhotoBoardList ({ commit }) {
+        return axios.get('http://localhost:7777/photoBoard/list')
+                .then((res) => {
+                    commit(FETCH_PHOTO_BOARD_LIST, res.data)
+                })
+    },
 }

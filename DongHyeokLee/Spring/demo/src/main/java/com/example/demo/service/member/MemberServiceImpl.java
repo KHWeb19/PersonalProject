@@ -1,7 +1,7 @@
 package com.example.demo.service.member;
 
 import com.example.demo.controller.member.request.MemberRequest;
-import com.example.demo.duplication.DuplicationCheck;
+import com.example.demo.response.DuplicationCheck;
 import com.example.demo.entitiy.member.MemberInfo;
 import com.example.demo.entitiy.member.MemberAuth;
 import com.example.demo.repository.member.MemberAuthRepository;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 
 
-import java.util.List;
+
 import java.util.Optional;
 
 @Slf4j

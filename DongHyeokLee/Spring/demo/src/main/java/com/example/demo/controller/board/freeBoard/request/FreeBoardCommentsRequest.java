@@ -1,4 +1,4 @@
-package com.example.demo.controller.comments.freeBoardComments.request;
+package com.example.demo.controller.board.freeBoard.request;
 
 import lombok.Data;
 

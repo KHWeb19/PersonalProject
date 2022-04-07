@@ -1,17 +1,17 @@
-package com.example.demo.entitiy.board.freeBoard;
+package com.example.demo.entitiy.board.photoBoard;
 
-
+import com.example.demo.entitiy.member.MemberAuth;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
-
+import java.util.List;
 
 @Data
 @Entity
-public class FreeBoard {
+public class PhotoBoard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long boardNo;
@@ -22,6 +22,9 @@ public class FreeBoard {
     @Column(length = 32, nullable = false)
     private String writer;
 
+    @Column
+    private String fileName;
+
     @Lob
     private String content;
 
@@ -30,8 +33,6 @@ public class FreeBoard {
 
     @UpdateTimestamp
     private Date updDate;
-
-
 
 
 }

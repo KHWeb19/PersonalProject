@@ -1,11 +1,15 @@
 import {
+    //자유게시판
     FETCH_FREE_BOARD_LIST,
     FETCH_FREE_BOARD,
-    FETCH_FREE_BOARD_COMMENTS_LIST
+    FETCH_FREE_BOARD_COMMENTS_LIST,
+    //사진게시판
+    FETCH_PHOTO_BOARD_LIST
     
 } from './mutation-types'
 
 export default {
+    //자유게시판
     [FETCH_FREE_BOARD_LIST] (state, freeBoards) {
         state.freeBoards = freeBoards
     },
@@ -14,5 +18,9 @@ export default {
     },
     [FETCH_FREE_BOARD_COMMENTS_LIST] (state, freeBoardComments) {
         state.freeBoardComments = freeBoardComments
+    },
+    //사진게시판
+    [FETCH_PHOTO_BOARD_LIST] (state, photoBoards) {
+        state.photoBoards = photoBoards
     }
 }

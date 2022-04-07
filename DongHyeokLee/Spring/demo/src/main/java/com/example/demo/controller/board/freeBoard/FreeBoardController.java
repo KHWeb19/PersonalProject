@@ -1,6 +1,5 @@
 package com.example.demo.controller.board.freeBoard;
 
-
 import com.example.demo.entitiy.board.freeBoard.FreeBoard;
 import com.example.demo.service.board.freeBoard.FreeBoardService;
 import lombok.extern.slf4j.Slf4j;

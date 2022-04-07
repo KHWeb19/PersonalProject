@@ -1,4 +1,4 @@
-package com.example.demo.duplication;
+package com.example.demo.response;
 
 
 import lombok.Data;

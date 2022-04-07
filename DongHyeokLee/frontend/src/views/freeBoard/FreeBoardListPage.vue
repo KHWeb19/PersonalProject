@@ -5,7 +5,7 @@
        
         <router-link :to="{ name: 'FreeBoardRegisterPage'}">
         
-        <v-btn class="blue" dark>
+        <v-btn v-if="$store.state.isLogin == true" class="blue" dark>
             <v-icon>mdi-pencil-plus</v-icon>
             <span>등록</span>
         </v-btn>
@@ -32,7 +32,12 @@ export default {
         
     },
     mounted () {
+        if(!this.$store.state.isLogin){
+            alert('로그인하세요')
+            this.$router.push({name: "HomeView"});
+        }else{
         this.fetchFreeBoardList()
+        }
         
     },
     methods: {

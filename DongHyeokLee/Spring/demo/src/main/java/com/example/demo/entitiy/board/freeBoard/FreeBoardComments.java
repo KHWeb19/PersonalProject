@@ -1,4 +1,4 @@
-package com.example.demo.entitiy.board.freeBoard.comments;
+package com.example.demo.entitiy.board.freeBoard;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -1,11 +1,10 @@
-package com.example.demo.controller.comments.freeBoardComments;
+package com.example.demo.controller.board.freeBoard;
 
 
 
-import com.example.demo.controller.comments.freeBoardComments.request.FreeBoardCommentsRequest;
-import com.example.demo.entitiy.board.freeBoard.FreeBoard;
-import com.example.demo.entitiy.board.freeBoard.comments.FreeBoardComments;
-import com.example.demo.service.comments.freeBoardComments.FreeBoardCommentsService;
+import com.example.demo.controller.board.freeBoard.request.FreeBoardCommentsRequest;
+import com.example.demo.entitiy.board.freeBoard.FreeBoardComments;
+import com.example.demo.service.board.freeBoard.FreeBoardCommentsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;

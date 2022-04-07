@@ -2,12 +2,17 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
+//자유게시판
 import FreeBoardReigster from '@/views/freeBoard/FreeBoardRegisterPage.vue'
 import FreeBoardListPage from '@/views/freeBoard/FreeBoardListPage.vue'
 import FreeBoardReadPage from '@/views/freeBoard/FreeBoardReadPage.vue'
 import FreeBoardModifyPage from '@/views/freeBoard/FreeBoardModifyPage.vue'
+//사진게시판
+import PhotoBoardReigster from '@/views/photoBoard/PhotoBoardRegisterPage.vue'
+import PhotoBoardListPage from '@/views/photoBoard/PhotoBoardListPage.vue'
+import PhotoBoardReadPage from '@/views/photoBoard/PhotoBoardReadPage.vue'
 
-import store from '@/store'
+
 
 
 
@@ -23,11 +28,32 @@ const routes = [
     component: HomeView
   },
   {
+    path: '/photoBoardRead/:boardNo',
+    name: 'PhotoBoardReadPage',
+    components: {
+      default: PhotoBoardReadPage
+    },
+    props: {
+      default: true
+    }
+  },
+  {
+    path:'/photoBoardRegister',
+    name: 'PhotoBoardRegisterPage',
+    component: PhotoBoardReigster
+  },
+  {
+    path: '/photoBoardList',
+    name: 'PhotoBoardListPage',
+    component: PhotoBoardListPage,
+  },
+  //자유게시판
+  {
     path: '/boardModify/:boardNo',
     name: 'FreeBoardModifyPage',
     components: {
       default: FreeBoardModifyPage
-    },
+  },
     props: {
       default: true
     }
@@ -51,14 +77,7 @@ const routes = [
     path: '/freeBoardList',
     name: 'FreeBoardListPage',
     component: FreeBoardListPage,
-    //접근제한
-    beforeEnter(to, from, next) {
-      if(store.state.isLogin){
-        next();
-      }else{
-        alert('로그인 하세요')
-      }
-    }
+  
   }
 
 ]
