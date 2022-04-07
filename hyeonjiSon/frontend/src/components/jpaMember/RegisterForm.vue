@@ -11,7 +11,7 @@
       <table>
         <tr>
           <td>아이디</td>
-          <td><input type="text" v-model="id" placeholder="*ID를 입력해주세요." :rules="idRule"></td>          
+          <td><input type="text" v-model="id" placeholder="*ID를 입력해주세요."></td>          
         </tr>
       </table>
 
@@ -59,7 +59,7 @@
 <script>
 
 export default {
-  name: "VuetifyMemberRegisterForm.vue",
+  name: "RegisterForm",
   data () {
     return {
       id: '',

@@ -11,9 +11,8 @@ import java.util.Date;
 @Data
 @Entity
 @NoArgsConstructor
-@Table(name = "jpa_member")
 //@Table에 name을 추가하면 테이블 이름이 name값으로 설정되어야 한다.
-public class JpaMemberEntity {
+public class Member {
     @Id //특정 속성을 기본키로 설정하는 어노테이션
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long memberNo;
@@ -37,7 +36,7 @@ public class JpaMemberEntity {
     private Date updDate;
 
 
-    public JpaMemberEntity (String userId, String storeName, String password, String passwordQAnswer) {
+    public Member(String userId, String storeName, String password, String passwordQAnswer) {
         this.userId = userId;
         this.storeName = storeName;
         this.password = password;

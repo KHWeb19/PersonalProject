@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.controller.request.MemberRequest;
-import com.example.demo.service.JpaMemberService;
+import com.example.demo.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/jpaMember")
 @CrossOrigin(origins = "http://localhost:8080", allowedHeaders = "*")
-public class JpaMemberController {
+public class MemberController {
 
     @Autowired
-    private JpaMemberService memberservice;
+    private MemberService memberservice;
 
     @PostMapping("/register")
     public void jpaMemberRegister(@Validated @RequestBody MemberRequest memberRequest) {
