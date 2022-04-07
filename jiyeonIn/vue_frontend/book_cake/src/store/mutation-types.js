@@ -1,0 +1,1 @@
+export const FETCH_CAKE_LISTS = 'FETCH_CAKE_LISTS'

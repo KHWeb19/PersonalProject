@@ -31,7 +31,7 @@
                     </v-row>
                     <v-row justify="center">
                         <v-col class="d-flex" cols="12" sm="5">
-                            <input type="file" id="storeData.files" ref="files" 
+                            <input type="file" id="files1" ref="files1" 
                             multiple v-on:change="handleFileUpload()"/>
                         </v-col>
                     </v-row>
@@ -43,7 +43,7 @@
                 </v-container>
             </div>
 
-            <swiper-page></swiper-page><br><br><br>
+            <swiper-page :cakeLists="cakeLists"></swiper-page><br><br><br>
 
         </div>
         
@@ -61,12 +61,13 @@ import MainPageForm from '@/components/layout/MainPageForm.vue'
 import FooterForm from '@/components/layout/FooterForm.vue'
 import axios from 'axios'
 import SwiperPage from '@/components/mainPage/SwiperPage.vue'
+import { mapState, mapActions} from 'vuex'
 
     export default {
         name: 'PreviewCakeImg',
         data () {
             return {
-                files: '',
+                files1: '',
                 response: '',
                 design: '',
                 size: '',
@@ -83,93 +84,44 @@ import SwiperPage from '@/components/mainPage/SwiperPage.vue'
             FooterForm,
             SwiperPage
         },
+        computed: {
+            ...mapState(['cakeLists'])
+        },
+        mounted () {
+            this.fetchCakeLists()
+        },
         methods: {
+            ...mapActions(['fetchCakeLists']),
             handleFileUpload () {
-            this.files = this.$refs.files.files
+            this.files1 = this.$refs.files1.files
             },
             onSubmit () {
                 let formData = new FormData()
 
-                for (let idx = 0; idx < this.files.length; idx++) {
-                    formData.append('fileList', this.files[idx])
-                 }
-
-                let why = {design : this.design, size: this.size, price: this.price }
-
-                axios.post('http://localhost:7777/upload/register',{ why, formData },{
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
-                    }
-                    })
-                    .then (res => {
-                        alert('처리 결과: ' + res.data)
-                    })
-                    .catch (res => {
-                        alert('처리 결과: ' + res.message)
-                    })
-                },
-                    
-            /*
-            submitFiles () {
-                let formData = new FormData()
-
-                for (let idx = 0; idx < this.files.length; idx++) {
-                    formData.append('fileList', this.files[idx])
-                 }
-
-                let dm =this.storeData.design
-
-                if(dm === 'family'){
-                    axios.post('http://localhost:7777/upload/uploadImgFamily', {formData, dm }, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
-                    }
-                    })
-                    .then (res => {
-                        alert('처리 결과: ' + res.data)
-                    })
-                    .catch (res => {
-                        alert('처리 결과: ' + res.message)
-                    })
-                }else if(dm === 'birthday'){
-                    axios.post('http://localhost:7777/upload/uploadImgBirthday', formData , {
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
-                    }
-                    })
-                    .then (res => {
-                        alert('처리 결과: ' + res.data)
-                    })
-                    .catch (res => {
-                        alert('처리 결과: ' + res.message)
-                    })
-                }else if(dm === 'friend'){
-                    axios.post('http://localhost:7777/upload/uploadImgFriend', formData , {
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
-                    }
-                    })
-                    .then (res => {
-                        alert('처리 결과: ' + res.data)
-                    })
-                    .catch (res => {
-                        alert('처리 결과: ' + res.message)
-                    })
-                }else if(dm === 'lover'){
-                    axios.post('http://localhost:7777/upload/uploadImgLover', formData , {
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
-                    }
-                    })
-                    .then (res => {
-                        alert('처리 결과: ' + res.data)
-                    })
-                    .catch (res => {
-                        alert('처리 결과: ' + res.message)
-                    })
+                let fileInfo = {
+                    design : this.design,
+                    size : this.size,
+                    price : this.price,
                 }
-            }*/
-            
+                console.log(fileInfo)
+
+                for (let idx = 0; idx < this.files1.length; idx++) {
+                    formData.append('fileList', this.files1[idx])
+                 }
+
+                formData.append(
+                    "info", new Blob([JSON.stringify(fileInfo)], {type: "application/json"})
+                );
+
+                axios.post('http://localhost:7777/upload/register', formData) 
+                    .then (res => {
+                        alert('처리 결과: ' + res.data)
+                    })
+                    .catch (res => {
+                        alert('처리 결과: ' + res.message)
+                    })
+            }
+                    
         }
     }
 </script>

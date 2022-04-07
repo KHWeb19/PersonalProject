@@ -1,15 +1,16 @@
 package com.example.demo.entity.uploadCake;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Data
 @Entity
+@NoArgsConstructor
+
 public class UploadCake {
 
     @Id

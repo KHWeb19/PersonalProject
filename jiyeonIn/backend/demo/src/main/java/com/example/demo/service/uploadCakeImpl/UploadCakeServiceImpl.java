@@ -22,15 +22,16 @@ public class UploadCakeServiceImpl implements UploadCakeService{
     @Override
     public void register(UploadRequest uploadRequest, String originalFilename) {
 
+        //require('@/assets/uploadImg/birthday/1.birhday.png')
         String findLink = null;
         if(uploadRequest.getDesign().equals("birthday")) {
-            findLink = "@/assets/uploadImg/birthday/" + originalFilename;
+            findLink = "@/assets/uploadImg/birthday/" + originalFilename ;
         } else if(uploadRequest.getDesign().equals("family")) {
-            findLink = "@/assets/uploadImg/family/" + originalFilename;
+            findLink = "@/assets/uploadImg/family/" + originalFilename ;
         } else if(uploadRequest.getDesign().equals("friend")) {
-            findLink = "@/assets/uploadImg/friend/" + originalFilename;
+            findLink = "@/assets/uploadImg/friend/" + originalFilename ;
         } else if(uploadRequest.getDesign().equals("lover")) {
-            findLink = "@/assets/uploadImg/lover/" + originalFilename;
+            findLink = "@/assets/uploadImg/lover/" + originalFilename ;
         }
 
         UploadCake uploadcake = new UploadCake(uploadRequest.getDesign(), uploadRequest.getSize(),uploadRequest.getPrice(), findLink);
