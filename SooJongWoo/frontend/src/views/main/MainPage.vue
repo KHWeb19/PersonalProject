@@ -31,11 +31,11 @@
         </v-list>
       </v-navigation-drawer>
 
-      <section class="container">
-        <h1 class="title">
-          <span style="font-size: 80px">Welcome to OOO</span>
-          <v-spacer></v-spacer>
-        </h1>
+      <section>
+        <div class="content">
+          <h2>WELCOME</h2>
+          <h2>WELCOME</h2>
+        </div>
       </section>
     </div>
 
@@ -82,6 +82,14 @@
         </v-row>
       </div>
     </div>
+
+    <div id="icon">
+      <vs-button icon relief danger animation-type="rotate">
+        <template #animate>
+          <i class="bx bxs-like"></i>
+        </template>
+      </vs-button>
+    </div>
   </div>
 </template>
 
@@ -114,6 +122,7 @@ export default {
   },
 };
 </script>
+
 
 <style lang= "scss" scoped>
 @import "@/assets/style/MainPageStyle.scss";
