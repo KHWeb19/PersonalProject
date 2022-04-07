@@ -10,6 +10,10 @@ export default {
     jpaBoard1: null,
     jpaBoards2: [],
     jpaBoard2: null,
+    jpaBoards3: [],
+    jpaBoard3: null,
+    
+ 
 
     businessMembers: [],
     crawlLists: []

@@ -10,7 +10,11 @@ import {
     FETCH_JPA_BOARD_LIST1,
     FETCH_JPA_BOARD1,
     FETCH_JPA_BOARD_LIST2,
-    FETCH_JPA_BOARD2
+    FETCH_JPA_BOARD2,
+    FETCH_JPA_BOARD_LIST3,
+    FETCH_JPA_BOARD3
+
+
 
 
 } from './mutation-types'
@@ -66,6 +70,12 @@ export default {
             })
     },
 
+    fetchJpaBoardList3 ({ commit }) {
+        return axios.get('http://localhost:7777/62th/board3/list3')
+            .then((res) => {
+                commit(FETCH_JPA_BOARD_LIST3, res.data)
+            })
+    },
 
 
 
@@ -94,6 +104,17 @@ export default {
                         commit(FETCH_JPA_BOARD2, res.data)
                     })
             },
+
+            fetchJpaBoard3 ({ commit }, boardNo) {
+                return axios.get(`http://localhost:7777/62th/board3/${boardNo}`)
+                    .then((res) => {
+                        commit(FETCH_JPA_BOARD3, res.data)
+                    })
+            },
+
+
+
+
 
 
 
