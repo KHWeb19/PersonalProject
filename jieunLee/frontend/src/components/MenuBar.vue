@@ -2,6 +2,7 @@
     <v-app-bar
       color="white"
     >
+          <v-spacer></v-spacer>
       <v-spacer></v-spacer>
       <v-app-bar-title>
         <router-link style="text-decoration: none;" :to="{name: 'HomeView'}">
@@ -53,15 +54,31 @@
       </template>
 
       <v-list>
-        <v-list-item v-for="(item, index) in items" :key="index" :to="item.link" link>
-          <v-list-item-icon>
-            <v-icon color="black">{{ item.icon }}</v-icon>
-          </v-list-item-icon>
-          <v-list-item-title>{{ item.title }}</v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-menu>
-    <v-spacer></v-spacer>
+          <v-list-item-title> 
+            <router-link style="text-decoration: none;" :to="{
+              name: 'MyProfilePage',
+              params: {memberNo: loginInfo.memberNo.toString()}}">
+              <v-btn>프로필</v-btn>
+            </router-link>
+          </v-list-item-title>
+
+          <v-list-item-title> 
+            <router-link style="text-decoration: none;" :to="{
+              name: 'AccountsEditPage',
+              params: {memberNo: loginInfo.memberNo.toString()}}">
+              <v-btn>설정</v-btn>
+            </router-link>
+          </v-list-item-title>
+
+            <v-list-item-title>        
+              <v-btn @click="logout">
+                로그아웃
+              </v-btn>
+          </v-list-item-title>
+        </v-list>
+      </v-menu>
+      <v-spacer></v-spacer>
+            <v-spacer></v-spacer>
     </v-app-bar>
     
   
@@ -70,13 +87,28 @@
 </template>
 
 <script>
+import Vue from 'vue'
+import cookies from 'vue-cookies'
+
+Vue.use(cookies)
+
   export default {
+    props: {
+      member: {
+          type: Object,
+          require: true
+      }
+    },
     data: () => ({
-      items: [
-        { icon:'mdi-account-circle-outline', title: '프로필', link:'/profile'},
-        { icon:'mdi-cog-outline', title: '설정', link:'/accounts/edit' },
-        { icon:'mdi-logout', title: '로그아웃', link:'/login' }
-      ],
+      isLogin: true,
+      loginInfo: JSON.parse(localStorage.getItem('loginInfo'))
     }),
+    methods: {
+      logout() {
+        localStorage.removeItem("loginInfo")
+        this.$cookies.remove("user")
+        this.$router.push({name: 'LoginPage'})
+      }
+    }
   }
 </script>

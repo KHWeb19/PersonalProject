@@ -2,15 +2,13 @@ package com.example.backend.service;
 
 import com.example.backend.controller.MemberRequest;
 import com.example.backend.entity.Member;
-import com.example.backend.entity.MemberAuth;
-import com.example.backend.repository.MemberAuthRepository;
 import com.example.backend.repository.MemberRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,68 +20,92 @@ public class MemberServiceImpl implements MemberService{
     private MemberRepository memberRepository;
 
     @Autowired
-    private MemberAuthRepository memberAuthRepository;
-
-    @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @Transactional
+    @Override
+    public List<Member> list() {
+        return memberRepository.findAll(Sort.by(Sort.Direction.DESC, "memberNo"));
+    }
+
+
     @Override
     public void register(MemberRequest memberRequest) {
-        String encodedPassword = passwordEncoder.encode(memberRequest.getPw());
-        memberRequest.setPw(encodedPassword);
+        String encodedPassword = passwordEncoder.encode(memberRequest.getPassword());
+        memberRequest.setPassword(encodedPassword);
 
         Member memberEntity = new Member(
-                memberRequest.getName(), memberRequest.getId(), memberRequest.getPw());
-
+                memberRequest.getMemberNo(),
+                memberRequest.getMemberName(),
+                memberRequest.getMemberId(),
+                memberRequest.getPassword(),
+                memberRequest.getMemberWeb(),
+                memberRequest.getMemberIntro()
+        );
 
         memberRepository.save(memberEntity);
-
-        MemberAuth authEntity = new MemberAuth(memberRequest.getAuth(), memberEntity);
-
-        memberAuthRepository.save(authEntity);
     }
 
     @Override
     public MemberRequest login(MemberRequest memberRequest) {
-        //gitId가 레퍼지토리에 존재하는지 확인해서 정보를 maybe에 저장, 없으면 null
-        Optional<Member> maybeMember = memberRepository.findByUserId(memberRequest.getId());
+        Optional<Member> maybeMember = memberRepository.findByUserId(memberRequest.getMemberId());
 
         if (maybeMember.equals(Optional.empty())) {
             log.info("이런 사람 없다!");
             return null;
         }
 
-        //있으면 로그인멤버에 정보저장
         Member loginMember = maybeMember.get();
 
-        //사용자가 입력한 비밀번호를 암호화하여 db에 저장된 암호와 비교
-        if (!passwordEncoder.matches(memberRequest.getPw(), loginMember.getPassword())) {
+        if (!passwordEncoder.matches(memberRequest.getPassword(), loginMember.getPassword())) {
             log.info("비밀번호를 잘못 입력했습니다!");
             return null;
         }
 
-        Optional<MemberAuth> maybeMemberAuth =
-                memberAuthRepository.findByMemberNo(loginMember.getMemberNo());
+        if (loginMember.getMemberId().equals(memberRequest.getMemberId())) {
 
-        if (maybeMemberAuth == null) {
-            log.info("auth 없음");
-            return null;
+            memberRequest.setMemberNo(loginMember.getMemberNo());
+            memberRequest.setMemberName(loginMember.getMemberName());
+            memberRequest.setMemberId(loginMember.getMemberId());
+            memberRequest.setPassword(loginMember.getPassword());
+            memberRequest.setMemberWeb(loginMember.getMemberWeb());
+            memberRequest.setMemberIntro(loginMember.getMemberIntro());
+            memberRequest.setRegData(loginMember.getRegDate());
         }
 
-        MemberAuth memberAuth = maybeMemberAuth.get();
         MemberRequest response = new MemberRequest(
-                memberRequest.getName(),
-                memberRequest.getId(),
+                memberRequest.getMemberNo(),
+                memberRequest.getMemberName(),
+                memberRequest.getMemberId(),
                 null,
-                memberAuth.getAuth());
+                memberRequest.getMemberWeb(),
+                memberRequest.getMemberIntro(),
+                memberRequest.getRegData());
 
         return response;
     }
 
     @Override
-    public List<Member> findBusiness() {
-        List<Member> businessMember = memberRepository.selectMemberWithRole("관리자");
-        return businessMember;
+    public Member read(Long memberNo) {
+        Optional<Member> maybeReadMember = memberRepository.findById(Long.valueOf(memberNo));
+
+        if (maybeReadMember.equals(Optional.empty())) {
+
+            return null;
+        }
+
+        return maybeReadMember.get();
+    }
+
+    @Override
+    public void modify(Member member) {
+        String encodedPassword = passwordEncoder.encode(member.getPassword());
+        member.setPassword(encodedPassword);
+
+        memberRepository.save(member);
+    }
+
+    @Override
+    public void remove(Long memberNo) {
+        memberRepository.deleteById(Long.valueOf(memberNo));
     }
 }

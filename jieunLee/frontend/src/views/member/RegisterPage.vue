@@ -8,18 +8,20 @@
 import RegisterForm from '@/components/member/RegisterForm'
 import axios from 'axios'
 export default {
+    name: 'RegisterPage.',
     components: {
         RegisterForm
     },
     methods: {
         onSubmit (payload) {
-        const { name, id, pw, auth } = payload
-        axios.post('http://localhost:7777/member/register', { name, id, pw, auth })
+        const { memberName, memberId, password } = payload
+        axios.post('http://localhost:7777/member/register', { memberName, memberId, password })
             .then(res => {
-            alert('등록 성공! - ' + res)
+                alert('등록 성공! - ' + res)
+                this.$router.push({name: 'LoginPage'})
             })
             .catch(res => {
-            alert(res.response.data.message)
+                alert(res.response.data.message)
             })
         }
     }
@@ -30,7 +32,4 @@ export default {
 /* #app {
   text-align: center;
 } */
-
-
-
 </style>

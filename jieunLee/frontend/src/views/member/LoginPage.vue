@@ -1,55 +1,72 @@
 <template>
     <div>
-        <v-container style="text-align: center; width: 350px; height: 382px; margin-top: 70px;">
-            <v-flex>
-                <v-card>
-                    <form @submit.prevent="onSubmit"  >
-                        <img style="margin: 40px 0px 40px 0px;" src="@/assets/vuelogo.png"/>
-                        <div>
-                            <input style="background-color: #fafafa; 
-                                margin: 3px;
-                                border: 1px solid #d6d6d6; 
-                                border-radius: 3px; 
-                                width: 268px; 
-                                height: 38px;
-                                padding-left: 5px;" 
-                            type="text" placeholder="아이디" />
-                        </div>
-                        <div>
-                            <input style="background-color: #fafafa; 
-                                margin: 3px;
-                                border: 1px solid #d6d6d6; 
-                                border-radius: 3px; 
-                                width: 268px; 
-                                height: 38px;
-                                padding-left: 5px;" 
-                            type="text" placeholder="비밀번호" />
-                        </div>
-                        <div><v-btn style="margin: 10px; width: 268px; height: 30px;" color="blue" class="white--text" type="submit">로그인</v-btn></div>
-                    </form>
-                    <div><button style="margin-top: 50px;" class="indigo--text" type="button">비밀번호를 잊으셨나요?</button></div>
-                    <br/>
-                </v-card>
-                <br/>
-                <v-card style="width: 350px; height: 63px; display: table-cell; vertical-align: middle;">
-                    <div>
-                        계정이 없으신가요?
-                        <router-link style="text-decoration: none;" :to="{name: 'RegisterPage'}">
-                        <button class="blue--text" type="button">&nbsp;가입하기</button>
-                        </router-link>
-                    </div>
-                </v-card>
-            </v-flex>
-
-        </v-container>
+        <login-form @submit="onSubmit"/>
+                <v-btn tile color="teal lighten-4" @click="logout">
+            <v-icon left>
+                mdi-logout
+            </v-icon>
+            로그아웃
+        </v-btn>
     </div>        
 </template>
 
 <script>
+import LoginForm from '@/components/member/LoginForm'
+import axios from 'axios'
+import Vue from 'vue'
+import cookies from 'vue-cookies'
+
+Vue.use(cookies)
+
 export default {
-    setup() {
-        
+    name: 'LoginPage',
+    components: {
+        LoginForm,
     },
+    data() {
+        return {
+            isLogin: false,
+            
+        }
+    },
+    mounted() {
+        this.$store.state.userInfo = this.$cookies.get("user")
+        if (this. $store.state.userInfo != null) {
+            this.isLogin = true
+        } else {
+            this.isLogin = false
+        }
+    },
+    methods: {
+        onSubmit(payload) {
+            if (!this.isLogin) {
+                const {memberId, password} = payload
+                axios.post('http://localhost:7777/member/login', {memberId, password})
+                    .then(res => {
+                        if(res.data) {
+                            this.$cookies.set("user", res.data, 300)
+                            this.isLogin = true
+                            this.$router.push({name: 'HomeView'})
+                            localStorage.setItem("loginInfo", JSON.stringify(res.data))
+                        } else {
+                            alert('로그인 실패!')
+                        }
+                    })
+                    .catch(res => {
+                        alert(res.response.data.message)
+                    })
+            } else {
+                alert('이미 로그인이 되어 있습니다!')
+            }
+        },
+        logout() {
+            this.$cookies.remove("user")
+            this.isLogin = false
+            localStorage.removeItem("loginInfo")
+
+            alert('로그아웃 성공!')
+        }
+    }
 }
 </script>
 

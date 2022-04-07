@@ -6,7 +6,10 @@ import com.example.backend.entity.Member;
 import java.util.List;
 
 public interface MemberService {
+    public List<Member> list ();
     public void register (MemberRequest memberRequest);
     public MemberRequest login (MemberRequest memberRequest);
-    List<Member> findBusiness();
+    public Member read (Long memberNo);
+    public void modify (Member member);
+    public void remove (Long memberNo);
 }

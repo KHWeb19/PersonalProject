@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -19,13 +18,21 @@ public class MemberController {
     @Autowired
     private MemberService service;
 
+    @GetMapping("/list")
+    public List<Member> memberList() {
+        log.info("memberList()");
+
+        return service.list();
+    }
+
+
+
     @PostMapping("/register")
     public void MemberRegister(@Validated @RequestBody MemberRequest memberRequest) {
-        log.info("MemberRegister():" +
-                memberRequest.getId() + ", " +
-                memberRequest.getPw() + ", " +
-                (memberRequest.getAuth().equals("관리자") ? "ROLE_BUSINESS" : "ROLE_INDIVIDUAL"));
-
+        log.info("MemberRegister():" + "," +
+                memberRequest.getMemberName() + ", " +
+                memberRequest.getMemberId() + ", " +
+                memberRequest.getPassword());
         service.register(memberRequest);
     }
 
@@ -44,17 +51,30 @@ public class MemberController {
         return memberResponse;
     }
 
-    @GetMapping("/checkBusiness")
-    public List<MemberResponse> checkBusinessMember () {
-        log.info("checkBusiness() ===> findBusinessMember!!!");
+    @GetMapping("/{memberNo}")
+    public Member memberRead(@PathVariable("memberNo") Long memberNo) {
+        log.info("memberRead()");
 
-        List<Member> businessMember = service.findBusiness();
-        List<MemberResponse> responses = new ArrayList<>();
+        return service.read(memberNo);
+    }
 
-        for (Member member : businessMember) {
-            responses.add(new MemberResponse(member.getMemberId()));
-        }
+    @PutMapping("/{memberNo}")
+    public Member memberModify (
+            @PathVariable("memberNo") Long memberNo,
+            @RequestBody Member member) {
+        log.info("memberModify(): " + member);
 
-        return responses;
+        member.setMemberNo(Long.valueOf(memberNo));
+        service.modify(member);
+
+        return member;
+    }
+
+    @DeleteMapping("/{memberNo}")
+    public void memberRemove (
+            @PathVariable("memberNo") Long memberNo) {
+        log.info("memberRemove()");
+
+        service.remove(memberNo);
     }
 }
