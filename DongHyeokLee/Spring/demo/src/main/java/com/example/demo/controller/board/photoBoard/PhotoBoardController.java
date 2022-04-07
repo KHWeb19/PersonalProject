@@ -94,7 +94,7 @@ public class PhotoBoardController {
         log.info("freeBoardModify(): " + photoBoard);
 
         photoBoard.setBoardNo(Long.valueOf(boardNo));
-
+        //수정 할 때 파일은 첨부하지 않고 넣었을 경우가 있어 db에서 파일명 가져올 수 있도록 하기
         String checkFileName = photoBoard.getFileName();
 
             if(checkFileName != null){

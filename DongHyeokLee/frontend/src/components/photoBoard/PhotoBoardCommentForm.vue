@@ -3,7 +3,7 @@
         <!-- 댓글 리스트 -->
         <h2>댓글</h2>
         
-        <div border="1" v-for="(comments, index) in freeBoardComments" :key="index" >
+        <div border="1" v-for="(comments, index) in photoBoardComments" :key="index" >
                 
                 <div>
                    {{ comments.writer }}
@@ -87,7 +87,7 @@ import axios from 'axios'
 
 
 export default {
-    name: 'FreeBoardCommentsListForm',
+    name: 'PhotoBoardCommentsListForm',
     data () {
         return {
             content:'',
@@ -99,7 +99,7 @@ export default {
         }
     },
     props: {
-      freeBoardComments: {
+      photoBoardComments: {
             type: Array,
             required: true
         },
@@ -116,7 +116,7 @@ export default {
         },
             onDelete (payload) {
             const commentNo = payload
-            axios.delete(`http://localhost:7777/freeBoardComments/${commentNo}`)
+            axios.delete(`http://localhost:7777/photoBoardComments/${commentNo}`)
                     .then(() => {
                         this.$router.go()
                     })
@@ -127,8 +127,8 @@ export default {
             onModify ( numOfComment, ediContent , index) {
                 const commentNo = numOfComment
                 const content = ediContent
-             axios.put(`http://localhost:7777/freeBoardComments/${commentNo}`,
-                    { content, writer: this.writer , boardNo: this.boardNo, regDate: this.freeBoardComments[index].regDate})
+             axios.put(`http://localhost:7777/photoBoardComments/${commentNo}`,
+                    { content, writer: this.writer , boardNo: this.boardNo, regDate: this.photoBoardComments[index].regDate})
                     .then(res => {
                         if(res.data){
                         alert('게시물 수정 성공!')
@@ -143,11 +143,14 @@ export default {
 
         },
             onEdit(payload) {
+                //payload를 index로 해줬으면 뭔가 뭐가 들어갔는지 알기 쉬웠을 듯
                 this.edit[payload] = true
-                this.ediContent = this.freeBoardComments[payload].content
+                //수정하면 빈칸되서 이걸로 넣어줌
+                this.ediContent = this.photoBoardComments[payload].content
                 this.$forceUpdate();
         },
             onCancel(index) {
+                //여긴 왜 index지 index냐 아님 payload로 통일하는건가 vue는
                 this.edit[index] = null
                 this.$forceUpdate();
             }

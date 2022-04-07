@@ -7,6 +7,9 @@
         
         <photo-board-read v-if=photoBoard :photoBoard="photoBoard"/>
 
+         <!-- 댓글-->
+        <photo-board-comment :boardNo="this.boardNo"/>
+
         <div class = "button">
             <router-link v-if="$store.state.userInfo.nickname == photoBoard.writer" 
                             :to="{ name: 'PhotoBoardModifyPage', params: { boardNo } }">
@@ -25,9 +28,11 @@
 
 <script>
 
-import PhotoBoardRead from '@/components/photoBoard/PhotoBoardRead.vue'
 import { mapActions, mapState } from 'vuex'
 import axios from 'axios'
+
+import PhotoBoardRead from '@/components/photoBoard/PhotoBoardRead.vue'
+import PhotoBoardComment from '@/views/photoBoard/PhotoBoardComment.vue'
 
 export default {
     name: 'PhotoBoardReadPage',
@@ -38,7 +43,8 @@ export default {
         }
     },
     components: {
-        PhotoBoardRead
+        PhotoBoardRead,
+        PhotoBoardComment
     },
     computed: {
         ...mapState(['photoBoard'])

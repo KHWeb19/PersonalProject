@@ -70,17 +70,16 @@ export default {
         return {
             title: '',
             content: '',
-            files: '',
         }
     },
     methods: {
         onSubmit () {
             const { title, content, files} = this
-           // if(files){
+            if(files){
                 this.$emit('submit', { title, content, files })
-           /* }else{
+            }else{
                 this.$emit('submit', { title, content })
-            }*/
+            }
         },
         handleFileUpload () {
                 this.files = this.$refs.files.files
