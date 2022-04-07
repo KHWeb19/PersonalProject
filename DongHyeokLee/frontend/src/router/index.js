@@ -11,7 +11,7 @@ import FreeBoardModifyPage from '@/views/freeBoard/FreeBoardModifyPage.vue'
 import PhotoBoardReigster from '@/views/photoBoard/PhotoBoardRegisterPage.vue'
 import PhotoBoardListPage from '@/views/photoBoard/PhotoBoardListPage.vue'
 import PhotoBoardReadPage from '@/views/photoBoard/PhotoBoardReadPage.vue'
-
+import PhotoBoardModifyPage from '@/views/photoBoard/PhotoBoardModifyPage.vue'
 
 
 
@@ -26,6 +26,16 @@ const routes = [
     path: '/',
     name: 'HomeView',
     component: HomeView
+  },
+  {
+    path: '/photoBoardModify/:boardNo',
+    name: 'PhotoBoardModifyPage',
+    components: {
+      default: PhotoBoardModifyPage
+  },
+    props: {
+      default: true
+    }
   },
   {
     path: '/photoBoardRead/:boardNo',
@@ -49,7 +59,7 @@ const routes = [
   },
   //자유게시판
   {
-    path: '/boardModify/:boardNo',
+    path: '/freeBoardModify/:boardNo',
     name: 'FreeBoardModifyPage',
     components: {
       default: FreeBoardModifyPage

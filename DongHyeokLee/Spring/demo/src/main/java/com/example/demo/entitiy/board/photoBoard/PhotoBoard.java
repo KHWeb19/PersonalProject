@@ -1,16 +1,17 @@
 package com.example.demo.entitiy.board.photoBoard;
 
-import com.example.demo.entitiy.member.MemberAuth;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
+
 
 @Data
 @Entity
+@NoArgsConstructor
 public class PhotoBoard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,6 +34,10 @@ public class PhotoBoard {
 
     @UpdateTimestamp
     private Date updDate;
+
+    public PhotoBoard (String fileName) {
+        this.fileName = fileName ;
+    }
 
 
 }

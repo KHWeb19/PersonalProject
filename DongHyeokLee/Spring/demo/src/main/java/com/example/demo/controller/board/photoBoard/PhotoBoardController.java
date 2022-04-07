@@ -3,6 +3,7 @@ package com.example.demo.controller.board.photoBoard;
 
 
 
+import com.example.demo.entitiy.board.freeBoard.FreeBoard;
 import com.example.demo.entitiy.board.photoBoard.PhotoBoard;
 import com.example.demo.service.board.photoBoard.PhotoBoardService;
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +26,7 @@ public class PhotoBoardController {
     @Autowired
     private PhotoBoardService service;
 
+    //등록
     @PostMapping("/register")
     public void PhotoBoardRegister (@Validated @RequestBody PhotoBoard photoBoard) {
         log.info("PhotoBoardRegister()");
@@ -33,14 +35,14 @@ public class PhotoBoardController {
         photoBoard.setFileName(fileName);
         service.register(photoBoard);
     }
-
+    //목록
     @GetMapping("/list")
     public List<PhotoBoard> PhotoBoardList () {
         log.info("PhotoBoardList()");
 
         return service.list();
     }
-
+    //읽기
     @GetMapping("/{boardNo}")
     public PhotoBoard photoBoardRead (
             @PathVariable("boardNo") Integer boardNo) {
@@ -48,7 +50,7 @@ public class PhotoBoardController {
 
         return service.read(boardNo);
     }
-
+    //파일 업로드
     @ResponseBody
     @PostMapping("/uploadImg")
     public String requestUploadFile (
@@ -62,8 +64,8 @@ public class PhotoBoardController {
                         multipartFile.getOriginalFilename());
 
                 //일단 저장된 위치에 이름 중복 될까봐 앞에 날짜 붙였는데 더좋은 방법 없나
-                //혹시 하루에 똑같은 이름 될 수도 있으니 시간까지 할려다가 너무 길어져서 일단 보류 함
-                LocalDate now = LocalDate.now();
+                //혹시 하루에 똑같은 이름 될 수도 있으니 시간까지 할려다가 너무 길어져서 일단 보류 함함
+               LocalDate now = LocalDate.now();
                 //LocalTime now = LocalTime.now();
 
 
@@ -83,6 +85,36 @@ public class PhotoBoardController {
         log.info("requestUploadFile(): Success!!!");
 
         return "Upload Success!!!";
+    }
+    //수정
+    @PutMapping("/{boardNo}")
+    public PhotoBoard photoBoardModify (
+            @PathVariable("boardNo") Integer boardNo,
+            @RequestBody PhotoBoard photoBoard) {
+        log.info("freeBoardModify(): " + photoBoard);
+
+        photoBoard.setBoardNo(Long.valueOf(boardNo));
+
+        String checkFileName = photoBoard.getFileName();
+
+            if(checkFileName != null){
+            LocalDate now = LocalDate.now();
+            String fileName = now + photoBoard.getFileName();
+            photoBoard.setFileName(fileName);
+
+            }
+
+            service.modify(photoBoard,boardNo);
+
+        return photoBoard;
+    }
+
+    @DeleteMapping("/{boardNo}")
+    public void photoBoardRemove (
+            @PathVariable("boardNo") Integer boardNo) {
+        log.info("freeBoardRemove()");
+
+        service.remove(boardNo);
     }
 
 }
