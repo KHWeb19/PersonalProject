@@ -46,7 +46,7 @@
         </v-container>
 
       <div class="header">
-          <button><img src ="@/assets/main/banner.png" width="250" @click="goToMain"></button>
+          <button><img src ="@/assets/main/banner.png" width="270" @click="goToMain"></button>
       </div>
       <div class="menuBar">  
           <main-toolbar/>
@@ -105,7 +105,7 @@ export default {
     position: relative;
     left: 20%;
     padding-top: 5px;
-    padding-bottom: 5px;
+    padding-bottom: 20px;
 }
 .btnSet{
   position: absolute;

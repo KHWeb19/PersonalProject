@@ -1,6 +1,6 @@
 <template>
     <v-container>
-        <v-toolbar color="black" dark class="mx-auto" height="46">
+        <v-toolbar color="black" dark class="mx-auto" height="55">
             <v-layout row wrap>
                 <v-tabs v-model="tabs">
                     <v-tab v-show="neverNoShow">
