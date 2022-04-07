@@ -39,6 +39,9 @@ public class PhotoBoardServiceImpl implements PhotoBoardService{
             log.info("Can't read board!!");
             return null;
         }
+        log.info("readCheck" + maybeReadBoard.get());
         return maybeReadBoard.get();
     }
+
+
 }

@@ -4,7 +4,8 @@ import {
     FETCH_FREE_BOARD,
     FETCH_FREE_BOARD_COMMENTS_LIST,
     //사진게시판
-    FETCH_PHOTO_BOARD_LIST
+    FETCH_PHOTO_BOARD_LIST,
+    FETCH_PHOTO_BOARD
    
 } from './mutation-types'
 
@@ -35,6 +36,12 @@ export default {
         return axios.get('http://localhost:7777/photoBoard/list')
                 .then((res) => {
                     commit(FETCH_PHOTO_BOARD_LIST, res.data)
+                })
+    },
+    fetchPhotoBoard ({ commit }, boardNo) {
+        return axios.get(`http://localhost:7777/photoBoard/${boardNo}`)
+                .then((res) => {
+                    commit(FETCH_PHOTO_BOARD, res.data)
                 })
     },
 }

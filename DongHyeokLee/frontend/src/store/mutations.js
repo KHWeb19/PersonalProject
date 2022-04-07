@@ -4,7 +4,8 @@ import {
     FETCH_FREE_BOARD,
     FETCH_FREE_BOARD_COMMENTS_LIST,
     //사진게시판
-    FETCH_PHOTO_BOARD_LIST
+    FETCH_PHOTO_BOARD_LIST,
+    FETCH_PHOTO_BOARD
     
 } from './mutation-types'
 
@@ -22,5 +23,8 @@ export default {
     //사진게시판
     [FETCH_PHOTO_BOARD_LIST] (state, photoBoards) {
         state.photoBoards = photoBoards
-    }
+    },
+    [FETCH_PHOTO_BOARD] (state, photoBoard) {
+        state.photoBoard = photoBoard
+    },
 }
