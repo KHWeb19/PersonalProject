@@ -53,7 +53,7 @@ const routes = [
         path: '/community',
         name: 'CommunityPage',
         component: CommunityPage,
-        //beforeEnter: requireLogin()
+        beforeEnter: requireLogin()
     },
     {
         path: '/community/write',

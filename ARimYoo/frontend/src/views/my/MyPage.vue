@@ -1,8 +1,8 @@
 <template>
     <v-container class="title">
         <v-row justify="center">
-            <img class="align-center" src="@/assets/title/MyPageTitle.png" width=250 >
-            <v-btn @click="onDelete" class="exit" fab color="red darken-2" small><v-icon color="white"> mdi-minus </v-icon> </v-btn>
+            <img class="titleImg" src="@/assets/title/MyPageTitle.png" width=250 >
+            <v-btn @click="onDelete" class="exit" fab color="red darken-2" ><v-icon color="white"> mdi-minus </v-icon> </v-btn>
         </v-row>
         <br/>
         <v-divider/>
@@ -80,8 +80,24 @@ export default  {
 .title {
     margin-top:3%;
 }
+.titleImg {
+    margin-bottom:20px;
+}
 .exit {
     position: absolute;
     left: 80%;
+    top:4%;
+}
+@media (max-width:700px){
+    .exit {
+        top:4%;
+        margin-left:10px;
+        zoom:70%;
+    }
+    .titleImg {
+        margin-top:10px;
+        margin-left:20px;
+        width:200px;
+    }
 }
 </style>

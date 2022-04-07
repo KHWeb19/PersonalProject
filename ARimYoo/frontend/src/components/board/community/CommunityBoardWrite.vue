@@ -43,7 +43,12 @@ export default {
     data() {
         return {
             image :'',
+            title:'',
+            content:''
         }
+    },
+    created () {
+        this.writer = this.$store.state.userInfo.name
     },
     methods: {
         handleFileUpload () {
@@ -56,8 +61,9 @@ export default {
             this.files = this.$refs.files.files
         },
         onSubmit () {
-            const { title, content } = this
-            this.$emit('submit', { title, content })
+            const { title, content,writer } = this
+            this.$emit('submit', { title, content,writer })
+            console.log(title,content,writer)
         },
         goPage (){
             this.$router.push('/community')

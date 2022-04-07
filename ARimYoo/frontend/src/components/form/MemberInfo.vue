@@ -139,4 +139,9 @@ td{
     font-size: 10pt;
     font-family: 'Noto Sans KR', sans-serif;
 }
+@media (max-width:700px){
+    table {
+       zoom:90%;
+    }
+}
 </style>

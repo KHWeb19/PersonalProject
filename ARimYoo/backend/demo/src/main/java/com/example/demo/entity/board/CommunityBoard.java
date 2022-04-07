@@ -23,8 +23,7 @@ public class CommunityBoard {
     @Column(length = 128, nullable = false)
     private String title;
 
-    @ManyToOne(targetEntity = Member.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_name", updatable = false)
+    @Column
     private String writer;
 
     @Lob

@@ -18,8 +18,8 @@ export default {
     name: 'CommunityWritePage',
     methods: {
         onSubmit (payload) {
-            const { title, content} = payload
-            axios.post('http://localhost:7777/board/community/register', { title, content })
+            const { title, content, writer} = payload
+            axios.post('http://localhost:7777/board/community/register', { title, content, writer })
                     .then(() => {
                         alert('게시물 등록 성공!')
 
