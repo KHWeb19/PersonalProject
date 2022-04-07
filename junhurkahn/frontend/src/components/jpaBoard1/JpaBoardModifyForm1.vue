@@ -3,21 +3,21 @@
         <form @submit.prevent="onSubmit">
             <table>
                 <tr>
-                    <td>게시물 번호</td>
+                    <td>계좌번호 수정하기</td>
                     <td>
                         <input type="text" :value="jpaBoard1.boardNo" disabled/>
                     </td>
                 </tr>
                 <tr>
-                    <td>제목</td>
+                    <td>은행이름</td>
                     <td>
                         <input type="text" v-model="title"/>
                     </td>
                 </tr>
                 <tr>
-                    <td>작성자</td>
+                    <td>계좌번호</td>
                     <td>
-                        <input type="text" :value="jpaBoard1.writer" disabled/>
+                        <input type="text" :value="jpaBoard1.writer"/>
                     </td>
                 </tr>
                 <tr>
@@ -47,7 +47,6 @@
 </template>
 
 <script>
-
 export default {
     name: 'JpaBoardModifyForm1',
     props: {
@@ -59,18 +58,20 @@ export default {
     data () {
         return {
             title: '',
+            writer:'',
             content: ''
         }
     },
     methods: {
         onSubmit () {
-            const { title, content } = this
-            this.$emit('submit', { title, content })
+            const { title, content, writer } = this
+            this.$emit('submit', { title, content, writer })
         }
     },
     created () {
         this.title = this.jpaBoard1.title
         this.content = this.jpaBoard1.content
+        this.writer = this.jpaBoard1.writer
     }
 }
 </script>

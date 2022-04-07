@@ -1,6 +1,6 @@
 <template>
     <div align="center">
-        <h2>계좌번호 게시판 읽기</h2>
+        <h2>계좌 번호 읽기</h2>
         <jpa-board-read-1 v-if="jpaBoard1" :jpaBoard1="jpaBoard1"/>
         <p v-else>로딩중 ....... </p>
         <router-link :to="{ name: 'JpaBoardModifyPage1', params: { boardNo } }">
@@ -14,7 +14,6 @@
 </template>
 
 <script>
-
 import axios from 'axios'
 import { mapActions, mapState } from 'vuex'
 import JpaBoardRead1 from '@/components/jpaBoard1/JpaBoardRead1.vue'
@@ -29,6 +28,7 @@ export default {
     },
     components: {
         JpaBoardRead1
+        
     },
     computed: {
         ...mapState(['jpaBoard1'])
@@ -56,5 +56,4 @@ export default {
         }
     }
 }
-
 </script>

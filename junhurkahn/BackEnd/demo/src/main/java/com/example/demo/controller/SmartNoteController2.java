@@ -1,62 +1,63 @@
 package com.example.demo.controller;
 
 
-import com.example.demo.service.order62.JpaBoardServices1;
+import com.example.demo.entity.jpa.JpaBoards2;
+import com.example.demo.service.order62.JpaBoardServices2;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import com.example.demo.entity.jpa.JpaBoards1;
+
 
 import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/62th/board1")
+@RequestMapping("/62th/board2")
 @CrossOrigin(origins = "http://localhost:8080", allowedHeaders = "*")
-public class SmartNoteController1 {
+public class SmartNoteController2 {
 
     @Autowired
-    private JpaBoardServices1 service;
+    private JpaBoardServices2 service;
 
-    @PostMapping("/register1")
-    public void jpaBoardRegister (@Validated @RequestBody JpaBoards1 board) {
-        log.info("jpaBoardRegister1()");
+    @PostMapping("/register2")
+    public void jpaBoardRegister (@Validated @RequestBody JpaBoards2 board) {
+        log.info("jpaBoardRegister2()");
 
         service.register(board);
     }
 
-    @GetMapping("/list1")
-    public List<JpaBoards1> jpaBoardList () {
-        log.info("jpaBoardList1()");
+    @GetMapping("/list2")
+    public List<JpaBoards2> jpaBoardList () {
+        log.info("jpaBoardList2()");
 
         return service.list();
     }
 
     @GetMapping("/{boardNo}")
-    public JpaBoards1 jpaBoardRead (
+    public JpaBoards2 jpaBoardRead (
             @PathVariable("boardNo") Integer boardNo) {
-        log.info("jpaBoardRead1()");
+        log.info("jpaBoardRead2()");
 
         return service.read(boardNo);
     }
 
     @PutMapping("/{boardNo}")
-    public JpaBoards1 jpaBoardModify (
+    public JpaBoards2 jpaBoardModify (
             @PathVariable("boardNo") Integer boardNo,
-            @RequestBody JpaBoards1 jpaBoard1) {
-        log.info("jpaBoardModify1(): " + jpaBoard1);
+            @RequestBody JpaBoards2 jpaBoard2) {
+        log.info("jpaBoardModify2(): " + jpaBoard2);
 
-        jpaBoard1.setBoardNo(Long.valueOf(boardNo));
-        service.modify(jpaBoard1);
+        jpaBoard2.setBoardNo(Long.valueOf(boardNo));
+        service.modify(jpaBoard2);
 
-        return jpaBoard1;
+        return jpaBoard2;
     }
 
     @DeleteMapping("/{boardNo}")
     public void jpaBoardRemove (
             @PathVariable("boardNo") Integer boardNo) {
-        log.info("jpaBoardRemove1()");
+        log.info("jpaBoardRemove2()");
 
         service.remove(boardNo);
     }

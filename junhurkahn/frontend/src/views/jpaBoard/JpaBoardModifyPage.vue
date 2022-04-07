@@ -1,6 +1,6 @@
 <template>
     <div align="center">
-        <h2>Vue + Spring 게시물 수정</h2>
+        <h2>텍스트메모 게시물 수정</h2>
         <jpa-board-modify-form v-if="jpaBoard" :jpaBoard="jpaBoard" @submit="onSubmit"/>
         <p v-else>로딩중 .......</p>
     </div>

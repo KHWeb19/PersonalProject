@@ -1,12 +1,11 @@
 <template>
     <div align="center">
-        <h2>계좌관리</h2>
+        <h2>게시물 작성</h2>
         <jpa-board-register-form-1 @submit="onSubmit"/>
     </div>
 </template>
 
 <script>
-
 import JpaBoardRegisterForm1 from '@/components/jpaBoard1/JpaBoardRegisterForm1.vue'
 import axios from 'axios'
 
@@ -21,7 +20,6 @@ export default {
             axios.post('http://localhost:7777/62th/board1/register1', { title, writer, content })
                     .then(() => {
                         alert('게시물 등록 성공!')
-
                         this.$router.push({
                             name: 'JpaBoardListPage1'
                         })
@@ -32,5 +30,4 @@ export default {
         }
     }
 }
-
 </script>

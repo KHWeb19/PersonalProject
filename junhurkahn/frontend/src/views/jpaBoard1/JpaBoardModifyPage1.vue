@@ -1,7 +1,7 @@
 <template>
     <div align="center">
-        <h2>계좌번호 수정 페이지</h2>
-        <jpa-board-modify-form-1 v-if="jpaBoard1" :jpaBoard1="jpaBoard1" @submit="onSubmit"/>
+        <h2>계좌 번호 수정</h2>
+        <jpa-board-modify-form-1  v-if="jpaBoard1" :jpaBoard1="jpaBoard1" @submit="onSubmit"/>
         <p v-else>로딩중 .......</p>
     </div>
 </template>
@@ -9,13 +9,10 @@
 <script>
 import axios from 'axios'
 import { mapActions, mapState } from 'vuex'
-
 import JpaBoardModifyForm1 from '@/components/jpaBoard1/JpaBoardModifyForm1.vue'
-
 export default {
     name: 'JpaBoardModifyPage1',
     components: {
-        
         JpaBoardModifyForm1
     },
     props: {
@@ -30,15 +27,14 @@ export default {
     methods: {
         ...mapActions(['fetchJpaBoard1']),
         onSubmit (payload) {
-            const { title, content } = payload
-
+            const { title, content, } = payload
             axios.put(`http://localhost:7777/62th/board1/${this.boardNo}`,
                 { title, writer: this.jpaBoard1.writer, content, regDate: this.jpaBoard1.regDate })
                     .then(res => {
                         alert('게시물 수정 성공!')
                         this.$router.push({
                             name: 'JpaBoardReadPage1',
-                            params: { boardNo: res.data.boardNo.toString() }
+                            params: { boardNo: res.data.boardNo.toString()}
                         })
                     })
                     .catch(() => {
@@ -54,5 +50,4 @@ export default {
                 })
     }
 }
-
 </script>

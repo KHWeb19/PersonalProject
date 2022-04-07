@@ -6,10 +6,8 @@
 </template>
 
 <script>
-
 import JpaBoardRegisterForm from '@/components/jpaBoard/JpaBoardRegisterForm.vue'
 import axios from 'axios'
-
 export default {
     name: 'BoardRegisterPage',
     components: {
@@ -21,7 +19,6 @@ export default {
             axios.post('http://localhost:7777/62th/board/register', { title, writer, content })
                     .then(() => {
                         alert('게시물 등록 성공!')
-
                         this.$router.push({
                             name: 'JpaBoardListPage'
                         })
@@ -32,5 +29,4 @@ export default {
         }
     }
 }
-
 </script>

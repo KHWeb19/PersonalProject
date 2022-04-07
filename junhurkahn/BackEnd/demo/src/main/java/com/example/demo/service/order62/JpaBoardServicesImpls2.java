@@ -2,9 +2,10 @@ package com.example.demo.service.order62;
 
 import com.example.demo.entity.jpa.JpaBoards1;
 
+import com.example.demo.repository.jpa.order63.JpaBoardRepositorys;
 
 
-import com.example.demo.repository.jpa.order63.JpaBoardRepositorys1;
+import com.example.demo.repository.jpa.order63.JpaBoardRepositorys2;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -15,10 +16,10 @@ import java.util.Optional;
 
 @Slf4j
 @Service
-public class JpaBoardServicesImpls1 implements JpaBoardServices1 {
+public class JpaBoardServicesImpls2 implements JpaBoardServices1 {
 
     @Autowired
-    JpaBoardRepositorys1 repository;
+    JpaBoardRepositorys2 repository;
 
     @Override
     public void register(JpaBoards1 board) {

@@ -2,13 +2,13 @@
     <form @submit.prevent="onSubmit">
         <table>
             <tr>
-                <td>제목</td>
+                <td>은행이름</td>
                 <td>
                     <input type="text" v-model="title"/>
                 </td>
             </tr>
             <tr>
-                <td>작성자</td>
+                <td>계좌번호</td>
                 <td>
                     <input type="text" v-model="writer"/>
                 </td>
@@ -32,13 +32,12 @@
 </template>
 
 <script>
-
 export default {
     name: 'JpaBoardRegisterForm1',
     data () {
         return {
-            title: '제목을 작성하세요.',
-            writer: '너님',
+            title: '은행이름을 작성하세요.',
+            writer: '계좌 번호작성하시오',
             content: '본문을 작성하세요.'
         }
     },

@@ -2,19 +2,19 @@
     <div>
         <table>
             <tr>
-                <td>게시물 번호</td>
+                <td>계좌번호 읽기</td>
                 <td>
                     <input type="text" :value="jpaBoard1.boardNo" readonly/>
                 </td>
             </tr>
             <tr>
-                <td>제목</td>
+                <td>은행이름</td>
                 <td>
                     <input type="text" :value="jpaBoard1.title" readonly/>
                 </td>
             </tr>
             <tr>
-                <td>작성자</td>
+                <td>계좌번호</td>
                 <td>
                     <input type="text" :value="jpaBoard1.writer" readonly/>
                 </td>
@@ -37,7 +37,6 @@
 </template>
 
 <script>
-
 export default {
     name: 'JpaBoardRead1',
     props: {
