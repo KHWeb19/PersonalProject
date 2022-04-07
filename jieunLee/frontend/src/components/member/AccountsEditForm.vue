@@ -63,7 +63,7 @@
                     width: 300px; 
                     height: 35px;
                     padding-left: 5px;" 
-                    type="text" v-model="memberWeb"/>
+                    type="text" placeholder="웹사이트" v-model="memberWeb"/>
                   </td>
               </tr>
               <br/>
@@ -77,7 +77,7 @@
                       width: 300px; 
                       min-height: 70px;
                       padding-left: 5px;" 
-                  type="text" v-model="memberIntro">
+                  type="text" placeholder="소개" v-model="memberIntro">
                   </textarea>
                   </td>
               </tr>
