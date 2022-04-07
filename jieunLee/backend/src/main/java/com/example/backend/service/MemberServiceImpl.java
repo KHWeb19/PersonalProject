@@ -98,11 +98,14 @@ public class MemberServiceImpl implements MemberService{
 
     @Override
     public void modify(Member member) {
-
-
         String encodedPassword = passwordEncoder.encode(member.getPassword());
         member.setPassword(encodedPassword);
 
         memberRepository.save(member);
+    }
+
+    @Override
+    public void remove(Long memberNo) {
+        memberRepository.deleteById(Long.valueOf(memberNo));
     }
 }

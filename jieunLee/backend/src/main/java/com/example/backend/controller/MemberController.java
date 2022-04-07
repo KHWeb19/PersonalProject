@@ -69,4 +69,12 @@ public class MemberController {
 
         return member;
     }
+
+    @DeleteMapping("/{memberNo}")
+    public void memberRemove (
+            @PathVariable("memberNo") Long memberNo) {
+        log.info("memberRemove()");
+
+        service.remove(memberNo);
+    }
 }
