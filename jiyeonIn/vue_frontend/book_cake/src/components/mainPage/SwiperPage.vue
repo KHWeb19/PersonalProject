@@ -60,6 +60,11 @@ export default {
         swiper,
         swiperSlide
     },
+    props: {
+        cakeLists: {
+            type: Array
+        }
+    },
     data () {
         return {
             swiperOption: {
@@ -81,31 +86,6 @@ export default {
                     dynamicBullets: true //총 몇개가 있는지 밑에가 true면 center와 사이드 몇개만 보이고, false면 전체 개수가 보인다.
                 }
             },
-            cakeArr: [
-                {image: require('@/assets/uploadImg/birthday/1.birhday.png'), design : 'birthday', size: '1호', price: '21,000'},
-                {image: require('@/assets/uploadImg/birthday/2.birhday(2).png'), design : 'birthday', size: '1호', price: '23,000'},
-                {image: require('@/assets/uploadImg/birthday/3.birhday(3).png'), design : 'birthday', size: '도시락 케이크', price: '15,000'},
-                {image: require('@/assets/uploadImg/birthday/4.birhday(4).png'), design : 'birthday', size: '도시락 케이크', price: '16,000'},
-                {image: require('@/assets/uploadImg/birthday/5.birhday(5).png'), design : 'birthday', size: '2호', price: '26,000'},
-
-                {image: require('@/assets/uploadImg/family/1.famaily cake.png'), design : 'family', size: '1호', price: '22,000'},
-                {image: require('@/assets/uploadImg/family/2.famaily cake(2).png'), design : 'family', size: '1호', price: '22,500'},
-                {image: require('@/assets/uploadImg/family/3.famaily cake(3).png'), design : 'family', size: '2호', price: '26,500'},
-                {image: require('@/assets/uploadImg/family/4.famaily cake(4).png'), design : 'family', size: '1호', price: '223,000'},
-                {image: require('@/assets/uploadImg/family/5.famaily cake(5).png'), design : 'family', size: '2호', price: '35,000'},
-
-                {image: require('@/assets/uploadImg/friend/1.friend cake.png'), design : 'friend', size: '도시락 케이크', price: '15,000'},
-                {image: require('@/assets/uploadImg/friend/2.friend cake(2).png'), design : 'friend', size: '2호', price: '29,000'},
-                {image: require('@/assets/uploadImg/friend/3.friend cake(3).png'), design : 'friend', size: '1호', price: '30,000'},
-                {image: require('@/assets/uploadImg/friend/4.friend cake(4).png'), design : 'friend', size: '1호', price: '24,000'},
-                {image: require('@/assets/uploadImg/friend/5.friend cake(5).png'), design : 'friend', size: '1호', price: '24,000'},
-
-                {image: require('@/assets/uploadImg/lover/1.lover.png'), design : 'lover', size: '1호', price: '22,000'},
-                {image: require('@/assets/uploadImg/lover/2.lover(2).png'), design : 'lover', size: '1호', price: '22,000'},
-                {image: require('@/assets/uploadImg/lover/3.lover(3).png'), design : 'lover', size: '1호', price: '23,000'},
-                {image: require('@/assets/uploadImg/lover/4.lover(4).png'), design : 'lover', size: '2호', price: '27,000'},
-                {image: require('@/assets/uploadImg/lover/5.lover(5).png'), design : 'lover', size: '도시락', price: '15,000'},
-            ],
             cakeBirthday: [],
             cakeFamily:[],
             cakeFriend:[],
@@ -113,12 +93,12 @@ export default {
         }
     },
     mounted () {
-        for(let i = 0 ; i < this.cakeArr.length ; i++) {
-            if(this.cakeArr[i].design == 'birthday'){
+        for(let i = 0 ; i < this.cakeLists.length ; i++) {
+            if(this.cakeLists[i].design == 'birthday'){
                 this.cakeBirthday.push(this.cakeArr[i])
-            } else if(this.cakeArr[i].design == 'family'){
+            } else if(this.cakeLists[i].design == 'family'){
                 this.cakeFamily.push(this.cakeArr[i])
-            } else if(this.cakeArr[i].design == 'friend'){
+            } else if(this.cakeLists[i].design == 'friend'){
                 this.cakeFriend.push(this.cakeArr[i])
             } else {
                 this.cakeLover.push(this.cakeArr[i])

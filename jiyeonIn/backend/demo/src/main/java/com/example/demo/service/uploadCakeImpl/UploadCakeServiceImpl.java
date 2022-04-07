@@ -5,9 +5,11 @@ import com.example.demo.entity.uploadCake.UploadCake;
 import com.example.demo.repository.upload.UploadRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -37,22 +39,7 @@ public class UploadCakeServiceImpl implements UploadCakeService{
     }
 
     @Override
-    public void familyImg(String originalFilename) {
-        String familyname = "@/assets/uploadImg/birthday/" + originalFilename;
-    }
-
-    @Override
-    public void friendImg(String originalFilename) {
-
-    }
-
-    @Override
-    public void loverImg(String originalFilename) {
-
-    }
-
-    @Override
-    public void birthdayImg(String originalFilename) {
-
+    public List<UploadCake> list() {
+        return uploadRepository.findAll(Sort.by(Sort.Direction.DESC,"cakeNo"));
     }
 }
