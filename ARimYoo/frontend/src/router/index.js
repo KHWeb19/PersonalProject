@@ -9,6 +9,8 @@ import JoinPage2 from '../views/main/JoinPage2.vue'
 import CommunityPage from '../views/board/CommunityPage.vue'
 import MyPage from '../views/my/MyPage.vue'
 
+import CommunityWritePage from '../views/board/CommunityWritePage.vue'
+
 Vue.use(VueRouter)
 
 const requireLogin = () => (to, from, next) => {
@@ -51,8 +53,13 @@ const routes = [
         path: '/community',
         name: 'CommunityPage',
         component: CommunityPage,
-        beforeEnter: requireLogin()
+        //beforeEnter: requireLogin()
     },
+    {
+        path: '/community/write',
+        name: 'CommunityWritePage',
+        component: CommunityWritePage
+    }
 
   
 ]
