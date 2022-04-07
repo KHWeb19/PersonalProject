@@ -25,7 +25,7 @@ export default {
   name: "MainCategory",
   methods: {
     planLink(){
-      this.$router.push({name: 'home'})
+      this.$router.push({name: 'HomeView'})
     },
     searchLink() {
       this.$router.push({name: 'SearchView'})
@@ -42,6 +42,6 @@ export default {
 
 <style scoped>
 .ca{
-  width: 120px;
+  width: 190px;
 }
 </style>

@@ -36,12 +36,13 @@
                   </tr>
 
                   <tr>
-                    <td colspan="2">&nbsp;&nbsp;<input class="inputBox" type="text" placeholder="make trip name!" v-model="tripName" required></td>
+                    <td colspan="2">&nbsp;&nbsp;<input class="inputBox" type="text" placeholder="make trip name!" v-model="planName" required></td>
                   </tr>
                   <tr></tr>
                   <tr>
+                    <td class="plan"> 여행 일정 </td>
                     <td> <v-btn @click="showDatePicker" fab><v-icon x-large>mdi-calendar-multiselect</v-icon></v-btn> &nbsp;&nbsp;&nbsp;&nbsp;</td>
-                    <td> <input type="text" readonly v-model="dateRangeText" placeholder="range date" required></td>
+                    <td> <input type="text" readonly v-model="planDate" placeholder="range date" required></td>
                   </tr>
                   <tr></tr>
                   <tr></tr>
@@ -50,7 +51,7 @@
                   </tr>
 
                   <tr>
-                    <td colspan="2">&nbsp;&nbsp;<input type="text" class="inputBox" placeholder="trip place!" required></td>
+                    <td colspan="2">&nbsp;&nbsp;<input type="text" class="inputBox" placeholder="trip place!" v-model="placeName" required></td>
                   </tr>
 
                 </table>
@@ -67,7 +68,7 @@
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn color="green darken-1" text @click="makePlan = false">Close</v-btn>
-            <v-btn type="submit" color="green darken-1" text>Save</v-btn>
+            <v-btn @click="onSubmit" color="green darken-1">Save</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -87,8 +88,8 @@ export default {
       makePlan: false,
       pickDate: false,
       dates: ['', ''],
-      tripName: '',
-      tripPlace: ''
+      planName: '',
+      placeName: ''
     }
   },
   methods: {
@@ -106,15 +107,15 @@ export default {
       this.pickDate = true
     },
     onSubmit(){
-      const {tripName, dates, tripPlace} = this;
+      const {planName, planDate, placeName} = this;
 
-      //console.log({tripName, dates, tripPlace});
-
-      this.$emit({tripName, dates, tripPlace});
+      console.log({planName, planDate, placeName});
+      this.makePlan = false;
+      this.$emit('submit',{planName, planDate, placeName});
     }
   },
   computed: {
-    dateRangeText () {
+    planDate () {
       return this.dates.join(' ~ ')
     },
   },

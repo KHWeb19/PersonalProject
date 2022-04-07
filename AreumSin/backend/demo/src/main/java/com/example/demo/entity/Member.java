@@ -45,4 +45,8 @@ public class Member {
 
     @UpdateTimestamp
     private Date userLoginDate;
+
+    public MemberPlan(String member) {
+        this.member = member
+    }
 }

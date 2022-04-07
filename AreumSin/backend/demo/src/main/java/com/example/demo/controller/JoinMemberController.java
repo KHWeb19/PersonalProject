@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -59,4 +60,11 @@ public class  JoinMemberController {
 
         return memberResponse;
     }
+
+    @GetMapping("/memberList")
+    public List<Member> MemberList() throws Exception {
+        log.info("memberList : "+ service.list());
+        return service.list();
+    }
+
 }
