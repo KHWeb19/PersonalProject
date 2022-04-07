@@ -1,6 +1,6 @@
 <template>
     <div class="Main">
-        <main-page-form v-bind:checklogin="checklogin"></main-page-form>
+        <main-page-form ></main-page-form>
 
         <div>
             <div class="login" align="center">
@@ -51,12 +51,13 @@ Vue.use(cookies)
                         .then(res => {
                             if(res.data) {
                                 alert('안녕하세요! ' +res.data.auth+'님!')
-                                this.$store.state.userInfo = res.data
-                                this.$cookies.set("user", res.data, 3600)
-                                this.$store.state.authInfo = res.data.auth
-                                this.$store.state.idInfo = res.data.id
+                                window.localStorage.setItem("userInfo",JSON.stringify(res.data))
+                                window.localStorage.setItem("token", res.data.token)
+                                localStorage.setItem("id", res.data.id)
                                 this.isLogin = true
                                 this.$router.push({ name: 'MainHomepage'})
+                                console.log(window.localStorage.getItem('userInfo'))
+                                console.log(window.localStorage.getItem('id'))
                             } else {
                                 alert('비밀번호, 아이디가 올바르지 않습니다.')
                             }

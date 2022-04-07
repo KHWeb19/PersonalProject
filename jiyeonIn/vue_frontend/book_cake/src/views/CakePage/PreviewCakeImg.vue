@@ -6,47 +6,43 @@
         </div>
 
         <div class="cakeImg">
-            <div v-if="($store.state.authInfo !== '관리자') || (this.$store.state.userInfo == null)">
+            
+            <div v-if="(dbrAction != 'manager') || (checkuserInfo == null)">
                 <h4>케이크 보기</h4><br>
             </div>
-            
-            
 
-            <div v-if="$store.state.authInfo === '관리자'">
+            <div v-show="(dbrAction == 'manager') && (checkuserInfo != null)">
                 <h4>케이크 보기</h4><br>
                 <v-container>
                     <v-row justify="center">
                         <v-col class="d-flex" cols="12" sm="3">
-                            <v-select class="selectCake" v-model="storeData.design" :items="selectCake" label="디자인 선택">
+                            <v-select class="selectCake" v-model="design" :items="selectCake" label="디자인 선택">
                             </v-select>
                         </v-col>
                         <v-col class="d-flex" cols="12" sm="3">
-                            <v-select class="selectSize" v-model="storeData.size" :items="selectSize" label="사이즈 선택">
+                            <v-select class="selectSize" v-model="size" :items="selectSize" label="사이즈 선택">
                             </v-select>
                         </v-col>
                         <v-col class="d-flex" cols="12" sm="3">
-                            <v-text-field label="가격 작성" v-model="storeData.price"></v-text-field>
+                            <v-text-field label="가격 작성" v-model="price"></v-text-field>
                         </v-col>
-                            <v-col class="d-flex" cols="12" sm="2">
-                        <v-btn color="black" text @click="onSubmit"><v-icon>mdi-check</v-icon></v-btn>
-                        </v-col>
+                        
                     </v-row>
                     <v-row justify="center">
                         <v-col class="d-flex" cols="12" sm="5">
-                            <input type="file" id="files" ref="files" 
+                            <input type="file" id="files1" ref="files1" 
                             multiple v-on:change="handleFileUpload()"/>
                         </v-col>
                     </v-row>
                     <v-row justify="center">
                         <v-col class="d-flex" cols="12" sm="2">
-                            <v-btn color="black" text @click="submitFiles()"><v-icon>mdi-check</v-icon>올리기!</v-btn>
+                            <v-btn color="black" text @click="onSubmit()"><v-icon>mdi-check</v-icon>올리기!</v-btn>
                         </v-col>
                     </v-row>
                 </v-container>
             </div>
 
-             
-            <swiper-page></swiper-page><br><br><br>
+            <swiper-page :cakeLists="cakeLists"></swiper-page><br><br><br>
 
         </div>
         
@@ -64,21 +60,22 @@ import MainPageForm from '@/components/layout/MainPageForm.vue'
 import FooterForm from '@/components/layout/FooterForm.vue'
 import axios from 'axios'
 import SwiperPage from '@/components/mainPage/SwiperPage.vue'
+import { mapState, mapActions} from 'vuex'
 
     export default {
         name: 'PreviewCakeImg',
         data () {
             return {
-                files: '',
+                files1: '',
                 response: '',
-                storeData: {
-                    design: '',
-                    size: '',
-                    price:'',
-                },
-                selectCake : ['birthday', 'lover','family','friend'],
-                selectSize : ['도시락 케이크','1호','2호','3호']
-                
+                design: '',
+                size: '',
+                price:'',  
+                selectCake : ['birthday', 'family','friend' , 'lover'],
+                selectSize : ['도시락 케이크','1호','2호','3호'],
+                dbrAction: (window.localStorage.getItem('id')),
+                checkuserInfo: window.localStorage.getItem('token')
+
                 }
             },
         
@@ -87,81 +84,47 @@ import SwiperPage from '@/components/mainPage/SwiperPage.vue'
             FooterForm,
             SwiperPage
         },
+        computed: {
+            ...mapState(['cakeLists'])
+        },
+        mounted () {
+            this.fetchCakeLists(),
+            window.localStorage.getItem('cakeList')
+        },
         methods: {
+            ...mapActions(['fetchCakeLists']),
             handleFileUpload () {
-            this.files = this.$refs.files.files
+            this.files1 = this.$refs.files1.files
             },
             onSubmit () {
-                let vm = this
-                axios.post('http://localhost:7777/upload/register',vm.storeData)
-                    .then(() => {
-                        alert('케이크 정보 등록 완료!')
-                        
-                    })
-                    .catch(() =>{
-                        alert('문제발생')
-                    })
-            },
-            submitFiles () {
                 let formData = new FormData()
 
-                for (let idx = 0; idx < this.files.length; idx++) {
-                    formData.append('fileList', this.files[idx])
+                let fileInfo = {
+                    design : this.design,
+                    size : this.size,
+                    price : this.price,
+                }
+                console.log(fileInfo)
+
+                for (let idx = 0; idx < this.files1.length; idx++) {
+                    formData.append('fileList', this.files1[idx])
                  }
 
-                let dm =this.storeData.design
+                formData.append(
+                    "info", new Blob([JSON.stringify(fileInfo)], {type: "application/json"})
+                );
 
-                if(dm === 'family'){
-                    axios.post('http://localhost:7777/upload/uploadImgFamily', formData , {
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
-                    }
-                    })
+                axios.post('http://localhost:7777/upload/register', formData) 
                     .then (res => {
                         alert('처리 결과: ' + res.data)
+                        window.localStorage.setItem("cakeList", this.cakeLists)
                     })
-                    .catch (res => {
-                        alert('처리 결과: ' + res.message)
+                    .catch (() => {
+                        alert('파일을 추가해주세요!')
+                        
                     })
-                }else if(dm === 'birthday'){
-                    axios.post('http://localhost:7777/upload/uploadImgBirthday', formData , {
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
-                    }
-                    })
-                    .then (res => {
-                        alert('처리 결과: ' + res.data)
-                    })
-                    .catch (res => {
-                        alert('처리 결과: ' + res.message)
-                    })
-                }else if(dm === 'friend'){
-                    axios.post('http://localhost:7777/upload/uploadImgFriend', formData , {
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
-                    }
-                    })
-                    .then (res => {
-                        alert('처리 결과: ' + res.data)
-                    })
-                    .catch (res => {
-                        alert('처리 결과: ' + res.message)
-                    })
-                }else if(dm === 'lover'){
-                    axios.post('http://localhost:7777/upload/uploadImgLover', formData , {
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
-                    }
-                    })
-                    .then (res => {
-                        alert('처리 결과: ' + res.data)
-                    })
-                    .catch (res => {
-                        alert('처리 결과: ' + res.message)
-                    })
-                }
             }
-            
+                    
         }
     }
 </script>

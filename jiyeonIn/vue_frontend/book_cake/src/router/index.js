@@ -9,6 +9,7 @@ import ReviewPage from '@/views/CakePage/ReviewPage.vue'
 import MyPage from '@/views/CakePage/MyPage.vue'
 import LoginPage from '@/views/CakePage/LoginPage.vue'
 import SignUpPage from '@/views/CakePage/SignUpPage.vue'
+import test from '@/views/CakePage/test.vue'
 
 Vue.use(VueRouter)
 
@@ -55,6 +56,12 @@ const routes = [
     path: '/signUpPage',
     name: 'SignUpPage',
     component: SignUpPage
+  }
+  ,
+  {
+    path: '/test',
+    name: 'test',
+    component: test
   }
 
   ,

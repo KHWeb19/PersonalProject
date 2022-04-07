@@ -6,22 +6,36 @@
         <div class="wrap">
             <h3>예약하기</h3>
             <br>
-            <booking-cake-form></booking-cake-form>
+            <booking-cake-form :cakeLists="cakeLists"></booking-cake-form>
 
         </div>
         
+        <footer-form></footer-form>
+
     </div>
 </template>
 
 <script>
 import BookingCakeForm from '@/components/mainPage/BookingCakeForm.vue'
 import MainPageForm from '@/components/layout/MainPageForm.vue'
+import FooterForm from '../../components/layout/FooterForm.vue'
+import { mapState, mapActions } from 'vuex'
 
     export default {
         name: 'BookingPage',
         components: {
             BookingCakeForm,
-            MainPageForm
+            MainPageForm,
+            FooterForm
+        },
+        computed: {
+            ...mapState(['cakeLists'])
+        },
+         mounted () {
+            this.fetchCakeLists()
+        },
+        methods: {
+            ...mapActions(['fetchCakeLists']),
         }
 
     }
