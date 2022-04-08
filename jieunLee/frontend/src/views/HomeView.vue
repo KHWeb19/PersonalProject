@@ -1,6 +1,6 @@
 <template>
   <div>
-    <menu-bar/>
+    <menu-bar :member="member"/>
     <v-container style="width: 1000px; margin-top: 20px;">
       <router-link style="text-decoration: none;" :to="{name: 'LoginPage'}">
         &nbsp;Login&nbsp;

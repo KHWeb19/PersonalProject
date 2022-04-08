@@ -1,6 +1,6 @@
 <template>
   <div>
-    <menu-bar/>
+    <menu-bar :member="member"/>
     <board-register-form/>
   </div>
 </template>

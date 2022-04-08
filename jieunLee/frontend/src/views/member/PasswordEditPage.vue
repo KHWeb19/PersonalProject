@@ -1,6 +1,6 @@
 <template>
   <div>
-    <menu-bar/>
+    <menu-bar :member="member"/>
     <div style="display: flex; justify-content: center;">
       <accounts-category/>
       <password-edit-form v-if="member" :member="member" @submit="onSubmit"/>
@@ -15,7 +15,6 @@ import AccountsCategory from '@/components/AccountsCategory.vue'
 import MenuBar from '../../components/MenuBar.vue'
 import { mapActions, mapState } from 'vuex'
 import axios from 'axios'
-
 export default {
   name: 'AccountsEditPage',
   components: {
@@ -33,19 +32,12 @@ export default {
     computed: {
     ...mapState(['member']),
   },
-  // created() {
-  //       this.fetchMember(this.memberNo)
-  //           .catch(()=> {
-  //               alert('비밀번호 조회 실패')
-  //               this.$router.back()
-  //           })
-  //   },
   methods: {
     ...mapActions(['fetchMember']),
         onSubmit(payload) {
       const {password} = payload
       axios.put(`http://localhost:7777/member/${this.memberNo}`, 
-      {memberName: this.member.memberName, memberId: this.member.memberId, password, memberWeb: this.member.memberWeb, memberIntro: this.member.memberIntro, regDate: this.member.regDate})
+      {memberName: this.member.memberName, memberId: this.member.memberId, password, imageName: this.member.imageName, memberWeb: this.member.memberWeb, memberIntro: this.member.memberIntro, regDate: this.member.regDate})
         .then(res => {
             alert('비밀번호 수정 성공')
             // localStorage.removeItem("userInfo")

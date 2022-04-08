@@ -1,4 +1,5 @@
 <template>
+    
     <my-profile v-if="member" :member="member"/>
      <p v-else>로딩중......</p>
 </template>

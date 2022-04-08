@@ -6,7 +6,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.FileOutputStream;
 import java.util.List;
 
 @Slf4j
@@ -70,10 +72,33 @@ public class MemberController {
         return member;
     }
 
+    @ResponseBody
+    @PostMapping("/uploadImg")
+    public String requestUploadFile (@RequestParam("fileList") List<MultipartFile> fileList) {
+        try {
+            for (MultipartFile multipartFile: fileList) {
+                log.info("requestUploadFile() - Make file:" + multipartFile.getOriginalFilename());
+
+                FileOutputStream writer = new FileOutputStream(
+                        "../frontend/src/assets/mImages/" + multipartFile.getOriginalFilename()
+                );
+                writer.write(multipartFile.getBytes());
+                writer.close();
+            }
+        } catch (Exception e) {
+            return "Upload Fail!";
+        }
+
+        log.info("requestUploadFile(): Success!!!");
+
+        return "Upload Success!";
+    }
+
     @DeleteMapping("/{memberNo}")
     public void memberRemove (
             @PathVariable("memberNo") Long memberNo) {
         log.info("memberRemove()");
+
 
         service.remove(memberNo);
     }
