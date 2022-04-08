@@ -11,14 +11,18 @@ export default {
   },
   methods: {
     onSubmit(payload) {
-      const { id, pw } = payload
+      const { id, pw, name, auth } = payload
       axios
-        .post("http://localhost:8888/member/register", { id, pw })
-        .then((res) => {
-          alert("등록 성공!" + res)
+        .post("http://localhost:8888/Member/register", { id, pw, name, auth })
+        .then(() => {
+          alert("등록 성공!")
+
+          this.$router.push({
+            name: "LoginPage",
+          })
         })
-        .catch((res) => {
-          alert(res.response.data.message)
+        .catch(() => {
+          alert("다시 확인해주세요.")
         })
     },
   },

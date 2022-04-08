@@ -29,6 +29,7 @@
                           placeholder="아이디를 입력해주세요"
                           v-model="id"
                           required
+                          :rules="rules_id"
                         />
                       </div>
                       <div class="login-member-password">
@@ -38,6 +39,7 @@
                           placeholder="비밀번호를 입력해주세요"
                           v-model="pw"
                           required
+                          :rules="rules_pw"
                         />
                       </div>
                     </div>
@@ -56,7 +58,9 @@
                       <div>
                         <ul class="login-util-find">
                           <li class="login-util-find id">
-                            <router-link :to="{ name: 'IdPage' }"
+                            <router-link
+                              :to="{ name: 'IdPage' }"
+                              class="routerlink"
                               >아이디 찾기</router-link
                             >
                           </li>
@@ -97,31 +101,19 @@ export default {
     return {
       id: "",
       pw: "",
+      rules_id: [(v) => !!v || "아이디를 입력해주세요"],
+      rules_pw: [(v) => !!v || "비밀번호를 입력해주세요"],
     }
   },
-  props: {
-    members: {
-      type: Array,
-    },
-  },
-
   methods: {
     onSubmit() {
-      for (var i = 0; i < this.members.length; i++) {
-        if (this.members[i].userid == this.id) {
-          const { id, pw } = this
-          this.$emit("submit", { id, pw })
-
-          return {
-            SelectedUser: 1,
-          }
-        }
-      }
-      let SelectedUser = null
-      this.members.forEach((user) => {
-        if (user.userid === this.userid) SelectedUser = user
+      const { id, pw } = this
+      this.$emit("submit", { id, pw })
+    },
+    login() {
+      this.$router.push({
+        name: "MainPage",
       })
-      if (SelectedUser === null) alert("등록된 회원 정보가 없습니다.")
     },
   },
 }

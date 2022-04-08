@@ -12,9 +12,21 @@
               <div class="sign-header">
                 <h2>회원가입</h2>
               </div>
-
               <div class="sign-line-top"></div>
-
+              <div class="radio-group">
+                <input
+                  v-model="radioGroup"
+                  type="radio"
+                  :label="`${kindsOfMember[0]}`"
+                  :value="`${kindsOfMember[0]}`"
+                />
+                <input
+                  v-model="radioGroup"
+                  type="radio"
+                  :label="`${kindsOfMember[1]}`"
+                  :value="`${kindsOfMember[1]}`"
+                />
+              </div>
               <section class="sign-section">
                 <div class="sign-member">
                   <form
@@ -29,7 +41,7 @@
                           type="text"
                           name="id"
                           placeholder="아이디"
-                          v-model="id"
+                          :rules="rules_id"
                           required
                         />
                       </div>
@@ -39,7 +51,7 @@
                           type="password"
                           name="pw"
                           placeholder="비밀번호"
-                          v-model="pw"
+                          :rules="rules_pw"
                           required
                         />
                       </div>
@@ -49,7 +61,7 @@
                           type="password"
                           name="pwCheck"
                           placeholder="비밀번호 확인"
-                          v-model="pwCheck"
+                          :rules="rules_pw1"
                           required
                         />
                       </div>
@@ -59,7 +71,7 @@
                           type="text"
                           name="name"
                           placeholder="이름(2~30자)"
-                          v-model="name"
+                          :rules="rules_name"
                           required
                           minlength="2"
                           maxlength="30"
@@ -88,17 +100,47 @@ export default {
 
   data() {
     return {
+      kindsOfMember: ["회원", "관리자"],
       id: "",
       pw: "",
-      pwCheck: "",
       name: "",
+      pw1: "",
+      rules_id: [(v) => !!v || "아이디를 입력해주세요"],
+      rules_pw: [
+        (v) => !!v || "비밀번호를 입력해주세요",
+        (v) => v.length >= 6 || "비밀번호를 6자리 이상 입력해주세요",
+      ],
+      rules_pw1: [
+        (v) => !!v || "비밀번호를 입력해주세요",
+        (v) => v === this.pw || "비밀번호가 일치하지 않습니다",
+      ],
+      rules_name: [(v) => !!v || "이름을 입력해주세요"],
     }
   },
-
+  /* eslint-disable */
   methods: {
     onSubmit() {
-      const { id, pw, pwCheck, name } = this
-      this.$emit("submit", { id, pw, pwCheck, name })
+      const { id, pw, name } = this
+      const auth = this.radioGroup == "사용자" ? "사용자" : "관리자"
+      this.$emit("submit", { id, pw, name, auth })
+    },
+    checkValid() {
+      const { id } = this
+      axios
+        .get(`http://localhost:8888/Member/check/${id}`)
+        .then((res) => {
+          this.temp = res.data
+          if (res.data == true) {
+            alert("사용 가능한 아이디 입니다!")
+            this.valid = res.data
+          } else {
+            alert("중복된 아이디 입니다!")
+            this.valid = false
+          }
+        })
+        .catch(() => {
+          alert("아이디를 입력해주세요!")
+        })
     },
   },
 }

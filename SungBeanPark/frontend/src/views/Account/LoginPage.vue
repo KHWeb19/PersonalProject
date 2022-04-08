@@ -3,10 +3,10 @@
 </template>
 <script>
 /* eslint-disable */
-
 import LoginPageForm from "@/components/Account/LoginPageForm.vue"
 import Vue from "vue"
 import axios from "axios"
+
 export default {
   name: "LoginPage",
   components: {
@@ -35,4 +35,4 @@ export default {
   },
 }
 </script>
-<style></style>
+<style scss scoped></style>
