@@ -4,7 +4,7 @@
             <table>
                 <tr>
                     <td>
-                        <input type="hidden" :value="photoBoard.boardNo" disabled/>
+                        <input type="hidden" :value="videoBoard.boardNo" disabled/>
                     </td>
                 </tr>
                 <tr>
@@ -16,13 +16,13 @@
                 <tr>
                     <td>작성자</td>
                     <td>
-                        <input type="text" :value="photoBoard.writer" disabled/>
+                        <input type="text" :value="videoBoard.writer" disabled/>
                     </td>
                 </tr>
                 <tr>
                     <td>등록일자</td>
                     <td>
-                        <input type="text" :value="photoBoard.regDate" disabled/>
+                        <input type="text" :value="videoBoard.regDate" disabled/>
                     </td>
                 </tr>
                 <tr>
@@ -46,8 +46,8 @@
 
             <div>
                 <button type="submit">수정 완료</button>
-                <router-link :to="{ name: 'PhotoBoardReadPage',
-                                    params: { boardNo: photoBoard.boardNo.toString() } }">
+                <router-link :to="{ name: 'VideoBoardReadPage',
+                                    params: { boardNo: videoBoard.boardNo.toString() } }">
                     취소
                 </router-link>
             </div>
@@ -58,9 +58,9 @@
 <script>
 
 export default {
-    name: 'PhotoBoardModifyForm',
+    name: 'VideoBoardModifyForm',
     props: {
-        photoBoard: {
+        videoBoard: {
             type: Object,
             required: true
         }
@@ -89,7 +89,7 @@ export default {
                 //let fileTyepLowerCase = fileType.toLowerCase()
                 //console.log(fileTyepLowerCase)
                 //vue에서 gif 대문자로 GIF가 되면 오류생겨서 확장자 이래 3개만 받음
-                if(fileType == "jpg" || fileType == "png" || fileType == "gif"){
+                if(fileType == "mp4"){
                     alert('첨부 되었습니다')
                     
                 } else{
@@ -100,8 +100,8 @@ export default {
         }
     },
     created () {
-        this.title = this.photoBoard.title
-        this.content = this.photoBoard.content
+        this.title = this.videoBoard.title
+        this.content = this.videoBoard.content
     }
 }
 </script>

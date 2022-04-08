@@ -2,9 +2,13 @@ package com.example.demo.service.board.freeBoard;
 
 
 import com.example.demo.entitiy.board.freeBoard.FreeBoard;
+import com.example.demo.entitiy.board.photoBoard.PhotoBoard;
 import com.example.demo.repository.board.freeBoard.FreeBoardRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -24,10 +28,16 @@ public class FreeBoardServiceImpl implements FreeBoardService {
         repository.save(freeBoard);
     }
 
+
     @Override
     public List<FreeBoard> list() {
         return repository.findAll(Sort.by(Sort.Direction.DESC, "boardNo"));
     }
+
+   /* @Override
+    public Page<FreeBoard> list(PageRequest pageRequest) {
+        return repository.findAll(pageRequest);
+    }*/
 
     @Override
     public FreeBoard read(Integer boardNo) {

@@ -1,5 +1,6 @@
 <template>
     <div>
+        <!-- 회원가입, 로그인-->
         <v-toolbar v-if="!this.$store.state.isLogin" class="black" dense dark>
             <v-spacer></v-spacer>
             <v-toolbar-title>         
@@ -7,7 +8,7 @@
                 <member-login/>
             </v-toolbar-title>
         </v-toolbar>
-
+        <!-- 로그아웃, 마이페이지 -->
         <v-toolbar v-if="this.$store.state.isLogin" class="black" dense dark>
             <v-spacer></v-spacer>
             <v-toolbar-title>         

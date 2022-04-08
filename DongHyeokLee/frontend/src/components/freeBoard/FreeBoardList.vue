@@ -13,6 +13,7 @@
                     현재 등록된 게시물이 없습니다!
                 </td>
             </tr>
+        
             <tr v-else v-for="freeBoard in freeBoards" :key="freeBoard.boardNo">
                 <td align="center">
                     {{ freeBoard.boardNo }}
@@ -31,7 +32,11 @@
                     
                 </th>
             </tr>
-        </table>
+        </table> 
+     
+        
+     
+         
         
     </div>
 </template>
@@ -43,18 +48,11 @@ export default {
     props: {
       freeBoards: {
             type: Array
-        },
-    data () {
-        return {
             
-
         }
     },
-    methods: {
-        
+   
     
-        },
-    }
 }
 
 </script>

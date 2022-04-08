@@ -3,17 +3,22 @@ import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
 //자유게시판
-import FreeBoardReigster from '@/views/freeBoard/FreeBoardRegisterPage.vue'
+import FreeBoardRegister from '@/views/freeBoard/FreeBoardRegisterPage.vue'
 import FreeBoardListPage from '@/views/freeBoard/FreeBoardListPage.vue'
 import FreeBoardReadPage from '@/views/freeBoard/FreeBoardReadPage.vue'
 import FreeBoardModifyPage from '@/views/freeBoard/FreeBoardModifyPage.vue'
 //사진게시판
-import PhotoBoardReigster from '@/views/photoBoard/PhotoBoardRegisterPage.vue'
+import PhotoBoardRegister from '@/views/photoBoard/PhotoBoardRegisterPage.vue'
 import PhotoBoardListPage from '@/views/photoBoard/PhotoBoardListPage.vue'
 import PhotoBoardReadPage from '@/views/photoBoard/PhotoBoardReadPage.vue'
 import PhotoBoardModifyPage from '@/views/photoBoard/PhotoBoardModifyPage.vue'
+//영상게시판
+import VideoBoardRegister from '@/views/videoBoard/VideoBoardRegisterPage.vue'
+import VideoBoardListPage from '@/views/videoBoard/VideoBoardListPage.vue'
+import VideoBoardReadPage from '@/views/videoBoard/VideoBoardReadPage.vue'
+import VideoBoardModifyPage from '@/views/videoBoard/VideoBoardModifyPage.vue'
 
-
+import MusicPage from '@/views/music/MusicPage.vue'
 
 
 
@@ -27,6 +32,38 @@ const routes = [
     name: 'HomeView',
     component: HomeView
   },
+   //영상게시판
+   {
+    path: '/videoBoardModify/:boardNo',
+    name: 'VideoBoardModifyPage',
+    components: {
+      default: VideoBoardModifyPage
+  },
+    props: {
+      default: true
+    }
+  },
+  {
+    path: '/videoBoardRead/:boardNo',
+    name: 'VideoBoardReadPage',
+    components: {
+      default: VideoBoardReadPage
+    },
+    props: {
+      default: true
+    }
+  },
+  {
+    path:'/videoBoardRegister',
+    name: 'VideoBoardRegisterPage',
+    component: VideoBoardRegister
+  },
+  {
+    path: '/videoBoardList',
+    name: 'VideoBoardListPage',
+    component: VideoBoardListPage,
+  },
+    //사진게시판
   {
     path: '/photoBoardModify/:boardNo',
     name: 'PhotoBoardModifyPage',
@@ -50,7 +87,7 @@ const routes = [
   {
     path:'/photoBoardRegister',
     name: 'PhotoBoardRegisterPage',
-    component: PhotoBoardReigster
+    component: PhotoBoardRegister
   },
   {
     path: '/photoBoardList',
@@ -81,14 +118,19 @@ const routes = [
   {
       path:'/freeBoardRegister',
       name: 'FreeBoardRegisterPage',
-      component: FreeBoardReigster
+      component: FreeBoardRegister
   },
   {
     path: '/freeBoardList',
     name: 'FreeBoardListPage',
     component: FreeBoardListPage,
   
-  }
+  },
+  {
+    path:'/playList',
+    name: 'MusicPlayer',
+    component: MusicPage
+},
 
 ]
 const router = new VueRouter({

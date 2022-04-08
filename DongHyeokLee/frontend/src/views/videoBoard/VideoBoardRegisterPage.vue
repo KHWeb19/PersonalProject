@@ -1,20 +1,20 @@
 <template>
     <div align="center">
         <h2>게시물 작성</h2>
-        <photo-board-register-form @submit="onSubmit"/>
+        <video-board-register-form @submit="onSubmit"/>
     </div>
 </template>
 
 <script>
 
 import axios from 'axios'
-import PhotoBoardRegisterForm from '@/components/photoBoard/PhotoBoardRegisterForm.vue'
+import VideoBoardRegisterForm from '@/components/videoBoard/VideoBoardRegisterForm.vue'
 
 
 export default {
-    name: 'PhotoBoardRegisterPage',
+    name: 'VideoBoardRegisterPage',
     components: {
-        PhotoBoardRegisterForm
+        VideoBoardRegisterForm
     },
     methods: {
         onSubmit (payload) {
@@ -27,8 +27,8 @@ export default {
             }
            //엑시오스 두개 사용 이래도 되나?
             axios.all([
-                 axios.post('http://localhost:7777/photoBoard/register', { title, writer, content, fileName}),
-                 axios.post('http://localhost:7777/photoBoard/uploadImg', formData,{
+                 axios.post('http://localhost:7777/videoBoard/register', { title, writer, content, fileName}),
+                 axios.post('http://localhost:7777/videoBoard/uploadImg', formData,{
                      headers: {
                          'Content-Type' : 'multipart/form-data'
                      }
@@ -38,7 +38,7 @@ export default {
                             alert('등록 성공')
 
                         this.$router.push({
-                            name: 'PhotoBoardListPage'
+                            name: 'VideoBoardListPage'
                         })
                     
                     })

@@ -1,7 +1,7 @@
-package com.example.demo.controller.board.photoBoard;
+package com.example.demo.controller.board.videoBoard;
 
-import com.example.demo.entitiy.board.photoBoard.PhotoBoard;
-import com.example.demo.service.board.photoBoard.PhotoBoardService;
+import com.example.demo.entitiy.board.videoBoard.VideoBoard;
+import com.example.demo.service.board.videoBoard.VideoBoardService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -15,34 +15,34 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/photoBoard")
+@RequestMapping("/videoBoard")
 @CrossOrigin(origins = "http://localhost:8080", allowedHeaders = "*")
-public class PhotoBoardController {
+public class VideoBoardController {
 
     @Autowired
-    private PhotoBoardService service;
+    private VideoBoardService service;
 
     //등록
     @PostMapping("/register")
-    public void PhotoBoardRegister (@Validated @RequestBody PhotoBoard photoBoard) {
-        log.info("PhotoBoardRegister()");
+    public void VideoBoardRegister (@Validated @RequestBody VideoBoard videoBoard) {
+        log.info("VideoBoardRegister()");
         LocalDate now = LocalDate.now();
-        String fileName = now + photoBoard.getFileName();
-        photoBoard.setFileName(fileName);
-        service.register(photoBoard);
+        String fileName = now + videoBoard.getFileName();
+        videoBoard.setFileName(fileName);
+        service.register(videoBoard);
     }
     //목록
     @GetMapping("/list")
-    public List<PhotoBoard> PhotoBoardList () {
-        log.info("PhotoBoardList()");
+    public List<VideoBoard> VideoBoardList () {
+        log.info("VideoBoardList()");
 
         return service.list();
     }
     //읽기
     @GetMapping("/{boardNo}")
-    public PhotoBoard photoBoardRead (
+    public VideoBoard videoBoardRead (
             @PathVariable("boardNo") Integer boardNo) {
-        log.info("photoBoardRead()");
+        log.info("videoBoardRead()");
 
         return service.read(boardNo);
     }
@@ -66,7 +66,7 @@ public class PhotoBoardController {
 
 
                 FileOutputStream writer = new FileOutputStream(
-                        "../../frontend/src/assets/uploadImg/"+ now + multipartFile.getOriginalFilename());
+                        "../../frontend/src/assets/uploadVideo/"+ now + multipartFile.getOriginalFilename());
 
 
                 log.info("디렉토리에 파일 배치 성공!");
@@ -84,31 +84,31 @@ public class PhotoBoardController {
     }
     //수정
     @PutMapping("/{boardNo}")
-    public PhotoBoard photoBoardModify (
+    public VideoBoard videoBoardModify (
             @PathVariable("boardNo") Integer boardNo,
-            @RequestBody PhotoBoard photoBoard) {
-        log.info("photoBoardModify(): " + photoBoard);
+            @RequestBody VideoBoard videoBoard) {
+        log.info("videoBoardModify(): " + videoBoard);
 
-        photoBoard.setBoardNo(Long.valueOf(boardNo));
+        videoBoard.setBoardNo(Long.valueOf(boardNo));
         //수정 할 때 파일은 첨부하지 않고 넣었을 경우가 있어 db에서 파일명 가져올 수 있도록 하기
-        String checkFileName = photoBoard.getFileName();
+        String checkFileName = videoBoard.getFileName();
 
             if(checkFileName != null){
             LocalDate now = LocalDate.now();
-            String fileName = now + photoBoard.getFileName();
-            photoBoard.setFileName(fileName);
+            String fileName = now + videoBoard.getFileName();
+                videoBoard.setFileName(fileName);
 
             }
 
-            service.modify(photoBoard,boardNo);
+            service.modify(videoBoard,boardNo);
 
-        return photoBoard;
+        return videoBoard;
     }
 
     @DeleteMapping("/{boardNo}")
-    public void photoBoardRemove (
+    public void videoBoardRemove (
             @PathVariable("boardNo") Integer boardNo) {
-        log.info("photoBoardRemove()");
+        log.info("videoBoardRemove()");
 
         service.remove(boardNo);
     }

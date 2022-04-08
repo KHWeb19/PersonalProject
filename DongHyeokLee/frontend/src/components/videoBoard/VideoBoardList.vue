@@ -4,18 +4,20 @@
       
      <v-container>
             <v-row>
-                <v-col v-for="photo in photoBoards" :key="photo.boardNo" class="d-flex child-flex" cols="4">
-                    <router-link :to="{ name: 'PhotoBoardReadPage', params: { boardNo: photo.boardNo.toString() } }">
+                <v-col v-for="video in videoBoards" :key="video.boardNo" class="d-flex child-flex" cols="4">
+                    <router-link :to="{ name: 'VideoBoardReadPage', params: { boardNo: video.boardNo.toString() } }">
                   <v-card>
                       <div>
-                        <v-img :src="require(`@/assets/uploadImg/${photo.fileName}`)" height="300"></v-img>
+                        <!-- 파일말고 링크 가지고 오고싶은데 어케하노-->
+                        <iframe :src="require(`@/assets/uploadVideo/${video.fileName}`)" height="300" width="100%" 
+                        allow="autoplay muted;"></iframe>
                       </div>
 
-                      <v-card-title>{{photo.title}}</v-card-title>
+                      <v-card-title>{{video.title}}</v-card-title>
               <v-list-item>
                 <v-list-item-subtitle>
-                  <strong>{{ photo.writer }}</strong>
-                  <span>{{ photo.regDate.substring(0, 11) }}</span>
+                  <strong>{{ video.writer }}</strong>
+                  <span>{{ video.regDate.substring(0, 11) }}</span>
                 </v-list-item-subtitle>
               </v-list-item>
                   </v-card>
@@ -23,15 +25,8 @@
                 </v-col>
             </v-row>
         </v-container>
-     <div>
-   
-
 
   </div>
-   
-   
-   
-    </div>
 
 
     
@@ -40,12 +35,12 @@
 <script>
 
 export default {
-    name: 'PhotoBoardList',
+    name: 'VideoBoardList',
     props: {
-      photoBoards: {
-            type: Array
+      videoBoards: {
+            type: Array   
         }
-    } 
+    }
 }
 
 </script>

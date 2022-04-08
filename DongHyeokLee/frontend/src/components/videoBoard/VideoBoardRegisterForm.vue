@@ -28,7 +28,7 @@
             <h3>파일 업로드 </h3>
             <div>
                 <label>Files
-                    <input type="file" id="files" ref="files" accept=".jpg, .png, .gif" v-on:change="handleFileUpload()"/>
+                    <input type="file" id="files" ref="files"  v-on:change="handleFileUpload()"/>
                     <!-- 여러개 파일 이름을 어떻게 저장 해야할지 감 안 잡혀서 multiple 기능 제거 -->
                 </label>
             </div>
@@ -36,7 +36,7 @@
 
         <div>
             <button type="submit">등록</button>
-            <router-link :to="{ name: 'PhotoBoardListPage' }">
+            <router-link :to="{ name: 'VideoBoardListPage' }">
                 취소
             </router-link>
         </div>
@@ -46,7 +46,7 @@
 <script>
 
 export default {
-    name: 'PhotoBoardRegisterForm',
+    name: 'VideoBoardRegisterForm',
     data () {
         return {
             title: '',
@@ -70,12 +70,11 @@ export default {
                 this.files = this.$refs.files.files
                 let fileLength = this.files[0].name.length
                 let fileDot = this.files[0].name.lastIndexOf(".")
-                
                 let fileType = this.files[0].name.substring(fileDot+1, fileLength)
                 //let fileTyepLowerCase = fileType.toLowerCase()
                 //console.log(fileTyepLowerCase)
                 //vue에서 gif 대문자로 GIF가 되면 오류생겨서 확장자 이래 3개만 받음
-                if(fileType == "jpg" || fileType == "png" || fileType == "gif"){
+                if(fileType == "mp4"){
                     alert('첨부 되었습니다')
                     
                 } else{

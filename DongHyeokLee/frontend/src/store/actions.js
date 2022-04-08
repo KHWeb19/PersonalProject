@@ -6,11 +6,16 @@ import {
     //사진게시판
     FETCH_PHOTO_BOARD_LIST,
     FETCH_PHOTO_BOARD,
-    FETCH_PHOTO_BOARD_COMMENTS_LIST
+    FETCH_PHOTO_BOARD_COMMENTS_LIST,
+    //영상게시판
+    FETCH_VIDEO_BOARD_LIST,
+    FETCH_VIDEO_BOARD,
+    FETCH_VIDEO_BOARD_COMMENTS_LIST
    
 } from './mutation-types'
 
 import axios from 'axios'
+
 
 export default {
     //자유게시판
@@ -51,4 +56,23 @@ export default {
                     commit(FETCH_PHOTO_BOARD_COMMENTS_LIST, res.data)
                 })
     },
+    //영상게시판
+    fetchVideoBoardList ({ commit }) {
+        return axios.get('http://localhost:7777/videoBoard/list')
+                .then((res) => {
+                    commit(FETCH_VIDEO_BOARD_LIST, res.data)
+                })
+    },
+    fetchVideoBoard ({ commit }, boardNo) {
+        return axios.get(`http://localhost:7777/videoBoard/${boardNo}`)
+                .then((res) => {
+                    commit(FETCH_VIDEO_BOARD, res.data)
+                })
+    },
+    fetchVideoBoardCommentsList({ commit }, boardNo ) {
+        return axios.get(`http://localhost:7777/videoBoardComments/list/${boardNo}`)
+                .then((res) => {
+                    commit(FETCH_VIDEO_BOARD_COMMENTS_LIST, res.data)
+                })
+    }
 }

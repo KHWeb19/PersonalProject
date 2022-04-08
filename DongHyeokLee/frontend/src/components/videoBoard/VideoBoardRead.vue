@@ -2,22 +2,22 @@
     <div >
         
         <div class="title">
-            <h2> {{ photoBoard.title }} </h2>
+            <h2> {{ videoBoard.title }} </h2>
             <div class="subtitle">
-                <p>{{ photoBoard.writer }}</p>
-                <span> {{ photoBoard.regDate.substring(0, 10) }}</span>
-                <span> {{new Date(photoBoard.regDate).toLocaleString("ko-KR", {timeZone: "Asia/Seoul"}).toString().substr(12, 11)}}</span>
+                <p>{{ videoBoard.writer }}</p>
+                <span> {{ videoBoard.regDate.substring(0, 10) }}</span>
+                <span> {{new Date(videoBoard.regDate).toLocaleString("ko-KR", {timeZone: "Asia/Seoul"}).toString().substr(12, 11)}}</span>
             </div>
         </div>
 
         <div class="img">
-            <v-img :src="require(`@/assets/uploadImg/${photoBoard.fileName}`)" width="50%" height="400"></v-img>
+            <iframe :src="require(`@/assets/uploadVideo/${videoBoard.fileName}`)" width="50%" height="400" allow="autoplay muted"></iframe>
         </div>
         
         <table>
             <tr>
                 <td>
-                   <div> {{ photoBoard.content }}</div>
+                   <div> {{ videoBoard.content }}</div>
                    
                 </td>
             </tr>
@@ -30,9 +30,9 @@
 
 
 export default {
-    name: 'PhotoBoardRead',
+    name: 'VideoBoardRead',
     props: {
-        photoBoard: {
+        videoBoard: {
             type: Object,
             required: true
         }

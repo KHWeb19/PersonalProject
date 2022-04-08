@@ -6,7 +6,7 @@
             <div class="subtitle">
                 <p>{{ freeBoard.writer }}</p>
                 <span> {{ freeBoard.regDate.substring(0, 10) }}</span>
-                <span> {{new Date(freeBoard.regDate).toLocaleString("ko-KR", {timeZone: "Asia/Seoul"}).toString().substr(11, 8)}}</span>
+                <span> {{new Date(freeBoard.regDate).toLocaleString("ko-KR", {timeZone: "Asia/Seoul"}).toString().substr(12, 8)}}</span>
             </div>
         </div>
         

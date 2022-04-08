@@ -9,7 +9,11 @@ export default {
      //사진게시판
      photoBoards: [],
      photoBoard: null,
-     photoBoardComments:[]
+     photoBoardComments:[],
+     //영상게시판
+     videoBoards: [],
+     videoBoard: null,
+     videoBoardComments:[]
     
   
 }

@@ -7,8 +7,8 @@
         
         <free-board-read v-if="freeBoard" :freeBoard="freeBoard"/>
         <p v-else>로딩중 ....... </p>
+       
         <!-- 댓글-->
-        
         <free-board-comment :boardNo="this.boardNo"/>  
         
         <div class = "button">
