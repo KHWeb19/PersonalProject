@@ -209,9 +209,9 @@
                           <template v-slot:activator="{ on, attrs }">
                             <v-btn
                               rounded
-                              width="100px"
+                              x-large
                               style="font-size: 13px"
-                              class="mt-3 ml-5"
+                              class="mt-3"
                               color="orange lighten-1"
                               v-bind="attrs"
                               v-on="on"
@@ -286,15 +286,64 @@
                       </div>
                     </validation-observer>
                   </template>
-                  <v-btn
-                    type="submit"
-                    width="100px"
-                    rounded
-                    color="orange lighten-1"
-                    class="mt-6 ml-5"
-                  >
-                    탈퇴하기</v-btn
-                  >
+
+                  <template>
+                    <div class="text-center">
+                      <v-dialog v-model="dialogDeleteMember" width="460">
+                        <template v-slot:activator="{ on, attrs }">
+                          <v-btn
+                            width="100px"
+                            rounded
+                            style="font-size: 13px"
+                            class="mt-5"
+                            color="orange lighten-5 red--text"
+                            v-bind="attrs"
+                            v-on="on"
+                            @click="resetCheckbox"
+                          >
+                            회원 탈퇴
+                          </v-btn>
+                        </template>
+
+                        <v-card>
+                          <v-card-title class="text-h5 orange lighten-3">
+                            회원 탈퇴
+                          </v-card-title>
+                          <v-card-text class="mt-5 pb-0">
+                            정말로 회원을 탈퇴하시겠습니까? <br />
+                            탈퇴를 원하시면 동의버튼을 체크하시고 <br />
+                            탈퇴버튼을 클릭해주세요.
+                          </v-card-text>
+                          <v-container class="pt-0 pb-0" fluid>
+                            <v-checkbox
+                              v-model="checkbox"
+                              label="동의합니다."
+                            ></v-checkbox>
+                          </v-container>
+                          <v-divider></v-divider>
+
+                          <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn
+                              color="orange lighten-3"
+                              text
+                              :disabled="!checkbox"
+                              @click="deleteLoginUser"
+                            >
+                              탈퇴
+                            </v-btn>
+                            <v-btn
+                              color="orange lighten-3"
+                              text
+                              @click="dialogDeleteMember = false"
+                            >
+                              취소
+                            </v-btn>
+                          </v-card-actions>
+                        </v-card>
+                      </v-dialog>
+                    </div>
+                  </template>
                 </v-form>
               </validation-observer>
             </v-card-text>
@@ -315,12 +364,14 @@ export default {
       dialogNick: false,
       dialogEmail: false,
       dialogPw: false,
+      dialogDeleteMember: false,
       NickPass: false,
       EmailPass: false,
       nickName: "",
       email: "",
       pw: "",
       pwConfirm: "",
+      checkbox: false,
     };
   },
   props: {
@@ -378,6 +429,7 @@ export default {
           })
           .then(() => {
             alert("닉네임이 변경되었습니다.");
+
             this.dialogNick = false;
           });
       }
@@ -393,6 +445,7 @@ export default {
           })
           .then(() => {
             alert("이메일이 변경되었습니다.");
+
             this.dialogEmail = false;
           });
       }
@@ -407,6 +460,22 @@ export default {
           alert("비밀번호가 변경되었습니다.");
           this.dialogPw = false;
         });
+    },
+    deleteLoginUser() {
+      const { memberNo } = this.userInfo;
+      axios
+        .delete(`http://localhost:7777/member/deleteMember/${memberNo}`)
+        .then(() => {
+          alert("회원탈퇴가 완료되었습니다.");
+          this.$cookies.remove("user");
+          this.isLogin = false;
+          this.$store.state.userInfo = null;
+          localStorage.removeItem("userInfo");
+          this.$router.push("/");
+        });
+    },
+    resetCheckbox() {
+      this.checkbox = false;
     },
   },
 };

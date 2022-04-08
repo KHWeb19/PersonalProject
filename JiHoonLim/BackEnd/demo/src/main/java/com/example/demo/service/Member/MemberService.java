@@ -19,4 +19,5 @@ public interface MemberService {
     public void modifyLoginPw(Long memberNo, String pw);
     public void modifyNickName(Long memberNo, String nickName);
     public void modifyEmail(Long memberNo, String email);
+    public void deleteMember(Long memberNo);
 }

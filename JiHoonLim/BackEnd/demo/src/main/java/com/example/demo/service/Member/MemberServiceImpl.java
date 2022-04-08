@@ -172,5 +172,10 @@ public class MemberServiceImpl implements MemberService {
         memberRepository.modifyEmail(memberNo, email);
     }
 
+    @Override
+    public void deleteMember(Long memberNo) {
+        memberRepository.deleteById(memberNo);
+    }
+
 
 }

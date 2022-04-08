@@ -142,4 +142,9 @@ public class MemberController {
 
         service.modifyEmail(memberNo, email);
     }
+
+    @DeleteMapping("/deleteMember/{memberNo}")
+    public void deleteMember(@PathVariable("memberNo") Long memberNo){
+        service.deleteMember(memberNo);
+    }
 }
