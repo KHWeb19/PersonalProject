@@ -202,15 +202,90 @@
                     </template>
                   </div>
 
-                  <v-btn
-                    type="submit"
-                    width="100px"
-                    rounded
-                    color="orange lighten-1"
-                    class="mt-6 mr-5"
-                  >
-                    비밀번호 변경</v-btn
-                  >
+                  <template>
+                    <validation-observer v-slot="{ invalid }">
+                      <div class="text-center">
+                        <v-dialog v-model="dialogPw" width="460">
+                          <template v-slot:activator="{ on, attrs }">
+                            <v-btn
+                              rounded
+                              width="100px"
+                              style="font-size: 13px"
+                              class="mt-3 ml-5"
+                              color="orange lighten-1"
+                              v-bind="attrs"
+                              v-on="on"
+                            >
+                              비밀번호 변경
+                            </v-btn>
+                          </template>
+
+                          <v-card>
+                            <v-card-title class="text-h5 orange lighten-3">
+                              비밀번호 변경
+                            </v-card-title>
+                            <v-card-text>
+                              <validation-provider
+                                v-slot="{ errors }"
+                                name="비밀번호"
+                                :rules="{ max: 15, required: true }"
+                              >
+                                <v-text-field
+                                  type="password"
+                                  v-model="pw"
+                                  label="변경하실 비밀번호"
+                                  clearable
+                                  prepend-icon="mdi-lock-outline"
+                                  :error-messages="errors"
+                                  :counter="15"
+                                />
+                              </validation-provider>
+                              <validation-provider
+                                v-slot="{ errors }"
+                                name="비밀번호 확인"
+                                :rules="{
+                                  max: 15,
+                                  confirmed: '비밀번호',
+                                  required: true,
+                                }"
+                              >
+                                <v-text-field
+                                  type="password"
+                                  v-model="pwConfirm"
+                                  label="비밀번호 확인"
+                                  clearable
+                                  prepend-icon="mdi-lock-check-outline"
+                                  :error-messages="errors"
+                                  :counter="15"
+                                />
+                              </validation-provider>
+                            </v-card-text>
+
+                            <v-divider></v-divider>
+
+                            <v-card-actions>
+                              <v-spacer></v-spacer>
+                              <v-btn
+                                color="orange lighten-3"
+                                text
+                                :disabled="invalid"
+                                @click="memberPwModify"
+                              >
+                                수정
+                              </v-btn>
+                              <v-btn
+                                color="orange lighten-3"
+                                text
+                                @click="dialogPw = false"
+                              >
+                                취소
+                              </v-btn>
+                            </v-card-actions>
+                          </v-card>
+                        </v-dialog>
+                      </div>
+                    </validation-observer>
+                  </template>
                   <v-btn
                     type="submit"
                     width="100px"
@@ -239,10 +314,13 @@ export default {
     return {
       dialogNick: false,
       dialogEmail: false,
+      dialogPw: false,
       NickPass: false,
       EmailPass: false,
       nickName: "",
       email: "",
+      pw: "",
+      pwConfirm: "",
     };
   },
   props: {
@@ -318,6 +396,17 @@ export default {
             this.dialogEmail = false;
           });
       }
+    },
+    memberPwModify() {
+      const { pw } = this;
+      axios
+        .post(`http://localhost:7777/member/resetLoginPw/${this.memberNo}`, {
+          pw,
+        })
+        .then(() => {
+          alert("비밀번호가 변경되었습니다.");
+          this.dialogPw = false;
+        });
     },
   },
 };

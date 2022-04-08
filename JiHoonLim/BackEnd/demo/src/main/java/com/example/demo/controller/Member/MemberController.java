@@ -113,13 +113,18 @@ public class MemberController {
         return result;
     }
 
-
-
-    @PostMapping("/resetPw/{id}")
-    public void ModifyPw(@PathVariable("id") String id, @Validated @RequestBody MemberRequest memberRequest) {
+    @PostMapping("/resetNoLoginPw/{id}")
+    public void resetNoLoginPw(@PathVariable("id") String id, @Validated @RequestBody MemberRequest memberRequest) {
         String pw = memberRequest.getPw();
 
-        service.modifyPw(id, pw);
+        service.modifyNoLoginPw(id, pw);
+    }
+
+    @PostMapping("/resetLoginPw/{memberNo}")
+    public void resetLoginPw(@PathVariable("memberNo") Long memberNo, @Validated @RequestBody MemberRequest memberRequest) {
+        String pw = memberRequest.getPw();
+
+        service.modifyLoginPw(memberNo, pw);
     }
 
     @PostMapping("/modifyNick/{memberNo}")
