@@ -1,6 +1,6 @@
 <template>
     <div>
-        <table>
+         <table border="1">
             <tr>
                 <td>계좌번호 읽기</td>
                 <td>
@@ -13,6 +13,17 @@
                     <input type="text" :value="jpaBoard1.title" readonly/>
                 </td>
             </tr>
+
+
+                <tr>
+                <td>소유자이름</td>
+                <td>
+                    <input type="text" :value="jpaBoard1.writer1" readonly/>
+                </td>
+            </tr>
+            <tr>
+
+
             <tr>
                 <td>계좌번호</td>
                 <td>

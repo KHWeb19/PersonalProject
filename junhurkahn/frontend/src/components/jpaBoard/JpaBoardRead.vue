@@ -1,6 +1,6 @@
 <template>
     <div>
-        <table>
+       <table border="1">
             <tr>
                 <td>게시물 번호</td>
                 <td>

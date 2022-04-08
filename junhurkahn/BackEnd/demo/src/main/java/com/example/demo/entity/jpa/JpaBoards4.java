@@ -20,6 +20,9 @@ public class JpaBoards4 {
     @Column(length = 32, nullable = false)
     private String writer;
 
+    @Column(length = 32, nullable = false)
+    private String writer1;
+
     @Lob
     private String content;
 

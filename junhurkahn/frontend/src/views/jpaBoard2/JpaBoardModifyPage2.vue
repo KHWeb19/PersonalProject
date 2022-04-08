@@ -29,7 +29,7 @@ export default {
         onSubmit (payload) {
             const { title, content, } = payload
             axios.put(`http://localhost:7777/62th/board2/${this.boardNo}`,
-                { title, writer: this.jpaBoard2.writer, content, regDate: this.jpaBoard2.regDate })
+                { title,  content, regDate: this.jpaBoard2.regDate })
                     .then(res => {
                         alert('게시물 수정 성공!')
                         this.$router.push({

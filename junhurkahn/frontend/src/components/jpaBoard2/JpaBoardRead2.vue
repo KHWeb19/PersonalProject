@@ -1,6 +1,6 @@
 <template>
     <div>
-        <table>
+        <table border="1">
             <tr>
                 <td>장보기 목록 읽기</td>
                 <td>
@@ -10,13 +10,7 @@
             <tr>
                 <td>가게이름</td>
                 <td>
-                    <input type="text" :value="jpaBoard2.title" readonly/>
-                </td>
-            </tr>
-            <tr>
-                <td>장보기 목록</td>
-                <td>
-                    <input type="text" :value="jpaBoard2.writer" readonly/>
+                    <input type="text" :value="jpaBoard2.content" readonly/>
                 </td>
             </tr>
             <tr>
@@ -26,9 +20,9 @@
                 </td>
             </tr>
             <tr>
-                <td>본문</td>
+                <td>물건목록</td>
                 <td>
-                    <textarea cols="50" rows="20" :value="jpaBoard2.content" readonly>
+                    <textarea cols="50" rows="20" :value="jpaBoard2.title" readonly>
                     </textarea>
                 </td>
             </tr>
