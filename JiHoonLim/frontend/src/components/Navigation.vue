@@ -124,7 +124,7 @@ export default {
       ],
       items: [
         { title: "내 보관함", link: "/" },
-        { title: "회원 정보 수정", link: "/memberModify" },
+        { title: "회원 정보 수정", link: "/memberInfo" },
       ],
       isLogin: false,
     };
@@ -140,6 +140,7 @@ export default {
       this.$cookies.remove("user");
       this.isLogin = false;
       this.$store.state.userInfo = null;
+      localStorage.removeItem("userInfo");
       alert("로그아웃 성공");
       this.$router.push("/login");
     },

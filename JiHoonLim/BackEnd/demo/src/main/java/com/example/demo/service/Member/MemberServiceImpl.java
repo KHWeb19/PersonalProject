@@ -156,5 +156,15 @@ public class MemberServiceImpl implements MemberService {
         memberRepository.modifyPw(id, encodedPassword);
     }
 
+    @Override
+    public void modifyNickName(Long memberNo, String nickName) {
+        memberRepository.modifyNickName(memberNo, nickName);
+    }
+
+    @Override
+    public void modifyEmail(Long memberNo, String email) {
+        memberRepository.modifyEmail(memberNo, email);
+    }
+
 
 }

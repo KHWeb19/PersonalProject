@@ -121,4 +121,20 @@ public class MemberController {
 
         service.modifyPw(id, pw);
     }
+
+    @PostMapping("/modifyNick/{memberNo}")
+    public void modifyNick(@PathVariable("memberNo") Long memberNo, @Validated @RequestBody MemberRequest memberRequest){
+
+        String nickName = memberRequest.getNickName();
+
+        service.modifyNickName(memberNo, nickName);
+    }
+
+    @PostMapping("/modifyEmail/{memberNo}")
+    public void modifyEmail(@PathVariable("memberNo") Long memberNo, @Validated @RequestBody MemberRequest memberRequest){
+
+        String email = memberRequest.getEmail();
+
+        service.modifyEmail(memberNo, email);
+    }
 }
