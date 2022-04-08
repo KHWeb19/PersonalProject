@@ -49,6 +49,11 @@ export default {
             userId: '',
             password: '',
             login_dialog: false,
+            radioGroup: 1,
+               kindsOfMember: [
+                    'Individual',
+                    'Manager'
+                ],
             
             
             rulesId:[
@@ -64,8 +69,8 @@ export default {
     },
     methods:{
         onLogin  () {
-            const { userId, password } = this
-           
+            const { userId, password} = this
+                     
             this.$emit('submit', { userId, password})
         }
 

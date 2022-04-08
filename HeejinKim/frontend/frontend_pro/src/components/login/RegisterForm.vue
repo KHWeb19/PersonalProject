@@ -33,7 +33,8 @@
                             
                             <div class="row">
                                 <v-radio-group v-model="radioGroup" row>
-                                    <v-radio v-for="kinds in kindsOfMember" :key="kinds" :label="`${kinds}`" :value="kinds"></v-radio>
+                                  <v-radio :label="`${kindsOfMember[0]}`" :value="`${kindsOfMember[0]}`"></v-radio>
+                                  <v-radio :label="`${kindsOfMember[1]}`" :value="`${kindsOfMember[1]}`"></v-radio>
                                 </v-radio-group>
                             </div>
 
@@ -75,8 +76,8 @@ export default {
                 valid: false,
                 radioGroup: 1,
                 kindsOfMember: [
-                    'individaul',
-                    'manager'
+                    'Individual',
+                    'Manager'
                 ],
                 rulesId:[
                     v => !!v || 'Enter your id'
@@ -104,7 +105,7 @@ export default {
         onRegister () {
                       
             const {  userId, password, passwordCheck, email, radioGroup } = this
-            const auth = (radioGroup == 'individaul' ? 'individaul' : 'manager')
+            const auth = (radioGroup == 'Individual' ? 'Individual' : 'Manager')
             this.$emit('submit', { userId, password, passwordCheck, email, auth})
             
         },

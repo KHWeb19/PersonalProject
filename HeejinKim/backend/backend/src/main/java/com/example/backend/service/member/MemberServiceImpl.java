@@ -67,7 +67,7 @@ public class MemberServiceImpl implements MemberService{
             return null;
         }
 
-        //권한 매칭
+        //권한 매칭-- 이부분이 잘 안되는 듯
         Optional<MemberAuth> maybeMemberAuth =
                 memberAuthRepository.findByMemberNo(loginMember.getMemberNo());
 

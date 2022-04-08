@@ -15,10 +15,7 @@
 
 
             <login-form @submit="onLogin" v-if="!isLogin"></login-form>
-
-
             <register-form @submit="onRegister" v-if="!isLogin"></register-form>
-
             <member-bar :session="session" v-if="isLogin" @logout="logout"></member-bar>
 
 
@@ -28,26 +25,29 @@
         
         </v-toolbar>
 
-        <v-navigation-drawer app v-model="nav_drawer" temporary>
-            <v-list nav dense>
-                <v-list-item-group v-model="group" active-class="grey--text  ">
-                    <v-list-item v-for="link in category" :key="link.name" router :to="link.route">
-                        <v-list-item-action>
-                            <v-icon left>
-                                {{ link.icon }}
-                            </v-icon>
-                        </v-list-item-action>
+        <div :session="session" v-if="this.$store.state.isAuth" >
+            
+            <v-navigation-drawer app v-model="nav_drawer" temporary>
+                <v-list nav dense>
+                    <v-list-item-group v-model="group" active-class="grey--text  ">
+                        <v-list-item v-for="link in category" :key="link.name" router :to="link.route">
+                            <v-list-item-action>
+                                <v-icon left>
+                                    {{ link.icon }}
+                                </v-icon>
+                            </v-list-item-action>
 
-                        <v-list-item-content>
-                            <v-list-item-title>
-                                {{ link.text }}
-                            </v-list-item-title>
-                        </v-list-item-content>
-                        
-                    </v-list-item>
-                </v-list-item-group>
-            </v-list>
-        </v-navigation-drawer>
+                            <v-list-item-content>
+                                <v-list-item-title>
+                                    {{ link.text }}
+                                </v-list-item-title>
+                            </v-list-item-content>
+
+                        </v-list-item>
+                    </v-list-item-group>
+                </v-list>
+            </v-navigation-drawer>
+        </div>
     </div>
 </template>
 
@@ -76,10 +76,11 @@ export default {
     },
     computed:
     {
-        ...mapState(['session']),    
+        ...mapState(['session','auth']),    
     },
-    mounted() {
 
+    mounted() {
+        {
         this.$store.state.session = this.$cookies.get("user")
         
         if(this.$store.state.session != null) {
@@ -87,18 +88,29 @@ export default {
         }else {
             this.isLogin = false
         }
-    },
+        
+        /*{
 
+        this.$store.state.auth = this.$cookies.get("auth")
+        
+        if(this.$store.state.auth == 'individaul') {
+            this.individual = true
+        }else {
+            this.individual = false
+        }
+        }*/
+        }
+    },
+    
     data () {
         return {
             login_dialog: false, 
             nav_drawer: false,
             group: false,
             isLogin: false,
-           
-            cookies: this.$cookies.isKey('user'),
-            userId: this.$cookies.get('user'),
 
+            
+            
             category: [
                 {  
                     icon: 'mdi-home',
@@ -109,13 +121,14 @@ export default {
                 {   
                     text: 'About us',
                     name: 'AboutUs',
-                    // route: '/main'
+                    
                 },
                 { 
                     text: 'Community',
                     name: 'Community',
-                    //route: '/'
+                    
                 },
+
                 {
                     text: 'Reservation',
                     name: 'Reservation',
@@ -141,7 +154,7 @@ export default {
    
     methods: {
         onRegister (payload) {
-            const {  userId, password, passwordCheck, email ,auth } = payload
+            const {  userId, password, passwordCheck, email ,auth} = payload
 
                 if(password == passwordCheck) {
 
@@ -167,7 +180,8 @@ export default {
                     alert('비밀번호가 일치하지 않습니다.')
                 return false
                 }        
-        },
+        }, 
+            
 
         onLogin (payload) {
 
@@ -182,9 +196,19 @@ export default {
                             
                             alert("Welcome" +"  "+res.data.userId )
                             this.isLogin = true;
-                            this.$store.state.session = res.data    
-                            this.$cookies.set("user", res.data, 30)
-                            window.location.reload();
+                            this.$store.state.session = res.data                               
+                            this.$cookies.set("user", res.data, 60)                          
+                            //this.$cookies.set("auth", res.data.auth, 60)
+                            if (res.data.auth == 'manager') {
+                                this.$store.state.isAuth = true
+                                alert('운영자 아이디로 로그인')
+                            } else {
+                                this.$store.state.isAuth = false
+                            }
+                            
+                            this.$router.push({
+                            name: 'Home'
+                        })
                             
                         } else {
                             alert('아이디와 비밀번호를 확인해주세요. ' + res.data)
@@ -204,13 +228,17 @@ export default {
             this.$cookies.remove('user')
             this.isLogin = false
             this.$store.state.session = null
-            window.location.reload();
+            this.$store.state.auth = null
+            //window.location.reload();
         },
-    }
+     
+    
+    },
+}
 
     
     
-}
+
 </script>
 
 <style scoped>

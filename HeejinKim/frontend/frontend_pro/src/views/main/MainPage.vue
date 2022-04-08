@@ -1,26 +1,5 @@
 <template>
-    <body>     
-        <v-navigation-drawer app v-model="nav_drawer" temporary>
-            <v-list nav dense>
-                <v-list-item-group v-model="group" active-class="grey--text  ">
-                    <v-list-item v-for="link in category" :key="link.name" router :to="link.route">
-                        <v-list-item-action>
-                            <v-icon left>
-                                {{ link.icon }}
-                            </v-icon>
-                        </v-list-item-action>
-
-                        <v-list-item-content>
-                            <v-list-item-title>
-                                {{ link.text }}
-                            </v-list-item-title>
-                        </v-list-item-content>
-                    </v-list-item>
-                </v-list-item-group>
-            </v-list>
-        </v-navigation-drawer>
-
-        
+    <body>            
         <v-container fluid>
             <v-window show-arrows>
                
