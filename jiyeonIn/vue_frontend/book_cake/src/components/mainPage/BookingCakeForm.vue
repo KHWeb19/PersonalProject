@@ -1,9 +1,8 @@
 <template>
-    <div class="calenderPage">
-        
-        <div>
+    <form @submit.prevent="submitBooking">
+        <div class="calenderPage">
             <h4>픽업일자 & 시간</h4>
-            <calender-test></calender-test>
+            <calender-test @submit="calendarInform"></calender-test>
             <p style="font-size: 13px; padding: 5px;">*예약 확정 후 최소 3일 이상 소요되니, 이에 맞추어 픽업일 입력 부탁 드립니다. <br> *일요일, 월요일은 휴무입니다.</p>
             <hr>
         </div>
@@ -119,7 +118,7 @@
             </div>
         </div>
 
-        <div style="font-size: 14px;"><br><p v-show="isShow">선택한 디자인 & 사이즈 & 가격 : <strong>{{ outDesign }} & {{ outSize }} & {{ outPrice }} </strong>  </p></div>
+        <div style="font-size: 14px;"><br><p v-show="isShow">선택한 디테일 : <strong>{{ outDesign }} & {{ outSize }} & {{ outPrice }} </strong>  </p></div>
 
         <div>
             <br><hr><br>
@@ -128,25 +127,23 @@
                 placeholder="케이크 위 레터링 글자는 최대 10자 이내 
 케이크 보드 위 레터링 글자는 최대 15자 이내입니다. 
 비용은 추후 레터링 및 추가 요구사항 확인 후 확정됩니다." 
-                    style="font-size: 14px;" wrap="soft">
+                    style="font-size: 14px;" wrap="soft" v-model="inputcontents">
             </textarea>
 
-            <input type="file" id="files" ref="files" 
+            <input type="file" id="files1" ref="files1" 
                 multiple v-on:change="handleFileUpload()"/>
-        </div>
+            </div>
 
-        <!-- <div style="text-align: center;">
-            <v-btn color="black" text type="submit" @click="submitBooking" style="font-size:19px;" width="260">
-                <v-icon color="black" text type="submit" >mdi-check</v-icon>예약하기
+        <div style="text-align: center;">
+            <v-btn color="black" text type="submit" style="font-size:19px;" width="260" >
+                <v-icon color="black" text>mdi-check</v-icon>예약하기
             </v-btn>
-        </div>    -->
-    </div>
+        </div>  
+    </form>
 </template>
 
 <script>
 import CalenderTest from '@/components/eventBusBooking/CalenderTest.vue'
-import EventBus from '@/eventBus.js'
-
 
 export default {
     name : 'BookingCakeForm',
@@ -176,8 +173,10 @@ export default {
             outSize:'',
             outPrice:'',
             outImg:'',
+            inputcontents:'',
             isShow:false,
-            cakeArrNo:'' //이거 가지고 갈거임
+            cakeArrNo:'', //이거 가지고 갈거임
+            id: (window.localStorage.getItem('id')),
         }
     },
     components: { 
@@ -192,14 +191,13 @@ export default {
         },
     },
     
-    created () {
-        EventBus.$on('calendarInform', (payload) => {
-            this.date =  payload[0]
-            this.time = payload[1]
-
-        })
-    },
     methods: {
+        calendarInform (payload) {
+            const { date, time } = payload
+            this.date = date
+            this.time = time
+            
+        },
         findDesign () {
             this.chooseDesignArr = new Array();
 
@@ -222,6 +220,7 @@ export default {
                     this.outDesign = this.cakeLists[i].design
                     this.outSize = this.cakeLists[i].size 
                     this.outPrice = this.cakeLists[i].price
+                    this.outImg = this.cakeLists[i].linkInfo
                     this.cakeArrNo = ((this.checkIndex) +1)
                     
                     break
@@ -290,7 +289,16 @@ export default {
                     }
                 }          
             }
-         }
+         },
+        
+        handleFileUpload() {
+            this.files1 = this.$refs.files1.files
+        },
+         
+        submitBooking () {
+            const {id, date, time, inputcontents, cakeArrNo, files1} = this
+            this.$emit('submit', {id, date, time, inputcontents, cakeArrNo, files1})
+        },
     }
     
 }

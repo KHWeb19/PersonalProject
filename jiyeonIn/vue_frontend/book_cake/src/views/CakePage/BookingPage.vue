@@ -57,16 +57,15 @@ import axios from 'axios'
                     cakeArrNo: cakeArrNo 
                     
                 }
-                console.log(fileInfo)
-
-                for(let idx=0; idx < files1.length; idx++) {
+                for(let idx = 0; idx < 1; idx++) {
                     formData.append('fileList', files1[idx])
                 }
 
                 formData.append(
                     "info", new Blob([JSON.stringify(fileInfo)], {type: "application/json"})
-                );
+                )
 
+                console.log(fileInfo)
                 axios.post('http://localhost:7777/booking/register', formData)
                     .then(res => {
                         alert('처리결과 :' + res.data)

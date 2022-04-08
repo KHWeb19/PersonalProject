@@ -37,8 +37,8 @@
             </v-col>
             
             <v-col>
-              <v-btn color="black" text type="submit" @click="calendarInform(date, time, $event)" v-model="isShow" >
-                <v-icon color="black" text type="submit" >mdi-check</v-icon>확정
+              <v-btn color="black" text type="submit" v-on:click="calendarInform" v-model="isShow" >
+                <v-icon color="black" text >mdi-check</v-icon>확정
               </v-btn>
             </v-col>
           </v-row>
@@ -52,7 +52,6 @@
 </template>
 
 <script>
-import EventBus from '@/eventBus.js'
 
   export default {
     data: vm => ({
@@ -90,11 +89,10 @@ import EventBus from '@/eventBus.js'
         const [month, day, year] = date.split('/')
         return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
       },
-      calendarInform(date, time, $event) {
-        const payload = [ date, time, $event.target.innerHTML ]
-        EventBus.$emit('calendarInform', payload)
+      calendarInform() {
+        const { date, time } =this
+        this.$emit('submit', { date, time })
         this.isShow = !this.isShow
-        alert('확정되었습니다!')
       }
     }
 
