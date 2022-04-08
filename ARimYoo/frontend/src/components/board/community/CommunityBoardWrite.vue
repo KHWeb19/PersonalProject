@@ -94,7 +94,8 @@ export default {
 .label{
     margin-right:3%;
     text-align: center;
-    padding-top: 15px;
+    padding-top: 10px;
+    font-size:18pt;
     font-family: 'Noto Sans KR', sans-serif;
 }
 table{
@@ -108,13 +109,7 @@ table{
     margin-right:auto;
     zoom:95%;
 }
-.v-combobox{
-    font-family: 'Noto Sans KR', sans-serif;
-}
-.v-text-field {
-    font-family: 'Noto Sans KR', sans-serif;
-}
-.v-textarea {
+.v-combobox, .v-text-field, .v-textarea, #files{
     font-family: 'Noto Sans KR', sans-serif;
 }
 .writeBtn {
@@ -134,8 +129,11 @@ table{
     float:left;
     margin-right:3%;
 }
-#files {
-    zoom:0.8;
-    font-family: 'Noto Sans KR', sans-serif;
+
+@media (max-width:700px){
+    table {
+        zoom:60%;
+        margin-bottom:30px;
+    }
 }
 </style>

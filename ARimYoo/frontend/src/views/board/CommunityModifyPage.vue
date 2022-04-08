@@ -1,5 +1,5 @@
 <template>
-    <v-container class="title">
+    <v-container>
         <v-row justify="center">
             <img class="title" src="@/assets/title/communityTitle.png" width=250 >
         </v-row>
@@ -57,7 +57,15 @@ export default {
 
 <style scoped>
 .title{
-    margin-top:2.5%;
+    margin-top:5%;
     margin-bottom: 5%;
+}
+@media (max-width:700px){
+    .title {
+        margin-top:10%;
+        margin-left:20px;
+        margin-bottom:10%;
+        width:200px;
+    }
 }
 </style>

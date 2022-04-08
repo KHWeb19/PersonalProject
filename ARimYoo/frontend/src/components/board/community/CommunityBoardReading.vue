@@ -21,11 +21,12 @@
                             </template>
                             <v-list class="black" dark>
                                 <v-list-item>
-                                    <router-link :to="{name:'CommunityModifyPage', params: { boardNo: communityBoard.boardNo.toString()}}">Modify
+                                    <router-link :to="{name:'CommunityModifyPage', 
+                                    params: { boardNo: communityBoard.boardNo.toString()}}" style="color:white">Modify
                                     </router-link>
                                 </v-list-item>
                                 <v-list-item>
-                                    <a @click=onDelete>Delete</a>
+                                    <a @click=onDelete  style="color:white">Delete</a>
                                 </v-list-item>
                             </v-list>
                     </v-menu>
@@ -87,7 +88,7 @@ export default {
             //alert('지우는 게시물 번호: ' + boardNo)
             axios.delete(`http://localhost:7777/board/community/${boardNo}`)
                     .then(() => {
-                        alert('삭제 성공!')
+                        alert('게시글이 삭제되었습니다.')
                         this.$router.push({ name: 'CommunityPage' })
                     })
                     .catch(() => {
@@ -123,15 +124,10 @@ table{
     margin-right:auto;
     zoom:95%;
 }
-.v-combobox{
+.v-combobox, .v-text-field, .v-textarea{
     font-family: 'Noto Sans KR', sans-serif;
 }
-.v-text-field {
-    font-family: 'Noto Sans KR', sans-serif;
-}
-.v-textarea {
-    font-family: 'Noto Sans KR', sans-serif;
-}
+
 .titleFloat {
     float:left;
     cursor: default;
@@ -157,7 +153,8 @@ a{
     table {
         top:4%;
         margin-left:10px;
-        zoom:70%;
+        zoom:60%;
+        margin-bottom:50px;
     }
     .date {
         left:60%;

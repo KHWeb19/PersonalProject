@@ -10,7 +10,8 @@
                         >
                 <template v-slot:[`item.title`]="{ item }">
                    <router-link :to="{ name: 'CommunityReadPage',
-                                        params: { boardNo: item.boardNo.toString() } }">
+                                        params: { boardNo: item.boardNo.toString() } }"
+                                        style="color:black">
                     {{ item.title }}
                    </router-link>
                 </template>

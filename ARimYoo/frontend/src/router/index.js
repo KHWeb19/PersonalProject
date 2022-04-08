@@ -23,6 +23,12 @@ const requireLogin = () => (to, from, next) => {
     }
 } 
 
+// const writerCheck = () => (to, from, next) => {
+//     alert('해당 방식으로는 접근이 불가능합니다.')
+//     return next('/main')
+    
+// }
+
 const routes = [
   {
     path: '/',
@@ -81,7 +87,8 @@ const routes = [
         },
         props: {
             default: true
-        }
+        },
+
     },
 
   

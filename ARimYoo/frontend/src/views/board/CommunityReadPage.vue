@@ -5,7 +5,6 @@
         </v-row>
         <v-row>
             <community-board-read v-if="communityBoard" :communityBoard="communityBoard"/>
-            <p v-else/>
         </v-row>
     </v-container>
 </template>
