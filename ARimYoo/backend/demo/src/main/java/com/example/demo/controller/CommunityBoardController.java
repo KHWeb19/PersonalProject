@@ -32,5 +32,12 @@ public class CommunityBoardController {
         return service.list ();
     }
 
+    @GetMapping("/{boardNo}")
+    public CommunityBoard read (
+            @PathVariable("boardNo") Integer boardNo) {
+        log.info("read()");
+
+        return service.read(boardNo);
+    }
 
 }

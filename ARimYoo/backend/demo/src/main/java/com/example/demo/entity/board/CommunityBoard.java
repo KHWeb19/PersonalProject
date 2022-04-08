@@ -29,6 +29,9 @@ public class CommunityBoard {
     @Lob
     private String content;
 
+    @Column
+    private String brackets;
+
 //    @OneToMany(
 //            mappedBy = "board",
 //            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},

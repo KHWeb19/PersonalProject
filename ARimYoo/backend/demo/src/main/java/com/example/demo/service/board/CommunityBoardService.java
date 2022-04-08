@@ -8,4 +8,5 @@ public interface CommunityBoardService {
 
     public void register (CommunityBoard board);
     public List<CommunityBoard> list ();
+    public CommunityBoard read (Integer boardNo);
 }

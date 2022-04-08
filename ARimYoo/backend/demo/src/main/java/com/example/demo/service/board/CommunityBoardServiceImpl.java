@@ -8,6 +8,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -25,6 +26,18 @@ public class CommunityBoardServiceImpl implements CommunityBoardService{
     public List<CommunityBoard> list() {
         return repository.findAll(Sort.by(Sort.Direction.DESC, "boardNo"));
 
+    }
+
+    @Override
+    public CommunityBoard read(Integer boardNo) {
+        Optional<CommunityBoard> maybeReadBoard = repository.findById(Long.valueOf(boardNo));
+
+        if (maybeReadBoard.equals(Optional.empty())) {
+            log.info("Can't read board!");
+            return null;
+        }
+
+        return maybeReadBoard.get();
     }
 
 }

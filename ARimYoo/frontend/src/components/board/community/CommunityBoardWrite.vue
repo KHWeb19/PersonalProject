@@ -5,13 +5,24 @@
                     <v-row justify="center">
                         <v-col cols="1" class="label">Title</v-col>
                         <v-col>
-                            <v-text-field color="red darken-3" v-model="title"/>
+                            <v-combobox
+                            class="titleFloat"
+                                v-model="brackets"
+                                :items="items"
+                                label="말머리"
+                                filled
+                                style="width:100px; zoom:1"
+                                outlined
+                                dense
+                                color="red darken-3"
+                                ></v-combobox>
+                            <v-text-field class="titleFloat" style="width:590px" color="red darken-3" v-model="title"/>
                         </v-col>
                     </v-row>
                     <v-row  wrap justify="center">
                         <v-col cols="1" class="label" > Files </v-col>
                         <v-col>
-                        <input type="file" dense clearable id="files" style="width:200px" ref="files" 
+                        <input type="file" dense clearable id="files" style="width:300px" ref="files" 
                                 multiple v-on:change="handleFileUpload()"/>
                         </v-col>
                         <v-col cols="12">
@@ -44,7 +55,12 @@ export default {
         return {
             image :'',
             title:'',
-            content:''
+            content:'',
+            brackets: [],
+            items: [
+            '[사담]',
+            '[질문]'
+            ],
         }
     },
     created () {
@@ -61,9 +77,9 @@ export default {
             this.files = this.$refs.files.files
         },
         onSubmit () {
-            const { title, content,writer } = this
-            this.$emit('submit', { title, content,writer })
-            console.log(title,content,writer)
+            const { title, content,writer, brackets } = this
+            this.$emit('submit', { title, content,writer, brackets })
+            console.log(title,content,writer,brackets)
         },
         goPage (){
             this.$router.push('/community')
@@ -76,9 +92,9 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap');
 
 .label{
-    margin-right:5%;
+    margin-right:3%;
     text-align: center;
-    padding-top: 5px;
+    padding-top: 15px;
     font-family: 'Noto Sans KR', sans-serif;
 }
 table{
@@ -90,6 +106,9 @@ table{
     padding-bottom: 7%;
     margin-left:auto;
     margin-right:auto;
+}
+.v-combobox{
+    font-family: 'Noto Sans KR', sans-serif;
 }
 .v-text-field {
     font-family: 'Noto Sans KR', sans-serif;
@@ -109,6 +128,10 @@ table{
     margin-top:1.5%;
     margin-left:68%;
     float:left;
+}
+.titleFloat {
+    float:left;
+    margin-right:3%;
 }
 #files {
     zoom:0.8;

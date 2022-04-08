@@ -6,10 +6,12 @@ import EnterVellup from '../views/main/EnterVellup.vue'
 import MainVellupPage from '../views/main/MainVellupPage.vue'
 import JoinPage from '../views/main/JoinPage.vue'
 import JoinPage2 from '../views/main/JoinPage2.vue'
-import CommunityPage from '../views/board/CommunityPage.vue'
 import MyPage from '../views/my/MyPage.vue'
 
+import CommunityPage from '../views/board/CommunityPage.vue'
 import CommunityWritePage from '../views/board/CommunityWritePage.vue'
+import CommunityReadPage from '../views/board/CommunityReadPage.vue'
+import CommunityModifyPage from '../views/board/CommunityModifyPage.vue'
 
 Vue.use(VueRouter)
 
@@ -59,7 +61,23 @@ const routes = [
         path: '/community/write',
         name: 'CommunityWritePage',
         component: CommunityWritePage
-    }
+    },
+    {
+        path: '/community/:boardNo',
+        name: 'CommunityReadPage',
+        components: {
+            default:
+                CommunityReadPage
+        },
+        props: {
+            default: true
+        }
+    },
+    {
+        path: '/community/modify',
+        name: 'CommunityModifyPage',
+        component: CommunityModifyPage
+    },
 
   
 ]

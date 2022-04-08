@@ -1,15 +1,19 @@
 <template>
     <v-container>
         <v-row column wrap justify="center">
-           <v-data-table v-if="!communityBoards || (Array.isArray(communityBoards) && communityBoards.length === 0)"
-            :headers="headerTitle">
-            </v-data-table>
-            <v-data-table v-else
+            <v-data-table 
                         :headers="headerTitle" 
                         :items="communityBoards"
+                        :key="communityBoards.boardNo"
                         :items-per-page="10"
                         class="elevation-1 grey lighten-4" 
                         >
+                <template v-slot:[`item.title`]="{ item }">
+                   <router-link :to="{ name: 'CommunityReadPage',
+                                        params: { boardNo: item.boardNo.toString() } }">
+                    {{ item.title }}
+                   </router-link>
+                </template>
             </v-data-table>
         </v-row>
         
@@ -28,6 +32,7 @@ export default {
         return {
             headerTitle: [
                 { text:'글 번호', value: 'boardNo', width:'70px'},
+                { text:'말머리', value: 'brackets', width:'70px'},
                 { text: '제목', value: 'title', width: "200px" },
                 { text: '작성자', value: 'writer', width: "100px" },
                 { text: '조회수', value: 'viewCnt', width: "70px" },
@@ -35,7 +40,10 @@ export default {
             ],
         }
     },
-}
+    methods: {
+      
+        }
+    } 
 </script>
 
 <style scoped>

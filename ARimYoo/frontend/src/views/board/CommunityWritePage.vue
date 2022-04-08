@@ -4,22 +4,22 @@
             <img class="title" src="@/assets/title/communityTitle.png" width=250 >
         </v-row>
         <v-row>
-            <community-board-write @submit="onSubmit"/>
+            <community-modify @submit="onSubmit"/>
         </v-row>
     </v-container>
 </template>
 
 <script>
-import CommunityBoardWrite from '@/components/board/community/CommunityBoardWrite.vue'
 import axios from 'axios'
+import CommunityModify from '@/components/board/community/CommunityModify.vue'
 
 export default {
-  components: { CommunityBoardWrite },
+  components: { CommunityModify },
     name: 'CommunityWritePage',
     methods: {
         onSubmit (payload) {
-            const { title, content, writer} = payload
-            axios.post('http://localhost:7777/board/community/register', { title, content, writer })
+            const { title, content, writer, brackets} = payload
+            axios.post('http://localhost:7777/board/community/register', { title, content, writer, brackets })
                     .then(() => {
                         alert('게시물 등록 성공!')
 

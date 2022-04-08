@@ -20,7 +20,6 @@ public class CommunityPhoto {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name ="communityBoard_id")
     private CommunityBoard board;
 
     @Column(nullable = false)

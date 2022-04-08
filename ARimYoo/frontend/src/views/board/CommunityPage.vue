@@ -1,5 +1,5 @@
 <template>
-    <v-container>
+    <v-container id="item">
         <v-row justify="center">
             <img class="titleImg" src="@/assets/title/communityTitle.png" width=250 >
             <v-btn @click="goPage" class="writeBtn" color="red darken-3" dark fab><v-icon color="white"> mdi-pencil </v-icon></v-btn>
