@@ -74,9 +74,14 @@ const routes = [
         }
     },
     {
-        path: '/community/modify',
+        path: '/community/modify/:boardNo',
         name: 'CommunityModifyPage',
-        component: CommunityModifyPage
+        components: {
+            default: CommunityModifyPage
+        },
+        props: {
+            default: true
+        }
     },
 
   

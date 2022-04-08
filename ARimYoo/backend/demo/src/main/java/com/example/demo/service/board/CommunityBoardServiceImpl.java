@@ -40,4 +40,13 @@ public class CommunityBoardServiceImpl implements CommunityBoardService{
         return maybeReadBoard.get();
     }
 
+    @Override
+    public void modify (CommunityBoard communityBoard) {
+        repository.save(communityBoard);
+    }
+
+    @Override
+    public void remove(Integer boardNo) {
+        repository.deleteById(Long.valueOf(boardNo));
+    }
 }

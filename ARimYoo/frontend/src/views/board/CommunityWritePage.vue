@@ -4,17 +4,17 @@
             <img class="title" src="@/assets/title/communityTitle.png" width=250 >
         </v-row>
         <v-row>
-            <community-modify @submit="onSubmit"/>
+            <community-board-write @submit="onSubmit"/>
         </v-row>
     </v-container>
 </template>
 
 <script>
+import CommunityBoardWrite from '@/components/board/community/CommunityBoardWrite.vue'
 import axios from 'axios'
-import CommunityModify from '@/components/board/community/CommunityModify.vue'
 
 export default {
-  components: { CommunityModify },
+  components: { CommunityBoardWrite },
     name: 'CommunityWritePage',
     methods: {
         onSubmit (payload) {

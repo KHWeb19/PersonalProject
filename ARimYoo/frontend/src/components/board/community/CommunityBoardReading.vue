@@ -5,35 +5,31 @@
                         <v-text-field class="date" color="red darken-3" rounded readonly :value="communityBoard.regDate"/>
                     </v-row>
                     <v-divider/>
-                        <v-row v-if="communityBoard.writer == this.$store.state.userInfo.name">
-                        <v-menu
-                        offset-y
-                        bottom
-                        >
-                        <template v-slot:activator="{ attrs, on }">
-                            <v-btn
-                            class="extraBtn"
-                            color="red darken-3"
-                            dark
-                            fab
-                            v-bind="attrs"
-                            v-on="on"
-                            >
-                            <v-icon> mdi-dots-horizontal </v-icon>
-                            </v-btn>
-                        </template>
-                            <v-list
-                            class="black" dark>
-                            <v-list-item
-                            v-for="item in items"
-                            :key="item"
-                            link
-                            >
-                            <v-list-item-title>{{item.menu}}</v-list-item-title>
-                            </v-list-item>
+                     <v-row v-if="communityBoard.writer == this.$store.state.userInfo.name">
+                        <v-menu offset-y bottom>
+                            <template v-slot:activator="{ attrs, on }">
+                                <v-btn
+                                class="extraBtn"
+                                color="red darken-3"
+                                dark
+                                fab
+                                v-bind="attrs"
+                                v-on="on"
+                                >
+                                <v-icon> mdi-dots-horizontal </v-icon>
+                                </v-btn>
+                            </template>
+                            <v-list class="black" dark>
+                                <v-list-item>
+                                    <router-link :to="{name:'CommunityModifyPage', params: { boardNo: communityBoard.boardNo.toString()}}">Modify
+                                    </router-link>
+                                </v-list-item>
+                                <v-list-item>
+                                    <a @click=onDelete>Delete</a>
+                                </v-list-item>
                             </v-list>
                     </v-menu>
-                    </v-row>
+                  </v-row>
                     <br/>
                     <v-row justify="center">
                         <v-col cols="1" class="label">Title</v-col>
@@ -72,6 +68,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
     name:'CommunityBoardRead',
     props: {
@@ -80,23 +78,24 @@ export default {
             required: true
         }
     },
-    data () {
-        return {
-        items: [
-         {menu: 'Modify', route:'/community/modify'},
-         {menu: 'Delete', route:'/community/delete'}
-        ],
-        id:''
-        }
-    },
     methods: {
         goPage () {
             this.$router.push('/community')
+        },
+        onDelete () {
+            const { boardNo } = this.communityBoard
+            //alert('지우는 게시물 번호: ' + boardNo)
+            axios.delete(`http://localhost:7777/board/community/${boardNo}`)
+                    .then(() => {
+                        alert('삭제 성공!')
+                        this.$router.push({ name: 'CommunityPage' })
+                    })
+                    .catch(() => {
+                        alert('삭제 실패! 문제 발생!')
+                    })
         }
-    },
-    created () {
-        this.id = this.$store.state.communityBoard.id
-    }
+
+        }
 }
 </script>
 
@@ -148,6 +147,10 @@ table{
     position: absolute;
     left:80%;
     top:15%;
+}
+a{
+    text-emphasis: none;
+  color:white;
 }
 
 @media (max-width:700px){

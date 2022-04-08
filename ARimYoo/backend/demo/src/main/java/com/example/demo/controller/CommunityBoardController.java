@@ -4,6 +4,8 @@ import com.example.demo.entity.board.CommunityBoard;
 import com.example.demo.service.board.CommunityBoardService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,5 +41,27 @@ public class CommunityBoardController {
 
         return service.read(boardNo);
     }
+
+    @PutMapping("/{boardNo}")
+    public CommunityBoard modify (
+            @PathVariable("boardNo") Integer boardNo,
+            @RequestBody CommunityBoard communityBoard) {
+        log.info("modify(): " + communityBoard);
+
+        communityBoard.setBoardNo(Long.valueOf(boardNo));
+        service.modify(communityBoard);
+
+        return communityBoard;
+    }
+
+    @DeleteMapping("/{boardNo}")
+    public void remove(
+            @PathVariable("boardNo") Integer boardNo) {
+        log.info("remove()");
+
+        service.remove(boardNo);
+
+    }
+
 
 }

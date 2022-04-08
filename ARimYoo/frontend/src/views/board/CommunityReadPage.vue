@@ -47,6 +47,7 @@ export default {
     margin-top:5%;
     margin-bottom: 5%;
 }
+
 @media (max-width:700px){
     .title {
         margin-top:50px;
