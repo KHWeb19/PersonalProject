@@ -88,8 +88,7 @@ import { mapState, mapActions} from 'vuex'
             ...mapState(['cakeLists'])
         },
         mounted () {
-            this.fetchCakeLists(),
-            window.localStorage.getItem('cakeList')
+            this.fetchCakeLists()
         },
         methods: {
             ...mapActions(['fetchCakeLists']),
@@ -117,7 +116,6 @@ import { mapState, mapActions} from 'vuex'
                 axios.post('http://localhost:7777/upload/register', formData) 
                     .then (res => {
                         alert('처리 결과: ' + res.data)
-                        window.localStorage.setItem("cakeList", this.cakeLists)
                     })
                     .catch (() => {
                         alert('파일을 추가해주세요!')

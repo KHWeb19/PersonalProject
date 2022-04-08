@@ -25,28 +25,33 @@ public class BookingController {
 
     @ResponseBody
     @PostMapping(value = "/register", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
-    public String uploadBookingContents ( @RequestPart(value = "info") BookingRequest info,
+    public String uploadBookingContents ( @RequestPart(value = "info", required = false) BookingRequest info,
                                           @RequestPart(value = "fileList", required = false) List<MultipartFile> fileList) {
 
         log.info("uploadBookingContents()" + info);
         log.info("uploadImg()" + fileList);
 
-        try{
-            for(MultipartFile multipartFile : fileList) {
-                log.info("requestUploadFile() - Make file: " +
-                        multipartFile.getOriginalFilename());
+        if (fileList != null) {
+            try{
+                for(MultipartFile multipartFile : fileList) {
+                    log.info("requestUploadFile() - Make file: " +
+                            multipartFile.getOriginalFilename());
 
-                FileOutputStream writer = new FileOutputStream(
-                        "../../vue_frontend/book_cake/src/assets/bookingImg/"+info.getDate()+"/"+info.getId()+"/"+multipartFile.getOriginalFilename());
-                log.info("디렉토리에 파일 배치 성공!");
+                    FileOutputStream writer = new FileOutputStream(
+                            "../../vue_frontend/book_cake/src/assets/bookingImg/"+info.getDate()+"."+info.getId()+"."+multipartFile.getOriginalFilename());
+                    log.info("디렉토리에 파일 배치 성공!");
 
-                writer.write(multipartFile.getBytes());
-                writer.close();
-                service.register(info, multipartFile.getOriginalFilename());
+                    writer.write(multipartFile.getBytes());
+                    writer.close();
+                    service.register(info, multipartFile.getOriginalFilename());
+                }
+            } catch (Exception e) {
+                return "Upload Fail!!";
             }
-        } catch (Exception e) {
-            return "Upload Fail!!";
+        } else if (fileList == null) {
+            service.exceptFilesBooking(info);
         }
+
 
         log.info("requestUpload(): Success!!!");
         return "Upload Success!!";

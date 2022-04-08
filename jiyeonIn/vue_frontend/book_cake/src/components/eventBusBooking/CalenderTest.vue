@@ -37,7 +37,7 @@
             </v-col>
             
             <v-col>
-              <v-btn color="black" text type="submit" v-on:click="calendarInform" v-model="isShow" >
+              <v-btn color="black" text type="button" v-on:click="calendarInform" v-model="isShow" >
                 <v-icon color="black" text >mdi-check</v-icon>확정
               </v-btn>
             </v-col>

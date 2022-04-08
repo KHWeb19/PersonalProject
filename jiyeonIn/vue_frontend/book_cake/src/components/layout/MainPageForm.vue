@@ -81,6 +81,7 @@
         },
         data () {
             return {
+                checkuserInfo: window.localStorage.getItem('token')
             }
         },
         methods: {

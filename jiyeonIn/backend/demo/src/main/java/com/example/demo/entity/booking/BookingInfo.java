@@ -25,6 +25,9 @@ public class BookingInfo {
     @Column(length = 32, nullable = false)
     private String time;
 
+    @Column(length = 32, nullable = false)
+    private String process;
+
     @Column(length = 128, nullable = true)
     private String contents;
 
@@ -43,22 +46,33 @@ public class BookingInfo {
     @CreationTimestamp
     private Date regDate;
 
-    public BookingInfo(String id, String date, String time, String contents, String linkInfo) {
+    public BookingInfo(String id, String date, String time, String process, String contents, String linkInfo) {
         this.id = id;
         this.date = date;
         this.time = time;
+        this.process = process;
         this.contents = contents;
         this.linkInfo = linkInfo;
     }
 
-    public BookingInfo(String id, String date, String time, String contents, String linkInfo,String design, String size, String price) {
+    public BookingInfo(String id, String date, String time, String process, String contents, String linkInfo, String design, String size, String price) {
         this.id = id;
         this.date = date;
         this.time = time;
+        this.process = process;
         this.contents = contents;
         this.linkInfo = linkInfo;
         this.design = design;
         this.size = size;
         this.price = price;
     }
+
+    public BookingInfo(String id, String date, String time, String process, String contents) {
+        this.id = id;
+        this.date = date;
+        this.time = time;
+        this.process = process;
+        this.contents = contents;
+    }
 }
+

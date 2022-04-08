@@ -25,21 +25,41 @@ public class BookingServiceImpl implements BookingService{
     @Transactional
     @Override
     public void register(BookingRequest info, String originalFilename) {
-        String putLink = info.getDate()+"/"+info.getId()+"/"+originalFilename;
+        String putLink = info.getDate()+"."+info.getId()+"."+originalFilename;
 
-        if(info.getCakeArrNo() != null) {
+        if(info.getCakeArrNo().equals("0")) {
+            BookingInfo bookingInfo2 = new BookingInfo(info.getId(), info.getDate(), info.getTime(), "예약중", info.getContents(), putLink);
+            repository.save(bookingInfo2);
+
+        }else {
             Optional<UploadCake> uploadCake = uploadRepository.findById(Long.valueOf(info.getCakeArrNo()));
             UploadCake checkCake = uploadCake.get();
 
             BookingInfo bookingInfo1 =
-                    new BookingInfo(info.getId(), info.getDate(), info.getTime(), info.getContents(), putLink,
-                                    checkCake.getDesign(),checkCake.getSize(),checkCake.getPrice());
+                    new BookingInfo(info.getId(), info.getDate(), info.getTime(), "예약중", info.getContents(), putLink,
+                            checkCake.getDesign(),checkCake.getSize(),checkCake.getPrice());
             repository.save(bookingInfo1);
-
-        }else if (info.getCakeArrNo() == null){
-            BookingInfo bookingInfo2 = new BookingInfo(info.getId(), info.getDate(), info.getTime(), info.getContents(), putLink);
-            repository.save(bookingInfo2);
         }
 
     }
+
+    @Override
+    public void exceptFilesBooking(BookingRequest info) {
+
+        if(info.getCakeArrNo().equals("0")) {
+            BookingInfo bookingInfo2 = new BookingInfo(info.getId(), info.getDate(), info.getTime(), "예약중", info.getContents());
+            repository.save(bookingInfo2);
+
+        }else {
+            Optional<UploadCake> uploadCake = uploadRepository.findById(Long.valueOf(info.getCakeArrNo()));
+            UploadCake checkCake = uploadCake.get();
+
+            BookingInfo bookingInfo1 =
+                    new BookingInfo(info.getId(), info.getDate(), info.getTime(), "예약중", info.getContents(), checkCake.getLinkInfo(),
+                            checkCake.getDesign(),checkCake.getSize(),checkCake.getPrice());
+            repository.save(bookingInfo1);
+
+        }
+    }
+
 }

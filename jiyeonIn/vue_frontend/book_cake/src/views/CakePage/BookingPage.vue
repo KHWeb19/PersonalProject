@@ -45,30 +45,35 @@ import axios from 'axios'
         methods: {
             ...mapActions(['fetchCakeLists']),
             submitBooking (payload) {
-                const { id, date, time, inputcontents, cakeArrNo, files1 } = payload
+                const { id, date, time, contents, cakeArrNo, files1 } = payload
                 
+                //cakeArrNo에 아무것도 없지만, "" 표시로 null이 아니여서 제외 할 수 있는 방법을 찾기가 어려움
+
                 let formData = new FormData()
-
+                
                 let fileInfo = { 
-                    id: id,
-                    date: date, 
-                    time: time, 
-                    contents: inputcontents, 
-                    cakeArrNo: cakeArrNo 
-                    
-                }
-                for(let idx = 0; idx < 1; idx++) {
-                    formData.append('fileList', files1[idx])
-                }
-
+                id: id,
+                date: date, 
+                time: time, 
+                contents: contents,
+                cakeArrNo: cakeArrNo}
+                
                 formData.append(
                     "info", new Blob([JSON.stringify(fileInfo)], {type: "application/json"})
                 )
-
+                if(files1 != null) {
+                    for(let idx = 0; idx < 1; idx++) {
+                        formData.append('fileList', files1[idx])
+                    }
+                }
+                
                 console.log(fileInfo)
                 axios.post('http://localhost:7777/booking/register', formData)
                     .then(res => {
                         alert('처리결과 :' + res.data)
+                        this.$router.push({
+                        name: 'BookingListPage'
+                    })
                     })
                     .catch(res => {
                         alert('처리결과: ' + res.message)
