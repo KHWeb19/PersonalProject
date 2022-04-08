@@ -1,9 +1,10 @@
 import {
-    FETCH_COOKIE_MEMBER,
+    FETCH_LOGIN_MEMBER,
+
 } from './mutation-types'
 
 export default {
-    [FETCH_COOKIE_MEMBER](state, payload){
-        state.members = payload;
-    }
+    [FETCH_LOGIN_MEMBER](state, payload) {
+        state.userPlans = payload;
+    },
 }

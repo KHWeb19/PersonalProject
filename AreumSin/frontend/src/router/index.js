@@ -50,7 +50,8 @@ const routes = [
   {
     path: '/planPage',
     name: 'PlanView',
-    component: PlanView
+    component: PlanView,
+    props: true
   }
 ]
 
