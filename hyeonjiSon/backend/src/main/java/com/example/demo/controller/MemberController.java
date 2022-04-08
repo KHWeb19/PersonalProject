@@ -22,4 +22,22 @@ public class MemberController {
 
         memberservice.register(memberRequest);
     }
+
+    /*
+    @PostMapping("/login")
+    public MemberRequest jpaMemberLogin (@RequestBody MemberRequest memberRequest) {
+        log.info("login request from vue:() " + memberRequest);
+
+        MemberRequest memberResponse = memberservice.login(memberRequest);
+
+        if (memberResponse != null) {
+            log.info("로그인 성공!");
+        } else {
+            log.info("로그인 실패!");
+        }
+
+        return memberResponse;
+    }
+
+     */
 }

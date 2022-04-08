@@ -17,9 +17,9 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long memberNo;
 
+
     @Column(length = 32, nullable = false)
     private String userId;
-
     @Column(length = 32, nullable = false)
     private String storeName;
 
