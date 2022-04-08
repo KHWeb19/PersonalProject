@@ -6,8 +6,7 @@
         <div class="wrap">
             <h3>예약하기</h3>
             <br>
-            <booking-cake-form :cakeLists="cakeLists"></booking-cake-form>
-
+            <booking-cake-form :cakeLists="cakeLists" @submit="submitBooking"/>
         </div>
         
         <footer-form></footer-form>
@@ -20,6 +19,7 @@ import BookingCakeForm from '@/components/mainPage/BookingCakeForm.vue'
 import MainPageForm from '@/components/layout/MainPageForm.vue'
 import FooterForm from '../../components/layout/FooterForm.vue'
 import { mapState, mapActions } from 'vuex'
+import axios from 'axios'
 
     export default {
         name: 'BookingPage',
@@ -27,6 +27,14 @@ import { mapState, mapActions } from 'vuex'
             BookingCakeForm,
             MainPageForm,
             FooterForm
+        },
+        created () {
+            if(window.localStorage.getItem('token') == null) {
+                    alert('로그인을 해주세요!')
+                    this.$router.push({
+                        name: 'LoginPage'
+                    })
+                }
         },
         computed: {
             ...mapState(['cakeLists'])
@@ -36,6 +44,37 @@ import { mapState, mapActions } from 'vuex'
         },
         methods: {
             ...mapActions(['fetchCakeLists']),
+            submitBooking (payload) {
+                const { id, date, time, inputcontents, cakeArrNo, files1 } = payload
+                
+                let formData = new FormData()
+
+                let fileInfo = { 
+                    id: id,
+                    date: date, 
+                    time: time, 
+                    contents: inputcontents, 
+                    cakeArrNo: cakeArrNo 
+                    
+                }
+                console.log(fileInfo)
+
+                for(let idx=0; idx < files1.length; idx++) {
+                    formData.append('fileList', files1[idx])
+                }
+
+                formData.append(
+                    "info", new Blob([JSON.stringify(fileInfo)], {type: "application/json"})
+                );
+
+                axios.post('http://localhost:7777/booking/register', formData)
+                    .then(res => {
+                        alert('처리결과 :' + res.data)
+                    })
+                    .catch(res => {
+                        alert('처리결과: ' + res.message)
+                    })
+            }
         }
 
     }
