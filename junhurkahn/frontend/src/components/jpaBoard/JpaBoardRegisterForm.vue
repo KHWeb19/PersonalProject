@@ -1,6 +1,6 @@
 <template>
     <form @submit.prevent="onSubmit">
-        <table>
+       <table border="1">
             <tr>
                 <td>제목</td>
                 <td>

@@ -1,7 +1,7 @@
 <template>
     <div>
         <form @submit.prevent="onSubmit">
-            <table>
+           <table border="1">
                 <tr>
                     <td>사이트아이디 수정하기</td>
                     <td>
@@ -14,6 +14,14 @@
                         <input type="text" v-model="title"/>
                     </td>
                 </tr>
+
+              <tr>
+                <td>사이트이름</td>
+                <td>
+                    <input type="text" v-model="writer1"/>
+                </td>
+            </tr>
+
                 <tr>
                     <td>사이트주소</td>
                     <td>

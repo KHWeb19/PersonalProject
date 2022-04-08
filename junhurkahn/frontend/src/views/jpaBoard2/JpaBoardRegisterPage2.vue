@@ -16,8 +16,8 @@ export default {
     },
     methods: {
         onSubmit (payload) {
-            const { title, content, writer } = payload
-            axios.post('http://localhost:7777/62th/board2/register2', { title, writer, content })
+            const { title, content,} = payload
+            axios.post('http://localhost:7777/62th/board2/register2', { title, content })
                     .then(() => {
                         alert('게시물 등록 성공!')
                         this.$router.push({

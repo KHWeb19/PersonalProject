@@ -1,22 +1,16 @@
 <template>
     <form @submit.prevent="onSubmit">
-        <table>
-            <tr>
-                <td>물건목록</td>
-                <td>
-                    <input type="text" v-model="title"/>
-                </td>
-            </tr>
+        <table border="1">
             <tr>
                 <td>가게이름</td>
                 <td>
-                    <input type="text" v-model="writer"/>
+                    <input type="text" v-model="content"/>
                 </td>
             </tr>
             <tr>
-                <td>본문</td>
+                <td>물건목록</td>
                 <td>
-                    <textarea cols="50" rows="20" v-model="content">
+                    <textarea cols="50" rows="20" v-model="title">
                     </textarea>
                 </td>
             </tr>
@@ -37,14 +31,13 @@ export default {
     data () {
         return {
             title: '물건목록을 작성하세요.',
-            writer: '가게이름작성하시오',
             content: '본문을 작성하세요.'
         }
     },
     methods: {
         onSubmit () {
-            const { title, writer, content } = this
-            this.$emit('submit', { title, writer, content })
+            const { title, content } = this
+            this.$emit('submit', { title,  content })
         }
     }
 }

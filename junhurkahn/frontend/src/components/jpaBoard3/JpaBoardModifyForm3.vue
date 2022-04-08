@@ -1,7 +1,7 @@
 <template>
     <div>
         <form @submit.prevent="onSubmit">
-            <table>
+           <table border="1">
                 <tr>
                     <td>생일관리 수정하기</td>
                     <td>
@@ -20,6 +20,15 @@
                         <input type="text" :value="jpaBoard3.writer"/>
                     </td>
                 </tr>
+
+                    <tr>
+                    <td>D-day</td>
+                    <td>
+                        <input type="text" :value="jpaBoard3.writer"/>
+                    </td>
+                </tr>
+
+
                 <tr>
                     <td>등록일자</td>
                     <td>
@@ -27,7 +36,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>본문</td>
+                    <td>메모</td>
                     <td>
                         <textarea cols="50" rows="20" v-model="content">
                         </textarea>
@@ -59,19 +68,22 @@ export default {
         return {
             title: '',
             writer:'',
+            writer1:'',
             content: ''
         }
     },
     methods: {
         onSubmit () {
-            const { title, content, writer } = this
-            this.$emit('submit', { title, content, writer })
+            const { title, content, writer, writer1 } = this
+            this.$emit('submit', { title, content, writer, writer1 })
         }
     },
     created () {
         this.title = this.jpaBoard3.title
         this.content = this.jpaBoard3.content
         this.writer = this.jpaBoard3.writer
+        this.writer1 = this.jpaBoard3.writer1
+
     }
 }
 </script>

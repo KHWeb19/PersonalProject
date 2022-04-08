@@ -3,9 +3,9 @@
         <h3>장보기 목록</h3>
         <table border="1">
             <tr>
-                <th align="center" width="200">번호</th>
-                <th align="center" width="440">물건목록</th>
-                <th align="center" width="150">가게이름</th>
+                <th align="center" width="100">번호</th>
+                <th align="center" width="590">물건목록</th>
+              
                 <th align="center" width="240">등록날짜</th>
             </tr>
             <tr v-if="!jpaBoards2 || (Array.isArray(jpaBoards2) && jpaBoards2.length === 0)">
@@ -22,12 +22,9 @@
                                         params: { boardNo: board.boardNo.toString() } }">
                         {{ board.title }}
                     </router-link>
-                </td>
-                <td align="right">
-                    {{ board.writer }}
-                </td>
+                
                 <td align="center">
-                    {{ board.regDate }}
+                    {{ board.regDate }}  
                 </td>
             </tr>
         </table>

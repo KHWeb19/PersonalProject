@@ -1,6 +1,6 @@
 <template>
     <div>
-        <table>
+         <table border="1">
             <tr>
                 <td>사이트아이디 읽기</td>
                 <td>
@@ -13,6 +13,15 @@
                     <input type="text" :value="jpaBoard4.title" readonly/>
                 </td>
             </tr>
+
+               <tr>
+                <td>사이트이름</td>
+                <td>
+                    <input type="text" v-model="writer1"/>
+                </td>
+            </tr>
+
+
             <tr>
                 <td>사이트주소</td>
                 <td>

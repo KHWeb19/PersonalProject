@@ -15,7 +15,7 @@
             </tr>
             <tr v-else v-for="board in jpaBoards" :key="board.boardNo">
                 <td align="center">
-                    {{ board.boardNo }}
+                    {{ board.boardNo }} 
                 </td>
                 <td align="left">
                     <router-link :to="{ name: 'JpaBoardReadPage',

@@ -3,13 +3,14 @@
         <h3>생일관리</h3>
         <table border="1">
             <tr>
-                <th align="center" width="200">번호</th>
-                <th align="center" width="440">이름</th>
-                <th align="center" width="150">생년월일</th>
+                <th align="center" width="100">번호</th>
+                <th align="center" width="150">이름</th>
+                <th align="center" width="250">생년월일</th>
+                <th align="center" width="440">메모</th>
                 <th align="center" width="240">등록날짜</th>
             </tr>
             <tr v-if="!jpaBoards3 || (Array.isArray(jpaBoards3) && jpaBoards3.length === 0)">
-                <td colspan="4">
+                <td colspan="5">
                     현재 등록된 게시물이 없습니다!
                 </td>
             </tr>
@@ -25,6 +26,9 @@
                 </td>
                 <td align="right">
                     {{ board.writer }}
+                 </td>
+                <td align="right">
+                    {{ board.content }}
                 </td>
                 <td align="center">
                     {{ board.regDate }}

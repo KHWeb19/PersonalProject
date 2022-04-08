@@ -1,7 +1,7 @@
 <template>
     <div>
         <form @submit.prevent="onSubmit">
-            <table>
+             <table border="1">
                 <tr>
                     <td>계좌번호 수정하기</td>
                     <td>
@@ -20,6 +20,17 @@
                         <input type="text" :value="jpaBoard1.writer"/>
                     </td>
                 </tr>
+
+                  <tr>
+                    <td>소유자이름</td>
+                    <td>
+                        <input type="text" :value="jpaBoard1.writer1"/>
+                    </td>
+                </tr>
+
+
+
+
                 <tr>
                     <td>등록일자</td>
                     <td>
@@ -59,19 +70,22 @@ export default {
         return {
             title: '',
             writer:'',
-            content: ''
+            writer1:'',
+            content:'',
+
         }
     },
     methods: {
         onSubmit () {
-            const { title, content, writer } = this
-            this.$emit('submit', { title, content, writer })
+            const { title, content, writer,writer1 } = this
+            this.$emit('submit', { title, content, writer,writer1 })
         }
     },
     created () {
         this.title = this.jpaBoard1.title
         this.content = this.jpaBoard1.content
         this.writer = this.jpaBoard1.writer
+        this.writer1 = this.jpaBoard1.writer1
     }
 }
 </script>

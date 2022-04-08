@@ -3,13 +3,14 @@
         <h3>사이트아이디 관리</h3>
         <table border="1">
             <tr>
-                <th align="center" width="200">번호</th>
-                <th align="center" width="440">사이트 주소</th>
-                <th align="center" width="150">사이트 아이디</th>
+                <th align="center" width="100">번호</th>
+                <th align="center" width="200">사이트이름</th>
+                <th align="center" width="340">사이트 주소</th>
+                <th align="center" width="200">사이트 아이디</th>
                 <th align="center" width="240">등록날짜</th>
             </tr>
             <tr v-if="!jpaBoards4 || (Array.isArray(jpaBoards4) && jpaBoards4.length === 0)">
-                <td colspan="4">
+                <td colspan="5">
                     현재 등록된 게시물이 없습니다!
                 </td>
             </tr>
@@ -25,6 +26,9 @@
                 </td>
                 <td align="right">
                     {{ board.writer }}
+                </td>
+                  <td align="right">
+                    {{ board.writer1 }}
                 </td>
                 <td align="center">
                     {{ board.regDate }}

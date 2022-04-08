@@ -27,9 +27,9 @@ export default {
     methods: {
         ...mapActions(['fetchJpaBoard1']),
         onSubmit (payload) {
-            const { title, content, } = payload
+            const { title, content,writer1 } = payload
             axios.put(`http://localhost:7777/62th/board1/${this.boardNo}`,
-                { title, writer: this.jpaBoard1.writer, content, regDate: this.jpaBoard1.regDate })
+                { title, writer: this.jpaBoard1.writer, content, writer1, regDate: this.jpaBoard1.regDate })
                     .then(res => {
                         alert('게시물 수정 성공!')
                         this.$router.push({
