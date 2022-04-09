@@ -4,7 +4,7 @@
         <br>
         <drop-down></drop-down>
            <div align="center">
-        <k-1-check-brand-register/>
+        <k-1-check-brand-register @submit="onSubmit"/>
     </div>
 
         </v-container>

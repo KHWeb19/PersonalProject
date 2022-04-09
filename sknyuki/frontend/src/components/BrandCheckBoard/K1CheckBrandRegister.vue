@@ -2,40 +2,58 @@
     <form @submit.prevent="onSubmit">
 
         <div class="app">
-            <h3 style="padding:30px 0px 30px 0px; font-weight:bold" align="left">게시글 작성</h3>
+            <h3 style="padding:30px 0px 30px 0px; font-weight:bold" align="center">게시글 작성</h3>
             
 
             <h3 align="left">제목 : </h3>
-            <input 
-                type="text" 
-                placeholder="내용을 입력하시오" 
-                style="width:300px; font-size:20px;"
-                v-model="title">
+             <v-text-field
+              label="TITLE"
+              placeholder="입력하시오"
+              outlined 
+              dense
+              style="width:300px; font-size:20px;"
+              v-model="title"
+            ></v-text-field>
             
 
-            <br>
 
             <h3 align="left">작성자 : </h3>
-            <input
-                type="text" width="300px"
-                placeholder="내용을 입력하시오" 
-                style="width:300px; font-size:20px;"
-                v-model="writer">
+              <v-text-field
+              label="WRITER"
+              placeholder="입력하시오"
+              outlined 
+              dense
+              style="width:300px; font-size:20px;"
+              v-model="writer"
+            ></v-text-field>
+                
+
+
+           <h3 align="left"> 업로드할 이미지 : </h3>
+             <input class="input" type="file"
+             ref="files"
+             multiple
+              @change="onInputImage()"/>
+           
            
 
-            <br>
+            <h3 align="left" >내용 : </h3>           
+           
+            <v-textarea
+            counter
+            outlined
+            dense
+            label="CONTENT"
+            style="font-size:20px"
+            placeholder="내용을 입력하시오"
+             rows="8" cols="100" v-model="content"
+          ></v-textarea>
+     
 
-            <h3 align="left" >내용 : </h3>
-            <textarea
-                id="textarea-rows"
-                placeholder="내용을 입력하시오"
-                style="font-size:20px"
-                rows="8" cols="100" v-model="content">
-            </textarea>
 
-            <div class="버튼" style="padding:20px;">
+            <div class="버튼">
                 <v-btn text color="black" rounded x-large
-                    style="padding: 10px; width: 90px;" type="submit">등록하기
+                    style="padding: 10px; width: 90px;" type="submit" >등록하기
                 </v-btn>
 
                 <br>
@@ -53,21 +71,39 @@
 </template>
 
 <script>
+
+//import UploadFile1 from '@/components/uploadfile1.vue'
+
 export default {
     name: 'BoardRegisterForm',
+    components:{
+      //  UploadFile1
+    },
     data () {
         return {
             title: '',
             writer: '',
-            content: ''
+            content: '',
+            files:'',
         }
     },
     methods: {
-        onSubmit () {
+    onInputImage(){
+        this.files=this.$refs.files.files
+        console.log(this.files)
+         let formData = new FormData()
+
+            for (let idx = 0; idx < this.files.length; idx++) {
+                formData.append('fileList', this.files[idx])
+                  
+            }console.log(formData)
+    },
+            onSubmit () {
             var result = confirm('등록 하시겠습니까?')
             if(result) {
-                const { title, writer, content } = this
-                this.$emit('submit', { title, writer, content })
+                const { title, writer, content, formData } = this
+                this.$emit('submit', { title, writer, content, formData })
+                console.log(this.title,this.writer,this.content,formData)
             }
          }
     }

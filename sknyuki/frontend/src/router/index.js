@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import VuetifyTemplateList from '@/views/VuetifyTemplateList.vue'
 import HomeView from '@/views/MainPage/HomeView.vue'
 import K1CheckBrandView from '@/views/K1CheckBrandVeiw/K1CheckBrandView.vue'
 import K1CheckBrandReadPage from '@/views/K1CheckBrandVeiw/K1CheckBrandReadPage.vue'
@@ -11,6 +12,11 @@ import K1CheckBrandRegisterPage from '@/views/K1CheckBrandVeiw/K1CheckBrandRegis
 Vue.use(VueRouter)
 
 const routes = [
+  { 
+    path: '/test',
+  name:'VuetifyTemplateList',
+  component:VuetifyTemplateList
+  },
   {
     path: '/',
     name: 'homeView',
