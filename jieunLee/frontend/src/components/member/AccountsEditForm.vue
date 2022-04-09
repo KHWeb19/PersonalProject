@@ -5,7 +5,7 @@
           <v-card style="height: 600px">
               <td  style="padding-right: 10px;" >
 
-                <v-img v-if="member.imageName" style=" margin-left: 25px" width="38" :src="require(`@/assets/mImages/${member.imageName}`)"/>
+                <v-img v-if="member.imageName" style=" margin-left: 25px" width="38" :src="require(`@/assets/mImage/${member.imageName}`)"/>
                 <v-img v-else style=" margin-left: 25px" width="38" src="@/assets/logo.png"/>
 
               </td>
@@ -109,9 +109,7 @@ export default {
         imageName: '',
         memberName: '',
         memberId: '',
-        // srcName: loginInfo.imageName,
-        srcName: 'logo.png',
-              loginInfo: JSON.parse(localStorage.getItem('loginInfo'))
+        loginInfo: JSON.parse(localStorage.getItem('loginInfo'))
       }
     },
     methods: {
@@ -135,6 +133,7 @@ export default {
               //
               const {imageName} = this
               this.$emit('image', {imageName})
+              localStorage.setItem("imageChange", JSON.stringify(imageName))
           })
           .catch (res => {
               alert('처리 결과: ' + res.message)

@@ -9,7 +9,7 @@
             <table>
               <tr>
                   <td style="text-align: right; padding-right: 10px">                    
-                    <v-img v-if="member.imageName" style=" margin-left: 25px" width="38" :src="require(`@/assets/mImages/${member.imageName}`)"/>
+                    <v-img v-if="member.imageName" style=" margin-left: 25px" width="38" :src="require(`@/assets/mImage/${member.imageName}`)"/>
                     <v-img v-else style=" margin-left: 25px" width="38" src="@/assets/logo.png"/>
                   </td>
                   <td style="padding-left: 10px; font-size: 24px">

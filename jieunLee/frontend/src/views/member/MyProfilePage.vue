@@ -1,12 +1,14 @@
 <template>
-    
-    <my-profile v-if="member" :member="member"/>
-     <p v-else>로딩중......</p>
+  <div>
+      <menu-bar/>
+      <my-profile v-if="member" :member="member"/>
+      <p v-else>로딩중......</p>
+  </div>
 </template>
 
 <script>
 import MyProfile from '@/components/member/MyProfile.vue'
-// import axios from 'axios'
+import MenuBar from '@/components/MenuBar.vue'
 import { mapActions, mapState } from 'vuex'
 
 export default {
@@ -18,7 +20,8 @@ export default {
     }
   },
   components: {
-    MyProfile
+    MyProfile,
+    MenuBar
   },
 
   computed: {

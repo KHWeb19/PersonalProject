@@ -48,6 +48,7 @@ export default {
                             this.isLogin = true
                             this.$router.push({name: 'HomeView'})
                             localStorage.setItem("loginInfo", JSON.stringify(res.data))
+                            
                         } else {
                             alert('로그인 실패!')
                         }

@@ -1,11 +1,10 @@
 <template>
     <div>
-    <menu-bar :member="member"/>
         <v-container style="max-width: 1000px; margin-top: 20px;">
         <v-flex>
             <div style="display: flex; justify-content: center;">
                 <div style="width: 300px; padding-left: 75px;">
-                    <v-img v-if="member.imageName" width="150" :src="require(`@/assets/mImages/${member.imageName}`)"/>
+                    <v-img v-if="member.imageName" width="150" :src="require(`@/assets/mImage/${member.imageName}`)"/>
                     <v-img v-else width="150" src="@/assets/logo.png"/>
                 </div>
                 <div style="width: 620px; margin-left: 20px;">
@@ -46,13 +45,10 @@
 </template>
 
 <script>
-import MenuBar from '@/components/MenuBar.vue'
+
 
 export default {
     name: 'MyProfile',
-    components: {
-        MenuBar
-    },
     props: {
       member: {
         type: Object,

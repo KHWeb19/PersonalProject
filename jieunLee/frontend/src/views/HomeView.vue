@@ -27,11 +27,6 @@ export default {
     MenuBar,
     MemberList
     },
-    data() {
-      return {
-        memberId: localStorage.getItem("loginId")
-      }
-    },
     computed: {
         ...mapState(['members']),
         

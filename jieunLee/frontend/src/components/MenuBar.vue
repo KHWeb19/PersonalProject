@@ -40,9 +40,9 @@
     <v-menu offset-y min-width="230px">
       <template v-slot:activator="{ on }">
         <v-btn icon v-on="on">
-                <v-img v-if="member.imageName" max-width="24" height="24" :src="require(`@/assets/mImages/${member.imageName}`)"/>
+                <v-img v-if="imageChange" max-width="24" height="24" :src="require(`@/assets/mImage/${imageChange}`)"/>
+                <v-img v-else-if="loginInfo.imageName" max-width="24" height="24" :src="require(`@/assets/mImage/${loginInfo.imageName}`)"/>
                 <v-img v-else max-width="24" height="24"  src="@/assets/logo.png"/>
-
         </v-btn> 
       </template>
       <v-list>
@@ -88,8 +88,8 @@ Vue.use(cookies)
       }
     },
     data: () => ({
-      isLogin: true,
-      loginInfo: JSON.parse(localStorage.getItem('loginInfo'))
+      loginInfo: JSON.parse(localStorage.getItem('loginInfo')),
+      imageChange: JSON.parse(localStorage.getItem('imageChange'))
     }),
       computed: {
     ...mapState(['member']),
@@ -98,6 +98,7 @@ Vue.use(cookies)
     ...mapActions(['fetchMember']),
       logout() {
         localStorage.removeItem("loginInfo")
+        localStorage.removeItem("imageChange")
         this.$cookies.remove("user")
         this.$router.push({name: 'LoginPage'})
       }

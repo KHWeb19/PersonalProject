@@ -1,6 +1,6 @@
 <template>
   <div>
-    <menu-bar :member="member"/>
+    <menu-bar/>
     <div style="display: flex; justify-content: center;">
       <accounts-category/>
       <password-edit-form v-if="member" :member="member" @submit="onSubmit"/>
@@ -12,7 +12,7 @@
 <script>
 import PasswordEditForm from '@/components/member/PasswordEditForm.vue'
 import AccountsCategory from '@/components/AccountsCategory.vue'
-import MenuBar from '../../components/MenuBar.vue'
+import MenuBar from '@/components/MenuBar.vue'
 import { mapActions, mapState } from 'vuex'
 import axios from 'axios'
 export default {
@@ -38,7 +38,7 @@ export default {
       const {password} = payload
       axios.put(`http://localhost:7777/member/${this.memberNo}`, 
       {memberName: this.member.memberName, memberId: this.member.memberId, password, imageName: this.member.imageName, memberWeb: this.member.memberWeb, memberIntro: this.member.memberIntro, regDate: this.member.regDate})
-        .then(res => {
+        .then((res) => {
             alert('비밀번호 수정 성공')
             // localStorage.removeItem("userInfo")
             // localStorage.setItem("userInfo", JSON.stringify(res.data))
