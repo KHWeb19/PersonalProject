@@ -28,7 +28,7 @@ public class CommunityBoardController {
     private PhotoService photoService;
 
     @PostMapping("/register")
-    public void CommunityBoardRegister (@Validated CommunityBoard board, @RequestParam("file") MultipartFile file) throws Exception {
+    public void CommunityBoardRegister (@Validated CommunityBoard board, @RequestParam(required = false) MultipartFile file) throws Exception {
         log.info ("CommunityBoardRegister();" + file);
         service.register(board, file);
 

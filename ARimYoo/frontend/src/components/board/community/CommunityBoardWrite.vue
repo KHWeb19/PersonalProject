@@ -1,6 +1,6 @@
 <template>
     <v-container>
-            <v-form @submit.prevent="onSubmit">
+            <v-form enctype="multipart/form-data" @submit.prevent="onSubmit">
                 <table>
                     <v-row justify="center">
                         <v-col cols="1" class="label">Title</v-col>
@@ -22,7 +22,7 @@
                     <v-row  wrap justify="center">
                         <v-col cols="1" class="label" > Files </v-col>
                         <v-col>
-                        <input type="file" dense clearable id="files" style="width:300px" ref="files" 
+                        <input type="file" id="files" ref="files"  dense style="width:300px"
                                 multiple v-on:change="handleFileUpload()"/>
                         </v-col>
                         <v-col cols="12">
@@ -61,6 +61,8 @@ export default {
             '[사담]',
             '[질문]'
             ],
+            files:'',
+            response: ''
         }
     },
     created () {
@@ -74,12 +76,16 @@ export default {
             const url = URL.createObjectURL(image)
             this.image = url
 
-            this.files = this.$refs.files.files
+            this.files = this.$refs.files.files[0]
         },
         onSubmit () {
-            const { title, content,writer, brackets } = this
-            this.$emit('submit', { title, content,writer, brackets })
-            console.log(title,content,writer,brackets)
+
+            const { title, content,writer, brackets} = this
+            const file =  this.$refs.files.files[0]
+            
+            this.$emit('submit', { title, content,writer, brackets, file })
+            console.log(title,content,writer,brackets,file)
+
         },
         goPage (){
             this.$router.push('/community')

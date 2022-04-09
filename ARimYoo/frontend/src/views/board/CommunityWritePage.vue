@@ -18,8 +18,21 @@ export default {
     name: 'CommunityWritePage',
     methods: {
         onSubmit (payload) {
-            const { title, content, writer, brackets} = payload
-            axios.post('http://localhost:7777/board/community/register', { title, content, writer, brackets })
+            const { title, content, writer, brackets, file} = payload
+
+            let formData = new FormData()
+
+            if (file != null ){formData.append('file', file)}
+            formData.append('title',title)
+            formData.append('content', content)
+            formData.append('writer', writer)
+            formData.append('brackets', brackets)
+
+            console.log(formData)
+       
+            axios.post('http://localhost:7777/board/community/register', formData, { headers: {
+                    'Content-Type': 'multipart/form-data'
+                }})
                     .then(() => {
                         alert('게시글이 등록되셨습니다.')
 

@@ -19,29 +19,22 @@ public class CommunityPhoto {
     @Column(name = "file_id")
     private Long id;
 
-    @ManyToOne
-    private CommunityBoard board;
-
-    @Column(nullable = false)
+    @Column
     private String origFileName;
 
-    @Column(nullable = false)
+    @Column
+    private String fileName;
+
+    @Column
     private String filePath;
 
-    private Long fileSize;
 
     @Builder
-    public CommunityPhoto(String origFileName, String filePath, Long fileSize){
+    public CommunityPhoto(Long id, String origFileName, String filePath, String fileName){
+        this.id = id;
         this.origFileName = origFileName;
         this.filePath = filePath;
-        this.fileSize = fileSize;
+        this.fileName = fileName;
     }
-
-//    public void setBoard (CommunityBoard board) {
-//        this.board = board;
-//
-//        if (!board.getPhoto().contains(this))
-//            board.getPhoto().add(this);
-//    }
 
 }

@@ -23,18 +23,19 @@ public class CommunityBoardServiceImpl implements CommunityBoardService {
     CommunityBoardRepository repository;
 
     @Override
-    public void register(CommunityBoard board, @RequestParam("file") MultipartFile file) throws Exception {
+    public void register(CommunityBoard board, @RequestParam(required = false) MultipartFile file) throws Exception {
         String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
 
+        if (file != null) {
+            UUID uuid = UUID.randomUUID();
+            String fileName = uuid + "_" + file.getOriginalFilename();
+            File saveFile = new File(projectPath, fileName);
 
-        UUID uuid = UUID.randomUUID();
-        String fileName = uuid + "_" + file.getOriginalFilename();
-        File saveFile = new File(projectPath, fileName);
+            file.transferTo(saveFile);
 
-        file.transferTo(saveFile);
-
-        board.setFileName(fileName);
-        board.setFilePath("/files" + fileName);
+            board.setFileName(fileName);
+            board.setFilePath("/files/" + fileName);
+        }
 
         repository.save(board);
     }
