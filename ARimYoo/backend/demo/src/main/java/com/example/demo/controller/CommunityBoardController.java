@@ -1,14 +1,18 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.board.CommunityBoard;
+import com.example.demo.entity.board.CommunityPhoto;
 import com.example.demo.service.board.CommunityBoardService;
+import com.example.demo.service.board.PhotoService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.List;
 
 @Slf4j
@@ -20,10 +24,13 @@ public class CommunityBoardController {
     @Autowired
     private CommunityBoardService service;
 
+    @Autowired
+    private PhotoService photoService;
+
     @PostMapping("/register")
-    public void CommunityBoardRegister (@Validated @RequestBody CommunityBoard board) {
-        log.info ("CommunityBoardRegister();");
-        service.register(board);
+    public void CommunityBoardRegister (@Validated CommunityBoard board, @RequestParam("file") MultipartFile file) throws Exception {
+        log.info ("CommunityBoardRegister();" + file);
+        service.register(board, file);
 
     }
 
@@ -36,7 +43,7 @@ public class CommunityBoardController {
 
     @GetMapping("/{boardNo}")
     public CommunityBoard read (
-            @PathVariable("boardNo") Integer boardNo) {
+            @PathVariable("boardNo") Long boardNo) {
         log.info("read()");
 
         return service.read(boardNo);
@@ -62,6 +69,5 @@ public class CommunityBoardController {
         service.remove(boardNo);
 
     }
-
 
 }

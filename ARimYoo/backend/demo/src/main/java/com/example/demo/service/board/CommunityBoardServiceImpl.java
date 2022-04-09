@@ -6,19 +6,36 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Slf4j
 @Service
-public class CommunityBoardServiceImpl implements CommunityBoardService{
+public class CommunityBoardServiceImpl implements CommunityBoardService {
 
     @Autowired
     CommunityBoardRepository repository;
 
     @Override
-    public void register (CommunityBoard board) {
+    public void register(CommunityBoard board, @RequestParam("file") MultipartFile file) throws Exception {
+        String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
+
+
+        UUID uuid = UUID.randomUUID();
+        String fileName = uuid + "_" + file.getOriginalFilename();
+        File saveFile = new File(projectPath, fileName);
+
+        file.transferTo(saveFile);
+
+        board.setFileName(fileName);
+        board.setFilePath("/files" + fileName);
+
         repository.save(board);
     }
 
@@ -29,19 +46,22 @@ public class CommunityBoardServiceImpl implements CommunityBoardService{
     }
 
     @Override
-    public CommunityBoard read(Integer boardNo) {
+    public CommunityBoard read(Long boardNo) {
         Optional<CommunityBoard> maybeReadBoard = repository.findById(Long.valueOf(boardNo));
 
         if (maybeReadBoard.equals(Optional.empty())) {
             log.info("Can't read board!");
             return null;
+        } else {
+            CommunityBoard communityBoard = maybeReadBoard.get();
+            communityBoard.increaseViewCnt();
+            repository.save(communityBoard);
+            return maybeReadBoard.get();
         }
-
-        return maybeReadBoard.get();
     }
 
     @Override
-    public void modify (CommunityBoard communityBoard) {
+    public void modify(CommunityBoard communityBoard) {
         repository.save(communityBoard);
     }
 
@@ -49,4 +69,6 @@ public class CommunityBoardServiceImpl implements CommunityBoardService{
     public void remove(Integer boardNo) {
         repository.deleteById(Long.valueOf(boardNo));
     }
+
+
 }
