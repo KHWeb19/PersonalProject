@@ -4,6 +4,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -12,6 +14,7 @@ public class Plan {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "PLAN_NO")
     private Integer planNo;
 
     @Column(nullable = false)
@@ -23,5 +26,13 @@ public class Plan {
     @Column(nullable = false)
     private String placeName;
 
+    @OneToMany(mappedBy = "plan")
+    private List<MemberPlan> memberPlans = new ArrayList<>();
+
+    public Plan(String planName, String planDate, String placeName){
+        this.planName = planName;
+        this.planDate=planDate;
+        this.placeName = placeName;
+    }
 
 }
