@@ -28,13 +28,8 @@
             ></v-text-field>
                 
 
-
-           <h3 align="left"> 업로드할 이미지 : </h3>
-             <input class="input" type="file"
-             ref="files"
-             multiple
-              @change="onInputImage()"/>
-           
+            <upload-file-1 @selectFile="selectFile"></upload-file-1>
+          
            
 
             <h3 align="left" >내용 : </h3>           
@@ -72,38 +67,35 @@
 
 <script>
 
-//import UploadFile1 from '@/components/uploadfile1.vue'
+import UploadFile1 from '@/components/uploadfile1.vue'
 
 export default {
     name: 'BoardRegisterForm',
     components:{
-      //  UploadFile1
+        UploadFile1
     },
     data () {
         return {
             title: '',
             writer: '',
             content: '',
-            files:'',
+            files:[],
         }
     },
     methods: {
-    onInputImage(){
-        this.files=this.$refs.files.files
-        console.log(this.files)
-         let formData = new FormData()
-
-            for (let idx = 0; idx < this.files.length; idx++) {
-                formData.append('fileList', this.files[idx])
-                  
-            }console.log(formData)
-    },
+        selectFile(files){
+            this.files=files
+        },
+    
             onSubmit () {
             var result = confirm('등록 하시겠습니까?')
             if(result) {
-                const { title, writer, content, formData } = this
-                this.$emit('submit', { title, writer, content, formData })
-                console.log(this.title,this.writer,this.content,formData)
+                const { title, writer, content} = this
+                this.$emit('submitContents', { title, writer, content})
+                console.log(this.title,this.writer,this.content)
+
+                this.$emit("submitFiles",this.files)
+                console.log(this.files)
             }
          }
     }
