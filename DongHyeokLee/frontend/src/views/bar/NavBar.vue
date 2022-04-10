@@ -1,35 +1,34 @@
 <template>    
     <section>
-    <div>
-        
-        <router-link style="text-decoration: none; color:white;" 
-            :to="{ name: 'HomeView' }">
-            <h1>AKMU</h1>
-        </router-link>
-        
-        <!-- <v-toolbar class="transparent" dense dark> -->
-               <!-- <v-spacer></v-spacer> -->
-                <v-app-bar-nav-icon class="list" @click="nav_drawer = !nav_drawer" dense dark>
-                </v-app-bar-nav-icon> 
-        <!--  </v-toolbar> -->
+        <div>
+            <router-link style="text-decoration: none; color:white;" 
+                :to="{ name: 'HomeView' }">
+                <h1>AKMU</h1>
+            </router-link>
+            
+            <!-- <v-toolbar class="transparent" dense dark> -->
+                    <!-- <v-spacer></v-spacer> -->
+                    <v-app-bar-nav-icon class="list" @click="nav_drawer = !nav_drawer" dense dark>
+                    </v-app-bar-nav-icon> 
+            <!--  </v-toolbar> -->
 
-        <v-navigation-drawer app v-model="nav_drawer" right temporary>
-            <v-list nav dense>
-                <v-list-item v-for="link in links" :key="link.name" router :to="link.route">
-                    <v-list-item-action>
-                        <v-icon left>
-                            {{ link.icon }}
-                        </v-icon>
-                    </v-list-item-action>
-                    <v-list-item-content>
-                        <v-list-item-title>
-                            {{ link.text }}
-                        </v-list-item-title>
-                    </v-list-item-content>
-                </v-list-item>
-            </v-list>
-        </v-navigation-drawer> 
-    </div>
+            <v-navigation-drawer app v-model="nav_drawer" right temporary>
+                <v-list nav dense>
+                    <v-list-item v-for="link in links" :key="link.name" router :to="link.route">
+                        <v-list-item-action>
+                            <v-icon left>
+                                {{ link.icon }}
+                            </v-icon>
+                        </v-list-item-action>
+                        <v-list-item-content>
+                            <v-list-item-title>
+                                {{ link.text }}
+                            </v-list-item-title>
+                        </v-list-item-content>
+                    </v-list-item>
+                </v-list>
+            </v-navigation-drawer> 
+        </div>
     </section>
 </template>
 

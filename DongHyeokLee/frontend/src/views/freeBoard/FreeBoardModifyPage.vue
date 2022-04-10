@@ -1,6 +1,5 @@
 <template>
     <div align="center">
-        <h2>게시물 수정</h2>
         <free-board-modify-form v-if="freeBoard" :freeBoard="freeBoard" @submit="onSubmit"/>
         <p v-else>로딩중 .......</p>
     </div>

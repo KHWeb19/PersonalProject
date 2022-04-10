@@ -2,8 +2,8 @@
 
   <v-app>
    
-   <top-nav-bar></top-nav-bar>
-   <nav-bar></nav-bar>
+  <top-nav-bar></top-nav-bar>
+  <nav-bar></nav-bar>
     
     <v-main>
       <router-view/>
@@ -20,15 +20,9 @@ import TopNavBar from '@/views/bar/TopNavBar.vue'
 export default {
   name: 'App',
   components: {
-    NavBar,
-    TopNavBar
+   NavBar,
+   TopNavBar
     
   },
-  data () {
-    return {
-         
-     
-    }
-  }
 }
 </script>

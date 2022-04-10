@@ -1,10 +1,12 @@
 <template>
-<!-- https://github.com/TylerPottsDev/vuejs-music-app/blob/master/src/App.vue 퍼옴 -->
-    <div id="app">
-    <v-carousel cycle hide-delimiters height="100%">
+
+    <div id="app"> 
+
+      <v-carousel cycle hide-delimiters class="cover">
         <v-carousel-item v-for="(item,i) in items" :key="i" :src="item.src" >
             <v-row class="fill-height" align="center" justify="center" >
-    <main>
+  <!-- https://github.com/TylerPottsDev/vuejs-music-app/blob/master/src/App.vue 음악 플레이어 퍼옴 -->
+
       <section class="player">
         <div class="controls">
           <button class="prev" @click="prev">
@@ -25,14 +27,10 @@
           </button>
         </div>
       </section>
-      <section class="playlist">
-        <h3>The Playlist</h3>
-        <button v-for="song in songs" :key="song.src" @click="play(song)" :class="(song.src == current.src) ? 'song playing' : 'song'">
-          {{ song.title }} - {{ song.artist }}
-        </button>
-      </section>
-    </main>
-      </v-row>
+
+
+
+               </v-row>
       </v-carousel-item>
     </v-carousel>
   </div>
@@ -62,19 +60,19 @@ export default {
        items: [
                     {
                         src: require('@/assets/music/img/akmuPicture1.jpg'),
-                        title: 'logo'
+                       
                     },
                     {
-                        src: require('@/assets/img/homeBackground.png'),
-                        title: 'logo'
+                        src: require('@/assets/music/img/akmuPicture2.jpg'),
+                        
                     },
                     {
-                        src: require('@/assets/img/homeBackground.png'),
-                        title: 'logo'
+                        src: require('@/assets/music/img/akmuPicture3.jpg'),
+                       
                     },
                     {
-                    src: require('@/assets/img/homeBackground.png'),
-                        title: 'logo'
+                        src: require('@/assets/music/img/akmuPicture4.jpg'),
+                       
                     }
                 ],
     }
@@ -192,29 +190,10 @@ button:hover {
   color: #FFF;
   background-color: greenyellow;
 }
-.playlist {
-  padding: 0px 30px;
-}
-.playlist h3 {
-  color: #212121;
-  font-size: 28px;
-  font-weight: 400;
-  margin-bottom: 30px;
-  text-align: center;
-}
-.playlist .song {
-  display: block;
-  width: 100%;
-  padding: 15px;
-  font-size: 20px;
-  font-weight: 700;
-  cursor: pointer;
-}
-.playlist .song:hover {
-  color: #FF5858;
-}
-.playlist .song.playing {
-  color: #FFF;
-  background-image: linear-gradient(to right, #CC2E5D, #FF5858);
+.cover {
+  width: 500px;
+  height: 500px;
+  margin-left: 30%;
+
 }
 </style>

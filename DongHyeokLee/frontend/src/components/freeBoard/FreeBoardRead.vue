@@ -1,25 +1,23 @@
 <template>
-    <div >
+    <div>
         
         <div class="title">
             <h2> {{ freeBoard.title }} </h2>
             <div class="subtitle">
-                <p>{{ freeBoard.writer }}</p>
-                <span> {{ freeBoard.regDate.substring(0, 10) }}</span>
-                <span> {{new Date(freeBoard.regDate).toLocaleString("ko-KR", {timeZone: "Asia/Seoul"}).toString().substr(12, 8)}}</span>
+                <p class="writer">{{ freeBoard.writer }}     </p>
+                <span class="day"> {{ freeBoard.regDate.substring(0, 10) }} 
+                    {{new Date(freeBoard.regDate).toLocaleString("ko-KR", {timeZone: "Asia/Seoul"}).toString().substr(12, 8)}}
+                </span>   
             </div>
         </div>
-        
+
         <table>
             <tr>
                 <td>
-                   <div> {{ freeBoard.content }}</div>
-                   
+                    {{ freeBoard.content }}
                 </td>
             </tr>
         </table>
-        
-       
     </div>
 </template>
 
@@ -71,6 +69,15 @@ export default {
   td {    
     border-bottom: 1px solid;
     padding: 10px;
+  }
+  table{
+      height: 500px;
+      width: 500px;
+      border: 1px solid;
+  }
+  .day {
+      font-size: 17px;
+      color: gray;
   }
     
   

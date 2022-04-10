@@ -8,21 +8,22 @@
         <free-board-read v-if="freeBoard" :freeBoard="freeBoard"/>
         <p v-else>로딩중 ....... </p>
        
-        <!-- 댓글-->
-        <free-board-comment :boardNo="this.boardNo"/>  
-        
         <div class = "button">
-            <router-link v-if="$store.state.userInfo.nickname == freeBoard.writer" 
+            <router-link class="modify-btn" v-if="$store.state.userInfo.nickname == freeBoard.writer" 
                             :to="{ name: 'FreeBoardModifyPage', params: { boardNo } }">
-                게시물 수정
+                수정
             </router-link>
             
-            <button v-if="$store.state.userInfo.nickname == freeBoard.writer" @click="onDelete">삭제</button>
-            
-            <router-link :to="{ name: 'FreeBoardListPage' }">
-                목록 보기
+            <button class="delete-btn" v-if="$store.state.userInfo.nickname == freeBoard.writer" @click="onDelete">삭제</button>
+        
+            <router-link class="list-btn" :to="{ name: 'FreeBoardListPage' }">
+                목록
             </router-link>
+          
         </div>
+
+           <!-- 댓글-->
+        <free-board-comment :boardNo="this.boardNo"/>  
     
         
     </div>
@@ -86,20 +87,34 @@ export default {
 
 <style scoped>
 
-.button {
-    margin-left: 30%;
-}
+    .button {
+        padding: 10px;
+         margin-left: 57%;
+    }
 
-a{
-    text-decoration: none;
+    a{
+        text-decoration: none;
+    }
+
+    a:hover{
+        text-decoration: none; 
+    }
+
+
+    p{
+        font-size: 1em;
+        padding:  15px;
+        margin-left:400px;
+    }
+    .modify-btn {
+        color: black;
+        
+        
+    }
+    .delete-btn{
+        color: red;
+       
+    }
     
-}
-
-p{
-    font-size: 1em;
-    padding:  15px;
-    margin-left:400px;
-}
-
     
 </style>
