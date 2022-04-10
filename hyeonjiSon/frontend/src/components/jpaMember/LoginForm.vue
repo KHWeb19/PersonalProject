@@ -8,19 +8,13 @@
 
       <br>
 
-      <table>
-        <tr>
-          <td>아이디</td>
-          <td><input id="loginInput" type="text" v-model="id" placeholder="*ID를 입력해주세요."></td>          
-        </tr>
-      </table>
+      <div class="input_area">
+        <v-text-field id="loginInput" type="text" v-model="id" style="width:350px" placeholder="*ID를 입력해주세요.">
+        </v-text-field></div>
 
-      <table>
-        <tr>
-          <td>비밀번호</td>
-          <td><input id="loginInput" type="password" v-model="pw" placeholder="*비밀번호를 입력하세요"></td>
-        </tr>
-      </table>
+      <div class="input_area">
+        <v-text-field id="loginInput" type="password" v-model="pw" placeholder="*비밀번호를 입력하세요" style="width:350px">
+        </v-text-field></div>
 
       <br>
       
@@ -60,12 +54,6 @@ export default {
 </script>
 
 <style scoped>
-    table {
-        width: 350px;
-        margin: 6px;
-        border-collapse: collapse;
-        border-bottom: 2px solid;
-    }
     #loginInput {
       margin: 15px;
       outline: none;

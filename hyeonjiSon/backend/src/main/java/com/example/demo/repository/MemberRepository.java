@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface MemberRepository extends JpaRepository<Member, Long> {
 
-  //  @Query("select userID = :userID")
-   // Optional<Member> findByUserId(String userId);
+    @Query("select m from Member m where m.userId = :userId")
+    Optional<Member> findByUserId(String userId);
 
 }

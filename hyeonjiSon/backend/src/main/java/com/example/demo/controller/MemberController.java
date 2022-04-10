@@ -23,7 +23,6 @@ public class MemberController {
         memberservice.register(memberRequest);
     }
 
-    /*
     @PostMapping("/login")
     public MemberRequest jpaMemberLogin (@RequestBody MemberRequest memberRequest) {
         log.info("login request from vue:() " + memberRequest);
@@ -38,6 +37,4 @@ public class MemberController {
 
         return memberResponse;
     }
-
-     */
 }

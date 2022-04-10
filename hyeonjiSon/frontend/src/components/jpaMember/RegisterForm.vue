@@ -8,33 +8,21 @@
 
       <br>
 
-      <table>
-        <tr>
-          <td>아이디</td>
-          <td><input type="text" v-model="id" placeholder="*ID를 입력해주세요."></td>          
-        </tr>
-      </table>
+      <div class="input_area">
+        <v-text-field v-model="id" style="width:350px" placeholder=" *ID를 입력해주세요." :rules="rulesId">
+        </v-text-field></div>
 
-      <table>
-        <tr>
-          <td>상호명</td>
-          <td><input type="text" v-model="sn" placeholder="*ID를 입력해주세요."></td>          
-        </tr>
-      </table>
+      <div class="input_area">
+        <v-text-field v-model="sn" style="width:350px" placeholder=" *상호명을 입력해주세요." :rules="rulesSn">
+        </v-text-field></div>
 
-      <table>
-        <tr>
-          <td>비밀번호</td>
-          <td><input type="password" v-model="pw" placeholder="*8~14자리로 작성하세요."></td>
-        </tr>
-      </table>
+      <div class="input_area">
+        <v-text-field type="password" style="width:350px" v-model="pw" placeholder=" *8~14자리로 작성하세요." :rules="rulesPw">
+        </v-text-field></div>
 
-      <table>
-        <tr>
-          <td>비밀번호 질문</td>
-          <td><input type="text" v-model="pwConfirm" placeholder="*가장 좋아하는 과일은?"></td>
-        </tr>
-      </table>
+      <div class="input_area">
+        <v-text-field v-model="pwConfirm" style="width:350px" placeholder=" *가장 좋아하는 과일은?" :rules="rulesPwc">
+        </v-text-field></div>
 
       <br>
       
@@ -65,7 +53,22 @@ export default {
       id: '',
       sn: '',
       pw: '',
-      pwConfirm: ''
+      pwConfirm: '',
+
+      rulesId:[
+          v => !!v || 'ID 입력은 필수입니다.'
+      ],
+      rulesSn:[
+          v => !!v || '상호명 입력은 필수입니다.',
+          v => v.length >= 3 || 'Password must be less than 3 characters'     
+      ],
+      rulesPw:[
+          v => !!v || '비밀번호 입력은 필수입니다.',
+          v => v.length >= 8 && v.length <=14 || '8자리 이상 14자리 이하로 입력하세요.'     
+      ],
+      rulesPwc:[
+          v => !!v || '비밀번호 질문의 답은 필수입니다.'
+      ]
     }
   },
   methods: {
@@ -79,18 +82,6 @@ export default {
 </script>
 
 <style scoped>
-    table {
-        width: 350px;
-        margin: 6px;
-        border-collapse: collapse;
-        border-bottom: 2px solid;
-    }
-    input {
-      margin: 15px;
-      outline: none;
-
-      font-size: 100%;
-    }
     button {
       margin: 15px;
       height: 50px;
