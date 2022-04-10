@@ -16,6 +16,10 @@
 
 export default {
     name: "AddressApi",
+    props: {
+        roadAddr: Object,
+        extraRoadAddr: Object
+    },
     methods : {
         search(){ //@click을 사용할 때 함수는 이렇게 작성해야 한다.
             new window.daum.Postcode({
@@ -69,7 +73,7 @@ export default {
                     guideTextBox.style.display = 'none';
                 }
 
-                this.$emit("address", data);   
+                this.$emit("address", { roadAddr, extraRoadAddr });   
             }
         }).open() 
         }

@@ -1,3 +1,5 @@
 export default {
-    userInfo: null
+    userInfo: null,
+    isLogin: false,
+    isLoginError: false
 }

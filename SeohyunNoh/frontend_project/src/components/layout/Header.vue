@@ -28,12 +28,19 @@
           -->
 
           <!-- 로그인, 장바구니, 마이페이지, 게시판--> 
-           <v-btn plain background-color="transparent" color="basil" v-for="link in links" :key="link.icon" :to="link.route">
-                <v-icon left>
-                    {{ link.icon }}
-                </v-icon>
-                <span> {{ link.text }}</span>
+            <v-btn v-if="this.$store.state.userInfo == null" router :to="{path: '/loginPage'}" plain background-color="transparent" color="basil"> 
+              LOGIN 
             </v-btn>
+            <v-btn v-else @click="logout"  plain background-color="transparent" color="basil"> 
+              LOGOUT 
+            </v-btn>
+
+
+            <v-btn router :to="{path: '/myPage'}" plain background-color="transparent" color="basil">
+              MY PAGE
+            </v-btn>     
+          
+            
 
           <!-- 그 중 게시판(BOARD)을 클릭하면 드롭다운으로 공지사항, 1:1문의 페이지로 이동하게 --> 
             <v-menu open-on-hover bottom offset-y>
@@ -99,7 +106,7 @@
              <v-tab>
               <v-menu open-on-hover bottom offset-y>
                 <template v-slot:activator="{ on, attrs }">
-                  <v-btn plain background-color="transparent" color="basil" v-bind="attrs" v-on="on" @click="lookbookPageLink">
+                  <v-btn plain background-color="transparent" color="basil" v-bind="attrs" v-on="on" router :to="{path: '/lookbookPage'}">
                     LOOKBOOK
                   </v-btn>
                 </template>
@@ -113,10 +120,13 @@
 
 <script>
 
+import { mapGetters } from 'vuex'
+
 export default {
    data () {
         return {
             tab: null,
+            isLogin: false,
             menus: [
                'women', 'men'
             ],
@@ -145,16 +155,14 @@ export default {
 
     },
     computed: {
-         logoLink() {
-           return this.$store.getters.isLogin ? '/mainPage' : '/loginPage';
-          }
+      ...mapGetters(['loggedIn'])
     },
     methods: {
         mainPageLink() {
             this.$router.push({ path: '/mainPage' })
         },
-        lookbookPageLink() {
-          this.$router.push({ path: '/lookbookPage' })
+        logout() {
+          this.$store.dispatch('logout')
         }
     }
 }
