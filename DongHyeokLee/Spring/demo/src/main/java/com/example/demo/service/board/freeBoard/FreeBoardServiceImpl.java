@@ -47,7 +47,11 @@ public class FreeBoardServiceImpl implements FreeBoardService {
             log.info("Can't read board!!");
             return null;
         }
-        return maybeReadBoard.get();
+        FreeBoard readBoard = maybeReadBoard.get();
+        readBoard.setCount(readBoard.getCount()+1);
+        repository.save(readBoard);
+
+        return readBoard;
     }
 
     @Override

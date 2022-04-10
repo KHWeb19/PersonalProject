@@ -12,7 +12,6 @@
     "bootstrap-vue": "^2.21.2",
     "core-js": "^3.8.3",
     "vue": "^2.6.14",
-    "vue-audio-better": "^3.0.1",
     "vue-coverflow": "^2.2.0",
     "vue-router": "^3.5.1",
     "vuetify": "^2.6.0",

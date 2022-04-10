@@ -126,6 +126,7 @@ const routes = [
     component: FreeBoardListPage,
   
   },
+  //뮤직
   {
     path:'/playList',
     name: 'MusicPlayer',

@@ -15,7 +15,10 @@
               <v-list-item>
                 <v-list-item-subtitle>
                   <strong>{{ photo.writer }}</strong>
-                  <span>{{ photo.regDate.substring(0, 11) }}</span>
+                  <span>{{ photo.regDate.substring(0, 11) }}</span> 
+                  
+                  <spacer>조회 {{photo.count}} </spacer>
+                  
                 </v-list-item-subtitle>
               </v-list-item>
                   </v-card>
@@ -89,6 +92,10 @@ export default {
 
   strong{
       margin-right: 5px;
+  }
+
+  spacer{
+    margin-left:10px;
   }
 
   

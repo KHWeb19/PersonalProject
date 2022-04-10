@@ -29,6 +29,9 @@ public class VideoBoard {
     @Lob
     private String content;
 
+    @Column
+    private int count;
+
     @CreationTimestamp
     private Date regDate;
 

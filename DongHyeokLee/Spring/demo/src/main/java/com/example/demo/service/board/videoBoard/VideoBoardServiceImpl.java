@@ -1,10 +1,7 @@
 package com.example.demo.service.board.videoBoard;
 
-import com.example.demo.entitiy.board.photoBoard.PhotoBoard;
 import com.example.demo.entitiy.board.videoBoard.VideoBoard;
-import com.example.demo.repository.board.photoBoard.PhotoBoardRepository;
 import com.example.demo.repository.board.videoBoard.VideoBoardRepository;
-import com.example.demo.service.board.photoBoard.PhotoBoardService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -40,8 +37,11 @@ public class VideoBoardServiceImpl implements VideoBoardService {
             log.info("Can't read board!!");
             return null;
         }
-        log.info("readCheck" + maybeReadBoard.get());
-        return maybeReadBoard.get();
+        VideoBoard readBoard = maybeReadBoard.get();
+        readBoard.setCount(readBoard.getCount()+1);
+        repository.save(readBoard);
+
+        return readBoard;
     }
 
     @Override
@@ -54,9 +54,7 @@ public class VideoBoardServiceImpl implements VideoBoardService {
             VideoBoard videoBoard = fileName.get();
             board.setFileName(videoBoard.getFileName());
 
-
         }
-
             repository.save(board);
     }
 

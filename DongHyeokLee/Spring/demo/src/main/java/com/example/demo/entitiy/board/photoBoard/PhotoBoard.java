@@ -29,6 +29,9 @@ public class PhotoBoard {
     @Lob
     private String content;
 
+    @Column
+    private int count;
+
     @CreationTimestamp
     private Date regDate;
 
