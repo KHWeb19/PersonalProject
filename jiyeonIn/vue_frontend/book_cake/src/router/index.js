@@ -10,6 +10,8 @@ import MyPage from '@/views/CakePage/MyPage.vue'
 import LoginPage from '@/views/CakePage/LoginPage.vue'
 import SignUpPage from '@/views/CakePage/SignUpPage.vue'
 import test from '@/views/CakePage/test.vue'
+import BookingReadPage from '@/views/boardPage/BookingReadPage.vue'
+import BookingModifyPage from '@/views/boardPage/BookingModifyPage.vue'
 
 Vue.use(VueRouter)
 
@@ -63,15 +65,27 @@ const routes = [
     name: 'test',
     component: test
   }
-
   ,
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    path: '/bookingReadPage',
+    name: 'BookingReadPage',
+    component: {
+      default: BookingReadPage
+    },
+    props: {
+      default: true
+    }
+  }
+  ,
+  {
+    path: '/bookingModifyPage',
+    name: 'BookingModifyPage',
+    component: {
+      default: BookingModifyPage
+    },
+    props: {
+      default: true
+    }
   }
 ]
 
