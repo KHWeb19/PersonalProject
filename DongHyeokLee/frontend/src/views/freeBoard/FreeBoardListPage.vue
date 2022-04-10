@@ -1,14 +1,9 @@
 <template>
-    <div id="freeBoard">
+    <div id="board" >
         <h2 id="title">자유게시판</h2>
         <free-board-list :freeBoards="freeBoards" />
 
-    <router-link :to="{ name: 'FreeBoardRegisterPage'}">
-        <v-btn v-if="$store.state.isLogin == true" class="register-btn" color="cyan lighten-3" dark>
-            <v-icon>mdi-pencil-plus</v-icon>
-            <span>등록</span>
-        </v-btn>
-    </router-link>
+ 
     </div>
 </template>
 
@@ -47,22 +42,25 @@ export default {
 </script>
 
 <style scoped>
-/* rotuer-link*/
-    a{
-        text-decoration: none;
-    }
 
-    a:hover{
-        text-decoration: none; 
-    }
+#board{
+ background-image: url(@/assets/img/homeBackground.png);
+ height: 100vh;
+}
+a{
+    text-decoration: none;
+}
 
-    #title {
-        text-align: center;
-        padding: 15px;   
-    }
+a:hover{
+    text-decoration: none; 
+}
 
-    .register-btn{
-        margin-left:80%; 
-        }
+#title {
+    color: white;
+    text-align: center;
+    padding: 30px;   
+}
+
+
 
 </style>

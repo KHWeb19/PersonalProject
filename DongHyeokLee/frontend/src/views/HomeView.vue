@@ -1,5 +1,9 @@
 <template>
     <div class="home">
+       
+        <div class="home-img">
+            <h1>AKMU</h1>
+        </div>
      
         <v-container>
             <v-row>
@@ -40,3 +44,22 @@ export default {
 }
 
 </script>
+
+<style scoped>
+
+ .home-img{
+        background-image: url(@/assets/img/homeBackground.png);
+        z-index: 3;
+        background-repeat: no-repeat;
+        height: 300px;
+        color:#ffffff;
+        text-align: center;
+         
+     }
+   .home-img h1{
+        font-size: 2.5em;
+        padding:  100px;
+        
+    }
+    
+</style>

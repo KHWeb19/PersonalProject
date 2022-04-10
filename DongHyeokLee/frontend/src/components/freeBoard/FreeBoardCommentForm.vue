@@ -1,15 +1,13 @@
 <template>
     <div class="comments">       
         <!-- 댓글 리스트 -->
-        
- 
-        
         <div border="1" v-for="(comments, index) in freeBoardComments" :key="index" >
-                <div>
+                <div class="writer">
                     <strong> {{ comments.writer }} </strong>
                     <span class="date"> 
-                        {{ comments.regDate.substring(0, 10) }} 
+                       <strong> {{ comments.regDate.substring(0, 10) }} 
                         {{ new Date(comments.regDate).toLocaleString("ko-KR", {timeZone: "Asia/Seoul"}).toString().substr(16, 8)}}
+                       </strong>
                      </span>
                 </div>
                     <!-- 수정 버튼 누르기 전-->
@@ -23,7 +21,7 @@
                     <div v-else >
                     <input class="content2" v-model="comments.content" disabled/>
                     <!-- 수정 버튼 -->
-                    <v-btn @click="onEdit(index)" text>
+                    <v-btn @click="onEdit(index)" text dark>
                         <v-icon class="modify-icon">
                         수정 
                         </v-icon> 
@@ -48,13 +46,13 @@
                     <div v-else>
                         <input class="content4" v-model="ediContent">
                             <!-- 수정 확인 버튼 -->
-                     <v-btn v-if="comments.writer == writer " @click="onModify(comments.commentNo,ediContent,index)" text>
+                     <v-btn v-if="comments.writer == writer " @click="onModify(comments.commentNo,ediContent,index)" text dark>
                         <v-icon class="select-icon">
                         완료
                         </v-icon> 
                     </v-btn>
                     <!-- 수정 취소 버튼 -->
-                    <v-btn v-if="comments.writer == writer" @click="onCancel(index)" text>
+                    <v-btn class="cancel-btn" v-if="comments.writer == writer" @click="onCancel(index)" text>
                         <v-icon class="cancel-icon">
                         취소
                         </v-icon> 
@@ -68,9 +66,9 @@
        
         <form @submit.prevent="onSubmit">
            <h4 class="commentsList">댓글</h4>
-           <div> <strong>{{ this.writer }}</strong> </div>     
+           <div class="commenter"> <strong>{{ this.writer }}</strong> </div>     
         <input type="text" class="commentRegister" v-model="content" placeholder="댓글을 작성하세요"/>
-        <v-btn type="submit" text>
+        <v-btn class="register-btn" type="submit" text>
             <v-icon class="register-icon">
             등록
             </v-icon>
@@ -95,6 +93,7 @@ export default {
             commnetNo:'',
             edit:[],
             ediContent: ''
+
         }
     },
     props: {
@@ -158,28 +157,51 @@ export default {
 </script>
 
 <style scoped>
+.writer{
+    color:white;
+}
 .comments{
     margin-left: 30%;
     margin-top: 10px;
 }
 .commentRegister {
-    border: 1px solid;
-    width: 500px;
+    border: 3px solid white;
+    width: 450px;
     outline: none;
+    color:white
 }
 .commentsList{
     margin-top: 10px;
+    color: white;
     
 }
-.modify-icon, .delete-icon,
-.select-icon, .cancel-icon,
-.register-icon {
+.commenter{
+    color:white;
+}
+.modify-icon,
+.select-icon, 
+.cancel-icon,
+.delete-icon {
    font-size: 17px;
+}
+.cancel-btn {
+    color:black;
+    font-size: 13px;
+}
+.register-btn{
+    color:grey;
+}
+.register-icon{
+    font-size: 17px;
+}
+.delete-btn{
+    color: grey;
 }
 .content1, .content2
 ,.content3, .content4 {
     width: 400px;
     border-bottom: 1px solid;
+    color: white;
     
 }
 .date {

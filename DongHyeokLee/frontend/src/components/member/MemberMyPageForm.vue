@@ -1,7 +1,7 @@
 <template>
     <v-dialog v-model="myPageDialog" persisten max-width="400px" >
            <template v-slot:activator="{ on }">
-            <v-btn color="cyan lighten-3" style="font-size: 0.7em;" dark v-on="on">
+            <v-btn color="white" style="font-size: 0.7em;" dark v-on="on" text>
                 <v-icon style="font-size: 1.3em;">
                     mdi-account
                 </v-icon>

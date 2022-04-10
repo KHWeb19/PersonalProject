@@ -1,9 +1,9 @@
 <template>
     <v-dialog v-if="this.$store.state.userInfo == null" v-model="loginDialog" persisten max-width="400px">
         <template v-slot:activator="{ on }">
-            <v-btn color="cyan lighten-3" 
-                   style="font-size: 0.7em; margin: 7px;" 
-                   dark v-on="on">
+            <v-btn color="white" 
+                   style="font-size: 0.7em; padding:1px;" 
+                   dark v-on="on" text>
                 <v-icon style="font-size: 1.5em;">
                     mdi-login
                 </v-icon>

@@ -15,7 +15,7 @@
                             :to="{ name: 'PhotoBoardModifyPage', params: { boardNo } }">
                 게시물 수정
             </router-link>
-            
+            <!-- 삭제해도 db에서 fileName은 날아가는데 vue에 저장 된 파일 자체는 안 날아가는 형태라 고민되네 -->
             <button v-if="$store.state.userInfo.nickname == photoBoard.writer" @click="onDelete">삭제</button>
             
             <router-link :to="{ name: 'PhotoBoardListPage' }">

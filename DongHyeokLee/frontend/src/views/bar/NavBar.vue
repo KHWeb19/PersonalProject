@@ -1,20 +1,12 @@
 <template>    
     <section>
         <div>
-            <router-link style="text-decoration: none; color:white;" 
-                :to="{ name: 'HomeView' }">
-                <h1>AKMU</h1>
-            </router-link>
+            <v-app-bar-nav-icon class="list" @click="nav_drawer = !nav_drawer" dense dark>
+            </v-app-bar-nav-icon> 
             
-            <!-- <v-toolbar class="transparent" dense dark> -->
-                    <!-- <v-spacer></v-spacer> -->
-                    <v-app-bar-nav-icon class="list" @click="nav_drawer = !nav_drawer" dense dark>
-                    </v-app-bar-nav-icon> 
-            <!--  </v-toolbar> -->
-
             <v-navigation-drawer app v-model="nav_drawer" right temporary>
                 <v-list nav dense>
-                    <v-list-item v-for="link in links" :key="link.name" router :to="link.route">
+                    <v-list-item v-for="link in links" :key="link.name" :href="link.route">
                         <v-list-item-action>
                             <v-icon left>
                                 {{ link.icon }}
@@ -44,7 +36,7 @@ export default {
             nav_drawer: false,
             links: [
                 { icon: 'mdi-home', text: 'Home', name: 'HomeView', route: '/' },
-                { icon: 'mdi-pencil-plus-outline', text:'자유게시판', name:'FreeBoardListPage', route:'/freeBoardList'},
+                { icon: 'mdi-pencil-plus-outline', text:'자유게시판', name:'FreeBoardListPage', route:'https://www.instagram.com/akmu_suhyun/'},
                 { icon: 'mdi-image-multiple', text: '사진게시판', name: 'PhotoBoardListPage', route: '/photoBoardList'},
                 { icon: 'mdi-music', text: 'playList', name: 'MusicPlayer', route: '/playList'},
                 { icon: 'mdi-video', text: '영상게시판', name: 'VideoBoardListPage', route: '/videoBoardList'}
@@ -57,26 +49,7 @@ export default {
 
 <style scoped>
    
-    section{
-        background-image: url(@/assets/img/homeBackground.png);
-        background-size: cover;
-        background-repeat: no-repeat;
-        display: block;
-        height: 300px;
-        color:#ffffff;
-        text-align: center;
-         
-     }
-    section h1{
-        font-size: 2.5em;
-        padding:  100px;
-        
-    }
-    
-    .list {
-        margin-left:1300px;
-      
-    }
+   
 
     
  

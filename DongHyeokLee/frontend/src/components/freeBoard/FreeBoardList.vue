@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="free-board" align="center">
         <table>
             <tr class="list">
                 <th align="center" width="100">번호</th> 
@@ -20,10 +20,11 @@
                 </th>
                 <th>
                     <router-link :to="{ name: 'FreeBoardReadPage',
-                                        params: { boardNo: freeBoard.boardNo.toString() } }" style=" color:black;">
-                        {{ freeBoard.title }}
+                                        params: { boardNo: freeBoard.boardNo.toString() } }" style="color:white;">
+                       {{ freeBoard.title}} 
                     </router-link>
                 </th>
+            
                 <th>
                     {{ freeBoard.writer }}
                 </th>
@@ -49,6 +50,13 @@
               mdi-chevron-right
           </v-icon>
       </v-btn>
+        <!-- 등록 버튼 -->
+    <router-link :to="{ name: 'FreeBoardRegisterPage'}">
+        <v-btn v-if="$store.state.isLogin == true" class="register-btn" text>
+            <v-icon class="register-icon">mdi-pencil-plus</v-icon>
+        </v-btn>
+    </router-link>
+    
     </div>
      
         
@@ -107,41 +115,50 @@ export default {
 
 
 <style scoped>
-
-    a{
-        text-decoration: none;
-    }
-
-    a:hover{
-        text-decoration: underline; 
-        color: black;
-    }
-
-    table {
-        margin-left: 180px;
-        margin-top: 10px;
-        text-align: center;
-        border-collapse: collapse;
-    }
+a{
+    text-decoration: none;
     
-    th {
-        padding: 10px;
-    }
+}
+a:hover{
+    text-decoration: underline; 
+    
+}
+table {
+   
+    margin-top: 10px;
+    text-align: center;
+    border-collapse: collapse;
+}
 
-    .list{
-        background-color: #FAFAFA;
-        border-bottom: 1px solid;
-    }
+th {
+    padding: 10px;
+    color: white;
+}
 
-    .page-next {
-        color: black;    
-    }
+.list{
+    /*background-color: #FAFAFA;*/
+    border-bottom: 1px solid white;
+    color: white
+}
 
-    .page-prev {
-        color:black;
-    }
+.page-next {
+    color: white;    
+}
 
-    .btn-cover {
-        margin-left:43%;
+.page-prev {
+    color:white;
+}
+.page-count{
+    color:white;
+}
+
+.btn-cover {
+    margin-top: 15px;
+}
+.register-btn{
+    color:white;
     }
+.register-icon{
+    font-size:1.7em;
+}
 </style>

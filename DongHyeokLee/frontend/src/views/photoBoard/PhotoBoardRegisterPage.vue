@@ -1,5 +1,5 @@
 <template>
-    <div align="center">
+    <div id="register" align="center">
         <h2>게시물 작성</h2>
         <photo-board-register-form @submit="onSubmit"/>
     </div>
@@ -51,3 +51,11 @@ export default {
 }
 
 </script>
+
+<style scoped>
+/*#register {
+ background-image: url(@/assets/img/homeBackground.png);
+ height: 100vh;
+}*/
+    
+</style>

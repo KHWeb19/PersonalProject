@@ -1,12 +1,12 @@
 <template>
     <div>
-        
         <div class="title">
-            <h2> {{ freeBoard.title }} </h2>
+            {{ freeBoard.title }}
             <div class="subtitle">
-                <p class="writer">{{ freeBoard.writer }}     </p>
-                <span class="day"> {{ freeBoard.regDate.substring(0, 10) }} 
+                <p class="writer">{{ freeBoard.writer }} </p>
+                <span class="day"><strong> {{ freeBoard.regDate.substring(0, 10) }} 
                     {{new Date(freeBoard.regDate).toLocaleString("ko-KR", {timeZone: "Asia/Seoul"}).toString().substr(12, 8)}}
+                    </strong>
                 </span>   
             </div>
         </div>
@@ -42,43 +42,31 @@ export default {
 
 <style scoped>
    
-
-    .title{
-       margin-left: 30%; 
-       margin-bottom: 20px;
-       
-    }
-
-    .subtitle{
-        margin-top: 10px;
-    }
-
-    
-
-     table {
+.title{
     margin-left: 30%; 
-    border-top: 1px solid ;
-    border-collapse: collapse;
-  }
-  th {
-    border-bottom: 1px solid ;
-    border-left: 1px solid;
+    padding:15px;
+    color:white;
+}
+.subtitle{
+    margin-top: 10px;
+}
+td {    
+    border-top: 3px solid white;
+    border-bottom: 3px solid white;
     padding: 10px;
-  }
+    color: white;
+}
+table{
+    margin-left: 30%; 
+    height: 500px;
+    width: 500px;
+    border: 1px solid transparent;
+}
+.day {
+    font-size: 17px;
+    color: grey;
+}
 
-  td {    
-    border-bottom: 1px solid;
-    padding: 10px;
-  }
-  table{
-      height: 500px;
-      width: 500px;
-      border: 1px solid;
-  }
-  .day {
-      font-size: 17px;
-      color: gray;
-  }
     
   
 </style>

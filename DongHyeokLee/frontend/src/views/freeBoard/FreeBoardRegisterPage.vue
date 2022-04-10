@@ -1,5 +1,5 @@
 <template>
-    <div align="center">
+    <div id="register" align="center">
         <free-board-register-form @submit="onSubmit"/>
     </div>
 </template>
@@ -34,3 +34,10 @@ export default {
 }
 
 </script>
+
+<style scoped>
+#register {
+    background-image: url(@/assets/img/homeBackground.png);
+    height: 100vh;
+}
+</style>

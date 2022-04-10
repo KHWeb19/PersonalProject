@@ -17,13 +17,8 @@ import VideoBoardRegister from '@/views/videoBoard/VideoBoardRegisterPage.vue'
 import VideoBoardListPage from '@/views/videoBoard/VideoBoardListPage.vue'
 import VideoBoardReadPage from '@/views/videoBoard/VideoBoardReadPage.vue'
 import VideoBoardModifyPage from '@/views/videoBoard/VideoBoardModifyPage.vue'
-
-import MusicPage from '@/views/music/MusicPage.vue'
-
-
-
-
-
+//PLAYLIST
+import PlayListPage from '@/views/music/PlayListPage.vue'
 
 Vue.use(VueRouter)
 const routes = [
@@ -129,8 +124,8 @@ const routes = [
   //뮤직
   {
     path:'/playList',
-    name: 'MusicPlayer',
-    component: MusicPage
+    name: 'PlayListPage',
+    component: PlayListPage
 },
 
 ]

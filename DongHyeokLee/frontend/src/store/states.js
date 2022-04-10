@@ -14,6 +14,4 @@ export default {
      videoBoards: [],
      videoBoard: null,
      videoBoardComments:[]
-    
-  
 }

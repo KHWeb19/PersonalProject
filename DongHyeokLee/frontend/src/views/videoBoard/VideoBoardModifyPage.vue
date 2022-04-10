@@ -30,6 +30,7 @@ export default {
         onSubmit (payload) {
             const { title, content, files } = payload
             if(files){
+                //파일 변경시
                 let formData = new FormData()
                 const fileName = files[0].name
                 for (let idx = 0; idx < files.length; idx++) {
@@ -56,6 +57,7 @@ export default {
                     .catch(() => {
                         alert('게시물 수정 실패!')
                     })
+                    //파일 변경 안할 경우
             }else{
                    axios.put(`http://localhost:7777/videoBoard/${this.boardNo}`,
                 { title, writer: this.videoBoard.writer, content, regDate: this.videoBoard.regDate })

@@ -1,7 +1,5 @@
 <template>
     <div>
-        <h3>게시물 목록</h3>
-      
      <v-container>
             <v-row>
                 <v-col v-for="photo in photoBoards" :key="photo.boardNo" class="d-flex child-flex" cols="4">

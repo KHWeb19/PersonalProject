@@ -1,25 +1,27 @@
 <template>
-    <div>
+    <div id="read">
         <!-- 리스트로 돌아가기 -->
-        <router-link :to="{ name: 'FreeBoardListPage' }">
-            <p>자유게시판</p>
+        <router-link id="list-btn" :to="{ name: 'FreeBoardListPage' }">
+            <v-icon id="list-icon">
+                mdi-format-list-bulleted
+            </v-icon>
+           <strong>자유게시판</strong>
         </router-link>
         
         <free-board-read v-if="freeBoard" :freeBoard="freeBoard"/>
         <p v-else>로딩중 ....... </p>
-       
+        <!-- 버튼 -->
         <div class = "button">
-            <router-link class="modify-btn" v-if="$store.state.userInfo.nickname == freeBoard.writer" 
+            <router-link v-if="$store.state.userInfo.nickname == freeBoard.writer" 
                             :to="{ name: 'FreeBoardModifyPage', params: { boardNo } }">
-                수정
+                <v-btn class="modify-btn" text>
+                <strong>수정</strong>
+                </v-btn>
             </router-link>
             
-            <button class="delete-btn" v-if="$store.state.userInfo.nickname == freeBoard.writer" @click="onDelete">삭제</button>
-        
-            <router-link class="list-btn" :to="{ name: 'FreeBoardListPage' }">
-                목록
-            </router-link>
-          
+            <v-btn class="delete-btn" v-if="$store.state.userInfo.nickname == freeBoard.writer" @click="onDelete" text>
+                <strong>삭제</strong>
+            </v-btn>
         </div>
 
            <!-- 댓글-->
@@ -42,7 +44,6 @@ export default {
         return {
             writer:'',
             content:''
-
         }
     },
     props: {
@@ -87,34 +88,37 @@ export default {
 
 <style scoped>
 
-    .button {
-        padding: 10px;
-         margin-left: 57%;
-    }
+#read{
+    background-image: url(@/assets/img/homeBackground.png);
+    background-size: cover;
+    padding: 20px;
+}
 
-    a{
-        text-decoration: none;
-    }
+.button {
+    padding: 10px;
+    margin-left: 800px;
+}
+a{
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: none; 
+}
 
-    a:hover{
-        text-decoration: none; 
-    }
-
-
-    p{
-        font-size: 1em;
-        padding:  15px;
-        margin-left:400px;
-    }
-    .modify-btn {
-        color: black;
-        
-        
-    }
-    .delete-btn{
-        color: red;
-       
-    }
+.modify-btn {
+    color: white;   
+}
+.delete-btn{
+    color: grey;  
+}
+#list-btn{
+    padding: 20px;
+    margin-left:425px;
+    color:white;
+}
+#list-icon{
+    color:white;
+}
     
     
 </style>

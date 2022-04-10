@@ -10,7 +10,7 @@
             </div>
         </div>
 
-        <div class="img">
+        <div class="video">
             <iframe :src="require(`@/assets/uploadVideo/${videoBoard.fileName}`)" width="50%" height="400" allow="autoplay muted"></iframe>
         </div>
         
