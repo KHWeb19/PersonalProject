@@ -9,9 +9,11 @@ import com.example.demo.repository.booking.BookingRepository;
 import com.example.demo.repository.upload.UploadRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -60,6 +62,11 @@ public class BookingServiceImpl implements BookingService{
             repository.save(bookingInfo1);
 
         }
+    }
+
+    @Override
+    public List<BookingInfo> list() {
+        return repository.findAll(Sort.by(Sort.Direction.DESC,"bookingNo"));
     }
 
 }

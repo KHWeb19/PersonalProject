@@ -46,8 +46,6 @@ import axios from 'axios'
             ...mapActions(['fetchCakeLists']),
             submitBooking (payload) {
                 const { id, date, time, contents, cakeArrNo, files1 } = payload
-                
-                //cakeArrNo에 아무것도 없지만, "" 표시로 null이 아니여서 제외 할 수 있는 방법을 찾기가 어려움
 
                 let formData = new FormData()
                 
@@ -61,6 +59,7 @@ import axios from 'axios'
                 formData.append(
                     "info", new Blob([JSON.stringify(fileInfo)], {type: "application/json"})
                 )
+
                 if(files1 != null) {
                     for(let idx = 0; idx < 1; idx++) {
                         formData.append('fileList', files1[idx])

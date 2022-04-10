@@ -1,6 +1,7 @@
 package com.example.demo.controller.bookingController;
 
 import com.example.demo.controller.bookingController.request.BookingRequest;
+import com.example.demo.entity.booking.BookingInfo;
 import com.example.demo.service.booking.BookingService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,4 +57,13 @@ public class BookingController {
         log.info("requestUpload(): Success!!!");
         return "Upload Success!!";
     }
+
+    @GetMapping("/list")
+    public List<BookingInfo> bookingList() {
+        log.info("bookingList()");
+
+
+        return service.list();
+    }
+
 }
