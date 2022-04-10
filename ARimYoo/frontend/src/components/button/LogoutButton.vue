@@ -19,6 +19,7 @@ export default {
             localStorage.removeItem("token") 
             alert ('로그아웃되셨습니다.')
             history.go(0)
+            this.$router.push('/main')
         }
     }
 }

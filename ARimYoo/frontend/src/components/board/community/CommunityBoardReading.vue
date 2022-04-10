@@ -54,6 +54,7 @@
                     </v-row>
                     <v-row justify="center">
                         <v-col cols="3" class="label2" style="font-size:23pt">Content</v-col>
+       
                         <v-col cols="12">
                             <v-textarea style="white-space:pre-line" cols="75" 
                             outlined color="red darken-3" readonly
