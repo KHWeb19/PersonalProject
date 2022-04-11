@@ -137,7 +137,7 @@ export default {
             ],
             boards: [
               {text: '1:1 문의', name: 'inquiry', route: '/inquiryPage'},
-              {text: 'NOTICE', name: 'notice', route: '/noticePage'}
+              {text: 'NOTICE', name: 'notice', route: '/noticeListPage'}
             ],
             womenCategories: [
               { item: 'Outer'},

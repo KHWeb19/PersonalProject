@@ -33,7 +33,7 @@
                                 </v-radio-group>
                                 </div>
                                 <!-- 생년월일 --> 
-                                <v-text-field type="date" v-model="birthDay" name="birthDay" style="width: 100%;" required >
+                                <v-text-field type="date" v-model="birth" name="birth" style="width: 100%;" required >
                                 </v-text-field>
                                 <!-- 아이디 --> 
                                 <v-text-field type="text" v-model="id" name="id" label="아이디" required>
@@ -71,7 +71,7 @@ export default {
     },
     data() {
         return {
-             radioGroup: 0,
+            radioGroup: 0,
             kindsOfMember : [
                 '개인',
                 '판매자',
@@ -85,19 +85,19 @@ export default {
             name: '',
             id: '',
             pw: '',
-            birthDay: '',
+            birth: '',
             address:''
         }
     },
     methods: {
         register() {
             this.$store.dispatch('register', {
-                auth: this.radioGroup,
-                gender: this.radioGender,
+                auth: (this.radioGroup == "개인" ?  "개인" : this.radioGroup == "판매자" ? "판매자" : "관리자"),
+                gender: (this.radioGender == "남성" ? "남성" : "여성"),
                 name: this.name,
+                birth: this.birth,
                 id: this.id,
                 pw: this.pw,
-                birthDay: this.birthDay,
                 address: this.address
             })
             .then(() => {

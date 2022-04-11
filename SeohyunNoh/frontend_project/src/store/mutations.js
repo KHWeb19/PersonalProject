@@ -1,4 +1,9 @@
 import axios from "axios"
+import {
+    FETCH_NOTICE_BOARD_LIST,
+    FETCH_NOTICE
+   
+} from './mutation-types'
 
 export default {
     SET_USER_DATA(state, userData) {
@@ -23,5 +28,11 @@ export default {
         state.userInfo = null
         localStorage.removeItem('user')
         axios.defaults.headers.common['Authorization'] = null
-    }
+    },
+    [FETCH_NOTICE_BOARD_LIST] (state, noticeBoards) {
+        state.noticeBoards = noticeBoards
+    },
+    [FETCH_NOTICE] (state, noticeBoard) {
+        state.noticeBoard = noticeBoard
+    },
 }

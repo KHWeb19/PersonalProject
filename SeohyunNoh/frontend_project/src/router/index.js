@@ -12,6 +12,11 @@ import WomenCategoryPage from '@/views/project/WomenCategoryPage.vue'
 import MenCategoryPage from '@/views/project/MenCategoryPage.vue'
 import SaleCategoryPage from '@/views/project/SaleCategoryPage.vue'
 
+import NoticeListPage from '@/views/notice/NoticeListPage.vue'
+import NoticeReadPage from '@/views/notice/NoticeReadPage.vue'
+import NoticeRegisterPage from '@/views/notice/NoticeRegisterPage.vue'
+import NoticeModifyPage from '@/views/notice/NoticeModifyPage.vue'
+
 
 Vue.use(VueRouter)
 
@@ -88,6 +93,37 @@ const routes = [
     path: '/saleCategoryPage',
     name: 'SaleCategoryPage',
     component: SaleCategoryPage
+  },
+  {
+    path: '/noticeListPage',
+    name: 'NoticeListPage',
+    component: NoticeListPage
+  },
+  {
+    path: '/noticeReadPage/:boardNo',
+    name: 'NoticeReadPage',
+    components: {
+      default: NoticeReadPage
+    },
+    props: {
+      default: true
+    }
+  },
+  {
+    path: '/noticeRegisterPage',
+    name: 'NoticeRegisterPage',
+    component: NoticeRegisterPage
+  },
+  {
+    path: '/noticeModifyPage/:boardNo',
+    name: 'NoticeModifyPage',
+    components: {
+      default: NoticeModifyPage
+    },
+    props: {
+      default: true
+    }
+
   }
 
 ]

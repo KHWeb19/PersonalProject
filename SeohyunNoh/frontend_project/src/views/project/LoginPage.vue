@@ -51,13 +51,13 @@
 
 import Header from '@/components/layout/Header.vue'
 
-// import { mapState } from 'vuex'
+//import { mapState } from 'vuex'
 
-//import Vue from 'vue'
-//import axios from 'axios'
-//import cookies from 'vue-cookies'
+// import Vue from 'vue'
+// import axios from 'axios'
+// import cookies from 'vue-cookies'
 
-//Vue.use(cookies)
+// Vue.use(cookies)
 
 export default {
     name: "LoginPage.vue",
@@ -76,12 +76,13 @@ export default {
             pw: ''
         }
     },
-    // computed: {
-    //     ...mapState(["isLogin", "isLoginError"])
-    // },
     methods: {
         login(){
-            this.$store.dispatch('login', { auth: this.radioGroup, id: this.id, pw: this.pw})
+
+            this.$store.dispatch('login', { 
+                auth: (this.radioGroup == '개인' ? '개인' : this.radioGroup == '판매자' ? '판매자' : '사업자'),
+                id: this.id, 
+                pw: this.pw})
             .then(() => {
                 this.$router.push({ path: '/mainPage' })
             })
@@ -89,4 +90,5 @@ export default {
 
     }
 }
+
 </script>
