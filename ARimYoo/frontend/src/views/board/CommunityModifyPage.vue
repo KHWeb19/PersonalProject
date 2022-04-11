@@ -29,7 +29,7 @@ export default {
     methods: {
         ...mapActions(['fetchCommunityBoard']),
         onSubmit (payload) {
-            const { title, content, brackets,writer, file, fileName} = payload
+            const { title, content, brackets,writer, file, fileName, viewCnt} = payload
               let formData = new FormData()
 
             if (file != null ){formData.append('file', file)}
@@ -38,6 +38,7 @@ export default {
             formData.append('writer', writer)
             formData.append('brackets', brackets)
             formData.append('fileName', fileName)
+            formData.append('viewCnt', viewCnt)
 
             console.log(formData)
 

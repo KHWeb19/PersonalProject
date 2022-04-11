@@ -82,9 +82,9 @@ export default {
             this.files = this.$refs.files.files
         },
         onSubmit () {
-            const { title, content, brackets, writer, fileName } = this
+            const { title, content, brackets, writer, fileName, viewCnt } = this
             const file =  this.$refs.files.files[0]
-            this.$emit('submit', { title, content, brackets,writer, file,fileName })
+            this.$emit('submit', { title, content, brackets,writer, file,fileName, viewCnt })
         },
         goPage() {
             this.$router.push()
@@ -96,6 +96,7 @@ export default {
         this.content = this.communityBoard.content
         this.brackets = this.communityBoard.brackets
         this.fileName = this.communityBoard.fileName
+        this.viewCnt = this.communityBoard.viewCnt
     }
 }
 </script>
