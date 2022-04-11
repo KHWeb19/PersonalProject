@@ -1,6 +1,5 @@
 <template>
-    <div align="center">
-        <h2>게시물 작성</h2>
+    <div id="register" align="center">
         <free-board-register-form @submit="onSubmit"/>
     </div>
 </template>
@@ -35,3 +34,10 @@ export default {
 }
 
 </script>
+
+<style scoped>
+#register {
+    background-image: url(@/assets/img/homeBackground.png);
+    height: 100vh;
+}
+</style>

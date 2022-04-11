@@ -1,46 +1,35 @@
 <template>
     <div>
         <form @submit.prevent="onSubmit">
-            <table>
-                <tr>
-                    <td>게시물 번호</td>
-                    <td>
-                        <input type="text" :value="freeBoard.boardNo" disabled/>
+            <h2 id="theme">게시물 수정</h2>
+            <table align="center" border="1">
+                 <tr>
+                    <td id="writer">
+                    <strong> {{ this.writer }} </strong> 
                     </td>
                 </tr>
-                <tr>
-                    <td>제목</td>
+                <tr> 
                     <td>
-                        <input type="text" v-model="title"/>
+                        <input id="title" type="text" v-model="title" cols="70" placeholder="제목을 입력하세요"/>
                     </td>
                 </tr>
-                <tr>
-                    <td>작성자</td>
-                    <td>
-                        <input type="text" :value="freeBoard.writer" disabled/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>등록일자</td>
-                    <td>
-                        <input type="text" :value="freeBoard.regDate" disabled/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>본문</td>
-                    <td>
-                        <textarea cols="50" rows="20" v-model="content">
+                <tr> 
+                    <td> 
+                        <textarea cols="70" rows="15" v-model="content" placeholder="본문을 작성하세요">
                         </textarea>
                     </td>
                 </tr>
             </table>
 
-            <div>
-                <button type="submit">수정 완료</button>
-                <router-link :to="{ name: 'FreeBoardReadPage',
-                                    params: { boardNo: freeBoard.boardNo.toString() } }">
-                    취소
+            <div class="button">
+                <v-btn type="submit" text dark>
+                    완료
+                </v-btn>
+                <v-btn text>
+                <router-link :to="{ name: 'FreeBoardListPage' }" class="black--text">
+                   <strong> 취소</strong>
                 </router-link>
+                </v-btn>
             </div>
         </form>
     </div>
@@ -59,7 +48,8 @@ export default {
     data () {
         return {
             title: '',
-            content: ''
+            content: '',
+            writer: this.$store.state.userInfo.nickname
         }
     },
     methods: {
@@ -74,3 +64,50 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+#theme{
+        padding:15px;
+        color:white;
+}
+#title{
+    color:white;
+}
+#writer{
+    color:grey;
+}
+table{
+    border-color: transparent;
+}
+th {
+    padding: 10px;
+    border-bottom: 1px solid white;
+    color: white;
+}
+td {
+    padding: 10px;
+    border-bottom: 4px solid white;
+    color: white;
+}
+textarea {
+    border: 1px solid transparent;
+    color: white;
+    outline: none;    
+}
+input {
+    outline: none;
+    width: 100%;
+}
+.button {
+    padding: 20px;
+}
+a{
+    text-decoration: none;
+    
+}
+a:hover{
+    text-decoration: none; 
+}
+
+    
+</style>

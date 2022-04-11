@@ -1,14 +1,19 @@
 package com.example.demo.service.member;
 
 import com.example.demo.controller.member.request.MemberRequest;
-import com.example.demo.entitiy.member.Member;
+import com.example.demo.response.DuplicationCheck;
+import com.example.demo.entitiy.member.MemberInfo;
+import com.example.demo.entitiy.member.MemberAuth;
+import com.example.demo.repository.member.MemberAuthRepository;
 import com.example.demo.repository.member.MemberRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+
+
+
 import java.util.Optional;
 
 @Slf4j
@@ -19,58 +24,97 @@ public class MemberServiceImpl implements MemberService {
     private MemberRepository memberRepository;
 
     @Autowired
+    private MemberAuthRepository memberAuthRepository;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
+
+
+
     @Override
-    public void register(MemberRequest memberRequest) {
+    public DuplicationCheck register(MemberRequest memberRequest) {
+
+            Optional<MemberInfo> checkUserId = memberRepository.checkUserId(memberRequest.getUserId());
+            if(!checkUserId.equals(Optional.empty())){
+                DuplicationCheck message = new DuplicationCheck("아이디 중복입니다");
+                return message;
+            }
+
+            Optional<MemberInfo> checkNickname = memberRepository.checkNickname(memberRequest.getNickname());
+            if(!checkNickname.equals(Optional.empty())){
+                DuplicationCheck message = new DuplicationCheck("닉네임 중복입니다");
+                return message;
+            }
+
+            Optional<MemberInfo> checkEmail = memberRepository.checkEmail(memberRequest.getEmail());
+            if(!checkEmail.equals(Optional.empty())){
+                DuplicationCheck message = new DuplicationCheck("이메일 중복입니다");
+                return message;
+            }
+
             String encodedPassword = passwordEncoder.encode(memberRequest.getPassword());
             memberRequest.setPassword(encodedPassword);
 
-            Member memberEntity = new Member(memberRequest.getUserId(), memberRequest.getPassword(),
+            MemberAuth authEntity = new MemberAuth(memberRequest.getAuth());
+            MemberInfo memberEntity = new MemberInfo(memberRequest.getUserId(), memberRequest.getPassword(),
                     memberRequest.getNickname(),memberRequest.getEmail());
 
+            memberEntity.addAuth(authEntity);
+
             memberRepository.save(memberEntity);
+
+            DuplicationCheck message = new DuplicationCheck("가입 되었습니다");
+
+            return message;
         }
 
     @Override
-    public List<Member> list()  {
-        //현재 password가 암호화 되어있긴한데 이것도 같이 나감
-            return memberRepository.findAll();
-    }
-
-    @Override
     public MemberRequest login(MemberRequest memberRequest) {
-            Optional<Member> maybeMember = memberRepository.findByUserId(memberRequest.getUserId());
+            Optional<MemberInfo> maybeMember = memberRepository.findByUserId(memberRequest.getUserId());
 
             if(maybeMember.equals(Optional.empty())){
                 log.info("There are no person who has this id!");
                 return null;
             }
 
-            Member loginMember =maybeMember.get();
+            MemberInfo loginMember =maybeMember.get();
 
             if(!passwordEncoder.matches(memberRequest.getPassword(), loginMember.getPassword())) {
                 log.info("Entered wrong password!");
                 return null;
             }
 
+            Optional<MemberAuth> maybeMemberAuth =
+                memberAuthRepository.findByMemberNo(loginMember.getMemberNo());
+
+            if (maybeMemberAuth.equals(Optional.empty())) {
+                log.info("no auth");
+                return null;
+            }
+
+            MemberAuth memberAuth = maybeMemberAuth.get();
             MemberRequest response = new MemberRequest(loginMember.getUserId(), null,
-                    loginMember.getNickname(), loginMember.getEmail() );
+                    loginMember.getNickname(), loginMember.getEmail(), memberAuth.getAuth());
 
             return response;
     }
 
     @Override
-    public void modify(Member member) {
-           String encodedPassword = passwordEncoder.encode(member.getPassword());
-           member.setPassword(encodedPassword);
+    public void modify(MemberRequest memberRequest) {
+            Optional<MemberInfo> maybeMember =memberRepository.findByUserId(memberRequest.getUserId());
+            MemberInfo memberInfo =  maybeMember.get();
 
-            memberRepository.save(member);
+            String encodedPassword = passwordEncoder.encode(memberRequest.getPassword());
+            memberInfo.setPassword(encodedPassword);
+
+            memberRepository.save(memberInfo);
     }
 
     @Override
-    public void remove(Member member) {
-            log.info("memberNo" + member.getMemberNo() );
-            memberRepository.deleteById(member.getMemberNo());
+    public void remove(MemberInfo member) {
+            Optional<MemberInfo> maybeMember = memberRepository.findMemberNo(member.getUserId());
+            MemberInfo removeMember = maybeMember.get();
+            memberRepository.deleteById(removeMember.getMemberNo());
     }
 }

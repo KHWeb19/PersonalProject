@@ -1,15 +1,14 @@
 package com.example.demo.controller.member;
 
-
 import com.example.demo.controller.member.request.MemberRequest;
-import com.example.demo.entitiy.member.Member;
+import com.example.demo.response.DuplicationCheck;
+import com.example.demo.entitiy.member.MemberInfo;
 import com.example.demo.service.member.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 
 @RestController
@@ -21,18 +20,14 @@ public class MemberController {
     @Autowired
     private MemberService memberService;
 
+
     @PostMapping("/register")
-    public void memberRegister(@Validated @RequestBody MemberRequest memberRequest){
+    public DuplicationCheck memberRegister(@Validated @RequestBody MemberRequest memberRequest){
         log.info("memberRegister request" + memberRequest);
 
-        memberService.register(memberRequest);
-    }
 
-    @GetMapping("/list")
-    public List<Member> memberList () {
-        log.info("MemberList()");
+        return memberService.register(memberRequest);
 
-        return memberService.list();
     }
 
     @PostMapping("/login")
@@ -50,19 +45,16 @@ public class MemberController {
     }
 
     @PutMapping("/modify")
-    public Member memberInformationModify (@RequestBody Member member) {
-        log.info("memberModify(): " + member);
+    public MemberRequest memberInformationModify (@RequestBody MemberRequest memberRequest) {
+        log.info("memberModify(): " + memberRequest.getPassword());
 
-        log.info(""+ member.getMemberNo());
+        memberService.modify(memberRequest);
 
-
-        memberService.modify(member);
-
-        return member;
+        return memberRequest;
     }
 
     @DeleteMapping("/remove")
-    public void MemberInformationRemove(@RequestBody Member member) {
+    public void MemberInformationRemove(@RequestBody MemberInfo member) {
         log.info("MemberRemove()" + member.getMemberNo());
 
         memberService.remove(member);

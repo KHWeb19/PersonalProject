@@ -1,38 +1,41 @@
 <template>
-    <div id="freeBoard">
-        <h2>자유게시판</h2>
-        <free-board-list :freeBoards="freeBoards"/>
-       
-        <router-link :to="{ name: 'FreeBoardRegisterPage'}">
-        
-        <v-btn class="blue" dark>
-            <v-icon>mdi-pencil-plus</v-icon>
-            <span>등록</span>
-        </v-btn>
-        </router-link>
-        
-        
+    <div id="board" >
+        <h2 id="title">자유게시판</h2>
+        <free-board-list :freeBoards="freeBoards" />
+
+ 
     </div>
 </template>
 
 <script>
 
+
 import { mapActions, mapState } from 'vuex'
 import FreeBoardList from '@/components/freeBoard/FreeBoardList.vue'
+
+
 
 export default {
     name: 'FreeBoardListPage',
     components: {
-        FreeBoardList
+        FreeBoardList,
+        
     },
     computed: {
-        ...mapState(['freeBoards'])
+        ...mapState(['freeBoards']),  
     },
     mounted () {
+        if(!this.$store.state.isLogin){
+            alert('로그인하세요')
+            this.$router.push({name: "HomeView"});
+        }else{
         this.fetchFreeBoardList()
+        }   
     },
     methods: {
         ...mapActions(['fetchFreeBoardList'])
+        
+       
     }
 
 }
@@ -40,16 +43,24 @@ export default {
 
 <style scoped>
 
-h2 {
-    text-align: center;
-    padding: 15px;
+#board{
+ background-image: url(@/assets/img/homeBackground.png);
+ height: 100vh;
 }
-
-a {
+a{
     text-decoration: none;
-    margin-left: 1230px;
-
 }
 
-    
+a:hover{
+    text-decoration: none; 
+}
+
+#title {
+    color: white;
+    text-align: center;
+    padding: 30px;   
+}
+
+
+
 </style>

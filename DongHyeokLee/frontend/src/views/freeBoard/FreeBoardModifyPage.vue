@@ -1,6 +1,5 @@
 <template>
-    <div align="center">
-        <h2>게시물 수정</h2>
+    <div id="modify" align="center">
         <free-board-modify-form v-if="freeBoard" :freeBoard="freeBoard" @submit="onSubmit"/>
         <p v-else>로딩중 .......</p>
     </div>
@@ -57,8 +56,9 @@ export default {
 
 <style scoped>
 
-h1 {
-    padding:15px;
+#modify{
+    background-image: url(@/assets/img/homeBackground.png);
+    height: 100vh;
 }
     
 </style>
