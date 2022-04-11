@@ -39,7 +39,7 @@ public class BookingInfo {
     private String linkInfo;
 
     @Column(length = 32, nullable = true)
-    private Long cakeArrNo;
+    private String cakeArrNo;
 
     @Column(length = 32, nullable = true)
     private String design;
@@ -68,7 +68,7 @@ public class BookingInfo {
         this.linkInfo = linkInfo;
     }
 
-    public BookingInfo(String id, String date, String time, String process, String contents, String linkInfo, String design, String size, String price, Long cakeArrNo) {
+    public BookingInfo(String id, String date, String time, String process, String contents, String linkInfo, String design, String size, String price, String cakeArrNo) {
         this.id = id;
         this.date = date;
         this.time = time;
@@ -89,7 +89,7 @@ public class BookingInfo {
         this.contents = contents;
     }
 
-    public BookingInfo(String id, String date, String time, String process, String contents, String design, String size, String price, Long cakeArrNo) {
+    public BookingInfo(String id, String date, String time, String process, String contents, String design, String size, String price, String cakeArrNo) {
         this.id = id;
         this.date = date;
         this.time = time;
