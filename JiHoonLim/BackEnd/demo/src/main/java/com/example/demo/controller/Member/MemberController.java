@@ -113,12 +113,38 @@ public class MemberController {
         return result;
     }
 
-
-
-    @PostMapping("/resetPw/{id}")
-    public void ModifyPw(@PathVariable("id") String id, @Validated @RequestBody MemberRequest memberRequest) {
+    @PostMapping("/resetNoLoginPw/{id}")
+    public void resetNoLoginPw(@PathVariable("id") String id, @Validated @RequestBody MemberRequest memberRequest) {
         String pw = memberRequest.getPw();
 
-        service.modifyPw(id, pw);
+        service.modifyNoLoginPw(id, pw);
+    }
+
+    @PostMapping("/resetLoginPw/{memberNo}")
+    public void resetLoginPw(@PathVariable("memberNo") Long memberNo, @Validated @RequestBody MemberRequest memberRequest) {
+        String pw = memberRequest.getPw();
+
+        service.modifyLoginPw(memberNo, pw);
+    }
+
+    @PostMapping("/modifyNick/{memberNo}")
+    public void modifyNick(@PathVariable("memberNo") Long memberNo, @Validated @RequestBody MemberRequest memberRequest){
+
+        String nickName = memberRequest.getNickName();
+
+        service.modifyNickName(memberNo, nickName);
+    }
+
+    @PostMapping("/modifyEmail/{memberNo}")
+    public void modifyEmail(@PathVariable("memberNo") Long memberNo, @Validated @RequestBody MemberRequest memberRequest){
+
+        String email = memberRequest.getEmail();
+
+        service.modifyEmail(memberNo, email);
+    }
+
+    @DeleteMapping("/deleteMember/{memberNo}")
+    public void deleteMember(@PathVariable("memberNo") Long memberNo){
+        service.deleteMember(memberNo);
     }
 }

@@ -151,9 +151,30 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public void modifyPw(String id, String pw) {
+    public void modifyNoLoginPw(String id, String pw) {
         String encodedPassword = passwordEncoder.encode(pw);
-        memberRepository.modifyPw(id, encodedPassword);
+        memberRepository.modifyNoLoginPw(id, encodedPassword);
+    }
+
+    @Override
+    public void modifyLoginPw(Long memberNo, String pw) {
+        String encodedPassword = passwordEncoder.encode(pw);
+        memberRepository.modifyLoginPw(memberNo, encodedPassword);
+    }
+
+    @Override
+    public void modifyNickName(Long memberNo, String nickName) {
+        memberRepository.modifyNickName(memberNo, nickName);
+    }
+
+    @Override
+    public void modifyEmail(Long memberNo, String email) {
+        memberRepository.modifyEmail(memberNo, email);
+    }
+
+    @Override
+    public void deleteMember(Long memberNo) {
+        memberRepository.deleteById(memberNo);
     }
 
 

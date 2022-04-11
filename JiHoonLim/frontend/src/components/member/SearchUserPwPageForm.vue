@@ -149,9 +149,11 @@ export default {
         });
     },
     resetPw() {
-      const { id, email, pw } = this;
+      const { id, pw } = this;
       axios
-        .post(`http://localhost:7777/member/resetPw/${id}`, { id, email, pw })
+        .post(`http://localhost:7777/member/resetNoLoginPw/${id}`, {
+          pw,
+        })
         .then(() => {
           alert("비밀번호가 변경되었습니다.");
         });

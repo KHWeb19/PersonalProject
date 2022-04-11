@@ -6,7 +6,7 @@ import SignUpPage from '@/views/member/SignUpPage.vue'
 import LoginPage from '@/views/member/LoginPage.vue'
 import SearchUserIdPage from '@/views/member/SearchUserIdPage.vue'
 import SearchUserPwPage from '@/views/member/SearchUserPwPage.vue'
-import MemberModifyPage from '@/views/member/MemberModifyPage.vue'
+import MemberInfoPage from '@/views/member/MemberInfoPage.vue'
 
 
 import FoodListPage from '@/views/foodBoard/FoodListPage.vue'
@@ -46,9 +46,9 @@ const routes = [
     component: SearchUserPwPage
   },
   {
-    path: '/memberModify',
-    name: 'MemberModifyPage',
-    component: MemberModifyPage
+    path: '/memberInfo',
+    name: 'MemberInfoPage',
+    component: MemberInfoPage
     
   },
   {
