@@ -22,7 +22,6 @@
         </table>
 
         <v-container>
-           
             <div>
                 <label>
                     <input type="file" id="files" ref="files" accept=".jpg, .png, .gif" v-on:change="handleFileUpload()"/>

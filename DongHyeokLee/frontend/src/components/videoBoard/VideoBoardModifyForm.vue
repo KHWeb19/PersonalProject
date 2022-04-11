@@ -1,58 +1,49 @@
 <template>
-    <div>
-        <form @submit.prevent="onSubmit">
-            <table>
-                <tr>
-                    <td>
-                        <input type="hidden" :value="videoBoard.boardNo" disabled/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>제목</td>
-                    <td>
-                        <input type="text" v-model="title"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>작성자</td>
-                    <td>
-                        <input type="text" :value="videoBoard.writer" disabled/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>등록일자</td>
-                    <td>
-                        <input type="text" :value="videoBoard.regDate" disabled/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>본문</td>
-                    <td>
-                        <textarea cols="50" rows="20" v-model="content">
-                        </textarea>
-                    </td>
-                </tr>
-            </table>
+     <form @submit.prevent="onSubmit">
+         <h2 class="theme">게시물 수정</h2>
+        <table align="center" border="1">
+            <tr>
+                <th>
+                  <strong class="writer">{{ this.writer }}</strong> 
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" v-model="title" cols="70" placeholder="제목을 입력하세요"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <textarea cols="70" rows="17" v-model="content" placeholder="본문을 작성하세요">
+                    </textarea>
+                </td>
+            </tr>
+        </table>
 
         <v-container>
-            <h3>파일 업로드 </h3>
             <div>
-                <label>Files
-                    <input type="file" id="files" ref="files" accept=".jpg, .png, .gif" v-on:change="handleFileUpload()"/>
+                <label>
+                    <input type="file" id="files" ref="files" accept=".mp4"  v-on:change="handleFileUpload()"/>
                     <!-- 여러개 파일 이름을 어떻게 저장 해야할지 감 안 잡혀서 multiple 기능 제거 -->
                 </label>
             </div>
         </v-container>
 
-            <div>
-                <button type="submit">수정 완료</button>
-                <router-link :to="{ name: 'VideoBoardReadPage',
-                                    params: { boardNo: videoBoard.boardNo.toString() } }">
-                    취소
-                </router-link>
-            </div>
-        </form>
-    </div>
+        <div class="button">
+            <!-- 수정 완료 -->
+            <v-btn type="submit" 
+                   class="check"
+                   color="amber lighten-2" >
+                <strong>완료</strong>
+            </v-btn>
+            <!-- 리스트 돌아가기-->
+            <v-btn>
+            <router-link class="cancel" :to="{ name: 'VideoBoardListPage' }">
+               <strong>취소</strong>
+            </router-link>
+            </v-btn>
+        </div>
+    </form>
 </template>
 
 <script>
@@ -69,6 +60,7 @@ export default {
         return {
             title: '',
             content: '',
+            writer: this.$store.state.userInfo.nickname
         }
     },
     methods: {
@@ -105,3 +97,61 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+
+
+.theme{
+       padding:15px;
+        color:black;
+        background-color:#FFD54F;
+}
+.writer{
+    color:black;
+    background-color: #EEEEEE;
+}
+table{
+    border-color: transparent;
+}
+th {
+    padding: 10px;
+    border-bottom: 1px solid black;
+    color: black;
+}
+td {
+    padding: 10px;
+    border-bottom: 1px solid black;
+    color: black;
+}
+textarea {
+    border: 1px solid transparent;
+    color: black;
+    outline: none;    
+}
+input {
+    outline: none;
+    width: 100%;
+}
+.button {
+    padding: 20px;
+}
+a{
+    text-decoration: none;
+    
+}
+a:hover{
+    text-decoration: none; 
+}
+.cancel{
+    color: grey;
+}
+input {
+    outline: none;
+    width: 100%;
+}
+.check{
+    margin-right:5px;
+}
+  
+    
+</style>

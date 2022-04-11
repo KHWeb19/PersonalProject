@@ -1,32 +1,35 @@
 <template>
     <div >
-        
         <div class="title">
-            <h2> {{ videoBoard.title }} </h2>
+            <h3> {{ videoBoard.title }} </h3>
             <div class="subtitle">
-                <p>{{ videoBoard.writer }}</p>
-                <span> {{ videoBoard.regDate.substring(0, 10) }}</span>
-                <span> {{new Date(videoBoard.regDate).toLocaleString("ko-KR", {timeZone: "Asia/Seoul"}).toString().substr(12, 11)}}</span>
+                <p align="center" class="writer">{{ videoBoard.writer }}</p>
+                <div class="day"> 
+                {{ videoBoard.regDate.substring(0, 10) }}
+                {{new Date(videoBoard.regDate).
+                    toLocaleString("ko-KR", {timeZone: "Asia/Seoul"}).
+                        toString().substr(13, 11)}}
+                </div>
             </div>
         </div>
 
-        <div class="video">
-            <iframe :src="require(`@/assets/uploadVideo/${videoBoard.fileName}`)" width="50%" height="400" allow="autoplay muted"></iframe>
+        <div>
+            <iframe class="video"
+                    :src="require(`@/assets/uploadVideo/${videoBoard.fileName}`)" 
+                    allow="autoplay muted">
+            </iframe>
+            <table>
+                <tr>
+                    <td>
+                    <div> {{ videoBoard.content }}</div>
+                    </td>
+                </tr>
+            </table>
         </div>
-        
-        <table>
-            <tr>
-                <td>
-                   <div> {{ videoBoard.content }}</div>
-                   
-                </td>
-            </tr>
-        </table>
     </div>
 </template>
 
 <script>
-
 
 
 export default {
@@ -46,39 +49,49 @@ export default {
 
 <style scoped>
    
-
-    .title{
-       margin-left: 30%; 
-       margin-bottom: 20px;
-       
-    }
-
-    .subtitle{
-        margin-top: 10px;
-    }
-
-    .img {
-        margin-left: 30%;
-        margin-bottom: 20px;
-    }
-
-    
-
-     table {
+.title{
     margin-left: 30%; 
-    border-top: 1px solid ;
-    border-collapse: collapse;
-  }
-  th {
-    border-bottom: 1px solid ;
-    border-left: 1px solid;
-    padding: 10px;
-  }
+    padding:15px;
+    color:black;
+    width:500px
+}
 
-  td {    
-    border-bottom: 1px solid;
+.subtitle{
+    margin-top: 10px;
+}
+
+.video {
+    width: auto; 
+    height: auto;
+    width: 600px;
+    height: 400px;
+    margin-left: 30%;
+    margin-bottom: 20px;
+    border-top: 1px solid black;
+}
+table {
+    margin-left: 30%; 
+    height: 200px;
+    width: 600px;
+    border: 1px solid transparent;
+}
+td {    
+    border-bottom: 1px solid black;
     padding: 10px;
-  }
+    color: black;
+}
+.writer{
+    background-color:#EEEEEE;
+    width:120px;
+    font-size: 19px;
+}
+.day{
+    border-bottom:1px solid #EEEEEE;
+    width:600px;
+    font-size: 17px;
+    color: black;
+
+}
 
   
 </style>

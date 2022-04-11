@@ -4,11 +4,11 @@
             <h3> {{ photoBoard.title }} </h3>
             <div class="subtitle">
                 <p align="center" class="writer">{{ photoBoard.writer }}</p>
-                <div> 
+                <div class="day"> 
                 {{ photoBoard.regDate.substring(0, 10) }}
                 {{new Date(photoBoard.regDate).
                     toLocaleString("ko-KR", {timeZone: "Asia/Seoul"}).
-                        toString().substr(12, 11)}}
+                        toString().substr(13, 11)}}
                 </div>
             </div>
         </div>
@@ -65,7 +65,6 @@ export default {
     max-height: 600px;
     margin-left: 30%;
     margin-bottom: 20px;
-    border-top: 1px solid black;
 }
 table {
     margin-left: 30%; 
@@ -81,6 +80,15 @@ td {
 .writer{
     background-color:#EEEEEE;
     width:120px;
+    font-size: 19px;
+}
+.day{
+    border-bottom:1px solid #EEEEEE;
+    width:600px;
+    font-size: 17px;
+    color: black;
+    
+
 }
 
 

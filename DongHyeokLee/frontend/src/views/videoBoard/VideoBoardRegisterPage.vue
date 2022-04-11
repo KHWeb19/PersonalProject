@@ -51,3 +51,11 @@ export default {
 }
 
 </script>
+
+<style scoped>
+h2{
+    padding:20px;
+    background-color:#FFD54F;
+}    
+    
+</style>

@@ -4,13 +4,6 @@
         <div>
         <video-board-list :videoBoards="videoBoards"/>
         </div>
-       
-        <router-link :to="{ name: 'VideoBoardRegisterPage'}">
-            <v-btn v-if="$store.state.isLogin == true" class="blue" dark>
-                <v-icon>mdi-pencil-plus</v-icon>
-                <span>등록</span>
-            </v-btn>
-        </router-link>
     </div>
 </template>
 
@@ -47,14 +40,13 @@ export default {
 <style scoped>
 
 h2 {
-    text-align: center;
-    padding: 15px;
+   text-align: center;
+    padding:20px;
+    background-color: #FFD54F;
 }
-
 a {
     text-decoration: none;
     margin-left: 1230px;
-
 }
 
     

@@ -41,7 +41,7 @@
         <router-link class="register-btn"
                      :to="{ name: 'PhotoBoardRegisterPage'}">
           <v-btn v-if="$store.state.isLogin == true" class="amber lighten-2">
-              등록
+             <strong>등록</strong>
           </v-btn>
         </router-link>
       </div>
@@ -125,9 +125,6 @@ td {
 }
 strong{
     margin-right: 5px;
-}
-spacer{
-  margin-left:10px;
 }
 .page-prev{
   color:#FFD54F;

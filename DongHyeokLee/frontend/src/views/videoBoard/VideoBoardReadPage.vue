@@ -2,27 +2,30 @@
     <div>   
          <!-- 리스트로 돌아가기 -->
         <router-link :to="{ name: 'VideoBoardListPage' }">
-            <p>사진게시판</p>
+            <v-btn class="list-btn" color="amber lighten-2">
+            <strong>영상게시판</strong>
+            </v-btn>
         </router-link>
         
         <video-board-read v-if=videoBoard :videoBoard="videoBoard"/>
 
-         <!-- 댓글-->
-        <video-board-comment :boardNo="this.boardNo"/>
-
         <div class = "button">
             <router-link v-if="$store.state.userInfo.nickname == videoBoard.writer" 
-                            :to="{ name: 'VideoBoardModifyPage', params: { boardNo } }">
-                게시물 수정
+                         :to="{ name: 'VideoBoardModifyPage', params: { boardNo } }">
+                 <v-btn class="modify-btn"
+                       color="amber lighten-2">
+                  <strong>수정</strong>
+                </v-btn>
             </router-link>
             <!-- 삭제해도 db에서 fileName은 날아가는데 vue에 저장 된 파일 자체는 안 날아가는 형태라 고민되네 -->
-            <button v-if="$store.state.userInfo.nickname == videoBoard.writer" @click="onDelete">삭제</button>
-            
-            <router-link :to="{ name: 'VideoBoardListPage' }">
-                목록 보기
-            </router-link>
+            <v-btn v-if="$store.state.userInfo.nickname == videoBoard.writer" 
+                   @click="onDelete"
+                   class="remove-btn">
+                <strong>삭제</strong>
+            </v-btn>
         </div>
-        
+          <!-- 댓글-->
+        <video-board-comment :boardNo="this.boardNo"/>
     </div>
 </template>
 
@@ -76,18 +79,26 @@ export default {
 <style scoped>
 
 .button {
-    margin-left: 30%;
+    padding: 5px;
+    margin-left: 60%;
 }
-
 a{
-    text-decoration: none;
-    
+    text-decoration: none;  
 }
-
 p{
     font-size: 1em;
-    padding:  15px;
-    margin-left:400px;
+    margin-top:25px;
+    margin-left:450px;
+}
+.list-btn{
+    margin-top:20px;
+    margin-left:30%;
+}
+.modify-btn{
+    margin-right: 5px;
+}
+.remove-btn{
+    color:grey;
 }
 
     
