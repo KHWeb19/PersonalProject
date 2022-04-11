@@ -9,7 +9,8 @@
     </router-link>
     </template>
     <template #content>
-        <h1>PersonalProject</h1>
+    <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20150702_242%2Fmie5125_1435844941413HOaHB_PNG%2Funnamed.png&type=sc960_832" width = 5%> 
+     <h1><b>SmartNote</b></h1>
       <v-simple-table>
         <template v-slot:default>
           <thead>
@@ -51,6 +52,7 @@ export default {
 </script>
 
 <style scoped>
+
 
 h3{color: white;}
 
