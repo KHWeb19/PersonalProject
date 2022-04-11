@@ -24,14 +24,17 @@ public class Member {
     @Column(length = 32, nullable = false)
     private String memberId;
 
+    @Column(length = 64, nullable = false)
+    private String password;
+
+    @Column(length = 64)
+    private String imageName;
+
     @Column(length = 128)
     private String memberWeb;
 
     @Lob
     private String memberIntro;
-
-    @Column(length = 64, nullable = false)
-    private String password;
 
     @CreationTimestamp
     private Date regDate;
@@ -39,12 +42,11 @@ public class Member {
     @UpdateTimestamp
     private Date updDate;
 
-    public Member(Long memberNo, String memberName, String memberId, String password, String memberWeb, String memberIntro) {
+    public Member(Long memberNo, String memberName, String memberId, String password, String imageName) {
         this.memberNo = memberNo;
         this.memberName = memberName;
         this.memberId = memberId;
         this.password = password;
-        this.memberWeb = memberWeb;
-        this.memberIntro = memberIntro;
+        this.imageName = imageName;
     }
 }
