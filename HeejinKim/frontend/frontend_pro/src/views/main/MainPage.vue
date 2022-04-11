@@ -60,15 +60,19 @@
                     </v-col>
                 </v-row>
             </v-sheet>  -->
-     
+    <weather></weather>
+    <br><br>
+    
     </body>
+    
    
 </template>
          
 
 <script>
 
-//import Weather from '@/components/home/Weather'
+import Weather from '@/components/main/Weather.vue'
+//import FooterForm from '@/components/main/FooterForm.vue'
 
 
 
@@ -76,7 +80,11 @@ export default {
 
     name: 'MainPage',
 
- // components:{Weather}
+  components:
+
+    {   Weather,
+        //FooterForm 
+    },
    
   data() {
     return {

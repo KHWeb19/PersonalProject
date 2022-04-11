@@ -126,6 +126,7 @@ export default {
                 { 
                     text: 'Community',
                     name: 'Community',
+                    route:'/freeBoard'
                     
                 },
 
@@ -197,8 +198,10 @@ export default {
                             alert("Welcome" +"  "+res.data.userId )
                             this.isLogin = true;
                             this.$store.state.session = res.data                               
-                            this.$cookies.set("user", res.data, 60)                          
+                            this.$cookies.set("user", res.data, 60) 
+
                             //this.$cookies.set("auth", res.data.auth, 60)
+                            
                             if (res.data.auth == 'manager') {
                                 this.$store.state.isAuth = true
                                 alert('운영자 아이디로 로그인')

@@ -1,4 +1,8 @@
 import{
+    FETCH_BOARD,
+    FETCH_BOARD_LIST
+
+
 
     //FETCH_MEMBER_LIST,
     //FETCH_MEMBER,
@@ -15,13 +19,30 @@ import{
 } from './mutation-types'
 
 import Vue from "vue";
-//import axios from 'axios'
+import axios from 'axios'
 import cookies from 'vue-cookies'
 //import router from '@/router'
 
 Vue.use(cookies)
 
 export default {
+
+    fetchBoardList ({ commit }) {
+        return axios.get(`http://localhost:7777/board/lists`)
+            .then((res) => {
+                commit(FETCH_BOARD_LIST, res.data)
+            })
+    },
+    fetchBoard ({ commit }, boardNo) {
+        return axios.get(`http://localhost:7777/board/${boardNo}`)
+            .then((res) => {
+                commit(FETCH_BOARD, res.data)
+            })
+    },
+
+
+
+
     /*
     fetchMemberList ({ commit }) {
         return axios.get(`http://localhost:7777/jpaMember/register/${memberNo}`)
