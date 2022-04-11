@@ -19,13 +19,24 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable=false)
     private String username;
-    private String first_name;
-    private String last_name;
+
+    @Column(nullable=false)
     private String password;
-    private Date register_date;
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Role> roles = new ArrayList<>();
+
+    @Column (unique = true)
+    private String email;
+
+    private String first_name;
+    private String last_name;
+
+    private Date register_date;
+
+
 
 }

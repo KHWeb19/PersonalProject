@@ -16,6 +16,7 @@ import java.util.List;
 @RequestMapping("/api")
 @RequiredArgsConstructor
 @Slf4j
+@CrossOrigin(origins ="http://localhost:8080", allowedHeaders = "*")
 public class UserController {
     private final UserService userService;
 
@@ -25,15 +26,15 @@ public class UserController {
         return ResponseEntity.ok().body(userService.getUsers());
     }
 
-    @GetMapping("/roles")
-    public ResponseEntity<List<Role>> getRoles(){
-        log.info("Users page");
-        return ResponseEntity.ok().body(userService.getRoles());
-    }
-
     @PostMapping("/users/save")
     public ResponseEntity<User> saveUser(@RequestBody User user){
         return new ResponseEntity<>(userService.saveUser(user), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/roles")
+    public ResponseEntity<List<Role>> getRoles(){
+        log.info("Roles page");
+        return new ResponseEntity<>(userService.getRoles(), HttpStatus.OK);
     }
 
     @PostMapping("/roles/save")
@@ -41,16 +42,15 @@ public class UserController {
         return new ResponseEntity<>(userService.saveRole(role), HttpStatus.CREATED);
     }
 
-    @PostMapping("/roles/addtouser")
-    public ResponseEntity<?> addToUser(@RequestBody RoleToUserForm form){
-        userService.addRoleToUser(form.getUsername(), form.getRolename());
+    @PostMapping("/role/addRoleToUser")
+    public ResponseEntity<?> addRoleToUser(@RequestBody UserRoleForm userRoleForm){
+        userService.addRoleToUser(userRoleForm.getUsername(), userRoleForm.getRolename());
         return ResponseEntity.ok().build();
     }
 
 }
-
 @Data
-class RoleToUserForm{
+class UserRoleForm{
     private String username;
     private String rolename;
 }
