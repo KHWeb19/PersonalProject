@@ -4,19 +4,16 @@
               <v-row>
                   <v-col v-for="photo in paginatedData" :key="photo.boardNo" class="d-flex child-flex" cols="4">
                       <router-link :to="{ name: 'PhotoBoardReadPage', params: { boardNo: photo.boardNo.toString() } }">
-                    <v-card>
-                        <div >
-                          <v-img id="img" :src="require(`@/assets/uploadImg/${photo.fileName}`)" height="300" ></v-img>
+                    <v-card class="img-card" >
+                        <div>
+                          <v-img :src="require(`@/assets/uploadImg/${photo.fileName}`)" height="300" ></v-img>
                         </div>
-
                         <v-card-title>{{photo.title}}</v-card-title>
                 <v-list-item>
                   <v-list-item-subtitle>
                     <strong>{{ photo.writer }}</strong>
-                    <span>{{ photo.regDate.substring(0, 10) }}</span> 
-                    
-                    <spacer>조회 {{photo.count}} </spacer>
-                    
+                    {{ photo.regDate.substring(0, 10) }}
+                    조회 {{photo.count}}  
                   </v-list-item-subtitle>
                 </v-list-item>
                     </v-card>
@@ -38,17 +35,16 @@
                   mdi-chevron-right
               </v-icon>
           </v-btn>
+        </div>
 
-        <router-link :to="{ name: 'PhotoBoardRegisterPage'}">
-          <v-btn v-if="$store.state.isLogin == true" class="register-btn" text>
-              <v-icon class="register-icon">mdi-pencil-plus</v-icon>
+        <!--등록 버튼-->
+        <router-link class="register-btn"
+                     :to="{ name: 'PhotoBoardRegisterPage'}">
+          <v-btn v-if="$store.state.isLogin == true" class="amber lighten-2">
+              등록
           </v-btn>
         </router-link>
       </div>
-    </div>
-
-
-    
 </template>
 
 <script>
@@ -133,24 +129,27 @@ strong{
 spacer{
   margin-left:10px;
 }
-img{
-  width: auto; 
-  height: auto;
-}
 .page-prev{
-  color:white;
+  color:#FFD54F;
 }
 .page-next{
-  color: white;
+  color: #FFD54F;
 }
 .page-count{
-  color: white;
+  color: black;
 }
 .register-btn{
-  color:white;
+  color:black;
 }
 .register-icon{
     font-size:1.7em;
+}
+.img-card{
+  background-color: #FFD54F;
+}
+.register-btn{
+  margin-left: 80%;
+  margin-bottom: 20px;
 }
 
   

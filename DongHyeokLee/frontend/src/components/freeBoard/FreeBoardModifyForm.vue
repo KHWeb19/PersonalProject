@@ -72,6 +72,7 @@ export default {
 #theme{
         padding:15px;
         color:black;
+        background-color:#FFD54F;
 }
 #title{
     color:black;

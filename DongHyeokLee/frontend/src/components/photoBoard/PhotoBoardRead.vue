@@ -3,10 +3,13 @@
         <div class="title">
             <h3> {{ photoBoard.title }} </h3>
             <div class="subtitle">
-                <p>{{ photoBoard.writer }}</p>
-                <span> {{ photoBoard.regDate.substring(0, 10) }}</span>
-                <span> {{new Date(photoBoard.regDate).toLocaleString("ko-KR", {timeZone: "Asia/Seoul"}).
-                        toString().substr(12, 11)}}</span>
+                <p align="center" class="writer">{{ photoBoard.writer }}</p>
+                <div> 
+                {{ photoBoard.regDate.substring(0, 10) }}
+                {{new Date(photoBoard.regDate).
+                    toLocaleString("ko-KR", {timeZone: "Asia/Seoul"}).
+                        toString().substr(12, 11)}}
+                </div>
             </div>
         </div>
 
@@ -62,7 +65,7 @@ export default {
     max-height: 600px;
     margin-left: 30%;
     margin-bottom: 20px;
-    border-top: 3px solid black;
+    border-top: 1px solid black;
 }
 table {
     margin-left: 30%; 
@@ -71,9 +74,13 @@ table {
     border: 1px solid transparent;
 }
 td {    
-    border-bottom: 3px solid black;
+    border-bottom: 1px solid black;
     padding: 10px;
     color: black;
+}
+.writer{
+    background-color:#EEEEEE;
+    width:120px;
 }
 
 

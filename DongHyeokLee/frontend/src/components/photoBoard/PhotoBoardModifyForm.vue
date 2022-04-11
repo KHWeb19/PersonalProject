@@ -1,10 +1,11 @@
 <template>
     <div>
+        <h2 class="theme">게시물 수정</h2>
         <form @submit.prevent="onSubmit">
         <table align="center" border="1">
             <tr>
                 <th>
-                   <strong> {{ this.writer }} </strong> 
+                   <strong class="writer"> {{ this.writer }} </strong> 
                 </th>
             </tr>
             <tr>
@@ -31,10 +32,17 @@
         </v-container>
 
             <div class="button">
-                <button type="submit"> 완료</button>
-                <router-link class="cancel" :to="{ name: 'PhotoBoardReadPage',
-                                    params: { boardNo: photoBoard.boardNo.toString() } }">
-                    취소
+                <v-btn type="submit"
+                       class="check"
+                       color="amber lighten-2">
+                    <strong>완료</strong>
+                </v-btn>
+               
+                <router-link :to="{ name: 'PhotoBoardReadPage',
+                             params: { boardNo: photoBoard.boardNo.toString() } }">
+                     <v-btn class="cancel">                
+                        취소
+                     </v-btn>
                 </router-link>
             </div>
         </form>
@@ -95,6 +103,15 @@ export default {
 
 <style scoped>
 
+.theme{
+       padding:15px;
+        color:black;
+        background-color:#FFD54F;
+}
+.writer{
+    color:black;
+    background-color: #EEEEEE;
+}
 table{
     border-color: transparent;
 }
@@ -105,7 +122,7 @@ th {
 }
 td {
     padding: 10px;
-    border-bottom: 3px solid black;
+    border-bottom: 1px solid black;
     color: black;
 }
 textarea {
@@ -113,11 +130,16 @@ textarea {
     color: black;
     outline: none;    
 }
+input {
+    outline: none;
+    width: 100%;
+}
 .button {
     padding: 20px;
 }
 a{
     text-decoration: none;
+    
 }
 a:hover{
     text-decoration: none; 
@@ -128,6 +150,9 @@ a:hover{
 input {
     outline: none;
     width: 100%;
+}
+.check{
+    margin-right:5px;
 }
     
 </style>

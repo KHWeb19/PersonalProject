@@ -55,9 +55,10 @@ a:hover{
 }
 
 #title {
-    color: black;
+    color: balck;
     text-align: center;
     padding: 30px;   
+    background-color:#FFD54F;
 }
 
 

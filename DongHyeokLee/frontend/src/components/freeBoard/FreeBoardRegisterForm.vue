@@ -28,10 +28,10 @@
                 등록
             </v-btn>
             <v-btn>
-            <router-link class="cancel" 
-                         :to="{ name: 'FreeBoardListPage' }">
-               <strong>취소</strong>
-            </router-link>
+                <router-link class="cancel" 
+                            :to="{ name: 'FreeBoardListPage' }">
+                <strong>취소</strong>
+                </router-link>
             </v-btn>
         </div>
     </form>
@@ -66,6 +66,7 @@ export default {
 #theme{
     padding:30px;
     color: black;
+    background-color:#FFD54F;
 }
 #title{
     color:black;

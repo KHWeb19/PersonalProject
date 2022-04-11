@@ -4,7 +4,7 @@
         <form @submit.prevent="onSubmit">
            <h4 class="commentsList">댓글</h4>
            <div class="commenter"> <strong>{{ this.writer }}</strong> </div>     
-        <input type="text" class="commentRegister" v-model="content" placeholder="댓글을 작성하세요"/>
+                <input type="text" class="commentRegister" v-model="content" placeholder="댓글을 작성하세요"/>
             <v-btn class="register-btn" type="submit" color="amber lighten-2">
                 <strong>등록</strong>
             </v-btn>  

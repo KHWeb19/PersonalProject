@@ -31,10 +31,12 @@
         </v-container>
 
         <div class="button">
-            <v-btn type="submit" >
+            <v-btn type="submit" 
+                   class="register"
+                   color="amber lighten-2" >
                 등록
             </v-btn>
-            <v-btn text>
+            <v-btn >
             <router-link id="cancel" :to="{ name: 'PhotoBoardListPage' }">
                <strong>취소</strong>
             </router-link>
@@ -90,20 +92,29 @@ export default {
 
 <style scoped>
 
-td {
-    padding: 10px;
-    border-bottom: 1px solid black;
-    color: black;
-}
 th {
     padding: 10px;
-    border-bottom: 3px solid black;
+    border-bottom: 1px solid #EEEEEE;
+    color: black;
+}
+td {
+    padding: 10px;
+    border-bottom: 1px solid #EEEEEE;
     color: black;
 }
 textarea {
     border: 1px solid transparent;
     color: black;
     outline: none;    
+}
+table {
+    border-color:  transparent ;
+}
+a{
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: none; 
 }
 input {
     outline: none;
@@ -112,14 +123,11 @@ input {
 .button {
     padding: 20px;
 }
-a{
-    text-decoration: none;
-}
-a:hover{
-    text-decoration: none; 
-}
 #cancel{
-    color: black;
+    color: grey;
+}
+.register{
+    margin-right: 5px;
 }
 
 </style>

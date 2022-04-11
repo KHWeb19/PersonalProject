@@ -30,7 +30,7 @@ export default {
             alert('로그인하세요')
             this.$router.push({name: "HomeView"});
         }else{
-        this.fetchBoardList()
+        this.fetchPhotoBoardList()
         }  
     },
     methods: {
@@ -45,16 +45,12 @@ export default {
 
 h2 {
     text-align: center;
-    margin-top: 20px;
+    padding:20px;
+    background-color: #FFD54F;
 }
 a {
     text-decoration: none;
     margin-left: 1230px;
-}
-#photo-board{
-     background-image: url(@/assets/img/XL.jpg);
-     background-size: cover;
-
 }
 
     

@@ -138,7 +138,7 @@ td{
     background-color:#FFD54F;
     padding: 10px;
     color: black;
-    font-family: 'Gowun Dodum', sans-serif;
+    
 }
 
 .list{

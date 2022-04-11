@@ -4,10 +4,9 @@
             <h3>{{ freeBoard.title }}</h3>
             <div class="subtitle">
                 <p  align="center" class="writer">{{ freeBoard.writer }} </p>
-                <span class="day"><strong> {{ freeBoard.regDate.substring(0, 10) }} 
+                <div class="day"> {{ freeBoard.regDate.substring(0, 10) }} 
                     {{new Date(freeBoard.regDate).toLocaleString("ko-KR", {timeZone: "Asia/Seoul"}).toString().substr(12, 8)}}
-                    </strong>
-                </span>   
+                </div>   
             </div>
         </div>
 

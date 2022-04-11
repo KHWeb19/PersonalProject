@@ -1,6 +1,5 @@
 <template>
     <div align="center">
-        <h2>게시물 수정</h2>
         <photo-board-modify-form v-if="photoBoard" :photoBoard="photoBoard" @submit="onSubmit"/>
         <p v-else>로딩중 .......</p>
     </div>

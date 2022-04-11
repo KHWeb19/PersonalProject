@@ -2,21 +2,31 @@
     <div>   
          <!-- 리스트로 돌아가기 -->
         <router-link :to="{ name: 'PhotoBoardListPage' }">
-            <p>사진게시판</p>
+            <v-btn class="list-btn" color="amber lighten-2">
+            <strong>사진게시판</strong>
+            </v-btn>
         </router-link>
         
         <photo-board-read v-if=photoBoard :photoBoard="photoBoard"/>
         <!-- 버튼 -->
         <div class = "button">
             <router-link v-if="$store.state.userInfo.nickname == photoBoard.writer" 
-                            :to="{ name: 'PhotoBoardModifyPage', params: { boardNo } }">
-                 수정
+                         :to="{ name: 'PhotoBoardModifyPage', params: { boardNo } }">
+                <v-btn class="modify-btn"
+                       color="amber lighten-2">
+                  <strong>수정</strong>
+                </v-btn>
+                 
             </router-link>
             <!-- 삭제해도 db에서 fileName은 날아가는데 vue에 저장 된 파일 자체는 안 날아가는 형태라 고민되네 -->
-            <button v-if="$store.state.userInfo.nickname == photoBoard.writer" @click="onDelete">삭제</button>
+            <v-btn v-if="$store.state.userInfo.nickname == photoBoard.writer" 
+                   @click="onDelete"
+                   class="remove-btn">
+                <strong>삭제</strong>
+            </v-btn>
             
         </div>
-        <!-- 댓글-->
+        <!-- 댓글 -->
         <photo-board-comment :boardNo="this.boardNo"/>
         
     </div>
@@ -72,20 +82,26 @@ export default {
 <style scoped>
 
 .button {
-    padding: 10px;
-    margin-left: 64%;
+    padding: 5px;
+    margin-left: 60%;
 }
-
 a{
-    text-decoration: none;
-    
+    text-decoration: none;  
 }
-
 p{
     font-size: 1em;
     margin-top:25px;
     margin-left:450px;
 }
-
+.list-btn{
+    margin-top:20px;
+    margin-left:30%;
+}
+.modify-btn{
+    margin-right: 5px;
+}
+.remove-btn{
+    color:grey;
+}
     
 </style>
