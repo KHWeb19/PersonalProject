@@ -1,8 +1,10 @@
 <template>
     <div id="read">
         <!-- 리스트로 돌아가기 -->
-        <router-link id="list-btn" :to="{ name: 'FreeBoardListPage' }">
-           <strong>자유게시판</strong>
+        <router-link class="list-btn-wrap" :to="{ name: 'FreeBoardListPage' }">
+            <v-btn class="list-btn" color="amber lighten-2">
+               <strong>자유게시판</strong>
+            </v-btn>
         </router-link>
         
         <free-board-read v-if="freeBoard" :freeBoard="freeBoard"/>
@@ -11,7 +13,7 @@
         <div class = "button">
             <router-link v-if="$store.state.userInfo.nickname == freeBoard.writer" 
                             :to="{ name: 'FreeBoardModifyPage', params: { boardNo } }">
-                <v-btn class="modify-btn">
+                <v-btn class="modify-btn" color="amber lighten-2">
                 <strong>수정</strong>
                 </v-btn>
             </router-link>
@@ -103,14 +105,17 @@ a:hover{
 }
 
 .modify-btn {
-    color: black;   
+    color: black;
+    margin-right: 5px;   
 }
 .delete-btn{
-    color: black;  
+    color: grey;  
 }
-#list-btn{
+.list-btn-wrap{
     padding: 20px;
-    margin-left:425px;
+    margin-left:425px; 
 }
+
+
     
 </style>

@@ -5,58 +5,58 @@
            <h4 class="commentsList">댓글</h4>
            <div class="commenter"> <strong>{{ this.writer }}</strong> </div>     
         <input type="text" class="commentRegister" v-model="content" placeholder="댓글을 작성하세요"/>
-        <v-btn class="register-btn" type="submit" text>
-            <v-icon class="register-icon">
-            등록
-            </v-icon>
-        </v-btn>
-        </form>      
+        </form>    
+            <v-btn class="register-btn" type="submit" color="amber lighten-2">
+                <strong>등록</strong>
+            </v-btn>  
         <!-- 댓글 리스트 -->
-        <div border="1" v-for="(comments, index) in freeBoardComments" :key="index" >
-                <div class="writer">
-                    <strong> {{ comments.writer }} </strong>
+        <div class="button" border="1" v-for="(comments, index) in freeBoardComments" :key="index" >
+                <div>
+                    <strong class="writer"> {{ comments.writer }} </strong>
                     <span class="date"> 
-                       <strong> {{ comments.regDate.substring(0, 10) }} 
+                       {{ comments.regDate.substring(0, 10) }} 
                         {{ new Date(comments.regDate).toLocaleString("ko-KR", {timeZone: "Asia/Seoul"}).toString().substr(16, 8)}}
-                       </strong>
+                        
                      </span>
+                     
                 </div>
                     <!-- 수정 버튼 누르기 전-->
-                <div v-if ="edit[index] == null">
-                    <div>
-                     <input class="content1" v-model="comments.content" disabled/>
+                <div class="content1" v-if ="edit[index] == null">
+                     <input  v-model="comments.content" disabled/>
                     <!-- 수정 버튼 -->
-                     <v-btn v-if="comments.writer == writer" @click="onEdit(index)" text>
-                        <v-icon class="modify-icon">
-                        수정 
-                        </v-icon> 
+                    <v-btn class="modify-btn" depressed small 
+                           v-if="comments.writer == writer" 
+                           @click="onEdit(index)" color="amber lighten-2">
+                       <strong>수정</strong> 
                     </v-btn>
                     <!-- 삭제 버튼 -->
-                    <v-btn v-if="comments.writer == writer" @click="onDelete(comments.commentNo)" text>
-                        <v-icon class="delete-icon">
+                    <v-btn depressed small 
+                           v-if="comments.writer == writer" 
+                           @click="onDelete(comments.commentNo)">
+                        <v-icon >
                         mdi-delete    
                         </v-icon> 
-                    </v-btn>
-                    </div>  
+                    </v-btn> 
                 </div>  
+                 
                     <!-- 수정 버튼 누른 후 -->
-                <div v-if ="edit[index] == true" >
-                    <div>
-                        <input class="content2" v-model="ediContent"> 
+               
+                <div class="content2" v-if ="edit[index] == true" >
+                    <input  v-model="ediContent"> 
                     <!-- 수정 확인 버튼 -->
-                     <v-btn v-if="comments.writer == writer " @click="onModify(comments.commentNo,ediContent,index)" text>
-                        <v-icon class="select-icon">
-                        완료
-                        </v-icon> 
+                     <v-btn class="check-btn" depressed small 
+                            v-if="comments.writer == writer " 
+                            @click="onModify(comments.commentNo,ediContent,index)" 
+                            color="amber lighten-2">
+                        <strong>완료</strong>
                     </v-btn>
                     <!-- 수정 취소 버튼 -->
-                    <v-btn class="cancel-btn" v-if="comments.writer == writer" @click="onCancel(index)" text>
-                        <v-icon class="cancel-icon">
+                    <v-btn depressed small 
+                           v-if="comments.writer == writer" 
+                           @click="onCancel(index)">
                         취소
-                        </v-icon> 
                     </v-btn> 
                 </div>
-            </div>
         </div>
     </div>
 </template>
@@ -142,6 +142,7 @@ export default {
 .writer{
     color:black;
     margin-top: 20px;
+    margin-right: 5px;
 }
 .comments{
     margin-left: 30%;
@@ -149,7 +150,7 @@ export default {
 }
 .commentRegister {
     border: 3px solid grey;
-    width: 550px;
+    width: 600px;
     outline: none;
     color:black
 }
@@ -163,35 +164,33 @@ export default {
 .commenter{
     color:black;
 }
-.modify-icon,
-.select-icon, 
-.cancel-icon,
-.delete-icon {
-   font-size: 17px;
-}
 .cancel-btn {
-    color:black;
+    color:grey;
     font-size: 13px;
 }
 .register-btn{
     color:black;
-}
-.register-icon{
-    font-size: 15px;
-}
-.delete-btn{
-    color: black;
+    margin-left: 52%;
+    margin-top: 5px;
 }
 .content1, 
 .content2{
-    width: 500px;
+    width: 600px;
     border-top: 1px solid;
-    color: black;
-    
+    color: black;  
+}
+.modify-btn{
+    margin-left: 315px;
+}
+.check-btn{
+    margin-left: 313px;
 }
 .date {
     color: black;
     font-size: 0.95em;
+}
+.button{
+    margin-top: 20px;
 }
     
 </style>

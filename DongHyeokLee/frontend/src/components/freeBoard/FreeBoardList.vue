@@ -2,11 +2,11 @@
     <div id="free-board" align="center">
         <table>
             <tr class="list">
-                <th align="center" width="100">번호</th> 
-                <th align="center" width="600">제목</th>
-                <th align="center" width="100">작성자</th>
-                <th align="center" width="150">등록일자</th>
-                <th align="center" width="80">조회수</th>
+                <td align="center" width="100">번호</td> 
+                <td align="center" width="600">제목</td>
+                <td align="center" width="100">작성자</td>
+                <td align="center" width="150">등록일자</td>
+                <td align="center" width="80">조회수</td>
             </tr>
             <tr v-if="!freeBoards || (Array.isArray(freeBoards) && freeBoards.length === 0)">
                 <td colspan="5">
@@ -19,8 +19,8 @@
                     {{ freeBoard.boardNo }}
                 </th>
                 <th>
-                    <router-link :to="{ name: 'FreeBoardReadPage',
-                                        params: { boardNo: freeBoard.boardNo.toString() } }" style="color:white;">
+                    <router-link class="read" :to="{ name: 'FreeBoardReadPage',
+                                        params: { boardNo: freeBoard.boardNo.toString() } }">
                        {{ freeBoard.title}} 
                     </router-link>
                 </th>
@@ -50,15 +50,13 @@
               mdi-chevron-right
           </v-icon>
       </v-btn>
-        <!-- 등록 버튼 -->
-    <router-link :to="{ name: 'FreeBoardRegisterPage'}">
-        <v-btn v-if="$store.state.isLogin == true" class="register-btn" text>
-            <v-icon class="register-icon">mdi-pencil-plus</v-icon>
+    </div>
+          <!-- 등록 버튼 -->
+    <router-link class="register-btn" :to="{ name: 'FreeBoardRegisterPage'}">
+        <v-btn v-if="$store.state.isLogin == true" class="amber lighten-2">
+          <strong>등록</strong>
         </v-btn>
     </router-link>
-    
-    </div>
-     
         
      
          
@@ -115,6 +113,7 @@ export default {
 
 
 <style scoped>
+
 a{
     text-decoration: none;
     
@@ -132,33 +131,40 @@ table {
 
 th {
     padding: 10px;
-    color: white;
+    color: black;
+    
+}
+td{
+    background-color:#FFD54F;
+    padding: 10px;
+    color: black;
+    font-family: 'Gowun Dodum', sans-serif;
 }
 
 .list{
     /*background-color: #FAFAFA;*/
-    border-bottom: 1px solid white;
-    color: white
+    border-bottom: 1px solid black;
+    color: black;
 }
 
 .page-next {
-    color: white;    
+    color: black;    
 }
 
 .page-prev {
-    color:white;
+    color:black;
 }
 .page-count{
-    color:white;
+    color:black;
 }
 
 .btn-cover {
     margin-top: 15px;
 }
 .register-btn{
-    color:white;
+    margin-left: 62%;
     }
-.register-icon{
-    font-size:1.7em;
+.read{
+    color:black;
 }
 </style>
