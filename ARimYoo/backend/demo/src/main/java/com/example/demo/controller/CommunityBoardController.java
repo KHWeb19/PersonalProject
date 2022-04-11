@@ -8,6 +8,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @Slf4j
@@ -55,9 +58,8 @@ public class CommunityBoardController {
 
     @DeleteMapping("/{boardNo}")
     public void remove(
-            @PathVariable("boardNo") Integer boardNo) {
+            @PathVariable("boardNo") Integer boardNo, CommunityBoard communityBoard) throws Exception  {
         log.info("remove()");
-
         service.remove(boardNo);
 
     }

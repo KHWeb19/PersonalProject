@@ -95,9 +95,9 @@ export default {
             this.$router.push('/community')
         },
         onDelete () {
-            const { boardNo } = this.communityBoard
+            const { boardNo, fileName } = this.communityBoard
             //alert('지우는 게시물 번호: ' + boardNo)
-            axios.delete(`http://localhost:7777/board/community/${boardNo}`)
+            axios.delete(`http://localhost:7777/board/community/${boardNo}`, {fileName})
                     .then(() => {
                         alert('게시글이 삭제되었습니다.')
                         this.$router.push({ name: 'CommunityPage' })
@@ -161,7 +161,8 @@ a{
 }
 .imgArea {
     position: relative;
-    max-height: 500px;
+    max-height: 800px;
+    max-width: 600px;
 }
 @media (max-width:700px){
     table {

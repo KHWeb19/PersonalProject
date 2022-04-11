@@ -50,6 +50,10 @@ public class CommunityBoard {
     public void increaseViewCnt() {
         this.viewCnt++;
     }
+
+    public CommunityBoard (String fileName){
+        this.fileName = fileName;
+    }
 //    public CommunityBoard (Long boardNo, String title, String writer, String content, String brackets,
 //                   String viewCnt) {
 //        this.boardNo = boardNo;

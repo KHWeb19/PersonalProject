@@ -23,10 +23,10 @@
                         <v-col cols="1" class="label" > Files </v-col>
                         <v-col>
                         <input type="file" dense clearable id="files" style="width:300px" ref="files" 
-                                multiple v-on:change="handleFileUpload()"/>
+                                multiple v-on:change="handleFileUpload()" />
                         </v-col>
                         <v-col cols="12">
-                        <v-img :src="image" class="responsive-img" alt=""/>
+                        <v-img :src="image" class="preview" alt=""/>
                         </v-col>
                     </v-row>
                     <v-row  justify="center">
@@ -72,7 +72,7 @@ export default {
         }
     },
     methods: {
-               handleFileUpload () {
+            handleFileUpload () {
             console.log('이미지 첨부')
 
             var image = this.$refs['files'].files[0]
@@ -82,8 +82,9 @@ export default {
             this.files = this.$refs.files.files
         },
         onSubmit () {
-            const { title, content, brackets, writer } = this
-            this.$emit('submit', { title, content, brackets,writer })
+            const { title, content, brackets, writer, fileName } = this
+            const file =  this.$refs.files.files[0]
+            this.$emit('submit', { title, content, brackets,writer, file,fileName })
         },
         goPage() {
             this.$router.push()
@@ -94,6 +95,7 @@ export default {
         this.title = this.communityBoard.title
         this.content = this.communityBoard.content
         this.brackets = this.communityBoard.brackets
+        this.fileName = this.communityBoard.fileName
     }
 }
 </script>
@@ -136,6 +138,12 @@ table{
     margin-top:1.5%;
     margin-left:68%;
     float:left;
+}
+.preview {
+    position: relative;
+    max-width: 400px;
+    max-height: 800px;
+   
 }
 @media (max-width:700px){
     table {

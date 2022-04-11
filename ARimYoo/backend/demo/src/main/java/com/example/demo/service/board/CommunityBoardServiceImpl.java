@@ -12,6 +12,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -25,7 +28,6 @@ public class CommunityBoardServiceImpl implements CommunityBoardService {
 
     @Override
     public void register(CommunityBoard board, @RequestParam(required = false) MultipartFile file) throws Exception {
-//        String projectPath = System.getProperty("user.dir") + "../../frontend/src/assets/back"
 
         if (file != null) {
             UUID uuid = UUID.randomUUID();
@@ -65,7 +67,11 @@ public class CommunityBoardServiceImpl implements CommunityBoardService {
 
     @Override
     public void modify(CommunityBoard communityBoard, @RequestParam(required = false) MultipartFile file) throws Exception {
+        log.info(communityBoard.getFileName());
+        Path filePath = Paths.get("c:\\khweb19\\PersonalProject\\ARimYoo\\frontend\\src\\assets\\back\\" + communityBoard.getFileName());
+        Files.delete(filePath);
         if (file != null) {
+
             UUID uuid = UUID.randomUUID();
             String fileName = uuid + "_" + file.getOriginalFilename();
             FileOutputStream saveFile = new FileOutputStream("../../frontend/src/assets/back/" + fileName);
@@ -80,7 +86,14 @@ public class CommunityBoardServiceImpl implements CommunityBoardService {
     }
 
     @Override
-    public void remove(Integer boardNo) {
+    public void remove(Integer boardNo) throws Exception {
+        Optional<CommunityBoard> selectFile = repository.findById(Long.valueOf(boardNo));
+        CommunityBoard deleteFile = selectFile.get();
+        System.out.println(deleteFile.getFileName());
+
+        Path filePath = Paths.get("c:\\khweb19\\PersonalProject\\ARimYoo\\frontend\\src\\assets\\back\\" + deleteFile.getFileName());
+        Files.delete(filePath);
+
         repository.deleteById(Long.valueOf(boardNo));
     }
 

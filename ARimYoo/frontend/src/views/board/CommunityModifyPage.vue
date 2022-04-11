@@ -29,10 +29,21 @@ export default {
     methods: {
         ...mapActions(['fetchCommunityBoard']),
         onSubmit (payload) {
-            const { title, content, brackets,writer } = payload
+            const { title, content, brackets,writer, file, fileName} = payload
+              let formData = new FormData()
 
-            axios.put(`http://localhost:7777/board/community/${this.boardNo}`,
-                { title, brackets, content,writer })
+            if (file != null ){formData.append('file', file)}
+            formData.append('title',title)
+            formData.append('content', content)
+            formData.append('writer', writer)
+            formData.append('brackets', brackets)
+            formData.append('fileName', fileName)
+
+            console.log(formData)
+
+            axios.put(`http://localhost:7777/board/community/${this.boardNo}`, formData, { headers: {
+                    'Content-Type': 'multipart/form-data'
+                }})
                     .then(res => {
                         alert('게시물 수정 성공!')
                         this.$router.push({
