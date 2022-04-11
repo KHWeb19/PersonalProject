@@ -13,4 +13,6 @@ public interface BookingService {
     public List<BookingInfo> list();
 
     public BookingInfo read(Integer bookingNo);
+
+    public void modify(BookingInfo bookingInfo);
 }

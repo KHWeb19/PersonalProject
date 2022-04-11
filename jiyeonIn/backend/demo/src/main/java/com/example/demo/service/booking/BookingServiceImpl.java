@@ -82,4 +82,9 @@ public class BookingServiceImpl implements BookingService{
         return maybeReadBoard.get();
     }
 
+    @Override
+    public void modify(BookingInfo bookingInfo) {
+        repository.save(bookingInfo);
+    }
+
 }

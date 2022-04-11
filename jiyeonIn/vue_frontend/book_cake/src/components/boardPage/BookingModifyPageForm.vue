@@ -18,18 +18,17 @@
             </v-row>
         </v-container>
 
+        <form @submit.prevent="onSubmit">
         <v-container v-show="(dbrAction == 'manager') && (checkuserInfo != null)">
             <v-row >
                 <v-col class="col-12 col-sm-3">
-                    <h4>!! {{BookingBoard.process}} !!</h4>
+                    <v-select class="checkProcess" v-model="process" :items="selectProcess" label="진행사항 체크"></v-select>
                 </v-col>
                 <v-col class="col-12 col-sm-6" style="text-align: center;">
                     <h3>{{BookingBoard.id}} 님의 주문서 입니다.</h3>
                 </v-col >
                 <v-col class="col-12 col-sm-3" style="text-align: right;">
-                    <router-link :to="{ name: 'BookingModifyPage', params: { bookingNo } }" style="text-decoration: none; color: red;">
-                        게시물 수정
-                    </router-link>
+                    <v-btn color="black" text type="submit">수정 완료</v-btn>
                 </v-col>
             </v-row>
             <v-row>
@@ -40,6 +39,7 @@
                 </v-col>
             </v-row>
         </v-container>
+        </form>
         <hr><hr><hr><br>
 
 
@@ -67,7 +67,7 @@
             </v-row>
             <v-row >
                 <v-col class="col-12 col-sm-6">
-                    <v-img v-bind:src="require(`@/assets/uploadImg/${cakeLists[ ((BookingBoard.cakeArrNo) -1)].linkInfo}`)" contain />
+                    <v-img v-bind:src="require(`@/assets/uploadImg/${this.cakeLists[(this.BookingBoard.cakeArrNo-1)].linkInfo}`)" contain />
                 </v-col>
             </v-row>
             <v-row >
@@ -99,7 +99,7 @@
             </v-row>
             <v-row >
                 <v-col class="col-12 col-sm-6">
-                    <v-img v-bind:src="require(`@/assets/uploadImg/${cakeLists[((BookingBoard.cakeArrNo)-1)].linkInfo}`)" contain />
+                    <v-img v-bind:src="require(`@/assets/uploadImg/${cakeLists[((this.BookingBoard.cakeArrNo)-1)].linkInfo}`)" contain />
                 </v-col>
             </v-row>
             <v-row >
@@ -107,7 +107,7 @@
             </v-row>
             <v-row >
                 <v-col class="col-12 col-sm-6">
-                    <v-img v-bind:src="require(`@/assets/bookingImg/${BookingBoard.linkInfo}`)" contain />
+                    <v-img v-bind:src="require(`@/assets/bookingImg/${this.BookingBoard.linkInfo}`)" contain />
                 </v-col>
             </v-row>
             <v-row >
@@ -130,7 +130,7 @@
             </v-row>
             <v-row >
                 <v-col class="col-12 col-sm-6">
-                     <v-img v-bind:src="require(`@/assets/bookingImg/${BookingBoard.linkInfo}`)" contain />
+                     <v-img v-bind:src="require(`@/assets/bookingImg/${this.BookingBoard.linkInfo}`)" contain />
                 </v-col>
             </v-row>
             <v-row >
@@ -182,9 +182,22 @@
         data () {
             return {
                 dbrAction: (window.localStorage.getItem('id')),
-                checkuserInfo: window.localStorage.getItem('token')
+                checkuserInfo: window.localStorage.getItem('token'),
+                selectProcess: ['예약중','예약확정','작업중','픽업완료','예약취소'],
+                process:'',
+                id:(window.localStorage.getItem('id')),
+                date: this.BookingBoard.date,
+                time: this.BookingBoard.time,
+                regDate: this.BookingBoard.regDate
             }
         },
+        methods: {
+            onSubmit () {
+
+                const { id, date, time, process, regDate } = this
+                this.$emit('submit', { id, date, time, process, regDate })
+            }
+        }
         
     }
 </script>

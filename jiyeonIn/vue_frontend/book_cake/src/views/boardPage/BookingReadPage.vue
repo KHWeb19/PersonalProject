@@ -3,11 +3,10 @@
         <main-page-form></main-page-form>
 
         <div class="wrap">
-            <booking-list-read-form v-if="BookingBoard" :BookingBoard="BookingBoard" :cakeLists="cakeLists"/>
+            <booking-list-read-form v-if="BookingBoard" :BookingBoard="BookingBoard" :bookingNo ="bookingNo" :cakeLists="cakeLists"/>
             <p v-else>로딩중 ... </p>
         </div>
         
-
         <footer-form ></footer-form>
     </div>
 </template>
@@ -26,6 +25,11 @@ import { mapState, mapActions } from 'vuex'
                 required: true
             }
         },
+        data () {
+            return {
+                dbrAction: (window.localStorage.getItem('id')),
+                }
+            },
         components: {
             BookingListReadForm,
             MainPageForm,

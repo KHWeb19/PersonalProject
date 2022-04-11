@@ -78,7 +78,7 @@ const routes = [
   }
   ,
   {
-    path: '/bookingModifyPage',
+    path: '/bookingModifyPage/:bookingNo',
     name: 'BookingModifyPage',
     components: {
       default: BookingModifyPage

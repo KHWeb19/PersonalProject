@@ -90,9 +90,10 @@
                 this.isLogin = false
                 this.$store.state.userInfo = null
                 window.localStorage.removeItem("token")
-                history.go(0)
                 alert('로그아웃 되었습니다!')
-                
+                this.$router.push({
+                        name: 'LoginPage'
+                    })
             }
         }
 

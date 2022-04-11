@@ -51,7 +51,7 @@ public class BookingInfo {
     private String price;
 
     @CreatedDate
-    @Column(length = 128, nullable = false)
+    @Column(length = 128, nullable = true)
     private String regDate;
 
     @PrePersist
