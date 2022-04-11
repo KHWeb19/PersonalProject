@@ -19,7 +19,6 @@
                   </div>
 
                   <v-text-field
-                    v-model="userInfoId"
                     :value="userInfo.id"
                     label="아이디"
                     clearable
@@ -28,7 +27,6 @@
                   />
 
                   <v-text-field
-                    v-model="userInfoName"
                     :value="userInfo.name"
                     label="이름"
                     clearable
@@ -37,7 +35,6 @@
                   />
                   <div class="d-flex">
                     <v-text-field
-                      v-model="userInfoNickName"
                       label="닉네임"
                       clearable
                       :value="userInfo.nickName"
@@ -121,7 +118,6 @@
                   </div>
                   <div class="d-flex">
                     <v-text-field
-                      v-model="userInfoEmail"
                       label="이메일"
                       :value="userInfo.email"
                       clearable
@@ -381,13 +377,8 @@ export default {
     },
   },
   created() {
-    this.userInfoId = this.userInfo.id;
-    this.userInfoName = this.userInfo.name;
-    this.userInfoNickName = this.userInfo.nickName;
-    this.userInfoEmail = this.userInfo.email;
     this.memberNo = this.userInfo.memberNo;
   },
-
   methods: {
     checkDuplicateNickName() {
       const { nickName } = this;
@@ -428,9 +419,11 @@ export default {
           .post(`http://localhost:7777/member/modifyNick/${this.memberNo}`, {
             nickName,
           })
-          .then(() => {
-            alert("닉네임이 변경되었습니다.");
-            this.userInfoNickName = nickName;
+          .then((res) => {
+            alert(
+              "닉네임이 변경되었습니다. 수정된 정보를 확인하고 싶다면 새로고침 해주세요."
+            );
+            localStorage.setItem("userInfo", JSON.stringify(res.data));
 
             this.dialogNick = false;
           });
@@ -445,9 +438,12 @@ export default {
           .post(`http://localhost:7777/member/modifyEmail/${this.memberNo}`, {
             email,
           })
-          .then(() => {
-            alert("이메일이 변경되었습니다.");
-            this.userInfoEmail = email;
+          .then((res) => {
+            alert(
+              "이메일이 변경되었습니다. 수정된 정보를 확인하고 싶다면 새로고침 해주세요."
+            );
+            localStorage.setItem("userInfo", JSON.stringify(res.data));
+
             this.dialogEmail = false;
           });
       }

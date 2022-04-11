@@ -163,13 +163,47 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public void modifyNickName(Long memberNo, String nickName) {
+    public MemberRequest modifyNickName(Long memberNo, String nickName, MemberRequest memberRequest) {
         memberRepository.modifyNickName(memberNo, nickName);
+
+        Optional<Member> maybeMember = memberRepository.findById(Long.valueOf(memberNo));
+
+
+        Member loginMember = maybeMember.get();
+
+        memberRequest.setId(loginMember.getId());
+        memberRequest.setMemberNo(loginMember.getMemberNo());
+        memberRequest.setName(loginMember.getName());
+        memberRequest.setNickName(loginMember.getNickName());
+        memberRequest.setEmail(loginMember.getEmail());
+
+
+        MemberRequest response = new MemberRequest(
+                memberRequest.getMemberNo(),memberRequest.getId(),null,memberRequest.getName() ,memberRequest.getNickName(),memberRequest.getEmail(),memberRequest.getAuth());
+        log.info("info response" + response);
+
+        return response;
     }
 
     @Override
-    public void modifyEmail(Long memberNo, String email) {
+    public MemberRequest modifyEmail(Long memberNo, String email,MemberRequest memberRequest) {
         memberRepository.modifyEmail(memberNo, email);
+
+        Optional<Member> maybeMember = memberRepository.findById(Long.valueOf(memberNo));
+
+        Member loginMember = maybeMember.get();
+
+        memberRequest.setId(loginMember.getId());
+        memberRequest.setMemberNo(loginMember.getMemberNo());
+        memberRequest.setName(loginMember.getName());
+        memberRequest.setNickName(loginMember.getNickName());
+        memberRequest.setEmail(loginMember.getEmail());
+
+        MemberRequest response = new MemberRequest(
+                memberRequest.getMemberNo(),memberRequest.getId(),null,memberRequest.getName() ,memberRequest.getNickName(),memberRequest.getEmail(),memberRequest.getAuth());
+        log.info("info response" + response);
+
+        return response;
     }
 
     @Override

@@ -128,19 +128,22 @@ public class MemberController {
     }
 
     @PostMapping("/modifyNick/{memberNo}")
-    public void modifyNick(@PathVariable("memberNo") Long memberNo, @Validated @RequestBody MemberRequest memberRequest){
+    public MemberRequest modifyNick(@PathVariable("memberNo") Long memberNo, @Validated @RequestBody MemberRequest memberRequest){
 
         String nickName = memberRequest.getNickName();
 
-        service.modifyNickName(memberNo, nickName);
+        MemberRequest response = service.modifyNickName(memberNo, nickName, memberRequest);
+        return response;
     }
 
     @PostMapping("/modifyEmail/{memberNo}")
-    public void modifyEmail(@PathVariable("memberNo") Long memberNo, @Validated @RequestBody MemberRequest memberRequest){
+    public MemberRequest modifyEmail(@PathVariable("memberNo") Long memberNo, @Validated @RequestBody MemberRequest memberRequest){
 
         String email = memberRequest.getEmail();
 
-        service.modifyEmail(memberNo, email);
+        MemberRequest response = service.modifyEmail(memberNo, email, memberRequest);
+
+        return response;
     }
 
     @DeleteMapping("/deleteMember/{memberNo}")
