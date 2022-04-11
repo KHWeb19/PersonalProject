@@ -5,10 +5,10 @@
            <h4 class="commentsList">댓글</h4>
            <div class="commenter"> <strong>{{ this.writer }}</strong> </div>     
         <input type="text" class="commentRegister" v-model="content" placeholder="댓글을 작성하세요"/>
-        </form>    
             <v-btn class="register-btn" type="submit" color="amber lighten-2">
                 <strong>등록</strong>
             </v-btn>  
+        </form>
         <!-- 댓글 리스트 -->
         <div class="button" border="1" v-for="(comments, index) in freeBoardComments" :key="index" >
                 <div>
@@ -16,9 +16,7 @@
                     <span class="date"> 
                        {{ comments.regDate.substring(0, 10) }} 
                         {{ new Date(comments.regDate).toLocaleString("ko-KR", {timeZone: "Asia/Seoul"}).toString().substr(16, 8)}}
-                        
                      </span>
-                     
                 </div>
                     <!-- 수정 버튼 누르기 전-->
                 <div class="content1" v-if ="edit[index] == null">
@@ -40,7 +38,6 @@
                 </div>  
                  
                     <!-- 수정 버튼 누른 후 -->
-               
                 <div class="content2" v-if ="edit[index] == true" >
                     <input  v-model="ediContent"> 
                     <!-- 수정 확인 버튼 -->
@@ -143,6 +140,8 @@ export default {
     color:black;
     margin-top: 20px;
     margin-right: 5px;
+    background-color:#FFD54F;
+    
 }
 .comments{
     margin-left: 30%;
@@ -178,6 +177,7 @@ export default {
     width: 600px;
     border-top: 1px solid;
     color: black;  
+    
 }
 .modify-btn{
     margin-left: 315px;

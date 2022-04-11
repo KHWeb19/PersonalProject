@@ -52,8 +52,8 @@ export default {
     margin-top: 10px;
 }
 td {    
-    border-top: 2px solid #EEEEEE;
-    border-bottom: 2px solid #EEEEEE;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
     padding: 10px;
     color: black;
 }

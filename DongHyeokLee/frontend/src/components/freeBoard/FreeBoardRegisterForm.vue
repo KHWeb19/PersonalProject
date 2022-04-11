@@ -4,7 +4,7 @@
         <table align="center" border="1">
             <tr>
                 <th>
-                   <strong> {{ this.writer }} </strong> 
+                   <strong class="writer"> {{ this.writer }} </strong> 
                 </th>
             </tr>
             <tr> 
@@ -22,11 +22,14 @@
         
 
         <div class="button">
-            <v-btn type="submit" text dark>
+            <v-btn type="submit"
+                   class="register"
+                   color="amber lighten-2">
                 등록
             </v-btn>
-            <v-btn text>
-            <router-link id="cancel" :to="{ name: 'FreeBoardListPage' }">
+            <v-btn>
+            <router-link class="cancel" 
+                         :to="{ name: 'FreeBoardListPage' }">
                <strong>취소</strong>
             </router-link>
             </v-btn>
@@ -61,25 +64,25 @@ export default {
 
 <style scoped>
 #theme{
-    padding:20px;
-    color: white;
+    padding:30px;
+    color: black;
 }
 #title{
-    color:white;
+    color:black;
 }
 th {
     padding: 10px;
-    border-bottom: 3px solid white;
-    color: white;
+    border-bottom: 1px solid #EEEEEE;
+    color: black;
 }
 td {
     padding: 10px;
-    border-bottom: 3px solid white;
-    color: white;
+    border-bottom: 1px solid #EEEEEE;
+    color: black;
 }
 textarea {
     border: 1px solid transparent;
-    color: white;
+    color: black;
     outline: none;    
 }
 table {
@@ -98,8 +101,15 @@ a{
 a:hover{
     text-decoration: none; 
 }
-#cancel{
-    color: black;
+.cancel{
+    color: grey;
+}
+.writer{
+    background-color:#EEEEEE;
+}
+.register{
+    margin-right:5px;
+
 }
 
 </style>
