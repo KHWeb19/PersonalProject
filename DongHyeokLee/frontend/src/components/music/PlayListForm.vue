@@ -152,7 +152,7 @@ button:hover {
   font-weight: 700;
   padding: 5px 10px;
   margin: 0px 15px;
-  color: #FFF;
+  color: black;
  
 }
 .next, .prev {
@@ -160,7 +160,7 @@ button:hover {
   font-weight: 700;
   padding: 5px 10px;
   margin: 0px 15px;
-  color: #FFF;
+  color: black;
   
 }
     

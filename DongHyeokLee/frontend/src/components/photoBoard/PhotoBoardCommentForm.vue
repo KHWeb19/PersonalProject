@@ -1,7 +1,18 @@
 <template>
-    <div class="comments">       
+    <div class="comments">
+        <!-- 댓글 등록-->
+        <form @submit.prevent="onSubmit">
+           <h4 class="commentsList">댓글</h4>
+           <div class="commenter"> <strong>{{ this.writer }}</strong> </div>     
+        <input type="text" class="commentRegister" v-model="content" placeholder="댓글을 작성하세요"/>
+        <v-btn class="register-btn" type="submit" text>
+            <v-icon class="register-icon">
+            등록
+            </v-icon>
+        </v-btn>
+        </form>       
          <!-- 댓글 리스트 -->
-        <div border="1" v-for="(comments, index) in photoBoardComments" :key="index" >
+        <div class="list" border="1" v-for="(comments, index) in photoBoardComments" :key="index" >
                 <div class="writer">
                     <strong> {{ comments.writer }} </strong>
                     <span class="date"> 
@@ -49,17 +60,7 @@
             </div>
         </div>
        
-        <!-- 댓글 등록-->
-        <form @submit.prevent="onSubmit">
-           <h4 class="commentsList">댓글</h4>
-           <div class="commenter"> <strong>{{ this.writer }}</strong> </div>     
-        <input type="text" class="commentRegister" v-model="content" placeholder="댓글을 작성하세요"/>
-        <v-btn class="register-btn" type="submit" text>
-            <v-icon class="register-icon">
-            등록
-            </v-icon>
-        </v-btn>
-        </form>
+        
     </div>
   
 </template>
@@ -144,12 +145,16 @@ export default {
 </script>
 
 <style scoped>
+
+.list{
+    margin-top:15px;
+}
 .comments{
     margin-left: 30%;
     margin-top: 10px;
 }
 .commentRegister {
-    border: 3px solid black;
+    border: 3px solid ;
     width: 550px;
     outline: none;
     color:black
@@ -184,8 +189,8 @@ export default {
 .content1, 
 .content2 {
     width: 500px;
-    border-bottom: 1px solid;
-    color: black;  
+    color: black; 
+    border-top: 1px solid; 
 }
 .date {
     color: grey;

@@ -1,85 +1,64 @@
 <template>
     <div class="comments">       
+        <!-- 댓글 등록-->
+        <form @submit.prevent="onSubmit">
+           <h4 class="commentsList">댓글</h4>
+           <div class="commenter"> <strong>{{ this.writer }}</strong> </div>     
+        <input type="text" class="commentRegister" v-model="content" placeholder="댓글을 작성하세요"/>
+        <v-btn class="register-btn" type="submit" text>
+            <v-icon class="register-icon">
+            등록
+            </v-icon>
+        </v-btn>
+        </form>      
         <!-- 댓글 리스트 -->
-        <h2>댓글</h2>
-        
-        <div border="1" v-for="(comments, index) in videoBoardComments" :key="index" >
-                
-                <div>
-                   {{ comments.writer }}
-                   {{ comments.regDate.substring(0, 10) }} 
-                   {{ new Date(comments.regDate).toLocaleString("ko-KR", {timeZone: "Asia/Seoul"}).toString().substr(11, 8)}}
-                <div>
+        <div border="1" v-for="(comments, index) in freeBoardComments" :key="index" >
+                <div class="writer">
+                    <strong> {{ comments.writer }} </strong>
+                    <span class="date"> 
+                       <strong> {{ comments.regDate.substring(0, 10) }} 
+                        {{ new Date(comments.regDate).toLocaleString("ko-KR", {timeZone: "Asia/Seoul"}).toString().substr(16, 8)}}
+                       </strong>
+                     </span>
+                </div>
                     <!-- 수정 버튼 누르기 전-->
                 <div v-if ="edit[index] == null">
-                    <!-- 작성자 아닌 경우 -->
-                    <div v-if="comments.writer != writer">
-                    {{ comments.content }} 
-                    </div>
-                    <!-- 작성자인 경우 -->
-                    <div v-else >
-                    <input v-model="comments.content" disabled/>
-                    </div>
-                </div>
-                    <!-- 수정 버튼 누른 후 -->
-                <div v-if ="edit[index] == true" >
-                    <!-- 장석자 아닌 경우 -->
-                    <div v-if="comments.writer != writer">
-                        {{ comments.content }} 
-                    </div>
-                    <!-- 작성자인 경우 -->
-                    <div v-else>
-                        <input v-model="ediContent">
-                    </div>
-                </div>
-                
+                    <div>
+                     <input class="content1" v-model="comments.content" disabled/>
                     <!-- 수정 버튼 -->
-                <div v-if="comments.writer == writer && edit[index] == null">
-                    <v-btn  @click="onEdit(index)">
-                        <v-icon>
+                     <v-btn v-if="comments.writer == writer" @click="onEdit(index)" text>
+                        <v-icon class="modify-icon">
                         수정 
                         </v-icon> 
                     </v-btn>
                     <!-- 삭제 버튼 -->
-                    <v-btn @click="onDelete(comments.commentNo)">
-                        <v-icon>
+                    <v-btn v-if="comments.writer == writer" @click="onDelete(comments.commentNo)" text>
+                        <v-icon class="delete-icon">
                         mdi-delete    
                         </v-icon> 
-                    </v-btn> 
-                 </div>
+                    </v-btn>
+                    </div>  
+                </div>  
+                    <!-- 수정 버튼 누른 후 -->
+                <div v-if ="edit[index] == true" >
+                    <div>
+                        <input class="content2" v-model="ediContent"> 
                     <!-- 수정 확인 버튼 -->
-                 <div v-if="comments.writer == writer && edit[index] == true">
-                     <v-btn v-if="comments.writer == writer " @click="onModify(comments.commentNo,ediContent,index)">
-                        <v-icon>
+                     <v-btn v-if="comments.writer == writer " @click="onModify(comments.commentNo,ediContent,index)" text>
+                        <v-icon class="select-icon">
                         완료
                         </v-icon> 
                     </v-btn>
                     <!-- 수정 취소 버튼 -->
-                    <v-btn v-if="comments.writer == writer" @click="onCancel(index)">
-                        <v-icon>
+                    <v-btn class="cancel-btn" v-if="comments.writer == writer" @click="onCancel(index)" text>
+                        <v-icon class="cancel-icon">
                         취소
                         </v-icon> 
                     </v-btn> 
-                 </div> 
-
+                </div>
             </div>
         </div>
-        </div>
-       
-        <!-- 댓글 등록-->
-        <form @submit.prevent="onSubmit">
-           <h2> {{ this.writer }}</h2>
-            <v-container fluid>
-                <v-row>
-                <v-col cols="12" md="6">
-                    <v-textarea v-model="content"></v-textarea>
-                <v-btn type="submit">등록</v-btn>
-                </v-col>
-                </v-row>
-            </v-container>
-        </form>
     </div>
-  
 </template>
 
 <script>
@@ -162,9 +141,53 @@ export default {
 </script>
 
 <style scoped>
+
 .comments{
     margin-left: 30%;
     margin-top: 10px;
+}
+.commentRegister {
+    border: 3px solid black;
+    width: 550px;
+    outline: none;
+    color:black
+}
+.commentsList{
+    margin-top: 10px;
+    color: black;
+    
+}
+.commenter{
+    color:black;
+}
+.cancel-btn {
+    color:black;
+    font-size: 13px;
+}
+.register-btn{
+    color:black;
+}
+.register-icon{
+    font-size: 17px;
+}
+.delete-btn{
+    color: grey;
+}
+.modify-icon,
+.select-icon, 
+.cancel-icon,
+.delete-icon {
+   font-size: 17px;
+}
+.content1, 
+.content2 {
+    width: 500px;
+    border-bottom: 1px solid;
+    color: black;  
+}
+.date {
+    color: grey;
+    font-size: 0.95em;
 }
     
 </style>

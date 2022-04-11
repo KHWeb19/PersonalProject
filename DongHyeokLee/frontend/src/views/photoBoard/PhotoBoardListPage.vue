@@ -30,7 +30,7 @@ export default {
             alert('로그인하세요')
             this.$router.push({name: "HomeView"});
         }else{
-        this.fetchPhotoBoardList()
+        this.fetchBoardList()
         }  
     },
     methods: {

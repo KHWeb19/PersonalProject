@@ -1,5 +1,16 @@
 <template>
-    <div class="comments">       
+    <div class="comments"> 
+        <!-- 댓글 등록-->
+        <form @submit.prevent="onSubmit">
+           <h4 class="commentsList">댓글</h4>
+           <div class="commenter"> <strong>{{ this.writer }}</strong> </div>     
+        <input type="text" class="commentRegister" v-model="content" placeholder="댓글을 작성하세요"/>
+        <v-btn class="register-btn" type="submit" text>
+            <v-icon class="register-icon">
+            등록
+            </v-icon>
+        </v-btn>
+        </form>      
         <!-- 댓글 리스트 -->
         <div border="1" v-for="(comments, index) in freeBoardComments" :key="index" >
                 <div class="writer">
@@ -15,7 +26,7 @@
                     <div>
                      <input class="content1" v-model="comments.content" disabled/>
                     <!-- 수정 버튼 -->
-                     <v-btn v-if="comments.writer == writer" @click="onEdit(index)" text dark>
+                     <v-btn v-if="comments.writer == writer" @click="onEdit(index)" text>
                         <v-icon class="modify-icon">
                         수정 
                         </v-icon> 
@@ -33,7 +44,7 @@
                     <div>
                         <input class="content2" v-model="ediContent"> 
                     <!-- 수정 확인 버튼 -->
-                     <v-btn v-if="comments.writer == writer " @click="onModify(comments.commentNo,ediContent,index)" text dark>
+                     <v-btn v-if="comments.writer == writer " @click="onModify(comments.commentNo,ediContent,index)" text>
                         <v-icon class="select-icon">
                         완료
                         </v-icon> 
@@ -47,22 +58,7 @@
                 </div>
             </div>
         </div>
-       
-        <!-- 댓글 등록-->
-       
-        <form @submit.prevent="onSubmit">
-           <h4 class="commentsList">댓글</h4>
-           <div class="commenter"> <strong>{{ this.writer }}</strong> </div>     
-        <input type="text" class="commentRegister" v-model="content" placeholder="댓글을 작성하세요"/>
-        <v-btn class="register-btn" type="submit" text>
-            <v-icon class="register-icon">
-            등록
-            </v-icon>
-        </v-btn>
-        </form>
-        
     </div>
-  
 </template>
 
 <script>
@@ -144,25 +140,28 @@ export default {
 
 <style scoped>
 .writer{
-    color:white;
+    color:black;
+    margin-top: 20px;
 }
 .comments{
     margin-left: 30%;
     margin-top: 10px;
 }
 .commentRegister {
-    border: 3px solid white;
+    border: 3px solid grey;
     width: 550px;
     outline: none;
-    color:white
+    color:black
 }
 .commentsList{
     margin-top: 10px;
-    color: white;
+    color: black;
+    background-color:#EEEEEE;
+    width:50px;
     
 }
 .commenter{
-    color:white;
+    color:black;
 }
 .modify-icon,
 .select-icon, 
@@ -171,27 +170,27 @@ export default {
    font-size: 17px;
 }
 .cancel-btn {
-    color:grey;
+    color:black;
     font-size: 13px;
 }
 .register-btn{
-    color:white;
+    color:black;
 }
 .register-icon{
-    font-size: 17px;
+    font-size: 15px;
 }
 .delete-btn{
-    color: grey;
+    color: black;
 }
-.content1, .content2
-,.content3, .content4 {
+.content1, 
+.content2{
     width: 500px;
-    border-bottom: 1px solid;
-    color: white;
+    border-top: 1px solid;
+    color: black;
     
 }
 .date {
-    color: grey;
+    color: black;
     font-size: 0.95em;
 }
     

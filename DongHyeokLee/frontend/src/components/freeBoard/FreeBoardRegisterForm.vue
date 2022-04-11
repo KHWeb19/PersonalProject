@@ -9,7 +9,7 @@
             </tr>
             <tr> 
                 <td>
-                    <input id="title" type="text" v-model="title" cols="70" placeholder="제목을 입력하세요"/>
+                    <input id="title" type="text" v-model="title" cols="70" placeholder="제목을 입력하세요(~18자)"/>
                 </td>
             </tr>
              <tr>

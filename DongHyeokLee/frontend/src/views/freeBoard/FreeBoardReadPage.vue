@@ -2,9 +2,6 @@
     <div id="read">
         <!-- 리스트로 돌아가기 -->
         <router-link id="list-btn" :to="{ name: 'FreeBoardListPage' }">
-            <v-icon id="list-icon">
-                mdi-format-list-bulleted
-            </v-icon>
            <strong>자유게시판</strong>
         </router-link>
         
@@ -14,12 +11,12 @@
         <div class = "button">
             <router-link v-if="$store.state.userInfo.nickname == freeBoard.writer" 
                             :to="{ name: 'FreeBoardModifyPage', params: { boardNo } }">
-                <v-btn class="modify-btn" text>
+                <v-btn class="modify-btn">
                 <strong>수정</strong>
                 </v-btn>
             </router-link>
             
-            <v-btn class="delete-btn" v-if="$store.state.userInfo.nickname == freeBoard.writer" @click="onDelete" text>
+            <v-btn class="delete-btn" v-if="$store.state.userInfo.nickname == freeBoard.writer" @click="onDelete">
                 <strong>삭제</strong>
             </v-btn>
         </div>
@@ -89,7 +86,7 @@ export default {
 <style scoped>
 
 #read{
-    background-image: url(@/assets/img/homeBackground.png);
+   /* background-image: url(@/assets/img/homeBackground.png);*/
     background-size: cover;
     padding: 20px;
 }
@@ -106,19 +103,14 @@ a:hover{
 }
 
 .modify-btn {
-    color: white;   
+    color: black;   
 }
 .delete-btn{
-    color: grey;  
+    color: black;  
 }
 #list-btn{
     padding: 20px;
     margin-left:425px;
-    color:white;
 }
-#list-icon{
-    color:white;
-}
-    
     
 </style>

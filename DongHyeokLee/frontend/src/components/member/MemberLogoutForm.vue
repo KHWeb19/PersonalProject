@@ -1,7 +1,7 @@
 <template>
   <v-dialog persisten max-width="400px">
       <template v-slot:activator="{ on }">
-            <v-btn color="white" style="font-size: 0.7em; padding:1px;" dark v-on="on" @click="logout()" text>
+            <v-btn color="amber lighten-2" style="font-size: 0.7em; padding:1px;" dark v-on="on" @click="logout()" text>
                 <v-icon style="font-size: 1.5em;">
                     mdi-logout
                 </v-icon>
