@@ -53,24 +53,10 @@
                <router-link style="text-decoration: none;" :to="{ name: 'JpaBoardListPage' }">
               <h4>텍스트 메모</h4> 
              </router-link>
-
-
-
-            
-   
-
-            
-
-
           </v-list-item-action>          
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-
-    
-
-
-
     <v-container>
       <v-content id="content">
         <slot name="content" class="font">

@@ -1,4 +1,6 @@
 <template>
+
+
     <div>
         <h3>게시물 목록</h3>
         <table border="1">
@@ -32,17 +34,27 @@
             </tr>
         </table>
     </div>
+
+
 </template>
 
 <script>
 
+
 export default {
+  
     name: 'JpaBoardList',
     props: {
       jpaBoards: {
             type: Array
+            
         }
     }
 }
 
 </script>
+
+
+<style scoped>
+h3{color: white;}
+</style>

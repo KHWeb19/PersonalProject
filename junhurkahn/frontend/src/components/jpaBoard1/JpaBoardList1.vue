@@ -1,4 +1,5 @@
 <template>
+
     <div>
         <h3>계좌번호 목록</h3>
         <table border="1">
@@ -39,6 +40,7 @@
             </tr>
         </table>
     </div>
+
 </template>
 
 <script>
@@ -46,7 +48,9 @@
 import axios from 'axios'
 import { mapActions,mapState} from 'vuex'
 
+
 export default {
+ 
     name: 'JpaBoardList1',
     props: {
       jpaBoards1: {

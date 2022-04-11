@@ -1,4 +1,16 @@
 <template>
+
+
+<v-app id="inspire">
+    <v-app-bar app clipped-right color="blue" dark>
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-toolbar-title>
+        <router-link style="text-decoration: none;"  :to="{ name: 'JpaBoardListPage' }">
+     <h3>스마트 노트</h3>
+    </router-link>
+      </v-toolbar-title>
+    </v-app-bar>
+
   <div>
     <div align="center">
       <h2>회원 가입</h2>
@@ -6,6 +18,7 @@
 
     <vuetify-member-register-form @submit="onSubmit"/>
   </div>
+</v-app>
 </template>
 
 <script>
@@ -36,5 +49,5 @@ export default {
 </script>
 
 <style scoped>
-
+h3{color: white;}
 </style>
