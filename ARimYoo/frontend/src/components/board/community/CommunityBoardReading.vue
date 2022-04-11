@@ -54,7 +54,7 @@
                     </v-row>
                     <v-row justify="center">
                         <v-col cols="12" class="label2" style="font-size:23pt">Content</v-col>
-                        <img v-if="this.communityBoard.fileName !== null" class="imgArea" 
+                        <img v-if="this.communityBoard.fileName !== (null || 'null')" class="imgArea" 
                         :src="require(`@/assets/back/${this.communityBoard.fileName}`)"
                         >
                     </v-row>
@@ -133,7 +133,7 @@ table{
     padding-bottom: 7%;
     margin-left:auto;
     margin-right:auto;
-    zoom:95%;
+    zoom:103%;
 }
 .v-combobox, .v-text-field, .v-textarea{
     font-family: 'Noto Sans KR', sans-serif;

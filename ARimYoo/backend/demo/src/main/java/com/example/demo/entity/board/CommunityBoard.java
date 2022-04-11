@@ -5,9 +5,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,8 +43,10 @@ public class CommunityBoard {
     @Column
     private int viewCnt = 0;
 
-    @CreationTimestamp
-    private LocalDateTime regDate = LocalDateTime.now();
+    @CreatedDate
+    private String regDate = LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT));
+
+//
 
     @UpdateTimestamp
     private LocalDateTime upDate;

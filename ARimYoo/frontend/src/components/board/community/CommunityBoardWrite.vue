@@ -26,7 +26,7 @@
                                 multiple v-on:change="handleFileUpload()"/>
                         </v-col>
                         <v-col cols="12">
-                        <v-img :src="image" class="responsive-img" alt=""/>
+                        <v-img :src="image" class="preview" alt=""/>
                         </v-col>
                     </v-row>
                     <v-row  justify="center">
@@ -134,6 +134,13 @@ table{
 .titleFloat {
     float:left;
     margin-right:3%;
+}
+.preview {
+    position: relative;
+    margin-left: auto;
+    margin-right:auto;
+    max-width: 500px;
+    max-height: 800px;
 }
 
 @media (max-width:700px){

@@ -68,8 +68,12 @@ public class CommunityBoardServiceImpl implements CommunityBoardService {
     @Override
     public void modify(CommunityBoard communityBoard, @RequestParam(required = false) MultipartFile file) throws Exception {
         log.info(communityBoard.getFileName());
-        Path filePath = Paths.get("c:\\khweb19\\PersonalProject\\ARimYoo\\frontend\\src\\assets\\back\\" + communityBoard.getFileName());
-        Files.delete(filePath);
+
+        if (communityBoard.getFileName().equals(Optional.empty())) {
+            Path filePath = Paths.get("c:\\khweb19\\PersonalProject\\ARimYoo\\frontend\\src\\assets\\back\\" + communityBoard.getFileName());
+            Files.delete(filePath);
+        }
+
         if (file != null) {
 
             UUID uuid = UUID.randomUUID();
@@ -82,6 +86,7 @@ public class CommunityBoardServiceImpl implements CommunityBoardService {
             communityBoard.setFileName(fileName);
             communityBoard.setFilePath("/files/" + fileName);
         }
+
         repository.save(communityBoard);
     }
 
@@ -91,8 +96,10 @@ public class CommunityBoardServiceImpl implements CommunityBoardService {
         CommunityBoard deleteFile = selectFile.get();
         System.out.println(deleteFile.getFileName());
 
-        Path filePath = Paths.get("c:\\khweb19\\PersonalProject\\ARimYoo\\frontend\\src\\assets\\back\\" + deleteFile.getFileName());
-        Files.delete(filePath);
+        if (deleteFile.getFileName() != null) {
+            Path filePath = Paths.get("c:\\khweb19\\PersonalProject\\ARimYoo\\frontend\\src\\assets\\back\\" + deleteFile.getFileName());
+            Files.delete(filePath);
+        }
 
         repository.deleteById(Long.valueOf(boardNo));
     }

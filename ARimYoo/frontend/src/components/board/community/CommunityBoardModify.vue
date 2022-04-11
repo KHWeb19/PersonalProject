@@ -142,6 +142,8 @@ table{
 }
 .preview {
     position: relative;
+    margin-left: auto;
+    margin-right:auto;
     max-width: 400px;
     max-height: 800px;
    
