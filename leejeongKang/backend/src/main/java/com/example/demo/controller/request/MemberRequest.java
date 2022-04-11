@@ -1,8 +1,9 @@
 package com.example.demo.controller.request;
 
 import lombok.Data;
-import org.springframework.stereotype.Controller;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 @Data
 public class MemberRequest {
     private String id;
@@ -19,5 +20,14 @@ public class MemberRequest {
         this.birth=birth;
         this.phone=phone;
         this.auth=auth;
+    }
+
+    public MemberRequest (String id, String password){
+        this.id = id;
+        this.password = password;
+    }
+
+    public MemberRequest (String id){
+        this.id = id;
     }
 }

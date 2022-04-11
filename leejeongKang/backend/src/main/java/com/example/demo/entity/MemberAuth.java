@@ -13,15 +13,18 @@ public class MemberAuth {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int memberAuthNo;
+    private Long memberAuthNo;
 
-    @Column(name = "member_no")
-    private int memberNo;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "MemberNo")
+    private Member member;
 
     @Column(length = 64, nullable = false)
     private String auth;
 
-    public MemberAuth(String auth) {
+    public MemberAuth(String auth, Member member1) {
+
         this.auth = auth;
+        member = member1;
     }
 }

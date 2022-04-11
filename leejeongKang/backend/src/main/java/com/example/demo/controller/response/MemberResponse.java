@@ -1,7 +1,5 @@
 package com.example.demo.controller.response;
 
-
-import com.example.demo.controller.request.MemberRequest;
 import lombok.Data;
 
 @Data

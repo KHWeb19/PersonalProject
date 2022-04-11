@@ -14,27 +14,25 @@ import java.util.List;
 public class Member {
     @Id //엔티티 식별 = primary key
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "member_no")
-    private int member_no;
+    private Long MemberNo;
 
-    @Column(name = "id", nullable = false)
+    @Column(length = 20, nullable = false)
     private String id;
 
-    @Column(name = "password", nullable = false)
+    @Column(length = 1000000000 , nullable = false)
     private String password;
 
-    @Column(name = "name" , nullable = false)
+    @Column(length = 10, nullable = false)
     private String name;
 
-    @Column(name = "birth", nullable = false)
+    @Column(length = 8, nullable = false)
     private String birth;
 
-    @Column(name = "phone", nullable = false)
+    @Column(length = 11, nullable = false)
     private String phone;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "member_no")
-    private List<MemberAuth> authList;
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<MemberAuth> authList = new ArrayList<>();
 
     public Member(String id, String password, String name, String birth, String phone) {
         this.id = id;
