@@ -9,7 +9,7 @@
         <br>
         <home-brand-check-list></home-brand-check-list>
         <br>
-        <question-board-list></question-board-list>
+        <home-question-board :QuestionBoards="QuestionBoards"/>
   </div>
 </v-container>
 </template>
@@ -19,7 +19,8 @@ import HeaderView from '../../components/home/headerView.vue'
 import HomeBanner from '../../components/home/HomeBanner.vue'
 import HomeSellList from '../../components/home/HomeSellList.vue'
 import HomeBrandCheckList from '../../components/home/HomeBrandCheckList.vue'
-import QuestionBoardList from '../../components/home/QuestionboardList.vue'
+import HomeQuestionBoard from '../../components/home/HomeQuestionboard.vue'
+//import { mapState, mapActions } from 'vuex'
 
   export default {
     name: 'HomeView',
@@ -29,7 +30,17 @@ import QuestionBoardList from '../../components/home/QuestionboardList.vue'
         HomeBanner,
         HomeSellList,
         HomeBrandCheckList,
-        QuestionBoardList,
+        HomeQuestionBoard,
     },
+  /*   computed: {
+        ...mapState(['QuestionBoards'])
+    },
+    mounted () {
+        this.fetchQuestionBoards()
+    },
+    methods: {
+        ...mapActions(['fetchQuestionBoards'])
+    }*/
+
   }
 </script>
