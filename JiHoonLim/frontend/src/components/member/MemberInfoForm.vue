@@ -387,6 +387,7 @@ export default {
     this.userInfoEmail = this.userInfo.email;
     this.memberNo = this.userInfo.memberNo;
   },
+
   methods: {
     checkDuplicateNickName() {
       const { nickName } = this;
@@ -429,6 +430,7 @@ export default {
           })
           .then(() => {
             alert("닉네임이 변경되었습니다.");
+            this.userInfoNickName = nickName;
 
             this.dialogNick = false;
           });
@@ -445,7 +447,7 @@ export default {
           })
           .then(() => {
             alert("이메일이 변경되었습니다.");
-
+            this.userInfoEmail = email;
             this.dialogEmail = false;
           });
       }
