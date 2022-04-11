@@ -19,4 +19,5 @@ export default {
                     commit(FETCH_MEMBER, res.data)
                 })
     },
+
 }

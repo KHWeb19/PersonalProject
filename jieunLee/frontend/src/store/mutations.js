@@ -9,5 +9,5 @@ export default {
     },
     [FETCH_MEMBER] (state, member) {
         state.member = member
-    }
+    },
 }

@@ -61,7 +61,7 @@ public class MemberController {
     }
 
     @PutMapping("/{memberNo}")
-    public Member memberModify (
+    public Member profileModify (
             @PathVariable("memberNo") Long memberNo,
             @RequestBody Member member) {
         log.info("memberModify(): " + member);
