@@ -27,57 +27,99 @@
                   :value="`${kindsOfMember[1]}`"
                 />
               </div>
+
               <section class="sign-section">
                 <div class="sign-member">
                   <form
                     class="sign-form"
-                    @submit.prevent="onSubmit"
+                    @submit.prevent="submit"
                     method="POST"
                   >
-                    <div class="sign-member-form">
-                      <div class="sign-member-id">
+                    <ValidationObserver
+                      class="sign-member-form"
+                      ref="validator"
+                    >
+                      <ValidationProvider
+                        tag="div"
+                        class="sign-member-id"
+                        v-slot="{ errors }"
+                        :rules="{ required }"
+                      >
                         <input
                           class="sign-input"
                           type="text"
-                          name="id"
                           placeholder="아이디"
-                          :rules="rules_id"
+                          maxlength="20"
                           required
+                          v-model="sign"
                         />
-                      </div>
-                      <div class="sign-member-password">
+
+                        <div class="errmsg">
+                          {{ errors[0] }}
+                        </div>
+                      </ValidationProvider>
+
+                      <ValidationProvider
+                        class="sign-member-password"
+                        tag="div"
+                        name="password"
+                        type="password"
+                        v-slot="{ errors }"
+                        :rules="{ checkPw }"
+                      >
+                        <div class="field">
+                          <input
+                            class="sign-input"
+                            type="password"
+                            name="password"
+                            placeholder="비밀번호"
+                            v-model="password"
+                            required
+                          />
+                        </div>
+                        <div class="errmsg" aria-live="polite">
+                          {{ errors[0] }}
+                        </div>
+                      </ValidationProvider>
+
+                      <ValidationProvider
+                        class="sign-member-password-confirm"
+                        tag="div"
+                        v-slot="{ errors }"
+                        name="checkPassword"
+                        :rules="{ confirmed: 'password' } || { required }"
+                      >
                         <input
                           class="sign-input"
                           type="password"
-                          name="pw"
-                          placeholder="비밀번호"
-                          :rules="rules_pw"
-                          required
-                        />
-                      </div>
-                      <div class="sign-member-password-confirm">
-                        <input
-                          class="sign-input"
-                          type="password"
-                          name="pwCheck"
                           placeholder="비밀번호 확인"
-                          :rules="rules_pw1"
+                          v-model="checkPassword"
                           required
                         />
-                      </div>
-                      <div class="sign-member-name">
+                        <div class="errmsg" aria-live="polite">
+                          {{ errors[0] }}
+                        </div>
+                      </ValidationProvider>
+
+                      <ValidationProvider
+                        class="sign-member-name"
+                        tag="div"
+                        name="name"
+                        v-slot="{ errors }"
+                        :rules="{ min: 2, max: 30 } || { required }"
+                      >
                         <input
                           class="sign-input"
                           type="text"
-                          name="name"
                           placeholder="이름(2~30자)"
-                          :rules="rules_name"
+                          v-model="name"
                           required
-                          minlength="2"
-                          maxlength="30"
                         />
-                      </div>
-                    </div>
+                        <div class="errmsg" aria-live="polite">
+                          {{ errors[0] }}
+                        </div>
+                      </ValidationProvider>
+                    </ValidationObserver>
 
                     <div class="sign-line-bottom"></div>
 
@@ -95,35 +137,37 @@
   </body>
 </template>
 <script>
+import { ValidationObserver, ValidationProvider, extend } from "vee-validate"
+
+import axios from "axios"
+
 export default {
   name: "SignPageForm",
 
   data() {
     return {
       kindsOfMember: ["회원", "관리자"],
-      id: "",
-      pw: "",
+      sign: "",
+      password: "",
+      checkPassword: "",
       name: "",
-      pw1: "",
-      rules_id: [(v) => !!v || "아이디를 입력해주세요"],
-      rules_pw: [
-        (v) => !!v || "비밀번호를 입력해주세요",
-        (v) => v.length >= 6 || "비밀번호를 6자리 이상 입력해주세요",
-      ],
-      rules_pw1: [
-        (v) => !!v || "비밀번호를 입력해주세요",
-        (v) => v === this.pw || "비밀번호가 일치하지 않습니다",
-      ],
-      rules_name: [(v) => !!v || "이름을 입력해주세요"],
+      checkPw: "",
+      required: "",
     }
+  },
+  component: {
+    ValidationObserver,
+    ValidationProvider,
+    extend,
   },
   /* eslint-disable */
   methods: {
-    onSubmit() {
+    submit() {
       const { id, pw, name } = this
       const auth = this.radioGroup == "사용자" ? "사용자" : "관리자"
       this.$emit("submit", { id, pw, name, auth })
     },
+
     checkValid() {
       const { id } = this
       axios

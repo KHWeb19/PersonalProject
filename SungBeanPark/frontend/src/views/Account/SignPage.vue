@@ -16,7 +16,6 @@ export default {
         .post("http://localhost:8888/Member/register", { id, pw, name, auth })
         .then(() => {
           alert("등록 성공!")
-
           this.$router.push({
             name: "LoginPage",
           })
