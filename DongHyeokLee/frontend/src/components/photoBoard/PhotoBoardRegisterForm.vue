@@ -1,22 +1,19 @@
 <template>
     <form @submit.prevent="onSubmit">
-        <table>
+        <table align="center" border="1">
             <tr>
-                <td>제목</td>
+                <th>
+                   <strong> {{ this.writer }} </strong> 
+                </th>
+            </tr>
+            <tr>
                 <td>
-                    <input type="text" v-model="title"/>
+                    <input type="text" v-model="title" cols="70" placeholder="제목을 입력하세요"/>
                 </td>
             </tr>
             <tr>
-                <td>작성자</td>
                 <td>
-                    {{ this.writer }} 
-                </td>
-            </tr>
-            <tr>
-                <td>본문</td>
-                <td>
-                    <textarea cols="50" rows="20" v-model="content">
+                    <textarea cols="70" rows="17" v-model="content" placeholder="본문을 작성하세요">
                     </textarea>
                 </td>
             </tr>
@@ -25,20 +22,23 @@
         
 
         <v-container>
-            <h3>파일 업로드 </h3>
             <div>
-                <label>Files
-                    <input type="file" id="files" ref="files" accept=".jpg, .png, .gif" v-on:change="handleFileUpload()"/>
+                <label>
+                    <input type="file" id="files" ref="files" accept=".jpg, .png, .gif" v-on:change="handleFileUpload()" />
                     <!-- 여러개 파일 이름을 어떻게 저장 해야할지 감 안 잡혀서 multiple 기능 제거 -->
                 </label>
             </div>
         </v-container>
 
-        <div>
-            <button type="submit">등록</button>
-            <router-link :to="{ name: 'PhotoBoardListPage' }">
-                취소
+        <div class="button">
+            <v-btn type="submit" >
+                등록
+            </v-btn>
+            <v-btn text>
+            <router-link id="cancel" :to="{ name: 'PhotoBoardListPage' }">
+               <strong>취소</strong>
             </router-link>
+            </v-btn>
         </div>
     </form>
 </template>
@@ -70,7 +70,6 @@ export default {
                 this.files = this.$refs.files.files
                 let fileLength = this.files[0].name.length
                 let fileDot = this.files[0].name.lastIndexOf(".")
-                
                 let fileType = this.files[0].name.substring(fileDot+1, fileLength)
                 //let fileTyepLowerCase = fileType.toLowerCase()
                 //console.log(fileTyepLowerCase)
@@ -87,3 +86,40 @@ export default {
     }
 }
 </script>
+
+
+<style scoped>
+
+td {
+    padding: 10px;
+    border-bottom: 1px solid black;
+    color: black;
+}
+th {
+    padding: 10px;
+    border-bottom: 3px solid black;
+    color: black;
+}
+textarea {
+    border: 1px solid transparent;
+    color: black;
+    outline: none;    
+}
+input {
+    outline: none;
+    width: 100%;
+}
+.button {
+    padding: 20px;
+}
+a{
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: none; 
+}
+#cancel{
+    color: black;
+}
+
+</style>

@@ -1,16 +1,9 @@
 <template>
-    <div id="photoBoard">
+    <div id="photo-board">
         <h2>사진게시판</h2>
         <div>
         <photo-board-list :photoBoards="photoBoards"/>
         </div>
-       
-        <router-link :to="{ name: 'PhotoBoardRegisterPage'}">
-            <v-btn v-if="$store.state.isLogin == true" class="blue" dark>
-                <v-icon>mdi-pencil-plus</v-icon>
-                <span>등록</span>
-            </v-btn>
-        </router-link>
     </div>
 </template>
 
@@ -33,8 +26,12 @@ export default {
         
     },
     mounted () {
+        if(!this.$store.state.isLogin){
+            alert('로그인하세요')
+            this.$router.push({name: "HomeView"});
+        }else{
         this.fetchPhotoBoardList()
-        
+        }  
     },
     methods: {
         ...mapActions(['fetchPhotoBoardList'])
@@ -48,12 +45,15 @@ export default {
 
 h2 {
     text-align: center;
-    padding: 15px;
+    margin-top: 20px;
 }
-
 a {
     text-decoration: none;
     margin-left: 1230px;
+}
+#photo-board{
+     background-image: url(@/assets/img/XL.jpg);
+     background-size: cover;
 
 }
 

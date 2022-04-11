@@ -61,7 +61,7 @@
             </v-app-bar-nav-icon> 
              <v-navigation-drawer  class="list" app v-model="nav_drawer" right temporary>
                 <v-list nav dense>
-                    <v-list-item v-for="link in links" :key="link.name" :href="link.route">
+                    <v-list-item v-for="(link, index) in links" :key="index" :href="link.route">
                         <v-list-item-action>
                             <v-icon left>
                                 {{ link.icon }}
@@ -105,9 +105,10 @@ export default {
         return {
              nav_drawer: false,
              links: [
-                { icon: 'mdi-instagram', text: 'SU-HYUN', name: 'SuHyun-insta', route: 'https://www.instagram.com/akmu_suhyun/' },
-                { icon: 'mdi-instagram', text:'CHAN-HYEOK', name:'FreeBoardListPage', route:'https://www.instagram.com/akmuchanhk/'},
-                
+                { icon: 'mdi-instagram', text: 'SU-HYUN', route: 'https://www.instagram.com/akmu_suhyun/' },
+                { icon: 'mdi-instagram', text:'CHAN-HYEOK',  route:'https://www.instagram.com/akmuchanhk/'},
+                { icon: 'mdi-youtube', text:'SU-HYUN', route:'https://www.youtube.com/c/Leesuhyun'},
+                { icon: 'mdi-youtube', text:'AKMU', route:'https://www.youtube.com/c/officialAKMU'},
             ],
      
         }

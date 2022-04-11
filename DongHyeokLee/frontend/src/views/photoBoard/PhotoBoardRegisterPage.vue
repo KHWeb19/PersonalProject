@@ -53,9 +53,13 @@ export default {
 </script>
 
 <style scoped>
-/*#register {
- background-image: url(@/assets/img/homeBackground.png);
- height: 100vh;
-}*/
-    
+/*
+#register {
+    background-image: url(@/assets/img/XL.jpg);
+    background-size: cover;
+}
+*/
+h2{
+    padding:20px;
+}    
 </style>

@@ -1,52 +1,38 @@
 <template>
     <div>
         <form @submit.prevent="onSubmit">
-            <table>
-                <tr>
-                    <td>
-                        <input type="hidden" :value="photoBoard.boardNo" disabled/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>제목</td>
-                    <td>
-                        <input type="text" v-model="title"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>작성자</td>
-                    <td>
-                        <input type="text" :value="photoBoard.writer" disabled/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>등록일자</td>
-                    <td>
-                        <input type="text" :value="photoBoard.regDate" disabled/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>본문</td>
-                    <td>
-                        <textarea cols="50" rows="20" v-model="content">
-                        </textarea>
-                    </td>
-                </tr>
-            </table>
+        <table align="center" border="1">
+            <tr>
+                <th>
+                   <strong> {{ this.writer }} </strong> 
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" v-model="title" placeholder="제목을 입력하세요"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <textarea cols="70" rows="17" v-model="content" placeholder="본문을 작성하세요">
+                    </textarea>
+                </td>
+            </tr>
+        </table>
 
         <v-container>
-            <h3>파일 업로드 </h3>
+           
             <div>
-                <label>Files
+                <label>
                     <input type="file" id="files" ref="files" accept=".jpg, .png, .gif" v-on:change="handleFileUpload()"/>
                     <!-- 여러개 파일 이름을 어떻게 저장 해야할지 감 안 잡혀서 multiple 기능 제거 -->
                 </label>
             </div>
         </v-container>
 
-            <div>
-                <button type="submit">수정 완료</button>
-                <router-link :to="{ name: 'PhotoBoardReadPage',
+            <div class="button">
+                <button type="submit"> 완료</button>
+                <router-link class="cancel" :to="{ name: 'PhotoBoardReadPage',
                                     params: { boardNo: photoBoard.boardNo.toString() } }">
                     취소
                 </router-link>
@@ -69,6 +55,7 @@ export default {
         return {
             title: '',
             content: '',
+            writer: this.$store.state.userInfo.nickname
         }
     },
     methods: {
@@ -105,3 +92,42 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+
+table{
+    border-color: transparent;
+}
+th {
+    padding: 10px;
+    border-bottom: 1px solid black;
+    color: black;
+}
+td {
+    padding: 10px;
+    border-bottom: 3px solid black;
+    color: black;
+}
+textarea {
+    border: 1px solid transparent;
+    color: black;
+    outline: none;    
+}
+.button {
+    padding: 20px;
+}
+a{
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: none; 
+}
+.cancel{
+    color: grey;
+}
+input {
+    outline: none;
+    width: 100%;
+}
+    
+</style>

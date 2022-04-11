@@ -16,10 +16,10 @@ public class FreeBoard {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long boardNo;
 
-    @Column(length = 128, nullable = false)
+    @Column(length = 18, nullable = false)
     private String title;
 
-    @Column(length = 32, nullable = false)
+    @Column(length = 18, nullable = false)
     private String writer;
 
     @Lob

@@ -69,12 +69,12 @@ export default {
 }
 th {
     padding: 10px;
-    border-bottom: 1px solid white;
+    border-bottom: 3px solid white;
     color: white;
 }
 td {
     padding: 10px;
-    border-bottom: 4px solid white;
+    border-bottom: 3px solid white;
     color: white;
 }
 textarea {

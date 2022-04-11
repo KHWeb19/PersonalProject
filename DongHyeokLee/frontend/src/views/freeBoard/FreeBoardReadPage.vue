@@ -96,7 +96,7 @@ export default {
 
 .button {
     padding: 10px;
-    margin-left: 800px;
+    margin-left: 900px;
 }
 a{
     text-decoration: none;

@@ -6,22 +6,18 @@
         </router-link>
         
         <photo-board-read v-if=photoBoard :photoBoard="photoBoard"/>
-
-         <!-- 댓글-->
-        <photo-board-comment :boardNo="this.boardNo"/>
-
+        <!-- 버튼 -->
         <div class = "button">
             <router-link v-if="$store.state.userInfo.nickname == photoBoard.writer" 
                             :to="{ name: 'PhotoBoardModifyPage', params: { boardNo } }">
-                게시물 수정
+                 수정
             </router-link>
             <!-- 삭제해도 db에서 fileName은 날아가는데 vue에 저장 된 파일 자체는 안 날아가는 형태라 고민되네 -->
             <button v-if="$store.state.userInfo.nickname == photoBoard.writer" @click="onDelete">삭제</button>
             
-            <router-link :to="{ name: 'PhotoBoardListPage' }">
-                목록 보기
-            </router-link>
         </div>
+        <!-- 댓글-->
+        <photo-board-comment :boardNo="this.boardNo"/>
         
     </div>
 </template>
@@ -76,7 +72,8 @@ export default {
 <style scoped>
 
 .button {
-    margin-left: 30%;
+    padding: 10px;
+    margin-left: 64%;
 }
 
 a{
@@ -86,8 +83,8 @@ a{
 
 p{
     font-size: 1em;
-    padding:  15px;
-    margin-left:400px;
+    margin-top:25px;
+    margin-left:450px;
 }
 
     

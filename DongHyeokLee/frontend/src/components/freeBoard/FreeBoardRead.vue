@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="title">
-            {{ freeBoard.title }}
+            <h3>{{ freeBoard.title }}</h3>
             <div class="subtitle">
                 <p class="writer">{{ freeBoard.writer }} </p>
                 <span class="day"><strong> {{ freeBoard.regDate.substring(0, 10) }} 
@@ -46,6 +46,7 @@ export default {
     margin-left: 30%; 
     padding:15px;
     color:white;
+    width:500px
 }
 .subtitle{
     margin-top: 10px;
@@ -59,7 +60,7 @@ td {
 table{
     margin-left: 30%; 
     height: 500px;
-    width: 500px;
+    width: 600px;
     border: 1px solid transparent;
 }
 .day {
