@@ -1,6 +1,6 @@
 <template>
   <div>
-    <menu-bar :member="member"/>
+    <menu-bar />
               <div style="display: flex; justify-content: center;">
     <accounts-category/>
     <accounts-edit-form v-if="member" :member="member" @submit="onSubmit" @image="onImage"/>

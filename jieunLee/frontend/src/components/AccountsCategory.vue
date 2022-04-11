@@ -68,6 +68,7 @@ export default {
                     this.$cookies.remove("user")
                     this.isLogin = false
                     localStorage.removeItem("loginInfo")
+                    localStorage.removeItem("imageChange")
                     this.$router.push({name: 'LoginPage'})
                 })
                 .catch(()=> {

@@ -11,9 +11,11 @@
               <td style="margin-left: 20px;"> 
                 {{member.memberId}}
                 <br/>
+
                 <label for="files">
                     프로필 사진 바꾸기
                 </label>
+
                 <input type="file" id="files" ref="files" 
                             multiple v-on:change="handleFileUpload()"/>
                 <br/>
@@ -147,6 +149,7 @@ export default {
       onSubmit() {
         const { memberName, memberId, imageName, memberWeb, memberIntro } = this
         this.$emit('submit', { memberName, memberId, imageName, memberWeb, memberIntro})
+        
       }
     },
     created() {

@@ -80,7 +80,7 @@ public class MemberController {
                 log.info("requestUploadFile() - Make file:" + multipartFile.getOriginalFilename());
 
                 FileOutputStream writer = new FileOutputStream(
-                        "../frontend/src/assets/mImages/" + multipartFile.getOriginalFilename()
+                        "../frontend/src/assets/mImage/" + multipartFile.getOriginalFilename()
                 );
                 writer.write(multipartFile.getBytes());
                 writer.close();

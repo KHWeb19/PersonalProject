@@ -1,6 +1,6 @@
 <template>
   <div>
-      <menu-bar/>
+      <menu-bar :member="member"/>
       <my-profile v-if="member" :member="member"/>
       <p v-else>로딩중......</p>
   </div>
@@ -35,23 +35,8 @@ export default {
           this.$router.push()
       })
   },
-  // mounted() {
-  //   this.fetchMember()
-  // },
   methods: {
       ...mapActions(['fetchMember']),
-      
-      // onDelete() {
-      //   const {memberId} = this.member
-      //   axios.delete(`http://localhost:7777/member/${memberId}`)
-      //     .then(()=> {
-      //         alert('삭제 성공')
-      //         this.$router.push({name: 'JpaBoardListPage'})
-      //     })
-      //     .catch(()=> {
-      //         alert('삭제실패 문제발생')
-      //     })
-      // }
     }
 }
 </script>

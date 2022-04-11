@@ -1,7 +1,9 @@
 <template>
   <div>
-    <menu-bar :member="member"/>
-    <v-container style="width: 1000px; margin-top: 20px;">
+    <menu-bar/>
+      <v-container style="width: 700px; margin-top: 20px; padding-left: 0px">
+      <v-flex>
+          <v-card style="height: 320px">
       <router-link style="text-decoration: none;" :to="{name: 'LoginPage'}">
         &nbsp;Login&nbsp;
       </router-link>
@@ -10,7 +12,8 @@
       </router-link>
 
       <member-list :members="members"/>
-
+          </v-card>
+          </v-flex>
     </v-container>
 
   </div>

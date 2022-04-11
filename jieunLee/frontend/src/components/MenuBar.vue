@@ -81,12 +81,12 @@ Vue.use(cookies)
 
   export default {
     name: 'MenuBar',
-    props: {
-      member: {
-          type: Object,
-          require: true
-      }
-    },
+    // props: {
+    //   member: {
+    //       type: Object,
+    //       require: true
+    //   }
+    // },
     data: () => ({
       loginInfo: JSON.parse(localStorage.getItem('loginInfo')),
       imageChange: JSON.parse(localStorage.getItem('imageChange'))

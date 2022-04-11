@@ -1,6 +1,8 @@
 import {
     FETCH_MEMBER,
     FETCH_MEMBER_LIST,
+    FETCH_BOARD,
+
 
 } from './mutation-types'
 
@@ -19,5 +21,10 @@ export default {
                     commit(FETCH_MEMBER, res.data)
                 })
     },
-
+    fetchBoard ({ commit }, boardNo) {
+        return axios.get(`http://localhost:7777/board/${boardNo}`)
+                .then((res) => {
+                    commit(FETCH_BOARD, res.data)
+                })
+    },
 }
