@@ -7,6 +7,39 @@
                 <th align="center" width="300">제목</th>
                 <th align="center" width="240">등록일자</th>
             </tr>
+
+            <tr>
+                <td>
+                    공지사항
+                </td>
+                <td>
+                </td>
+                <td>
+                    <router-link :to="{ name: 'BeforeBooking'}">
+                       <strong> 예약 전 필독 </strong>
+                    </router-link>
+                </td>
+                <td>
+                    2022.4.11 오전 10:00:00
+                </td>
+            </tr>
+            <tr>
+                 <td>
+                    공지사항
+                </td>
+                <td>
+                </td>
+                <td>
+                    <router-link :to="{ name: 'BeforeConfirm'}">
+                        <strong> 예약 확정 전 필독</strong>
+                    </router-link>
+                </td>
+                <td>
+                    2022.4.11 오전 10:00:00
+                </td>
+            </tr>
+
+
             <tr v-if="!bookingLists || (Array.isArray(bookingLists) && bookingLists.length === 0)">
                 <td colspan="4">
                     현재 등록된 게시물이 없습니다!

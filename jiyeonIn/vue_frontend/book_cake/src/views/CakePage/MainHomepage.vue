@@ -15,15 +15,19 @@
                         <h4> &nbsp;&nbsp;공지사항</h4><br>
                         <ul>
                             <li>
-                                1. 예약 전 필독
+                                <router-link :to="{ name: 'BeforeBooking'}">
+                                   <strong> 1. 예약 전 필독 </strong>
+                                </router-link>
                             </li>
                             <li>
-                                2. 예약 확정 전 필독
-                            </li>
-                            <li>
-                                3. 후기 등록 시 추가 혜택
+                                <router-link :to="{ name: 'BeforeConfirm'}">
+                                    <strong> 2. 예약 확정 전 필독 </strong>
+                                </router-link>
                             </li>
                             <br>
+                            <li>
+                                ** 후기 등록 시 5% 할인
+                            </li>
                             <li>
                                 ** 찾아오는 길
                                 <span><br>&nbsp;&nbsp;&nbsp;&nbsp;인천 1호선 테크노파크역 2번 출구 </span>
@@ -80,6 +84,10 @@ ul{
 a {
     text-decoration: none;
     font: 300;
+}
+
+ul a {
+    color: inherit;
 }
 
 </style>

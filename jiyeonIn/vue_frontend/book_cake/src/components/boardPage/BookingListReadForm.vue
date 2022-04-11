@@ -152,11 +152,19 @@
                 *디자인 관련 이미지가 없습니다!
             </v-row>
             <v-row >
-                <p></p><br>
+                <br><br>
             </v-row>
         </v-container>
 
-        <br>
+        <div class="illbeback" style="text-align: right;">
+            <v-btn color="black" text >
+                <router-link :to="{ name: 'BookingListPage'}" >
+                        돌아가기
+                </router-link>
+            </v-btn>
+        </div>
+
+        
         <hr><hr><hr>
         <br>
     </div>
@@ -190,4 +198,9 @@
 </script>
 
 <style scoped>
+.illbeback  a{
+    text-decoration: none; 
+    color: inherit;
+    text-align: right;
+}
 </style>

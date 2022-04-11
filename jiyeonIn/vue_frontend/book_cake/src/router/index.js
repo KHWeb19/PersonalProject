@@ -12,6 +12,8 @@ import SignUpPage from '@/views/CakePage/SignUpPage.vue'
 import test from '@/views/CakePage/test.vue'
 import BookingReadPage from '@/views/boardPage/BookingReadPage.vue'
 import BookingModifyPage from '@/views/boardPage/BookingModifyPage.vue'
+import BeforeBooking from '@/views/boardNotice/BeforeBooking.vue'
+import BeforeConfirm from '@/views/boardNotice/BeforeConfirm.vue'
 
 Vue.use(VueRouter)
 
@@ -86,6 +88,17 @@ const routes = [
     props: {
       default: true
     }
+  },
+  {
+    path: '/beforeBooking',
+    name: 'BeforeBooking',
+    component: BeforeBooking
+  }
+  ,
+  {
+    path: '/beforeConfirm',
+    name: 'BeforeConfirm',
+    component: BeforeConfirm
   }
 ]
 
