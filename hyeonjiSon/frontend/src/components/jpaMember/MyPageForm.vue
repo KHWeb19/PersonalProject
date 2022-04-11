@@ -4,32 +4,31 @@
             <tr>
                 <td>회원 번호</td>
                 <td>
-                    <input id="right" type="text" :value="member.memberNo" readonly/>
+                    {{ member.memberNo }}
                 </td>
             </tr>
             <tr>
                 <td id="left">ID</td>
                 <td>
-                    <input id="right" type="text" :value="member.userId" readonly/>
+                    {{ member.userId }}
                 </td>
             </tr>
             <tr>
                 <td id="left">상호명</td>
                 <td>
-                    <input id="right" type="text" :value="member.storeName" readonly/>
+                    {{ member.storeName }}
                 </td>
             </tr>
             <tr>
                 <td id="left">비밀번호</td>
                 <td>
-                    <input id="right" type="text" :value="member.password" readonly/>
+                    {{ member.password }}
                 </td>
             </tr>
             <tr>
                 <td id="left">비밀번호 질문 답</td>
                 <td>
-                    <textarea cols="50" rows="20" :value="member.passwordqanswer" readonly>
-                    </textarea>
+                    {{ member.passwordqanswer }}
                 </td>
             </tr>
         </table>
@@ -38,7 +37,18 @@
 
 <script>
 export default {
-    
+    name: 'MyPageForm',
+    props: {
+        Member: {
+            type: Object,
+            required: true
+        }
+    },
+    data() {
+        return {
+            userInfo: JSON.parse(localStorage.getItem('userInfo'))
+        }
+    }
 }
 </script>
 

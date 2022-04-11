@@ -3,41 +3,46 @@
   <div>
       <h2>나의 정보 확인하기</h2>
       <my-page-form v-if="member" :member="member"/>
-         <p v-else>로딩중 ....... </p>
-
-         <v-btn backgrondcolor: blue>
-            <v-on @click="passwordCheck">
-            정보 수정
-            </v-on>
-         </v-btn>
-
-      <delete-member-pop-up/> <!--ㅡmyPopup으로 이름 바꾸기 -->
-
-      <v-btn>회원 탈퇴</v-btn>
-      <button @click="onDelete">회원 탈퇴</button>
+        <p v-else>로딩중 ....... </p>
+      <my-pop-up/>
   </div>
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex'
+//import axios from 'axios'
+
 import MyPageForm from '@/components/jpaMember/MyPageForm.vue'
-import DeleteMemberPopUp from '@/components/jpaMember/MyPopUp.vue'
+import MyPopUp from '@/components/jpaMember/MyPopUp.vue'
 
 export default {
-     name: "MemberMyPage",
+   name: "MemberMyPage",
+    props: {
+        memberNo: {
+            type: String,
+            required: true
+        }
+    },
   components: {
      MyPageForm,
-     DeleteMemberPopUp
+     MyPopUp
   },
   computed: {
+     ...mapState(['member', 'loginMember'])
   },
-  created(){
-     this.fetchMember(this.memberNo)
+  created() {
+     this.fetchMember(this.$store.state.loginMemberNo)
             .catch(() => {
-               alert('나의 정보 요청 실패!')
+               alert('정보 요청 실패!')
                this.$router.push()
             })
   },
   methods: {
-  },
+      ...mapActions(['fetchMember']),
+ //    onSubmit (payload) {
+   //         const { sn, pw, pwConfirm } = payload
+     //       axios.put(`http://localhost:7777/jpaMember/${this.$store.state.userInfo.memberNo}`,
+       //     { id: this.$store.state.userInfo.id, sn, pw, pwConfirm})
+      }
 }
 </script>

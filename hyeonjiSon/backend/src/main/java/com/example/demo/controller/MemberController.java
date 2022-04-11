@@ -1,11 +1,13 @@
 package com.example.demo.controller;
 
 import com.example.demo.controller.request.MemberRequest;
+import com.example.demo.entity.Member;
 import com.example.demo.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
 
 @Slf4j
 @RestController
@@ -24,7 +26,7 @@ public class MemberController {
     }
 
     @PostMapping("/login")
-    public MemberRequest jpaMemberLogin (@RequestBody MemberRequest memberRequest) {
+    public MemberRequest jpaMemberLogin(@RequestBody MemberRequest memberRequest) {
         log.info("login request from vue:() " + memberRequest);
 
         MemberRequest memberResponse = memberservice.login(memberRequest);
@@ -37,4 +39,13 @@ public class MemberController {
 
         return memberResponse;
     }
+
+    @GetMapping("/{memberNo}")
+    public Member jpaMemberRead(
+            @PathVariable("memberNo") Long memberNo) {
+        log.info("Member information Read()" + memberNo);
+
+        return memberservice.read(memberNo);
+    }
 }
+

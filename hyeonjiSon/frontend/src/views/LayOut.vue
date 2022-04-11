@@ -6,32 +6,32 @@
         <div @click="home">로고 들어갈 자리</div>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-toolbar-items>
-        <!-- router-link에 생기는 하이퍼링크 밑줄은 stype scope에서 decoration:none;설정하여 지움 <-v-btn에 하이퍼링크 넣기로 해결!-->
-        <v-col> 
-            <v-btn v-if="!isLogin" onclick="location.href='http://localhost:8080/memberLoginPage'">
+
+      <v-toolbar-items v-if="this.$store.state.userInfo == null">
+              <v-btn onclick="location.href='http://localhost:8080/memberLoginPage'">
                 <v-icon>
                     mdi-login
                 </v-icon>
             </v-btn>
-            <v-btn v-if="isLogin" @click="logout">
+            <v-btn onclick="location.href='http://localhost:8080/memberRegisterPage'">
+                    <v-icon>
+                        mdi-account-multiple-plus-outline
+                    </v-icon>
+            </v-btn>            
+      </v-toolbar-items>
+      <v-toolbar-items v-if="this.$store.state.userInfo != null">
+            <v-btn @click="logout">
                 <v-icon>
                     mdi-logout
                 </v-icon>
             </v-btn>
-            <v-btn v-if="!isLogin" onclick="location.href='http://localhost:8080/memberRegisterPage'">
-                    <v-icon>
-                        mdi-account-multiple-plus-outline
-                    </v-icon>
-            </v-btn>
-            <v-btn v-if="isLogin" onclick="location.href='http://localhost:8080/memberMyPage'">
+            <v-btn onclick="location.href='http://localhost:8080/memberMyPage'">
                 <v-icon>
                     mdi-clipboard-account-outline
                 </v-icon>
-            </v-btn>
-
-        </v-col>
+            </v-btn>     
       </v-toolbar-items>
+
       <slot name="menubar"></slot>
     </v-app-bar>
 
@@ -77,10 +77,6 @@ export default {
         drawer: false,
         left: false,
 
-        move: [
-            { login: '/memberLoginPage', register: '/memberRegisterPage', mypage: '/memberMypage'}
-        ],
-
         navrouters: [
           { icon: 'mdi-leaf-circle-outline', text: '프로젝트 소개', name: 'home', route: '/projectIntroducePage' },
           { icon: 'mdi-recycle-variant', text: '분리수거 안내', name: 'home', route: '/recycleGuideMainPage' },
@@ -92,9 +88,11 @@ export default {
     }
   },
   mounted () {
-        this.$store.state.session = this.$cookies.get("user")
-        if (this.$store.state.session != null) {
+        this.$store.state.userInfo = this.$cookies.get("user")
+        if (this.$store.state.userInfo != null){
             this.$store.state.isLogin = true
+        }else {
+            this.$store.state.isLogin = false
         }
   },
   computed: {
@@ -113,6 +111,9 @@ export default {
       this.isLogin = false
       this.$store.state.userInfo = null
       alert('로그아웃 성공!')
+    },
+    mypage(){
+      
     }
   }
 }
