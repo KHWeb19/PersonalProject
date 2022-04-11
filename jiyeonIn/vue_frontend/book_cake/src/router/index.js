@@ -67,9 +67,9 @@ const routes = [
   }
   ,
   {
-    path: '/bookingReadPage',
+    path: '/bookingReadPage/:bookingNo',
     name: 'BookingReadPage',
-    component: {
+    components: {
       default: BookingReadPage
     },
     props: {
@@ -80,7 +80,7 @@ const routes = [
   {
     path: '/bookingModifyPage',
     name: 'BookingModifyPage',
-    component: {
+    components: {
       default: BookingModifyPage
     },
     props: {

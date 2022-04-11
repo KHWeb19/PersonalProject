@@ -311,7 +311,7 @@ export default {
                 const {id, date, time, contents,cakeArrNo, files1} = this
                 this.$emit('submit', {id, date, time, contents, cakeArrNo,files1})
             }else{
-                (this.cakeArrNo) = 0
+                this.cakeArrNo = 0
                 const {id, date, time, contents,cakeArrNo, files1} = this
                 this.$emit('submit', {id, date, time, contents, cakeArrNo,files1})
             }

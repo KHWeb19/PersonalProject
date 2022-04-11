@@ -12,6 +12,6 @@ public class BookingRequest {
     private String date;
     private String time;
     private String contents;
-    private String cakeArrNo;
+    private Long cakeArrNo;
 
 }

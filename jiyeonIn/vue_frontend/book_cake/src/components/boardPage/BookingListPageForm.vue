@@ -1,7 +1,6 @@
 <template>
     <div>
     <table>
-        
             <tr>
                 <th align="center" width="100">번호</th>
                 <th align="center" width="140">진행사항</th>
