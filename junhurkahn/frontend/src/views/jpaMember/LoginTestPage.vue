@@ -4,7 +4,7 @@
     <v-app-bar app clipped-right color="blue" dark>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>
-        <router-link style="text-decoration: none;"  :to="{ name: 'JpaBoardListPage' }">
+        <router-link style="text-decoration: none;"  :to="{ name: '' }">
      <h3>스마트 노트</h3>
     </router-link>
       </v-toolbar-title>
@@ -35,6 +35,7 @@ import LoginForm from '@/components/jpaMember/LoginForm.vue'
 import Vue from 'vue'
 import axios from 'axios'
 import cookies from 'vue-cookies'
+import router from '@/router'
 
 Vue.use(cookies)
 
@@ -68,10 +69,14 @@ export default {
                 this.$store.state.userInfo = res.data
                 this.$cookies.set("user", res.data, 30)
                 this.isLogin = true
+                 router.push({name : 'JpaBoardListPage'})
+
               }
             })
             .catch(res => {
               alert(res.response.data.message)
+                router.push({name : 'JpaBoardListPage'})
+               
             })
       } else {
         alert('이미 로그인이 되어 있습니다!')
@@ -81,6 +86,7 @@ export default {
       this.$cookies.remove("user")
       this.isLogin = false
       this.$store.state.userInfo = null
+      
 
       alert('로그아웃 성공!')
     }

@@ -103,6 +103,14 @@ import JpaBoardList4 from '@/components/jpaBoard4/JpaBoardList4.vue'
 import { mapState, mapActions } from 'vuex'
 export default {
     name: 'JpaBoardListPage4',
+
+      data () {
+    return {
+      drawer: false,
+      left: false
+    }
+  },
+  
     components: {
       JpaBoardList4
     },

@@ -5,7 +5,7 @@
     <form @submit.prevent="onSubmit">
      
       <h3>로그인 형식</h3>
-      <table>
+      <table border="1">
         <tr>
           <td>아 이 디</td>
           <td><input type="text" v-model="id"></td>

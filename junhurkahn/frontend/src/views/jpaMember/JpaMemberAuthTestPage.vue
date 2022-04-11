@@ -4,7 +4,7 @@
     <v-app-bar app clipped-right color="blue" dark>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>
-        <router-link style="text-decoration: none;"  :to="{ name: 'JpaBoardListPage' }">
+        <router-link style="text-decoration: none;"  :to="{ name: '' }">
      <h3>스마트 노트</h3>
     </router-link>
       </v-toolbar-title>

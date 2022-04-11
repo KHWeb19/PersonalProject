@@ -5,7 +5,7 @@
     <v-app-bar app clipped-right color="blue" dark>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>
-        <router-link style="text-decoration: none;"  :to="{ name: 'JpaBoardListPage' }">
+        <router-link style="text-decoration: none;"  :to="{ name: '' }">
      <h3>스마트 노트</h3>
     </router-link>
       </v-toolbar-title>
@@ -29,6 +29,7 @@
 import VuetifyMemberJoinColumnTestForm from '@/components/jpaMember/VuetifyMemberJoinColumnTestForm.vue'
 import LookBusinessMemberForm from '@/components/jpaMember/LookBusinessMemberForm.vue'
 import axios from 'axios'
+import router from '@/router'
 
 export default {
   name: "VuetifyMemberJoinColumnTestPage",
@@ -42,9 +43,14 @@ export default {
       axios.post('http://localhost:7777/vueJpaMemberAuth/register', { id, pw, auth })
         .then(res => {
           alert('등록 성공! - ' + res)
+            router.push({name : 'LoginTestPage'})
         })
         .catch(res => {
           alert(res.response.data.message)
+           router.push({name : 'LoginTestPage'})
+           
+          
+          
         })
     }
   }

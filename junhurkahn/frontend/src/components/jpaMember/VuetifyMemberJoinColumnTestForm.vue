@@ -16,7 +16,7 @@
         </v-radio-group>
       </div>
 
-      <table>
+      <table border="1">
         <tr>
           <td>아이디</td>
           <td><input style="border: 1px solid black;" type="text" v-model="id"></td>
@@ -60,6 +60,7 @@ export default {
       const { id, pw, radioGroup } = this
       const auth = (radioGroup == '개인' ? '개인' : '사업자')
       this.$emit('submit', { id, pw, auth })
+       
     }
   }
 }

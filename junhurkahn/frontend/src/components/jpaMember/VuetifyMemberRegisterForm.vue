@@ -4,7 +4,7 @@
     <form @submit.prevent="onSubmit">
       <h3>회원 가입 양식</h3>
 
-      <table>
+      <table border="1">
         <tr>
           <td>아이디</td>
           <td><input type="text" v-model="id"></td>
