@@ -28,10 +28,10 @@ export default {
      MyPopUp
   },
   computed: {
-     ...mapState(['member', 'loginMember'])
+     ...mapState(['member'])
   },
   created() {
-     this.fetchMember(this.$store.state.loginMemberNo)
+     this.fetchMember(this.$store.state.memberNo)
             .catch(() => {
                alert('정보 요청 실패!')
                this.$router.push()

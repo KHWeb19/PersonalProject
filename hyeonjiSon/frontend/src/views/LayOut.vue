@@ -25,7 +25,7 @@
                     mdi-logout
                 </v-icon>
             </v-btn>
-            <v-btn onclick="location.href='http://localhost:8080/memberMyPage'">
+            <v-btn @click="mypage">
                 <v-icon>
                     mdi-clipboard-account-outline
                 </v-icon>
@@ -67,13 +67,17 @@ import cookies from 'vue-cookies'
 Vue.use(cookies)
 
 export default {
-  components: {
-   },
-  
   name: "LayOut",
-  data () {
+    props: {
+      member: {
+          type: Object,
+          require: true
+      }
+    },
+data () {
     return {
         isLogin: false,
+        loginInfo: JSON.parse(localStorage.getItem('loginInfo')),
         drawer: false,
         left: false,
 
@@ -103,9 +107,6 @@ export default {
     home () {
       (window.location.pathname !== '/') ? router.push('/') : router.go(0)
     },
-    category () {
-      (window.location.pathname !== '/') ? router.push('/') : router.go(0)
-    },
     logout () {
       this.$cookies.remove("user")
       this.isLogin = false
@@ -113,7 +114,7 @@ export default {
       alert('로그아웃 성공!')
     },
     mypage(){
-      
+      this.$router.push({ name: 'memberMyPage', params: {memberNo: this.$store.state.userInfo.memberNo.toString()} }) 
     }
   }
 }
