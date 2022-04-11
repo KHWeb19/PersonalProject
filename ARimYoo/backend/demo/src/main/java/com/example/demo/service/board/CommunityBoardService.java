@@ -12,6 +12,6 @@ public interface CommunityBoardService {
     public void register (CommunityBoard board, @RequestParam(required = false) MultipartFile file) throws Exception;
     public List<CommunityBoard> list ();
     public CommunityBoard read (Long boardNo);
-    public void modify (CommunityBoard communityBoard);
+    public void modify (CommunityBoard communityBoard, @RequestParam(required = false) MultipartFile file) throws Exception;
     public void remove (Integer boardNo);
 }

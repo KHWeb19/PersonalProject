@@ -1,18 +1,13 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.board.CommunityBoard;
-import com.example.demo.entity.board.CommunityPhoto;
 import com.example.demo.service.board.CommunityBoardService;
-import com.example.demo.service.board.PhotoService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.util.List;
 
 @Slf4j
@@ -23,9 +18,6 @@ public class CommunityBoardController {
 
     @Autowired
     private CommunityBoardService service;
-
-    @Autowired
-    private PhotoService photoService;
 
     @PostMapping("/register")
     public void CommunityBoardRegister (@Validated CommunityBoard board, @RequestParam(required = false) MultipartFile file) throws Exception {
@@ -52,11 +44,11 @@ public class CommunityBoardController {
     @PutMapping("/{boardNo}")
     public CommunityBoard modify (
             @PathVariable("boardNo") Integer boardNo,
-            @RequestBody CommunityBoard communityBoard) {
+             CommunityBoard communityBoard, @RequestParam(required = false) MultipartFile file) throws Exception  {
         log.info("modify(): " + communityBoard);
 
         communityBoard.setBoardNo(Long.valueOf(boardNo));
-        service.modify(communityBoard);
+        service.modify(communityBoard, file);
 
         return communityBoard;
     }

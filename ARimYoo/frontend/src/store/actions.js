@@ -24,6 +24,7 @@ export default {
         return axios.get(`http://localhost:7777/board/community/${boardNo}`)
             .then((res) => {
                 commit(FETCH_COMMUNITY_BOARD, res.data)
+                console.log(res.data)
         })
         
     }

@@ -64,7 +64,18 @@ public class CommunityBoardServiceImpl implements CommunityBoardService {
     }
 
     @Override
-    public void modify(CommunityBoard communityBoard) {
+    public void modify(CommunityBoard communityBoard, @RequestParam(required = false) MultipartFile file) throws Exception {
+        if (file != null) {
+            UUID uuid = UUID.randomUUID();
+            String fileName = uuid + "_" + file.getOriginalFilename();
+            FileOutputStream saveFile = new FileOutputStream("../../frontend/src/assets/back/" + fileName);
+
+            saveFile.write(file.getBytes());
+            saveFile.close();
+
+            communityBoard.setFileName(fileName);
+            communityBoard.setFilePath("/files/" + fileName);
+        }
         repository.save(communityBoard);
     }
 
