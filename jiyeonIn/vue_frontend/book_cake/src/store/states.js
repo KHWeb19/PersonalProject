@@ -1,3 +1,4 @@
 export default {
-    cakeLists: []
+    cakeLists: [],
+    bookingLists:[],
 }
