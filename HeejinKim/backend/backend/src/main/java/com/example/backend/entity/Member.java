@@ -32,6 +32,7 @@ public class Member {
     @Column(length = 64, nullable = false)
     private String email;
 
+
     @CreationTimestamp
     private Date regDate;
 
@@ -46,14 +47,24 @@ public class Member {
         this.password = password;
         this.passwordCheck = passwordCheck;
         this.email = email;
+
+
     }
 
-        /*
+    public Member (String userId, String password, String passwordCheck, String email, MemberAuth auth) {
+        this.userId = userId;
+        this.password = password;
+        this.passwordCheck = passwordCheck;
+        this.email = email;
+
+
         if (auth != null) {
             changeAuth(auth);
         }
     }
-    public void changeAuth (MemberAuth auth) {}  */
+
+
+    public void changeAuth (MemberAuth auth) {}
 
     public void addAuth (MemberAuth auth) {
         if (authList == null) {

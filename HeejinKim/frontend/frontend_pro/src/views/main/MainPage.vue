@@ -1,51 +1,5 @@
 <template>
-    <div id="mainbar">
-        <v-banner>
-            <v-toolbar flat white>
-                <v-app-bar-nav-icon @click="nav_drawer = !nav_drawer">
-                </v-app-bar-nav-icon>
-
-                <div id="logo" >     
-                    <router-link style="text-decoration: none;" :to="{name: 'Home'}">
-                        <h1>The Village</h1>
-                    </router-link>
-                </div>
-
-                <v-spacer></v-spacer>
-
-                <v-toolbar-items>
-                    <router-link style="text-decoration: none;" :to="{name: 'RegisterPage'}">
-                         <h3 class="font-weight-light pa-6 pl-6 pr-2">Login</h3>
-                    </router-link>   
-                    <router-link style="text-decoration: none;" :to="{name: 'RegisterPage'}">
-                        <h3 class="font-weight-light pa-6 pl-6 pr-2">Register</h3>
-                    </router-link>   
-                  
-                </v-toolbar-items>
-
-            </v-toolbar>
-
-            <v-navigation-drawer app v-model="nav_drawer" temporary>
-                <v-list nav dense>
-                    <v-list-item-group v-model="group" active-class="grey--text  ">
-                        <v-list-item v-for="link in category" :key="link.name" router :to="link.route">
-                            <v-list-item-action>
-                                <v-icon left>
-                                    {{ link.icon }}
-                                </v-icon>
-                            </v-list-item-action>
-
-                            <v-list-item-content>
-                                <v-list-item-title>
-                                    {{ link.text }}
-                                </v-list-item-title>
-                            </v-list-item-content>
-                        </v-list-item>
-                    </v-list-item-group>
-                </v-list>
-            </v-navigation-drawer>
-        </v-banner>
-
+    <body>            
         <v-container fluid>
             <v-window show-arrows>
                
@@ -106,70 +60,47 @@
                     </v-col>
                 </v-row>
             </v-sheet>  -->
+    <weather></weather>
+    <br><br>
+    
+    </body>
+    
    
-    </div>
 </template>
          
 
-
-
 <script>
 
-//import Weather from '@/components/home/Weather'
+import Weather from '@/components/main/Weather.vue'
+//import FooterForm from '@/components/main/FooterForm.vue'
+
+
 
 export default {
-  name: 'MainPage',
 
- // components:{Weather},
+    name: 'MainPage',
 
+  components:
+
+    {   Weather,
+        //FooterForm 
+    },
+   
   data() {
     return {
-        nav_drawer: false,
-        group: false,
-        
-          category: [
-                {  
-                    icon: 'mdi-home',
-                    name: 'MainPage',
-                    route: '/MainPage'
-                  
-                },
-                {   
-                    text: 'About us',
-                    name: 'AboutUs',
-                    // route: '/main'
-                },
-                { 
-                    text: 'Community',
-                    name: 'Community',
-                    //route: '/'
-                },
-                {
-                    text: 'Reservation',
-                    name: 'Reservation',
-                },
-                {
-                    text: 'Notice',
-                    name: 'Notice',
-                },
-                {
-                    text: 'News',
-                    name: 'News',
-                },
-                {
-                    text: 'Service Center',
-                    name: 'ServiceCenter',
-                }
-                
-            ]
-           
-        }
+        nav_drawer:'',
+        group:'',
+        category:''
+      
     }
 }
+}
+
 
 //@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap');'Dancing Script', cursive;
 //@import url('https://fonts.googleapis.com/css2?family=Parisienne&display=swap'); color: rgba(230, 215, 89, 0.897);
 //font-family: 'Cinzel', serif;  @import url('https://fonts.googleapis.com/css2?family=Cinzel&display=swap');
+
 </script>
 
 
@@ -182,30 +113,6 @@ export default {
     box-sizing: border-box;
 }
 
-#logo {
-    font-family: 'Poiret One', cursive;
-    text-align:center; 
-    width: 1500vw;  
-    
-}
-.v-application a {
-      color:black;
-}
-h1 {
-    display: block;
-    font-size: 3.4em;
-    letter-spacing:0.3vw;
-    margin-block-start: 0.3 em;
-    margin-block-end: 0.3 em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;        
-}
-
-/* v-bar 패딩 넣기
-.v-application--is-ltr .v-banner__wrapper {
-     padding: 6px 5px 6px 5px; 
-}
-    */
 .contents {
     font-family: 'Poiret One', cursive;
     text-align: center;
@@ -303,7 +210,20 @@ h1 {
 .screen2:hover::after{
     opacity: 1;
 }
+.login{
+    text-decoration: none;  
+    
+    font-size: 20px;
+    padding-top: 23px;
+    margin-right: 30px;
+}
+.register{
+    text-decoration: none;  
+    font-weight: light; 
+    font-size: 20px;
+    padding-top: 23px
 
+}
 
 </style>
 
