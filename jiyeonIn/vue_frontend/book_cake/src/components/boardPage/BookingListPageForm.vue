@@ -27,7 +27,7 @@
                     </router-link>
                 </td>
                 <td align="center">
-                    {{ board.regDate.substring(0, 10) }} {{board.regDate.substring(11, 16)}}
+                    {{ board.regDate}}
                 </td>
             </tr>
         </table>

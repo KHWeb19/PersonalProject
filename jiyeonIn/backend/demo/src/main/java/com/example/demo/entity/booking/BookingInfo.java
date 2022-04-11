@@ -3,8 +3,12 @@ package com.example.demo.entity.booking;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.Date;
 
 @Data
@@ -43,8 +47,14 @@ public class BookingInfo {
     @Column(length = 32, nullable = true)
     private String price;
 
-    @CreationTimestamp
-    private Date regDate;
+    @CreatedDate
+    @Column(length = 128, nullable = false)
+    private String regDate;
+
+    @PrePersist
+    public void onPrePersist(){
+        this.regDate = LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT));
+    }
 
     public BookingInfo(String id, String date, String time, String process, String contents, String linkInfo) {
         this.id = id;
