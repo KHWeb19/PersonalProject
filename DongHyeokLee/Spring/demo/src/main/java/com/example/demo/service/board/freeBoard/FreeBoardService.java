@@ -14,4 +14,5 @@ public interface FreeBoardService {
         public FreeBoard read (Integer boardNo);
         public void modify (FreeBoard board);
         public void remove (Integer boardNo);
+        public List<FreeBoard> searchList(String searchWord);
 }

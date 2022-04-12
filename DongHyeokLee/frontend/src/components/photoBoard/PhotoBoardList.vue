@@ -134,6 +134,7 @@ strong{
 }
 .page-count{
   color: black;
+  margin-bottom:15px;
 }
 .register-btn{
   color:black;

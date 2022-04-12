@@ -1,5 +1,6 @@
 <template>
-    <div id="free-board" align="center">
+    <div class="free-board" align="center">
+        <h2 id="title">검색 결과</h2>
         <table>
             <tr class="list">
                 <td align="center" width="100"><strong>번호</strong></td> 
@@ -8,7 +9,7 @@
                 <td align="center" width="150"><strong>등록일자</strong></td>
                 <td align="center" width="80"><strong>조회수</strong></td>
             </tr>
-            <tr v-if="!freeBoards || (Array.isArray(freeBoards) && freeBoards.length === 0)">
+            <tr v-if="!searchList || (Array.isArray(searchList) && searchList.length === 0)">
                 <td colspan="5">
                     현재 등록된 게시물이 없습니다!
                 </td>
@@ -52,92 +53,60 @@
       </v-btn>
     </div>
 
-    <!-- 검색 기능 -->
-    <div class="btn-cover">
-    <input type="text" 
-           class="search" 
-           v-model="keyWord" 
-           cols="70" 
-           placeholder="검색어 입력" />
-    <v-btn @click="searchBtn()" 
-            class="search-btn"
-            depressed small>
-        <strong>검색</strong>
-        </v-btn>
-          <!-- 등록 버튼 -->
-    <router-link class="register-btn" :to="{ name: 'FreeBoardRegisterPage'}">
-        <v-btn v-if="$store.state.isLogin == true" class="amber lighten-2">
-          <strong>등록</strong>
-        </v-btn>
-    </router-link>
-    </div>
+  
      
          
         
     </div>
 </template>
 
+
 <script>
-import axios from 'axios';
-
 export default {
-    name: 'FreeBoardList',
-    props: {
-      freeBoards: {
-            type: Array
-        }   
-    },
-    data () {
-        return {
-            pageNum: 0,
-            pageSize:10,
-            searchList:[],
-            keyWord:''
-        }
-    },
-    methods: {
-        nextPage () {
-            this.pageNum += 1;
+        name: 'SearchList',
+        props: {
+            searchList: {
+                type: Array,
+                required: true
+            }
         },
-        prevPage () {
-            this.pageNum -= 1;
+        data () {
+            return {
+                pageNum: 0,
+                pageSize:10
+            }
         },
-        searchBtn() {
-            const keyWord = this.keyWord
-            console.log(keyWord)
-            axios.post('http://localhost:7777/freeBoard/search',  { keyWord })
-                    .then((res) => {
-                        console.log("검색 성공")
-                        console.log(res.data)
-                        this.$router.push({name: 'SearchResult',
-                                    params: { searchList: res.data} })
-                    })
-        }
-    },
-    computed: {
-        pageCount () {
-            let listLeng = this.freeBoards.length,
-                listSize = this.pageSize,
-                page = Math.floor(listLeng / listSize);
-                
-                if(listLeng % listSize > 0 ) {
-                    page += 1;
-                }
+        methods: {
+            nextPage () {
+                this.pageNum += 1;
+            },
+            prevPage () {
+                this.pageNum -= 1;
+            }
+        },
+        computed: {
+            pageCount () {
+                let listLeng = this.searchList.length,
+                    listSize = this.pageSize,
+                    page = Math.floor(listLeng / listSize);
+                    
+                    if(listLeng % listSize > 0 ) {
+                        page += 1;
+                    }
 
-                return page
-        },
-         paginatedData () {
-             const start = this.pageNum * this.pageSize,
-             end = start + this.pageSize
-      
-            return this.freeBoards.slice(start, end);
+                    return page
+            },
+            paginatedData () {
+                const start = this.pageNum * this.pageSize,
+                end = start + this.pageSize
+        
+                return this.searchList.slice(start, end);
+            }
         }
-    }
     
+   
 }
-
 </script>
-
 
 <style scoped>
 
@@ -188,19 +157,16 @@ td{
     margin-top: 15px;
     margin-bottom:15px;
 }
-.register-btn{
-    margin-left: 250px;
-    }
 .read{
     color:black;
 }
-.search{
-    border: 3px solid grey;
-    outline: none;
-    margin-left: 360px;
+#title {
+    color: black;
+    text-align: center;
+    padding: 20px;   
+    background-color:#FFD54F;
+    margin-bottom:50px;
+    font-family: 'Nanum Brush Script', cursive;
+}
     
-}
-.search-btn{
-    margin-left:5px;
-}
 </style>

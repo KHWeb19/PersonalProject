@@ -1,13 +1,10 @@
 package com.example.demo.controller.board.freeBoard;
 
+import com.example.demo.controller.board.freeBoard.request.KeyWordRequest;
 import com.example.demo.entitiy.board.freeBoard.FreeBoard;
-import com.example.demo.entitiy.board.photoBoard.PhotoBoard;
 import com.example.demo.service.board.freeBoard.FreeBoardService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -70,5 +67,13 @@ public class FreeBoardController {
         log.info("freeBoardRemove()");
 
         service.remove(boardNo);
+    }
+
+    @PostMapping("/search")
+    public List<FreeBoard> FreeBoardSearchList (@RequestBody KeyWordRequest keyWord) {
+        log.info("FreeBoardSearchList()");
+        String word = keyWord.getKeyWord();
+
+        return service.searchList(word);
     }
 }

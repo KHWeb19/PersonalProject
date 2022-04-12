@@ -68,7 +68,7 @@ export default {
     color: black;
     background-color:#FFD54F;
     margin-bottom:50px;
-     font-family: 'Nanum Brush Script', cursive;
+    font-family: 'Nanum Brush Script', cursive;
 }
 #title{
     color:black;
