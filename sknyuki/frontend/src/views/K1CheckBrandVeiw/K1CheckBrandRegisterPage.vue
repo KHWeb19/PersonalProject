@@ -15,6 +15,7 @@ import K1CheckBrandRegister from '@/components/BrandCheckBoard/K1CheckBrandRegis
 import HeaderView from '@/components/home/headerView.vue'
 import DropDown from '@/components/KategoriePage1/DropDown.vue'
 import axios from 'axios'
+//import { mapState } from 'vuex'
 export default {
     name:'K1CheckBrandRegisterPage',
     components:{ 
@@ -28,20 +29,20 @@ data () {
       files:[],
     }
 },
+computed: {
+    ...mapState([ 'userInfo' ])
+  },
      methods: {
         contentsSubmit (payload) {
-            const { title, content, writer} = payload
+            const id=this.userInfo.id
+            const { title, content,writer} = payload
             console.log('contents의 값이 넘어왔습니다.'+content)
-            //spring 작업시 경우에 따라서 회원정보의 id값도 넘겨줘야함
-            axios.post('http://localhost:7777/CheckBrandBoard/register', { title, writer, content })
+            axios.post('http://localhost:7777/CheckBrandBoard/register', {id, title, content,writer })
                     .then(res => {
                         // alert('등록 성공! - ' + res)
                         this.boardNo=res.data.boardNo
                         
-                       // this.$router.push({
-                         //   name: 'BoardListPage',
-                           // params: { boardNo: res.data.boardNo.toString() }
-                        //})
+                    
                     })
                 },
                 filesSubmit(files){
@@ -54,16 +55,25 @@ data () {
                     }
 
                     formData.append('boardNo',this.boardNo)
+                    formData.append('id', this.userInfo.id)
+                    
 
                     axios.post('http://localhost:7777/fileUpload/CheckBrandBoard',formData,{
                         headers:{ 'Content-Type': 'multipart/form-data'}
                         })
                         .then(res=>{
                              console.log(res.data)
+                              // alert('등록 성공! - ' + res)
+                                // this.$router.push({
+                         //   name: 'K1CheckBrandVeiw',
+                           // params: { boardNo:  boardNo: this.boardNo, id: this.id }
+                        //})
                         }).catch(err=>{
                              console.log(err)
+                             
                         })
                 },1000)
+                 
                 }
      }
 }
