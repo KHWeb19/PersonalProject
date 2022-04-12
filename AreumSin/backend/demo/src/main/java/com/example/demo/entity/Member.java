@@ -1,16 +1,25 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-@Data
+@Getter
+@Setter
 @Entity
 @NoArgsConstructor
+@Transactional
 public class Member {
 
     @Id
@@ -46,7 +55,7 @@ public class Member {
     @UpdateTimestamp
     private Date userLoginDate;
 
-    public MemberPlan(String member) {
-        this.member = member
-    }
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<MemberPlan> memberPlans = new ArrayList<>();
+
 }
