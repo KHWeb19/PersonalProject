@@ -118,7 +118,7 @@ table{
     padding-bottom: 7%;
     margin-left:auto;
     margin-right:auto;
-    zoom:95%;
+    zoom:90%;
 }
 .v-combobox, .v-text-field, .v-textarea, #files{
     font-family: 'Noto Sans KR', sans-serif;

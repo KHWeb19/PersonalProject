@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+;
 import java.util.List;
 
 @Slf4j
@@ -40,7 +37,6 @@ public class CommunityBoardController {
     public CommunityBoard read (
             @PathVariable("boardNo") Long boardNo) {
         log.info("read()");
-
         return service.read(boardNo);
     }
 

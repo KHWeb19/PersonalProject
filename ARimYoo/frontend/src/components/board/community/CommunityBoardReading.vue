@@ -38,12 +38,12 @@
                             <v-text-field
                                 class="titleFloat"
                                 :value="communityBoard.brackets"
-                                style="width:100px; zoom:1.2; cursor:default"
+                                style="width:100px; zoom:1.1; cursor:default"
                                 rounded
                                 readonly
                                 color="red darken-3"
                                 ></v-text-field>
-                            <v-text-field class="titleFloat"  rounded style="width:500px; zoom:1.2" color="red darken-3" readonly :value="communityBoard.title"/>
+                            <v-text-field class="titleFloat"  rounded style="width:500px; zoom:1.1" color="red darken-3" readonly :value="communityBoard.title"/>
                         </v-col>
                     </v-row>
                      <v-row>
@@ -54,7 +54,7 @@
                     </v-row>
                     <v-row justify="center">
                         <v-col cols="12" class="label2" style="font-size:23pt">Content</v-col>
-                        <img v-if="this.communityBoard.fileName !== (null || 'null')" class="imgArea" 
+                        <img v-if="this.communityBoard.fileName !== null && this.communityBoard.fileName !== 'null'" class="imgArea" 
                         :src="require(`@/assets/back/${this.communityBoard.fileName}`)"
                         >
                     </v-row>
@@ -70,14 +70,15 @@
                         <v-btn @click=goPage() class="backBtn" color="black" dark>Back</v-btn>
                     </v-row>
                 </table>
-
     </v-container>
 </template>
 
 <script>
 import axios from 'axios'
+import { mapActions } from 'vuex'
 
 export default {
+
     name:'CommunityBoardRead',
     props: {
         communityBoard: {
@@ -90,7 +91,11 @@ export default {
         fileName: this.communityBoard.fileName
         }
     },
+    created () {
+        this.boardNo = this.communityBoard.boardNo
+    },
     methods: {
+        ...mapActions(['fetchCommunityCommentsList']),
         goPage () {
             this.$router.push('/community')
         },
@@ -105,13 +110,13 @@ export default {
                     .catch(() => {
                         alert('삭제 실패! 문제 발생!')
                     })
-        }
-
-        }
+        },
+    }
 }
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap');
 .label{
     margin-right:3%;
     text-align: center;
@@ -127,13 +132,12 @@ export default {
 table{
     position: relative;
     background-color: rgb(245, 244, 244);
-    padding-left: 10%;
-    padding-right: 10%;
+    padding-left: 12%;
+    padding-right: 12%;
     padding-top: 2%;
     padding-bottom: 7%;
     margin-left:auto;
     margin-right:auto;
-    zoom:103%;
 }
 .v-combobox, .v-text-field, .v-textarea{
     font-family: 'Noto Sans KR', sans-serif;
