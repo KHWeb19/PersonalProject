@@ -35,6 +35,7 @@ export default {
                 { text:'글 번호', value: 'boardNo', width:'70px'},
                 { text:'말머리', value: 'brackets', width:'70px'},
                 { text: '제목', value: 'title', width: "200px" },
+                { text: '', value:'commentCnt', width:"20px"},
                 { text: '작성자', value: 'writer', width: "100px" },
                 { text: '조회수', value: 'viewCnt', width: "70px" },
                 { text: 'date. ', value: 'regDate', width: "100px" },

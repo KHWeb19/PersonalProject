@@ -41,7 +41,7 @@ public class CommunityBoard {
     @Column
     private int viewCnt = 0;
 
-    @Formula("(SELECT count(1) FROM community_comment_box c WHERE c.community_board_board_no = 'boardNo')")
+    @Formula("(SELECT count(1) FROM community_comment_box c WHERE c.community_board_board_no = board_no)")
     private int commentCnt;
 
     @CreatedDate
