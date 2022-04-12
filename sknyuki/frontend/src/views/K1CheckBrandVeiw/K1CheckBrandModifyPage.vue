@@ -42,13 +42,16 @@ export default {
         data () {
     return {
       boardNo:null,
-     
-      //  id: null,
+      id: null,
         }
     },
   //       computed: {
    //     ...mapState(['BrandCheckboard'])
     },
+     created () {
+    this.boardNo = this.$route.query.boardNo
+    this.id = this.$route.query.id
+    console.log(this.id, this.boardN)},
     methods:{
    //      ...mapActions(['fetchBrandCheckboard']),
 
@@ -69,7 +72,7 @@ axios.patch(`http://localhost:7777/CheckBrand/modify/${this.boardNo}`, { title, 
                     }
 
                     formData.append('boardNo',this.boardNo)
-                    //formData.append('id', this.userInfo.id)
+                    formData.append('id', this.id)
                     
 
                     axios.post('http://localhost:7777/fileUpload/CheckBrandBoard',formData,{
