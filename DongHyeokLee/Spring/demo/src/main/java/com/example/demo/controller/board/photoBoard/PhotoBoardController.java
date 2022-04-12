@@ -110,7 +110,9 @@ public class PhotoBoardController {
             @PathVariable("boardNo") Integer boardNo) {
         log.info("photoBoardRemove()");
 
+        //service.removeFile(boardNo);
         service.remove(boardNo);
+
     }
 
 }

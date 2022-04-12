@@ -37,13 +37,26 @@
           </v-btn>
         </div>
 
-        <!--등록 버튼-->
+      
+          <!-- 검색 기능-->
+       <!--   <input type="text" 
+                class="search" 
+                v-model="keyWord" 
+                cols="70" 
+                placeholder="검색어 입력" />
+          <v-btn @click="searchBtn()" 
+                  class="search-btn"
+                  depressed small>
+              <strong>검색</strong>
+          </v-btn> -->
+        <!-- 등록 버튼 -->
         <router-link class="register-btn"
                      :to="{ name: 'PhotoBoardRegisterPage'}">
           <v-btn v-if="$store.state.isLogin == true" class="amber lighten-2">
              <strong>등록</strong>
           </v-btn>
         </router-link>
+      
       </div>
 </template>
 

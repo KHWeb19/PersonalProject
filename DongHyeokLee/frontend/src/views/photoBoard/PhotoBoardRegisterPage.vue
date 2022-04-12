@@ -17,7 +17,7 @@ export default {
         PhotoBoardRegisterForm
     },
     methods: {
-        onSubmit (payload) {
+          onSubmit (payload) {
             const { title, content, writer, files } = payload
             let formData = new FormData()
             const fileName = files[0].name

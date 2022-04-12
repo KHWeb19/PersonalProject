@@ -1,5 +1,6 @@
 package com.example.demo.service.board.videoBoard;
 
+import com.example.demo.entitiy.board.photoBoard.PhotoBoard;
 import com.example.demo.entitiy.board.videoBoard.VideoBoard;
 import com.example.demo.repository.board.videoBoard.VideoBoardRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,12 +56,30 @@ public class VideoBoardServiceImpl implements VideoBoardService {
             VideoBoard videoBoard = fileName.get();
             board.setFileName(videoBoard.getFileName());
 
-        }
             repository.save(board);
+
+        }else {
+            Optional<VideoBoard> findFileName = repository.findFileName(Long.valueOf(boardNo));
+            VideoBoard fileName = findFileName.get();
+            File file = new File("../../frontend/src/assets/uploadVideo/" + fileName.getFileName());
+
+            if (file.exists()) {
+                file.delete();
+            }
+            repository.save(board);
+        }
+
     }
 
     @Override
     public void remove(Integer boardNo) {
+        Optional<VideoBoard> findFileName = repository.findFileName(Long.valueOf(boardNo));
+        VideoBoard fileName = findFileName.get();
+        File file = new File("../../frontend/src/assets/uploadVideo/" + fileName.getFileName());
+
+        if (file.exists()) {
+            file.delete();
+        }
         repository.deleteById(Long.valueOf(boardNo));
     }
 
