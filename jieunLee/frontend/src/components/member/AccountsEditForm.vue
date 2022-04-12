@@ -165,7 +165,6 @@ export default {
 
 <style scoped>
 label {
-    cursor: pointer;
     color: blue;
 }
 
@@ -173,7 +172,5 @@ label {
 #files {
     visibility: hidden;
 }
-
-
 
 </style>

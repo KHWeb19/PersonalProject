@@ -1,37 +1,47 @@
 <template>
-    <v-container style="width: 700px; margin-top: 20px; padding-left: 0px">
+    <v-container style="width: 1000px; margin-top: 20px; ">
         <v-flex>
-            <v-card style="height: 320px">
-                새 게시물 생성
+            <v-card style="height: 100%">
                 <form @submit.prevent="onSubmit">
-                    <table>
+                    <table style="width: 100%;" >
+                        <tr >
+                            <td width="33%" >
+                                <v-btn icon>
+                                    <router-link style="text-decoration: none;" :to="{name: 'HomeView' }">
+                                        <v-icon color="black">
+                                            mdi-arrow-left
+                                        </v-icon>
+                                    </router-link>
+                                </v-btn>
+                            </td>
+                            <td align="center" style="font-weight: bold">
+                                새 게시물 만들기 
+                            </td>
+                            <td align="right">
+                                <v-btn text color="primary" type="submit">공유하기</v-btn>
+                            </td>
+                        </tr>
+                    </table>
+                    <hr style="border: 0; height: 1px; background: #d8d8d8; "/>
+                    <table style="width: 100%; border-collapse : collapse;">
+                        
                         <tr>
-                            <td>제목</td>
-                            <td>
-                                <input type="text" v-model="boardImage"/>
+                            <td align="center" rowspan="2" colspan="2" width="66%" >
+                                
+                                사진 선택
+                               
+                            </td>
+                            <td style="font-weight: bold">
+                                <input style="margin: 16px" type="text" v-model="loginInfo.memberId" disabled/>
                             </td>
                         </tr>
                         <tr>
-                            <td>작성자</td>
                             <td>
-                                <input type="text" v-model="loginInfo.memberId" disabled/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>본문</td>
-                            <td>
-                                <textarea cols="50" rows="20" v-model="content">
+                                <textarea style="padding: 0px 16px; outline-style: none;" cols="30" rows="25" placeholder="문구 입력..." v-model="content">
                                 </textarea>
                             </td>
                         </tr>
                     </table>
-
-                    <div>
-                        <button type="submit">등록</button>
-                        <router-link :to="{name: 'BoardListPage' }">
-                            취소
-                        </router-link>
-                    </div>
                 </form>
             </v-card>
 
@@ -46,8 +56,8 @@ export default {
     data() {
         return {
             loginInfo: JSON.parse(localStorage.getItem('loginInfo')),
-            boardImage: '제목을 작성하세요.',
-            content: '본문을 작성하세요.'
+            boardImage: '',
+            content: ''
         }
     },
     methods: {
@@ -58,3 +68,7 @@ export default {
     }
 }
 </script>
+
+<style>
+input textarea { outline-style: none; }
+</style>
