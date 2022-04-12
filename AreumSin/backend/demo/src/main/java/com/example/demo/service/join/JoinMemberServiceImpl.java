@@ -9,6 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,6 +23,7 @@ public class JoinMemberServiceImpl implements JoinMemberService{
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Transactional
     @Override
     public void register(Member member, HttpSession session) {
         String encodePassword = passwordEncoder.encode(member.getPw());
@@ -59,9 +61,17 @@ public class JoinMemberServiceImpl implements JoinMemberService{
         return response;
     }
 
+    @Transactional
+    @Override
+    public Integer memberNo(String id) {
+        return repository.findByIntMemberNo(id);
+    }
+
+    @Transactional
     @Override
     public List<Member> list() throws Exception {
         return repository.findAll();
     }
+
 
 }

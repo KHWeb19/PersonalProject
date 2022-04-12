@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Slf4j
@@ -61,10 +62,11 @@ public class  JoinMemberController {
         return memberResponse;
     }
 
-    @GetMapping("/memberList")
-    public List<Member> MemberList() throws Exception {
-        log.info("memberList : "+ service.list());
-        return service.list();
-    }
+    @PostMapping("/loginSuccess/{id}")
+    public Member loginMember(@PathVariable("id") String id) {
+        log.info("loginMember :" + id);
 
+        //return service.read(id);
+        return null;
+    }
 }

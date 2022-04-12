@@ -10,5 +10,6 @@ public interface JoinMemberService {
     void register(Member member, HttpSession session);
     Boolean checkIdDuplicate(String id);
     MemberRequest login(MemberRequest memberRequest);
+    Integer memberNo(String id);
     List<Member> list() throws Exception;
 }
