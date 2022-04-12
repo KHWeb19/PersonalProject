@@ -62,7 +62,7 @@
 <style scoped>
 .commentcheck {
     border: 2px solid rgb(37, 26, 26);
-    width:700px;
+    width:800px;
     height: 100px;
     color:black;
 }

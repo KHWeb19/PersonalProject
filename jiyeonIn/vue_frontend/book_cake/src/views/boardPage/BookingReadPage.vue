@@ -33,6 +33,7 @@ import BookingBoardComment from '@/views/boardPage/BookingBoardComment.vue'
         data () {
             return {
                 dbrAction: (window.localStorage.getItem('id')),
+                checkID: this.BookingBoard.id
                 }
             },
         components: {
@@ -42,7 +43,6 @@ import BookingBoardComment from '@/views/boardPage/BookingBoardComment.vue'
             BookingBoardComment
         },
         computed: {
-  
             ...mapState(['BookingBoard']),
             ...mapState(['cakeLists'])
         },
@@ -57,7 +57,16 @@ import BookingBoardComment from '@/views/boardPage/BookingBoardComment.vue'
         methods: {
             ...mapActions(['fetchBookingBoard']),
             ...mapActions(['fetchCakeLists'])
+        },
+        mounted() {
+            if(this.dbrAction != this.checkID && this.dbrAction != 'manager') {
+                alert('해당 아이디만 읽을 수 있습니다!')
+                this.$router.push({
+                            name: 'BookingListPage'
+                            })
+            }
         }
+        
 
     }
 </script>

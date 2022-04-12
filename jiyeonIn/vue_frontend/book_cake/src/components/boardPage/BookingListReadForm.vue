@@ -190,7 +190,8 @@
         data () {
             return {
                 dbrAction: (window.localStorage.getItem('id')),
-                checkuserInfo: window.localStorage.getItem('token')
+                checkuserInfo: window.localStorage.getItem('token'),
+                checkID: this.BookingBoard.id
             }
         },
         
