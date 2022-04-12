@@ -1,22 +1,26 @@
 <template>
-
   <div>
+    <MainCategory></MainCategory>
     <div>
       {{id}}
     </div>
 
-    <BeforePencilIcon @submit="onSubmit" :id="id"/>
+    <PlanPageForm v-bind:userPlans="userPlans"></PlanPageForm>
+
+    <PencilIcon @submit="onSubmit" :id="id"/>
   </div>
 </template>
 
 <script>
-import {mapActions, mapState} from "vuex";
-import BeforePencilIcon from "@/components/Item/BeforePencilIcon";
+import PencilIcon from "@/components/Item/PencilIcon";
 import axios from "axios";
+import {mapActions, mapState} from "vuex";
+import PlanPageForm from "@/components/plan/PlanPageForm";
+import MainCategory from "@/components/MainCategory";
 
 export default {
   name: "PlanView",
-  components: {BeforePencilIcon},
+  components: {MainCategory, PlanPageForm, PencilIcon},
   props: {
 
   },
@@ -26,7 +30,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['fetchLoginMember']),
+    ...mapActions(['fetchUserPlans']),
     onSubmit(payload){
       console.log(payload + this.userId)
       let id = this.id;
@@ -44,11 +48,8 @@ export default {
   computed: {
     ...mapState(['userPlans'])
   },
-  created() {
-    this.fetchLoginMember(this.id)
-        .catch(() => {
-          alert('오류')
-        })
+  mounted() {
+    this.fetchUserPlans(this.id);
   }
 }
 </script>

@@ -83,13 +83,19 @@ export default {
     return{
       dropItems: [
         {text: '일정생성', icon: 'mdi-clock'},
-        {text: '친구초대', icon: 'mdi-clock'}
+        {text: '친구초대', icon: 'mdi-clock'},
+        {text: '투표만들기', icon: 'mdi-clock'}
       ],
       makePlan: false,
       pickDate: false,
       dates: ['', ''],
       planName: '',
       placeName: ''
+    }
+  },
+  props:{
+    id: {
+      type: String
     }
   },
   methods: {

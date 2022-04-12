@@ -1,10 +1,9 @@
 import {
-    FETCH_LOGIN_MEMBER,
-
+    FETCH_USER_PLANS
 } from './mutation-types'
 
 export default {
-    [FETCH_LOGIN_MEMBER](state, payload) {
-        state.userPlans = payload;
-    },
+    [FETCH_USER_PLANS] (state, plan){
+        state.userPlans = plan
+    }
 }
