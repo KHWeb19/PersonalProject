@@ -1,11 +1,7 @@
 <template>
-    <div>
         <div>
-            <Header/>
-        </div>
-
          <v-container fill-height stlye="max-width:600px;">
-            <form @submit.prevent="register">
+            <form ref="form" @submit.prevent="register">
                 <v-layout align-center row wrap>
                     <v-flex xs12>
                             <v-toolbar flat>
@@ -14,7 +10,7 @@
                             
                             <!-- 권한 선택 --> 
                             <div class="row">
-                                <v-radio-group v-model="radioGroup" name="auth" row required>
+                                <v-radio-group ref="auth" v-model="auth"  row required>
                                     <v-radio :label="`${kindsOfMember[0]}`" :value="`${kindsOfMember[0]}`"></v-radio>
                                     <v-radio :label="`${kindsOfMember[1]}`" :value="`${kindsOfMember[1]}`"></v-radio>
                                     <v-radio :label="`${kindsOfMember[2]}`" :value="`${kindsOfMember[2]}`"></v-radio>
@@ -23,26 +19,26 @@
 
                             <div class="pa-3">
                                 <!-- 이름 --> 
-                                <v-text-field type="text" v-model="name" name="name" label="이름" required>
+                                <v-text-field type="text" ref="name" v-model="name" label="이름" :rules="nameRules" required>
                                 </v-text-field>
                                 <!-- 성별 --> 
                             <div class="row">
-                                <v-radio-group v-model="radioGender" name="gender" row required>
+                                <v-radio-group ref="gender" v-model="gender" :rules="genderRules" row required>
                                     <v-radio :label="`${genderCheck[0]}`" :value="`${genderCheck[0]}`"></v-radio>
                                     <v-radio :label="`${genderCheck[1]}`" :value="`${genderCheck[1]}`"></v-radio>
                                 </v-radio-group>
                                 </div>
                                 <!-- 생년월일 --> 
-                                <v-text-field type="date" v-model="birth" name="birth" style="width: 100%;" required >
+                                <v-text-field ref="birth" type="date" v-model="birth" :rules="birthRules" style="width: 100%;" required >
                                 </v-text-field>
                                 <!-- 아이디 --> 
-                                <v-text-field type="text" v-model="id" name="id" label="아이디" required>
+                                <v-text-field ref="id" type="text" v-model="id" label="아이디" :rules="idRules" required>
                                 </v-text-field>
                                 <!-- 패스워드 --> 
-                                <v-text-field type="password" v-model="pw" name="pw" label="패스워드" required>
+                                <v-text-field  ref="pw" type="password" v-model="pw" name="pw" label="패스워드" :rules="pwRules" required>
                                 </v-text-field>
                                 <!-- 주소 --> 
-                                <v-text-field type="address" v-model="address" name="address" label="주소" required>
+                                <v-text-field  ref="address" type="address" v-model="address" name="address" label="주소" :rules="addrRules" required>
                                 </v-text-field>
 
                                 <br>
@@ -56,28 +52,28 @@
                 </v-layout>
             </form>
     </v-container>
-
     </div>
 </template>
 
 <script>
 
-import Header from '@/components/layout/Header.vue'
+import { mapState } from 'vuex'
+import axios from 'axios'
 
 export default {
     name: "JoinPage",
     components: {
-        Header
+
     },
     data() {
         return {
-            radioGroup: 0,
+            auth: 0,
             kindsOfMember : [
                 '개인',
                 '판매자',
                 '관리자'
             ],
-            radioGender: 0,
+            gender: 0,
             genderCheck: [
                 '남성',
                 '여성'
@@ -86,22 +82,45 @@ export default {
             id: '',
             pw: '',
             birth: '',
-            address:''
+            address:'',
+            formError: false
         }
+    },
+    computed: {
+        form() {
+            return {
+                auth: this.auth,
+                id: this.id,
+                pw: this.pw,
+                name: this.name,
+                gender: this.gender,
+                birth: this.birth,
+                address: this.address
+            }
+        },
+        ...mapState([
+            'idRules',
+            'pwRules',
+            'nameRules',
+            'birthRules',
+            'addrRules'
+         ])
     },
     methods: {
         register() {
-            this.$store.dispatch('register', {
-                auth: (this.radioGroup == "개인" ?  "개인" : this.radioGroup == "판매자" ? "판매자" : "관리자"),
-                gender: (this.radioGender == "남성" ? "남성" : "여성"),
-                name: this.name,
-                birth: this.birth,
-                id: this.id,
-                pw: this.pw,
-                address: this.address
+            this.formError = false
+
+            Object.keys(this.form).forEach(f => {
+                if(!this.form[f]) this.formError = true
+
+                this.$refs[f].validate(true)
             })
+
+            axios.post('http://localhost:7777/member/register', this.form)
             .then(() => {
-                this.$router.push({path: '/loginPage'})
+                alert('회원가입이 완료되었습니다!')
+            }).catch(res => {
+                alert(res)
             })
         }
  

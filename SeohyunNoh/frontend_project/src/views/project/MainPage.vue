@@ -1,7 +1,5 @@
 <template>
     <div>
-        <Header/>
-
         <!-- 메인페이지 이미지슬라이드 너비가 꽉 차게 하고싶은데 안됨-->
         <div id="app">
             <v-app id="inspire">
@@ -22,12 +20,11 @@
 </template>
 
 <script>
-import Header from '@/components/layout/Header.vue'
 
 export default {
     name: 'MainPage.vue',
     components: {
-        Header
+        
     },
     data() {
         return {

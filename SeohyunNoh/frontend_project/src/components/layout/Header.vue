@@ -28,7 +28,7 @@
           -->
 
           <!-- 로그인, 장바구니, 마이페이지, 게시판--> 
-            <v-btn v-if="this.$store.state.userInfo == null" router :to="{path: '/loginPage'}" plain background-color="transparent" color="basil"> 
+            <v-btn v-if="isLogin === false" router :to="{path: '/loginPage'}" plain background-color="transparent" color="basil"> 
               LOGIN 
             </v-btn>
             <v-btn v-else @click="logout"  plain background-color="transparent" color="basil"> 
@@ -75,7 +75,7 @@
                 </template>
 
                 <v-list background-color="transparent" color="basil">
-                  <v-list-item v-for="(category, i) in womenCategories" :key="i">
+                  <v-list-item v-for="(category, i) in womenCategories" :key="i" :to="category.route">
                     <v-list-item-title>
                       {{ category.item }}
                     </v-list-item-title>
@@ -93,7 +93,7 @@
                 </template>
 
                 <v-list background-color="transparent" color="basil">
-                  <v-list-item v-for="(category, i) in menCategories" :key="i">
+                  <v-list-item v-for="(category, i) in menCategories" :key="i" :to="category.route">
                     <v-list-item-title>
                       {{ category.item }}
                     </v-list-item-title>
@@ -120,13 +120,13 @@
 
 <script>
 
-import { mapGetters } from 'vuex'
+import axios from 'axios'
+import { mapState } from 'vuex'
 
 export default {
    data () {
         return {
             tab: null,
-            isLogin: false,
             menus: [
                'women', 'men'
             ],
@@ -140,7 +140,7 @@ export default {
               {text: 'NOTICE', name: 'notice', route: '/noticeListPage'}
             ],
             womenCategories: [
-              { item: 'Outer'},
+              { item: 'Outer', route: '/womenOuterCategoryPage'},
               { item: 'Top'},
               { item: 'Bottom'},
               { item: 'Accessories'},
@@ -155,14 +155,18 @@ export default {
 
     },
     computed: {
-      ...mapGetters(['loggedIn'])
+      ...mapState(['isLogin'])
     },
     methods: {
         mainPageLink() {
             this.$router.push({ path: '/mainPage' })
         },
         logout() {
-          this.$store.dispatch('logout')
+            axios.post('http://localhost:7777/member/logout').then(res => {
+            this.$store.commit('USER_LOGIN', res.data)
+            this.fetchSession(this.$cookies.remove('session'))
+            this.$store.commit('FETCH_USER_INFO', [])
+      })
         }
     }
 }

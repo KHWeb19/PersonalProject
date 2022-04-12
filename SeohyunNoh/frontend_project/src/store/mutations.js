@@ -1,34 +1,31 @@
-import axios from "axios"
+// import axios from "axios"
 import {
+    //MEMBER
+    USER_LOGIN,
+    FETCH_USER_INFO,
+    FETCH_SESSION,
+
+    //NOTICE
     FETCH_NOTICE_BOARD_LIST,
     FETCH_NOTICE
    
 } from './mutation-types'
 
 export default {
-    SET_USER_DATA(state, userData) {
-        state.userInfo = userData
-        state.isLogin = true
-        state.isLoginError = false
-        // localStorage.setItem('user',JSON.stringify(userData))
-        // axios.defaults.headers.common['Authorization'] = `Bearer${userData.token}`
+    // MEMBER
+    [USER_LOGIN] (state, isLogin) {
+        state.isLogin = isLogin
+        console.log('isLogin: ' + isLogin)
     },
-    loginSuccess(state, payload) {
-        state.isLogin = true
-        state.isLoginError = false
-        state.userInfo = payload
+    [FETCH_USER_INFO] (state, userInfo) {
+        state.userInfo = userInfo
+        console.log('userInfo' + userInfo)
     },
-    loginError(state) {
-        state.isLogin = false
-        state.isLoginError = true
+    [FETCH_SESSION] (state, session) {
+        state.session = session
     },
-    logout(state) {
-        state.isLogin = false
-        state.isLoginError = false
-        state.userInfo = null
-        localStorage.removeItem('user')
-        axios.defaults.headers.common['Authorization'] = null
-    },
+    
+    //NOTICE
     [FETCH_NOTICE_BOARD_LIST] (state, noticeBoards) {
         state.noticeBoards = noticeBoards
     },

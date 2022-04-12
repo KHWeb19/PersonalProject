@@ -17,6 +17,9 @@ import NoticeReadPage from '@/views/notice/NoticeReadPage.vue'
 import NoticeRegisterPage from '@/views/notice/NoticeRegisterPage.vue'
 import NoticeModifyPage from '@/views/notice/NoticeModifyPage.vue'
 
+import WomenOuterCategoryPage from '@/views/womenCategory/WomenOuterCategoryPage.vue'
+
+
 
 Vue.use(VueRouter)
 
@@ -124,6 +127,11 @@ const routes = [
       default: true
     }
 
+  },
+  {
+    path: '/womenoOuterCategoryPage',
+    name: 'WomenOuterCategoryPage',
+    component: WomenOuterCategoryPage
   }
 
 ]

@@ -18,5 +18,5 @@ export default new Vuex.Store({
   mutations,
   getters,
   router,
-  axios
+  axios,
 })
