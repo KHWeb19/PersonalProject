@@ -22,8 +22,7 @@
                     </tr>
                     <tr align="center">
                         <td colspan="2">
-                        <!-- {{ board.boardImage }} -->
-                        이미지
+                            <v-img width="672px" :src="require(`@/assets/mImage/${board.boardImage}`)"/>
                         </td>
                     </tr>
                     <tr align="left">

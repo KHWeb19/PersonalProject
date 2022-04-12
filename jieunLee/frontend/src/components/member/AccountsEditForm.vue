@@ -11,15 +11,10 @@
               <td style="margin-left: 20px;"> 
                 {{member.memberId}}
                 <br/>
-
                 <label for="files">
                     프로필 사진 바꾸기
                 </label>
-
-                <input type="file" id="files" ref="files" 
-                            multiple v-on:change="handleFileUpload()"/>
-                <br/>
-                <button v-on:click="onImage()">적용</button>
+                <input type="file" id="files" ref="files" multiple v-on:change="handleFileUpload()"/>
               </td>
             </div>
             <div style="display: flex; justify-content: center;">
@@ -123,8 +118,8 @@ export default {
       handleFileUpload () {
             this.files = this.$refs.files.files
         },
-      onImage () {
-          let formData = new FormData()
+      onSubmit() {
+        let formData = new FormData()
           for (let idx = 0; idx < this.files.length; idx++) {
               formData.append('fileList', this.files[idx])
           }
@@ -138,18 +133,13 @@ export default {
               console.log(this.files[0].name)
               this.imageName = this.files[0].name
               //
-              const {imageName} = this
-              this.$emit('image', {imageName})
+              const { memberName, memberId, imageName, memberWeb, memberIntro } = this
+              this.$emit('submit', { memberName, memberId, imageName, memberWeb, memberIntro})
               localStorage.setItem("imageChange", JSON.stringify(imageName))
           })
           .catch (res => {
               alert('처리 결과: ' + res.message)
           })
-      },
-      onSubmit() {
-        const { memberName, memberId, imageName, memberWeb, memberIntro } = this
-        this.$emit('submit', { memberName, memberId, imageName, memberWeb, memberIntro})
-        
       }
     },
     created() {

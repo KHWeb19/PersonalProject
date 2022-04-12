@@ -15,7 +15,7 @@ public class Board {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long boardNo;
 
-    @Column(length = 64)
+    @Column(length = 64, nullable = false)
     private String boardImage;
 
     @Column(length = 32, nullable = false)

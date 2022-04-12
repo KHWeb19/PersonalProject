@@ -27,10 +27,12 @@
                         
                         <tr>
                             <td align="center" rowspan="2" colspan="2" width="66%" >
-                                
-                                사진 선택
-                               
+                                <label for="files">
+                                    사진 선택
+                                </label>
+                                <input type="file" id="files" ref="files" multiple v-on:change="handleFileUpload()"/>
                             </td>
+                            
                             <td style="font-weight: bold">
                                 <input style="margin: 16px" type="text" v-model="loginInfo.memberId" disabled/>
                             </td>
@@ -51,6 +53,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
     name: 'BoardRegisterForm',
     data() {
@@ -61,14 +64,44 @@ export default {
         }
     },
     methods: {
+        handleFileUpload () {
+            this.files = this.$refs.files.files
+        },
         onSubmit() {
-            const { boardImage,  content } = this
-            this.$emit('submit', { boardImage, writer: this.loginInfo.memberName, content })
+            let formData = new FormData()
+            for (let idx = 0; idx < this.files.length; idx++) {
+                formData.append('fileList', this.files[idx])
+            }
+            axios.post('http://localhost:7777/member/uploadImg', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                }
+            })
+            .then (res => {
+                alert('처리 결과: ' + res.data)
+                console.log(this.files[0].name)
+                this.boardImage = this.files[0].name
+                //
+                const { boardImage, content } = this
+                this.$emit('submit', { boardImage, writer: this.loginInfo.memberName, content })
+            })
+            .catch (res => {
+                alert('처리 결과: ' + res.message)
+            })
+            
         }
     }
 }
 </script>
 
-<style>
-input textarea { outline-style: none; }
+<style scoped>
+label {
+    color: blue;
+}
+
+/* 못생긴 기존 input 숨기기 */
+#files {
+    visibility: hidden;
+}
+
 </style>
