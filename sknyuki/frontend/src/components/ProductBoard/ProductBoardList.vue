@@ -4,24 +4,24 @@
                         
           <v-card class="pa-3" color="primary" flat>
             <v-row>
-              <v-col v-for="ProductBoard in ProductBoards" :key="ProductBoard.ProductBoardNo"
+              <v-col v-for="productBoard in productBoards" :key="productBoard.productBoardNo"
                 cols="12" sm="6" md="4" lg="3">
                 <v-hover v-slot="{hover}" close-delay="50">
                   <v-card :elevation="hover ? 16:2" class="{ 'on-hover': hover }"
-                   @click="handleClick">
+                   @click="handleClick(productBoard)">
                     <v-list-item>
                       <v-list-item-title>
-                        {{ ProductBoard.title }}
+                        {{ productBoard.title }}
                       </v-list-item-title>
                     </v-list-item>
                     
                     <v-divider></v-divider>
-                    <img :src="showFile(ProductBoard.writer,ProductBoard.ProductBoardNo)"  width="100%"/>
+                    <img :src="showFile(productBoard.writer,productBoard.productBoardNo)"  width="100%"/>
 
 
                     <v-card-text class="caption">
-                      {{ProductBoard.condition}}
-                      {{ProductBoard.price}}
+                      {{productBoard.condition}}
+                      {{productBoard.price}}
                     </v-card-text>
                   
                   </v-card>
@@ -39,7 +39,7 @@
 export default {
     name:'ProductBoardList',
     props:{
-      BrandCheckboards: []
+      productBoards: []
     },
   data () {
     return {
@@ -57,7 +57,7 @@ export default {
         
         
     },
-    handleClick(){
+    handleClick(productBoard){
        this.$router.push({
                             name: 'ProductBoardReadPage',
                             params: { productNo: productBoard.productNo.toString() } },
