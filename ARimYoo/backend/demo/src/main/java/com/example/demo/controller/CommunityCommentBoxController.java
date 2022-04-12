@@ -34,4 +34,10 @@ public class CommunityCommentBoxController {
         return service.list(boardNo);
     }
 
+    @DeleteMapping("/comment/{commentId}")
+    public void delete (@PathVariable ("commentId") Long commentId , CommunityCommentBox communityCommentBox) {
+        log.info("Comment remove()");
+        service.delete(commentId);
+    }
+
 }

@@ -165,7 +165,7 @@ a{
 }
 .imgArea {
     position: relative;
-    max-height: 800px;
+    max-height: 500px;
     max-width: 600px;
 }
 @media (max-width:700px){

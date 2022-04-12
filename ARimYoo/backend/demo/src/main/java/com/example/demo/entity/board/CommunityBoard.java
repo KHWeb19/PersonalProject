@@ -35,8 +35,6 @@ public class CommunityBoard {
 
     @Column
     private String fileName;
-    @Column
-    private String filePath;
 
     @Column
     private int viewCnt = 0;

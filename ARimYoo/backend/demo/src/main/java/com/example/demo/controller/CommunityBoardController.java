@@ -4,10 +4,13 @@ import com.example.demo.entity.board.CommunityBoard;
 import com.example.demo.service.board.CommunityBoardService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 ;
+import java.awt.print.Pageable;
 import java.util.List;
 
 @Slf4j
@@ -58,6 +61,11 @@ public class CommunityBoardController {
         log.info("remove()");
         service.remove(boardNo);
 
+    }
+
+    @GetMapping("/search")
+    public List<CommunityBoard> searchList (String keyword) {
+         return service.search(keyword);
     }
 
 }

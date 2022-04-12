@@ -8,6 +8,5 @@ public interface CommunityCommentBoxService {
 
     public void register (Long boardNo, CommunityCommentBox communityCommentBox);
     public List<CommunityCommentBox> list (Long boardNo);
-
-
+    public void delete (Long commentId);
 }

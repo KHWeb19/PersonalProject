@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.awt.print.Pageable;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -38,7 +39,6 @@ public class CommunityBoardServiceImpl implements CommunityBoardService {
             saveFile.close();
 
             board.setFileName(fileName);
-            board.setFilePath("/files/" + fileName);
         }
 
         repository.save(board);
@@ -47,7 +47,6 @@ public class CommunityBoardServiceImpl implements CommunityBoardService {
     @Override
     public List<CommunityBoard> list() {
         return repository.findAll(Sort.by(Sort.Direction.DESC, "boardNo"));
-
     }
 
     @Override
@@ -84,7 +83,6 @@ public class CommunityBoardServiceImpl implements CommunityBoardService {
             saveFile.close();
 
             communityBoard.setFileName(fileName);
-            communityBoard.setFilePath("/files/" + fileName);
         }
 
         repository.save(communityBoard);
@@ -102,6 +100,11 @@ public class CommunityBoardServiceImpl implements CommunityBoardService {
         }
 
         repository.deleteById(Long.valueOf(boardNo));
+    }
+
+    @Override
+    public List<CommunityBoard> search (String keyword) {
+        return repository.findByTitleContaining(keyword);
     }
 
 

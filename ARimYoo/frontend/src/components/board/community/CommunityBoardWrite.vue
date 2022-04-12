@@ -25,6 +25,8 @@
                         <input type="file" id="files" ref="files"  dense style="width:300px"
                                 multiple v-on:change="handleFileUpload()"/>
                         </v-col>
+                    </v-row>
+                    <v-row justify="center">
                         <v-col cols="12">
                         <v-img :src="image" class="preview" alt=""/>
                         </v-col>
@@ -140,7 +142,7 @@ table{
     margin-left: auto;
     margin-right:auto;
     max-width: 500px;
-    max-height: 800px;
+    max-height: 600px;
 }
 
 @media (max-width:700px){

@@ -24,12 +24,15 @@
                    </div>
                 </template>
             </v-data-table>
+            <input type="text" v-model="keyword">
+            <button @click="search"> 검색 </button>
         </v-row>
-        
         </v-container>
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
     name:'CommunityBoardList',
     props: {
@@ -47,10 +50,20 @@ export default {
                 { text: '조회수', value: 'viewCnt', width: "70px" },
                 { text: 'date. ', value: 'regDate', width: "100px" },
             ],
+            keyword:''
         }
     },
     methods: {
-      
+        search(){
+                const {keyword} = this
+                axios.get('http://localhost:7777/board/community/search', {keyword})
+                .then(() => {
+                    alert('검색완료.')
+                })
+                .catch (() => {
+                    alert('문제 발생!')
+                })
+            }
         }
     } 
 </script>

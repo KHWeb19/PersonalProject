@@ -34,4 +34,9 @@ public class CommunityCommentBoxServiceImpl implements CommunityCommentBoxServic
        CommunityBoard communityBoard = boardRepository.findById(boardNo).get();
         return repository.findCommunityCommentBoxByCommunityBoard(communityBoard);
     }
+
+    @Override
+    public void delete (Long commentId) {
+        repository.deleteById(Long.valueOf(commentId));
+    }
 }
