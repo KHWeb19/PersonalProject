@@ -11,9 +11,17 @@
                 <template v-slot:[`item.title`]="{ item }">
                    <router-link :to="{ name: 'CommunityReadPage',
                                         params: { boardNo: item.boardNo.toString() } }"
-                                        style="color:black">
-                    {{ item.title }}
+                                        style="color:black; float:left">
+                    {{ item.title }} &nbsp;&nbsp;&nbsp;&nbsp;
                    </router-link>
+                   <div style="color:#D50000; float:left" >
+                       [{{ item.commentCnt }}] &nbsp;
+                   </div>
+                   <div v-if="item.fileName">
+                       <v-icon style="zoom:0.9">
+                           mdi-image
+                       </v-icon>
+                   </div>
                 </template>
             </v-data-table>
         </v-row>
@@ -35,7 +43,6 @@ export default {
                 { text:'글 번호', value: 'boardNo', width:'70px'},
                 { text:'말머리', value: 'brackets', width:'70px'},
                 { text: '제목', value: 'title', width: "200px" },
-                { text: '', value:'commentCnt', width:"20px"},
                 { text: '작성자', value: 'writer', width: "100px" },
                 { text: '조회수', value: 'viewCnt', width: "70px" },
                 { text: 'date. ', value: 'regDate', width: "100px" },
