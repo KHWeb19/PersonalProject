@@ -5,7 +5,11 @@
         <div class="wrap">
             <booking-list-read-form v-if="BookingBoard" :BookingBoard="BookingBoard" :bookingNo ="bookingNo" :cakeLists="cakeLists"/>
             <p v-else>로딩중 ... </p>
+            <div>
+                <booking-board-comment :bookingNo="bookingNo"></booking-board-comment>
+            </div>
         </div>
+        
         
         <footer-form ></footer-form>
     </div>
@@ -16,6 +20,7 @@ import MainPageForm from '@/components/layout/MainPageForm.vue'
 import FooterForm from '@/components/layout/FooterForm.vue'
 import BookingListReadForm from '@/components/boardPage/BookingListReadForm.vue'
 import { mapState, mapActions } from 'vuex'
+import BookingBoardComment from '@/views/boardPage/BookingBoardComment.vue'
 
     export default {
         name: 'BookingReadPage',
@@ -33,9 +38,11 @@ import { mapState, mapActions } from 'vuex'
         components: {
             BookingListReadForm,
             MainPageForm,
-            FooterForm
+            FooterForm,
+            BookingBoardComment
         },
         computed: {
+  
             ...mapState(['BookingBoard']),
             ...mapState(['cakeLists'])
         },

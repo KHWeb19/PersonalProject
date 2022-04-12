@@ -1,5 +1,6 @@
 export default {
     cakeLists: [],
     bookingLists:[],
-    BookingBoard: null
+    BookingBoard: null,
+    boardComments:[]
 }

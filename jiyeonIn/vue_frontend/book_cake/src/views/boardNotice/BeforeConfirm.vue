@@ -18,7 +18,7 @@
                 </v-row>
             </v-container>
             
-            <v-container style="padding: 5% 5% 5% 5%; border:1px solid;  height: 200px; width: 800px">
+            <v-container style="padding: 5% 5% 5% 5%; border:1px solid;  height: 230px; width: 800px">
                 <v-row >
                     <p>* 예약하시면 하루 이내에 댓글로 가격 확정 드립니다.</p>
                 </v-row>
@@ -56,7 +56,7 @@ import FooterForm from '@/components/layout/FooterForm.vue'
         components: {
             MainPageForm, 
             FooterForm
-        }
+        },
     }
 </script>
 
