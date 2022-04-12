@@ -2,11 +2,11 @@
     <div id="free-board" align="center">
         <table>
             <tr class="list">
-                <td align="center" width="100">번호</td> 
-                <td align="center" width="600">제목</td>
-                <td align="center" width="100">작성자</td>
-                <td align="center" width="150">등록일자</td>
-                <td align="center" width="80">조회수</td>
+                <td align="center" width="100"><strong>번호</strong></td> 
+                <td align="center" width="600"><strong>제목</strong></td>
+                <td align="center" width="100"><strong>작성자</strong></td>
+                <td align="center" width="150"><strong>등록일자</strong></td>
+                <td align="center" width="80"><strong>조회수</strong></td>
             </tr>
             <tr v-if="!freeBoards || (Array.isArray(freeBoards) && freeBoards.length === 0)">
                 <td colspan="5">
@@ -148,11 +148,11 @@ td{
 }
 
 .page-next {
-    color: black;    
+    color: #FFD54F;    
 }
 
 .page-prev {
-    color:black;
+    color:#FFD54F;
 }
 .page-count{
     color:black;

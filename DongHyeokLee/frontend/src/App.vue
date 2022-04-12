@@ -1,4 +1,5 @@
 <template>
+  <div id="app">
   <v-app>
         <top-nav-bar></top-nav-bar>
     <v-main>
@@ -6,6 +7,7 @@
          <footer-bar></footer-bar> 
     </v-main>
   </v-app>
+  </div>
 </template>
 
 <script>
@@ -24,3 +26,8 @@ export default {
   },
 }
 </script>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&display=swap');
+
+</style>

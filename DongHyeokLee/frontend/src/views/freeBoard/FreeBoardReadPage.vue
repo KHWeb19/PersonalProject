@@ -1,9 +1,10 @@
 <template>
-    <div id="read">
+    <div class="read">
+        <h2 class="bar"></h2>
         <!-- 리스트로 돌아가기 -->
         <router-link class="list-btn-wrap" :to="{ name: 'FreeBoardListPage' }">
             <v-btn class="list-btn" color="amber lighten-2">
-               <strong>자유게시판</strong>
+               <strong class="text">자유게시판</strong>
             </v-btn>
         </router-link>
         
@@ -87,12 +88,6 @@ export default {
 
 <style scoped>
 
-#read{
-   /* background-image: url(@/assets/img/homeBackground.png);*/
-    background-size: cover;
-    padding: 20px;
-}
-
 .button {
     padding: 10px;
     margin-left: 900px;
@@ -114,7 +109,19 @@ a:hover{
 .list-btn-wrap{
     padding: 20px;
     margin-left:425px; 
+    
 }
+.bar{
+    height:80px;
+    padding: 20px;   
+    background-color:#FFD54F;
+    margin-bottom:50px;
+}
+.text{
+     font-family: 'Nanum Brush Script', cursive;
+     font-size: 18px;
+}
+
 
 
     

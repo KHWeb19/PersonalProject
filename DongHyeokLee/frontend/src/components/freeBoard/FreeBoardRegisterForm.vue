@@ -25,7 +25,7 @@
             <v-btn type="submit"
                    class="register"
                    color="amber lighten-2">
-                등록
+               <strong>등록</strong>
             </v-btn>
             <v-btn>
                 <router-link class="cancel" 
@@ -67,6 +67,8 @@ export default {
     padding:30px;
     color: black;
     background-color:#FFD54F;
+    margin-bottom:50px;
+     font-family: 'Nanum Brush Script', cursive;
 }
 #title{
     color:black;
@@ -89,18 +91,18 @@ textarea {
 table {
     border-color:  transparent ;
 }
+a{
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: none; 
+}
 input {
     outline: none;
     width: 100%;
 }
 .button {
     padding: 20px;
-}
-a{
-    text-decoration: none;
-}
-a:hover{
-    text-decoration: none; 
 }
 .cancel{
     color: grey;

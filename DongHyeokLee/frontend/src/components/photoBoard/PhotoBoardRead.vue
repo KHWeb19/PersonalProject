@@ -80,7 +80,8 @@ td {
 .writer{
     background-color:#EEEEEE;
     width:120px;
-    font-size: 19px;
+    font-size: 20px;
+ 
 }
 .day{
     border-bottom:1px solid #EEEEEE;
@@ -88,7 +89,10 @@ td {
     font-size: 17px;
     color: black;
     
-
+}
+h3{
+    font-size: 40px;
+    
 }
 
 

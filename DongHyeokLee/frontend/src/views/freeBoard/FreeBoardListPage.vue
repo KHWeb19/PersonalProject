@@ -55,12 +55,12 @@ a:hover{
 }
 
 #title {
-    color: balck;
+    color: black;
     text-align: center;
-    padding: 30px;   
+    padding: 20px;   
     background-color:#FFD54F;
+    margin-bottom:50px;
+    font-family: 'Nanum Brush Script', cursive;
 }
-
-
 
 </style>

@@ -16,7 +16,7 @@
         <div>
             <iframe class="video"
                     :src="require(`@/assets/uploadVideo/${videoBoard.fileName}`)" 
-                    allow="autoplay muted">
+                    allow="autoplay 'none'">
             </iframe>
             <table>
                 <tr>
@@ -83,15 +83,19 @@ td {
 .writer{
     background-color:#EEEEEE;
     width:120px;
-    font-size: 19px;
+    font-size: 20px;
+    font-family: 'Nanum Brush Script', cursive;
 }
 .day{
     border-bottom:1px solid #EEEEEE;
     width:600px;
     font-size: 17px;
     color: black;
-
+    
 }
-
+h3{
+    font-size: 40px;
+   
+}
   
 </style>

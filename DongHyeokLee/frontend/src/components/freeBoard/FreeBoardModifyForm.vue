@@ -1,7 +1,7 @@
 <template>
     <div>
         <form @submit.prevent="onSubmit">
-            <h2 id="theme">게시물 수정</h2>
+            <h2 class="theme">게시물 수정</h2>
             <table align="center" border="1">
                  <tr>
                     <td>
@@ -25,7 +25,7 @@
                 <v-btn type="submit"
                        class="check"
                        color="amber lighten-2">
-                    완료
+                    <strong>완료</strong>
                 </v-btn>
                 <v-btn>
                 <router-link class="cancel"
@@ -69,10 +69,12 @@ export default {
 </script>
 
 <style scoped>
-#theme{
+.theme{
         padding:15px;
         color:black;
         background-color:#FFD54F;
+        margin-bottom:50px;
+        font-family: 'Nanum Brush Script', cursive;
 }
 #title{
     color:black;

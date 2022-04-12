@@ -77,7 +77,7 @@ export default {
         
     },
     created () {
-        this.fetchPhotoBoard(this.boardNo)
+        this.fetchVideoBoard(this.boardNo)
                 .catch(() => {
                     alert('게시물 DB 조회 실패!')
                     this.$router.back()
@@ -89,8 +89,5 @@ export default {
 
 <style scoped>
 
-h1 {
-    padding:15px;
-}
-    
+
 </style>

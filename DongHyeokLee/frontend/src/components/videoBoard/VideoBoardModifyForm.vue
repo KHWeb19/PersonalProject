@@ -105,6 +105,8 @@ export default {
        padding:15px;
         color:black;
         background-color:#FFD54F;
+        margin-bottom:50px;
+        font-family: 'Nanum Brush Script', cursive;
 }
 .writer{
     color:black;

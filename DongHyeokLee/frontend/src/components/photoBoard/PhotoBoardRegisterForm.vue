@@ -34,7 +34,7 @@
             <v-btn type="submit" 
                    class="register"
                    color="amber lighten-2" >
-                등록
+               <strong>등록</strong>
             </v-btn>
             <v-btn>
             <router-link class="cancel" :to="{ name: 'PhotoBoardListPage' }">

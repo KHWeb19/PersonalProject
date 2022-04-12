@@ -20,17 +20,15 @@
                      </span>
                 </div>
                     <!-- 수정 버튼 누르기 전-->
-                <div class="content1" v-if ="edit[index] == null">
+                <div class="content1" v-if ="edit[index] == null && comments.writer == writer">
                      <input  v-model="comments.content" disabled/>
                     <!-- 수정 버튼 -->
-                    <v-btn class="modify-btn" depressed small 
-                           v-if="comments.writer == writer" 
+                    <v-btn class="modify-btn" depressed small  
                            @click="onEdit(index)" color="amber lighten-2">
                        <strong>수정</strong> 
                     </v-btn>
                     <!-- 삭제 버튼 -->
                     <v-btn depressed small 
-                           v-if="comments.writer == writer" 
                            @click="onDelete(comments.commentNo)">
                         <v-icon >
                         mdi-delete    
@@ -39,18 +37,16 @@
                 </div>  
                  
                     <!-- 수정 버튼 누른 후 -->
-                <div class="content2" v-if ="edit[index] == true" >
+                <div class="content2" v-if ="edit[index] == true && comments.writer == writer" >
                     <input  v-model="ediContent"> 
                     <!-- 수정 확인 버튼 -->
-                     <v-btn class="check-btn" depressed small 
-                            v-if="comments.writer == writer " 
+                     <v-btn class="check-btn" depressed small  
                             @click="onModify(comments.commentNo,ediContent,index)" 
                             color="amber lighten-2">
                         <strong>완료</strong>
                     </v-btn>
                     <!-- 수정 취소 버튼 -->
                     <v-btn depressed small 
-                           v-if="comments.writer == writer" 
                            @click="onCancel(index)">
                         취소
                     </v-btn> 

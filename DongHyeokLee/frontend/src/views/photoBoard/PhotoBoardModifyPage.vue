@@ -28,6 +28,7 @@ export default {
         ...mapActions(['fetchPhotoBoard']),
         onSubmit (payload) {
             const { title, content, files } = payload
+            // 파일 다시 첨부 했을 경우
             if(files){
                 let formData = new FormData()
                 const fileName = files[0].name
@@ -55,6 +56,7 @@ export default {
                     .catch(() => {
                         alert('게시물 수정 실패!')
                     })
+            //파일 다시 첨부 안할 경우
             }else{
                    axios.put(`http://localhost:7777/photoBoard/${this.boardNo}`,
                 { title, writer: this.photoBoard.writer, content, regDate: this.photoBoard.regDate })
@@ -87,8 +89,4 @@ export default {
 
 <style scoped>
 
-h1 {
-    padding:15px;
-}
-    
 </style>

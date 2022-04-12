@@ -57,5 +57,7 @@ export default {
 h2{
     padding:20px;
     background-color:#FFD54F;
+    margin-bottom:50px;
+     font-family: 'Nanum Brush Script', cursive;
 }    
 </style>

@@ -47,6 +47,9 @@ h2 {
     text-align: center;
     padding:20px;
     background-color: #FFD54F;
+    margin-bottom:50px;
+    font-family: 'Nanum Brush Script', cursive;
+
 }
 a {
     text-decoration: none;

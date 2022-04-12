@@ -7,8 +7,10 @@
               <v-card class="video-card">
                   <div>
                     <!-- 파일말고 링크 가지고 오고싶은데 어케하노-->
-                    <iframe :src="require(`@/assets/uploadVideo/${video.fileName}`)" height="300" width="100%" 
-                    allow="autoplay muted;"></iframe>
+                    <iframe :src="require(`@/assets/uploadVideo/${video.fileName}`)" 
+                            height="300" width="100%" 
+                            allow="autoplay 'none'">
+                    </iframe>
                   </div>
 
                   <v-card-title>{{video.title}}</v-card-title>

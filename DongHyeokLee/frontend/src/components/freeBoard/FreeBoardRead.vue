@@ -3,7 +3,7 @@
         <div class="title">
             <h3>{{ freeBoard.title }}</h3>
             <div class="subtitle">
-                <p  align="center" class="writer">{{ freeBoard.writer }} </p>
+                <p align="center" class="writer">{{ freeBoard.writer }} </p>
                 <div class="day"> {{ freeBoard.regDate.substring(0, 10) }} 
                     {{new Date(freeBoard.regDate).toLocaleString("ko-KR", {timeZone: "Asia/Seoul"}).toString().substr(12, 8)}}
                 </div>   
@@ -44,7 +44,7 @@ export default {
 .title{
     margin-left: 30%; 
     padding:15px;
-    color:blacke;
+    color:black;
     width:500px
 }
 .subtitle{
@@ -63,13 +63,17 @@ table{
     border: 1px solid transparent;
 }
 .day {
-    font-size: 17px;
+    font-size: 15px;
     color: black;
+    
 }
 .writer{
     background-color:#EEEEEE;
     width:120px;
+    font-size: 20px;
+    
 }
+
     
   
 </style>

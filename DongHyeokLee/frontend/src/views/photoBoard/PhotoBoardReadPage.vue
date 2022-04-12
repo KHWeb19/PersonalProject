@@ -1,9 +1,10 @@
 <template>
     <div>   
+        <h2 class="bar"></h2>
          <!-- 리스트로 돌아가기 -->
         <router-link :to="{ name: 'PhotoBoardListPage' }">
             <v-btn class="list-btn" color="amber lighten-2">
-            <strong>사진게시판</strong>
+            <strong class="text">사진게시판</strong>
             </v-btn>
         </router-link>
         
@@ -101,6 +102,16 @@ p{
 }
 .remove-btn{
     color:grey;
+}
+.bar{
+    height:80px;
+    padding: 20px;   
+    background-color:#FFD54F;
+    margin-bottom:50px;    
+}
+.text{
+     font-family: 'Nanum Brush Script', cursive;
+     font-size:18px;
 }
     
 </style>

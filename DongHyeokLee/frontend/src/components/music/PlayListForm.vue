@@ -1,6 +1,5 @@
 <template>
   <!-- https://github.com/TylerPottsDev/vuejs-music-app/blob/master/src/App.vue 음악 플레이어 퍼옴 -->
-  <!-- "https://bmchun00.github.io/assets/chan2/mp3/chan2%20(8).mp3" 음악 소스 빼오는거-->
       <section class="player">
         <div class="controls">
           <v-btn class="prev" @click="prev" text>
@@ -152,7 +151,7 @@ button:hover {
   font-weight: 700;
   padding: 5px 10px;
   margin: 0px 15px;
-  color: black;
+  color: #FFD54F;
  
 }
 .next, .prev {
@@ -160,7 +159,7 @@ button:hover {
   font-weight: 700;
   padding: 5px 10px;
   margin: 0px 15px;
-  color: black;
+  color: #FFD54F;
   
 }
     
