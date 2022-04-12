@@ -4,7 +4,7 @@
             <img class="title" src="@/assets/title/communityTitle.png" width=250 >
         </v-row>
         <v-row>
-            <community-board-write @submit="onSubmit"/>
+            <community-board-write @submit="onBoardSubmit"/>
         </v-row>
     </v-container>
 </template>
@@ -17,7 +17,7 @@ export default {
   components: { CommunityBoardWrite },
     name: 'CommunityWritePage',
     methods: {
-        onSubmit (payload) {
+        onBoardSubmit (payload) {
             const { title, content, writer, brackets, file} = payload
 
             let formData = new FormData()

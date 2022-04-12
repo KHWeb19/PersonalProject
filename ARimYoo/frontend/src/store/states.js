@@ -2,6 +2,7 @@ export default {
 
     communityBoards: [],
     communityBoard: null,
+    communityComments: [],
     
     member: null,
     

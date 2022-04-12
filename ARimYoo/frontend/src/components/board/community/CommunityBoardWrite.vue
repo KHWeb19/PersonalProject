@@ -1,6 +1,6 @@
 <template>
     <v-container>
-            <v-form enctype="multipart/form-data" @submit.prevent="onSubmit">
+            <v-form enctype="multipart/form-data" @submit.prevent="onBoardSubmit">
                 <table>
                     <v-row justify="center">
                         <v-col cols="1" class="label">Title</v-col>
@@ -78,7 +78,7 @@ export default {
 
             this.files = this.$refs.files.files[0]
         },
-        onSubmit () {
+        onBoardSubmit () {
 
             const { title, content,writer, brackets} = this
             const file =  this.$refs.files.files[0]
@@ -113,7 +113,7 @@ table{
     padding-bottom: 7%;
     margin-left:auto;
     margin-right:auto;
-    zoom:95%;
+    zoom:90%;
 }
 .v-combobox, .v-text-field, .v-textarea, #files{
     font-family: 'Noto Sans KR', sans-serif;
