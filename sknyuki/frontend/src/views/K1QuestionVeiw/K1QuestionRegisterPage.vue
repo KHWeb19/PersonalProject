@@ -29,12 +29,15 @@ data () {
       files:[],
     }
 },
+computed: {
+    ...mapState([ 'userInfo' ])
+  },
      methods: {
         contentsSubmit (payload) {
+            const id=this.userInfo.id
             const { title, content, writer} = payload
             console.log('contents의 값이 넘어왔습니다.'+content)
-            //spring 작업시 경우에 따라서 회원정보의 id값도 넘겨줘야함
-            axios.post('http://localhost:7777/CheckBrandBoard/register', { title, writer, content })
+            axios.post('http://localhost:7777/CheckBrandBoard/register', { id, title, writer, content })
                     .then(res => {
                         // alert('등록 성공! - ' + res)
                         this.boardNo=res.data.boardNo
@@ -55,7 +58,7 @@ data () {
                     }
 
                     formData.append('boardNo',this.boardNo)
-                    //formData.append('id', this.userInfo.id)
+                    formData.append('id', this.userInfo.id)
                     
 
                     axios.post('http://localhost:7777/fileUpload/QuestionBoard',formData,{
