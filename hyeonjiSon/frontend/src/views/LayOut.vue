@@ -6,39 +6,32 @@
         <div @click="home">로고 들어갈 자리</div>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-toolbar-items>
-        <!-- router-link에 생기는 하이퍼링크 밑줄은 stype scope에서 decoration:none;설정하여 지움 -->
-        <v-col> 
-          <router-link :to="{ name: 'memberLoginPage'}">
-            <v-btn v-if="!isLogin">
+
+      <v-toolbar-items v-if="this.$store.state.userInfo == null">
+              <v-btn onclick="location.href='http://localhost:8080/memberLoginPage'">
                 <v-icon>
                     mdi-login
                 </v-icon>
             </v-btn>
-          </router-link>
-            <v-btn v-if="isLogin" @click="logout">
+            <v-btn onclick="location.href='http://localhost:8080/memberRegisterPage'">
+                    <v-icon>
+                        mdi-account-multiple-plus-outline
+                    </v-icon>
+            </v-btn>            
+      </v-toolbar-items>
+      <v-toolbar-items v-if="this.$store.state.userInfo != null">
+            <v-btn @click="logout">
                 <v-icon>
                     mdi-logout
                 </v-icon>
             </v-btn>
-
-          <router-link :to="{ name: 'memberRegisterPage'}">
-            <v-btn v-if="!isLogin">
-                    <v-icon>
-                        mdi-account-multiple-plus-outline
-                    </v-icon>
-            </v-btn>
-          </router-link>
-          <router-link :to="{ name: 'memberMyPage'}">
-            <v-btn v-if="isLogin">
+            <v-btn @click="mypage">
                 <v-icon>
                     mdi-clipboard-account-outline
                 </v-icon>
-            </v-btn>
-          </router-link>
-
-        </v-col>
+            </v-btn>     
       </v-toolbar-items>
+
       <slot name="menubar"></slot>
     </v-app-bar>
 
@@ -74,19 +67,19 @@ import cookies from 'vue-cookies'
 Vue.use(cookies)
 
 export default {
-  components: {
-   },
-  
   name: "LayOut",
-  data () {
+    props: {
+      member: {
+          type: Object,
+          require: true
+      }
+    },
+data () {
     return {
         isLogin: false,
+        loginInfo: JSON.parse(localStorage.getItem('loginInfo')),
         drawer: false,
         left: false,
-
-        move: [
-            { login: '/memberLoginPage', register: '/memberRegisterPage', mypage: '/memberMypage'}
-        ],
 
         navrouters: [
           { icon: 'mdi-leaf-circle-outline', text: '프로젝트 소개', name: 'home', route: '/projectIntroducePage' },
@@ -99,9 +92,11 @@ export default {
     }
   },
   mounted () {
-        this.$store.state.session = this.$cookies.get("user")
-        if (this.$store.state.session != null) {
+        this.$store.state.userInfo = this.$cookies.get("user")
+        if (this.$store.state.userInfo != null){
             this.$store.state.isLogin = true
+        }else {
+            this.$store.state.isLogin = false
         }
   },
   computed: {
@@ -112,14 +107,14 @@ export default {
     home () {
       (window.location.pathname !== '/') ? router.push('/') : router.go(0)
     },
-    category () {
-      (window.location.pathname !== '/') ? router.push('/') : router.go(0)
-    },
     logout () {
       this.$cookies.remove("user")
       this.isLogin = false
       this.$store.state.userInfo = null
       alert('로그아웃 성공!')
+    },
+    mypage(){
+      this.$router.push({ name: 'memberMyPage', params: {memberNo: this.$store.state.userInfo.memberNo.toString()} }) 
     }
   }
 }
