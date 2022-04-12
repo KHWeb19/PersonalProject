@@ -10,7 +10,6 @@ import LoginPageForm from "@/components/login/LoginPageForm";
 import axios from "axios";
 import cookies from 'vue-cookies'
 import Vue from "vue";
-import {mapActions, mapState} from "vuex";
 
 Vue.use(cookies)
 
@@ -19,26 +18,16 @@ export default {
   components: {LoginPageForm},
   data(){
     return{
-      isLogin: false,
       userId: this.$cookies.get("user"),
     }
   },
   mounted() {
-    this.fetch_board_list()
     this.$store.state.userInfo = this.$cookies.get("user")
-
-   if (this.$store.state.userInfo != null) {
-     this.$store.state.isLogin = true;
-     console.log(this.$store.state.isLogin);
-    } else {
-     this.$store.state.isLogin = false;
-     console.log(this.$store.state.isLogin);
-    }
   },
   methods: {
-    ...mapActions(['fetch_board_list']),
     async onSubmit(payload) {
-        if(!this.isLogin) {
+        if(localStorage.getItem("session") == null) {
+        //if(localStorage.getItem("session") === payload.id || this.checkLoginUser(payload.id)) {
         const {id, pw} = payload;
         await axios.post('http://localhost:7777/join/login', {id, pw})
             .then(res => {
@@ -46,22 +35,31 @@ export default {
               if (res.data.id == null) {
                 alert('아이디나 비밀번호가 틀렸습니다.')
               } else {
-                this.$cookies.set("user", res.data.id, 120)
-                this.$store.state.isLogin = true
-                this.$router.push({name: 'PlanView'})
+                localStorage.setItem("userInfo", JSON.stringify(res.data))
+                localStorage.setItem("session", res.data.id);
+                //this.$store.commit('addUser', res.data.id);
+                this.$router.push({name: 'PlanView', params: {id: res.data.id}});
               }
             })
-            .catch(res => {
-              alert(res.response.data.message)
+            .catch(() => {
+              alert('오류다 임마!')
             })
       } else {
         alert('이미 로그인 되어 있습니다.')
       }
     },
+/*     checkLoginUser(payloadId){
+      if (this.$store.state.userInfo != null){
+        for(let i =0;  i < this.$store.state.userInfo.length; i++){
+          if(this.$store.state.userInfo[i].id === payloadId){
+            return false;
+          }
+        }
+        return true;
+      }
+    }*/
   },
-  computed: {
-    ...mapState(['members', 'isLogin'])
-  }
+
 }
 </script>
 
