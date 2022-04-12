@@ -10,7 +10,8 @@ import ProjectIntroducePage from '@/views/introduce/ProjectIntroducePage.vue'
 
 import RecycleGuideMainPage from '@/views/recycleGuide/RecycleGuideMainPage.vue'
 
-import LivingTipBoardPage from '@/views/livingTip/LivingTipBoardPage.vue'
+import LivingTipBoardList from '@/views/livingTip/LivingTipBoardList.vue'
+import TipRegisterPage from '@/views/livingTip/TipRegisterPage.vue'
 
 import BoardStorePage from '@/views/findStore/BoardStorePage.vue'
 
@@ -60,11 +61,19 @@ const routes = [
     name: 'recycleGuideMainPage',
     component: RecycleGuideMainPage
   },
+  
   {
-    path: '/livingTipBoardPage',
-    name: 'livingTipBoardPage',
-    component: LivingTipBoardPage
+    path: '/livingTipBoardList',
+    name: 'livingTipBoardList',
+    component: LivingTipBoardList
   },
+  {
+    path: '/tipRegisterPage',
+    name: 'tipRegisterPage',
+    component: TipRegisterPage
+  },
+
+
   {
     path: '/boardStorePage',
     name: 'boardStorePage',

@@ -2,6 +2,9 @@ import {
     FETCH_MEMBER_LIST,
     FETCH_MEMBER,
 
+    FETCH_TIP_BOARD_LIST,
+    FETCH_TIP_BOARD,
+
 } from './mutation-types'
 
 import axios from 'axios'
@@ -18,5 +21,18 @@ export default {
                 .then((res) => {
                     commit(FETCH_MEMBER, res.data)
                 })
+    },
+
+    fetchTipBoardList ({ commit }) {
+        return axios.get('http://localhost:7777/tipboard/list')
+            .then((res) => {
+                commit(FETCH_TIP_BOARD_LIST, res.data)
+            })
+    },
+    fetchTipBoard ({ commit }, boardNo) {
+        return axios.get(`http://localhost:7777/tipboard/${boardNo}`)
+            .then((res) => {
+                commit(FETCH_TIP_BOARD, res.data)
+            })
     },
 }
