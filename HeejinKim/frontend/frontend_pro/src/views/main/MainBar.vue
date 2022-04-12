@@ -25,8 +25,10 @@
         
         </v-toolbar>
 
-        <div :session="session" v-if="this.$store.state.isAuth" >
-            
+        <!-- 관리자 페이지 만들때 
+        <div :session="session" v-if="this.$store.state.isAuth" >-->
+
+        <div v-if="isLogin">    
             <v-navigation-drawer app v-model="nav_drawer" temporary>
                 <v-list nav dense>
                     <v-list-item-group v-model="group" active-class="grey--text  ">
@@ -115,7 +117,7 @@ export default {
                 {  
                     icon: 'mdi-home',
                     name: 'Home',
-                    route: '/'
+                    route: '/Home'
                   
                 },
                 {   
@@ -126,7 +128,7 @@ export default {
                 { 
                     text: 'Community',
                     name: 'Community',
-                    route:'/freeBoard'
+                    route:'/communityBoard'
                     
                 },
 
@@ -196,12 +198,13 @@ export default {
                         if (res.data != "") {
                             
                             alert("Welcome" +"  "+res.data.userId )
+
                             this.isLogin = true;
                             this.$store.state.session = res.data                               
-                            this.$cookies.set("user", res.data, 60) 
+                            this.$cookies.set("user", res.data, 3600) 
+                            this.$cookies.set("auth", res.data.auth, 3600)
+                            this.$router.push({ name: 'Home' })
 
-                            //this.$cookies.set("auth", res.data.auth, 60)
-                            
                             if (res.data.auth == 'manager') {
                                 this.$store.state.isAuth = true
                                 alert('운영자 아이디로 로그인')
@@ -209,9 +212,6 @@ export default {
                                 this.$store.state.isAuth = false
                             }
                             
-                            this.$router.push({
-                            name: 'Home'
-                        })
                             
                         } else {
                             alert('아이디와 비밀번호를 확인해주세요. ' + res.data)

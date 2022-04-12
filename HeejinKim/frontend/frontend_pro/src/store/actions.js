@@ -7,12 +7,12 @@ import{
     //FETCH_MEMBER_LIST,
     //FETCH_MEMBER,
     
-    //COOKIE_SESSION,
+    
     //REMOVE_IS_LOGIN,
-   // REMOVE_SESSION,
-    //SET_IS_LOGIN,
+    //REMOVE_SESSION,
+    
 
-    //SET_AUTH,
+    
     //SET_MEMBER_NO
 
 
@@ -28,13 +28,13 @@ Vue.use(cookies)
 export default {
 
     fetchBoardList ({ commit }) {
-        return axios.get(`http://localhost:7777/board/lists`)
+        return axios.get(`http://localhost:7777/board/community/list`)
             .then((res) => {
                 commit(FETCH_BOARD_LIST, res.data)
             })
     },
     fetchBoard ({ commit }, boardNo) {
-        return axios.get(`http://localhost:7777/board/${boardNo}`)
+        return axios.get(`http://localhost:7777/board/community/${boardNo}`)
             .then((res) => {
                 commit(FETCH_BOARD, res.data)
             })

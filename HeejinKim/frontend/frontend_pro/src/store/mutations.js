@@ -6,6 +6,11 @@ import {
     FETCH_AUTH_LIST,
     FETCH_MEMBERAUTH,
     FETCH_MEMBERAUTH_LIST,
+
+    FETCH_BOARD,
+    FETCH_BOARD_LIST,
+
+
 /*
     COOKIE_SESSION,
     REMOVE_IS_LOGIN,
@@ -19,6 +24,17 @@ import {
 }from './mutation-types'
 
 export default {
+
+    [FETCH_BOARD_LIST] (state,boards) {
+        state.boards = boards;
+    },
+    [FETCH_BOARD] (state, board) {
+        state.board = board
+    },
+
+
+
+
     [FETCH_MEMBER_LIST] (state, members) {
         state.boards = members
     },
