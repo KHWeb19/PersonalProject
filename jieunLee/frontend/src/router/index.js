@@ -61,7 +61,7 @@ const routes = [
     }
   },
   {
-    path: '/board/register',
+    path: '/boardRegister',
     name: 'BoardRegisterPage',
     component: BoardRegisterPage
   },

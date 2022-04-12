@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @RestController
 @RequestMapping("/board")
@@ -21,5 +23,12 @@ public class BoardController {
         log.info("boardRegister()");
 
         service.register(board);
+    }
+
+    @GetMapping("/list")
+    public List<Board> boardList() {
+        log.info("boardList()");
+
+        return service.list();
     }
 }
