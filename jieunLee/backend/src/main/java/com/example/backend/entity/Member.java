@@ -24,7 +24,7 @@ public class Member {
     @Column(length = 32, nullable = false)
     private String memberId;
 
-    @Column(length = 64, nullable = false)
+    @Column(length = 64)
     private String password;
 
     @Column(length = 64)
@@ -42,11 +42,9 @@ public class Member {
     @UpdateTimestamp
     private Date updDate;
 
-    public Member(Long memberNo, String memberName, String memberId, String password, String imageName) {
-        this.memberNo = memberNo;
+    public Member(String memberName, String memberId, String password) {
         this.memberName = memberName;
         this.memberId = memberId;
         this.password = password;
-        this.imageName = imageName;
     }
 }

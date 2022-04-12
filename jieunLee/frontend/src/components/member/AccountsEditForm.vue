@@ -139,6 +139,9 @@ export default {
           })
           .catch (res => {
               alert('처리 결과: ' + res.message)
+              this.imageName = this.member.imageName
+              const { memberName, memberId, imageName, memberWeb, memberIntro } = this
+              this.$emit('submit', { memberName, memberId, imageName, memberWeb, memberIntro})
           })
       }
     },

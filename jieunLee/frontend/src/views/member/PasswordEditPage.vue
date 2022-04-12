@@ -36,7 +36,7 @@ export default {
     ...mapActions(['fetchMember']),
         onSubmit(payload) {
       const {password} = payload
-      axios.put(`http://localhost:7777/member/${this.memberNo}`, 
+      axios.put(`http://localhost:7777/member/pw/${this.memberNo}`, 
       {memberName: this.member.memberName, memberId: this.member.memberId, password, imageName: this.member.imageName, memberWeb: this.member.memberWeb, memberIntro: this.member.memberIntro, regDate: this.member.regDate})
         .then((res) => {
             alert('비밀번호 수정 성공')

@@ -10,6 +10,7 @@ public interface MemberService {
     public void register (MemberRequest memberRequest);
     public MemberRequest login (MemberRequest memberRequest);
     public Member read (Long memberNo);
+    public void profile (Member member);
     public void modify (Member member);
     public void remove (Long memberNo);
 }

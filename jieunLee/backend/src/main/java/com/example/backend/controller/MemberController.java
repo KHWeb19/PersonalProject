@@ -67,6 +67,18 @@ public class MemberController {
         log.info("memberModify(): " + member);
 
         member.setMemberNo(Long.valueOf(memberNo));
+        service.profile(member);
+
+        return member;
+    }
+
+    @PutMapping("/pw/{memberNo}")
+    public Member passwordModify (
+            @PathVariable("memberNo") Long memberNo,
+            @RequestBody Member member) {
+        log.info("memberModify(): " + member);
+
+        member.setMemberNo(Long.valueOf(memberNo));
         service.modify(member);
 
         return member;

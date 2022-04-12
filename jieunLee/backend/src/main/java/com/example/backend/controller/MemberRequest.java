@@ -25,6 +25,4 @@ public class MemberRequest {
         this.memberIntro = memberIntro;
         this.regData = regData;
     }
-
-
 }
