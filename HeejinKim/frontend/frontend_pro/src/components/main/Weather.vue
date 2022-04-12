@@ -1,4 +1,5 @@
 <template>
+
   <div id="app" :class="typeof weather.main != 'undefined' && this.temp > 15 ?'warm' : ''">
     <v-card>
       <v-card-title class="text-center justify-center py-6">
@@ -84,6 +85,7 @@ export default {
   },
   
   methods: {
+
     selectCity (city) {
       
       
