@@ -1,7 +1,8 @@
-create table member(
+create table user(
+    user_no int not null auto_increment,
 	id varchar(20) not null,
 	password varchar(15) not null,
 	phonenumber varchar(11) not null,
 	email varchar(50) not null,
-	PRIMARY KEY (id, password)
+	PRIMARY KEY (user_no)
 );
