@@ -185,17 +185,24 @@
                 checkuserInfo: window.localStorage.getItem('token'),
                 selectProcess: ['예약중','예약확정','작업중','픽업완료','예약취소'],
                 process:'',
-                id:(window.localStorage.getItem('id')),
+                id:this.BookingBoard.id,
                 date: this.BookingBoard.date,
                 time: this.BookingBoard.time,
-                regDate: this.BookingBoard.regDate
+                regDate: this.BookingBoard.regDate,
+                contents: this.BookingBoard.contents,
+                linkInfo: this.BookingBoard.linkInfo,
+                cakeArrNo: this.BookingBoard.cakeArrNo,
+                design: this.BookingBoard.design,
+                size: this.BookingBoard.size,
+                price: this.BookingBoard.price
+
             }
         },
         methods: {
             onSubmit () {
 
-                const { id, date, time, process, regDate } = this
-                this.$emit('submit', { id, date, time, process, regDate })
+                const { id, date, time, process, contents, linkInfo, cakeArrNo, design, size, price, regDate } = this
+                this.$emit('submit', { id, date, time, process, contents, linkInfo, cakeArrNo, design, size, price, regDate })
             }
         }
         

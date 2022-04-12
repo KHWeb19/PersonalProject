@@ -39,9 +39,9 @@ import { mapState, mapActions } from 'vuex'
             ...mapActions(['fetchBookingBoard']),
             ...mapActions(['fetchCakeLists']),
             onSubmit (payload) {
-                const { id, date, time, process, regDate } = payload
+                const { id, date, time, process, contents, linkInfo, cakeArrNo, design, size, price, regDate } = payload
                 
-                axios.put(`http://localhost:7777/booking/${this.bookingNo}`, {id, date, time, process, regDate})
+                axios.put(`http://localhost:7777/booking/${this.bookingNo}`, {id, date, time, process, contents, linkInfo, cakeArrNo, design, size, price, regDate})
                     .then(res => {
                         alert('게시물 수정 완료!')
                         this.$router.push({
