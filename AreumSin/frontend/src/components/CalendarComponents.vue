@@ -69,7 +69,7 @@ export default {
         this.year = this.year-1;
       }
       this.calendarData()
-      alert(+" "+this.month)
+      // alert(+" "+this.month)
     },
     next(){
       if(this.month !== 12){
@@ -78,6 +78,7 @@ export default {
         this.month = 1;
         this.year = this.year +1;
       }
+      this.calendarData()
     },
     calendarData() {
       const [monthFirstDay, monthLastDate, lastMonthLastDate] = this.getFirstDayLastDate(this.year, this.month);

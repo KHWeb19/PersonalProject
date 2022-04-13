@@ -9,15 +9,13 @@ public class MemberRequest {
     private String pw;
     private String name;
     private Integer birth;
-    private Boolean checkId;
     private String sessionKey;
 
-    public MemberRequest(String id, String pw, String name, Integer birth, Boolean checkId, String sessionKey) {
+    public MemberRequest(String id, String pw, String name, Integer birth, String sessionKey) {
         this.id = id;
         this.pw = pw;
         this.name = name;
         this.birth = birth;
-        this.checkId = checkId;
         this.sessionKey = sessionKey;
     }
 }

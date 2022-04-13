@@ -2,6 +2,7 @@
   <v-container class="spacing-playground pa-16">
     <login-page-form @submit="onSubmit"></login-page-form>
   </v-container>
+
 </template>
 
 <script>
@@ -9,8 +10,6 @@ import LoginPageForm from "@/components/login/LoginPageForm";
 import axios from "axios";
 import cookies from 'vue-cookies'
 import Vue from "vue";
-//import {FETCH_COOKIE_MEMBER} from "@/store/mutation-types";
-import {mapState} from "vuex";
 
 Vue.use(cookies)
 
@@ -19,69 +18,48 @@ export default {
   components: {LoginPageForm},
   data(){
     return{
-      isLogin: false,
       userId: this.$cookies.get("user"),
     }
   },
   mounted() {
-
     this.$store.state.userInfo = this.$cookies.get("user")
-
-/*    if (this.$store.state.userInfo != null) {
-      this.isLogin = true
-    } else {
-      this.isLogin = false
-    }*/
   },
   methods: {
     async onSubmit(payload) {
-      if (!this.checkUserInfo(payload, this.$store.state.userInfo)) {
-        //if(!this.isLogin) {
+        if(localStorage.getItem("session") == null) {
+        //if(localStorage.getItem("session") === payload.id || this.checkLoginUser(payload.id)) {
         const {id, pw} = payload;
         await axios.post('http://localhost:7777/join/login', {id, pw})
             .then(res => {
               console.log(res.data)
-              if (!res.data.checkId) {
+              if (res.data.id == null) {
                 alert('아이디나 비밀번호가 틀렸습니다.')
               } else {
-                this.$store.state.userInfo += res.data;
-                // this.$store.commit([FETCH_COOKIE_MEMBER], res.data.id);
-                this.$cookies.keys();
-                this.$cookies.set("user", res.data.id, 120)
-                //this.updateCookie(res.data.id);
-                this.isLogin = true
-                this.$router.push({name: 'HomeView'})
+                localStorage.setItem("userInfo", JSON.stringify(res.data))
+                localStorage.setItem("session", res.data.id);
+                //this.$store.commit('addUser', res.data.id);
+                this.$router.push({name: 'PlanView', params: {id: res.data.id}});
               }
             })
-            .catch(res => {
-              alert(res.response.data.message)
+            .catch(() => {
+              alert('오류다 임마!')
             })
       } else {
         alert('이미 로그인 되어 있습니다.')
       }
     },
-    checkUserInfo(payloadId, userInfo) {
-      /*
-      if(userInfo !== null) {
-        userInfo.forEach(user => {
-          if (user.id === payloadId.id)
-            return true;
-        })
-        return false;
-      }*/
-
-      if(userInfo !== null){
-        if(userInfo === payloadId.id){
-          return true;
+/*     checkLoginUser(payloadId){
+      if (this.$store.state.userInfo != null){
+        for(let i =0;  i < this.$store.state.userInfo.length; i++){
+          if(this.$store.state.userInfo[i].id === payloadId){
+            return false;
+          }
         }
-        return false;
+        return true;
       }
-      return false;
-    }
+    }*/
   },
-  computed: {
-    ...mapState(['userInfo'])
-  }
+
 }
 </script>
 

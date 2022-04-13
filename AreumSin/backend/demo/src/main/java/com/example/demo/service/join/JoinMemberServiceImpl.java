@@ -9,6 +9,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -21,6 +23,7 @@ public class JoinMemberServiceImpl implements JoinMemberService{
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Transactional
     @Override
     public void register(Member member, HttpSession session) {
         String encodePassword = passwordEncoder.encode(member.getPw());
@@ -41,21 +44,34 @@ public class JoinMemberServiceImpl implements JoinMemberService{
 
         if(maybeMember.equals(Optional.empty())){
             log.info("No id!");
-            return new MemberRequest(null, null, null, null, false, null);
+            return new MemberRequest(null, null, null, null, null);
         }
 
         Member loginMember = maybeMember.get();
 
         if(!passwordEncoder.matches(memberRequest.getPw(), loginMember.getPw())){
             log.info("Wrong password!");
-            return new MemberRequest(null, null, null, null, false, null);
+            return new MemberRequest(null, null, null, null,  null);
         }
 
         //Optional<Member> memberSessionKey = repository.findById(loginMember.getSessionKey());
 
-        MemberRequest response = new MemberRequest(memberRequest.getId(), null, null, null, true, loginMember.getSessionKey());
+        MemberRequest response = new MemberRequest(memberRequest.getId(), null, null, null,  loginMember.getSessionKey());
         System.out.println("response = " + response);
         return response;
     }
+
+    @Transactional
+    @Override
+    public Integer memberNo(String id) {
+        return repository.findByIntMemberNo(id);
+    }
+
+    @Transactional
+    @Override
+    public List<Member> list() throws Exception {
+        return repository.findAll();
+    }
+
 
 }
