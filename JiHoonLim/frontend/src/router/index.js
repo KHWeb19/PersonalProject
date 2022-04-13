@@ -8,8 +8,8 @@ import SearchUserIdPage from '@/views/member/SearchUserIdPage.vue'
 import SearchUserPwPage from '@/views/member/SearchUserPwPage.vue'
 import MemberInfoPage from '@/views/member/MemberInfoPage.vue'
 
-
 import FoodListPage from '@/views/foodBoard/FoodListPage.vue'
+import FoodRegisterPage from '@/views/foodBoard/FoodRegisterPage.vue'
 
 import test from '@/views/test.vue'
 Vue.use(VueRouter)
@@ -55,6 +55,11 @@ const routes = [
     path: '/foodList',
     name: 'FoodListPage',
     component: FoodListPage
+  },
+  {
+    path: '/foodRegister',
+    name: 'FoodRegisterPage',
+    component: FoodRegisterPage
   },
   
 ]
