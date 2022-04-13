@@ -36,4 +36,12 @@ public class MemberPlan {
         return memberPlan;
     }
 
+    public static MemberPlan inviteMember(Member member, Plan plan){
+        MemberPlan memberPlan = new MemberPlan();
+        memberPlan.setPlan(plan);
+        memberPlan.setMember(member);
+
+        return memberPlan;
+    }
+
 }

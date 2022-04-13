@@ -7,12 +7,17 @@ import com.example.demo.repository.JoinMemberRepository;
 import com.example.demo.repository.MakePlanRepository;
 import com.example.demo.repository.MemberPlanRepository;
 import com.example.demo.request.MemberPlanRequest;
+import com.example.demo.request.MemberRequest;
+import com.example.demo.request.PlanFriend;
+import com.example.demo.response.FriendMemberResponse;
+import com.example.demo.response.PlanResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -38,7 +43,7 @@ public class MakePlanServiceImpl implements MakePlanService{
 
         Plan planEntity = Plan.createPlan(memberPlanRequest.getPlanName(), memberPlanRequest.getPlanDate(), memberPlanRequest.getPlaceName(), memberPlan);
 
-        //Member memberEntity = Member.createPlan(member, memberPlan);
+        //Member memberEntity = Member.c(member, memberPlan);
 
         // 넘어온 plan db에 저장.
         planRepository.save(planEntity);
@@ -78,6 +83,52 @@ public class MakePlanServiceImpl implements MakePlanService{
         return userPlanList;
     }
 
+    @Override
+    public FriendMemberResponse searchMember(String friendId) {
+
+        log.info(friendId);
+
+        Optional<Member> maybeFriend = memberRepository.findById(friendId);
+
+        if(maybeFriend.equals(Optional.empty())){
+            log.info("No id!");
+            return new FriendMemberResponse(null, "x");
+        }
+
+        Member members = maybeFriend.get();
+
+        System.out.println("members = " + members.getId());
+        return new FriendMemberResponse(members.getId(), members.getName());
+    }
+
+    @Override
+    public void addFriend(PlanFriend planFriend) {
+
+        Member member = memberRepository.findByMemberNo(planFriend.getFriendId());
+        Plan plan = planRepository.findByPlan(planFriend.getPlanNo());
+
+        MemberPlan memberPlan = MemberPlan.inviteMember(member, plan);
+
+        memberPlanRepository.save(memberPlan);
+
+    }
+
+    @Transactional
+    @Override
+    public List<MemberPlan> showInviteMember(Integer planNo) {
+
+        List<MemberPlan> listMember = memberPlanRepository.findAllMember(planNo);
+
+        for(MemberPlan memberPlan : listMember){
+            log.info("memberPlanList: " + memberPlan.getMember().getId());
+            log.info("memberPlanList: " + memberPlan.getMember().getName());
+            log.info("memberPlanList: " + memberPlan.getMember().getColor());
+        }
+
+        return listMember;
+    }
+
+
     /*
     @Transactional
     @Override
@@ -95,6 +146,7 @@ public class MakePlanServiceImpl implements MakePlanService{
         //return null;
     }
      */
+
 
 
 }

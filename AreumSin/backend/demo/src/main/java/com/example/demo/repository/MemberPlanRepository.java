@@ -29,4 +29,8 @@ public interface MemberPlanRepository extends JpaRepository<MemberPlan, Long> {
     @Transactional
     @Query("select mp from MemberPlan mp join mp.plan p join mp.member m where m.memberNo = :memberNo")
     List<MemberPlan> findAll(@Param("memberNo") Integer memberNo);
+
+    @Transactional
+    @Query("select mp from MemberPlan mp join mp.plan p join mp.member m where p.planNo = :planNo")
+    List<MemberPlan> findAllMember(@Param("planNo") Integer planNo);
 }
