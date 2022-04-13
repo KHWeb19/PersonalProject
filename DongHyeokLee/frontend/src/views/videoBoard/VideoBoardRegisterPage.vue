@@ -17,7 +17,7 @@ export default {
         VideoBoardRegisterForm
     },
     methods: {
-        onSubmit (payload) {
+    async onSubmit (payload) {
             const { title, content, writer, files } = payload
             let formData = new FormData()
             const fileName = files[0].name
@@ -26,27 +26,30 @@ export default {
                 formData.append('fileList', files[idx])
             }
            //엑시오스 두개 사용 이래도 되나?
-            axios.all([
-                 axios.post('http://localhost:7777/videoBoard/register', { title, writer, content, fileName}),
-                 axios.post('http://localhost:7777/videoBoard/uploadImg', formData,{
-                     headers: {
-                         'Content-Type' : 'multipart/form-data'
-                     }
-                 })
-            ])
+               if(files != null){
+        await axios.all([
+                axios.post('http://localhost:7777/videoBoard/register', { title, writer, content, fileName}),
+                axios.post('http://localhost:7777/videoBoard/uploadImg', formData,{
+                    headers: {
+                        'Content-Type' : 'multipart/form-data'
+                    }
+                })
+             ])  
                     .then(axios.spread(() => {
                             alert('등록 성공')
-
-                        this.$router.push({
+                         setTimeout(()=> {this.$router.push({
                             name: 'VideoBoardListPage'
-                        })
+                        })},300)
                     
                     })
                 )
                     .catch(() => {
                         alert('문제 발생!')
                     })
-        }
+               }else{
+                   alert('파일을 첨부하세요')
+               }
+            }
     }
 }
 

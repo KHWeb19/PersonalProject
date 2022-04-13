@@ -19,7 +19,7 @@ import VideoBoardReadPage from '@/views/videoBoard/VideoBoardReadPage.vue'
 import VideoBoardModifyPage from '@/views/videoBoard/VideoBoardModifyPage.vue'
 //PLAYLIST
 import PlayListPage from '@/views/music/PlayListPage.vue'
-
+//검색기능
 import SearchResult from '@/views/freeBoard/SearchListPage.vue'
 
 Vue.use(VueRouter)

@@ -92,7 +92,8 @@ export default {
              end = start + this.pageSize
       
             return this.videoBoards.slice(start, end);
-        }
+        },
+        
     }
 }
 
@@ -115,12 +116,10 @@ a:hover{
   color: black;
   
 }
-
 table {
   margin-left: 180px;
   margin-top: 10px;
   margin-bottom: 10px;
-
   border-top: 1px solid ;
   border-collapse: collapse;
 }
@@ -129,12 +128,10 @@ th {
   border-left: 1px solid;
   padding: 10px;
 }
-
 td {    
   border-bottom: 1px solid;
   padding: 10px;
 }
-
 strong{
     margin-right: 5px;
 }

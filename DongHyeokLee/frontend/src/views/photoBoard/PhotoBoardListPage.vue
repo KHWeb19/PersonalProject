@@ -1,29 +1,33 @@
 <template>
     <div id="photo-board">
         <h2>사진게시판</h2>
-        <div>
-        <photo-board-list :photoBoards="photoBoards"/>
-        </div>
-    </div>
+        <board-list :boards="photoBoards" 
+                    :registerName="`${this.registerName}`"
+                    :readName="`${this.readName}`"/>
+    </div>   
 </template>
 
 <script>
 
 
 import { mapActions, mapState } from 'vuex'
-import PhotoBoardList from '@/components/photoBoard/PhotoBoardList.vue'
+import BoardList from '@/components/common/board/BoardList.vue'
 
 
 
 export default {
     name: 'PhotoBoardListPage',
     components: {
-        PhotoBoardList,
-        
+        BoardList,     
+    },
+    data () {
+        return {
+            registerName : 'PhotoBoardRegisterPage',
+            readName: 'PhotoBoardReadPage'
+        }
     },
     computed: {
         ...mapState(['photoBoards'])
-        
     },
     mounted () {
         if(!this.$store.state.isLogin){

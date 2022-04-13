@@ -24,12 +24,11 @@ public class PhotoBoardController {
 
     //등록
     @PostMapping("/register")
-    public void PhotoBoardRegister (@Validated @RequestBody PhotoBoard photoBoard) {
-        log.info("PhotoBoardRegister()");
-        LocalDate now = LocalDate.now();
-        String fileName = now + photoBoard.getFileName();
-        photoBoard.setFileName(fileName);
-        service.register(photoBoard);
+    public void PhotoBoardRegister (@Validated PhotoBoard board,
+                                    @RequestParam(required = false) MultipartFile files) throws Exception {
+        log.info("PhotoBoardRegister()" + board + "file" + files);
+
+        service.register(board, files);
     }
     //목록
     @GetMapping("/list")
@@ -47,7 +46,7 @@ public class PhotoBoardController {
         return service.read(boardNo);
     }
     //파일 업로드
-    @ResponseBody
+    /*@ResponseBody
     @PostMapping("/uploadImg")
     public String requestUploadFile (
             @RequestParam("fileList") List<MultipartFile> fileList) {
@@ -81,7 +80,7 @@ public class PhotoBoardController {
         log.info("requestUploadFile(): Success!!!");
 
         return "Upload Success!!!";
-    }
+    }*/
     //수정
     @PutMapping("/{boardNo}")
     public PhotoBoard photoBoardModify (

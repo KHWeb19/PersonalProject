@@ -1,11 +1,11 @@
 package com.example.demo.service.board.videoBoard;
 
-import com.example.demo.entitiy.board.photoBoard.PhotoBoard;
 import com.example.demo.entitiy.board.videoBoard.VideoBoard;
 import com.example.demo.repository.board.videoBoard.VideoBoardRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -19,6 +19,7 @@ public class VideoBoardServiceImpl implements VideoBoardService {
 
     @Autowired
     private VideoBoardRepository repository;
+
 
     @Override
     public void register(VideoBoard videoBoard) {

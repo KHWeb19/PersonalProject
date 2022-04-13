@@ -1,6 +1,15 @@
 <template>
   <!-- https://github.com/TylerPottsDev/vuejs-music-app/blob/master/src/App.vue 음악 플레이어 퍼옴 -->
       <section class="player">
+        <div class="songInfo" align="center"> 
+         <strong> 
+           <v-icon>
+             mdi-music
+            </v-icon>
+          {{ this.current.title }} - {{ this.current.artist}} 
+         </strong>
+        </div>
+        
         <div class="controls">
           <v-btn class="prev" @click="prev" text>
               <v-icon>
@@ -18,6 +27,7 @@
                   mdi-skip-next
               </v-icon>
           </v-btn>
+
         </div>
       </section>
 </template>
@@ -26,73 +36,73 @@
 export default {
         
     data () {
-        return {
+      return {
         current: {},
-      index: 0,
-      isPlaying: false,
-      songs: [
-        {
-          title: 'Dinosaur',
-          artist: 'AKMU',
-          src: require('@/assets/music/Dinosaur.mp3')
-        },
-        {
-          title: 'Re-Bye',
-          artist: 'AKMU',
-          src: require('@/assets/music/Re-Bye.mp3')
-        },
-         {
-          title: '사람들이 움직이는게',
-          artist: 'AKMU',
-          src: require('@/assets/music/사람들이 움직이는게.mp3')
-        }
-      ],
-      player: new Audio(),
-        }
-    },
+        index: 0,
+        isPlaying: false,
+        songs: [
+          {
+            title: 'Dinosaur',
+            artist: 'AKMU',
+            src: require('@/assets/music/Dinosaur.mp3')
+          },
+          {
+            title: 'Re-Bye',
+            artist: 'AKMU',
+            src: require('@/assets/music/Re-Bye.mp3')
+          },
+          {
+            title: '사람들이 움직이는게',
+            artist: 'AKMU',
+            src: require('@/assets/music/사람들이 움직이는게.mp3')
+          }
+        ],
+        player: new Audio(),
+          }
+      },
     methods: {
-    play (song) {
-      if (typeof song.src != "undefined") {
-        this.current = song;
-        this.player.src = this.current.src;
-      }
-      this.player.play();
-      this.player.addEventListener('ended', function () {
+      play (song) {
+        if (typeof song.src != "undefined") {
+          this.current = song;
+          this.player.src = this.current.src;
+        }
+        this.player.play();
+        this.player.addEventListener('ended', function () {
+          this.index++;
+          if (this.index > this.songs.length - 1) {
+            this.index = 0;
+          }
+          this.current = this.songs[this.index];
+          this.play(this.current);
+        }.bind(this));
+        this.isPlaying = true;
+      },
+      pause () {
+        this.player.pause();
+        this.isPlaying = false;
+      },
+      next () {
         this.index++;
         if (this.index > this.songs.length - 1) {
           this.index = 0;
         }
         this.current = this.songs[this.index];
         this.play(this.current);
-      }.bind(this));
-      this.isPlaying = true;
-    },
-    pause () {
-      this.player.pause();
-      this.isPlaying = false;
-    },
-    next () {
-      this.index++;
-      if (this.index > this.songs.length - 1) {
-        this.index = 0;
-      }
-      this.current = this.songs[this.index];
-      this.play(this.current);
-    },
-    prev () {
-      this.index--;
-      if (this.index < 0) {
-        this.index = this.songs.length - 1;
-      }
-      this.current = this.songs[this.index];
-      this.play(this.current);
+      },
+      prev () {
+        this.index--;
+        if (this.index < 0) {
+          this.index = this.songs.length - 1;
+        }
+        this.current = this.songs[this.index];
+        this.play(this.current);
+        }
+      },
+      created () {
+        this.current = this.songs[this.index];
+        this.player.src = this.current.src;
     }
-  },
-  created () {
-    this.current = this.songs[this.index];
-    this.player.src = this.current.src;
   }
-}
 </script>
 
 <style scoped>
@@ -160,7 +170,11 @@ button:hover {
   padding: 5px 10px;
   margin: 0px 15px;
   color: #FFD54F;
-  
+}
+.songInfo{
+  font-family: 'Nanum Brush Script', cursive;
+  font-size: 20px;
+ 
 }
     
 </style>

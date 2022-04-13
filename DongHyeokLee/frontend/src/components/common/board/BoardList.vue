@@ -2,25 +2,25 @@
     <div>
       <v-container>
               <v-row>
-                  <v-col v-for="photo in paginatedData" :key="photo.boardNo" class="d-flex child-flex" cols="4">
-                      <router-link :to="{ name: 'PhotoBoardReadPage', params: { boardNo: photo.boardNo.toString() } }">
+                  <v-col v-for="board in paginatedData" :key="board.boardNo" class="d-flex child-flex" cols="4">
+                      <router-link :to="{ name: readName , params: { boardNo: board.boardNo.toString() } }">
                     <v-card class="img-card" >
                         <div>
-                          <v-img :src="require(`@/assets/uploadImg/${photo.fileName}`)" height="300" ></v-img>
+                          <v-img :src="require(`@/assets/uploadImg/${board.fileName}`)" height="300" ></v-img>
                         </div>
-                        <v-card-title>{{photo.title}}</v-card-title>
+                        <v-card-title>{{board.title}}</v-card-title>
                 <v-list-item>
                   <v-list-item-subtitle>
-                    <strong>{{ photo.writer }}</strong>
-                    {{ photo.regDate.substring(0, 10) }}
-                    조회 {{photo.count}}  
+                    <strong>{{ board.writer }}</strong>
+                    {{ board.regDate.substring(0, 10) }}
+                    조회 {{board.count}}  
                   </v-list-item-subtitle>
                 </v-list-item>
                     </v-card>
                       </router-link>
                   </v-col>
               </v-row>
-          </v-container>
+      </v-container>
 
           <!-- 페이징 참고 https://pewww.tistory.com/5 -->
         <div class="btn-cover" align="center">
@@ -37,25 +37,15 @@
           </v-btn>
         </div>
 
-      
-          <!-- 검색 기능-->
-       <!--   <input type="text" 
-                class="search" 
-                v-model="keyWord" 
-                cols="70" 
-                placeholder="검색어 입력" />
-          <v-btn @click="searchBtn()" 
-                  class="search-btn"
-                  depressed small>
-              <strong>검색</strong>
-          </v-btn> -->
-        <!-- 등록 버튼 -->
-        <router-link class="register-btn"
-                     :to="{ name: 'PhotoBoardRegisterPage'}">
+         <div>
+         <router-link class="register-btn"
+                     :to="{ name: `${this.registerName}`}">
           <v-btn v-if="$store.state.isLogin == true" class="amber lighten-2">
              <strong>등록</strong>
           </v-btn>
         </router-link>
+         </div>
+   
       
       </div>
 </template>
@@ -63,16 +53,23 @@
 <script>
 
 export default {
-    name: 'PhotoBoardList',
+    name: 'BoardList',
     props: {
-      photoBoards: {
+        boards: {
             type: Array
+        },
+        registerName:{
+            type: String
+        },
+        readName:{
+            type:String
         }
     },
     data () {
         return {
             pageNum: 0,
-            pageSize:6
+            pageSize:6,
+            filePath:[]
         }
     },
     methods: {
@@ -85,7 +82,7 @@ export default {
     },
     computed: {
         pageCount () {
-            let listLeng = this.photoBoards.length,
+            let listLeng = this.boards.length,
                 listSize = this.pageSize,
                 page = Math.floor(listLeng / listSize);
                 
@@ -99,7 +96,7 @@ export default {
              const start = this.pageNum * this.pageSize,
              end = start + this.pageSize
       
-            return this.photoBoards.slice(start, end);
+            return this.boards.slice(start, end);
         }
     }
 }

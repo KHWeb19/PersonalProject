@@ -18,12 +18,10 @@ import VideoBoardList from '@/components/videoBoard/VideoBoardList.vue'
 export default {
     name: 'VideoBoardListPage',
     components: {
-        VideoBoardList
-        
+        VideoBoardList  
     },
     computed: {
-        ...mapState(['videoBoards'])
-        
+        ...mapState(['videoBoards']),
     },
     mounted () {
         this.fetchVideoBoardList()

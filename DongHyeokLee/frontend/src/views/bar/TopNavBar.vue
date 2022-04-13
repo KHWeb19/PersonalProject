@@ -104,6 +104,7 @@ export default {
                 { icon: 'mdi-instagram', text:'CHAN-HYEOK',  route:'https://www.instagram.com/akmuchanhk/'},
                 { icon: 'mdi-youtube', text:'SU-HYUN', route:'https://www.youtube.com/c/Leesuhyun'},
                 { icon: 'mdi-youtube', text:'AKMU', route:'https://www.youtube.com/c/officialAKMU'},
+                //{ icon: 'mdi-vlive' , text: 'AKMU', router: 'https://www.vlive.tv/channel/F36179'}
             ],
      
         }

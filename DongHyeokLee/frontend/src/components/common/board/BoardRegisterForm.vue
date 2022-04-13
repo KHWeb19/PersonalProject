@@ -24,8 +24,7 @@
         <v-container>
             <div>
                 <label>
-                    <input type="file" id="files" ref="files" accept=".jpg, .png, .gif" v-on:change="handleFileUpload()" />
-                    <!-- 여러개 파일 이름을 어떻게 저장 해야할지 감 안 잡혀서 multiple 기능 제거 -->
+                    <input type="file" id="files" ref="files" :accept="accept" v-on:change="handleFileUpload()" /> 
                 </label>
             </div>
         </v-container>
@@ -37,7 +36,7 @@
                <strong>등록</strong>
             </v-btn>
             <v-btn>
-            <router-link class="cancel" :to="{ name: 'PhotoBoardListPage' }">
+            <router-link class="cancel" :to="{ name: `${this.listName}` }">
                <strong>취소</strong>
             </router-link>
             </v-btn>
@@ -49,6 +48,14 @@
 
 export default {
     name: 'PhotoBoardRegisterForm',
+    props: {
+        listName:{
+            type:String
+        },
+        accept:{
+            type:String
+        }
+    },
     data () {
         return {
             title: '',
@@ -59,8 +66,8 @@ export default {
     },
     methods: {
         onSubmit () {
-        
             const { title, writer, content, files } = this
+            console.log(files)
             if(files){
             this.$emit('submit', { title, writer, content, files })
             }else{
@@ -69,21 +76,25 @@ export default {
 
         },
           handleFileUpload () {
+              
                 this.files = this.$refs.files.files
+                
                 let fileLength = this.files[0].name.length
                 let fileDot = this.files[0].name.lastIndexOf(".")
                 let fileType = this.files[0].name.substring(fileDot+1, fileLength)
+                console.log(fileType + " " + this.accept )
                 //let fileTyepLowerCase = fileType.toLowerCase()
                 //console.log(fileTyepLowerCase)
-                //vue에서 gif 대문자로 GIF가 되면 오류생겨서 확장자 이래 3개만 받음
-                if(fileType == "jpg" || fileType == "png" || fileType == "gif"){
+               //vue에서 gif 대문자로 GIF가 되면 오류생겨서 확장자 이래 3개만 받음 
+               
+               if(this.accept === fileType){
                     alert('첨부 되었습니다')
                     
                 } else{
                     alert('확장자를 확인하세요')
                     this.$refs.files.value = ''
                   //확장자 다를경우 파일 초기화  
-                }  
+                } 
         }
     }
 }

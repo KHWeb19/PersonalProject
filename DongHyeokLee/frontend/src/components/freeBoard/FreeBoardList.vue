@@ -58,7 +58,7 @@
            class="search" 
            v-model="keyWord" 
            cols="70" 
-           placeholder="검색어 입력" />
+           placeholder="Search" />
     <v-btn @click="searchBtn()" 
             class="search-btn"
             depressed small>
@@ -127,8 +127,8 @@ export default {
                 return page
         },
          paginatedData () {
-             const start = this.pageNum * this.pageSize,
-             end = start + this.pageSize
+            const start = this.pageNum * this.pageSize,
+                    end = start + this.pageSize
       
             return this.freeBoards.slice(start, end);
         }
@@ -190,12 +190,12 @@ td{
 }
 .register-btn{
     margin-left: 250px;
-    }
+}
 .read{
     color:black;
 }
 .search{
-    border: 3px solid grey;
+    border-bottom: 3px solid grey;
     outline: none;
     margin-left: 360px;
     

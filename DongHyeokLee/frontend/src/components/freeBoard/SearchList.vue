@@ -53,6 +53,13 @@
       </v-btn>
     </div>
 
+    <v-btn color="amber lighten-2">
+        <router-link class="cancel"
+                    :to="{ name: 'FreeBoardListPage' }">
+        <strong> 돌아가기</strong>
+        </router-link>
+    </v-btn>
+
   
      
          
@@ -167,6 +174,9 @@ td{
     background-color:#FFD54F;
     margin-bottom:50px;
     font-family: 'Nanum Brush Script', cursive;
+}
+.cancel{
+    color:black;
 }
     
 </style>

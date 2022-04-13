@@ -1,7 +1,7 @@
 <template>
     <div class="footer">
         <v-toolbar class="black" dense dark>
-            
+        
         </v-toolbar>
     </div>
 </template>
