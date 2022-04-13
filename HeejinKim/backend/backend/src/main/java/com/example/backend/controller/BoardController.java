@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -19,10 +20,10 @@ public class BoardController {
     private BoardService service;
 
     @PostMapping("/register")
-    public void BoardRegister(@Validated @RequestBody Board board){
-        log.info("BoardRegister()");
+    public void BoardRegister(@Validated Board board, @RequestParam(required = false) MultipartFile file) throws Exception {
+        log.info("BoardRegister()" + file);
 
-        service.register(board);
+        service.register(board, file);
 
     }
 
@@ -32,4 +33,32 @@ public class BoardController {
 
         return service.list ();
     }
+
+    @GetMapping("/{boardNo}")
+    public Board boardRead (
+            @PathVariable("boardNo") Long boardNo) {
+        log.info("boardRead()");
+        return service.read(boardNo);
+    }
+
+    @PutMapping("/{boardNo}")
+    public Board boardModify (
+            @PathVariable("boardNo") Integer boardNo,Board board,
+            @RequestParam(required = false) MultipartFile file) throws Exception {
+        log.info("boardModify(): " + board);
+
+        board.setBoardNo(Long.valueOf(boardNo));
+        service.modify(board,file);
+
+        return board;
+    }
+
+    @DeleteMapping("/{boardNo}")
+    public void boardRemove(
+            @PathVariable("boardNo") Integer boardNo) {
+        log.info("boardRemove()");
+
+        service.remove(boardNo);
+    }
 }
+

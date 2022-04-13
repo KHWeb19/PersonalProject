@@ -20,6 +20,9 @@ public class Board {
     @Column(length = 32, nullable = false)
     private String writer;
 
+    @Column
+    private String fileName;
+
     @Lob
     private String content;
 
@@ -28,4 +31,11 @@ public class Board {
 
     @UpdateTimestamp
     private Date updDate;
+
+
+    public Board(String fileName) {
+        this.fileName = fileName;
+    }
+
 }
+
