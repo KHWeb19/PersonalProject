@@ -7,7 +7,7 @@
                     {{ comment.comments}} 
                 </span>
                 <span> <br>
-                    <v-img v-if="comment.commentLinkInfo != null" v-bind:src="require(`@/assets/boardComment/${comment.commentLinkInfo}`)" contain style="height:300px; width:300px" />
+                    <v-img v-if="comment.commentLinkInfo != null" v-bind:src="require(`@/assets/boardComment/${comment.commentLinkInfo}`)" contain style="height:300px; width:300px position: fixed;" />
                 </span>
                 <span class="date"> <br>
                     {{ comment.regDate}} <hr>
@@ -17,7 +17,7 @@
 
         <form @submit.prevent="onSubmit">
             <br><br><h4>댓글 : <strong>{{this.id}}</strong></h4>
-            <textarea type="text" v-model="comments" placeholder="댓글을 입력해주세요" class="commentcheck"/>
+            <textarea type="text" v-model="comments" placeholder="댓글을 입력해주세요" class="commentcheck"/><br>
             <input type="file" id="files1" ref="files1" 
                 multiple v-on:change="handleFileUpload()"/>
             <v-btn class="commentRegister" type="submit" color="white">
@@ -67,7 +67,7 @@
     color:black;
 }
 .commentRegister{
-    margin-left: 52%;
+    margin-left: 30%;
     margin-top: 5px;
 }
 
@@ -76,7 +76,7 @@ form{
 }
 
 .textbox{
-    width: 800px;
+    width: 1000px;
     color:black;
     padding: 0 0 0 13%;
 }
