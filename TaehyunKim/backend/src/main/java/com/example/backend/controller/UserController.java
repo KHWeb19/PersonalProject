@@ -16,7 +16,6 @@ import java.util.List;
 @RequestMapping("/api")
 @RequiredArgsConstructor
 @Slf4j
-@CrossOrigin(origins ="http://localhost:8080", allowedHeaders = "*")
 public class UserController {
     private final UserService userService;
 

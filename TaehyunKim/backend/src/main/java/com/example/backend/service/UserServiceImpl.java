@@ -28,16 +28,19 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepo.findByUsername(username);
 
-        Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+            User user = userRepo.findByUsername(username);
 
-        user.getRoles().forEach(role -> {
-            authorities.add(new SimpleGrantedAuthority(role.getName()));
-        });
+            Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
 
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
+            user.getRoles().forEach(role -> {
+                authorities.add(new SimpleGrantedAuthority(role.getName()));
+            });
+
+            return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
+
     }
+
 
     @Override
     public User saveUser(User user) {
