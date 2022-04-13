@@ -8,10 +8,12 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.swing.text.html.Option;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Slf4j
@@ -50,6 +52,17 @@ public class FoodBoardServiceImpl implements FoodBoardService{
     @Override
     public List<FoodBoard> getFoodList() {
         return repository.findAll();
+    }
+
+    @Override
+    public FoodBoard read(Integer boardNo) {
+        Optional<FoodBoard> maybeReadBoard = repository.findById(Long.valueOf(boardNo));
+
+        if (maybeReadBoard.equals(Optional.empty())){
+            log.info("No Read");
+            return null;
+        }
+        return maybeReadBoard.get();
     }
 
 

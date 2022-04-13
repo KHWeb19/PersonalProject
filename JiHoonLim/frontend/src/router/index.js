@@ -10,6 +10,7 @@ import MemberInfoPage from '@/views/member/MemberInfoPage.vue'
 
 import FoodListPage from '@/views/foodBoard/FoodListPage.vue'
 import FoodRegisterPage from '@/views/foodBoard/FoodRegisterPage.vue'
+import FoodDetailPage from '@/views/foodBoard/FoodDetailPage.vue'
 
 import test from '@/views/test.vue'
 Vue.use(VueRouter)
@@ -61,7 +62,16 @@ const routes = [
     name: 'FoodRegisterPage',
     component: FoodRegisterPage
   },
-  
+  {
+    path: '/foodDetail/:boardNo',
+    name: 'FoodDetailPage',
+    components: {
+      default: FoodDetailPage
+    },
+    props: {
+      default: true
+    }
+  },
 ]
 
 const router = new VueRouter({

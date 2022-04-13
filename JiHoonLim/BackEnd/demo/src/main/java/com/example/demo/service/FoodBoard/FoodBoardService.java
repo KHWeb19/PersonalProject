@@ -12,5 +12,6 @@ public interface FoodBoardService {
     public void register (FoodBoard foodBoard, @RequestParam(required = false)MultipartFile file) throws IOException, Exception;
     public List<FoodBoard> list();
     public List<FoodBoard> getFoodList();
+    public FoodBoard read(Integer boardNo);
 
 }

@@ -5,9 +5,14 @@
         <v-col> 카테고리 박스 </v-col>
       </v-row>
       <v-row>
-        <v-col v-for="food in paginatedData" :key="food.foodNo" lg="3" sm="6">
+        <v-col v-for="food in paginatedData" :key="food.boardNo" lg="3" sm="6">
           <v-card width="280" height="370" class="mx-auto">
-            <router-link to="">
+            <router-link
+              :to="{
+                name: 'FoodDetailPage',
+                params: { boardNo: food.boardNo },
+              }"
+            >
               <v-img
                 :src="require(`@/assets/uploadImg/foodBoard/${food.filename}`)"
                 height="200px"
@@ -74,7 +79,7 @@ export default {
     pageSize: {
       type: Number,
       required: false,
-      default: 16,
+      default: 10,
     },
   },
   data() {

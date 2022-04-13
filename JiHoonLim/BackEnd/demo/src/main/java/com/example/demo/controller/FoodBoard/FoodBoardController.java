@@ -40,4 +40,11 @@ public class FoodBoardController {
         return service.getFoodList();
     }
 
+    @GetMapping("/{boardNo}")
+    public FoodBoard foodBoardRead(
+            @PathVariable("boardNo") Integer boardNo){
+        log.info("foodBoardRead()" +boardNo);
+
+        return service.read(boardNo);
+    }
 }
