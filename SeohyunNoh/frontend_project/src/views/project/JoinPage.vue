@@ -119,6 +119,7 @@ export default {
             axios.post('http://localhost:7777/member/register', this.form)
             .then(() => {
                 alert('회원가입이 완료되었습니다!')
+                this.$router.push({ path: '/loginPage' })
             }).catch(res => {
                 alert(res)
             })

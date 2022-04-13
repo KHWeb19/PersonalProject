@@ -43,24 +43,12 @@
             
 
           <!-- 그 중 게시판(BOARD)을 클릭하면 드롭다운으로 공지사항, 1:1문의 페이지로 이동하게 --> 
-            <v-menu open-on-hover bottom offset-y>
-              <template v-slot:activator="{ on, attrs }">
-                <v-btn plain background-color="transparent" color="basil" v-bind="attrs" v-on="on">
-                  <v-icon left>
+              <v-btn plain background-color="transparent" color="basil" router :to="{path: '/noticeListPage'}">
+                  <!-- <v-icon left>
                     mdi-view-dashboard-edit-outline
-                  </v-icon>
-                  <span> BOARD </span>
-                </v-btn>
-              </template>
-
-              <v-list background-color="transparent" color="basil">
-                <v-list-item v-for="(board, i) in boards" :key="i" :to="board.route">
-                  <v-list-item-title>
-                    {{ board.text }}
-                  </v-list-item-title>
-                </v-list-item>
-              </v-list>
-            </v-menu>
+                  </v-icon> -->
+                  <span> NOTICE </span>
+              </v-btn>
               
           </v-card-title>
 
@@ -75,9 +63,9 @@
                 </template>
 
                 <v-list background-color="transparent" color="basil">
-                  <v-list-item v-for="(category, i) in womenCategories" :key="i" :to="category.route">
+                  <v-list-item v-for="(wcategory, i) in womenCategories" :key="i" :to="wcategory.route">
                     <v-list-item-title>
-                      {{ category.item }}
+                      {{ wcategory.item }}
                     </v-list-item-title>
                   </v-list-item>
                 </v-list>
@@ -93,9 +81,9 @@
                 </template>
 
                 <v-list background-color="transparent" color="basil">
-                  <v-list-item v-for="(category, i) in menCategories" :key="i" :to="category.route">
+                  <v-list-item v-for="(mcategory, i) in menCategories" :key="i" :to="mcategory.route">
                     <v-list-item-title>
-                      {{ category.item }}
+                      {{ mcategory.item }}
                     </v-list-item-title>
                   </v-list-item>
                 </v-list> 
@@ -135,15 +123,11 @@ export default {
               { icon: 'mdi-cart', text: 'CART', name: 'cart', route: '/cartPage' },
               { icon: 'mdi-account-cowboy-hat-outline', text: 'MYPAGE', name: 'myPage', route: '/myPage' },
             ],
-            boards: [
-              {text: '1:1 문의', name: 'inquiry', route: '/inquiryPage'},
-              {text: 'NOTICE', name: 'notice', route: '/noticeListPage'}
-            ],
             womenCategories: [
               { item: 'Outer', route: '/womenOuterCategoryPage'},
-              { item: 'Top'},
-              { item: 'Bottom'},
-              { item: 'Accessories'},
+              { item: 'Top', route: '/womenOuterCategoryPage'},
+              { item: 'Bottom', route: '/womenOuterCategoryPage'},
+              { item: 'Accessories', route: '/womenOuterCategoryPage'},
             ],
             menCategories: [
               { item: 'Outer'},

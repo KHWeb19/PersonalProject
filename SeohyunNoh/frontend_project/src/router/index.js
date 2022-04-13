@@ -8,6 +8,8 @@ import LoginPage from '@/views/project/LoginPage.vue'
 import JoinPage from '@/views/project/JoinPage.vue'
 import MyPage from '@/views/project/MyPage.vue'
 
+import LookBookPage from '@/views/project/LookBookPage.vue'
+
 import WomenCategoryPage from '@/views/project/WomenCategoryPage.vue'
 import MenCategoryPage from '@/views/project/MenCategoryPage.vue'
 import SaleCategoryPage from '@/views/project/SaleCategoryPage.vue'
@@ -18,8 +20,10 @@ import NoticeRegisterPage from '@/views/notice/NoticeRegisterPage.vue'
 import NoticeModifyPage from '@/views/notice/NoticeModifyPage.vue'
 
 import WomenOuterCategoryPage from '@/views/womenCategory/WomenOuterCategoryPage.vue'
+import ProductDetailPage from '@/views/womenCategory/ProductDetailPage.vue'
 
-
+import CartPage from '@/views/pay/CartPage.vue'
+import PayPage from '@/views/pay/PayPage.vue'
 
 Vue.use(VueRouter)
 
@@ -129,9 +133,29 @@ const routes = [
 
   },
   {
-    path: '/womenoOuterCategoryPage',
+    path: '/womenOuterCategoryPage',
     name: 'WomenOuterCategoryPage',
     component: WomenOuterCategoryPage
+  },
+  {
+    path: '/productDetail',
+    name: 'ProductDetailPage',
+    component: ProductDetailPage
+  },
+  {
+    path: '/lookBookPage',
+    name: 'LookBookPage',
+    component: LookBookPage
+  },
+  {
+    path: '/cartPage',
+    name: 'CartPage',
+    component: CartPage
+  },
+  {
+    path: '/payPage',
+    name: 'PayPage',
+    component: PayPage
   }
 
 ]

@@ -107,8 +107,8 @@ export default {
                 this.fetchUserInfo(id)
                 alert('로그인이 완료되었습니다!')
                 
-                // recommend(together) 로 보냄
-                this.$emit('onLogin')
+                this.$router.push({ path: '/mainPage' })
+                
                 } else if (res.data == false) {
                 alert('아이디와 비밀번호를 확인해주세요!')
                 console.log('isLogin: ' + res.data)
