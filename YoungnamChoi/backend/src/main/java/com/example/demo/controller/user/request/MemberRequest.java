@@ -8,9 +8,10 @@ public class MemberRequest {
     private String pw;
     private String auth;
 
-    public MemberRequest(String userId, String password, String auth) {
+    public MemberRequest(String userId, String password) {
         this.id = userId;
         this.pw = password;
         this.auth = auth;
     }
+
 }
