@@ -21,8 +21,12 @@ export default {
       const { id, pw } = payload;
       axios
         .post("http://localhost:7777/user/register", { id, pw })
-        .then((res) => {
-          alert("등록 성공! - " + res);
+        .then(() => {
+          alert("회원가입이 완료되었습니다.!");
+
+          this.$router.push({
+            name: "LoginPage",
+          });
         })
         .catch((res) => {
           alert(res.response.data.message);
