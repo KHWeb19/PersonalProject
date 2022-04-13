@@ -13,14 +13,14 @@ import java.util.Date;
 @Data
 @Entity
 @NoArgsConstructor
-@Table(name = "cake_member_auth")
+@Table(name = "member_auth")
 public class MemberAuth<z> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long memberAuthNo;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "for_member_no")
+    @JoinColumn(name = "member_no")
     @JsonIgnore
     private Member member;
 

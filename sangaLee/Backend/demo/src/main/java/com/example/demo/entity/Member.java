@@ -13,20 +13,17 @@ import java.util.List;
 @Data
 @Entity
 @NoArgsConstructor
-@Table(name = "cake_member")
+@Table(name = "member")
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long memberNo;
 
-    @Column(length = 32, nullable = false)
+    @Column(length = 20, nullable = false)
     private String userId;
 
-    @Column(length = 128, nullable = false)
+    @Column(length = 15, nullable = false)
     private String password;
-
-    @Column(length = 32, nullable = false)
-    private String userName;
 
     @CreationTimestamp
     private Date regDate;
@@ -42,10 +39,9 @@ public class Member {
         this.password = password;
     }
 
-    public Member (String userId, String password, String userName, MemberAuth auth) {
+    public Member (String userId, String password, MemberAuth auth) {
         this.userId = userId;
         this.password = password;
-        this.userName = userName;
 
         if(auth != null) {
             changeAuth(auth);
