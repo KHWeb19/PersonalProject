@@ -23,10 +23,10 @@ export default{
                     }
                     axios.get("http://localhost:1234/api/users", config)
                     .then((result) => console.log(result.data))
-                    .catch((e) => alert("로딩 실패 "+e))
+                    .catch(() => alert("권한없음"))
                 }
             )
-            .catch((e)=> alert("실패" + e))
+            .catch(() => (alert("로그인실패")))
         }
     }
 }

@@ -54,6 +54,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return userRepo.findAll();
     }
 
+    @Override
+    public User getUser(String username) {
+        return userRepo.findByUsername(username);
+    }
 
     @Override
     public Role saveRole(Role role) {

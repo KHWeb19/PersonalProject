@@ -40,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors();
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.authorizeRequests().antMatchers("/api//login/**").permitAll();
+        http.authorizeRequests().antMatchers("/api//login/**", "/api/refreshtoken").permitAll();
         http.authorizeRequests().antMatchers(GET, "/api/users/**").hasAuthority("ROLE_USER");
         http.authorizeRequests().antMatchers(POST, "/api/users/save/**").hasAuthority("ROLE_ADMIN");
         http.authorizeRequests().anyRequest().authenticated();
@@ -65,7 +65,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowedOrigins(Arrays.asList("http://localhost:8080"));
         config.setAllowedMethods(Arrays.asList("HEAD", "GET", "POST", "PUT", "OPTIONS"));
-        config.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type", "authorization"));
+        config.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));
         config.setAllowCredentials(true);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
