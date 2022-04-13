@@ -1,13 +1,17 @@
 <template>
     <div>
         <h3>사이트아이디 관리</h3>
-        <table border="1">
-            <tr>
-                <th align="center" width="100">번호</th>
-                <th align="center" width="200">사이트이름</th>
-                <th align="center" width="340">사이트 주소</th>
-                <th align="center" width="200">사이트 아이디</th>
-                <th align="center" width="240">등록날짜</th>
+                      <div class="input-group mb-3">
+  <span class="input-group-text" id="inputGroup-sizing-default">Find</span>
+  <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+</div>
+       <table class="table">
+           <tr align="center">
+                <th scope="col">번호</th>
+      <th scope="col">사이트이름</th>
+      <th scope="col">사이트 주소</th>
+      <th scope="col">사이트 아이디</th>
+      <th scope="col">등록날짜</th>
             </tr>
             <tr v-if="!jpaBoards4 || (Array.isArray(jpaBoards4) && jpaBoards4.length === 0)">
                 <td colspan="5">
@@ -18,16 +22,16 @@
                 <td align="center">
                     {{ board.boardNo }}
                 </td>
-                <td align="left">
+                <td align="center">
                     <router-link :to="{ name: 'JpaBoardReadPage4',
                                         params: { boardNo: board.boardNo.toString() } }">
                         {{ board.title }}
                     </router-link>
                 </td>
-                <td align="right">
+                <td align="center">
                     {{ board.writer }}
                 </td>
-                  <td align="right">
+                  <td align="center">
                     {{ board.writer1 }}
                 </td>
                 <td align="center">

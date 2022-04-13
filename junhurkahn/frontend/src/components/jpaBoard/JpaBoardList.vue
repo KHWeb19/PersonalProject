@@ -3,12 +3,17 @@
 
     <div>
         <h3>게시물 목록</h3>
-        <table border="1">
-            <tr>
-                <th align="center" width="100">번호</th>
-                <th align="center" width="640">제목</th>
-                <th align="center" width="150">작성자</th>
-                <th align="center" width="240">등록일자</th>
+                      <div class="input-group mb-3">
+  <span class="input-group-text" id="inputGroup-sizing-default">Find</span>
+  <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+</div>
+
+        <table class="table">
+            <tr align="center">
+                <th scope="col">번호</th>
+               <th scope="col">제목</th>
+               <th scope="col">작성자</th>
+               <th scope="col">등록일자</th>
             </tr>
             <tr v-if="!jpaBoards || (Array.isArray(jpaBoards) && jpaBoards.length === 0)">
                 <td colspan="4">
@@ -19,13 +24,13 @@
                 <td align="center">
                     {{ board.boardNo }} 
                 </td>
-                <td align="left">
+                <td align="center">
                     <router-link :to="{ name: 'JpaBoardReadPage',
                                         params: { boardNo: board.boardNo.toString() } }">
                         {{ board.title }}
                     </router-link>
                 </td>
-                <td align="right">
+                <td align="center">
                     {{ board.writer }}
                 </td>
                 <td align="center">
@@ -53,8 +58,3 @@ export default {
 }
 
 </script>
-
-
-<style scoped>
-h3{color: white;}
-</style>

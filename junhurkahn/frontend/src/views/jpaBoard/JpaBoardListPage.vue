@@ -7,12 +7,9 @@
       <v-toolbar-title>
         <router-link style="text-decoration: none;"  :to="{ name: 'JpaBoardListPage' }">
      <h3>텍스트 메모</h3>
+     
     </router-link>
       </v-toolbar-title>
-
-
-
-
 
 
       <v-spacer></v-spacer>
@@ -82,8 +79,10 @@
     <div id="board">
         <h1>텍스트메모</h1>
         <router-link :to="{ name: 'JpaBoardRegisterPage' }">
-            게시물 작성
+           게시물 작성 
         </router-link>
+
+        
         <jpa-board-list :jpaBoards="jpaBoards"/>
     </div>
 </div>
@@ -126,7 +125,10 @@ export default {
     methods: {
         ...mapActions(['fetchJpaBoardList'])
         
+
+        
     }
+    
 }
 
 </script>
