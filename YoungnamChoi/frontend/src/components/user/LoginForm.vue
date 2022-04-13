@@ -1,8 +1,8 @@
 <template>
   <v-container>
     <form @submit.prevent="onSubmit">
-      <div class="login" align="center">
-        <b-form style="width: 400px" @submit="onSubmit">
+      <div align="center">
+        <b-form style="width: 400px">
           <b-form-group id="input-group-1" label="" label-for="input-1">
             <b-form-input
               id="input-1"
@@ -64,7 +64,7 @@ export default {
   data() {
     return {
       id: "",
-      pe: "",
+      pw: "",
     };
   },
   methods: {
@@ -75,8 +75,4 @@ export default {
   },
 };
 </script>
-<style scoped>
-.로그인중하단 {
-  padding: 0px 0px 80px 0px;
-}
-</style>
+<style></style>
