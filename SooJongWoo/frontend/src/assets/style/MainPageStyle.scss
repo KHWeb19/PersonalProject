@@ -4,13 +4,29 @@
     min-height: 100vh;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: left;
     color: white;
+	padding-left: 5%;
     background: {
     image: linear-gradient(to bottom,  rgba(172, 172, 172, 0.014) 0%,rgba(0, 0, 0, 0.75) 100%),
     url('@/assets/image/sea42.jpeg');
     size: cover;
     }
+	.content {
+		color: #fff;
+		font-size: 4em;
+	}
+	.content h2:nth-child(1) {
+		color: #fff;
+		-webkit-text-stroke: 2px white;
+	}
+	
+	.content h2:nth-child(2) {
+		color: #03a9f4;
+		animation: animate 4s  infinite;
+		position: absolute;
+	}
+
 }
 .main-bar{
     position: absolute;
@@ -72,27 +88,6 @@ body {
 	justify-content: center;
 }
 
-.content {
-	position: relative;
-}
-
-.content h2 {
-	color: #fff;
-	font-size: 8em;
-	position: absolute;
-	transform: translate(-50%, -50%);
-}
-
-.content h2:nth-child(1) {
-	color: transparent;
-	-webkit-text-stroke: 2px white;
-}
-
-.content h2:nth-child(2) {
-	color: #03a9f4;
-	animation: animate 4s ease-in-out infinite;
-}
-
 @keyframes animate {
 	0%,
 	100% {
@@ -122,4 +117,34 @@ body {
 			0% 100%
 		);
 	}
+}
+
+.swiper {
+	height: 500px;
+	width: 100%;
+
+	.swiper-slide {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+		font-weight: bold;
+	}
+}
+
+.btn2 {
+	margin: 5%;
+}
+.btn2:hover {
+	color: #ffffff;
+}
+.btn2:hover::before {
+	opacity: 1;
+	background-color: #6098FF;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
 }

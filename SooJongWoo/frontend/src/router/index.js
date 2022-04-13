@@ -20,17 +20,17 @@ const routes = [
     component: HomewView
   },
   {
-    path: '/',
+    path: '/hawul',
     name: 'MainPage',
     component: MainPage
   },
   {
-    path: '/',
+    path: '/login',
     name: 'MemberLogin',
     component: MemberLogin
   },
   {
-    path: '/',
+    path: '/memberRegister',
     name: 'MemberRegister',
     component: MemberRegister
   },

@@ -4,7 +4,7 @@
       <v-app-bar-nav-icon
         @click="nav_drawer = !nav_drawer"
       ></v-app-bar-nav-icon>
-      <v-btn text router :to="'/hotel'" class="home-btn" plain>
+      <v-btn text router :to="'/hawul'" class="home-btn" plain>
         <v-icon>mdi-home</v-icon>
       </v-btn>
 
@@ -35,7 +35,7 @@
     </v-toolbar>
 
     <v-navigation-drawer app v-model="nav_drawer" temporary>
-      <v-list nav dense class="MenuBar">
+      <v-list nav dense class="menubar">
         <v-list-item-group
           v-model="group"
           active-class="deep-blue--text text--accent-4"
@@ -68,12 +68,15 @@ export default {
     return {
       nav_drawer: false,
       group: false,
+      cookie: this.$cookies.isKey("user"),
+      individual: this.$cookies.get("auth"),
+      userId: this.$cookies.get("user"),
       links: [
-        { text: "Home", name: "home", route: "/" },
-        { text: "객실안내", name: "room", route: "/" },
-        { text: "예약안내", name: "reservation", route: "/" },
-        { text: "부대시설", name: "service", route: "/" },
-        { text: "공지사항", name: "notice", route: "/" },
+        { text: "Home", name: "home", route: "/hawul" },
+        { text: "객실안내", name: "room", route: "/rooms" },
+        { text: "예약안내", name: "reservation", route: "/reservation" },
+        { text: "부대시설", name: "service", route: "/service" },
+        { text: "공지사항", name: "notice", route: "/notice" },
       ],
     };
   },
@@ -89,5 +92,34 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/style/MenuBarStyle.scss";
+@import url("https://fonts.googleapis.com/css2?family=Cinzel+Decorative&display=swap");
+.menubar {
+  padding-top: 100px;
+  padding-left: 40px;
+}
+.nav-menu {
+  position: absolute;
+  top: 3%;
+  left: 1%;
+}
+.logo {
+  font-family: "Cinzel Decorative";
+  font-size: 40px;
+  margin: 0 auto;
+}
+.account {
+  padding-left: 40vw;
+}
+.login-locate {
+  padding: 10px 0px 10px 0px;
+  position: absolute;
+  right: 0.5%;
+  top: 1%;
+}
+.home-btn {
+  padding: 10px 0px 10px 0px;
+  position: absolute;
+  right: 5%;
+  top: 22%;
+}
 </style>

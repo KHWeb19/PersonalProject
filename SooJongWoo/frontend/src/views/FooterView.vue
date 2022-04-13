@@ -9,12 +9,18 @@
             ><b style="padding-left: 1%">위치기반서비스이용약관</b
             ><b style="padding-left: 1%">고객센터</b>
           </p>
+          <p style="margin-bottom: 3px">
+            <b>HOTEL</b> HAWUL
+            <b style="padding-left: 1%"> ADDRESS</b> 주소적는칸
+            <b style="padding-left: 1%"> TEL</b> 012-345-6789 (대표: HAWUL)
+          </p>
         </v-card-text>
       </div>
 
       <v-divider></v-divider>
       <v-card-text>
-        {{ new Date().getFullYear() }} - <strong>COPYRIGHT(C)</strong>
+        {{ new Date().getFullYear() }} -
+        <strong>COPYRIGHT(C) HAWUL HOTEL. ALL RIGHTS RESERVED.</strong>
       </v-card-text>
     </v-card>
   </v-footer>
@@ -23,9 +29,7 @@
 <script>
 export default {
   data() {
-    return {
-      icons: ["home", "phone_in_talk", "event_available"],
-    };
+    return {};
   },
 };
 </script>
