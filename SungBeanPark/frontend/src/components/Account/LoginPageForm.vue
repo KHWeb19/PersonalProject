@@ -29,7 +29,6 @@
                           placeholder="아이디를 입력해주세요"
                           v-model="id"
                           required
-                          :rules="rules_id"
                         />
                       </div>
                       <div class="login-member-password">
@@ -39,13 +38,16 @@
                           placeholder="비밀번호를 입력해주세요"
                           v-model="pw"
                           required
-                          :rules="rules_pw"
                         />
                       </div>
                     </div>
 
                     <div class="login-button">
-                      <button class="btn-black btn-46" @click="login">
+                      <button
+                        class="btn-black btn-46"
+                        type="submit"
+                        @click="onSubmit"
+                      >
                         로그인
                       </button>
                     </div>
@@ -75,7 +77,12 @@
                   </form>
 
                   <div>
-                    <button class="login-btn-kakao">카카오 로그인</button>
+                    <a
+                      href="https://kauth.kakao.com/oauth/authorize?client_id=${92f347c8d65782843d4cebadfc7ca6d0}&redirect_uri=${	
+https://localhost:8080/auth/kakao/callback}&response_type=code"
+                    >
+                      <button class="login-btn-kakao">카카오 로그인</button>
+                    </a>
                   </div>
                   <div>
                     <button class="login-btn-naver">네이버 로그인</button>
@@ -101,19 +108,12 @@ export default {
     return {
       id: "",
       pw: "",
-      rules_id: [(v) => !!v || "아이디를 입력해주세요"],
-      rules_pw: [(v) => !!v || "비밀번호를 입력해주세요"],
     }
   },
   methods: {
     onSubmit() {
       const { id, pw } = this
       this.$emit("submit", { id, pw })
-    },
-    login() {
-      this.$router.push({
-        name: "MainPage",
-      })
     },
   },
 }

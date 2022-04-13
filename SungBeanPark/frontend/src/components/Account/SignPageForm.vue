@@ -51,7 +51,7 @@
                           placeholder="아이디"
                           maxlength="20"
                           required
-                          v-model="sign"
+                          v-model="id"
                         />
 
                         <div class="errmsg">
@@ -73,7 +73,7 @@
                             type="password"
                             name="password"
                             placeholder="비밀번호"
-                            v-model="password"
+                            v-model="pw"
                             required
                           />
                         </div>
@@ -143,12 +143,17 @@ import axios from "axios"
 
 export default {
   name: "SignPageForm",
+  props: {
+    members: {
+      type: Array,
+    },
+  },
 
   data() {
     return {
       kindsOfMember: ["회원", "관리자"],
-      sign: "",
-      password: "",
+      id: "",
+      pw: "",
       checkPassword: "",
       name: "",
       checkPw: "",
