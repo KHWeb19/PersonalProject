@@ -1,82 +1,177 @@
 <template>
-    <div>
-        <v-toolbar dense dark>
-            <v-app-bar-nav-icon @click="nav_drawer = !nav_drawer">
-            </v-app-bar-nav-icon>
-            
-            <!-- 로고 버튼 누르면 메인페이지로 이동하는거 구현하고 싶은데 이게 맞나-->
-             <v-toolbar-title class="text-uppercase grey--text">
-                <button type="button" @click="mainPageLink">
-                    <v-icon left>
-                        mdi-home
-                    </v-icon>
-                    <!-- <span>HOME</span> -->
-                </button>
-            </v-toolbar-title>
-
+      <v-card color="basil">
+          <v-card-title>
+            <h1 class="font-weight-bold text-h2 basil--text" @click="mainPageLink">
+              SELECTSHOP
+            </h1>
+          
             <v-spacer></v-spacer>
+
+          <!-- 검색 네모창을 만들어야함 --> 
+          <!-- <v-btn icon type="submit" color="basil">
+             <v-icon>mdi-magnify</v-icon>
+            <span></span>
+            <v-input type="text" size="sm" class="mr-sm-2" placeholder="Search">search</v-input> 
+            <v-text-field hidden-details flat label="Search" prepend-inner-icon="mdi-magnify" solo-inverted></v-text-field>
+          </v-btn> 
+          
+          <v-container>
+    <v-text-field v-model="search" single-line></v-text-field>
+    <v-data-table
+            style="width: 50%"
+            :headers="headers"
+            :items="contents"
+            :items-per-page="5"
+            :search="search"
+    ></v-data-table>
+  </v-container>
+          -->
+
+          <!-- 로그인, 장바구니, 마이페이지, 게시판--> 
+            <v-btn v-if="isLogin === false" router :to="{path: '/loginPage'}" plain background-color="transparent" color="basil"> 
+              LOGIN 
+            </v-btn>
+            <v-btn v-else @click="logout"  plain background-color="transparent" color="basil"> 
+              LOGOUT 
+            </v-btn>
+
+
+            <v-btn router :to="{path: '/myPage'}" plain background-color="transparent" color="basil">
+              MY PAGE
+            </v-btn>     
+          
             
-            <!-- 검색기능(아직 못함) -->
-            <v-app-bar-nav-icon class="ml-auto">
-                <v-form>
-                    <v-input
-                    size="sm"
-                    class="mr-sm-2"
-                    placeholder="Search"
-                    ></v-input>
-                    <v-btn size="sm" class="my-2 my-sm-0" type="submit"
-                    >Search</v-btn>
-                </v-form>
-            </v-app-bar-nav-icon>
-            
-            <!-- 로그인, 회원가입, 마이페이지, 장바구니 등등 (아직 미완성) --> 
-            <v-toolbar-items>
-                <v-btn v-for="link in links" :key="link.icon" :to="link.route">
-                    <v-icon left>
-                        {{ link.icon }}
-                    </v-icon>
-                    <span> {{ link.text }}</span>
+
+          <!-- 그 중 게시판(BOARD)을 클릭하면 드롭다운으로 공지사항, 1:1문의 페이지로 이동하게 --> 
+            <v-menu open-on-hover bottom offset-y>
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn plain background-color="transparent" color="basil" v-bind="attrs" v-on="on">
+                  <v-icon left>
+                    mdi-view-dashboard-edit-outline
+                  </v-icon>
+                  <span> BOARD </span>
                 </v-btn>
-            </v-toolbar-items>
-        </v-toolbar>
+              </template>
 
-        <!-- <v-navigation-drawer app v-model="nav_drawer" temporary>
-            <v-list nav dense>
-                <v-list-item v-for="link in links" :key="link.name" router :to="link.route">
-                    <v-list-item-action>
-                        <v-icon left>
-                            {{ link.icon }}
-                        </v-icon>
-                    </v-list-item-action>
-                    <v-list-item-content>
-                        <v-list-item-title>
-                            {{ link.text}}
-                        </v-list-item-title>
-                    </v-list-item-content>
+              <v-list background-color="transparent" color="basil">
+                <v-list-item v-for="(board, i) in boards" :key="i" :to="board.route">
+                  <v-list-item-title>
+                    {{ board.text }}
+                  </v-list-item-title>
                 </v-list-item>
-            </v-list>
-        </v-navigation-drawer> -->
+              </v-list>
+            </v-menu>
+              
+          </v-card-title>
 
-    </div>
+        <!-- 카테고리 메뉴 탭 (코드 너무 지저분하다 리팩토링 필요한데 v-btn에 v-for적용하면 women이랑 men이랑 같이 나옴) --> 
+          <v-tabs v-model="tab" background-color="transparent" color="basil" grow>
+            <v-tab>
+              <v-menu open-on-hover bottom offset-y>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn plain background-color="transparent" color="basil" v-bind="attrs" v-on="on">
+                    WOMEN
+                  </v-btn>
+                </template>
+
+                <v-list background-color="transparent" color="basil">
+                  <v-list-item v-for="(category, i) in womenCategories" :key="i" :to="category.route">
+                    <v-list-item-title>
+                      {{ category.item }}
+                    </v-list-item-title>
+                  </v-list-item>
+                </v-list>
+              </v-menu>
+            </v-tab>
+
+            <v-tab>
+              <v-menu open-on-hover bottom offset-y>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn plain background-color="transparent" color="basil" v-bind="attrs" v-on="on">
+                    MEN
+                  </v-btn>
+                </template>
+
+                <v-list background-color="transparent" color="basil">
+                  <v-list-item v-for="(category, i) in menCategories" :key="i" :to="category.route">
+                    <v-list-item-title>
+                      {{ category.item }}
+                    </v-list-item-title>
+                  </v-list-item>
+                </v-list> 
+            </v-menu>
+            </v-tab>
+
+
+             <v-tab>
+              <v-menu open-on-hover bottom offset-y>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn plain background-color="transparent" color="basil" v-bind="attrs" v-on="on" router :to="{path: '/lookbookPage'}">
+                    LOOKBOOK
+                  </v-btn>
+                </template>
+              </v-menu>
+            </v-tab>
+          </v-tabs>
+        
+
+      </v-card>
 </template>
 
 <script>
+
+import axios from 'axios'
+import { mapState } from 'vuex'
+
 export default {
-    data() {
+   data () {
         return {
-          nav_drawer: false,
-          links: [
-              { icon: 'mdi-home', text: 'HOME', name: 'logo', route: '/mainPage' },
+            tab: null,
+            menus: [
+               'women', 'men'
+            ],
+            links: [
               { icon: 'mdi-login-variant', text: 'LOGIN', name: 'login', route: '/loginPage' },
-              { icon: 'mdi-account-plus-outline', text: 'JOIN', name: 'join', route: '/joinPage' },
-              { icon: 'mdi-cart', text: 'CART', name: 'cart', route: '/cartPage' }
-          ]  
+              { icon: 'mdi-cart', text: 'CART', name: 'cart', route: '/cartPage' },
+              { icon: 'mdi-account-cowboy-hat-outline', text: 'MYPAGE', name: 'myPage', route: '/myPage' },
+            ],
+            boards: [
+              {text: '1:1 문의', name: 'inquiry', route: '/inquiryPage'},
+              {text: 'NOTICE', name: 'notice', route: '/noticeListPage'}
+            ],
+            womenCategories: [
+              { item: 'Outer', route: '/womenOuterCategoryPage'},
+              { item: 'Top'},
+              { item: 'Bottom'},
+              { item: 'Accessories'},
+            ],
+            menCategories: [
+              { item: 'Outer'},
+              { item: 'Top'},
+              { item: 'Bottom'},
+              { item: 'Accessories'},
+            ]
         }
+
+    },
+    computed: {
+      ...mapState(['isLogin'])
     },
     methods: {
         mainPageLink() {
-            this.$router.push({ path: 'mainPage' })
+            this.$router.push({ path: '/mainPage' })
+        },
+        logout() {
+            axios.post('http://localhost:7777/member/logout').then(res => {
+            this.$store.commit('USER_LOGIN', res.data)
+            this.fetchSession(this.$cookies.remove('session'))
+            this.$store.commit('FETCH_USER_INFO', [])
+      })
         }
-    },
+    }
 }
 </script>
+
+<style scoped>
+  
+</style>
