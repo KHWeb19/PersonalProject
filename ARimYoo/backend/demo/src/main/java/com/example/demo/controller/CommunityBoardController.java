@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.controller.Request.keywordRequest;
 import com.example.demo.entity.board.CommunityBoard;
 import com.example.demo.service.board.CommunityBoardService;
 import lombok.extern.slf4j.Slf4j;
@@ -63,9 +64,11 @@ public class CommunityBoardController {
 
     }
 
-    @GetMapping("/search")
-    public List<CommunityBoard> searchList (String keyword) {
-         return service.search(keyword);
+    @PostMapping("/search")
+    public List<CommunityBoard> searchList (@RequestBody keywordRequest keyword) {
+        log.info("searchList! " + keyword);
+        String key = keyword.getKeyword();
+         return service.searchList(key);
     }
 
 }

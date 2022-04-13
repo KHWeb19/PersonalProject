@@ -24,8 +24,18 @@
                    </div>
                 </template>
             </v-data-table>
-            <input type="text" v-model="keyword">
-            <button @click="search"> 검색 </button>
+        </v-row>
+        <v-row justify="center" style="margin-top:50px">
+            <v-col  cols="3">
+            <input type="text" class="search" v-model="keyword"/>
+            </v-col>
+            <v-col cols="1">
+                <v-btn class="searchBtn" @click=goSearch color="red darken-3" dark small>
+                    <v-icon>
+                        mdi-magnify
+                    </v-icon>
+                </v-btn>
+            </v-col>
         </v-row>
         </v-container>
 </template>
@@ -50,15 +60,19 @@ export default {
                 { text: '조회수', value: 'viewCnt', width: "70px" },
                 { text: 'date. ', value: 'regDate', width: "100px" },
             ],
-            keyword:''
+            keyword:'',
+            searchList: []
         }
     },
     methods: {
-        search(){
+        goSearch(){
                 const {keyword} = this
-                axios.get('http://localhost:7777/board/community/search', {keyword})
-                .then(() => {
+                console.log(keyword)
+                axios.post('http://localhost:7777/board/community/search', {keyword})
+                .then((res) => {
                     alert('검색완료.')
+                    console.log(res.data)
+                    this.$router.push({name: 'CommunityBoardSearchPage', params: { searchList: res.data }})
                 })
                 .catch (() => {
                     alert('문제 발생!')
@@ -80,5 +94,16 @@ export default {
 }
 .v-data-table::v-deep th {
   font-size: 14px !important;
+}
+.search {
+    width:300px;
+    height:30px;
+    background-color: rgb(240, 238, 238);
+    outline-color: rgb(211, 32, 32);
+    padding-left:10px;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+.searchBtn {
+    margin-left:10px;
 }
 </style>

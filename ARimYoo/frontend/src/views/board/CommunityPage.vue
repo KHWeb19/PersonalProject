@@ -2,7 +2,7 @@
     <v-container id="item">
         <v-row justify="center">
             <img class="titleImg" src="@/assets/title/communityTitle.png" width=250 >
-            <v-btn @click="goPage" class="writeBtn" color="red darken-3" dark fab><v-icon color="white"> mdi-pencil </v-icon></v-btn>
+            <v-btn @click=goPage class="writeBtn" color="red darken-3" dark fab><v-icon color="white"> mdi-pencil </v-icon></v-btn>
         </v-row>
         <br/>
         <v-row justify="center">
@@ -17,9 +17,15 @@
 <script>
 import CommunityBoardList from '@/components/board/community/CommunityBoardList.vue'
 import { mapState, mapActions } from 'vuex'
+
 export default {
   components: { CommunityBoardList },
     name:'CommunityPage',
+    data () {
+        return {
+            keyword: ''
+        }
+    },
     computed: {
         ...mapState(['communityBoards'])
     },
@@ -29,8 +35,8 @@ export default {
     methods: {
         ...mapActions(['fetchCommunityBoardList']),
         goPage(){
-            this.$router.push('/community/write')
-        }
+        this.$router.push('/community/write')
+        },
     }
 }
 </script>

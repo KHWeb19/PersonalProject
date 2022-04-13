@@ -103,8 +103,9 @@ public class CommunityBoardServiceImpl implements CommunityBoardService {
     }
 
     @Override
-    public List<CommunityBoard> search (String keyword) {
-        return repository.findByTitleContaining(keyword);
+    public List<CommunityBoard> searchList (String keyword) {
+        List<CommunityBoard> findList = repository.findByTitleContaining(keyword);
+        return findList;
     }
 
 

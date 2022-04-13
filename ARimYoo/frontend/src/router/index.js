@@ -12,6 +12,7 @@ import CommunityPage from '../views/board/CommunityPage.vue'
 import CommunityWritePage from '../views/board/CommunityWritePage.vue'
 import CommunityReadPage from '../views/board/CommunityReadPage.vue'
 import CommunityModifyPage from '../views/board/CommunityModifyPage.vue'
+import CommunityBoardSearchPage from '../views/board/CommunityBoardSearchPage.vue'
 
 Vue.use(VueRouter)
 
@@ -90,6 +91,16 @@ const routes = [
         },
 
     },
+    {
+        path: '/community/search',
+        name: 'CommunityBoardSearchPage',
+        components: {
+            default: CommunityBoardSearchPage
+        },
+        props: {
+            default: true
+        }
+    }
 
   
 ]
