@@ -86,7 +86,7 @@ import axios from 'axios'
 <style scoped>
 
 .Main {
-    background: rgb(255, 186, 186);
+    background: #ffbaba;
 }
 .MainLogo {
     display: block; margin: 0px auto;

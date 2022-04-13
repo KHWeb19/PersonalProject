@@ -4,7 +4,6 @@
             <v-container v-if="checkuserInfo == null">
                 <v-row>
                     <v-col class="col-12 col-sm-10">
-                        
                     </v-col>
                     <v-col class="col-12 col-sm-1">
                         <router-link :to="{name: 'LoginPage'}" >
@@ -22,6 +21,7 @@
             <v-container v-if="checkuserInfo != null">
                 <v-row>
                     <v-col class="col-12 col-sm-10">
+                        <span>{{id}}님, 안녕하세요</span>
                     </v-col>
                     <v-col class="col-12 col-sm-1">
                         <button @click="logout" type="submit" style="font-size: small; color: black;">로그아웃 </button>
@@ -81,7 +81,8 @@
         },
         data () {
             return {
-                checkuserInfo: window.localStorage.getItem('token')
+                checkuserInfo: window.localStorage.getItem('token'),
+                id: (window.localStorage.getItem('id')),
             }
         },
         methods: {

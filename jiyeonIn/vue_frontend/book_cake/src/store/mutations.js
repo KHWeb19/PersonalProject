@@ -2,7 +2,8 @@ import {
     FETCH_CAKE_LISTS,
     FETCH_BOOKING_LISTS,
     FETCH_BOOKING_BOARD,
-    FETCH_BOARD_COMMENTS
+    FETCH_BOARD_COMMENTS,
+    FETCH_REVIEWS
 }from './mutation-types'
 
 export default {
@@ -17,5 +18,8 @@ export default {
     },
     [FETCH_BOARD_COMMENTS] (state, boardComments) {
         state.boardComments = boardComments
+    },
+    [FETCH_REVIEWS] (state, reviews) {
+        state.reviews = reviews
     }
 }

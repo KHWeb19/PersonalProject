@@ -3,7 +3,7 @@
         <main-page-form></main-page-form>
 
         <div class="wrap">
-            <booking-list-read-form v-if="BookingBoard" :BookingBoard="BookingBoard" :bookingNo ="bookingNo" :cakeLists="cakeLists"/>
+            <booking-list-read-form v-if="BookingBoard" :BookingBoard="BookingBoard" :bookingNo ="bookingNo" :cakeLists="cakeLists" @click="checksameID()"/>
             <p v-else>로딩중 ... </p>
             <div>
                 <booking-board-comment :bookingNo="bookingNo"></booking-board-comment>
@@ -56,17 +56,9 @@ import BookingBoardComment from '@/views/boardPage/BookingBoardComment.vue'
         },
         methods: {
             ...mapActions(['fetchBookingBoard']),
-            ...mapActions(['fetchCakeLists'])
-        },
-        mounted() {
-            if(this.dbrAction != this.checkID && this.dbrAction != 'manager') {
-                alert('해당 아이디만 읽을 수 있습니다!')
-                this.$router.push({
-                            name: 'BookingListPage'
-                            })
-            }
+            ...mapActions(['fetchCakeLists']),
+
         }
-        
 
     }
 </script>
