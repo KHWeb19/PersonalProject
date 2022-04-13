@@ -1,6 +1,7 @@
 <template>
   <div>
     <menu-bar />
+    <hr style="border: 0; height: 1px; background: #d8d8d8; "/>
               <div style="display: flex; justify-content: center;">
     <accounts-category/>
     <accounts-edit-form v-if="member" :member="member" @submit="onSubmit"/>

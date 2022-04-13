@@ -1,7 +1,8 @@
 <template>
-  <v-app-bar color="white">
+  <v-app-bar flat color="white">
     <v-spacer></v-spacer>
     <v-spacer></v-spacer>
+    
     <v-app-bar-title>
       <router-link style="text-decoration: none;" :to="{name: 'HomeView'}">
         <v-img
@@ -70,6 +71,7 @@
     <v-spacer></v-spacer>
     <v-spacer></v-spacer>
   </v-app-bar>
+  
 </template>
 
 <script>

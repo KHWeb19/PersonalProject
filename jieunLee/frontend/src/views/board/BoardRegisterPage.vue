@@ -1,6 +1,7 @@
 <template>
   <div>
     <menu-bar/>
+    <hr style="border: 0; height: 1px; background: #d8d8d8; "/>
     <board-register-form :member="member" @submit="onSubmit"/>
   </div>
 </template>
@@ -16,11 +17,6 @@ export default {
   components: {
     MenuBar,
     BoardRegisterForm
-  },
-  data() {
-    return {
-            loginInfo: JSON.parse(localStorage.getItem('loginInfo')),
-    }
   },
   computed: {
         ...mapState(['member'])

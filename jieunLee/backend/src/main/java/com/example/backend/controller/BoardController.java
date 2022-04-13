@@ -31,4 +31,38 @@ public class BoardController {
 
         return service.list();
     }
+
+//    @GetMapping("/myList")
+//    public List<Board> MyList(@RequestParam(value="writer") String writer) {
+//        log.info("MyList()");
+//
+//        return service.list(writer);
+//    }
+
+    @GetMapping("/{boardNo}")
+    public Board boardRead(@PathVariable("boardNo") Integer boardNo) {
+        log.info("boardRead()");
+
+        return service.read(boardNo);
+    }
+
+    @PutMapping("/{boardNo}")
+    public Board boardModify (
+            @PathVariable("boardNo") Integer boardNo,
+            @RequestBody Board board) {
+        log.info("boardModify(): " + board);
+
+        board.setBoardNo(Long.valueOf(boardNo));
+        service.modify(board);
+
+        return board;
+    }
+
+    @DeleteMapping("/{boardNo}")
+    public void boardRemove (
+            @PathVariable("boardNo") Integer boardNo) {
+        log.info("boardRemove()");
+
+        service.remove(boardNo);
+    }
 }
