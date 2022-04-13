@@ -17,7 +17,7 @@ public interface MemberService {
     public Boolean idMatchEmail(MemberRequest memberRequest);
     public void modifyNoLoginPw(String id, String pw);
     public void modifyLoginPw(Long memberNo, String pw);
-    public void modifyNickName(Long memberNo, String nickName);
-    public void modifyEmail(Long memberNo, String email);
+    public MemberRequest modifyNickName(Long memberNo, String nickName, MemberRequest memberRequest);
+    public MemberRequest modifyEmail(Long memberNo, String email, MemberRequest memberRequest);
     public void deleteMember(Long memberNo);
 }
