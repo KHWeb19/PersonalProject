@@ -16,10 +16,6 @@ configurations {
 
 repositories {
 	mavenCentral()
-	maven {
-		url 'https://repo.clojars.org'
-		name 'Clojars'
-	}
 }
 
 dependencies {
@@ -29,7 +25,6 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.jsoup:jsoup:1.13.1'
-	implementation 'entity:entity-sql:0.1.2'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'mysql:mysql-connector-java'
 	annotationProcessor 'org.projectlombok:lombok'
