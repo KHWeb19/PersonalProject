@@ -6,7 +6,7 @@
       </v-row>
       <v-row>
         <v-col v-for="food in paginatedData" :key="food.boardNo" lg="3" sm="6">
-          <v-card width="280" height="370" class="mx-auto">
+          <v-card width="305" height="370" class="mx-auto">
             <router-link
               :to="{
                 name: 'FoodDetailPage',
@@ -15,13 +15,19 @@
             >
               <v-img
                 :src="require(`@/assets/uploadImg/foodBoard/${food.filename}`)"
-                height="200px"
+                height="215px"
               ></v-img>
             </router-link>
 
-            <v-card-title> {{ food.name }} </v-card-title>
+            <v-card-subtitle class="pt-3 pb-0"
+              ><v-chip class="ma-2" small>
+                {{ food.mat }}
+              </v-chip>
+              <v-chip class="ma-2" small> {{ food.kind }} </v-chip>
+              <v-chip class="ma-2" small> {{ food.way }} </v-chip>
+            </v-card-subtitle>
 
-            <v-card-subtitle> {{ food.des }} </v-card-subtitle>
+            <v-card-title class="pt-0 pb-0"> {{ food.name }} </v-card-title>
 
             <v-card-actions>
               <v-card-text class="pb-0 pt-0">{{ food.writer }}</v-card-text>

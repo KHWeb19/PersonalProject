@@ -47,4 +47,15 @@ public class FoodBoardController {
 
         return service.read(boardNo);
     }
+
+    @PutMapping("/{boardNo}")
+    public FoodBoard foodBoardModify(
+            @PathVariable("boardNo") Integer boardNo, FoodBoard foodBoard ,@RequestParam(required = false) MultipartFile file) throws Exception {
+        log.info("foodBoardModify() " +boardNo);
+        log.info("" +foodBoard);
+        foodBoard.setBoardNo(Long.valueOf(boardNo));
+        service.modify(foodBoard,file);
+
+        return foodBoard;
+    }
 }

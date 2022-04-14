@@ -49,9 +49,11 @@ public class FoodBoard {
     @Column
     private String filepath;
 
+
     @CreationTimestamp
     private Date regDate;
 
     @UpdateTimestamp
     private Date updDate;
+
 }

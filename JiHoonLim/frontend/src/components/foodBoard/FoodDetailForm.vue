@@ -86,6 +86,17 @@
                       style="width: 800px"
                     />
                   </div>
+                  <div v-if="checkWriteUser">
+                    <v-btn
+                      :to="{
+                        name: 'FoodModifyPage',
+                        params: { boardNo: foodBoard.boardNo.toString() },
+                      }"
+                      >수정</v-btn
+                    >
+
+                    <v-btn>삭제</v-btn>
+                  </div>
                 </div>
               </div>
             </div>
@@ -104,6 +115,16 @@ export default {
       type: Object,
       required: true,
     },
+  },
+  data() {
+    return {
+      checkWriteUser: false,
+    };
+  },
+  created() {
+    if (this.$store.state.userInfo.nickName == this.foodBoard.writer) {
+      this.checkWriteUser = true;
+    }
   },
 };
 </script>

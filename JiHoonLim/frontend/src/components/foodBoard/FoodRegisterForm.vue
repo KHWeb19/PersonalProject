@@ -48,7 +48,7 @@
                               :rules="{ required: true }"
                             >
                               <v-text-field
-                                style="width: 300px"
+                                style="width: 500px"
                                 v-model="name"
                                 label="요리 이름"
                                 clearable
@@ -83,11 +83,12 @@
                           name="한줄 설명"
                           :rules="{ required: true }"
                         >
-                          <v-text-field
-                            style="width: 500px"
+                          <v-textarea
+                            style="width: 700px"
                             v-model="des"
                             label="한줄 설명"
                             clearable
+                            auto-grow
                             outlined
                             color="orange"
                             :error-messages="errors"
@@ -257,11 +258,14 @@ export default {
       chooseWay: "",
 
       kind: [
-        { value: "반찬" },
-        { value: "국/탕" },
         { value: "밥" },
+        { value: "반찬" },
+        { value: "국물" },
         { value: "면" },
         { value: "디저트" },
+        { value: "분식" },
+        { value: "샐러드" },
+        { value: "음료" },
         { value: "기타" },
       ],
       mat: [
@@ -270,18 +274,18 @@ export default {
         { value: "닭고기" },
         { value: "채소" },
         { value: "해물" },
+        { value: "계란" },
         { value: "유제품" },
         { value: "기타" },
       ],
       way: [
+        { value: "구이" },
+        { value: "찜" },
+        { value: "국탕찌개" },
         { value: "볶음" },
-        { value: "끓이기" },
-        { value: "삶기" },
-        { value: "굽기" },
-        { value: "튀김" },
         { value: "조림" },
-        { value: "무침" },
-        { value: "비빔" },
+        { value: "튀김" },
+        { value: "무침 / 비빔" },
         { value: "기타" },
       ],
     };

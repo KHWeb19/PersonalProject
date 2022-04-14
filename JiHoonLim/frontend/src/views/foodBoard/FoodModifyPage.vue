@@ -1,32 +1,40 @@
 <template>
   <div>
-    <food-register-form @submit="onSubmit" />
+    <food-modify-form
+      v-if="foodBoard"
+      :foodBoard="foodBoard"
+      @submit="onSubmit"
+    />
   </div>
 </template>
 
 <script>
-import FoodRegisterForm from "@/components/foodBoard/FoodRegisterForm.vue";
-import axios from "axios";
+import FoodModifyForm from "@/components/foodBoard/FoodModifyForm.vue";
 import { mapActions, mapState } from "vuex";
+import axios from "axios";
 
 export default {
-  name: "FoodRegisterPage",
+  name: "FoodModifyPage",
   components: {
-    FoodRegisterForm,
+    FoodModifyForm,
   },
-  data() {
-    return {
-      userInfo: JSON.parse(localStorage.getItem("userInfo")),
-    };
+  props: {
+    boardNo: {
+      type: String,
+      required: true,
+    },
   },
-
   computed: {
-    ...mapState(["member"]),
+    ...mapState(["foodBoard"]),
   },
-
+  created() {
+    this.fetchFoodBoard(this.boardNo).catch(() => {
+      alert("조회 실패");
+      this.$router.back();
+    });
+  },
   methods: {
-    ...mapActions(["fetchMember"]),
-
+    ...mapActions(["fetchFoodBoard"]),
     onSubmit(payload) {
       const {
         name,
@@ -39,12 +47,14 @@ export default {
         chooseMat,
         chooseWay,
         file,
+        fileName,
       } = payload;
 
       let formData = new FormData();
 
       if (file != null) {
         formData.append("file", file);
+        formData.append("filename", fileName);
       }
       formData.append("name", name);
       formData.append("des", des);
@@ -57,20 +67,21 @@ export default {
       formData.append("writer", writer);
 
       axios
-        .post("http://localhost:7777/foodBoard/register", formData, {
+        .put(`http://localhost:7777/foodBoard/${this.boardNo}`, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
         })
-        .then(() => {
-          alert("게시물 등록 성공");
+        .then((res) => {
+          alert("게시물 수정 성공");
 
           this.$router.push({
-            name: "FoodListPage",
+            name: "FoodDetailPage",
+            params: { boardNo: res.data.boardNo.toString() },
           });
         })
         .catch(() => {
-          alert("문제 발생");
+          alert("게시물 수정 실패");
         });
     },
   },

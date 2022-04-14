@@ -11,6 +11,7 @@ import MemberInfoPage from '@/views/member/MemberInfoPage.vue'
 import FoodListPage from '@/views/foodBoard/FoodListPage.vue'
 import FoodRegisterPage from '@/views/foodBoard/FoodRegisterPage.vue'
 import FoodDetailPage from '@/views/foodBoard/FoodDetailPage.vue'
+import FoodModifyPage from '@/views/foodBoard/FoodModifyPage.vue'
 
 import test from '@/views/test.vue'
 Vue.use(VueRouter)
@@ -67,6 +68,16 @@ const routes = [
     name: 'FoodDetailPage',
     components: {
       default: FoodDetailPage
+    },
+    props: {
+      default: true
+    }
+  },
+  {
+    path: '/foodModify/:boardNo',
+    name: 'FoodModifyPage',
+    components: {
+      default: FoodModifyPage
     },
     props: {
       default: true
