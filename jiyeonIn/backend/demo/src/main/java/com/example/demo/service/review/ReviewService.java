@@ -1,5 +1,6 @@
 package com.example.demo.service.review;
 
+import com.example.demo.controller.reviewController.request.RequestDelete;
 import com.example.demo.controller.reviewController.request.ReviewRequest;
 import com.example.demo.entity.review.Review;
 
@@ -16,4 +17,6 @@ public interface ReviewService {
     public void includeImgModify(Review info, String originalFilename) throws IOException;
 
     public void exceptImgModify(Review info) throws IOException;
+
+    public void remove(RequestDelete request) throws IOException;
 }

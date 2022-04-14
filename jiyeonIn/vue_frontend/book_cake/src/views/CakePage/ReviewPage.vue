@@ -24,7 +24,7 @@
             </v-icon>
             <v-icon
                 small
-                @click="deleteDialog = true, deleteItem(item.reviewNo)"
+                @click="deleteItem(item)"
             >
                 mdi-delete
             </v-icon>
@@ -185,8 +185,6 @@ import { mapState, mapActions } from 'vuex'
                     }
                 }
 
-                this.reviewNo = this.modifyNo
-
                 axios.put('http://localhost:7777/review/modify', formData)
                         .then(() => {
                             alert('수정되었습니다!')
@@ -194,6 +192,33 @@ import { mapState, mapActions } from 'vuex'
                         })
                         .catch(() => {
                             alert('수정 실패!')
+                        })
+            },
+            deleteItem(item){
+                this.deleteDialog = true
+                this.deleteNo = item.reviewNo
+            },
+            deleteReview(){
+
+                let formData = new FormData()
+
+                let fileInfo = {
+                    reviewNo : this.deleteNo
+                }
+                console.log(fileInfo)
+
+                formData.append(
+                    "info", new Blob([JSON.stringify(fileInfo)], {type:"application/json"})
+                )
+
+                this.reviewNo = this.deleteNo
+                axios.post('http://localhost:7777/review/delete', formData )
+                        .then(() => {
+                            alert('삭제가 완료되었습니다!')
+                            this.$router.go()
+                        })
+                        .catch(() => {
+                            alert('삭제실패!')
                         })
             }
         }

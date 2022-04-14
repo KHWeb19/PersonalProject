@@ -1,5 +1,6 @@
 package com.example.demo.service.review;
 
+import com.example.demo.controller.reviewController.request.RequestDelete;
 import com.example.demo.controller.reviewController.request.ReviewRequest;
 import com.example.demo.entity.review.Review;
 import com.example.demo.repository.review.ReviewRepository;
@@ -78,6 +79,26 @@ public class ReviewServiceImpl implements ReviewService{
             repository.save(info);
         }else if(findImg1.getReviewFile() == null) {
             repository.save(info);
+        }
+    }
+
+    @Transactional
+    @Override
+    public void remove(RequestDelete request) throws IOException {
+        Long reviewNo = request.getReviewNo();
+
+        Optional<Review> maybeReviewInfo = repository.findInfo(reviewNo);
+        Review findImg = maybeReviewInfo.get();
+
+        if(findImg.getReviewFile() != null){
+            Path filePath = Paths.get("c:\\khweb19\\PersonalProject\\jiyeonIn\\vue_frontend\\book_cake\\src\\assets\\review\\" + findImg.getReviewFile());
+            Files.delete(filePath);
+
+            repository.deleteById(reviewNo);
+
+        }else if(findImg.getReviewFile() == null) {
+
+            repository.deleteById(reviewNo);
         }
     }
 

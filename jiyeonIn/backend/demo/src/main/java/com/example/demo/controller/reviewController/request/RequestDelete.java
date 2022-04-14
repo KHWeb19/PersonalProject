@@ -7,8 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ReviewRequest {
-    private String id;
-    private String content;
+public class RequestDelete {
     private Long reviewNo;
 }
