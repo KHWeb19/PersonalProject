@@ -61,7 +61,7 @@
               <v-btn>설정</v-btn>
             </router-link>
           </v-list-item-title>
-            <v-list-item-title>        
+          <v-list-item-title>        
               <v-btn @click="logout">
                 로그아웃
               </v-btn>

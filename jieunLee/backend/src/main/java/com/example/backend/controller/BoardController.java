@@ -1,6 +1,7 @@
 package com.example.backend.controller;
 
 import com.example.backend.entity.Board;
+import com.example.backend.entity.Member;
 import com.example.backend.service.BoardService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,12 +33,19 @@ public class BoardController {
         return service.list();
     }
 
-//    @GetMapping("/myList")
-//    public List<Board> MyList(@RequestParam(value="writer") String writer) {
-//        log.info("MyList()");
-//
-//        return service.list(writer);
-//    }
+    @GetMapping("/list/{memberNo}")
+    public List<Board> memberNoBoardList(@PathVariable("memberNo") Integer memberNo) {
+        log.info("myBoardList()");
+
+        return service.memberNoBoardList(memberNo);
+    }
+
+    @GetMapping("/writerList")
+    public List<Board> myBoardList() {
+        log.info("myBoardList()");
+
+        return service.findList();
+    }
 
     @GetMapping("/{boardNo}")
     public Board boardRead(@PathVariable("boardNo") Integer boardNo) {

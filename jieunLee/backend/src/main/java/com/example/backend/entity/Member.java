@@ -6,7 +6,9 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -41,6 +43,11 @@ public class Member {
 
     @UpdateTimestamp
     private Date updDate;
+
+    //
+//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @JoinColumn(name = "member_no")
+//    private List<Board> boardList;
 
     public Member(String memberName, String memberId, String password) {
         this.memberName = memberName;

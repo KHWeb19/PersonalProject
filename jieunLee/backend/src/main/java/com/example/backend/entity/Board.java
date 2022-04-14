@@ -9,11 +9,15 @@ import java.util.Date;
 
 @Data
 @Entity
+@Table(name = "board")
 public class Board {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long boardNo;
+
+    @Column(name = "member_no")
+    private Long memberNo;
 
     @Column(length = 64, nullable = false)
     private String boardImage;

@@ -10,6 +10,8 @@ import AccountsEditPage from '@/views/member/AccountsEditPage'
 import PasswordEditPage from '@/views/member/PasswordEditPage'
 
 import BoardRegisterPage from '@/views/board/BoardRegisterPage'
+import BoardReadPage from '@/views/board/BoardReadPage'
+import BoardModifyPage from '@/views/board/BoardModifyPage'
 
 
 Vue.use(VueRouter)
@@ -28,7 +30,10 @@ const routes = [
   {
     path: '/',
     name: 'HomeView',
-    component: HomeView
+    component: HomeView,
+    props: {
+      default: true
+    }
   },
   {
     path: '/:memberNo',
@@ -64,6 +69,26 @@ const routes = [
     path: '/boardRegister',
     name: 'BoardRegisterPage',
     component: BoardRegisterPage
+  },
+  {
+    path: '/boardRead/:boardNo',
+    name: 'BoardReadPage',
+    components: {
+      default: BoardReadPage
+    },
+    props: {
+      default: true
+    }
+  },
+  {
+    path: '/boardModify/:boardNo',
+    name: 'BoardModifyPage',
+    components: {
+      default: BoardModifyPage
+    },
+    props: {
+      default: true
+    }
   },
 ]
 

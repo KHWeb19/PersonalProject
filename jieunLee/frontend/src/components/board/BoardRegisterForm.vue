@@ -24,7 +24,6 @@
                     </table>
                     <hr style="border: 0; height: 1px; background: #d8d8d8; "/>
                     <table style="width: 100%; border-collapse : collapse;">
-                        
                         <tr>
                             <td align="center" rowspan="2" colspan="2" width="66%" >
                                 <label for="files">
@@ -83,7 +82,7 @@ export default {
                 this.boardImage = this.files[0].name
                 //
                 const { boardImage, content } = this
-                this.$emit('submit', { boardImage, writer: this.loginInfo.memberName, content })
+                this.$emit('submit', { memberNo: this.loginInfo.memberNo, boardImage, writer: this.loginInfo.memberName, content })
             })
             .catch (res => {
                 alert('처리 결과: ' + res.message)
