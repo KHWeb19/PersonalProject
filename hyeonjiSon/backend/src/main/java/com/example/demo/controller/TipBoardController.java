@@ -31,4 +31,32 @@ public class TipBoardController {
 
         return service.list();
     }
+
+    @GetMapping("/{boardNo}")
+    public TipBoard tipBoardRead (
+            @PathVariable("boardNo") Integer boardNo) {
+        log.info("tipBoardRead()");
+
+        return service.read(boardNo);
+    }
+
+    @PutMapping("/{boardNo}")
+    public TipBoard tipBoardModify (
+            @PathVariable("boardNo") Integer boardNo,
+            @RequestBody TipBoard tipBoard) {
+        log.info("tipBoardModify(): " + tipBoard);
+
+        tipBoard.setBoardNo(Long.valueOf(boardNo));
+        service.modify(tipBoard);
+
+        return tipBoard;
+    }
+
+    @DeleteMapping("/{boardNo}")
+    public void tipBoardRemove (
+            @PathVariable("boardNo") Integer boardNo) {
+        log.info("tipBoardRemove()");
+
+        service.remove(boardNo);
+    }
 }

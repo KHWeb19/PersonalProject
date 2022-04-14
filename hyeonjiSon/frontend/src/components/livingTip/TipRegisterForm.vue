@@ -1,4 +1,5 @@
 <template>
+    <v-container>
     <form @submit.prevent="onSubmit">
         <table>
             <tr>
@@ -29,21 +30,32 @@
         </table>
 
         <div>
-            <button type="submit">등록</button>
+            <v-btn type="submit">등록</v-btn>
             <router-link :to="{ name: 'livingTipBoardList' }">
-                취소
+                <v-btn>
+                    취소
+                </v-btn>
             </router-link>
         </div>
     </form>
+    </v-container>
 </template>
 
 <script>
 export default {
-    name: 'TipRegisterForm',
+    name: 'TipRegisterForm.vue',
+    data () {
+        return {
+            title: '',
+            writer: '',
+            password: '',
+            content: '',
+        }
+    },
     methods: {
         onSubmit () {
-            const {title, writer, password, content} = this
-            this.$emit('submit', {title, writer, content, password})
+            const { title, writer, password, content } = this
+            this.$emit('submit', { title, writer, password, content })
         }
     }
     

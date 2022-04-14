@@ -3,8 +3,7 @@ import {
     FETCH_MEMBER,
 
     FETCH_TIP_BOARD_LIST,
-    FETCH_TIP_BOARD,
-
+    FETCH_TIP_BOARD
 } from './mutation-types'
 
 import axios from 'axios'

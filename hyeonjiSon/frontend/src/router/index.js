@@ -12,6 +12,8 @@ import RecycleGuideMainPage from '@/views/recycleGuide/RecycleGuideMainPage.vue'
 
 import LivingTipBoardList from '@/views/livingTip/LivingTipBoardList.vue'
 import TipRegisterPage from '@/views/livingTip/TipRegisterPage.vue'
+import TipReadPage from '@/views/livingTip/TipReadPage.vue'
+import TipModifyPage from '@/views/livingTip/TipModifyPage.vue'
 
 import BoardStorePage from '@/views/findStore/BoardStorePage.vue'
 
@@ -71,6 +73,26 @@ const routes = [
     path: '/tipRegisterPage',
     name: 'tipRegisterPage',
     component: TipRegisterPage
+  },
+  {
+    path: '/tipReadPage/:boardNo',
+    name: 'TipReadPage',
+    components: {
+      default: TipReadPage
+    },
+    props: {
+      default: true
+    }
+  },
+  {
+    path: '/tipModifyPage/:boardNo',
+    name: 'TipModifyPage',
+    components: {
+      default: TipModifyPage
+    },
+    props: {
+      default: true
+    }
   },
 
 
