@@ -1,5 +1,5 @@
-<template>
-    <div class="reviewForm">
+<template class="reviewForm">
+    <div>
         <form @submit.prevent="onSubmit" >
             <div v-if="checkuserInfo != null" class="showInputReview">
                 <p>아이디 : {{id}}</p>
@@ -12,81 +12,61 @@
                 <br><br><br><hr>
             </div>
         </form>
-        
-        <v-container v-for="(review, index) in reviews" :key="index">
-            <v-row>
-                <v-col  class="col-12 col-sm-4">
-                    <div v-if="review.reviewFile != null">
-                        <v-img v-bind:src="require(`@/assets/review/${review.reviewFile}`)" contain class="fixed" style="height:250px; width:250px" />
-                    </div>
-                    <div v-if="review.reviewFile == null">
-                        <v-img src="@/assets/review/nullImg.png" contain class="fixed" style="height:250px; width:250px" />
-                    </div>
-                </v-col>
-                <v-col  class="col-12 col-sm-6">
-                    <div class="showDetail">
-                        <strong>{{review.id}}</strong>
-                        <p></p><p></p>
-                        <p>{{review.content}}</p>
-                        <p style="text-align: left;">{{review.regDate}}</p>
-                    </div>
-                </v-col>
-            </v-row>
-            <hr>
-        </v-container>
 
+            <v-layout row wrap>
+                <v-flex xs12>
+                    <v-data-table :headers="headerTitle" :items="reviews" class="elevation-0">
+                        <template v-slot:[`item.reviewFile`]="{ item }">
+                            <img v-bind:src="require(`@/assets/review/${item.reviewFile}`)" height="250px"/>
+                        </template>
 
+                        
+                            
+                    </v-data-table>
+                </v-flex>
+            </v-layout>
 
+            <v-dialog
+                v-model="dialog"
+                width="500"
+                >
+                <template v-slot:activator="{ on, attrs }">
+                    <v-btn
+                    color="red lighten-2"
+                    dark
+                    v-bind="attrs"
+                    v-on="on"
+                    >
+                    Click Me
+                    </v-btn>
+                </template>
 
-        <div v-for="(review, index) in reviews" :key="index" class="showReview">
-            <br><hr><br>
-            <div v-if="review.reviewFile != null">
-                <v-img v-bind:src="require(`@/assets/review/${review.reviewFile}`)" contain class="fixed" style="height:250px; width:250px" />
-            </div>
-            <div v-if="review.reviewFile == null">
-                <v-img src="@/assets/review/nullImg.png" contain class="fixed" style="height:250px; width:250px" />
-            </div>
-            <div class="showDetail">
-                <strong>{{review.id}}</strong>
-                <p>{{review.content}}</p>
-                <p>{{review.regDate}}</p>
-            </div>
-        </div>
+                <v-card>
+                    <v-card-title class="text-h5 grey lighten-2">
+                    Privacy Policy
+                    </v-card-title>
 
+                    <v-card-text>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </v-card-text>
 
-        <v-container>
-        <v-row justify="center">
-            <v-data-table 
-                        :headers="headerTitle" 
-                        :items="reviews"
-                        :key="reviews.reviewNo"
-                        :items-per-page="10"
-                        class="elevation-1"
-                        style="background: green-light;" 
-                        >
-<!--                         
-            시도 1 
-            <template v-slot:[`item.reviewFile`]="{ item }">
-                <div class="p-2">
-                    <v-img :src="require(`@/assets/bookingImg/${item.reviewFile}`)" :alt="item.content" height="100px"></v-img>
-                </div>
-            </template> -->
+                    <v-divider></v-divider>
+
+                    <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                        color="primary"
+                        text
+                        @click="dialog = false"
+                    >
+                        I accept
+                    </v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-dialog>
             
-            시도 2 
-                <template slot="items" slot-scope="props">
-                    <td class="text-xs-right">{{ props.item.reviewNo }}</td>
-                    <td><img :src="require(`@/assets/bookingImg/${item.reviewFile}`)" style="width: 50px; height: 50px"></td>
-                    <td class="text-xs-right">{{ props.item.content }}</td>
-                    <td class="text-xs-right">{{ props.item.id }}</td>
-                    <td class="text-xs-right">{{ props.item.regDate }}</td>
-                </template>       
-            </v-data-table>
-        </v-row>
-        
-        </v-container>
 
-
-    </div>
+</div>
 </template>
 
 <script>
@@ -99,11 +79,11 @@
                 content:'',
                 headerTitle: [
                 { text:'no', value: 'reviewNo', width:'70px'},
-                { text:'image', value: 'reviewFile', width:'70px'},
+                { text:'reviewFile', value: 'reviewFile', width:'70px'},
                 { text: 'content', value: 'content', width: "300px" },
                 { text: 'writer', value: 'id', width: "150px" },
-                { text: 'date. ', value: 'regDate', width: "200px" },
-            ],
+                { text: 'date', value: 'regDate', width: "200px" },
+                ],
             }
         },
         props: {
