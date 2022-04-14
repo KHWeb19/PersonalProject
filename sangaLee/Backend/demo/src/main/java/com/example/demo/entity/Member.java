@@ -19,16 +19,12 @@ public class Member {
     private Long memberNo;
 
     @NotNull
-    @Column(length = 20)
+    @Column(length = 64)
     private String id;
 
     @NotNull
-    @Column(length = 15)
+    @Column(length = 64)
     private String pw;
-
-    @NotNull
-    @Column(length = 11)
-    private String pn;
 
     @NotNull
     @Column(length = 50)
@@ -40,11 +36,10 @@ public class Member {
     @UpdateTimestamp
     private Date updDate;
 
-    public Member (Long memberNo, String userId, String password, String userPn, String userEmail) {
+    public Member (Long memberNo, String userId, String password, String userEmail) {
         this.memberNo = memberNo;
         this.id = userId;
         this.pw = password;
-        this.pn = userPn;
         this.email = userEmail;
     }
 }

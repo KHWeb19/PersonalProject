@@ -48,12 +48,11 @@ public class MemberServiceImpl implements MemberService{
         if (loginMember.getId().equals(memberRequest.getId())) {
             memberRequest.setMemberNo(loginMember.getMemberNo());
             memberRequest.setId(loginMember.getId());
-            memberRequest.setPn(loginMember.getPn());
             memberRequest.setEmail(loginMember.getEmail());
         }
 
         MemberRequest response = new MemberRequest(memberRequest.getMemberNo(), memberRequest.getId(), null,
-                memberRequest.getPn(), memberRequest.getEmail());
+                memberRequest.getEmail());
 
         return response;
     }
