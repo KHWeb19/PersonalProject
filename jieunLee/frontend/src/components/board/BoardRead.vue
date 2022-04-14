@@ -2,9 +2,10 @@
     <v-container style="width: 1000px; margin-top: 20px; font-size: 14px">
       <v-flex>
             <v-card style="margin-bottom: 30px;">
+                <form @submit.prevent="onSubmit">
                 <table style="width: 100%">
                     <tr >
-                        <td rowspan="12" width="672px">
+                        <td rowspan="20" width="672px">
                             <v-img width="672px" :src="require(`@/assets/mImage/${board.boardImage}`)"/>
                         </td>
                     </tr>
@@ -49,11 +50,15 @@
                             </div>
                         </td>
                     </tr>
-                    <tr align="left">
+                    <tr align="left" v-for="comment in comments" :key="comment.commentNo" >
                         <td colspan="2" style="padding-left: 16px">
-                            (댓글리스트)
-                            (댓글리스트)
-                            (댓글리스트)
+                            <div style="display: flex;">
+                                <div style="font-weight: bold;" >
+                                    {{ comment.writer }}&nbsp;
+                                </div>
+                                {{ comment.content }}
+                            </div>
+                            <span style="font-size: 12px; color: grey">{{ comment.regDate }}</span>
                         </td>
                     </tr>
                     <tr align="left">
@@ -83,16 +88,17 @@
                     </tr>
                     <tr align="left">
                         <td style="padding: 14px 0px 14px 16px;">
-                            <input type="text" placeholder="댓글 달기..."/>
+                            <input type="text" placeholder="댓글 달기..." v-model="content"/>
                         </td>
                         <td align="right"> 
-                            <v-btn text color="primary">
+                            <v-btn text color="primary" type="submit">
                                 게시
                             </v-btn>
                         </td>
                     </tr>
                     
                 </table>
+                </form>
             </v-card>
         </v-flex>
     </v-container>
@@ -105,12 +111,25 @@ export default {
         board: {
             type: Object,
             require:true
+        },
+        comments: {
+            type: Array
+        }
+    },
+    data() {
+        return {
+            loginInfo: JSON.parse(localStorage.getItem('loginInfo')),
+            content: ''
         }
     },
     methods: {
         onDelete() {
             const { boardNo } = this
             this.$emit('click', {boardNo})
+        },
+        onSubmit() {
+            const { content } = this
+            this.$emit('submit', { boardNo: this.board.boardNo, content })
         }
     }
 }

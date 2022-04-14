@@ -1,7 +1,6 @@
 package com.example.backend.service;
 
 import com.example.backend.entity.Board;
-import com.example.backend.entity.Member;
 
 import java.util.List;
 

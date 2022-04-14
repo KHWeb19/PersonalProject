@@ -2,7 +2,7 @@
   <div>
     <menu-bar/>
     <hr style="border: 0; height: 1px; background: #d8d8d8; "/>
-    <board-read :board="board" @click="onDelete"/>
+    <board-read :board="board" :comments="comments" @click="onDelete" @submit="onSubmit"/>
   </div>
 </template>
 
@@ -24,8 +24,15 @@ export default {
             required: true
         }
     },
+            data() {
+        return {
+            loginInfo: JSON.parse(localStorage.getItem('loginInfo')),
+
+        }
+    },
     computed: {
         ...mapState(['board']),
+                ...mapState(['comments']),
     },
     created() {
         this.fetchBoard(this.boardNo)
@@ -33,9 +40,18 @@ export default {
                 alert('게시물 요청 실패')
                 this.$router.push()
             })
+        this.fetchCommentList(this.boardNo)
+            .catch(()=>{
+                alert('댓글 요청 실패')
+                this.$router.push()
+            })
     },
+      mounted () {
+    this.fetchCommentList(this.boardNo)
+  },
     methods: {
         ...mapActions(['fetchBoard']),
+                ...mapActions(['fetchCommentList']),
         onDelete() {
             const {boardNo} = this.board
             axios.delete(`http://localhost:7777/board/${boardNo}`)
@@ -46,7 +62,18 @@ export default {
                 .catch(()=> {
                     alert('삭제실패 문제발생')
                 })
-        }
+        },
+        onSubmit(payload) {
+            const { boardNo, content} = payload
+            axios.post('http://localhost:7777/comment/register', {boardNo, writer: this.loginInfo.memberName, content})
+                .then(() => {
+                    alert('댓글 등록 성공!')
+                        history.go(0);
+                    })
+                    .catch(() => {
+                        alert('문제 발생!')
+                    })
+        }    
     },
 }
 </script>

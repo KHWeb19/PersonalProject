@@ -1,9 +1,7 @@
 package com.example.backend.service;
 
 import com.example.backend.entity.Board;
-import com.example.backend.entity.Member;
 import com.example.backend.repository.BoardRepository;
-import com.example.backend.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -16,9 +14,6 @@ public class BoardServiceImpl implements BoardService {
 
     @Autowired
     BoardRepository repository;
-
-    @Autowired
-    MemberRepository memberRepository;
 
     @Override
     public void register(Board board) {
@@ -36,10 +31,8 @@ public class BoardServiceImpl implements BoardService {
         return myBoard;
     }
 
-
     @Override
     public List<Board> findList() {
-//        List<Board> myBoard = repository.selectMyBoard(Long.valueOf(writerNo));
         List<Board> myBoard = repository.selectMyBoard(Long.valueOf(75));
         return myBoard;
     }
