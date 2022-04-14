@@ -5,6 +5,7 @@ package com.example.demo.service.board.freeBoard;
 import com.example.demo.controller.board.freeBoard.request.FreeBoardCommentsRequest;
 import com.example.demo.entitiy.board.freeBoard.FreeBoardComments;
 import com.example.demo.repository.board.freeBoard.FreeBoardCommentsRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ public class FreeBoardCommentsServiceImpl implements FreeBoardCommentsService {
 
     @Override
     public void register(FreeBoardCommentsRequest commentsRequest) {
-
+         log.info(":" + commentsRequest);
         FreeBoardComments commentsEntity = new FreeBoardComments(commentsRequest.getWriter(),
                     commentsRequest.getContent(),commentsRequest.getBoardNo());
 

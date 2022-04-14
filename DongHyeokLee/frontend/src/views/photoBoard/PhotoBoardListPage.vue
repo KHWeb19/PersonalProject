@@ -2,6 +2,7 @@
     <div id="photo-board">
         <h2>사진게시판</h2>
         <board-list :boards="photoBoards" 
+                    :accept="accept" 
                     :registerPage="`${registerPage}`"
                     :readPage="`${readPage}`"/>
     </div>   
@@ -23,7 +24,8 @@ export default {
     data () {
         return {
             registerPage : 'PhotoBoardRegisterPage',
-            readPage: 'PhotoBoardReadPage'
+            readPage: 'PhotoBoardReadPage',
+            accept: 'jpg'
         }
     },
     computed: {

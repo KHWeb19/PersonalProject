@@ -8,6 +8,9 @@ public class FreeBoardCommentsRequest {
     private String content;
     private Long boardNo;
 
+    public FreeBoardCommentsRequest() {
+    }
+
     public FreeBoardCommentsRequest(String writer, String content, Long boardNo){
         this.writer = writer;
         this.content = content;

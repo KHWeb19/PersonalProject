@@ -31,7 +31,7 @@ public class PhotoBoardController {
                                      @RequestPart(value="files") MultipartFile files) throws Exception {
         log.info("PhotoBoardRegister()" + board + "file" + files);
 
-        service.register(board, files);
+       service.register(board, files);
     }
     //목록
     @GetMapping("/list")

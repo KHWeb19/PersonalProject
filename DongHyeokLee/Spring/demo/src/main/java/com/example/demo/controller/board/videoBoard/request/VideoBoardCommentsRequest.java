@@ -8,6 +8,10 @@ public class VideoBoardCommentsRequest {
     private String content;
     private Long boardNo;
 
+
+    public VideoBoardCommentsRequest(){
+    }
+
     public VideoBoardCommentsRequest(String writer, String content, Long boardNo){
         this.writer = writer;
         this.content = content;

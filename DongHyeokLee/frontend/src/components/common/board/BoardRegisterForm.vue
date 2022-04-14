@@ -47,7 +47,7 @@
 <script>
 
 export default {
-    name: 'PhotoBoardRegisterForm',
+    name: 'BoardRegisterForm',
     props: {
         listPage:{
             type: String

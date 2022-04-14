@@ -1,55 +1,59 @@
 <template>
     <div align="center">
         <h2>게시물 작성</h2>
-        <video-board-register-form @submit="onSubmit"/>
+         <board-register-form :listPage="`${listPage}`"
+                             :accept="accept" 
+                             @submit="onSubmit"/>   
     </div>
 </template>
 
 <script>
 
 import axios from 'axios'
-import VideoBoardRegisterForm from '@/components/videoBoard/VideoBoardRegisterForm.vue'
+import BoardRegisterForm from '@/components/common/board/BoardRegisterForm.vue'
 
 
 export default {
     name: 'VideoBoardRegisterPage',
     components: {
-        VideoBoardRegisterForm
+        BoardRegisterForm
+    },
+     data () {
+        return{
+            listPage : 'VideoBoardListPage',
+            accept: '.mp4'
+        }
     },
     methods: {
-    async onSubmit (payload) {
+    onSubmit (payload) {
             const { title, content, writer, files } = payload
             let formData = new FormData()
-            const fileName = files[0].name
-            //파일 저장 된거 불러 오는 방법을 위치랑 이름으로 밖에 못하겠어가지고 일단 db에 이름값을 전달 하도록 함
-            for (let idx = 0; idx < files.length; idx++) {
-                formData.append('fileList', files[idx])
+            let board = {
+                    title,
+                    content,
+                    writer
             }
-           //엑시오스 두개 사용 이래도 되나?
-               if(files != null){
-        await axios.all([
-                axios.post('http://localhost:7777/videoBoard/register', { title, writer, content, fileName}),
-                axios.post('http://localhost:7777/videoBoard/uploadImg', formData,{
-                    headers: {
-                        'Content-Type' : 'multipart/form-data'
-                    }
-                })
-             ])  
-                    .then(axios.spread(() => {
-                            alert('등록 성공')
-                         setTimeout(()=> {this.$router.push({
-                            name: 'VideoBoardListPage'
-                        })},300)
-                    
+    
+            formData.append('files',files)
+            formData.append('board',new Blob([JSON.stringify(board)],{type: "application/json"}))
+            
+                 axios.post('http://localhost:7777/videoBoard/register', formData,{
+                     headers: {
+                         'Content-Type' : 'multipart/form-data'
+                        }
+                    }).then((res)=>{
+                       
+                        if(res.data != null){
+                        alert('등록 완료')
+                         this.$router.push({
+                        name: 'VideoBoardListPage'
+                        })
+                        }
                     })
-                )
                     .catch(() => {
                         alert('문제 발생!')
                     })
-               }else{
-                   alert('파일을 첨부하세요')
-               }
-            }
+        }   
     }
 }
 

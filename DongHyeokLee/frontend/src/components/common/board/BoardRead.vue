@@ -4,7 +4,7 @@
          <!-- 리스트로 돌아가기 -->
         <router-link :to="{ name: `${this.listPage}` }">
             <v-btn class="list-btn" color="amber lighten-2">
-            <strong class="text">사진게시판</strong>
+            <strong class="text">to.게시판</strong>
             </v-btn>
         </router-link>
 
@@ -13,14 +13,14 @@
             <div class="subtitle">
                 <p align="center" class="writer">{{ board.writer }}</p>
                 <div class="day"> 
-                {{ board.regDate.substring(0, 10) }}
-                {{ board.regDate.substring(19, 11) }}
+                {{ board.regDate.substring(0, 19) }}
                 </div>
             </div>
         </div>
 
         <div>
-            <v-img class="img" :src="require(`@/assets/uploadImg/${board.fileName}`)" ></v-img>
+            <v-img v-if="accept == 'jpg'" class="img" :src="require(`@/assets/uploadImg/${board.fileName}`)" ></v-img>
+            <iframe v-if="accept == 'mp4'" :src="require(`@/assets/uploadVideo/${board.fileName}`)" width="40%" height="400" allow="autoplay muted"></iframe>
             <table>
                 <tr>
                     <td>
@@ -56,7 +56,7 @@ import axios from 'axios'
 
 
 export default {
-    name: 'PhotoBoardRead',
+    name: 'BoardRead',
     props: {
         board: {
             type: Object,
@@ -71,15 +71,24 @@ export default {
         },
         modifyPage:{
             type: String
+        },
+        boardName:{
+            type: String,
+            required: true
+        },
+        accept:{
+            type: String
         }
     },
     methods: {
            onDelete () {
             const boardNo= this.boardNo
-            axios.delete(`http://localhost:7777/photoBoard/${boardNo}`)
+            const boardName = this.boardName
+            const listPage = this.listPage
+            axios.delete(`http://localhost:7777/${boardName}/${boardNo}`)
                     .then(() => {
                         alert('삭제 성공!')
-                        this.$router.push({ name: 'PhotoBoardListPage' })
+                        this.$router.push({ name: listPage })
                     })
                     .catch(() => {
                         alert('삭제 실패! 문제 발생!')
@@ -162,6 +171,9 @@ a{
 .list-btn{
     margin-top:20px;
     margin-left:30%;
+}
+iframe{
+    margin-left:450px;
 }
 
 

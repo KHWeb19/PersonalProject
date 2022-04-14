@@ -1,9 +1,11 @@
 <template>
-    <div id="photoBoard">
+    <div id="videoBoard">
         <h2>영상게시판</h2>
-        <div>
-        <video-board-list :videoBoards="videoBoards"/>
-        </div>
+        <board-list :boards="videoBoards" 
+                    :registerPage="`${registerPage}`"
+                    :accept="accept" 
+                    :readPage="`${readPage}`"/>
+        
     </div>
 </template>
 
@@ -11,14 +13,21 @@
 
 
 import { mapActions, mapState } from 'vuex'
-import VideoBoardList from '@/components/videoBoard/VideoBoardList.vue'
+import BoardList from '@/components/common/board/BoardList.vue'
 
 
 
 export default {
     name: 'VideoBoardListPage',
     components: {
-        VideoBoardList  
+        BoardList  
+    },
+    data () {
+        return {
+            registerPage : 'VideoBoardRegisterPage',
+            readPage: 'VideoBoardReadPage',
+            accept: 'mp4'
+        }
     },
     computed: {
         ...mapState(['videoBoards']),

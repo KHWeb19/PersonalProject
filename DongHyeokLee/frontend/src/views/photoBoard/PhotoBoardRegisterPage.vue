@@ -25,7 +25,7 @@ export default {
         }
     },
     methods: {
-    async onSubmit (payload) {
+        onSubmit (payload) {
             const { title, content, writer, files } = payload
             let formData = new FormData()
             let board = {
@@ -37,21 +37,24 @@ export default {
             formData.append('files',files)
             formData.append('board',new Blob([JSON.stringify(board)],{type: "application/json"}))
             
-            await axios.post('http://localhost:7777/photoBoard/register', formData,{
+                 axios.post('http://localhost:7777/photoBoard/register', formData,{
                      headers: {
                          'Content-Type' : 'multipart/form-data'
                         }
-                    }).then(()=>{
+                    }).then((res)=>{
+                       
+                        if(res.data != null){
                         alert('등록 완료')
-                      
+                         this.$router.push({
+                        name: 'PhotoBoardListPage'
+                        })
+                        }
                     })
                     .catch(() => {
                         alert('문제 발생!')
                     })
 
-                    this.$router.push({
-                    name: 'PhotoBoardListPage'
-                    })
+                   
             
         }
     }

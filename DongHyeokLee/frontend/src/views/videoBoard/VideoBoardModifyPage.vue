@@ -1,6 +1,11 @@
 <template>
     <div align="center">
-        <video-board-modify-form v-if="videoBoard" :videoBoard="videoBoard" @submit="onSubmit"/>
+        <board-modify-form v-if="videoBoard" 
+                                :board="videoBoard"
+                                :boardNo="boardNo"
+                                :readPage="`${this.readPage}`" 
+                                :accept ="accept"
+                                @submit="onSubmit"/>
         <p v-else>로딩중 .......</p>
     </div>
 </template>
@@ -8,12 +13,12 @@
 <script>
 import axios from 'axios'
 import { mapActions, mapState } from 'vuex'
-import VideoBoardModifyForm from '@/components/videoBoard/VideoBoardModifyForm.vue'
+import BoardModifyForm from '@/components/common/board/BoardModifyForm.vue'
 
 export default {
     name: 'VideoBoardModifyPage',
     components: {
-        VideoBoardModifyForm
+        BoardModifyForm
     },
     props: {
         boardNo: {
@@ -21,57 +26,53 @@ export default {
             required: true
         }
     },
+      data () {
+        return {
+            readPage: 'VideoBoardReadPage',
+            accept: '.mp4',
+           
+
+        }
+    },
     computed: {
         ...mapState(['videoBoard'])
     },
     methods: {
         ...mapActions(['fetchVideoBoard']),
-        onSubmit (payload) {
+         onSubmit (payload) {
             const { title, content, files } = payload
-            if(files){
-                //파일 변경시
+            // 파일 다시 첨부 했을 경우
+           
                 let formData = new FormData()
-                const fileName = files[0].name
-                for (let idx = 0; idx < files.length; idx++) {
-                    formData.append('fileList', files[idx])
-                }  
-            
-            axios.all([
-                axios.put(`http://localhost:7777/videoBoard/${this.boardNo}`,
-                { title, writer: this.videoBoard.writer, content, regDate: this.videoBoard.regDate, fileName }),
-                axios.post('http://localhost:7777/videoBoard/uploadImg', formData,{
+                let board = {
+                    title,
+                    content,
+                    writer: this.videoBoard.writer,
+                    regDate: this.videoBoard.regDate,
+                    count: this.videoBoard.count,
+                    fileName: this.videoBoard.fileName
+                }
+               
+                if(files != null) {formData.append('files',files)}
+                formData.append('board',new Blob([JSON.stringify(board)],{type: "application/json"}))
+             
+                 axios.put(`http://localhost:7777/videoBoard/${this.boardNo}`, formData,{
                      headers: {
                          'Content-Type' : 'multipart/form-data'
-                     }
-                })
-            ])
-                    .then(axios.spread((res) => {
-                        alert('게시물 수정 성공!')
-                        this.$router.push({
-                            name: 'VideoBoardReadPage',
+                        }
+                    }).then((res)=>{
+                           alert('등록 완료')
+                           this.$router.push({
+                            name: 'VideoBoardReadPage', 
                             params: { boardNo: res.data.boardNo.toString() }
                         })
-                    })
-                )
-                    .catch(() => {
-                        alert('게시물 수정 실패!')
-                    })
-                    //파일 변경 안할 경우
-            }else{
-                   axios.put(`http://localhost:7777/videoBoard/${this.boardNo}`,
-                { title, writer: this.videoBoard.writer, content, regDate: this.videoBoard.regDate })
-                    .then(res => {
-                        alert('게시물 수정 성공!')
-                        this.$router.push({
-                            name: 'VideoBoardReadPage',
-                            params: { boardNo: res.data.boardNo.toString() }
-                        })
+                   
+                           
                     })
                     .catch(() => {
-                        alert('게시물 수정 실패!')
+                        alert('문제 발생!')
                     })
-
-            }
+        
         
         }
         

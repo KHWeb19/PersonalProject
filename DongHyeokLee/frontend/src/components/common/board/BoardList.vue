@@ -6,7 +6,11 @@
                       <router-link :to="{ name:  readPage , params: { boardNo: board.boardNo.toString() } }">
                     <v-card class="img-card" >
                         <div>
-                          <v-img :src="require(`@/assets/uploadImg/${board.fileName}`)" height="300" ></v-img>
+                          <v-img v-if="accept == 'jpg'" :src="require(`@/assets/uploadImg/${board.fileName}`)" height="300" ></v-img>
+                          <iframe v-if="accept == 'mp4'" :src="require(`@/assets/uploadVideo/${board.fileName}`)" 
+                            height="300" width="100%" 
+                            allow="autoplay 'none'">
+                          </iframe>
                         </div>
                         <v-card-title>{{board.title}}</v-card-title>
                 <v-list-item>
@@ -63,6 +67,9 @@ export default {
         },
         readPage:{
             type:String
+        },
+         accept:{
+            type: String
         }
     },
     data () {
@@ -98,13 +105,7 @@ export default {
              end = start + this.pageSize
       
             return this.boards.slice(start, end);
-        },
-        fileNameAllot(){
-          return this.boards[this.boards.length - 1].fileName  
         }
-          
-     
-       
     }
 }
 

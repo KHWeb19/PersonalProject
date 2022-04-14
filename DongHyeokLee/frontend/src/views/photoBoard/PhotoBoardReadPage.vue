@@ -2,7 +2,9 @@
     <div>   
         <board-read v-if=photoBoard :board="photoBoard"
                                     :boardNo="boardNo"
+                                    :boardName="`${this.boardName}`"
                                     :listPage="listPage"
+                                    :accept="accept" 
                                     :modifyPage="modifyPage"/>
         <!-- 댓글 -->              
         <photo-board-comment :boardNo="this.boardNo"/>
@@ -28,7 +30,9 @@ export default {
     data () {
         return {
             listPage: 'PhotoBoardListPage',
-            modifyPage: 'PhotoBoardModifyPage'
+            modifyPage: 'PhotoBoardModifyPage',
+            boardName: 'photoBoard',
+            accept: 'jpg'
         }
     },
     components: {

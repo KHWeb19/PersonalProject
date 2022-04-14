@@ -8,6 +8,8 @@ public class PhotoBoardCommentsRequest {
     private String content;
     private Long boardNo;
 
+    public PhotoBoardCommentsRequest(){
+    }
     public PhotoBoardCommentsRequest(String writer, String content, Long boardNo){
         this.writer = writer;
         this.content = content;

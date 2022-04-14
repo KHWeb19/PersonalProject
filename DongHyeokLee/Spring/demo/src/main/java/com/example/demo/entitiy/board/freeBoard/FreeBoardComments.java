@@ -1,5 +1,6 @@
 package com.example.demo.entitiy.board.freeBoard;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -31,6 +32,8 @@ public class FreeBoardComments {
 
     @UpdateTimestamp
     private Date updDate;
+
+
 
     public FreeBoardComments(String writer, String content, Long boardNo){
             this.writer = writer;

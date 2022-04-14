@@ -3,7 +3,6 @@ package com.example.demo.controller.board.photoBoard;
 
 
 import com.example.demo.controller.board.photoBoard.request.PhotoBoardCommentsRequest;
-import com.example.demo.entitiy.board.freeBoard.FreeBoardComments;
 import com.example.demo.entitiy.board.photoBoard.PhotoBoardComments;
 import com.example.demo.service.board.photoBoard.PhotoBoardCommentsService;
 import lombok.extern.slf4j.Slf4j;

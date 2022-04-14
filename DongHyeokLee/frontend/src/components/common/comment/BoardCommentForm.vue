@@ -14,8 +14,7 @@
                 <div>
                     <strong class="writer"> {{ comment.writer }} </strong>
                     <span class="date"> 
-                       {{ comment.regDate.substring(0, 10) }} 
-                        {{ new Date(comment.regDate).toLocaleString("ko-KR", {timeZone: "Asia/Seoul"}).toString().substr(16, 8)}}
+                       {{ comment.regDate.substring(0, 19) }} 
                      </span>
                 </div>
                     <!-- 수정 버튼 누르기 전-->
@@ -36,11 +35,11 @@
                 </div>  
                  
                     <!-- 수정 버튼 누른 후 -->
-                <div class="content2" v-if ="edit[index] == true && comments.writer == writer" >
+                <div class="content2" v-if ="edit[index] == true && comment.writer == writer" >
                     <input  v-model="ediContent"> 
                     <!-- 수정 확인 버튼 -->
                      <v-btn class="check-btn" depressed small 
-                            @click="onModify(comments.commentNo,ediContent,index)" 
+                            @click="onModify(comment.commentNo,ediContent,index)" 
                             color="amber lighten-2">
                         <strong>완료</strong>
                     </v-btn>
@@ -78,6 +77,10 @@ export default {
           boardNo: {
             type: String,
             required: true
+        },
+        boardName:{
+            type: String,
+            required: true
         }
     },
     
@@ -88,7 +91,8 @@ export default {
         },
             onDelete (payload) {
             const commentNo = payload
-            axios.delete(`http://localhost:7777/photoBoardComments/${commentNo}`)
+            const boardName = this.boardName
+            axios.delete(`http://localhost:7777/${boardName}/${commentNo}`)
                     .then(() => {
                         this.$router.go()
                     })
@@ -99,8 +103,9 @@ export default {
             onModify ( numOfComment, ediContent , index) {
                 const commentNo = numOfComment
                 const content = ediContent
-             axios.put(`http://localhost:7777/photoBoardComments/${commentNo}`,
-                    { content, writer: this.writer , boardNo: this.boardNo, regDate: this.photoBoardComments[index].regDate})
+                const boardName = this.boardName
+             axios.put(`http://localhost:7777/${boardName}/${commentNo}`,
+                    { content, writer: this.writer , boardNo: this.boardNo, regDate: this.comments[index].regDate})
                     .then(res => {
                         if(res.data){
                         alert('게시물 수정 성공!')
@@ -116,7 +121,7 @@ export default {
                 //payload를 index로 해줬으면 뭔가 뭐가 들어갔는지 알기 쉬웠을 듯
                 this.edit[payload] = true
                 //수정하면 빈칸되서 이걸로 넣어줌
-                this.ediContent = this.photoBoardComments[payload].content
+                this.ediContent = this.comments[payload].content
                 this.$forceUpdate();
         },
             onCancel(index) {

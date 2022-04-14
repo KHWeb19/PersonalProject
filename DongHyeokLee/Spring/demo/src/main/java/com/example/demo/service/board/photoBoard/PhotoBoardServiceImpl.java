@@ -80,9 +80,8 @@ public class PhotoBoardServiceImpl implements PhotoBoardService {
                 file.delete();
             }
 
-            register(board, files);
-
         }
+        register(board, files);
     }
 
     @Override

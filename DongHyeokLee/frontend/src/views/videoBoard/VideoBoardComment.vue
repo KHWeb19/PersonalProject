@@ -1,12 +1,15 @@
 <template>
     <div>
-        <video-board-comment-form :videoBoardComments="videoBoardComments" :boardNo="boardNo" @submit="onSubmit"/>
+       <board-comment-form :comments="videoBoardComments" 
+                            :boardNo="boardNo"
+                            :boardName="`${this.boardName}`"
+                             @submit="onSubmit"/>
     </div>
 </template>
 
 <script>
 
-import VideoBoardCommentForm from '@/components/videoBoard/VideoBoardCommentForm.vue'
+import BoardCommentForm from '@/components/common/comment/BoardCommentForm.vue'
 import { mapActions, mapState } from 'vuex'
 import axios from 'axios'
 
@@ -18,9 +21,13 @@ export default {
             required: true
         }
     },
-
+    data () {
+    return {
+        boardName: 'photoBoardComments'
+    }
+    },
     components: {
-        VideoBoardCommentForm
+        BoardCommentForm
     },
         computed: {
         ...mapState(['videoBoardComments'])

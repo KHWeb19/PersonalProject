@@ -50,7 +50,7 @@
 <script>
 
 export default {
-    name: 'PhotoBoardModifyForm',
+    name: 'BoardModifyForm',
     props: {
         board: {
             type: Object,

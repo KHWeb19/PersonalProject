@@ -5,12 +5,14 @@ import com.example.demo.repository.board.videoBoard.VideoBoardRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 
 @Slf4j
@@ -22,9 +24,25 @@ public class VideoBoardServiceImpl implements VideoBoardService {
 
 
     @Override
-    public void register(VideoBoard videoBoard) {
-            repository.save(videoBoard);
+    public void register(VideoBoard board,
+                         MultipartFile files) throws Exception {
 
+
+        if (files != null) {
+            UUID uuid = UUID.randomUUID();
+
+            String fileName = uuid + "_" + files.getOriginalFilename();
+            FileOutputStream saveFile = new FileOutputStream(
+                    "../../frontend/src/assets/uploadVideo/" + fileName);
+
+            saveFile.write(files.getBytes());
+            saveFile.close();
+
+            board.setFileName(fileName);
+
+        }
+
+        repository.save(board);
     }
 
     @Override
@@ -48,28 +66,18 @@ public class VideoBoardServiceImpl implements VideoBoardService {
     }
 
     @Override
-    public void modify(VideoBoard board , Integer boardNo) {
+    public void modify(Integer boardNo, VideoBoard board, MultipartFile files) throws Exception {
+        log.info(board + " " );
 
-        String checkFileName = board.getFileName();
-        if( checkFileName == null ) {
-            Optional<VideoBoard> fileName = repository.findFileName(Long.valueOf(boardNo));
-            log.info("fileName is null");
-            VideoBoard videoBoard = fileName.get();
-            board.setFileName(videoBoard.getFileName());
+        if( files != null) {
 
-            repository.save(board);
-
-        }else {
-            Optional<VideoBoard> findFileName = repository.findFileName(Long.valueOf(boardNo));
-            VideoBoard fileName = findFileName.get();
-            File file = new File("../../frontend/src/assets/uploadVideo/" + fileName.getFileName());
+            File file = new File("../../frontend/src/assets/uploadVideo/" + board.getFileName());
 
             if (file.exists()) {
                 file.delete();
             }
-            repository.save(board);
         }
-
+        register(board, files);
     }
 
     @Override

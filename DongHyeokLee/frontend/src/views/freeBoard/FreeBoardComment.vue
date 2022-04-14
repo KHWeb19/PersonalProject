@@ -1,12 +1,15 @@
 <template>
     <div>
-        <free-board-comment-form :freeBoardComments="freeBoardComments" :boardNo="boardNo" @submit="onSubmit"/>
+        <board-comment-form :comments="freeBoardComments" 
+                            :boardNo="boardNo"
+                            :boardName="`${this.boardName}`"
+                             @submit="onSubmit"/>
     </div>
 </template>
 
 <script>
 
-import FreeBoardCommentForm from '@/components/freeBoard/FreeBoardCommentForm.vue'
+import BoardCommentForm from '@/components/common/comment/BoardCommentForm.vue'
 import { mapActions, mapState } from 'vuex'
 import axios from 'axios'
 
@@ -17,9 +20,13 @@ export default {
             required: true
         }
     },
-
+     data () {
+        return {
+            boardName: "freeBoardComments"
+        }
+    },
     components: {
-        FreeBoardCommentForm
+        BoardCommentForm
     },
         computed: {
         ...mapState(['freeBoardComments'])
