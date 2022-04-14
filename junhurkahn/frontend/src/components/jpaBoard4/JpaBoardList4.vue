@@ -36,6 +36,7 @@
                 </td>
                 <td align="center">
                     {{ board.regDate }}
+                    <button type="button" class="btn btn-danger" @click="onDelete(board)">Delete</button>
                 </td>
             </tr>
         </table>
@@ -43,12 +44,45 @@
 </template>
 
 <script>
+import axios from 'axios'
+import { mapActions,mapState} from 'vuex'
+
+
 export default {
+  
     name: 'JpaBoardList4',
     props: {
       jpaBoards4: {
-            type: Array
+            type: Array,
+             required: true
+        }
+    },
+
+      computed: {
+        ...mapState(['jpaBoard4'])
+       },
+
+        methods: {
+        ...mapActions([
+            'fetchJpaBoard4',
+            'fetchJpaBoardList4']),
+        onDelete (board) {
+            const { boardNo } = board;
+            //alert('지우는 게시물 번호: ' + boardNo)
+            axios.delete(`http://localhost:7777/62th/board4/${boardNo}`)
+            .then(() => {
+                alert('삭제 성공!')
+                this.fetchJpaBoardList4();
+            })
+            .catch(() => {
+                alert('삭제 실패! 문제 발생!')
+            })
+        }
+        },
+
+        findSearch() {
+            const keyword = this.$refs.keyword.value;
+            this.fetchJpaBoardList4(keyword);
         }
     }
-}
 </script>

@@ -30,6 +30,7 @@
                 <td align="center">
                     {{ board.regDate }} <button type="button" class="btn btn-primary btn-sm">완료</button>
 <button type="button" class="btn btn-secondary btn-sm">미완료</button> 
+ <button type="button" class="btn btn-danger" @click="onDelete(board)">Delete</button>
 
                      
                 </td>
@@ -41,45 +42,47 @@
 <script>
 
 
+import axios from 'axios'
+import { mapActions,mapState} from 'vuex'
 
 
 export default {
-    
-   
-    
+  
     name: 'JpaBoardList2',
     props: {
       jpaBoards2: {
-            type: Array
+            type: Array,
+             required: true
         }
     },
 
-    data() {
-      return {
-          Incomplete : '미완료',
-          false : '미완료',
-          true : '완료',
-           showCreditCard: true,
-      
-    
-           
-      }
-    },
+      computed: {
+        ...mapState(['jpaBoard2'])
+       },
 
-    methods: {
-        
-    
-        changebutton() {
-            
-            this. Incomplete= !this.Incomplete
-        },   
-            
-    },
+        methods: {
+        ...mapActions([
+            'fetchJpaBoard2',
+            'fetchJpaBoardList2']),
+        onDelete (board) {
+            const { boardNo } = board;
+            //alert('지우는 게시물 번호: ' + boardNo)
+            axios.delete(`http://localhost:7777/62th/board2/${boardNo}`)
+            .then(() => {
+                alert('삭제 성공!')
+                this.fetchJpaBoardList2();
+            })
+            .catch(() => {
+                alert('삭제 실패! 문제 발생!')
+            })
+        }
+        },
 
-    
-
-  
-}
+        findSearch() {
+            const keyword = this.$refs.keyword.value;
+            this.fetchJpaBoardList2(keyword);
+        }
+    }
 
       
 
