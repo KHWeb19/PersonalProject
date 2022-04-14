@@ -47,14 +47,13 @@ export default {
         chooseMat,
         chooseWay,
         file,
-        fileName,
+        filename,
       } = payload;
 
       let formData = new FormData();
 
       if (file != null) {
         formData.append("file", file);
-        formData.append("filename", fileName);
       }
       formData.append("name", name);
       formData.append("des", des);
@@ -65,6 +64,7 @@ export default {
       formData.append("way", chooseWay);
       formData.append("mat", chooseMat);
       formData.append("writer", writer);
+      formData.append("filename", filename);
 
       axios
         .put(`http://localhost:7777/foodBoard/${this.boardNo}`, formData, {

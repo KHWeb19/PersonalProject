@@ -267,6 +267,7 @@ export default {
       files: "",
       response: "",
       image: "",
+      filename: "",
 
       chooseKind: "",
       chooseMat: "",
@@ -314,7 +315,7 @@ export default {
     this.chooseMat = this.foodBoard.mat;
     this.chooseWay = this.foodBoard.way;
     this.chooseKind = this.foodBoard.kind;
-    this.fileName = this.foodBoard.fileName;
+    this.filename = this.foodBoard.filename;
   },
   methods: {
     onSubmit() {
@@ -328,7 +329,7 @@ export default {
         chooseKind,
         chooseMat,
         chooseWay,
-        fileName,
+        filename,
       } = this;
       const file = this.$refs.files.files[0];
       if (file == null) {
@@ -346,7 +347,7 @@ export default {
         chooseMat,
         chooseWay,
         file,
-        fileName,
+        filename,
       });
     },
     handlerFileUpload() {

@@ -71,9 +71,10 @@ public class FoodBoardServiceImpl implements FoodBoardService{
 
     @Override
     public void modify(FoodBoard foodBoard, @RequestParam(required = false) MultipartFile file) throws Exception {
-        log.info(foodBoard.getFilename());
-        if (foodBoard.getFilename().equals(Optional.empty())){
-            Path filePath = Paths.get("c:\\khweb19\\PersonalProject\\JiHoonLim\\frontend\\src\\assets\\upploadImg\\foodBoard" + foodBoard.getFilename());
+        log.info("fileName: " +foodBoard.getFilename());
+
+        if (!foodBoard.getFilename().isEmpty()){
+            Path filePath = Paths.get("c:\\khweb19\\PersonalProject\\JiHoonLim\\frontend\\src\\assets\\uploadImg\\foodBoard\\" + foodBoard.getFilename());
             Files.delete(filePath);
         }
 
@@ -88,9 +89,22 @@ public class FoodBoardServiceImpl implements FoodBoardService{
             saveFile.close();
 
             foodBoard.setFilename(fileName);
+            foodBoard.setFilepath("/files/" + fileName);
         }
 
         repository.save(foodBoard);
+    }
+
+    @Override
+    public void remove(Integer boardNo) throws Exception{
+        Optional<FoodBoard> selectFile = repository.findById(Long.valueOf(boardNo));
+        FoodBoard deleteFile = selectFile.get();
+
+        if (deleteFile.getFilename() != null){
+            Path filePath = Paths.get("c:\\khweb19\\PersonalProject\\JiHoonLim\\frontend\\src\\assets\\uploadImg\\foodBoard\\" + deleteFile.getFilename());
+            Files.delete(filePath);
+        }
+        repository.deleteById(Long.valueOf(boardNo));
     }
 
 }

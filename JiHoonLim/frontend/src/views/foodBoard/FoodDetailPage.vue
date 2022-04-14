@@ -29,7 +29,6 @@ export default {
   },
   methods: {
     ...mapActions(["fetchFoodBoard"]),
-    onDelete() {},
   },
 };
 </script>

@@ -95,7 +95,50 @@
                       >수정</v-btn
                     >
 
-                    <v-btn>삭제</v-btn>
+                    <v-dialog v-model="dialogDelete" width="460">
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn v-bind="attrs" v-on="on" @click="restCheckbox">
+                          삭제
+                        </v-btn>
+                      </template>
+
+                      <v-card>
+                        <v-card-title class="text-h5 orange lighten-3">
+                          게시물 삭제
+                        </v-card-title>
+                        <v-card-text class="mt-5 pb-0">
+                          게시물 삭제를 원하시면 <br />
+                          버튼을 체크하시고 <br />
+                          삭제 버튼을 클릭해주세요.
+                        </v-card-text>
+                        <v-container class="pt-0 pb-0" fluid>
+                          <v-checkbox
+                            v-model="checkbox"
+                            label="삭제 동의 버튼."
+                          ></v-checkbox>
+                        </v-container>
+                        <v-divider></v-divider>
+
+                        <v-card-actions>
+                          <v-spacer></v-spacer>
+                          <v-btn
+                            color="orange lighten-3"
+                            text
+                            :disabled="!checkbox"
+                            @click="onDelete"
+                          >
+                            삭제
+                          </v-btn>
+                          <v-btn
+                            color="orange lighten-3"
+                            text
+                            @click="dialogDelete = false"
+                          >
+                            취소
+                          </v-btn>
+                        </v-card-actions>
+                      </v-card>
+                    </v-dialog>
                   </div>
                 </div>
               </div>
@@ -108,6 +151,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "FoodDetailForm",
   props: {
@@ -119,12 +163,35 @@ export default {
   data() {
     return {
       checkWriteUser: false,
+      dialogDelete: false,
+      checkbox: false,
     };
   },
   created() {
     if (this.$store.state.userInfo.nickName == this.foodBoard.writer) {
       this.checkWriteUser = true;
+    } else {
+      this.checkWriteUser = false;
     }
+  },
+  methods: {
+    onDelete() {
+      const { boardNo, filename } = this.foodBoard;
+      axios
+        .delete(`http://localhost:7777/foodBoard/${boardNo}`, {
+          filename,
+        })
+        .then(() => {
+          alert("삭제 성공!");
+          this.$router.push({ name: "FoodListPage" });
+        })
+        .catch(() => {
+          alert("삭제 실패");
+        });
+    },
+    restCheckbox() {
+      this.checkbox = false;
+    },
   },
 };
 </script>

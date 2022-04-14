@@ -50,12 +50,20 @@ public class FoodBoardController {
 
     @PutMapping("/{boardNo}")
     public FoodBoard foodBoardModify(
-            @PathVariable("boardNo") Integer boardNo, FoodBoard foodBoard ,@RequestParam(required = false) MultipartFile file) throws Exception {
-        log.info("foodBoardModify() " +boardNo);
-        log.info("" +foodBoard);
+            @PathVariable("boardNo") Integer boardNo,  FoodBoard foodBoard ,@RequestParam(required = false) MultipartFile file) throws Exception {
+        log.info("foodBoardModify() " +boardNo + ""+ foodBoard.getFilename());
+
         foodBoard.setBoardNo(Long.valueOf(boardNo));
         service.modify(foodBoard,file);
 
         return foodBoard;
+    }
+
+    @DeleteMapping("/{boardNo}")
+    public void foodBoardRemove(
+            @PathVariable("boardNo") Integer boardNo,FoodBoard foodBoard) throws Exception {
+        log.info("foodBoardRemove()" +boardNo);
+
+        service.remove(boardNo);
     }
 }

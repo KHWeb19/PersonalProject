@@ -56,4 +56,7 @@ public class FoodBoard {
     @UpdateTimestamp
     private Date updDate;
 
+    public FoodBoard (String filename){
+        this.filename = filename;
+    }
 }
