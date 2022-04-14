@@ -6,6 +6,71 @@
             <h3>후기 작성하기</h3>
             <br>
             <review-page-form :reviews="reviews" @submit="onSubmit"/>
+
+            <v-data-table :headers="headerTitle" :items="reviews" class="elevation-0">
+            <template v-slot:[`item.reviewFile`]="{ item }">
+                <img v-bind:src="require(`@/assets/review/${item.reviewFile}`)" height="230px"/>
+            </template>   
+
+            <template v-slot:[`item.actions`] ="{ item }" v-if="checkuserInfo != null">
+            <v-icon
+                small
+                class="mr-2"
+                @click="editItem(item)"
+            >
+                mdi-pencil
+            </v-icon>
+            <v-icon
+                small
+                @click="deleteDialog = true, deleteItem(item.reviewNo)"
+            >
+                mdi-delete
+            </v-icon>
+            </template>
+        </v-data-table>
+
+        <form @submit.prevent="modifySubmit">
+            <v-dialog v-model="dialog" >
+                <v-card >
+                    <v-card-title >수정하기</v-card-title>
+                    <v-card-text>
+                        <v-container>
+                            <v-row>
+                                <v-col>
+                                    <p>파일 다시 올리기</p>
+                                    <input type="file" id="files2" ref="files2"
+                                        multiple v-on:change="handleFileUpload2()"/>
+                                </v-col>
+                                <v-col>
+                                    <p>내용 수정하기</p>
+                                    <textarea type="text" v-model="modifyContent" style="height: 200px; width:400px;"/><br>
+                                </v-col>
+                            </v-row>
+                        </v-container>
+                    </v-card-text>
+                    <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="white" @click="dialog = false">돌아가기</v-btn>
+                    <v-btn color="white" @click="modifySubmit">수정하기</v-btn>
+                    </v-card-actions>
+                </v-card>   
+            </v-dialog>
+        </form>
+        
+
+        <v-dialog v-model="deleteDialog">
+            <v-card>
+                 <v-card-title class="headline">정말 삭제하시겠습니까?</v-card-title>
+                <v-card-text>삭제하게 되면 내용은 다시 볼 수 없게 됩니다.</v-card-text>
+                <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="white" @click="deleteDialog = false">돌아가기</v-btn>
+                <v-btn color="white" @click="deleteDialog = false, deleteReview()">삭제합니다</v-btn>
+                </v-card-actions>
+            </v-card>   
+        </v-dialog>
+
+
         </div>
 
         <footer-form></footer-form>
@@ -24,7 +89,24 @@ import { mapState, mapActions } from 'vuex'
         data () {
             return {
                 id: (window.localStorage.getItem('id')),
-                content: ''
+                checkuserInfo: window.localStorage.getItem('token'),
+                content: '',
+                headerTitle: [
+                { text:'no', value: 'reviewNo', width:'70px'},
+                { text:'reviewFile', value: 'reviewFile', width:'70px'},
+                { text: 'content', value: 'content', width: "350px" },
+                { text: 'writer', value: 'id', width: "100px" },
+                { text: 'date', value: 'regDate', width: "200px" },
+                { text: 'Actions', value: 'actions', sortable: false ,  width: "70px" },
+                ],
+                dialog:false,
+                deleteDialog:false,
+                modifyNo:'',
+                deleteNo:'',
+                review: this.reviews,
+                modifyContent:'',
+                modifyRegDate:'',
+                reviewNo: '',
             }
         },
         components: {
@@ -69,6 +151,47 @@ import { mapState, mapActions } from 'vuex'
                         })
                         .catch(() => {
                             alert('문제발생')
+                        })
+            },
+            editItem(item){
+                this.dialog = true, 
+                this.modifyNo = item.reviewNo
+                this.modifyContent = item.content
+                this.modifyRegDate = item.regDate
+            },
+            handleFileUpload2() {
+                this.files2 = this.$refs.files2.files
+            },
+            modifySubmit(){
+                let formData = new FormData()
+
+                let fileInfo = {
+                    id: this.id,
+                    content : this.modifyContent,
+                    regDate : this.modifyRegDate,
+                    reviewNo : this.modifyNo
+                }
+                console.log(fileInfo)
+
+                formData.append(
+                    "info", new Blob([JSON.stringify(fileInfo)], {type:"application/json"})
+                )
+
+                if(this.files2 != null) {
+                    for(let idx = 0; idx <1; idx++) {
+                        formData.append('fileList', this.files2[idx])
+                    }
+                }
+
+                this.reviewNo = this.modifyNo
+
+                axios.put('http://localhost:7777/review/modify', formData)
+                        .then(() => {
+                            alert('수정되었습니다!')
+                            this.$router.go()
+                        })
+                        .catch(() => {
+                            alert('수정 실패!')
                         })
             }
         }

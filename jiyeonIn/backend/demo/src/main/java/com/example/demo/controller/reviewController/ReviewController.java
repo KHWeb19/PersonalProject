@@ -60,4 +60,41 @@ public class ReviewController {
     public List<Review> reviewList() {
         return service.list();
     }
+
+
+    @PutMapping("/modify")
+    public Review modifyReview (
+            @RequestPart(value = "info", required = false) Review info,
+            @RequestPart(value = "fileList",required = false) List<MultipartFile> fileList) throws IOException {
+
+        log.info("review info: " + info);
+        log.info("fileList: " +fileList);
+
+
+        if(fileList != null) {
+            try {
+                for(MultipartFile multipartFile: fileList){
+                    log.info("requestUploadFile() - Make file: " +
+                            multipartFile.getOriginalFilename());
+
+                    FileOutputStream writer = new FileOutputStream(
+                            "../../vue_frontend/book_cake/src/assets/review/" +info.getId() +"."+ multipartFile.getOriginalFilename());
+                    log.info("디렉토리에 파일 배치 성공!");
+
+                    writer.write(multipartFile.getBytes());
+                    writer.close();
+                    service.includeImgModify(info, multipartFile.getOriginalFilename());
+                }
+
+            } catch (Exception e) {
+                return null;
+            }
+        }else if(fileList == null) {
+            service.exceptImgModify(info);
+        }
+
+        log.info("reviewModify(): Success!!!");
+        return info;
+    }
+
 }
