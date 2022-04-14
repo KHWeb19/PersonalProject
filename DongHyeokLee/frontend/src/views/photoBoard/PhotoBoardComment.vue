@@ -1,6 +1,6 @@
 <template>
     <div>
-        <board-comment-form :comments="photoBoardComments" 
+        <board-comment-form :commentList="photoBoardComments" 
                             :boardNo="boardNo"
                             :boardName="`${this.boardName}`"
                              @submit="onSubmit"/>

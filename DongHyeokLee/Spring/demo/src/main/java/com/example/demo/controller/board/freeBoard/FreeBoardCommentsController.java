@@ -29,7 +29,7 @@ public class FreeBoardCommentsController {
         log.info("FreeBoardCommentsRegister()" + commentsRequest);
         commentsRequest.setBoardNo(Long.valueOf(boardNo));
 
-        service.register(commentsRequest);
+        service.register(boardNo,commentsRequest);
     }
 
     //댓글 목록
@@ -47,7 +47,10 @@ public class FreeBoardCommentsController {
             @RequestBody FreeBoardComments freeBoardComments) {
         log.info("freeBoardCommentModify(): " + freeBoardComments);
 
-        freeBoardComments.setCommentNo(Long.valueOf(commentNo));
+        freeBoardComments.builder()
+                        .commentNo(Long.valueOf(commentNo))
+                        .build();
+
         service.modify(freeBoardComments);
 
         return freeBoardComments;

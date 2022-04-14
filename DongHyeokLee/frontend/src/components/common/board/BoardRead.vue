@@ -60,7 +60,6 @@ export default {
     props: {
         board: {
             type: Object,
-            required: true
         },
         boardNo: {
             type: String,
@@ -74,7 +73,6 @@ export default {
         },
         boardName:{
             type: String,
-            required: true
         },
         accept:{
             type: String

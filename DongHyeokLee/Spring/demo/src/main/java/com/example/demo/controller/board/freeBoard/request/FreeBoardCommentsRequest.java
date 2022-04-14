@@ -5,15 +5,15 @@ import lombok.Data;
 @Data
 public class FreeBoardCommentsRequest {
     private String writer;
-    private String content;
+    private String comment;
     private Long boardNo;
 
     public FreeBoardCommentsRequest() {
     }
 
-    public FreeBoardCommentsRequest(String writer, String content, Long boardNo){
+    public FreeBoardCommentsRequest(String writer, String comment, Long boardNo){
         this.writer = writer;
-        this.content = content;
+        this.comment = comment;
         this.boardNo = boardNo;
 
     }

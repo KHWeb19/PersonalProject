@@ -1,6 +1,6 @@
 <template>
     <div>
-       <board-comment-form :comments="videoBoardComments" 
+       <board-comment-form :commentList="videoBoardComments" 
                             :boardNo="boardNo"
                             :boardName="`${this.boardName}`"
                              @submit="onSubmit"/>

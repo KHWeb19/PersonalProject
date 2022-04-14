@@ -55,7 +55,10 @@ public class FreeBoardController {
             @RequestBody FreeBoard freeBoard) {
         log.info("freeBoardModify(): " + freeBoard);
 
-        freeBoard.setBoardNo(Long.valueOf(boardNo));
+        freeBoard.builder()
+                .boardNo(Long.valueOf(boardNo))
+                .build();
+
         service.modify(freeBoard);
 
         return freeBoard;

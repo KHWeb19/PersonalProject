@@ -32,11 +32,6 @@ public class FreeBoardServiceImpl implements FreeBoardService {
         return repository.findAll(Sort.by(Sort.Direction.DESC, "boardNo"));
     }
 
-   /* @Override
-    public Page<FreeBoard> list(PageRequest pageRequest) {
-        return repository.findAll(pageRequest);
-    }*/
-
     @Override
     public FreeBoard read(Integer boardNo) {
         Optional<FreeBoard> maybeReadBoard = repository.findById(Long.valueOf(boardNo));
@@ -45,8 +40,9 @@ public class FreeBoardServiceImpl implements FreeBoardService {
             log.info("Can't read board!!");
             return null;
         }
+
         FreeBoard readBoard = maybeReadBoard.get();
-        readBoard.setCount(readBoard.getCount()+1);
+        readBoard.builder().count(readBoard.getCount()+1).build();
         repository.save(readBoard);
 
         return readBoard;

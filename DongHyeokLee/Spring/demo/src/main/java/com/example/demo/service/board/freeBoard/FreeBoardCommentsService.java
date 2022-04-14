@@ -7,7 +7,7 @@ import com.example.demo.entitiy.board.freeBoard.FreeBoardComments;
 import java.util.List;
 
 public interface FreeBoardCommentsService {
-    public void register (FreeBoardCommentsRequest commentsRequest);
+    public void register (Integer boardNo, FreeBoardCommentsRequest commentsRequest);
     public List<FreeBoardComments> list (Integer boardNo);
     public void modify (FreeBoardComments freeBoardComments);
     public void remove (Integer boardNo);

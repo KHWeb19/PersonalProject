@@ -10,6 +10,6 @@ import java.util.List;
 
 public interface FreeBoardCommentsRepository extends JpaRepository<FreeBoardComments, Long> {
 
-    @Query("select m from FreeBoardComments m where m.boardNo = :boardNo")
-    List<FreeBoardComments> findComment(@Param("boardNo") Long boardNo);
+    @Query("select m from FreeBoardComments m join m.freeBoard tb where tb.boardNo = :boardNo")
+    List<FreeBoardComments> findAllFreeBoardCommentsByBoardId(@Param("boardNo") Long boardNo);
 }

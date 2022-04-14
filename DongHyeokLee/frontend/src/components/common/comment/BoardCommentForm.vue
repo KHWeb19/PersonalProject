@@ -4,22 +4,22 @@
         <form @submit.prevent="onSubmit">
            <h4 class="commentsList">댓글</h4>
            <div class="commenter"> <strong>{{ this.writer }}</strong> </div>     
-                <input type="text" class="commentRegister" v-model="content" placeholder="댓글을 작성하세요"/>
+                <input type="text" class="commentRegister" v-model="comment" placeholder="댓글을 작성하세요"/>
             <v-btn class="register-btn" type="submit" color="amber lighten-2">
                 <strong>등록</strong>
             </v-btn>  
         </form>
         <!-- 댓글 리스트 -->
-        <div class="button" border="1" v-for="(comment, index) in comments" :key="index" >
+        <div class="button" border="1" v-for="(comments, index) in commentList" :key="index" >
                 <div>
-                    <strong class="writer"> {{ comment.writer }} </strong>
+                    <strong class="writer"> {{ comments.writer }} </strong>
                     <span class="date"> 
-                       {{ comment.regDate.substring(0, 19) }} 
+                       {{ comments.regDate.substring(0, 19) }} 
                      </span>
                 </div>
                     <!-- 수정 버튼 누르기 전-->
-                <div class="content1" v-if ="edit[index] == null && comment.writer == writer">
-                     <input  v-model="comment.content" disabled/>
+                <div class="content1" v-if ="edit[index] == null && comments.writer == writer">
+                     <input  v-model="comments.comment" disabled/>
                     <!-- 수정 버튼 -->
                     <v-btn class="modify-btn" depressed small 
                            @click="onEdit(index)" color="amber lighten-2">
@@ -27,7 +27,7 @@
                     </v-btn>
                     <!-- 삭제 버튼 -->
                     <v-btn depressed small 
-                           @click="onDelete(comment.commentNo)">
+                           @click="onDelete(comments.commentNo)">
                         <v-icon >
                         mdi-delete    
                         </v-icon> 
@@ -35,11 +35,11 @@
                 </div>  
                  
                     <!-- 수정 버튼 누른 후 -->
-                <div class="content2" v-if ="edit[index] == true && comment.writer == writer" >
-                    <input  v-model="ediContent"> 
+                <div class="content2" v-if ="edit[index] == true && comments.writer == writer" >
+                    <input class="modify" v-model="ediComment"> 
                     <!-- 수정 확인 버튼 -->
                      <v-btn class="check-btn" depressed small 
-                            @click="onModify(comment.commentNo,ediContent,index)" 
+                            @click="onModify(comments.commentNo,ediComment,index)" 
                             color="amber lighten-2">
                         <strong>완료</strong>
                     </v-btn>
@@ -61,20 +61,20 @@ export default {
     name: 'PhotoBoardCommentsListForm',
     data () {
         return {
-            content:'',
+            comment:'',
             writer: this.$store.state.userInfo.nickname,
             nickname:'',
             commnetNo:'',
             edit:[],
-            ediContent: ''
+            ediComment: ''
         }
     },
     props: {
-      comments: {
+      commentList: {
             type: Array,
             required: true
         },
-          boardNo: {
+        boardNo: {
             type: String,
             required: true
         },
@@ -86,26 +86,28 @@ export default {
     
     methods: {
         onSubmit () {
-            const { writer, content } = this
-            this.$emit('submit', { writer, content })
+            const { writer, comment } = this
+            this.$emit('submit', { writer, comment })
         },
             onDelete (payload) {
             const commentNo = payload
             const boardName = this.boardName
             axios.delete(`http://localhost:7777/${boardName}/${commentNo}`)
                     .then(() => {
+                        alert('삭제 성공')
                         this.$router.go()
                     })
                     .catch(() => {
                         alert('삭제 실패! 문제 발생!')
                     })
         },
-            onModify ( numOfComment, ediContent , index) {
+            onModify( numOfComment, ediComment , index) {
                 const commentNo = numOfComment
-                const content = ediContent
+                const comment = ediComment
                 const boardName = this.boardName
+                console.log(this.boardNo + "" + this.writer)
              axios.put(`http://localhost:7777/${boardName}/${commentNo}`,
-                    { content, writer: this.writer , boardNo: this.boardNo, regDate: this.comments[index].regDate})
+                    {comment, writer: this.writer , boardNo: this.boardNo, regDate: this.commentList[index].regDate})
                     .then(res => {
                         if(res.data){
                         alert('게시물 수정 성공!')
@@ -121,7 +123,7 @@ export default {
                 //payload를 index로 해줬으면 뭔가 뭐가 들어갔는지 알기 쉬웠을 듯
                 this.edit[payload] = true
                 //수정하면 빈칸되서 이걸로 넣어줌
-                this.ediContent = this.comments[payload].content
+                this.ediComment = this.commentList[payload].comment
                 this.$forceUpdate();
         },
             onCancel(index) {
@@ -150,6 +152,12 @@ export default {
     margin-top: 10px;
 }
 .commentRegister {
+    border: 3px solid grey;
+    width: 600px;
+    outline: none;
+    color:black
+}
+.modify{
     border: 3px solid grey;
     width: 600px;
     outline: none;
@@ -185,7 +193,7 @@ export default {
     margin-left: 315px;
 }
 .check-btn{
-    margin-left: 313px;
+    margin-left: 490px;
 }
 .date {
     color: black;

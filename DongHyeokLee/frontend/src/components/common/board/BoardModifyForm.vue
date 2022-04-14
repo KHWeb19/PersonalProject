@@ -54,7 +54,6 @@ export default {
     props: {
         board: {
             type: Object,
-            required: true
         },
         accept:{
             type: String

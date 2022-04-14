@@ -41,14 +41,14 @@ export default {
                      headers: {
                          'Content-Type' : 'multipart/form-data'
                         }
-                    }).then((res)=>{
+                    }).then(()=>{
                        
-                        if(res.data != null){
+                      
                         alert('등록 완료')
                          this.$router.push({
                         name: 'PhotoBoardListPage'
                         })
-                        }
+                      
                     })
                     .catch(() => {
                         alert('문제 발생!')

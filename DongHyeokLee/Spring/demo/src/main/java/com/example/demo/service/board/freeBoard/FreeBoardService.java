@@ -9,7 +9,6 @@ import java.util.List;
 
 public interface FreeBoardService {
         public void register (FreeBoard freeBoard);
-        //public Page<FreeBoard> list (PageRequest pageRequest);
         public List<FreeBoard> list();
         public FreeBoard read (Integer boardNo);
         public void modify (FreeBoard board);
