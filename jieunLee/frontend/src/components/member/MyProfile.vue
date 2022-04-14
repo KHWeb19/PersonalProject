@@ -9,7 +9,7 @@
                 </div>
                 <div style="width: 620px; margin-left: 20px;">
                     <div style="display: flex;">
-                        <h1>{{member.memberId}}</h1> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <div style="font-size: 28px">{{member.memberId}}</div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <router-link style="text-decoration: none;" :to="{
                             name: 'AccountsEditPage',
                             params: {memberNo: member.memberNo.toString()}}">
@@ -17,12 +17,15 @@
                         </router-link>
                     </div>
                     <br/>
-                    <div style="font-weight: bold">
-                        {{member.memberName}}
+                    {{member.memberName}}
+                    <div v-if="member.memberWeb">
+                        {{member.memberWeb}} 
+                        <br/>
+                        {{member.memberIntro}} 
                     </div>
-                    {{member.memberWeb}} 
-                    <br/>
-                    {{member.memberIntro}} 
+                    <div v-else>
+                        {{member.memberIntro}} 
+                    </div>
                 </div>
             </div>
             <br/>

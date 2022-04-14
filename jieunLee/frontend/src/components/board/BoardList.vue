@@ -66,7 +66,7 @@
                             <router-link style="text-decoration: none; color: grey" :to="{
                                 name: 'BoardReadPage',
                                 params: {boardNo: board.boardNo.toString()}}">
-                            댓글 모두 보기
+                                댓글 모두 보기
                             </router-link>
                         </td>
                     </tr>
