@@ -8,8 +8,10 @@
             <review-page-form :reviews="reviews" @submit="onSubmit"/>
 
             <v-data-table :headers="headerTitle" :items="reviews" class="elevation-0">
-            <template v-slot:[`item.reviewFile`]="{ item }">
-                <img v-bind:src="require(`@/assets/review/${item.reviewFile}`)" height="230px"/>
+
+            <template v-slot:[`item.reviewFile`]="{ item }" >
+                <img v-if="item.reviewFile != null" v-bind:src="require(`@/assets/review/${item.reviewFile}`)" height="230px"/>
+                <img v-if="item.reviewFile == null" v-bind:src="require(`@/assets/review/nullImg.png`)" height="230px"/>
             </template>   
 
             <template v-slot:[`item.actions`] ="{ item }" v-if="checkuserInfo != null">
