@@ -3,7 +3,7 @@
       <v-container>
               <v-row>
                   <v-col v-for="board in paginatedData" :key="board.boardNo" class="d-flex child-flex" cols="4">
-                      <router-link :to="{ name: readName , params: { boardNo: board.boardNo.toString() } }">
+                      <router-link :to="{ name:  readPage , params: { boardNo: board.boardNo.toString() } }">
                     <v-card class="img-card" >
                         <div>
                           <v-img :src="require(`@/assets/uploadImg/${board.fileName}`)" height="300" ></v-img>
@@ -39,7 +39,7 @@
 
          <div>
          <router-link class="register-btn"
-                     :to="{ name: `${this.registerName}`}">
+                     :to="{ name: registerPage }">
           <v-btn v-if="$store.state.isLogin == true" class="amber lighten-2">
              <strong>등록</strong>
           </v-btn>
@@ -58,10 +58,10 @@ export default {
         boards: {
             type: Array
         },
-        registerName:{
+        registerPage:{
             type: String
         },
-        readName:{
+        readPage:{
             type:String
         }
     },
@@ -70,6 +70,7 @@ export default {
             pageNum: 0,
             pageSize:6,
             filePath:[]
+           
         }
     },
     methods: {
@@ -97,7 +98,13 @@ export default {
              end = start + this.pageSize
       
             return this.boards.slice(start, end);
+        },
+        fileNameAllot(){
+          return this.boards[this.boards.length - 1].fileName  
         }
+          
+     
+       
     }
 }
 

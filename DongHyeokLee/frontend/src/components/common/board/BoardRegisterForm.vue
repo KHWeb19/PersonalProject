@@ -36,7 +36,7 @@
                <strong>등록</strong>
             </v-btn>
             <v-btn>
-            <router-link class="cancel" :to="{ name: `${this.listName}` }">
+            <router-link class="cancel" :to="{ name: listPage }">
                <strong>취소</strong>
             </router-link>
             </v-btn>
@@ -49,11 +49,11 @@
 export default {
     name: 'PhotoBoardRegisterForm',
     props: {
-        listName:{
-            type:String
+        listPage:{
+            type: String
         },
         accept:{
-            type:String
+            type: String
         }
     },
     data () {
@@ -76,18 +76,19 @@ export default {
 
         },
           handleFileUpload () {
-              
-                this.files = this.$refs.files.files
-                
-                let fileLength = this.files[0].name.length
-                let fileDot = this.files[0].name.lastIndexOf(".")
-                let fileType = this.files[0].name.substring(fileDot+1, fileLength)
-                console.log(fileType + " " + this.accept )
+                this.files = this.$refs.files.files[0]
+
+                this.fileName = this.files.name
+
+                let fileLength = this.fileName.length
+                let fileDot = this.fileName.lastIndexOf(".")
+                let fileType = this.fileName.substring(fileDot+1, fileLength)
+                //console.log(fileType + " " + this.accept )
                 //let fileTyepLowerCase = fileType.toLowerCase()
                 //console.log(fileTyepLowerCase)
                //vue에서 gif 대문자로 GIF가 되면 오류생겨서 확장자 이래 3개만 받음 
                
-               if(this.accept === fileType){
+               if(this.accept === "." + fileType){
                     alert('첨부 되었습니다')
                     
                 } else{

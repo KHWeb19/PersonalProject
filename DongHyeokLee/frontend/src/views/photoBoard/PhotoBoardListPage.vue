@@ -2,8 +2,8 @@
     <div id="photo-board">
         <h2>사진게시판</h2>
         <board-list :boards="photoBoards" 
-                    :registerName="`${this.registerName}`"
-                    :readName="`${this.readName}`"/>
+                    :registerPage="`${registerPage}`"
+                    :readPage="`${readPage}`"/>
     </div>   
 </template>
 
@@ -22,8 +22,8 @@ export default {
     },
     data () {
         return {
-            registerName : 'PhotoBoardRegisterPage',
-            readName: 'PhotoBoardReadPage'
+            registerPage : 'PhotoBoardRegisterPage',
+            readPage: 'PhotoBoardReadPage'
         }
     },
     computed: {

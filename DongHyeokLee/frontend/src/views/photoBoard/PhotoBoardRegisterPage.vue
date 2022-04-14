@@ -1,7 +1,7 @@
 <template>
     <div id="register" align="center">
         <h2>게시물 작성</h2>
-        <board-register-form :listName="listName"
+        <board-register-form :listPage="`${listPage}`"
                              :accept="accept" 
                              @submit="onSubmit"/>   
     </div>
@@ -20,35 +20,39 @@ export default {
     },
     data () {
         return{
-            listName : 'PhotoBoardListPage',
+            listPage : 'PhotoBoardListPage',
             accept: '.jpg'
         }
     },
     methods: {
-               
-         onSubmit (payload) {
+    async onSubmit (payload) {
             const { title, content, writer, files } = payload
             let formData = new FormData()
+            let board = {
+                    title,
+                    content,
+                    writer
+            }
     
             formData.append('files',files)
-            formData.append('title',title)
-            formData.append('content',content)
-            formData.append('writer', writer)
+            formData.append('board',new Blob([JSON.stringify(board)],{type: "application/json"}))
             
-                axios.post('http://localhost:7777/photoBoard/register', formData,{
+            await axios.post('http://localhost:7777/photoBoard/register', formData,{
                      headers: {
                          'Content-Type' : 'multipart/form-data'
                         }
                     }).then(()=>{
-                         alert('등록 성공')
-                          this.$router.push({
-                          name: 'PhotoBoardListPage'
-                        })
-                           
+                        alert('등록 완료')
+                      
                     })
                     .catch(() => {
                         alert('문제 발생!')
                     })
+
+                    this.$router.push({
+                    name: 'PhotoBoardListPage'
+                    })
+            
         }
     }
 }

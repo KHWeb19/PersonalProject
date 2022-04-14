@@ -10,12 +10,12 @@
             </tr>
             <tr>
                 <td>
-                    <input type="text" v-model="title" placeholder="제목을 입력하세요"/>
+                    <input type="text" v-model="title"/>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <textarea cols="70" rows="17" v-model="content" placeholder="본문을 작성하세요">
+                    <textarea cols="70" rows="17" v-model="content">
                     </textarea>
                 </td>
             </tr>
@@ -24,8 +24,7 @@
         <v-container>
             <div>
                 <label>
-                    <input type="file" id="files" ref="files" accept=".jpg, .png, .gif" v-on:change="handleFileUpload()"/>
-                    <!-- 여러개 파일 이름을 어떻게 저장 해야할지 감 안 잡혀서 multiple 기능 제거 -->
+                    <input type="file" id="files" ref="files" :accept="accept" v-on:change="handleFileUpload()"/>
                 </label>
             </div>
         </v-container>
@@ -37,8 +36,8 @@
                     <strong>완료</strong>
                 </v-btn>
                
-                <router-link :to="{ name: 'PhotoBoardReadPage',
-                             params: { boardNo: photoBoard.boardNo.toString() } }">
+                <router-link :to="{ name: readPage,
+                             params: { boardNo: board.boardNo.toString() } }">
                      <v-btn class="cancel">                
                         취소
                      </v-btn>
@@ -53,15 +52,26 @@
 export default {
     name: 'PhotoBoardModifyForm',
     props: {
-        photoBoard: {
+        board: {
             type: Object,
             required: true
-        }
+        },
+        accept:{
+            type: String
+        },
+        readPage:{
+            type: String
+        },
+        boardNo: {
+            type: String,
+            required: true
+        },
     },
     data () {
         return {
             title: '',
             content: '',
+            files:'',
             writer: this.$store.state.userInfo.nickname
         }
     },
@@ -76,26 +86,26 @@ export default {
             }
         },
         handleFileUpload () {
-                this.files = this.$refs.files.files
-                let fileLength = this.files[0].name.length
-                let fileDot = this.files[0].name.lastIndexOf(".")
-                let fileType = this.files[0].name.substring(fileDot+1, fileLength)
-                //let fileTyepLowerCase = fileType.toLowerCase()
-                //console.log(fileTyepLowerCase)
-                //vue에서 gif 대문자로 GIF가 되면 오류생겨서 확장자 이래 3개만 받음
-                if(fileType == "jpg" || fileType == "png" || fileType == "gif"){
+                this.files = this.$refs.files.files[0]
+                
+                this.fileName = this.files.name
+                
+                let fileLength = this.fileName.length
+                let fileDot = this.fileName.lastIndexOf(".")
+                let fileType = this.fileName.substring(fileDot+1, fileLength)
+    
+               if(this.accept === "." + fileType){
                     alert('첨부 되었습니다')
                     
                 } else{
                     alert('확장자를 확인하세요')
                     this.$refs.files.value = ''
-                  //확장자 다를경우 파일 초기화  
-                }  
+                } 
         }
     },
     created () {
-        this.title = this.photoBoard.title
-        this.content = this.photoBoard.content
+        this.title = this.board.title
+        this.content = this.board.content
     }
 }
 </script>
