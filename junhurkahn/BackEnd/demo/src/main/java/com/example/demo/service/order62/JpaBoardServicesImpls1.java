@@ -30,6 +30,12 @@ public class JpaBoardServicesImpls1 implements JpaBoardServices1 {
         return repository.findAll(Sort.by(Sort.Direction.DESC, "boardNo"));
     }
 
+
+    @Override
+    public List<JpaBoards1> search(String keyword) {
+        return repository.findAllByTitleContainingOrWriterContainingOrWriter1Containing(keyword, keyword, keyword);
+    }
+
     @Override
     public JpaBoards1 read(Integer boardNo) {
         Optional<JpaBoards1> maybeReadBoard = repository.findById(Long.valueOf(boardNo));

@@ -27,10 +27,15 @@ public class SmartNoteController1 {
     }
 
     @GetMapping("/list1")
-    public List<JpaBoards1> jpaBoardList () {
+    public List<JpaBoards1> jpaBoardList (String keyword) {
         log.info("jpaBoardList1()");
 
-        return service.list();
+        if (keyword == null) {
+            return service.list();
+        } else {
+            return service.search(keyword);
+        }
+
     }
 
     @GetMapping("/{boardNo}")

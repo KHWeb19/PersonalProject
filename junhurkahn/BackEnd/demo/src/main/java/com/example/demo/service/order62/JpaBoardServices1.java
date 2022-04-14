@@ -11,4 +11,7 @@ public interface JpaBoardServices1 {
     public JpaBoards1 read (Integer boardNo);
     public void modify (JpaBoards1 board);
     public void remove (Integer boardNo);
+
+    public List<JpaBoards1> search(String keyword);
+
 }

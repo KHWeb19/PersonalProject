@@ -3,8 +3,15 @@
     <div>
         <h3>계좌번호 목록</h3>
     <div class="input-group mb-3">
-  <span class="input-group-text" id="inputGroup-sizing-default">Find</span>
-  <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+  
+  <span class="input-group-text" id="inputGroup-sizing-default" @click="findSearch">Find</span>
+
+  <input type="text" 
+        class="form-control" 
+        ref="keyword"
+        aria-label="Sizing example input" 
+        aria-describedby="inputGroup-sizing-default">
+
 </div>
         <table class="table">
             
@@ -41,7 +48,8 @@
 
 
                 <td align="center">
-                    {{ board.regDate }}  <button type="button" class="btn btn-danger" @click="onDelete">Delete</button>
+                    {{ board.regDate }}  
+                    <button type="button" class="btn btn-danger" @click="onDelete(board)">Delete</button>
                     
                 </td>
             </tr>
@@ -73,25 +81,29 @@ export default {
      
 
      methods: {
-        ...mapActions(['fetchJpaBoard1']),
-        onDelete () {
-            const { boardNo } = this.jpaBoard1
-            alert('지우는 게시물 번호: ' + boardNo)
+        ...mapActions([
+            'fetchJpaBoard1',
+            'fetchJpaBoardList1']),
+        onDelete (board) {
+            const { boardNo } = board;
+            //alert('지우는 게시물 번호: ' + boardNo)
             axios.delete(`http://localhost:7777/62th/board1/${boardNo}`)
-                    .then(() => {
-                        alert('삭제 성공!')
-                        this.$router.push({ name: 'JpaBoardList1' })
-                    })
-                    .catch(() => {
-                        alert('삭제 실패! 문제 발생!')
-                    })
+            .then(() => {
+                alert('삭제 성공!')
+                this.fetchJpaBoardList1();
+            })
+            .catch(() => {
+                alert('삭제 실패! 문제 발생!')
+            })
+        },
+
+        findSearch() {
+            const keyword = this.$refs.keyword.value;
+            this.fetchJpaBoardList1(keyword);
         }
     }
-
-    
-
    
-        }
+}
     
 
 

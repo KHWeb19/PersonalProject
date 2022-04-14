@@ -55,8 +55,12 @@ export default {
             })
     },
 
-    fetchJpaBoardList1 ({ commit }) {
-        return axios.get('http://localhost:7777/62th/board1/list1')
+    fetchJpaBoardList1 ({ commit }, keyword) {
+        let url = 'http://localhost:7777/62th/board1/list1';
+        if (keyword != undefined) {
+            url += '?keyword='+encodeURIComponent(keyword);
+        }
+        return axios.get(url)
             .then((res) => {
                 commit(FETCH_JPA_BOARD_LIST1, res.data)
             })
