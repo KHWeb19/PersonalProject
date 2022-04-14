@@ -1,8 +1,7 @@
 create table member(
-    memberNo int not null auto_increment,
 	id varchar(20) not null,
-	password varchar(15) not null,
-	phoneNumber varchar(11) not null,
+	pw varchar(15) not null,
+	pn varchar(11) not null,
 	email varchar(50) not null,
 	PRIMARY KEY (memberNo)
 );

@@ -1,82 +1,69 @@
-
 package com.example.demo.service;
 
 import com.example.demo.Controller.request.MemberRequest;
 import com.example.demo.entity.Member;
-import com.example.demo.entity.MemberAuth;
-import com.example.demo.repository.MemberAuthRepository;
 import com.example.demo.repository.MemberRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Slf4j
 @Service
-public class MemberServiceImpl implements com.example.demo.service.MemberService {
+public class MemberServiceImpl implements MemberService{
 
     @Autowired
-    private MemberRepository memberRepository;
-
-    @Autowired
-    private MemberAuthRepository memberAuthRepository;
+    private MemberRepository repository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
 
 
-    @Transactional
     @Override
-    public void register(MemberRequest memberRequest) {
-        String encodedPassword = passwordEncoder.encode(memberRequest.getPw());
-        memberRequest.setPw(encodedPassword);
+    public void register(Member member) {
+        String encodedPassword = passwordEncoder.encode(member.getPw());
+        member.setPw(encodedPassword);
 
-        Member memberEntity = new Member(
-                memberRequest.getId(), memberRequest.getPw()
-        );
-
-        memberRepository.save(memberEntity);
-
-        MemberAuth authEntity = new MemberAuth(memberRequest.getAuth(), memberEntity);
-
-        memberAuthRepository.save(authEntity);
+        repository.save(member);
     }
 
-    @Transactional
     @Override
     public MemberRequest login(MemberRequest memberRequest) {
-        Optional<Member> maybeMember = memberRepository.findByUserId(memberRequest.getId());
+        Optional<Member> maybeMember = repository.findByUserId(memberRequest.getId());
 
         if (maybeMember.equals(Optional.empty())) {
-            log.info("no Id");
+            log.info("no id");
             return null;
         }
 
         Member loginMember = maybeMember.get();
 
-        if (!passwordEncoder.matches(memberRequest.getPw(), loginMember.getPassword())) {
+        if (!passwordEncoder.matches(memberRequest.getPw(), loginMember.getPw())) {
             log.info("wrong password");
             return null;
         }
 
-        Optional<MemberAuth> maybeMemberAuth =
-                memberAuthRepository.findByMemberNo(loginMember.getMemberNo());
-
-        if (maybeMemberAuth == null) {
-            log.info("no auth");
-            return null;
+        if (loginMember.getId().equals(memberRequest.getId())) {
+            memberRequest.setMemberNo(loginMember.getMemberNo());
+            memberRequest.setId(loginMember.getId());
+            memberRequest.setPn(loginMember.getPn());
+            memberRequest.setEmail(loginMember.getEmail());
         }
 
-        MemberAuth memberAuth = maybeMemberAuth.get();
-
-        MemberRequest response = new MemberRequest(
-                memberRequest.getId(),
-                null,
-                memberAuth.getAuth());
+        MemberRequest response = new MemberRequest(memberRequest.getMemberNo(), memberRequest.getId(), null,
+                memberRequest.getPn(), memberRequest.getEmail());
 
         return response;
+    }
+
+    @Override
+    public void modify(Member member) {
+
+        String encodedPassword = passwordEncoder.encode(member.getPw());
+        member.setPw(encodedPassword);
+
+        repository.save(member);
     }
 }

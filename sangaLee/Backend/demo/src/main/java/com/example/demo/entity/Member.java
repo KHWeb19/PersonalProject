@@ -1,29 +1,38 @@
 package com.example.demo.entity;
 
+import com.sun.istack.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Data
 @Entity
 @NoArgsConstructor
-@Table(name = "member")
 public class Member {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long memberNo;
 
-    @Column(length = 20, nullable = false)
-    private String userId;
+    @NotNull
+    @Column(length = 20)
+    private String id;
 
-    @Column(length = 15, nullable = false)
-    private String password;
+    @NotNull
+    @Column(length = 15)
+    private String pw;
+
+    @NotNull
+    @Column(length = 11)
+    private String pn;
+
+    @NotNull
+    @Column(length = 50)
+    private String email;
 
     @CreationTimestamp
     private Date regDate;
@@ -31,34 +40,11 @@ public class Member {
     @UpdateTimestamp
     private Date updDate;
 
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<MemberAuth> authList = new ArrayList<>();
-
-    public Member (String userId, String password) {
-        this.userId = userId;
-        this.password = password;
-    }
-
-    public Member (String userId, String password, MemberAuth auth) {
-        this.userId = userId;
-        this.password = password;
-
-        if(auth != null) {
-            changeAuth(auth);
-        }
-    }
-
-    public void changeAuth(MemberAuth auth) {}
-
-    public void addAuth (MemberAuth auth) {
-        if (authList == null) {
-            authList = new ArrayList();
-        }
-
-        authList.add(auth);
-    }
-
-    public void clearAuthList () {
-        authList.clear();
+    public Member (Long memberNo, String userId, String password, String userPn, String userEmail) {
+        this.memberNo = memberNo;
+        this.id = userId;
+        this.pw = password;
+        this.pn = userPn;
+        this.email = userEmail;
     }
 }
