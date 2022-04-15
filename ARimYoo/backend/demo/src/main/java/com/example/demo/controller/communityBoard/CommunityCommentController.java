@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package com.example.demo.controller.communityBoard;
 
 import com.example.demo.entity.communityBoard.CommunityCommentBox;
 import com.example.demo.service.communityBoard.CommunityCommentService;

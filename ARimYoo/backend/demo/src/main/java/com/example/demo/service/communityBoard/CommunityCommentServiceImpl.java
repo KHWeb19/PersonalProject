@@ -31,7 +31,7 @@ public class CommunityCommentServiceImpl implements CommunityCommentService {
     @Override
     public List<CommunityCommentBox> list (Long boardNo) {
        CommunityBoard communityBoard = boardRepository.findById(boardNo).get();
-        return repository.findCommunityCommentByCommunityBoard(communityBoard);
+        return repository.findCommunityCommentBoxByCommunityBoard(communityBoard);
     }
 
     @Override

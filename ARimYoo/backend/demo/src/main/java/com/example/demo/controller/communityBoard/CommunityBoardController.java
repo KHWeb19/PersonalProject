@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package com.example.demo.controller.communityBoard;
 
 import com.example.demo.controller.Request.keywordRequest;
 import com.example.demo.entity.communityBoard.CommunityBoard;
