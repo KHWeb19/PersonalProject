@@ -51,13 +51,13 @@
                 <p>* 픽업 시간 : {{BookingBoard.time}}</p>
             </v-row>
             <v-row >
-                <p>* 디자인 : {{BookingBoard.design}}</p>
+                <p>* 디자인 : {{cakeLists[((BookingBoard.cakeArrNo) -1)].design}}</p>
             </v-row>
             <v-row >
-                <p>* 사이즈 : {{BookingBoard.size}}</p>
+                <p>* 사이즈 : {{cakeLists[((BookingBoard.cakeArrNo) -1)].size}}</p>
             </v-row>
             <v-row >
-                <p>* 가격 : {{BookingBoard.price}}</p>
+                <p>* 가격 : {{cakeLists[((BookingBoard.cakeArrNo) -1)].price}}</p>
             </v-row>
             <v-row >
                 <p>* 요청사항 : {{BookingBoard.contents}}</p>
@@ -83,13 +83,13 @@
                 <p>* 픽업 시간 : {{BookingBoard.time}}</p>
             </v-row>
             <v-row >
-                <p>* 디자인 : {{BookingBoard.design}}</p>
+                <p>* 디자인 : {{cakeLists[((BookingBoard.cakeArrNo) -1)].design}}</p>
             </v-row>
             <v-row >
-                <p>* 사이즈 : {{BookingBoard.size}}</p>
+                <p>* 사이즈 : {{cakeLists[((BookingBoard.cakeArrNo) -1)].size}}</p>
             </v-row>
             <v-row >
-                <p>* 가격 : {{BookingBoard.price}}</p>
+                <p>* 가격 : {{cakeLists[((BookingBoard.cakeArrNo) -1)].price}}</p>
             </v-row>
             <v-row >
                 <p>* 요청사항 : {{BookingBoard.contents}}</p>

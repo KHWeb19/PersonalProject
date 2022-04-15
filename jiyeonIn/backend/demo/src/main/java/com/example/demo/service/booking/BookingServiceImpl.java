@@ -29,7 +29,7 @@ public class BookingServiceImpl implements BookingService{
     public void register(BookingRequest info, String originalFilename) {
         String putLink = info.getDate()+"."+info.getId()+"."+originalFilename;
 
-        if(info.getCakeArrNo().equals("0")) {
+        if(info.getCakeArrNo() == 0) {
             BookingInfo bookingInfo2 = new BookingInfo(info.getId(), info.getDate(), info.getTime(), "예약중", info.getContents(), putLink);
             repository.save(bookingInfo2);
 
@@ -39,7 +39,7 @@ public class BookingServiceImpl implements BookingService{
 
             BookingInfo bookingInfo1 =
                     new BookingInfo(info.getId(), info.getDate(), info.getTime(), "예약중", info.getContents(), putLink,
-                            checkCake.getDesign(),checkCake.getSize(),checkCake.getPrice(),info.getCakeArrNo());
+                            info.getCakeArrNo());
             repository.save(bookingInfo1);
         }
 
@@ -59,7 +59,7 @@ public class BookingServiceImpl implements BookingService{
 
             BookingInfo bookingInfo1 =
                     new BookingInfo(info.getId(), info.getDate(), info.getTime(), "예약중", info.getContents(),
-                            checkCake.getDesign(),checkCake.getSize(),checkCake.getPrice(),info.getCakeArrNo());
+                            info.getCakeArrNo());
             repository.save(bookingInfo1);
 
         }

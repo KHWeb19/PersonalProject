@@ -32,8 +32,6 @@ import BookingBoardComment from '@/views/boardPage/BookingBoardComment.vue'
         },
         data () {
             return {
-                dbrAction: (window.localStorage.getItem('id')),
-                checkID: this.BookingBoard.id
                 }
             },
         components: {
