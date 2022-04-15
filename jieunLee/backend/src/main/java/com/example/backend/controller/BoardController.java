@@ -39,12 +39,12 @@ public class BoardController {
         return service.memberNoBoardList(memberNo);
     }
 
-    @GetMapping("/writerList")
-    public List<Board> myBoardList() {
-        log.info("myBoardList()");
-
-        return service.findList();
-    }
+//    @GetMapping("/writerList")
+//    public List<Board> myBoardList() {
+//        log.info("myBoardList()");
+//
+//        return service.findList();
+//    }
 
     @GetMapping("/{boardNo}")
     public Board boardRead(@PathVariable("boardNo") Integer boardNo) {

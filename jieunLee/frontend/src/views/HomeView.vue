@@ -33,12 +33,12 @@ export default {
     },
     methods: {
         ...mapActions(['fetchBoardList']),
-        onDelete() {
-            const {boardNo} = this.board
+        onDelete(payload) {
+            const {boardNo} = payload
             axios.delete(`http://localhost:7777/board/${boardNo}`)
                 .then(()=> {
                     alert('삭제 성공')
-                    this.$router.push({name: 'HomeView'})
+                    history.go(0);
                 })
                 .catch(()=> {
                     alert('삭제실패 문제발생')
@@ -49,7 +49,7 @@ export default {
             axios.post('http://localhost:7777/comment/register', {boardNo, writer: this.loginInfo.memberName, content})
                 .then(() => {
                     alert('댓글 등록 성공!')
-                      this.$router.push()
+                      history.go(0);
                     })
                     .catch(() => {
                         alert('문제 발생!')

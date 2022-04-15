@@ -10,7 +10,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td style="padding: 14px 0px 14px 16px; font-weight: bold;">
+                        <td style="height: 20px; padding: 14px 0px 14px 16px; font-weight: bold;">
                             {{ board.writer }}
                         </td>
                         <td align="right" style="padding-right: 12px;"> 
@@ -41,7 +41,7 @@
                         </td>
                     </tr>
                     <tr align="left">
-                        <td colspan="2" style="padding-left: 16px">
+                        <td colspan="2" style="height: 50px; padding-left: 16px">
                             <div style="display: flex;">
                                 <div style="font-weight: bold;" >
                                     {{ board.writer }}&nbsp;
@@ -50,19 +50,22 @@
                             </div>
                         </td>
                     </tr>
-                    <tr align="left" v-for="comment in comments" :key="comment.commentNo" >
-                        <td colspan="2" style="padding-left: 16px">
-                            <div style="display: flex;">
-                                <div style="font-weight: bold;" >
-                                    {{ comment.writer }}&nbsp;
-                                </div>
+                    <tr align="left" >
+                        <td colspan="2" style="height: 430px; padding-left: 16px"  > 
+                            <div v-for="comment in comments" :key="comment.commentNo">
+                                <span style="font-weight: bold;">{{ comment.writer }}&nbsp;</span>
                                 {{ comment.content }}
+                                <div style="font-size: 12px; color: grey">{{ comment.regDate }}</div>
                             </div>
-                            <span style="font-size: 12px; color: grey">{{ comment.regDate }}</span>
                         </td>
                     </tr>
-                    <tr align="left">
-                        <td colspan="2" style="padding: 6px 9px">
+                    <tr>
+                        <td colspan="2">
+                        <hr style="border: 0; height: 1px; background: #d8d8d8; "/>
+                        </td>
+                    </tr>
+                    <tr align="left" >
+                        <td colspan="2" style="height: 20px; padding: 6px 9px">
                             <v-btn icon>
                                 <v-icon color="black">
                                     mdi-heart-outline
@@ -75,9 +78,8 @@
                             </v-btn>
                         </td>
                     </tr>
-                    
-                    <tr align="left" style="font-size: 10px">
-                        <td colspan="2" style="padding: 8px 0px 16px 16px; color: grey">
+                    <tr align="left" style="height: 10px; font-size: 10px">
+                        <td colspan="2" style="padding: 0px 0px 8px 16px; color: grey">
                             {{ board.regDate }}
                         </td>
                     </tr>
@@ -87,7 +89,7 @@
                         </td>
                     </tr>
                     <tr align="left">
-                        <td style="padding: 14px 0px 14px 16px;">
+                        <td style="height: 20px; padding: 14px 0px 14px 16px;">
                             <input type="text" placeholder="댓글 달기..." v-model="content"/>
                         </td>
                         <td align="right"> 
@@ -112,6 +114,10 @@ export default {
             type: Object,
             require:true
         },
+        boardNo: {
+            type: String,
+            required: true
+        },
         comments: {
             type: Array
         }
@@ -129,7 +135,8 @@ export default {
         },
         onSubmit() {
             const { content } = this
-            this.$emit('submit', { boardNo: this.board.boardNo, content })
+            // this.$emit('submit', { boardNo: this.board.boardNo, content })
+            this.$emit('submit', { content })
         }
     }
 }

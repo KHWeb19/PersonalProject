@@ -1,6 +1,10 @@
 package com.example.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -9,6 +13,10 @@ import java.util.Date;
 
 @Data
 @Entity
+@NoArgsConstructor
+//밑에두개는 같이 써줘야함
+@AllArgsConstructor
+@Builder
 public class Comment {
 
     @Id
@@ -16,8 +24,13 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long commentNo;
 
-    @Column(name = "board_no")
-    private Long boardNo;
+//    @Column(name = "board_no")
+//    private Long boardNo;
+
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name= "board_no")
+    private Board board;
 
     @Column(length = 32, nullable = false)
     private String writer;

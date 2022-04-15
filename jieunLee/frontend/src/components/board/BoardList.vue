@@ -22,7 +22,7 @@
                                     </template>
                                     <v-list>
                                         <v-list-item-title> 
-                                            <v-btn @click="onDelete">삭제</v-btn>
+                                            <v-btn @click="onDelete(board.boardNo)">삭제</v-btn>
                                         </v-list-item-title>
                                         <v-list-item-title> 
                                             <router-link :to="{ name: 'BoardModifyPage', params: { boardNo: board.boardNo } }">
@@ -76,21 +76,21 @@
                                 {{ board.regDate }}
                             </td>
                         </tr>
-                        <!-- <tr>
+                        <tr>
                             <td colspan="2">
                             <hr style="border: 0; height: 1px; background: #d8d8d8; "/>
                             </td>
                         </tr>
                         <tr align="left">
                                 <td style="padding: 14px 0px 14px 16px;">
-                                    <textarea type="text" width="300px" placeholder="댓글 달기..." v-model="content"/>
+                                    <textarea type="text" style="width: 100%; height: 18px"  placeholder="댓글 달기..." v-model="content"/>
                                 </td>
                                 <td align="right"> 
                                     <v-btn text color="primary" type="submit">
                                         게시
                                     </v-btn>
                                 </td>
-                        </tr> -->
+                        </tr>
                         
                     </table>
                 </form>
@@ -105,6 +105,10 @@ export default {
     props: {
         boards: {
             type: Array
+        },
+        boardNo: {
+            type: String,
+            require: true
         }
     },
     data() {
@@ -114,12 +118,13 @@ export default {
         }
     },
     methods: {
-        onDelete() {
-            const { boardNo } = this
+        onDelete(boardNo) {
+            // console.log(boardNo)
             this.$emit('click', {boardNo})
         },
         onSubmit() {
             const { content } = this
+            
             this.$emit('submit', { boardNo: this.board.boardNo, content })
         }
     }

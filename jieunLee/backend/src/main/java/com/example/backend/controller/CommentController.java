@@ -19,17 +19,19 @@ public class CommentController {
     @Autowired
     private CommentService service;
 
-    @PostMapping("/register")
-    public void commentRegister(@Validated @RequestBody Comment comment) {
+    @PostMapping("/register/{boardNo}")
+    public void commentRegister(@PathVariable("boardNo") Integer boardNo, @Validated @RequestBody CommentRequest commentRequest) {
         log.info("commentRegister()");
 
-        service.register(comment);
+
+        commentRequest.setBoardNo(Long.valueOf(boardNo));
+        service.register(boardNo, commentRequest);
     }
 
     @GetMapping("/list/{boardNo}")
-    public List<Comment> boardNoCommentList(@PathVariable("boardNo") Integer boardNo) {
-        log.info("boardNoCommentList()");
+    public List<Comment> commentList(@PathVariable("boardNo") Integer boardNo) {
+        log.info("commentList()");
 
-        return service.boardNoCommentList(boardNo);
+        return service.list(boardNo);
     }
 }

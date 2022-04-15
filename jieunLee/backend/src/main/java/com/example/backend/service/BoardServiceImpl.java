@@ -31,11 +31,11 @@ public class BoardServiceImpl implements BoardService {
         return myBoard;
     }
 
-    @Override
-    public List<Board> findList() {
-        List<Board> myBoard = repository.selectMyBoard(Long.valueOf(75));
-        return myBoard;
-    }
+//    @Override
+//    public List<Board> findList() {
+//        List<Board> myBoard = repository.selectMyBoard(Long.valueOf(75));
+//        return myBoard;
+//    }
 
     @Override
     public Board read(Integer boardNo) {
