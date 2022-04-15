@@ -2,7 +2,7 @@
     FETCH_MEMBER,
     FETCH_COMMUNITY_BOARD_LIST,
     FETCH_COMMUNITY_BOARD,
-    FETCH_COMMUNITY_COMMENTS_LIST
+    FETCH_COMMUNITY_COMMENTS_LIST,
  } from './mutation-types'
 
 import axios from 'axios'
@@ -34,5 +34,5 @@ export default {
             .then((res) => {
                 commit(FETCH_COMMUNITY_COMMENTS_LIST, res.data)
         })
-    }
+    },
 }

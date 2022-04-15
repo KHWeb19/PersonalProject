@@ -1,7 +1,7 @@
-package com.example.demo.service.board;
+package com.example.demo.service.communityBoard;
 
-import com.example.demo.entity.board.CommunityBoard;
-import com.example.demo.repository.board.CommunityBoardRepository;
+import com.example.demo.entity.communityBoard.CommunityBoard;
+import com.example.demo.repository.CommunityBoard.CommunityBoardRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -9,10 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.awt.print.Pageable;
-import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;

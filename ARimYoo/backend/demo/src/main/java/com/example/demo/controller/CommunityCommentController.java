@@ -1,9 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.board.CommunityBoard;
-import com.example.demo.entity.board.CommunityCommentBox;
-import com.example.demo.service.board.CommunityCommentBoxService;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.example.demo.entity.communityBoard.CommunityCommentBox;
+import com.example.demo.service.communityBoard.CommunityCommentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -15,16 +13,16 @@ import java.util.List;
 @RestController
 @RequestMapping("/board/community")
 @CrossOrigin(origins ="http://localhost:8080", allowedHeaders = "*")
-public class CommunityCommentBoxController {
+public class CommunityCommentController {
 
     @Autowired
-    private CommunityCommentBoxService service;
+    private CommunityCommentService service;
 
     @PostMapping("/{boardNo}/comment/register")
-    public void register (@Validated CommunityCommentBox communityCommentBox, @PathVariable ("boardNo") Long boardNo
+    public void register (@Validated CommunityCommentBox communityComment, @PathVariable ("boardNo") Long boardNo
                           ){
-        log.info("register" + communityCommentBox);
-        service.register(boardNo, communityCommentBox);
+        log.info("register" + communityComment);
+        service.register(boardNo, communityComment);
 
     }
 
@@ -35,7 +33,7 @@ public class CommunityCommentBoxController {
     }
 
     @DeleteMapping("/comment/{commentId}")
-    public void delete (@PathVariable ("commentId") Long commentId , CommunityCommentBox communityCommentBox) {
+    public void delete (@PathVariable ("commentId") Long commentId , CommunityCommentBox communityComment) {
         log.info("Comment remove()");
         service.delete(commentId);
     }

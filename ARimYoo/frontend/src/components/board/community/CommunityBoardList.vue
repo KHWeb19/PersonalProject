@@ -26,10 +26,10 @@
             </v-data-table>
         </v-row>
         <v-row justify="center" style="margin-top:50px">
-            <v-col  cols="3">
+            <v-col  cols="7" md="3">
             <input type="text" class="search" v-model="keyword"/>
             </v-col>
-            <v-col cols="1">
+            <v-col cols="2" md="1">
                 <v-btn class="searchBtn" @click=goSearch color="red darken-3" dark small>
                     <v-icon>
                         mdi-magnify
@@ -57,6 +57,7 @@ export default {
                 { text:'말머리', value: 'brackets', width:'70px'},
                 { text: '제목', value: 'title', width: "200px" },
                 { text: '작성자', value: 'writer', width: "100px" },
+                { text: '💛', value: 'likeCnt', width: "50px" },
                 { text: '조회수', value: 'viewCnt', width: "70px" },
                 { text: 'date. ', value: 'regDate', width: "100px" },
             ],
@@ -96,14 +97,18 @@ export default {
   font-size: 14px !important;
 }
 .search {
+    position: relative;
     width:300px;
     height:30px;
     background-color: rgb(240, 238, 238);
     outline-color: rgb(211, 32, 32);
     padding-left:10px;
     font-family: 'Noto Sans KR', sans-serif;
+    float:left;
 }
 .searchBtn {
-    margin-left:10px;
+    position: relative;
+    float:left;
+    margin-left:10%;
 }
 </style>

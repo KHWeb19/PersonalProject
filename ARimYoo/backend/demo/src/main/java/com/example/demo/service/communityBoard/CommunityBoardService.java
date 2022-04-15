@@ -1,11 +1,9 @@
-package com.example.demo.service.board;
+package com.example.demo.service.communityBoard;
 
-import com.example.demo.entity.board.CommunityBoard;
-import org.springframework.transaction.annotation.Transactional;
+import com.example.demo.entity.communityBoard.CommunityBoard;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.awt.print.Pageable;
 import java.util.List;
 
 public interface CommunityBoardService {

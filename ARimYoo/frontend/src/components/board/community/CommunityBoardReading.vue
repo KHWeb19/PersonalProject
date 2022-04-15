@@ -67,7 +67,18 @@
                         </v-col>
                     </v-row>
                     <v-row wrap>
-                        <v-btn @click=goPage() class="backBtn" color="black" dark>Back</v-btn>
+                        <v-col cols="10.5">
+                            <v-btn @click=goPage() class="backBtn" color="black" dark>Back</v-btn>
+                        </v-col>
+                        <v-col cols="1">
+                            <v-btn @click=like color="yellow darken-1" style="box-shadow:none" dark fab small>
+                                <v-icon>mdi-cards-heart</v-icon>
+                            </v-btn>
+                        </v-col>
+                                <div class="likeCnt">
+                            {{ communityBoard.likeCnt }}
+                            </div>
+
                     </v-row>
                 </table>
     </v-container>
@@ -88,11 +99,12 @@ export default {
     },
     data () {
         return {
-        fileName: this.communityBoard.fileName
+        fileName: this.communityBoard.fileName,
         }
     },
     created () {
         this.boardNo = this.communityBoard.boardNo
+        this.who = this.$store.state.userInfo.id
     },
     methods: {
         ...mapActions(['fetchCommunityCommentsList']),
@@ -111,6 +123,25 @@ export default {
                         alert('삭제 실패! 문제 발생!')
                     })
         },
+        like () {
+            const { boardNo, who } = this
+            console.log(boardNo, who)
+            if (this.iLike == true ){
+                alert("이미 좋아요 하셨습니다 !")
+            } else {
+            axios.post(`http://localhost:7777/board/community/${boardNo}/like`, {who})
+                 .then((res) => {
+                    if (res.data == false) {
+                    alert("이미 좋아요 하셨습니다!")
+                } else {
+                    alert("좋아요")
+                }
+            })
+            .catch(() => {
+                alert ('좋아요 실패 문제발생 !')
+            })
+            }
+        }
     }
 }
 </script>
@@ -167,6 +198,10 @@ a{
     position: relative;
     max-height: 500px;
     max-width: 600px;
+}
+.likeCnt {
+     font-family: 'Noto Sans KR', sans-serif;
+     
 }
 @media (max-width:700px){
     table {

@@ -1,6 +1,5 @@
-package com.example.demo.entity.board;
+package com.example.demo.entity.communityBoard;
 
-import com.example.demo.entity.board.CommunityBoard;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import lombok.Data;
@@ -38,7 +37,7 @@ public class CommunityCommentBox {
     @JoinColumn(name ="communityBoard_boardNo")
     private CommunityBoard communityBoard;
 
-    public CommunityCommentBox (String comment, String commentWriter){
+    public CommunityCommentBox(String comment, String commentWriter){
         this.comment = comment;
         this.commentWriter = commentWriter;
     }

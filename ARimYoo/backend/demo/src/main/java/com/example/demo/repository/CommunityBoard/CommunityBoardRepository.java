@@ -1,6 +1,6 @@
-package com.example.demo.repository.board;
+package com.example.demo.repository.CommunityBoard;
 
-import com.example.demo.entity.board.CommunityBoard;
+import com.example.demo.entity.communityBoard.CommunityBoard;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
