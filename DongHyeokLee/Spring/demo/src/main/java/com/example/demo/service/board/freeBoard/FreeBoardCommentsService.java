@@ -9,6 +9,6 @@ import java.util.List;
 public interface FreeBoardCommentsService {
     public void register (Integer boardNo, FreeBoardCommentsRequest commentsRequest);
     public List<FreeBoardComments> list (Integer boardNo);
-    public void modify (FreeBoardComments freeBoardComments);
+    public FreeBoardComments modify (Integer commentNo, FreeBoardCommentsRequest commentsRequest);
     public void remove (Integer boardNo);
 }

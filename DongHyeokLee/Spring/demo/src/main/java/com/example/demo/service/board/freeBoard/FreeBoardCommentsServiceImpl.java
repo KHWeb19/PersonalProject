@@ -54,10 +54,19 @@ public class FreeBoardCommentsServiceImpl implements FreeBoardCommentsService {
     }
 
     @Override
-    public void modify(FreeBoardComments freeBoardComments) {
+    public FreeBoardComments modify(Integer commentNo, FreeBoardCommentsRequest commentsRequest) {
+        Optional<FreeBoard> maybeBoard = boardRepository.findById(Long.valueOf(commentsRequest.getBoardNo()));
+        FreeBoard board = maybeBoard.get();
 
+        FreeBoardComments commentModify = FreeBoardComments.builder()
+                                        .commentNo(Long.valueOf(commentNo))
+                                        .freeBoard(board)
+                                        .comment(commentsRequest.getComment())
+                                        .writer(commentsRequest.getWriter())
+                                        .regDate(commentsRequest.getRegDate())
+                                        .build();
 
-        repository.save(freeBoardComments);
+        return repository.save(commentModify);
 
     }
 

@@ -19,13 +19,14 @@ public class FreeBoardController {
     @Autowired
     private FreeBoardService service;
 
+    //등록
     @PostMapping("/register")
     public void FreeBoardRegister (@Validated @RequestBody FreeBoard freeBoard) {
         log.info("FreeBoardRegister()");
 
         service.register(freeBoard);
     }
-
+    //목록
     @GetMapping("/list")
     public List<FreeBoard> FreeBoardList () {
         log.info("FreeBoardList()");
@@ -40,7 +41,7 @@ public class FreeBoardController {
         return service.list(pageRequest);
     }*/
 
-
+    //읽기
     @GetMapping("/{boardNo}")
     public FreeBoard freeBoardRead (
             @PathVariable("boardNo") Integer boardNo) {
@@ -48,7 +49,7 @@ public class FreeBoardController {
 
         return service.read(boardNo);
     }
-
+    //수정
     @PutMapping("/{boardNo}")
     public FreeBoard freeBoardModify (
             @PathVariable("boardNo") Integer boardNo,
@@ -59,11 +60,13 @@ public class FreeBoardController {
                 .boardNo(Long.valueOf(boardNo))
                 .build();
 
+
+
         service.modify(freeBoard);
 
         return freeBoard;
     }
-
+    //삭제
     @DeleteMapping("/{boardNo}")
     public void freeBoardRemove (
             @PathVariable("boardNo") Integer boardNo) {

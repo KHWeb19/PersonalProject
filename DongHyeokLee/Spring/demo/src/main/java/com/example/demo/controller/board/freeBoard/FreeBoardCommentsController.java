@@ -27,7 +27,7 @@ public class FreeBoardCommentsController {
                                             @Validated @RequestBody FreeBoardCommentsRequest commentsRequest) {
 
         log.info("FreeBoardCommentsRegister()" + commentsRequest);
-        commentsRequest.setBoardNo(Long.valueOf(boardNo));
+        //commentsRequest.setBoardNo(Long.valueOf(boardNo));
 
         service.register(boardNo,commentsRequest);
     }
@@ -44,16 +44,12 @@ public class FreeBoardCommentsController {
     @PutMapping("/{commentNo}")
     public FreeBoardComments freeBoardCommentModify (
             @PathVariable("commentNo") Integer commentNo,
-            @RequestBody FreeBoardComments freeBoardComments) {
-        log.info("freeBoardCommentModify(): " + freeBoardComments);
+            @Validated @RequestBody FreeBoardCommentsRequest commentsRequest) {
+        log.info("freeBoardCommentModify(): " + commentsRequest);
 
-        freeBoardComments.builder()
-                        .commentNo(Long.valueOf(commentNo))
-                        .build();
 
-        service.modify(freeBoardComments);
+       return service.modify(commentNo ,commentsRequest);
 
-        return freeBoardComments;
     }
 
 
