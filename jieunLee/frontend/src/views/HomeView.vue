@@ -46,7 +46,7 @@ export default {
         },
         onSubmit(payload) {
             const { boardNo, content} = payload
-            axios.post('http://localhost:7777/comment/register', {boardNo, writer: this.loginInfo.memberName, content})
+            axios.post(`http://localhost:7777/comment/register/${boardNo}`, {boardNo, writer: this.loginInfo.memberName, content})
                 .then(() => {
                     alert('댓글 등록 성공!')
                       history.go(0);

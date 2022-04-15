@@ -65,7 +65,6 @@ export default {
         },
         onSubmit(payload) {
             const boardNo = this.boardNo
-            console.log(this.boardNo)
             const {content} = payload
             axios.post(`http://localhost:7777/comment/register/${boardNo}`, {writer: this.loginInfo.memberName, content})
                 .then(() => {

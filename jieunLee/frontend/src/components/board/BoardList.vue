@@ -5,7 +5,7 @@
                     현재 등록된 게시물이 없습니다!
             </v-card>
             <v-card style="margin-bottom: 30px;" v-else v-for="board in boards" :key="board.boardNo">
-                <form @submit.prevent="onSubmit">
+                <form @submit.prevent="onSubmit(board.boardNo)">
                     <table style="width: 100%;">
                         <tr>
                             <td style="padding: 14px 0px 14px 16px; font-weight: bold;">
@@ -122,10 +122,9 @@ export default {
             // console.log(boardNo)
             this.$emit('click', {boardNo})
         },
-        onSubmit() {
+        onSubmit(boardNo) {
             const { content } = this
-            
-            this.$emit('submit', { boardNo: this.board.boardNo, content })
+            this.$emit('submit', { boardNo, content })
         }
     }
 }
