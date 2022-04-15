@@ -12,7 +12,7 @@ export default {
         return axios.get('http://localhost:7777/BrandCheckBoard/list')
             .then((res) => {
                 commit(FETCH_BRAND_CHECK_BOARD_LIST, res.data)
-               // console.log(res)
+               console.log(res)
             })
     },
     fetchBrandCheckBoard ({ commit }, boardNo) {
