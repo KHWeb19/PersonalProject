@@ -25,13 +25,15 @@
                     <hr style="border: 0; height: 1px; background: #d8d8d8; "/>
                     <table style="width: 100%; border-collapse : collapse;">
                         <tr>
-                            <td align="center" rowspan="2" colspan="2" width="66%" >
+                            <td v-if="!priview" rowspan="2" colspan="2" width="66%" >
                                 <label for="files">
-                                    사진 선택
+                                    <span style="margin-left: 250px">컴퓨터에서 사진 선택</span>
                                 </label>
                                 <input type="file" id="files" ref="files" multiple v-on:change="handleFileUpload()"/>
                             </td>
-                            
+                            <td v-else align="center" rowspan="2" colspan="2" width="66%" >
+                                <v-img width="672px" :src="priview" />
+                            </td>
                             <td style="font-weight: bold">
                                 <input style="margin: 16px" type="text" v-model="loginInfo.memberId" disabled/>
                             </td>
@@ -59,12 +61,15 @@ export default {
         return {
             loginInfo: JSON.parse(localStorage.getItem('loginInfo')),
             boardImage: '',
-            content: ''
+            content: '',
+            priview: ''
         }
     },
     methods: {
         handleFileUpload () {
+            
             this.files = this.$refs.files.files
+            this.priview = URL.createObjectURL(this.files[0])
         },
         onSubmit() {
             let formData = new FormData()
