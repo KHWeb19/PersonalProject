@@ -33,10 +33,10 @@ public class FreeBoardCommentsServiceImpl implements FreeBoardCommentsService {
                 FreeBoard board = maybeBoard.get();
                 log.info("************" + board);
 
-        FreeBoardComments comment = FreeBoardComments.builder().
-                comment(commentsRequest.getComment()).
-                freeBoard(board).
-                writer(commentsRequest.getWriter())
+                FreeBoardComments comment = FreeBoardComments.builder()
+                        .comment(commentsRequest.getComment())
+                        .freeBoard(board)
+                        .writer(commentsRequest.getWriter())
                         .build();
 
 
@@ -55,6 +55,7 @@ public class FreeBoardCommentsServiceImpl implements FreeBoardCommentsService {
 
     @Override
     public FreeBoardComments modify(Integer commentNo, FreeBoardCommentsRequest commentsRequest) {
+
         Optional<FreeBoard> maybeBoard = boardRepository.findById(Long.valueOf(commentsRequest.getBoardNo()));
         FreeBoard board = maybeBoard.get();
 

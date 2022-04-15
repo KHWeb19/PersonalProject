@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
+@Setter
 @Getter
 @Entity
 @NoArgsConstructor
@@ -34,7 +34,7 @@ public class FreeBoard {
     private String content;
 
     @Column
-    private Long count = 0l;
+    private Long count;
 
     @CreationTimestamp
     private Date regDate;
@@ -43,7 +43,7 @@ public class FreeBoard {
     private Date updDate;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "freeBoard", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "freeBoard", fetch = FetchType.EAGER, orphanRemoval = true)
     private List<FreeBoardComments> comments = new ArrayList<>();
 
    /* public FreeBoard (String title, String writer, String content) {

@@ -2,6 +2,7 @@ package com.example.demo.service.board.freeBoard;
 
 
 import com.example.demo.entitiy.board.freeBoard.FreeBoard;
+import com.example.demo.repository.board.freeBoard.FreeBoardCommentsRepository;
 import com.example.demo.repository.board.freeBoard.FreeBoardRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,19 @@ public class FreeBoardServiceImpl implements FreeBoardService {
     @Autowired
     FreeBoardRepository repository;
 
+    @Autowired
+    FreeBoardCommentsRepository commentsRepository;
+
     @Override
     public void register(FreeBoard freeBoard) {
+      /*  freeBoard = FreeBoard.builder()
+                .count(Long.valueOf(0))
+                .writer(freeBoard.getWriter())
+                .title(freeBoard.getTitle())
+                .content(freeBoard.getContent())
+                .build();*/
+        freeBoard.setCount(Long.valueOf(0));
+
         repository.save(freeBoard);
     }
 
@@ -34,6 +46,7 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 
     @Override
     public FreeBoard read(Integer boardNo) {
+
         Optional<FreeBoard> maybeReadBoard = repository.findById(Long.valueOf(boardNo));
 
         if (maybeReadBoard.equals(Optional.empty())){
@@ -42,16 +55,30 @@ public class FreeBoardServiceImpl implements FreeBoardService {
         }
 
         FreeBoard readBoard = maybeReadBoard.get();
-        readBoard.builder().count(readBoard.getCount()+1).build();
+        readBoard.setCount(readBoard.getCount()+1);
+
         repository.save(readBoard);
 
         return readBoard;
     }
 
     @Override
-    public void modify(FreeBoard board) {
-        repository.save(board);
+    public FreeBoard modify(Integer boardNo, FreeBoard board) {
 
+       board.setBoardNo(Long.valueOf(boardNo));
+
+        /* board = FreeBoard.builder()
+                .boardNo(Long.valueOf(boardNo))
+                .content(board.getContent())
+                .regDate(board.getRegDate())
+                .title(board.getTitle())
+                .writer(board.getWriter())
+                .count(board.getCount())
+                .build();*/
+
+         repository.save(board);
+
+         return board;
     }
 
     @Override

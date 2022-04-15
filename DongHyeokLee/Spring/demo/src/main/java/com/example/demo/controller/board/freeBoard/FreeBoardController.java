@@ -33,13 +33,6 @@ public class FreeBoardController {
 
         return service.list();
     }
-   /* @GetMapping("/list/{page}")
-    public Page<FreeBoard> FreeBoardList (@PathVariable Integer page) {
-        log.info("FreeBoardList()" + page + " " );
-        PageRequest pageRequest = PageRequest.of(page-1,10, Sort.Direction.DESC, "boardNo");
-
-        return service.list(pageRequest);
-    }*/
 
     //읽기
     @GetMapping("/{boardNo}")
@@ -53,18 +46,11 @@ public class FreeBoardController {
     @PutMapping("/{boardNo}")
     public FreeBoard freeBoardModify (
             @PathVariable("boardNo") Integer boardNo,
-            @RequestBody FreeBoard freeBoard) {
-        log.info("freeBoardModify(): " + freeBoard);
+            @RequestBody FreeBoard board) {
+        log.info("Modify: ");
 
-        freeBoard.builder()
-                .boardNo(Long.valueOf(boardNo))
-                .build();
+        return service.modify(boardNo, board);
 
-
-
-        service.modify(freeBoard);
-
-        return freeBoard;
     }
     //삭제
     @DeleteMapping("/{boardNo}")

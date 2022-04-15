@@ -12,4 +12,5 @@ public interface FreeBoardCommentsRepository extends JpaRepository<FreeBoardComm
 
     @Query("select m from FreeBoardComments m join m.freeBoard tb where tb.boardNo = :boardNo")
     List<FreeBoardComments> findAllFreeBoardCommentsByBoardId(@Param("boardNo") Long boardNo);
+
 }
