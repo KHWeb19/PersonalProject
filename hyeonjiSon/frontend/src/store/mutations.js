@@ -3,6 +3,8 @@ import {
     FETCH_MEMBER,
     FETCH_TIP_BOARD_LIST,
     FETCH_TIP_BOARD,
+    FETCH_STORE_BOARD_LIST,
+    FETCH_STORE_BOARD,    
 } from './mutation-types'
 
 export default {
@@ -18,5 +20,12 @@ export default {
     },
     [FETCH_TIP_BOARD] (state, board) {
         state.tipBoard = board
+    },
+
+    [FETCH_STORE_BOARD_LIST] (state, boards) {
+        state.storeBoards = boards
+    },
+    [FETCH_STORE_BOARD] (state, board) {
+        state.storeBoard = board
     },
 }

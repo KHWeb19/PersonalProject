@@ -5,4 +5,8 @@ export default {
 
     tipBoards: [],
     tipBoard: null,
+
+    storeBoards: [],
+    storeBoard: null,
+
 }

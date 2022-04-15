@@ -15,7 +15,8 @@ import TipRegisterPage from '@/views/livingTip/TipRegisterPage.vue'
 import TipReadPage from '@/views/livingTip/TipReadPage.vue'
 import TipModifyPage from '@/views/livingTip/TipModifyPage.vue'
 
-import BoardStorePage from '@/views/findStore/BoardStorePage.vue'
+import StoreBoardListPage from '@/views/findStore/StoreBoardListPage.vue'
+import StoreRegisterPage from '@/views/findStore/StoreRegisterPage.vue'
 
 import DonationInfoPage from '@/views/donateInfo/DonationInfoPage.vue'
 
@@ -97,10 +98,17 @@ const routes = [
 
 
   {
-    path: '/boardStorePage',
-    name: 'boardStorePage',
-    component: BoardStorePage
+    path: '/storeBoardListPage',
+    name: 'storeBoardListPage',
+    component: StoreBoardListPage
   },
+  {
+    path: '/storeRegisterPage',
+    name: 'storeRegisterPage',
+    component: StoreRegisterPage
+  },
+
+
   {
     path: '/donationInfoPage',
     name: 'donationInfoPage',
