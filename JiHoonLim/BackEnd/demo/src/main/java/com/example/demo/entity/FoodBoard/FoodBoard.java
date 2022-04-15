@@ -50,7 +50,7 @@ public class FoodBoard {
     private String filepath;
 
     @Column()
-    private Integer vueCount = 0;
+    private Integer viewCount = 0;
 
 
     @CreationTimestamp

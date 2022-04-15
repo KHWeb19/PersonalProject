@@ -88,7 +88,7 @@
                     />
                   </div>
                   <div>
-                    <v-text-field :value="foodBoard.vueCount"></v-text-field>
+                    <v-text-field :value="foodBoard.viewCount"></v-text-field>
                   </div>
                   <div v-if="checkWriteUser">
                     <v-btn
@@ -170,10 +170,14 @@ export default {
       dialogDelete: false,
       checkbox: false,
       img: this.foodBoard.filename,
+      nickName: "",
     };
   },
   created() {
-    if (this.$store.state.userInfo.nickName == this.foodBoard.writer) {
+    if (this.$store.state.userInfo != null) {
+      this.nickName = this.$store.state.userInfo.nickName;
+    }
+    if (this.nickName == this.foodBoard.writer) {
       this.checkWriteUser = true;
     } else {
       this.checkWriteUser = false;

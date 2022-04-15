@@ -48,6 +48,7 @@ export default {
         chooseWay,
         file,
         filename,
+        viewCount,
       } = payload;
 
       let formData = new FormData();
@@ -65,7 +66,7 @@ export default {
       formData.append("mat", chooseMat);
       formData.append("writer", writer);
       formData.append("filename", filename);
-
+      formData.append("viewCount", viewCount);
       axios
         .put(`http://localhost:7777/foodBoard/${this.boardNo}`, formData, {
           headers: {

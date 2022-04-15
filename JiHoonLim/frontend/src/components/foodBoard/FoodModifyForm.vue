@@ -316,6 +316,7 @@ export default {
     this.chooseWay = this.foodBoard.way;
     this.chooseKind = this.foodBoard.kind;
     this.filename = this.foodBoard.filename;
+    this.viewCount = this.foodBoard.viewCount;
   },
   methods: {
     onSubmit() {
@@ -330,6 +331,7 @@ export default {
         chooseMat,
         chooseWay,
         filename,
+        viewCount,
       } = this;
       const file = this.$refs.files.files[0];
       if (file == null) {
@@ -348,6 +350,7 @@ export default {
         chooseWay,
         file,
         filename,
+        viewCount,
       });
     },
     handlerFileUpload() {

@@ -12,6 +12,6 @@ public interface FoodBoardRepository extends JpaRepository<FoodBoard, Long> {
 
     @Transactional
     @Modifying
-    @Query("update FoodBoard vc set vc.vueCount = vc.vueCount + 1 where vc.boardNo = :boardNo")
+    @Query("update FoodBoard vc set vc.viewCount = vc.viewCount + 1 where vc.boardNo = :boardNo")
     void updateViewCount(@Param("boardNo") Long boardNo);
 }

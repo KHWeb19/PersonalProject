@@ -34,7 +34,7 @@
             </v-card-actions>
             <v-card-actions>
               <v-card-text class="pt-0">추천 수</v-card-text>
-              <v-card-text class="pt-0">{{ food.vueCount }}</v-card-text>
+              <v-card-text class="pt-0">{{ food.viewCount }}</v-card-text>
             </v-card-actions>
           </v-card>
         </v-col>
