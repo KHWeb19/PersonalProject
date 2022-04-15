@@ -1,9 +1,9 @@
 <template>
     <v-container>
-            <v-form enctype="multipart/form-data" @submit.prevent="onBoardSubmit">
+            <v-form @submit.prevent="onSubmit">
                 <table>
                     <v-row justify="center">
-                        <v-col cols="1" class="label">Title</v-col>
+                        <v-col cols="1" class="label" >Title</v-col>
                         <v-col>
                             <v-combobox
                             class="titleFloat"
@@ -22,11 +22,9 @@
                     <v-row  wrap justify="center">
                         <v-col cols="1" class="label" > Files </v-col>
                         <v-col>
-                        <input type="file" id="files" ref="files"  dense style="width:300px"
-                                multiple v-on:change="handleFileUpload()"/>
+                        <input type="file" dense clearable id="files" style="width:300px" ref="files" 
+                                multiple v-on:change="handleFileUpload()" />
                         </v-col>
-                    </v-row>
-                    <v-row justify="center">
                         <v-col cols="12">
                         <v-img :src="image" class="preview" alt=""/>
                         </v-col>
@@ -40,9 +38,11 @@
                             </v-textarea>
                         </v-col>
                     </v-row>
-                    <v-row wrap>
-                        <v-btn @click="goPage" class="writeBtn" color="black" dark>cancle</v-btn>
-                        <v-btn type="submit" class="writeBtn2" color="red darken-3" dark>write</v-btn>
+                     <v-row wrap>
+                        <v-btn class="writeBtn" color="black" dark>
+                            <router-link :to="{ name: 'CommunityReadPage',
+                                    params: { boardNo: communityBoard.boardNo.toString() } }" style="color:white">cancle</router-link></v-btn>
+                        <v-btn type="submit" class="writeBtn2" color="red darken-3" dark>Modify</v-btn>
                     </v-row>
                 </table>
             </v-form>
@@ -50,55 +50,58 @@
 </template>
 
 <script>
-
 export default {
-    name:'CommunityBoardWirte',
-    data() {
+    name:'CommunityModify',
+    props: {
+        communityBoard: {
+            type: Object,
+            required: true
+        }
+    },
+    data () {
         return {
+            title: '',
+            content: '',
             image :'',
-            title:'',
-            content:'',
             brackets: [],
             items: [
             '[사담]',
             '[질문]'
             ],
-            files:'',
-            response: ''
+        
         }
     },
-    created () {
-        this.writer = this.$store.state.userInfo.name
-    },
     methods: {
-        handleFileUpload () {
+            handleFileUpload () {
             console.log('이미지 첨부')
 
             var image = this.$refs['files'].files[0]
             const url = URL.createObjectURL(image)
             this.image = url
 
-            this.files = this.$refs.files.files[0]
+            this.files = this.$refs.files.files
         },
-        onBoardSubmit () {
-
-            const { title, content,writer, brackets} = this
+        onSubmit () {
+            const { title, content, brackets, writer, fileName, viewCnt } = this
             const file =  this.$refs.files.files[0]
-            
-            this.$emit('submit', { title, content,writer, brackets, file })
-            console.log(title,content,writer,brackets,file)
-
+            this.$emit('submit', { title, content, brackets,writer, file,fileName, viewCnt })
         },
-        goPage (){
-            this.$router.push('/community')
+        goPage() {
+            this.$router.push()
         }
+    },
+    created () {
+        this.writer = this.communityBoard.writer
+        this.title = this.communityBoard.title
+        this.content = this.communityBoard.content
+        this.brackets = this.communityBoard.brackets
+        this.fileName = this.communityBoard.fileName
+        this.viewCnt = this.communityBoard.viewCnt
     }
-
 }
 </script>
-<style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap');
 
+<style scoped>
 .label{
     margin-right:3%;
     text-align: center;
@@ -120,6 +123,10 @@ table{
 .v-combobox, .v-text-field, .v-textarea, #files{
     font-family: 'Noto Sans KR', sans-serif;
 }
+.titleFloat {
+    float:left;
+    margin-right:3%;
+}
 .writeBtn {
     position: relative;
     margin-top:1.5%;
@@ -133,22 +140,20 @@ table{
     margin-left:68%;
     float:left;
 }
-.titleFloat {
-    float:left;
-    margin-right:3%;
-}
 .preview {
     position: relative;
     margin-left: auto;
     margin-right:auto;
-    max-width: 500px;
-    max-height: 600px;
+    max-width: 400px;
+    max-height: 800px;
+   
 }
-
 @media (max-width:700px){
     table {
+        top:4%;
+        margin-left:10px;
         zoom:60%;
-        margin-bottom:30px;
+        margin-bottom:50px;
     }
 }
 </style>

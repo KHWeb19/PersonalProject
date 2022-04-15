@@ -6,10 +6,13 @@ import EnterVellup from '../views/main/EnterVellup.vue'
 import MainVellupPage from '../views/main/MainVellupPage.vue'
 import JoinPage from '../views/main/JoinPage.vue'
 import JoinPage2 from '../views/main/JoinPage2.vue'
-import CommunityPage from '../views/board/CommunityPage.vue'
 import MyPage from '../views/my/MyPage.vue'
 
+import CommunityPage from '../views/board/CommunityPage.vue'
 import CommunityWritePage from '../views/board/CommunityWritePage.vue'
+import CommunityReadPage from '../views/board/CommunityReadPage.vue'
+import CommunityModifyPage from '../views/board/CommunityModifyPage.vue'
+import CommunityBoardSearchPage from '../views/board/CommunityBoardSearchPage.vue'
 
 Vue.use(VueRouter)
 
@@ -20,6 +23,12 @@ const requireLogin = () => (to, from, next) => {
         alert('로그인이 필요한 서비스입니다.')
     }
 } 
+
+// const writerCheck = () => (to, from, next) => {
+//     alert('해당 방식으로는 접근이 불가능합니다.')
+//     return next('/main')
+    
+// }
 
 const routes = [
   {
@@ -59,6 +68,38 @@ const routes = [
         path: '/community/write',
         name: 'CommunityWritePage',
         component: CommunityWritePage
+    },
+    {
+        path: '/community/:boardNo',
+        name: 'CommunityReadPage',
+        components: {
+            default:
+                CommunityReadPage
+        },
+        props: {
+            default: true
+        }
+    },
+    {
+        path: '/community/modify/:boardNo',
+        name: 'CommunityModifyPage',
+        components: {
+            default: CommunityModifyPage
+        },
+        props: {
+            default: true
+        },
+
+    },
+    {
+        path: '/community/search',
+        name: 'CommunityBoardSearchPage',
+        components: {
+            default: CommunityBoardSearchPage
+        },
+        props: {
+            default: true
+        }
     }
 
   

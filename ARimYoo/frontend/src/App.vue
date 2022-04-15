@@ -13,9 +13,8 @@
                                     <button depressed color="white" height="30" 
                                     v-on="on" class="myBtn" width="140">{{ user.message }} 님</button>
                                 </template>
-                            <v-list>
+                            <v-list class="black">
                                 <v-list-item
-                                    class="black"
                                     dark
                                     v-for="(item,idx) in items"
                                     :key="idx"
@@ -129,10 +128,8 @@ export default {
 </style>
 
 <style>
-a {
+a{
     text-decoration: none;
-}
-a:linked{
-  color:white;
+    color:white;
 }
 </style>

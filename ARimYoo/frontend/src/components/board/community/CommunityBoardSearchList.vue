@@ -3,8 +3,8 @@
         <v-row column wrap justify="center">
             <v-data-table 
                         :headers="headerTitle" 
-                        :items="communityBoards"
-                        :key="communityBoards.boardNo"
+                        :items="searchList"
+                        :key="searchList.boardNo"
                         :items-per-page="10"
                         class="elevation-1 grey lighten-4" 
                         >
@@ -25,11 +25,11 @@
                 </template>
             </v-data-table>
         </v-row>
-        <v-row justify="center" style="margin-top:50px">
-            <v-col  cols="7" md="3">
-            <input type="text" class="search" v-model="keyword"/>
+           <v-row justify="center" style="margin-top:50px">
+            <v-col  cols="3">
+            <v-input type="text" class="search" v-model="keyword"/>
             </v-col>
-            <v-col cols="2" md="1">
+            <v-col cols="1">
                 <v-btn class="searchBtn" @click=goSearch color="red darken-3" dark small>
                     <v-icon>
                         mdi-magnify
@@ -44,29 +44,28 @@
 import axios from 'axios'
 
 export default {
-    name:'CommunityBoardList',
-    props: {
-        communityBoards: {
-            type:Array
+    name:'CommunityBoardSearchList',
+       props: {
+        searchList : {
+            type: Array,
+            required: true
         }
-    },
-    data () {
+       },
+     data () {
         return {
             headerTitle: [
                 { text:'글 번호', value: 'boardNo', width:'70px'},
                 { text:'말머리', value: 'brackets', width:'70px'},
                 { text: '제목', value: 'title', width: "200px" },
                 { text: '작성자', value: 'writer', width: "100px" },
-                { text: '💛', value: 'likeCnt', width: "50px" },
                 { text: '조회수', value: 'viewCnt', width: "70px" },
                 { text: 'date. ', value: 'regDate', width: "100px" },
             ],
-            keyword:'',
-            searchList: []
+            keyword:''
         }
-    },
-    methods: {
-        goSearch(){
+     },
+     methods: {
+           goSearch(){
                 const {keyword} = this
                 console.log(keyword)
                 axios.post('http://localhost:7777/board/community/search', {keyword})
@@ -80,7 +79,8 @@ export default {
                 })
             }
         }
-    } 
+     }
+
 </script>
 
 <style scoped>
@@ -97,18 +97,14 @@ export default {
   font-size: 14px !important;
 }
 .search {
-    position: relative;
     width:300px;
     height:30px;
     background-color: rgb(240, 238, 238);
     outline-color: rgb(211, 32, 32);
     padding-left:10px;
     font-family: 'Noto Sans KR', sans-serif;
-    float:left;
 }
 .searchBtn {
-    position: relative;
-    float:left;
-    margin-left:10%;
+    margin-left:1%;
 }
 </style>
