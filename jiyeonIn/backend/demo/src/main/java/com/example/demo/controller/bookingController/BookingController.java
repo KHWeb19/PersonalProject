@@ -66,4 +66,25 @@ public class BookingController {
         return service.list();
     }
 
+    @GetMapping("/{bookingNo}")
+    public BookingInfo bookingBoard (@PathVariable("bookingNo") Integer bookingNo) {
+        log.info("bookingBoard() : "+ bookingNo);
+
+        return service.read(bookingNo);
+    }
+
+    @PutMapping("/{bookingNo}")
+    public BookingInfo modifyBookingBoard (
+            @PathVariable("bookingNo") Integer bookingNo,
+            @RequestBody BookingInfo bookingInfo) {
+
+        log.info("modifyBookingNo() :" + bookingNo);
+        log.info("modifyBookingBoard() :" + bookingInfo);
+
+        bookingInfo.setBookingNo(Long.valueOf(bookingNo));
+        service.modify(bookingInfo);
+
+        return bookingInfo;
+    }
+
 }

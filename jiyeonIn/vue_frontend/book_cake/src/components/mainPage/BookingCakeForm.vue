@@ -122,7 +122,6 @@
             </div>
         </div>
 
-        <div style="font-size: 14px; margin:1% 1% 1% 15%;"><br><p v-show="isShow">선택한 디테일 : <strong>{{ outDesign }} & {{ outSize }} & {{ outPrice }} {{outImg}}</strong>  </p></div>
         <br><hr><br>
 
         <div style="margin:1% 1% 1% 7%;">
@@ -311,7 +310,7 @@ export default {
                 const {id, date, time, contents,cakeArrNo, files1} = this
                 this.$emit('submit', {id, date, time, contents, cakeArrNo,files1})
             }else{
-                (this.cakeArrNo) = 0
+                this.cakeArrNo = 0
                 const {id, date, time, contents,cakeArrNo, files1} = this
                 this.$emit('submit', {id, date, time, contents, cakeArrNo,files1})
             }

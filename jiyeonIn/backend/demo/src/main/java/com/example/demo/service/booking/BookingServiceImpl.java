@@ -29,7 +29,7 @@ public class BookingServiceImpl implements BookingService{
     public void register(BookingRequest info, String originalFilename) {
         String putLink = info.getDate()+"."+info.getId()+"."+originalFilename;
 
-        if(info.getCakeArrNo().equals("0")) {
+        if(info.getCakeArrNo() == 0) {
             BookingInfo bookingInfo2 = new BookingInfo(info.getId(), info.getDate(), info.getTime(), "예약중", info.getContents(), putLink);
             repository.save(bookingInfo2);
 
@@ -39,7 +39,7 @@ public class BookingServiceImpl implements BookingService{
 
             BookingInfo bookingInfo1 =
                     new BookingInfo(info.getId(), info.getDate(), info.getTime(), "예약중", info.getContents(), putLink,
-                            checkCake.getDesign(),checkCake.getSize(),checkCake.getPrice());
+                            info.getCakeArrNo());
             repository.save(bookingInfo1);
         }
 
@@ -56,9 +56,10 @@ public class BookingServiceImpl implements BookingService{
             Optional<UploadCake> uploadCake = uploadRepository.findById(Long.valueOf(info.getCakeArrNo()));
             UploadCake checkCake = uploadCake.get();
 
+
             BookingInfo bookingInfo1 =
-                    new BookingInfo(info.getId(), info.getDate(), info.getTime(), "예약중", info.getContents(), checkCake.getLinkInfo(),
-                            checkCake.getDesign(),checkCake.getSize(),checkCake.getPrice());
+                    new BookingInfo(info.getId(), info.getDate(), info.getTime(), "예약중", info.getContents(),
+                            info.getCakeArrNo());
             repository.save(bookingInfo1);
 
         }
@@ -67,6 +68,23 @@ public class BookingServiceImpl implements BookingService{
     @Override
     public List<BookingInfo> list() {
         return repository.findAll(Sort.by(Sort.Direction.DESC,"bookingNo"));
+    }
+
+
+    @Override
+    public BookingInfo read(Integer bookingNo) {
+        Optional<BookingInfo> maybeReadBoard = repository.findById(Long.valueOf(bookingNo));
+
+        if(maybeReadBoard.equals(Optional.empty())){
+            log.info("content is null");
+        }
+
+        return maybeReadBoard.get();
+    }
+
+    @Override
+    public void modify(BookingInfo bookingInfo) {
+        repository.save(bookingInfo);
     }
 
 }

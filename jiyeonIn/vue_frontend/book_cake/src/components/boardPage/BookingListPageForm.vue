@@ -1,13 +1,45 @@
 <template>
     <div>
     <table>
-        
             <tr>
                 <th align="center" width="100">번호</th>
                 <th align="center" width="140">진행사항</th>
                 <th align="center" width="300">제목</th>
                 <th align="center" width="240">등록일자</th>
             </tr>
+
+            <tr>
+                <td>
+                    공지사항
+                </td>
+                <td>
+                </td>
+                <td>
+                    <router-link :to="{ name: 'BeforeBooking'}">
+                       <strong> 예약 전 필독 </strong>
+                    </router-link>
+                </td>
+                <td>
+                    2022.4.11 오전 10:00:00
+                </td>
+            </tr>
+            <tr>
+                 <td>
+                    공지사항
+                </td>
+                <td>
+                </td>
+                <td>
+                    <router-link :to="{ name: 'BeforeConfirm'}">
+                        <strong> 예약 확정 전 필독</strong>
+                    </router-link>
+                </td>
+                <td>
+                    2022.4.11 오전 10:00:00
+                </td>
+            </tr>
+
+
             <tr v-if="!bookingLists || (Array.isArray(bookingLists) && bookingLists.length === 0)">
                 <td colspan="4">
                     현재 등록된 게시물이 없습니다!
@@ -22,8 +54,8 @@
                 </td>
                 <td align="center" >
                     <router-link :to="{ name: 'BookingReadPage',
-                                        params: { bookingNo: board.bookingNo.toString() } }">
-                        {{ board.id }} 님의 주문서입니다.
+                                        params: { bookingNo: board.bookingNo.toString()}}" > 
+                        {{ board.id }} 님의 주문서입니다. 
                     </router-link>
                 </td>
                 <td align="center">
@@ -61,6 +93,7 @@
         data () {
             return {
                 pageNum: 0,
+                bookingNo:''
             }
         },
         computed: {
@@ -84,6 +117,14 @@
             },
             prevPage () {
             this.pageNum -= 1;
+            },
+            checksomeID(bookingNo) {
+                if(this.dbrAction != this.bookingLists[bookingNo].id && this.dbrAction != 'manager') {
+                alert('해당 아이디만 읽을 수 있습니다!')
+                this.$router.push({
+                            name: 'BookingListPage'
+                            })
+                }
             }
         }
         

@@ -11,4 +11,8 @@ public interface BookingService {
     public void exceptFilesBooking(BookingRequest info);
 
     public List<BookingInfo> list();
+
+    public BookingInfo read(Integer bookingNo);
+
+    public void modify(BookingInfo bookingInfo);
 }

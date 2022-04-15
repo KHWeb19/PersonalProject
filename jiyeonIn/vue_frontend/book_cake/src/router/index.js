@@ -9,9 +9,10 @@ import ReviewPage from '@/views/CakePage/ReviewPage.vue'
 import MyPage from '@/views/CakePage/MyPage.vue'
 import LoginPage from '@/views/CakePage/LoginPage.vue'
 import SignUpPage from '@/views/CakePage/SignUpPage.vue'
-import test from '@/views/CakePage/test.vue'
 import BookingReadPage from '@/views/boardPage/BookingReadPage.vue'
 import BookingModifyPage from '@/views/boardPage/BookingModifyPage.vue'
+import BeforeBooking from '@/views/boardNotice/BeforeBooking.vue'
+import BeforeConfirm from '@/views/boardNotice/BeforeConfirm.vue'
 
 Vue.use(VueRouter)
 
@@ -61,15 +62,9 @@ const routes = [
   }
   ,
   {
-    path: '/test',
-    name: 'test',
-    component: test
-  }
-  ,
-  {
-    path: '/bookingReadPage',
+    path: '/bookingReadPage/:bookingNo',
     name: 'BookingReadPage',
-    component: {
+    components: {
       default: BookingReadPage
     },
     props: {
@@ -78,14 +73,25 @@ const routes = [
   }
   ,
   {
-    path: '/bookingModifyPage',
+    path: '/bookingModifyPage/:bookingNo',
     name: 'BookingModifyPage',
-    component: {
+    components: {
       default: BookingModifyPage
     },
     props: {
       default: true
     }
+  },
+  {
+    path: '/beforeBooking',
+    name: 'BeforeBooking',
+    component: BeforeBooking
+  }
+  ,
+  {
+    path: '/beforeConfirm',
+    name: 'BeforeConfirm',
+    component: BeforeConfirm
   }
 ]
 
