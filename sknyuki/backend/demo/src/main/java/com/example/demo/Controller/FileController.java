@@ -13,9 +13,22 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:8080", allowedHeaders = "*")
 public class FileController {
 
-    @PostMapping("/CheckBrandBoard")
+    @PostMapping("/BrandCheckBoard")
     @ResponseBody
     public String checkBrandFileUpload(@RequestParam(value = "fileList", required = false) List<MultipartFile> fileList,
+                                       @RequestParam("boardNo") Long boardNo){
+        try {
+            for (MultipartFile multipartFile : fileList) {
+                FileOutputStream writer = new FileOutputStream("./images/BrandCheck/" + boardNo + "_" + ".jpg");
+                writer.write(multipartFile.getBytes());
+                writer.close();
+            }
+        } catch (Exception e) {
+            return "Recommend File Upload Fail";
+        }
+        return "Recommend File Upload Success";
+    }
+  /*  public String checkBrandFileUpload(@RequestParam(value = "fileList", required = false) List<MultipartFile> fileList,
                                        @RequestParam("boardNo") Long boardNo, @RequestParam("id") String id) {
         try {
             for (MultipartFile multipartFile : fileList) {
@@ -27,7 +40,7 @@ public class FileController {
             return "Recommend File Upload Fail";
         }
         return "Recommend File Upload Success";
-    }
+    }*/
 
     @PostMapping("/QuestionBoard")
     @ResponseBody
