@@ -11,7 +11,7 @@
               placeholder="입력하시오"
               outlined 
               dense
-              style="width:300px; font-size:20px;"
+              style="width:600px; font-size:20px;"
               v-model="title"
             ></v-text-field>
             

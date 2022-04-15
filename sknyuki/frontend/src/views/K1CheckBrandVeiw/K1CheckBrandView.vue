@@ -9,7 +9,7 @@
      
 
     <div class="app">
-        <k-1-check-brand-list :BrandCheckboards="BrandCheckboards"/>
+        <k-1-check-brand-list :BrandCheckBoards="BrandCheckBoards"/>
     </div>
     </div>
      
@@ -18,6 +18,7 @@
     </v-container>
 </template>
 <script>
+import { mapActions, mapState } from 'vuex'
 import HeaderView from '@/components/home/headerView.vue'
 import DropDown from '@/components/KategoriePage1/DropDown.vue'
 import K1CheckBrandList from '@/components/BrandCheckBoard/K1CheckBrandList.vue'
@@ -28,18 +29,18 @@ export default {
     HeaderView,
     DropDown,
     K1CheckBrandList,
-        
     },
-/* computed: {
-        ...mapState(['BrandCheckboards'])
+    computed: {
+        ...mapState(['BrandCheckBoards'])
     },
     mounted () {
-        this.fetchBoardList()
+        this.fetchBrandCheckBoardList()
     },
     methods: {
-        ...mapActions(['fetchBoardList'])
-    }*/
+        ...mapActions(['fetchBrandCheckBoardList'])
     }
+}
+
 </script>
 
 <style scoped>

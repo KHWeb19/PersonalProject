@@ -1,6 +1,6 @@
 <template>
-<div>
- <!--<p>proto type</p>
+<!--
+ <p>proto type</p>
 
         <h3 text align="center">게시물 목록</h3>
           <table id="BrandCheckBoard">
@@ -10,17 +10,17 @@
                 <th align="center" width="150">작성자</th>
                 <th align="center" width="240">등록일자</th>
             </tr>
-            <tr v-if="!jpaBoards || (Array.isArray(jpaBoards) && jpaBoards.length === 0)">
+            <tr v-if="!BrandCheckBoards || (Array.isArray(BrandCheckBoards) && BrandCheckBoards.length === 0)">
                 <td colspan="4">
                     현재 등록된 게시물이 없습니다!
                 </td>
             </tr>
-            <tr v-else v-for="board in jpaBoards" :key="board.boardNo">
+            <tr v-else v-for="board in BrandCheckBoards" :key="board.boardNo">
                 <td align="center">
                     {{ board.boardNo }}
                 </td>
                 <td align="left">
-                    <router-link :to="{ name: 'JpaBoardReadPage',
+                    <router-link :to="{ name: 'K1CheckBrandReadPage',
                                         params: { boardNo: board.boardNo.toString() } }">
                         {{ board.title }}
                     </router-link>
@@ -33,23 +33,27 @@
                 </td>
             </tr>
         </table>
-        <br>
-          <v-row align="center" justify="center">-->
+        <br>-->
+         
               <div>
-                
-            <v-simple-table style="padding:20px 100px 100px 100px">
-            <v-data-table
-                :headers="headerTitle"
-                :items="BrandCheckboards"
-                :page.sync="page"
-                :items-per-page="10"
-                hide-default-footer
-                class="elevation-1" 
-                @click:row="handleClick"
-                @page-count="pageCount = $event"
-            ></v-data-table>
-            </v-simple-table>
                  
+           
+             <v-data-table
+                :headers="headerTitle"
+                :items="BrandCheckBoards"
+                :key="BrandCheckBoards.boardNo"
+                :items-per-page="10"
+                class="elevation-1" >
+                <template v-slot:[`item.title`]="{ item }">
+                   <router-link :to="{ name: 'K1CheckBrandReadPage',
+                                        params: { boardNo: item.boardNo.toString() } }">
+                    {{ item.title }}
+                   </router-link>
+                </template>
+                
+            ></v-data-table>
+         
+                 <br>
   <v-row  justify="end">
        <!--name:homeview-> register로 변경예정-->
     <router-link style="text-decoration: none;" :to="{name:'K1CheckBrandRegisterPage'}">   
@@ -57,19 +61,9 @@
       <v-icon small>mdi-pencil</v-icon> 글쓰기</v-btn>
     </router-link></v-row>
     <br>
-            
-            <div class="text-center pt-2">
-            <v-pagination
-                v-model="page"
-                :length="pageCount"
-                dark
-            ></v-pagination>
-            
-       
- 
-            </div>
+  
               </div>
-</div>
+
               
 
 </template>
@@ -78,14 +72,11 @@
 export default {
     name:'K1CheckBrandList',
     props:{
-      questionList: []
+      BrandCheckBoards: []
     },
   data () {
     return {
-            page: 1,
-            pageCount: 0,
-            itemsPerPage: 10,
-            headerTitle: [
+           headerTitle: [
                             { text: '번호', value: 'boardNo', width: "70px" },
                             { text: '제목', value: 'title', width: "200px" },
                             { text: '작성자', value: 'writer', width: "50px" },
@@ -93,37 +84,10 @@ export default {
                         ]
     }
   },
-function: {
-    },
     methods: {
-        handleClick(event, idx) {
-            this.$router.push({
-                            name: 'BoardReadPage',
-                            params: { boardNo: String(idx.item.boardNo) }
-                         })//실행 안될시  params->query: { boardNo: boardNo, id: id }
-        }
+      
     },
-    mounted () {
-        console.log(this.BrandCheckboards.regDate)
-        console.log(this.BrandCheckboards.boardNo)
-    }
+
 }
 </script> 
 
-<style scoped>
-/* #BrandCheckBoard{
- margin:auto;
- width: 1600px;
- border-top: 1px solid black;
- border-collapse: collapse;
- border-right: 1px solid black;
- border-left: 1px solid black;
-
-}
-
-td, th{
- 
-  border-bottom: 1px solid black;
-  padding:10px;
-}*/
-</style>

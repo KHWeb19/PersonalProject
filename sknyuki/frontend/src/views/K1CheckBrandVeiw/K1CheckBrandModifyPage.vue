@@ -4,19 +4,12 @@
         <br>
         <drop-down></drop-down>
            <div align="center">
-        <k-1-check-brand-modify @submitContents="modifyContentsSubmit"
-         @submitFiles="modifyFilesSubmit"/>
-    </div>
-
-
-
- <!--back작업시 변경 지금은 도안을 보기위해 항상 열어둔 상태 
-<k-1-check-brand-modify v--if="BrandCheckboard" :BrandCheckboard="BrandCheckboard"/>
-<p v-else>로딩중 .....</p>-->
-
-
-
-  
+      
+      <k-1-check-brand-modify v-if="BrandCheckBoard" :BrandCheckBoard="BrandCheckBoard" 
+@submitContents="modifyContentsSubmit" 
+@submitFiles="modifyFilesSubmit"/>
+<p v-else>로딩중 .....</p>
+           </div>
         </v-container>
 </template>
 <script>
@@ -24,7 +17,7 @@ import HeaderView from '@/components/home/headerView.vue'
 import DropDown from '@/components/KategoriePage1/DropDown.vue'
 import K1CheckBrandModify from '@/components/BrandCheckBoard/K1CheckBrandModify.vue'
 import axios from 'axios'
-//import { mapActions, mapState } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
 
 export default {
@@ -38,32 +31,45 @@ export default {
          boardNo: {
             type: String,
             required: true
+         }
         },
         data () {
     return {
-      boardNo:null,
-      id: null,
+      files:[],
         }
     },
-  //       computed: {
-   //     ...mapState(['BrandCheckboard'])
+         computed: {
+      ...mapState(['BrandCheckBoard'])
     },
-     created () {
-    this.boardNo = this.$route.query.boardNo
-    this.id = this.$route.query.id
-    console.log(this.id, this.boardN)},
-    methods:{
-   //      ...mapActions(['fetchBrandCheckboard']),
+          created () {
+            console.log(this.boardNo)
+        this.fetchBrandCheckBoard(this.boardNo)
+                .catch(() => {
+                    alert('게시물 DB 조회 실패!')
+                    this.$router.back()
+                    
+                })
+    },
+   
 
-         modifyContentsSubmit(payload){
-             const{title,content}=payload
-             console.log('content의 값이 넘어왔습니다.'+title)
-axios.patch(`http://localhost:7777/CheckBrand/modify/${this.boardNo}`, { title, content }).then(() => {
-        
-        this.fetchBrandCheckboard(this.boardNo)
-      })
-         },
+    methods:{
+        ...mapActions(['fetchBrandCheckBoard']),
+        modifyContentsSubmit (payload) {
+            const { title, content } = payload
+
+            axios.put(`http://localhost:7777/BrandCheckBoard/${this.boardNo}`,
+                { title, writer: this.BrandCheckBoard.writer, content, regDate: this.BrandCheckBoard.regDate })
+                    .then(() => {
+                        alert('게시물 수정 성공!')
+                    })
+                    .catch(() => {
+                        alert('게시물 수정 실패!')
+                    })
+        },
+   
+ 
          modifyFilesSubmit(files){
+           this.files=files
              console.log('수정한 사진이 넘어왔습니다'+files)
      setTimeout(()=>{
                     const formData=new FormData()
@@ -72,26 +78,28 @@ axios.patch(`http://localhost:7777/CheckBrand/modify/${this.boardNo}`, { title, 
                     }
 
                     formData.append('boardNo',this.boardNo)
-                    formData.append('id', this.id)
+                    //formData.append('id', this.id)
+                    console.log(this.boardNo)
                     
 
-                    axios.post('http://localhost:7777/fileUpload/CheckBrandBoard',formData,{
+                    axios.post('http://localhost:7777/fileUpload/BrandCheckBoard',formData,{
                         headers:{ 'Content-Type': 'multipart/form-data'}
                         })
                         .then(res=>{
                              console.log("등록 성공"+res.data)
                               alert('수정이 완료되었습니다!')
-                              // alert('등록 성공! - ' + res)
-                                // this.$router.push({
-                         //   name: 'K1CheckBrandVeiw',
-                           // query: { boardNo: this.boardNo, id: this.id }
-                        //})
+                               alert('등록 성공! - ' + res)
+                                 this.$router.push({
+                            name: 'K1CheckBrandView',
+                           
+                        })
                         }).catch(err=>{
                              console.log(err)
                              
                         })
                 },1000)
-         }
+         },
+    },
+      
     }
-}
 </script>

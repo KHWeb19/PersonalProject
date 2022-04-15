@@ -6,7 +6,7 @@
                 
 
                 
-             <!--  spring연동시 아래의 코드로 변경
+             
                  <h3 align="left">제목 : </h3>
                 <v-text-field
                 dense
@@ -24,7 +24,7 @@
                 label="UpLoadDate"
                 dense
                  style="width:300px; font-size:20px;"
-                outlined type="text" :value="BrandCheckboard.regDate" readonly/>
+                outlined type="text" :value="BrandCheckBoard.regDate" readonly/>
                 
                 
             
@@ -35,10 +35,10 @@
                 label="WRITER"
                 dense 
                 style="width:300px; font-size:20px;"
-                outlined type="text" :value="BrandCheckboard.writer" readonly/>
-               -->
+                outlined type="text" :value="BrandCheckBoard.writer" readonly/>
+               
 
-                <h3 align="left">제목 : </h3>
+               <!-- <h3 align="left">제목 : </h3>
                 <v-text-field
                 label="TITLE"
                 outlined 
@@ -66,9 +66,10 @@
                 label="WRITER"
                 dense 
                 style="width:300px; font-size:20px;"
-                outlined type="text"/>
-               
-              <!--  <h3 align="left">내용 : </h3>
+                outlined type="text"/>-->
+                <upload-file-1 @selectFile="selectFile"></upload-file-1>
+
+                <h3 align="left">내용 : </h3>
                 <v-textarea
                     counter
                     outlined
@@ -79,11 +80,11 @@
                     rows="8" 
                     cols="100"
                     v-model="content">
-                </v-textarea>-->
+                </v-textarea>
 
-                <upload-file-1 @selectFile="selectFile"></upload-file-1>
+               
 
-                <h3 align="left">내용 : </h3>
+               <!-- <h3 align="left">내용 : </h3>
                 <v-textarea
                     counter
                     outlined
@@ -93,7 +94,7 @@
                     rows="8" 
                     cols="100"
                     v-model="content">
-                </v-textarea>
+                </v-textarea>-->
     
      <div class="버튼">
                 <v-btn text color="black" rounded x-large
@@ -102,7 +103,7 @@
 
                 <br>
 
-                <router-link style="text-decoration: none; color:black" :to="{ name: 'K1CheckBrandView'/*,params: { boardNo: String(idx.item.boardNo) }*/  }">
+                <router-link style="text-decoration: none; color:black" :to="{ name: 'K1CheckBrandView', params: { boardNo: BrandCheckBoard.boardNo.toString() }}">
                     <v-btn text color="black" rounded x-large
                         style="padding: 10px; width: 90px;">수정 취소
                     </v-btn>
@@ -120,7 +121,7 @@ export default {
         UploadFile1
     },
      props: {
-        BrandCheckboard: {
+        BrandCheckBoard: {
             type: Object,
             required: true
         }
@@ -142,14 +143,14 @@ methods: {
             if(result) {
                 const { title, content} = this
                 this.$emit('submitContents', { title, content})
-                console.log(this.title,this.content)
+                //console.log(this.title,this.content)
 
                 this.$emit("submitFiles",this.files)
-                console.log(this.files)
+                //console.log(this.files)
                 }
             },
                created () {
-                   //this.id = this.BrandCheckboard.id
+        //this.id = this.BrandCheckboard.id
         this.boardNo =this.BrandCheckboard.boardNo
         this.title = this.BrandCheckboard.title
         this.content = this.BrandCheckboard.content

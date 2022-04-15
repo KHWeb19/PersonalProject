@@ -29,25 +29,27 @@ data () {
       files:[],
     }
 },
-computed: {
-    ...mapState([ 'userInfo' ])
-  },
+//computed: {
+  //  ...mapState([ 'userInfo' ])
+  //},
      methods: {
         contentsSubmit (payload) {
-            const id=this.userInfo.id
-            const { title, content,writer} = payload
+           // const id=this.userInfo.id
+            const { title,content,writer} = payload
             console.log('contents의 값이 넘어왔습니다.'+content)
-            axios.post('http://localhost:7777/CheckBrandBoard/register', {id, title, content,writer })
+            console.log(typeof(title))
+            axios.post('http://localhost:7777/BrandCheckBoard/register', {title, content,writer })
                     .then(res => {
-                        // alert('등록 성공! - ' + res)
+                        alert('등록 성공! - ' + res)
                         this.boardNo=res.data.boardNo
+//console.log(res)
                         
                     
                     })
                 },
                 filesSubmit(files){
                 this.files=files
-                console.log('값이 넘어왔습니다'+files)
+               // console.log('값이 넘어왔습니다'+files)
                 setTimeout(()=>{
                     const formData=new FormData()
                     for (let i=0; i<this.files.length; i++){
@@ -55,20 +57,21 @@ computed: {
                     }
 
                     formData.append('boardNo',this.boardNo)
-                    formData.append('id', this.userInfo.id)
+                    console.log(this.boardNo)
+                   // formData.append('id', this.userInfo.id)
                     
 
-                    axios.post('http://localhost:7777/fileUpload/CheckBrandBoard',formData,{
+                    axios.post('http://localhost:7777/fileUpload/BrandCheckBoard',formData,{
                         headers:{ 'Content-Type': 'multipart/form-data'}
                         })
                         .then(res=>{
                              console.log(res.data)
-                              // alert('등록 성공! - ' + res)
-                                // this.$router.push({
-                         //   name: 'K1CheckBrandVeiw',
-                           // params: { boardNo:  boardNo: this.boardNo, id: this.id }
-                        //})
+                               alert('등록 성공! - ' + res)
+                                 this.$router.push({
+                            name: 'K1CheckBrandView'
+                        })
                         }).catch(err=>{
+                            alert('문제발생')
                              console.log(err)
                              
                         })
