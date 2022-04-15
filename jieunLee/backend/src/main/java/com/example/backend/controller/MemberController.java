@@ -27,6 +27,13 @@ public class MemberController {
         return service.list();
     }
 
+    @PostMapping("/search")
+    public List<Member> search (@RequestBody KeyWordRequest keyWord) {
+        log.info("search()"+keyWord);
+
+        return service.search(keyWord.getKeyWord());
+    }
+
 
 
     @PostMapping("/register")

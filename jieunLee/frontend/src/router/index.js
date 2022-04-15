@@ -5,6 +5,7 @@ import LoginPage from '@/views/member/LoginPage'
 import RegisterPage from '@/views/member/RegisterPage'
 
 import HomeView from '@/views/HomeView.vue'
+import MemberList from '@/components/member/MemberList'
 import MyProfilePage from '@/views/member/MyProfilePage'
 import AccountsEditPage from '@/views/member/AccountsEditPage'
 import PasswordEditPage from '@/views/member/PasswordEditPage'
@@ -31,6 +32,16 @@ const routes = [
     path: '/',
     name: 'HomeView',
     component: HomeView,
+    props: {
+      default: true
+    }
+  },
+  {
+    path: '/memberList/:keyWord',
+    name: 'MemberList',
+    components: {
+      default: MemberList
+    },
     props: {
       default: true
     }

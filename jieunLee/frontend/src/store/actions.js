@@ -1,6 +1,7 @@
 import {
     FETCH_MEMBER,
     FETCH_MEMBER_LIST,
+    FETCH_SEARCH_MEMBER_LIST,
     FETCH_BOARD,
     FETCH_BOARD_LIST,
     FETCH_BOARD_MY_LIST,
@@ -21,6 +22,12 @@ export default {
         return axios.get('http://localhost:7777/member/list')
                 .then((res) => {
                     commit(FETCH_MEMBER_LIST, res.data)
+                })
+    },
+    fetchSearchMemberList ({ commit }) {
+        return axios.get('http://localhost:7777/member/search')
+                .then((res) => {
+                    commit(FETCH_SEARCH_MEMBER_LIST, res.data)
                 })
     },
     fetchBoard ({ commit }, boardNo) {

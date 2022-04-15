@@ -1,6 +1,7 @@
 export default {
     member: null,
     members: [],
+    searchMembers: [],
     board: null,
     boards: [],
     myBoards: [],

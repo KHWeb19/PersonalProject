@@ -27,6 +27,12 @@ public class MemberServiceImpl implements MemberService{
         return memberRepository.findAll(Sort.by(Sort.Direction.DESC, "memberNo"));
     }
 
+    @Override
+    public List<Member> search(String keyWord) {
+        return memberRepository.findByMemberIdContaining(keyWord);
+
+
+    }
 
     @Override
     public void register(MemberRequest memberRequest) {

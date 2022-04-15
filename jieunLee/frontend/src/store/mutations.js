@@ -1,6 +1,7 @@
 import {
     FETCH_MEMBER,
     FETCH_MEMBER_LIST,
+    FETCH_SEARCH_MEMBER_LIST,
     FETCH_BOARD,
     FETCH_BOARD_LIST,
     FETCH_BOARD_MY_LIST,
@@ -14,6 +15,9 @@ export default {
     },
     [FETCH_MEMBER_LIST] (state, members) {
         state.members = members
+    },
+    [FETCH_SEARCH_MEMBER_LIST] (state, searchMembers) {
+        state.searchMembers = searchMembers
     },
     [FETCH_BOARD] (state, board) {
         state.board = board
