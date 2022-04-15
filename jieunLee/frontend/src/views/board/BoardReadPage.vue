@@ -32,7 +32,7 @@ export default {
     },
     computed: {
         ...mapState(['board']),
-                ...mapState(['comments']),
+        ...mapState(['comments']),
     },
     created() {
         this.fetchBoard(this.boardNo)
@@ -46,12 +46,12 @@ export default {
                 this.$router.push()
             })
     },
-      mounted () {
-    this.fetchCommentList(this.boardNo)
+    mounted () {
+        this.fetchCommentList(this.boardNo)
   },
     methods: {
         ...mapActions(['fetchBoard']),
-                ...mapActions(['fetchCommentList']),
+        ...mapActions(['fetchCommentList']),
         onDelete() {
             const {boardNo} = this.board
             axios.delete(`http://localhost:7777/board/${boardNo}`)
@@ -75,7 +75,8 @@ export default {
                         
                         alert('문제 발생!')
                     })
-        }    
+        },
+        
     },
 }
 </script>

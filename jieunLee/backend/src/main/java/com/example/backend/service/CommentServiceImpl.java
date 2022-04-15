@@ -43,4 +43,9 @@ public class CommentServiceImpl implements CommentService {
         List<Comment> comments = repository.findCommentByBoardNo(Long.valueOf(boardNo));
         return comments;
     }
+
+    @Override
+    public void remove(Integer commentNo) {
+        repository.deleteById(Long.valueOf(commentNo));
+    }
 }
