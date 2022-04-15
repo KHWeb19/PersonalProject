@@ -21,8 +21,8 @@ export default {
                 commit(FETCH_BOOKING_LISTS, res.data)
             })
     },
-    fetchBookingBoard ({ commit }, bookingNo) {
-        return axios.get(`http://localhost:7777/booking/${bookingNo}`)
+    fetchBookingBoard ({ commit }, bookingNo, id) {
+        return axios.get(`http://localhost:7777/booking/${bookingNo}/${id}`)
                 .then ((res) => {
                     commit(FETCH_BOOKING_BOARD, res.data)
                 })

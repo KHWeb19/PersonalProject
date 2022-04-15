@@ -12,7 +12,7 @@ public interface BookingService {
 
     public List<BookingInfo> list();
 
-    public BookingInfo read(Integer bookingNo);
+    public BookingInfo read(Integer bookingNo, String id);
 
     public void modify(BookingInfo bookingInfo);
 }

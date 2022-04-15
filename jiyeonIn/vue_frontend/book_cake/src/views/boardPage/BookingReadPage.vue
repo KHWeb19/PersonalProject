@@ -6,7 +6,7 @@
             <booking-list-read-form v-if="BookingBoard" :BookingBoard="BookingBoard" :bookingNo ="bookingNo" :cakeLists="cakeLists" @click="checksameID()"/>
             <p v-else>로딩중 ... </p>
             <div>
-                <booking-board-comment :bookingNo="bookingNo"></booking-board-comment>
+                <booking-board-comment :bookingNo="bookingNo" ></booking-board-comment>
             </div>
         </div>
         

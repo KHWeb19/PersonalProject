@@ -66,11 +66,13 @@ public class BookingController {
         return service.list();
     }
 
-    @GetMapping("/{bookingNo}")
-    public BookingInfo bookingBoard (@PathVariable("bookingNo") Integer bookingNo) {
+    @GetMapping("/{bookingNo}/{id}")
+    public BookingInfo bookingBoard (@PathVariable("bookingNo") Integer bookingNo,
+                                     @PathVariable("id") String id) {
+        log.info("checkId:" +id);
         log.info("bookingBoard() : "+ bookingNo);
 
-        return service.read(bookingNo);
+        return service.read(bookingNo, id);
     }
 
     @PutMapping("/{bookingNo}")
