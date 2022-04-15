@@ -50,7 +50,7 @@ export default {
 
             title:'',
             content:'',
-            //files: '',
+            files: '',
             image :''
             
         }
@@ -63,15 +63,19 @@ export default {
 
             console.log('add Image')
 
-            this.files = this.$refs.files.files
-            this.image = URL.createObjectURL(this.files[0])
-             
+            var image = this.$refs['files'].files[0]
+            const url = URL.createObjectURL(image)
+            this.image = url
+            this.files = this.$refs.files.files[0]
+
+           
             
         },
         onSubmit () {
             const { title, content,writer } = this
-            this.$emit('submit', { title, content,writer })
-            console.log(title,content,writer)
+            const file =  this.$refs.files.files[0]
+            this.$emit('submit', { title, content,writer,file })
+            console.log(title,content,writer,file)
         },
         cancel (){
             this.$router.push('/communityBoard')

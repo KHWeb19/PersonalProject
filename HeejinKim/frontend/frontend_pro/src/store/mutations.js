@@ -4,8 +4,7 @@ import {
 
     FETCH_AUTH,
     FETCH_AUTH_LIST,
-    FETCH_MEMBERAUTH,
-    FETCH_MEMBERAUTH_LIST,
+   
 
     FETCH_BOARD,
     FETCH_BOARD_LIST,
@@ -47,12 +46,7 @@ export default {
     [FETCH_AUTH_LIST] (state, auths) {
         state.auths = auths;
     },
-    [FETCH_MEMBERAUTH_LIST] (state, memberAuths) {
-        state.memberAuths = memberAuths;
-    },
-    [FETCH_MEMBERAUTH] (state, memberAuth) {
-        state.memberAuth = memberAuth
-    },
+  
 
 /*
     [COOKIE_SESSION](state, payload) {

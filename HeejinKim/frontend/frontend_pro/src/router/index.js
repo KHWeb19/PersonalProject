@@ -8,6 +8,8 @@ import LoginPage from '@/views/login/LoginPage.vue'
 import MemberInfoPage from '@/views/main/MemberInfoPage.vue'
 import BoardList from '@/views/board/community/BoardList.vue'
 import  BoardRegister from '@/views/board/community/BoardRegister.vue'
+import  BoardRead from '@/views/board/community/BoardRead.vue'
+import  BoardModify from '@/views/board/community/BoardModify.vue'
 
 
 Vue.use(VueRouter)
@@ -54,7 +56,29 @@ const routes = [
     path: '/community/register',
     name: 'BoardRegister',
     component: BoardRegister
-}
+},
+{
+  path: '/community/read/:boardNo',
+  name: 'BoardRead',
+  components: {
+
+    default:BoardRead
+  },
+  props: {
+    default: true
+  }
+},
+{
+  path: '/community/modify/:boardNo',
+  name: 'BoardModify',
+  components: {
+
+    default:BoardModify
+  },
+  props: {
+    default: true
+  }
+},
   
 ]
 

@@ -71,7 +71,7 @@ export default {
   methods: {
     showBoard(event, idx) {
       console.log("글 번호: " + idx.item.boardNo)
-      this.$router.push({name: 'BoardReadPage', params: {boardNo: String(idx.item.boardNo)}})
+      this.$router.push({name: 'BoardRead', params: {boardNo: String(idx.item.boardNo)}})
     },
   }
 }
@@ -90,6 +90,7 @@ export default {
 .cardStyle{
 
   font-family: 'Poiret One', cursive;
+  font-weight: bold;
   margin: 30px;
   width:90%;
 }

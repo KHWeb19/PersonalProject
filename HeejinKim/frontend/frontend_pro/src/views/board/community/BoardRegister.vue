@@ -22,8 +22,19 @@ export default {
     
     methods: {
         onSubmit (payload) {
-            const { title, content, writer} = payload
-            axios.post('http://localhost:7777/board/community/register', { title, content, writer })
+            const { title, content, writer,file} = payload
+
+            let formData = new FormData()
+            if (file != null )
+            {formData.append('file', file)}
+            formData.append('title',title)
+            formData.append('content', content)
+            formData.append('writer', writer)
+           
+
+            axios.post('http://localhost:7777/board/community/register',formData, { headers: {
+                    'Content-Type': 'multipart/form-data'
+                }})
                     .then(() => {
                         alert('게시물 등록 성공!')
                         this.$router.push({
