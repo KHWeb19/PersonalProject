@@ -3,10 +3,14 @@
     <v-container class="white" style="width: 1240px">
       <v-row>
         <v-col> 카테고리 박스 </v-col>
+        <v-col>
+          <v-btn>최신 순</v-btn>
+          <v-btn>조회 순</v-btn>
+        </v-col>
       </v-row>
       <v-row>
         <v-col v-for="food in paginatedData" :key="food.boardNo" lg="3" sm="6">
-          <v-card width="305" height="370" class="mx-auto">
+          <v-card width="500" height="370" class="mx-auto">
             <router-link
               :to="{
                 name: 'FoodDetailPage',
@@ -15,16 +19,16 @@
             >
               <v-img
                 :src="require(`@/assets/uploadImg/foodBoard/${food.filename}`)"
-                height="215px"
+                height="200px"
               ></v-img>
             </router-link>
 
             <v-card-subtitle class="pt-3 pb-0"
-              ><v-chip class="ma-2" small>
+              ><v-chip class="ma-1" small>
                 {{ food.mat }}
               </v-chip>
-              <v-chip class="ma-2" small> {{ food.kind }} </v-chip>
-              <v-chip class="ma-2" small> {{ food.way }} </v-chip>
+              <v-chip class="ma-1" small> {{ food.kind }} </v-chip>
+              <v-chip class="ma-1" small> {{ food.way }} </v-chip>
             </v-card-subtitle>
 
             <v-card-title class="pt-0 pb-0"> {{ food.name }} </v-card-title>
@@ -35,6 +39,7 @@
             <v-card-actions>
               <v-card-text class="pt-0">추천 수</v-card-text>
               <v-card-text class="pt-0">{{ food.viewCount }}</v-card-text>
+              <v-card-text class="pt-0">{{ food.regDate }}</v-card-text>
             </v-card-actions>
           </v-card>
         </v-col>
@@ -91,6 +96,7 @@ export default {
   data() {
     return {
       pageNum: 0,
+      sortReset: true,
     };
   },
 

@@ -4,8 +4,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.Date;
 
 @Data
@@ -49,15 +53,15 @@ public class FoodBoard {
     @Column
     private String filepath;
 
-    @Column()
+    @Column
     private Integer viewCount = 0;
 
 
-    @CreationTimestamp
-    private Date regDate;
+    @CreatedDate
+    private String regDate = LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT));
 
     @UpdateTimestamp
-    private Date updDate;
+    private LocalDateTime upDate;
 
 
 }

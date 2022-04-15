@@ -4,6 +4,7 @@ import com.example.demo.entity.FoodBoard.FoodBoard;
 import com.example.demo.service.FoodBoard.FoodBoardService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -34,11 +35,14 @@ public class FoodBoardController {
         return service.list();
     }
 
-    @GetMapping("getFoodList")
+    @GetMapping("/getFoodList")
     public List<FoodBoard> getFoodList(){
         log.info("getFoodList()");
+
         return service.getFoodList();
     }
+
+
 
     @GetMapping("/{boardNo}")
     public FoodBoard foodBoardRead(
@@ -51,11 +55,12 @@ public class FoodBoardController {
 
     @PutMapping("/{boardNo}")
     public FoodBoard foodBoardModify(
-            @PathVariable("boardNo") Integer boardNo,  FoodBoard foodBoard ,@RequestParam(required = false) MultipartFile file) throws Exception {
-        log.info("foodBoardModify() " +boardNo + ""+ foodBoard.getFilename());
+            @PathVariable("boardNo") Integer boardNo,FoodBoard foodBoard,@RequestParam(required = false) MultipartFile file) throws Exception {
+        log.info("foodBoardModify() " +boardNo + " "+ foodBoard.getFilename());
 
         foodBoard.setBoardNo(Long.valueOf(boardNo));
         service.modify(foodBoard,file);
+
 
         return foodBoard;
     }
@@ -67,4 +72,6 @@ public class FoodBoardController {
 
         service.remove(boardNo);
     }
+
+
 }

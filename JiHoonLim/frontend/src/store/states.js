@@ -3,6 +3,7 @@ export default {
     member: null,
 
     foodBoards: [],
-    foodBoard: null
+    foodBoard: null,
     
+  
 }

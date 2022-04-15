@@ -119,7 +119,7 @@ export default {
     return {
       links: [
         { text: "공지사항", route: "/announcement" },
-        { text: "인기 순위", route: "/best" },
+        { text: "인기 순위", route: "/bestFoodList" },
         { text: "레시피", route: "/foodList" },
       ],
       items: [

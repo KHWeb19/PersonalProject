@@ -12,6 +12,7 @@ import FoodListPage from '@/views/foodBoard/FoodListPage.vue'
 import FoodRegisterPage from '@/views/foodBoard/FoodRegisterPage.vue'
 import FoodDetailPage from '@/views/foodBoard/FoodDetailPage.vue'
 import FoodModifyPage from '@/views/foodBoard/FoodModifyPage.vue'
+import BestFoodListPage from '@/views/foodBoard/BestFoodListPage.vue'
 
 import test from '@/views/test.vue'
 Vue.use(VueRouter)
@@ -82,6 +83,11 @@ const routes = [
     props: {
       default: true
     }
+  },
+  {
+    path: '/bestFoodList',
+    name: 'BestFoodListPage',
+    component: BestFoodListPage
   },
 ]
 

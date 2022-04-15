@@ -55,8 +55,11 @@ public class FoodBoardServiceImpl implements FoodBoardService{
 
     @Override
     public List<FoodBoard> getFoodList() {
-        return repository.findAll();
+
+        return repository.findAll(Sort.by(Sort.Direction.DESC,"boardNo"));
     }
+
+
 
     @Override
     public FoodBoard read(Integer boardNo) {
