@@ -49,6 +49,9 @@ public class FoodBoard {
     @Column
     private String filepath;
 
+    @Column()
+    private Integer vueCount = 0;
+
 
     @CreationTimestamp
     private Date regDate;
@@ -56,7 +59,5 @@ public class FoodBoard {
     @UpdateTimestamp
     private Date updDate;
 
-    public FoodBoard (String filename){
-        this.filename = filename;
-    }
+
 }

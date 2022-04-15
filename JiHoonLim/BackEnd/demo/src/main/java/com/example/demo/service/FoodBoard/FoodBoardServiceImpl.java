@@ -66,7 +66,15 @@ public class FoodBoardServiceImpl implements FoodBoardService{
             log.info("No Read");
             return null;
         }
+
+
         return maybeReadBoard.get();
+    }
+
+    @Override
+    public void updateViewCount(Integer boardNo) {
+
+        repository.updateViewCount(Long.valueOf(boardNo));
     }
 
     @Override

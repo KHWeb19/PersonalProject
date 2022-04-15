@@ -44,6 +44,7 @@ public class FoodBoardController {
     public FoodBoard foodBoardRead(
             @PathVariable("boardNo") Integer boardNo){
         log.info("foodBoardRead()" +boardNo);
+        service.updateViewCount(boardNo);
 
         return service.read(boardNo);
     }

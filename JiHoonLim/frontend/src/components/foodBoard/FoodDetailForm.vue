@@ -12,9 +12,9 @@
                   contain
                   content-class=""
                   :src="
-                    require(`@/assets/uploadImg/foodBoard/${foodBoard.filename}`)
+                    require(`../../assets/uploadImg/foodBoard/${foodBoard.filename}`)
                   "
-                ></v-img>
+                />
               </div>
               <div class="foodRec-cont">
                 <div class="foodRec-left">
@@ -41,6 +41,7 @@
                       flat
                       solo
                       auto-grow
+                      class="textArea"
                     />
                   </div>
                   <div class="main_title">
@@ -85,6 +86,9 @@
                       readonly
                       style="width: 800px"
                     />
+                  </div>
+                  <div>
+                    <v-text-field :value="foodBoard.vueCount"></v-text-field>
                   </div>
                   <div v-if="checkWriteUser">
                     <v-btn
@@ -165,6 +169,7 @@ export default {
       checkWriteUser: false,
       dialogDelete: false,
       checkbox: false,
+      img: this.foodBoard.filename,
     };
   },
   created() {
@@ -242,6 +247,13 @@ export default {
   border-right: 1px solid #dbdbdb;
 }
 
+.v-textarea {
+  display: block;
+  font-size: 20px;
+  color: #666;
+  font-weight: lighter;
+  line-height: 2;
+}
 h2 {
   font-size: 45px;
   color: #333;
@@ -255,12 +267,5 @@ h2 {
   background: #fff;
   border-radius: 50px;
   margin-right: 10px;
-}
-.v-textarea {
-  display: block;
-  font-size: 20px;
-  color: #666;
-  font-weight: lighter;
-  line-height: 1.5;
 }
 </style>

@@ -13,6 +13,7 @@ public interface FoodBoardService {
     public List<FoodBoard> list();
     public List<FoodBoard> getFoodList();
     public FoodBoard read(Integer boardNo);
+    public void updateViewCount(Integer boardNo);
     public void modify (FoodBoard foodBoard, @RequestParam(required = false)MultipartFile file) throws Exception;
     public void remove(Integer boardNo) throws Exception;
 }
