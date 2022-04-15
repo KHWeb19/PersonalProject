@@ -75,12 +75,12 @@ public class MemberServiceImpl implements MemberService{
 
     @Override
     public void modify(Member member, MemberDto memberDto) throws Exception {
-//        String encodedPassword = passwordEncoder.encode(memberDto.getPw());
-//        memberDto.setPw(encodedPassword);
-//
-//        member.updateMember(memberDto);
-//
-//        memberRepository.save(member);
+        String encodedPassword = passwordEncoder.encode(memberDto.getPw());
+        memberDto.setPw(encodedPassword);
+
+        member.updateMember(memberDto);
+
+        memberRepository.save(member);
     }
 
     @Override

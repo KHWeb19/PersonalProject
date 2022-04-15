@@ -10,6 +10,10 @@ import router from '../router/index.js'
 
 import axios from 'axios'
 
+//새로고침 후에도 로그인 유지하게 함 
+import createPersistedState from "vuex-persistedstate";
+
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -19,4 +23,5 @@ export default new Vuex.Store({
   getters,
   router,
   axios,
+  plugins: [createPersistedState()]
 })

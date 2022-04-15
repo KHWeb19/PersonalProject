@@ -10,14 +10,15 @@ import MyPage from '@/views/project/MyPage.vue'
 
 import LookBookPage from '@/views/project/LookBookPage.vue'
 
-import WomenCategoryPage from '@/views/project/WomenCategoryPage.vue'
-import MenCategoryPage from '@/views/project/MenCategoryPage.vue'
-import SaleCategoryPage from '@/views/project/SaleCategoryPage.vue'
-
 import NoticeListPage from '@/views/notice/NoticeListPage.vue'
 import NoticeReadPage from '@/views/notice/NoticeReadPage.vue'
 import NoticeRegisterPage from '@/views/notice/NoticeRegisterPage.vue'
 import NoticeModifyPage from '@/views/notice/NoticeModifyPage.vue'
+
+import QnAListPage from '@/views/qna/QnAListPage.vue'
+import QnARegisterPage from '@/views/qna/QnARegisterPage.vue'
+import QnAReadPage from '@/views/qna/QnAReadPage.vue'
+import QnAModifyPage from '@/views/qna/QnAModifyPage.vue'
 
 import WomenOuterCategoryPage from '@/views/womenCategory/WomenOuterCategoryPage.vue'
 import ProductDetailPage from '@/views/womenCategory/ProductDetailPage.vue'
@@ -87,21 +88,6 @@ const routes = [
     component: MyPage
   },
   {
-    path: '/womenCategoryPage',
-    name: 'WomenCategoryPage',
-    component: WomenCategoryPage
-  },
-  {
-    path: '/menCategoryPage',
-    name: 'MenCategoryPage',
-    component: MenCategoryPage
-  },
-  {
-    path: '/saleCategoryPage',
-    name: 'SaleCategoryPage',
-    component: SaleCategoryPage
-  },
-  {
     path: '/noticeListPage',
     name: 'NoticeListPage',
     component: NoticeListPage
@@ -130,7 +116,36 @@ const routes = [
     props: {
       default: true
     }
-
+  },
+  {
+    path: '/qnaListPage',
+    name: 'QnAListPage',
+    component: QnAListPage
+  },
+  {
+    path: '/qnaRegisterPage',
+    name: 'QnARegisterPage',
+    component: QnARegisterPage
+  },
+  {
+    path: '/qnaReadPage/:qnaNo',
+    name: 'QnAReadPage',
+    components: {
+      default: QnAReadPage
+    },
+    props: {
+      default: true
+    }
+  },
+  {
+    path: '/qnaModifyPage/:qnaNo',
+    name: 'QnAModifyPage',
+    components: {
+      default: QnAModifyPage
+    },
+    props: {
+      default: true
+    }
   },
   {
     path: '/womenOuterCategoryPage',

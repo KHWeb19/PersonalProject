@@ -38,17 +38,15 @@
 
             <v-btn router :to="{path: '/myPage'}" plain background-color="transparent" color="basil">
               MY PAGE
-            </v-btn>     
-          
-            
+            </v-btn>   
+  
+            <v-btn plain background-color="transparent" color="basil" router :to="{path: '/noticeListPage'}">
+              NOTICE
+            </v-btn>
 
-          <!-- 그 중 게시판(BOARD)을 클릭하면 드롭다운으로 공지사항, 1:1문의 페이지로 이동하게 --> 
-              <v-btn plain background-color="transparent" color="basil" router :to="{path: '/noticeListPage'}">
-                  <!-- <v-icon left>
-                    mdi-view-dashboard-edit-outline
-                  </v-icon> -->
-                  <span> NOTICE </span>
-              </v-btn>
+            <v-btn plain background-color="transparent" color="basil" router :to="{path: '/qnaListPage'}">
+              Q&A
+            </v-btn>
               
           </v-card-title>
 
@@ -108,8 +106,8 @@
 
 <script>
 
-import axios from 'axios'
-import { mapState } from 'vuex'
+// import axios from 'axios'
+import { mapState, mapActions } from 'vuex'
 
 export default {
    data () {
@@ -142,15 +140,21 @@ export default {
       ...mapState(['isLogin'])
     },
     methods: {
+      ...mapActions(['fetchSession']),
         mainPageLink() {
             this.$router.push({ path: '/mainPage' })
         },
         logout() {
-            axios.post('http://localhost:7777/member/logout').then(res => {
-            this.$store.commit('USER_LOGIN', res.data)
+            // axios.post('http://localhost:7777/member/logout')
+            // .then(res => {
+            // this.$store.commit('USER_LOGIN', res.data)
+            // this.fetchSession(this.$cookies.remove('session'))
+            // this.$store.commit('FETCH_USER_INFO', [])
+            // })
+
+            this.$store.commit('USER_LOGIN', !this.isLogin)
             this.fetchSession(this.$cookies.remove('session'))
             this.$store.commit('FETCH_USER_INFO', [])
-      })
         }
     }
 }

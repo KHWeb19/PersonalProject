@@ -29,4 +29,8 @@ export default {
     //NOTICE
     noticeBoards: [],
     noticeBoard: null, 
+
+    //QNA
+    qnaBoards: [],
+    qnaBoard: null,
 }

@@ -13,11 +13,11 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MemberDto {
-    private String auth;
+
     private String id;
     private String pw;
     private String name;
-    private String gender;
+//    private String gender;
     private Date birth;
     private String address;
     private Date regDate;
@@ -25,11 +25,10 @@ public class MemberDto {
 
     public Member toEntity() {
         return Member.builder()
-                .auth(auth)
                 .id(id)
                 .pw(pw)
                 .name(name)
-                .gender(gender)
+     //           .gender(gender)
                 .birth(birth)
                 .address(address)
                 .regDate(regDate)

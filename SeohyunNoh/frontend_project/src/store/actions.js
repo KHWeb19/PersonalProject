@@ -5,12 +5,19 @@ import {
 
     //NOTICE
     FETCH_NOTICE_BOARD_LIST,
-    FETCH_NOTICE
+    FETCH_NOTICE,
+
+    //QNA
+    FETCH_QNA_BOARD_LIST,
+    FETCH_QNA,
    
 } from './mutation-types'
 
+import Vue from 'vue'
 import axios from 'axios'
 import cookies from 'vue-cookies'
+
+Vue.use(cookies)
 
 export default {
     //MEMBER
@@ -37,5 +44,20 @@ export default {
             .then((res) => {
                 commit(FETCH_NOTICE, res.data)
             })
-    }
+    },
+
+    //QNA
+    fetchQnABoardList ({ commit }) {
+        return axios.get('http://localhost:7777/qna/list')
+            .then((res) => {
+                commit(FETCH_QNA_BOARD_LIST, res.data)
+            })
+    },
+    fetchQnA ({ commit }, qnaNo) {
+        return axios.get(`http://localhost:7777/qna/${qnaNo}`)
+            .then((res) => {
+                commit(FETCH_QNA, res.data)
+            })
+    },
+
 }

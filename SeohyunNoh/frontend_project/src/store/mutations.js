@@ -7,7 +7,11 @@ import {
 
     //NOTICE
     FETCH_NOTICE_BOARD_LIST,
-    FETCH_NOTICE
+    FETCH_NOTICE,
+
+    //QNA
+    FETCH_QNA_BOARD_LIST,
+    FETCH_QNA,
    
 } from './mutation-types'
 
@@ -31,5 +35,13 @@ export default {
     },
     [FETCH_NOTICE] (state, noticeBoard) {
         state.noticeBoard = noticeBoard
+    },
+
+    //QNA
+    [FETCH_QNA_BOARD_LIST] (state, qnaBoards) {
+        state.qnaBoards = qnaBoards
+    },
+    [FETCH_QNA] (state, qnaBoard) {
+        state.qnaBoard = qnaBoard
     },
 }
