@@ -201,8 +201,8 @@
         methods: {
             onSubmit () {
 
-                const { id, date, time, process, contents, linkInfo, cakeArrNo, design, size, price, regDate } = this
-                this.$emit('submit', { id, date, time, process, contents, linkInfo, cakeArrNo, design, size, price, regDate })
+                const { id, date, time, process, contents, linkInfo, cakeArrNo, regDate } = this
+                this.$emit('submit', { id, date, time, process, contents, linkInfo, cakeArrNo, regDate })
             }
         }
         

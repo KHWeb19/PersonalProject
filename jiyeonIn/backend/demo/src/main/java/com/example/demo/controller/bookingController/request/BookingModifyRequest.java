@@ -8,5 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BookingModifyRequest {
-    private String process;
+    private Long bookingNo;
+    private String Id;
 }

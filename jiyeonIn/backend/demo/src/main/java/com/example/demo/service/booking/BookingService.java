@@ -1,5 +1,6 @@
 package com.example.demo.service.booking;
 
+import com.example.demo.controller.bookingController.request.BookingModifyRequest;
 import com.example.demo.controller.bookingController.request.BookingRequest;
 import com.example.demo.entity.booking.BookingInfo;
 
@@ -12,7 +13,8 @@ public interface BookingService {
 
     public List<BookingInfo> list();
 
-    public BookingInfo read(Integer bookingNo, String id);
 
     public void modify(BookingInfo bookingInfo);
+
+    public BookingInfo read(BookingModifyRequest info);
 }

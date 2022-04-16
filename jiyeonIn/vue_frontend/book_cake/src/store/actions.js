@@ -21,10 +21,16 @@ export default {
                 commit(FETCH_BOOKING_LISTS, res.data)
             })
     },
-    fetchBookingBoard ({ commit }, bookingNo, id) {
-        return axios.get(`http://localhost:7777/booking/${bookingNo}/${id}`)
+    fetchBookingBoard ({ commit }, payload) {
+        const { bookingNo, id } = payload
+        return axios.get('http://localhost:7777/booking/read',{ bookingNo, id })
                 .then ((res) => {
+                    if(res.data){
                     commit(FETCH_BOOKING_BOARD, res.data)
+                    }else {
+                        alert('작성자만 확인 가능합니다!')
+                        this.$router.go()
+                    } 
                 })
     },
     fetchBoardComments ({commit}) {

@@ -54,7 +54,7 @@
                 </td>
                 <td align="center" >
                     <router-link :to="{ name: 'BookingReadPage',
-                                        params: { bookingNo: board.bookingNo.toString(), id: this.checkId}}" > 
+                        params: { bookingNo: board.bookingNo.toString(), id: 'test1' }}" > 
                         {{ board.id }} 님의 주문서입니다. 
                     </router-link>
                 </td>
@@ -94,8 +94,13 @@
             return {
                 pageNum: 0,
                 bookingNo:'',
-                id: (window.localStorage.getItem('id')),
-                checkId: (window.localStorage.getItem('id'))
+                id:'',
+                dbrAction: 'test1',
+                arr:[
+                    {bookingNo: this.bookingLists.bookingNo.toString()},
+                    {id: 'test1'}
+                ]
+
             }
         },
         computed: {
@@ -110,7 +115,6 @@
                 const start = this.pageNum * this.pageSize,
                         end = start + this.pageSize;
                 return this.bookingLists.slice(start, end);
-                
             }
         },
         methods: {

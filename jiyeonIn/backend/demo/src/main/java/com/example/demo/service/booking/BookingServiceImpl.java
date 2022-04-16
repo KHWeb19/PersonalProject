@@ -1,6 +1,7 @@
 package com.example.demo.service.booking;
 
 
+import com.example.demo.controller.bookingController.request.BookingModifyRequest;
 import com.example.demo.controller.bookingController.request.BookingRequest;
 import com.example.demo.entity.booking.BookingInfo;
 import com.example.demo.entity.uploadCake.UploadCake;
@@ -44,6 +45,7 @@ public class BookingServiceImpl implements BookingService{
 
     }
 
+    @Transactional
     @Override
     public void exceptFilesBooking(BookingRequest info) {
 
@@ -64,31 +66,33 @@ public class BookingServiceImpl implements BookingService{
         }
     }
 
+    @Transactional
     @Override
     public List<BookingInfo> list() {
         return repository.findAll(Sort.by(Sort.Direction.DESC,"bookingNo"));
     }
 
-
+    @Transactional
     @Override
-    public BookingInfo read(Integer bookingNo, String id) {
-        Optional<BookingInfo> maybeReadBoard = repository.findById(Long.valueOf(bookingNo));
+    public BookingInfo read(BookingModifyRequest info) {
+        Optional<BookingInfo> maybeReadBoard = repository.findById(Long.valueOf(info.getBookingNo()));
 
         if(maybeReadBoard.equals(Optional.empty())){
             log.info("content is null");
             return null;
         }
-        BookingInfo checkId = maybeReadBoard.get();
+        BookingInfo checkIds = maybeReadBoard.get();
 
-        if(checkId.getId().equals(id)){
-            return checkId;
-        }else if(checkId.getId().equals("manager")){
-            return checkId;
+        if(checkIds.getId().equals(info.getId())){
+            return checkIds;
+        }else if(checkIds.getId().equals("manager")){
+            return checkIds;
         }else
             return null;
 
     }
 
+    @Transactional
     @Override
     public void modify(BookingInfo bookingInfo) {
         repository.save(bookingInfo);

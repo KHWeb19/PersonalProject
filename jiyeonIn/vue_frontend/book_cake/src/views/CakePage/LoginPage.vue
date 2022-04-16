@@ -54,8 +54,10 @@ Vue.use(cookies)
                                 window.localStorage.setItem("userInfo",JSON.stringify(res.data))
                                 window.localStorage.setItem("token", res.data.token)
                                 localStorage.setItem("id", res.data.id)
+                                this.$store.state.user = res.data
                                 this.isLogin = true
                                 this.$router.push({ name: 'MainHomepage'})
+
                                 console.log(window.localStorage.getItem('userInfo'))
                                 console.log(window.localStorage.getItem('id'))
                             } else {
