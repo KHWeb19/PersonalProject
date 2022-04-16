@@ -1,6 +1,6 @@
 package com.example.demo.service.board.videoBoard;
 
-import com.example.demo.controller.board.videoBoard.request.VideoBoardCommentsRequest;
+import com.example.demo.dto.CommentRequest;
 import com.example.demo.entitiy.board.videoBoard.VideoBoardComments;
 import com.example.demo.repository.board.videoBoard.VideoBoardCommentsRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -18,10 +18,10 @@ public class VideoBoardCommentsServiceImpl implements VideoBoardCommentsService 
     private VideoBoardCommentsRepository repository;
 
     @Override
-    public void register(VideoBoardCommentsRequest commentsRequest) {
+    public void register(CommentRequest commentRequest) {
 
-        VideoBoardComments commentsEntity = new VideoBoardComments(commentsRequest.getWriter(),
-                    commentsRequest.getContent(),commentsRequest.getBoardNo());
+        VideoBoardComments commentsEntity = new VideoBoardComments(commentRequest.getWriter(),
+                commentRequest.getComment(),commentRequest.getBoardNo());
 
         repository.save(commentsEntity);
     }

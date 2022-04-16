@@ -1,8 +1,6 @@
 package com.example.demo.controller.board.photoBoard;
 
-
-
-import com.example.demo.controller.board.photoBoard.request.PhotoBoardCommentsRequest;
+import com.example.demo.dto.CommentRequest;
 import com.example.demo.entitiy.board.photoBoard.PhotoBoardComments;
 import com.example.demo.service.board.photoBoard.PhotoBoardCommentsService;
 import lombok.extern.slf4j.Slf4j;
@@ -24,12 +22,12 @@ public class PhotoBoardCommentsController {
     //댓글 등록
     @PostMapping("/register/{boardNo}")
     public void PhotoBoardCommentsRegister ( @PathVariable("boardNo") Integer boardNo,
-                                            @Validated @RequestBody PhotoBoardCommentsRequest commentsRequest) {
+                                            @Validated @RequestBody CommentRequest commentRequest) {
 
-        log.info("FreeBoardCommentsRegister()" + commentsRequest);
-        commentsRequest.setBoardNo(Long.valueOf(boardNo));
+        log.info("FreeBoardCommentsRegister()" + commentRequest);
+        commentRequest.setBoardNo(Long.valueOf(boardNo));
 
-        service.register(commentsRequest);
+        service.register(commentRequest);
     }
 
     //댓글 목록

@@ -1,5 +1,7 @@
 package com.example.demo.entitiy.board.videoBoard;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -11,6 +13,8 @@ import java.util.Date;
 
 @Data
 @Entity
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 public class VideoBoard {
     @Id

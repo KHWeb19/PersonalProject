@@ -28,7 +28,7 @@ public class VideoBoardComments {
     private String writer;
 
     @Column(length = 64, nullable = false)
-    private String content;
+    private String comment;
 
     @CreatedDate
     @Column(length = 128, nullable = false)
@@ -37,9 +37,9 @@ public class VideoBoardComments {
     @UpdateTimestamp
     private Date updDate;
 
-    public VideoBoardComments(String writer, String content, Long boardNo){
+    public VideoBoardComments(String writer, String comment, Long boardNo){
             this.writer = writer;
-            this.content = content;
+            this.comment = comment;
             this.boardNo = boardNo;
     }
 

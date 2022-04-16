@@ -1,9 +1,6 @@
 package com.example.demo.entitiy.board.photoBoard;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
@@ -20,7 +17,7 @@ import java.util.Date;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PhotoBoard {
+public class PhotoBoard  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long boardNo;
@@ -40,9 +37,12 @@ public class PhotoBoard {
     @Column
     private int count;
 
-    @CreatedDate
+    /*@CreatedDate
     @Column(length = 128, nullable = false)
-    private String regDate;
+    private String regDate;*/
+    @CreationTimestamp
+    private Date regDate;
+
 
     @UpdateTimestamp
     private Date updDate;
@@ -51,10 +51,10 @@ public class PhotoBoard {
         this.fileName = fileName ;
     }
 
-    @PrePersist
+    /*@PrePersist
     public void onPrePersist(){
         this.regDate = LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT));
-    }
+    }*/
 
 
 }

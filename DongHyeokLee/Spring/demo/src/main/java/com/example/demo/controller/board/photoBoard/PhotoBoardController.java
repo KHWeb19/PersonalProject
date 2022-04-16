@@ -1,5 +1,6 @@
 package com.example.demo.controller.board.photoBoard;
 
+import com.example.demo.dto.Board;
 import com.example.demo.entitiy.board.freeBoard.FreeBoard;
 import com.example.demo.entitiy.board.photoBoard.PhotoBoard;
 import com.example.demo.service.board.photoBoard.PhotoBoardService;
@@ -27,21 +28,21 @@ public class PhotoBoardController {
     //등록
     @PostMapping(value = "/register",
                 consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
-    public void PhotoBoardRegister ( @RequestPart(value="board") PhotoBoard board,
+    public void PhotoBoardRegister ( @RequestPart(value="board") Board board,
                                      @RequestPart(value="files") MultipartFile files) throws Exception {
         log.info("PhotoBoardRegister()" + board + "file" + files);
 
        service.register(board, files);
     }
     //목록
-    @GetMapping("/list")
+   @GetMapping("/list")
     public List<PhotoBoard> PhotoBoardList () {
         log.info("PhotoBoardList()");
 
         return service.list();
     }
     //읽기
-    @GetMapping("/{boardNo}")
+   @GetMapping("/{boardNo}")
     public PhotoBoard photoBoardRead (
             @PathVariable("boardNo") Integer boardNo) {
         log.info("photoBoardRead()");
@@ -52,9 +53,9 @@ public class PhotoBoardController {
     //수정
     @PutMapping(value = "/{boardNo}",
             consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
-    public PhotoBoard photoBoardModify (
+    public Board photoBoardModify (
             @PathVariable("boardNo") Integer boardNo,
-            @RequestPart(value="board") PhotoBoard board,
+            @RequestPart(value="board") Board board,
             @RequestPart(value="files", required = false) MultipartFile files) throws Exception {
         log.info("photoBoardModify(): " + board + "boardNo" + boardNo);
 

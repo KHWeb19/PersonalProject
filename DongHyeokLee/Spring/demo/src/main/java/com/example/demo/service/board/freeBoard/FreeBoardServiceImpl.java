@@ -26,13 +26,6 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 
     @Override
     public void register(FreeBoard freeBoard) {
-      /*  freeBoard = FreeBoard.builder()
-                .count(Long.valueOf(0))
-                .writer(freeBoard.getWriter())
-                .title(freeBoard.getTitle())
-                .content(freeBoard.getContent())
-                .build();*/
-        freeBoard.setCount(Long.valueOf(0));
 
         repository.save(freeBoard);
     }
@@ -56,6 +49,7 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 
         FreeBoard readBoard = maybeReadBoard.get();
         readBoard.setCount(readBoard.getCount()+1);
+
 
         repository.save(readBoard);
 

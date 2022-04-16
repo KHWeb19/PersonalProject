@@ -1,6 +1,6 @@
 package com.example.demo.controller.member;
 
-import com.example.demo.controller.member.request.MemberRequest;
+import com.example.demo.dto.MemberRequest;
 import com.example.demo.response.DuplicationCheck;
 import com.example.demo.entitiy.member.MemberInfo;
 import com.example.demo.service.member.MemberService;

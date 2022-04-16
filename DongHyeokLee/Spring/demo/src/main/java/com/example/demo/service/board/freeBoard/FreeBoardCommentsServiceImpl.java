@@ -1,9 +1,6 @@
 package com.example.demo.service.board.freeBoard;
 
-
-
-import com.example.demo.controller.board.freeBoard.request.FreeBoardCommentsRequest;
-import com.example.demo.entitiy.board.freeBoard.CommentResponse;
+import com.example.demo.dto.CommentRequest;
 import com.example.demo.entitiy.board.freeBoard.FreeBoard;
 import com.example.demo.entitiy.board.freeBoard.FreeBoardComments;
 import com.example.demo.repository.board.freeBoard.FreeBoardCommentsRepository;
@@ -12,7 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,17 +24,17 @@ public class FreeBoardCommentsServiceImpl implements FreeBoardCommentsService {
     private FreeBoardCommentsRepository repository;
 
     @Override
-    public void register(Integer boardNo, FreeBoardCommentsRequest commentsRequest) {
+    public void register(Integer boardNo, CommentRequest commentRequest) {
                 Optional<FreeBoard> maybeBoard = boardRepository.findById(Long.valueOf(boardNo));
                 FreeBoard board = maybeBoard.get();
-                log.info("************" + board);
+                /*board.setCommentCnt(board.getCommentCnt()+1);
+                boardRepository.save(board);*/
 
                 FreeBoardComments comment = FreeBoardComments.builder()
-                        .comment(commentsRequest.getComment())
+                        .comment(commentRequest.getComment())
                         .freeBoard(board)
-                        .writer(commentsRequest.getWriter())
+                        .writer(commentRequest.getWriter())
                         .build();
-
 
         repository.save(comment);
     }
@@ -54,17 +50,17 @@ public class FreeBoardCommentsServiceImpl implements FreeBoardCommentsService {
     }
 
     @Override
-    public FreeBoardComments modify(Integer commentNo, FreeBoardCommentsRequest commentsRequest) {
+    public FreeBoardComments modify(Integer commentNo, CommentRequest commentRequest) {
 
-        Optional<FreeBoard> maybeBoard = boardRepository.findById(Long.valueOf(commentsRequest.getBoardNo()));
+        Optional<FreeBoard> maybeBoard = boardRepository.findById(Long.valueOf(commentRequest.getBoardNo()));
         FreeBoard board = maybeBoard.get();
 
         FreeBoardComments commentModify = FreeBoardComments.builder()
                                         .commentNo(Long.valueOf(commentNo))
                                         .freeBoard(board)
-                                        .comment(commentsRequest.getComment())
-                                        .writer(commentsRequest.getWriter())
-                                        .regDate(commentsRequest.getRegDate())
+                                        .comment(commentRequest.getComment())
+                                        .writer(commentRequest.getWriter())
+                                        .regDate(commentRequest.getRegDate())
                                         .build();
 
         return repository.save(commentModify);

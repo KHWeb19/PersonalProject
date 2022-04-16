@@ -1,8 +1,6 @@
 package com.example.demo.controller.board.freeBoard;
 
-
-
-import com.example.demo.controller.board.freeBoard.request.FreeBoardCommentsRequest;
+import com.example.demo.dto.CommentRequest;
 import com.example.demo.entitiy.board.freeBoard.FreeBoardComments;
 import com.example.demo.service.board.freeBoard.FreeBoardCommentsService;
 import lombok.extern.slf4j.Slf4j;
@@ -24,12 +22,12 @@ public class FreeBoardCommentsController {
     //댓글 등록
     @PostMapping("/register/{boardNo}")
     public void freeBoardCommentsRegister ( @PathVariable("boardNo") Integer boardNo,
-                                            @Validated @RequestBody FreeBoardCommentsRequest commentsRequest) {
+                                            @Validated @RequestBody CommentRequest commentRequest) {
 
-        log.info("FreeBoardCommentsRegister()" + commentsRequest);
+        log.info("FreeBoardCommentsRegister()" + commentRequest);
         //commentsRequest.setBoardNo(Long.valueOf(boardNo));
 
-        service.register(boardNo,commentsRequest);
+        service.register(boardNo, commentRequest);
     }
 
     //댓글 목록
@@ -44,11 +42,11 @@ public class FreeBoardCommentsController {
     @PutMapping("/{commentNo}")
     public FreeBoardComments freeBoardCommentModify (
             @PathVariable("commentNo") Integer commentNo,
-            @Validated @RequestBody FreeBoardCommentsRequest commentsRequest) {
-        log.info("freeBoardCommentModify(): " + commentsRequest);
+            @Validated @RequestBody CommentRequest commentRequest) {
+        log.info("freeBoardCommentModify(): " + commentRequest);
 
 
-       return service.modify(commentNo ,commentsRequest);
+       return service.modify(commentNo, commentRequest);
 
     }
 

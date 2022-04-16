@@ -1,6 +1,6 @@
 package com.example.demo.controller.board.videoBoard;
 
-import com.example.demo.controller.board.videoBoard.request.VideoBoardCommentsRequest;
+import com.example.demo.dto.CommentRequest;
 import com.example.demo.entitiy.board.videoBoard.VideoBoardComments;
 import com.example.demo.service.board.videoBoard.VideoBoardCommentsService;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +22,7 @@ public class VideoBoardCommentsController {
     //댓글 등록
     @PostMapping("/register/{boardNo}")
     public void VideoBoardCommentsRegister ( @PathVariable("boardNo") Integer boardNo,
-                                            @Validated @RequestBody VideoBoardCommentsRequest commentsRequest) {
+                                            @Validated @RequestBody CommentRequest commentsRequest) {
 
         log.info("FreeBoardCommentsRegister()" + commentsRequest);
         commentsRequest.setBoardNo(Long.valueOf(boardNo));

@@ -1,6 +1,6 @@
 package com.example.demo.service.board.photoBoard;
 
-import com.example.demo.controller.board.photoBoard.request.PhotoBoardCommentsRequest;
+import com.example.demo.dto.CommentRequest;
 import com.example.demo.entitiy.board.photoBoard.PhotoBoardComments;
 import com.example.demo.repository.board.photoBoard.PhotoBoardCommentsRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -17,10 +17,10 @@ public class PhotoBoardCommentsServiceImpl implements PhotoBoardCommentsService 
     private PhotoBoardCommentsRepository repository;
 
     @Override
-    public void register(PhotoBoardCommentsRequest commentsRequest) {
+    public void register(CommentRequest commentRequest) {
 
-        PhotoBoardComments commentsEntity = new PhotoBoardComments(commentsRequest.getWriter(),
-                    commentsRequest.getContent(),commentsRequest.getBoardNo());
+        PhotoBoardComments commentsEntity = new PhotoBoardComments(commentRequest.getWriter(),
+                commentRequest.getComment(),commentRequest.getBoardNo());
 
         repository.save(commentsEntity);
     }

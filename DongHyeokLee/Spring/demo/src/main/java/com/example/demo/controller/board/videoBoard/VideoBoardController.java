@@ -1,5 +1,6 @@
 package com.example.demo.controller.board.videoBoard;
 
+import com.example.demo.dto.Board;
 import com.example.demo.entitiy.board.photoBoard.PhotoBoard;
 import com.example.demo.entitiy.board.videoBoard.VideoBoard;
 import com.example.demo.service.board.videoBoard.VideoBoardService;
@@ -27,7 +28,7 @@ public class VideoBoardController {
     //등록
     @PostMapping(value = "/register",
             consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
-    public void VideoBoardRegister ( @RequestPart(value="board") VideoBoard board,
+    public void VideoBoardRegister ( @RequestPart(value="board") Board board,
                                      @RequestPart(value="files") MultipartFile files) throws Exception {
         log.info("VideoBoardRegister()" + board + "file" + files);
 
@@ -53,9 +54,9 @@ public class VideoBoardController {
     //수정
     @PutMapping(value = "/{boardNo}",
             consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
-    public VideoBoard videoBoardModify (
+    public Board videoBoardModify (
             @PathVariable("boardNo") Integer boardNo,
-            @RequestPart(value="board") VideoBoard board,
+            @RequestPart(value="board") Board board,
             @RequestPart(value="files", required = false) MultipartFile files) throws Exception {
         log.info("videoBoardModify(): " + board + "boardNo" + boardNo);
 

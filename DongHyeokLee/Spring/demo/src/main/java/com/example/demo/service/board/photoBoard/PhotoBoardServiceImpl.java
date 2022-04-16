@@ -1,8 +1,10 @@
 package com.example.demo.service.board.photoBoard;
 
+import com.example.demo.dto.Board;
 import com.example.demo.entitiy.board.photoBoard.PhotoBoard;
 import com.example.demo.repository.board.photoBoard.PhotoBoardRepository;
 
+import com.example.demo.service.board.BoardServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -18,40 +20,36 @@ import java.util.UUID;
 
 @Slf4j
 @Service
-public class PhotoBoardServiceImpl implements PhotoBoardService {
+public class PhotoBoardServiceImpl extends BoardServiceImpl implements PhotoBoardService {
 
     @Autowired
     private PhotoBoardRepository repository;
 
     @Override
-    public void register(PhotoBoard board,
-                         MultipartFile files) throws Exception {
+    public void register(Board board, MultipartFile files) throws Exception {
 
 
-        if (files != null) {
-            UUID uuid = UUID.randomUUID();
+        String path = "uploadImg";
 
-            String fileName = uuid + "_" + files.getOriginalFilename();
-            FileOutputStream saveFile = new FileOutputStream(
-                    "../../frontend/src/assets/uploadImg/" + fileName);
+        fileUpload(board, files, path);
 
-            saveFile.write(files.getBytes());
-            saveFile.close();
+        PhotoBoard photoBoard = PhotoBoard.builder()
+                .title(board.getTitle())
+                .content(board.getContent())
+                .writer(board.getWriter())
+                .fileName(board.getFileName())
+                .build();
 
-            board.setFileName(fileName);
-
-        }
-
-        repository.save(board);
+        repository.save(photoBoard);
     }
 
 
-    @Override
+   @Override
     public List<PhotoBoard> list() {
         return repository.findAll(Sort.by(Sort.Direction.DESC, "boardNo"));
     }
 
-    @Override
+   @Override
     public PhotoBoard read(Integer boardNo) {
         Optional<PhotoBoard> maybeReadBoard = repository.findById(Long.valueOf(boardNo));
 
@@ -69,31 +67,40 @@ public class PhotoBoardServiceImpl implements PhotoBoardService {
 
 
     @Override
-    public void modify(Integer boardNo, PhotoBoard board, MultipartFile files) throws Exception {
+    public void modify(Integer boardNo, Board board, MultipartFile files) throws Exception {
         log.info(board + " " );
 
-        if( files != null) {
+        String path = "uploadImg";
 
-            File file = new File("../../frontend/src/assets/uploadImg/" + board.getFileName());
+        PhotoBoard photoBoard = PhotoBoard.builder()
+                .boardNo(Long.valueOf(boardNo))
+                .title(board.getTitle())
+                .content(board.getContent())
+                .writer(board.getWriter())
+                .fileName(board.getFileName())
+                .regDate(board.getRegDate())
+                .build();
 
-            if (file.exists()) {
-                file.delete();
-            }
-
+        if(files != null) {
+            fileChange(board, files, path);
+            fileUpload(board,files,path);
+            photoBoard.setFileName(board.getFileName());
         }
-        register(board, files);
+
+        repository.save(photoBoard);
     }
 
     @Override
     public void remove(Integer boardNo) {
         //파일삭제
         Optional<PhotoBoard> findFileName = repository.findFileName(Long.valueOf(boardNo));
-        PhotoBoard fileName = findFileName.get();
-        File file = new File("../../frontend/src/assets/uploadImg/" + fileName.getFileName());
+        PhotoBoard photoBoard = findFileName.get();
 
-        if (file.exists()) {
-            file.delete();
-        }
+        String fileName = photoBoard.getFileName();
+
+        String path = "uploadImg";
+
+        fileRemove(fileName, path);
         //db삭제
         repository.deleteById(Long.valueOf(boardNo));
     }

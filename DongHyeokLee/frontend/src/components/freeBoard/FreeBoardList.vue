@@ -21,7 +21,7 @@
                 <th>
                     <router-link class="read" :to="{ name: 'FreeBoardReadPage',
                                         params: { boardNo: freeBoard.boardNo.toString() } }">
-                       {{ freeBoard.title}} 
+                       {{ freeBoard.title}} [{{freeBoard.commentCnt}}]
                     </router-link>
                 </th>
             

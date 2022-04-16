@@ -10,5 +10,5 @@ import java.util.Optional;
 public interface VideoBoardRepository extends JpaRepository<VideoBoard, Long> {
 
     @Query("select m.fileName from VideoBoard m where m.boardNo = :boardNo")
-    Optional<VideoBoard> findFileName(Long boardNo);
+    Optional<VideoBoard> findFileName(@Param("boardNo") Long boardNo);
 }

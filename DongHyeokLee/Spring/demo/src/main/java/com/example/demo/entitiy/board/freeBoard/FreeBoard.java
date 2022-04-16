@@ -4,6 +4,7 @@ package com.example.demo.entitiy.board.freeBoard;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
@@ -30,11 +31,14 @@ public class FreeBoard {
     @Column(length = 18, nullable = false)
     private String writer;
 
+    @Formula("(Select count(1) From free_board_comments c Where c.board_No = board_No)")
+    private int commentCnt;
+
     @Lob
     private String content;
 
-    @Column
-    private Long count;
+    @Column(columnDefinition = "integer default 0")
+    private int count;
 
     @CreationTimestamp
     private Date regDate;

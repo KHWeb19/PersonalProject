@@ -45,6 +45,8 @@ public class MemberInfo {
     private List<MemberAuth> authList;
 
 
+
+
     public MemberInfo(String userId, String password, String nickname, String email) {
         this.userId = userId;
         this.password = password;
