@@ -135,6 +135,7 @@ export default {
                     alert("이미 좋아요 하셨습니다!")
                 } else {
                     alert("좋아요")
+                    history.go(0)
                 }
             })
             .catch(() => {

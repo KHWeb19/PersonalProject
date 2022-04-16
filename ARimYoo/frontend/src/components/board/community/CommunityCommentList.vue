@@ -104,8 +104,8 @@ table {
 }
 .comDeleteBtn {
     position:absolute;
-    margin-top:1%;
-    left:85%;
+    margin-top:0.8%;
+    left:86%;
  
 }
 </style>

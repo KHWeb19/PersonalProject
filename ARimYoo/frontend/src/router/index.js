@@ -8,11 +8,14 @@ import JoinPage from '../views/main/JoinPage.vue'
 import JoinPage2 from '../views/main/JoinPage2.vue'
 import MyPage from '../views/my/MyPage.vue'
 
-import CommunityPage from '../views/board/CommunityPage.vue'
-import CommunityWritePage from '../views/board/CommunityWritePage.vue'
-import CommunityReadPage from '../views/board/CommunityReadPage.vue'
-import CommunityModifyPage from '../views/board/CommunityModifyPage.vue'
-import CommunityBoardSearchPage from '../views/board/CommunityBoardSearchPage.vue'
+import CommunityPage from '../views/board/communityBoard/CommunityPage.vue'
+import CommunityWritePage from '../views/board/communityBoard/CommunityWritePage.vue'
+import CommunityReadPage from '../views/board/communityBoard/CommunityReadPage.vue'
+import CommunityModifyPage from '../views/board/communityBoard/CommunityModifyPage.vue'
+import CommunityBoardSearchPage from '../views/board/communityBoard/CommunityBoardSearchPage.vue'
+
+import ReviewPage from '../views/board/review/ReviewPage.vue'
+import ReviewWritePage from '../views/board/review/ReviewWritePage.vue'
 
 Vue.use(VueRouter)
 
@@ -67,7 +70,8 @@ const routes = [
     {
         path: '/community/write',
         name: 'CommunityWritePage',
-        component: CommunityWritePage
+        component: CommunityWritePage,
+        beforeEnter: requireLogin()
     },
     {
         path: '/community/:boardNo',
@@ -78,7 +82,8 @@ const routes = [
         },
         props: {
             default: true
-        }
+        },
+        beforeEnter: requireLogin()
     },
     {
         path: '/community/modify/:boardNo',
@@ -89,7 +94,7 @@ const routes = [
         props: {
             default: true
         },
-
+        beforeEnter: requireLogin()
     },
     {
         path: '/community/search',
@@ -99,8 +104,21 @@ const routes = [
         },
         props: {
             default: true
-        }
-    }
+        },
+        beforeEnter: requireLogin()
+    },
+    {
+        path: '/review',
+        name: 'ReviewPage',
+        component: ReviewPage,
+        beforeEnter: requireLogin()
+    },
+    {
+        path: '/review/write',
+        name: 'ReviewWritePage',
+        component: ReviewWritePage,
+        beforeEnter: requireLogin()
+    },
 
   
 ]
