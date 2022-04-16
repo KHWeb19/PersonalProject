@@ -59,6 +59,11 @@ public class FoodBoardServiceImpl implements FoodBoardService{
         return repository.findAll(Sort.by(Sort.Direction.DESC,"boardNo"));
     }
 
+    @Override
+    public List<FoodBoard> bestFoodList() {
+        return repository.findTop10ByOrderByViewCountDesc();
+
+    }
 
 
     @Override

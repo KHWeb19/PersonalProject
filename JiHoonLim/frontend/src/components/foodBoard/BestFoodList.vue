@@ -5,7 +5,15 @@
         <v-col> 인기 순위 </v-col>
       </v-row>
       <v-row>
-        <v-col v-for="food in foodBoards" :key="food.boardNo" lg="3" sm="6">
+        <v-col
+          v-if="
+            !bestFoodBoards ||
+            (Array.isArray(bestFoodBoards) && bestFoodBoards.length === 0)
+          "
+        >
+          게시물 없음</v-col
+        >
+        <v-col v-else v-for="food in bestFoodBoards" :key="food.boardNo">
           <v-card width="305" height="370" class="mx-auto">
             <router-link
               :to="{
@@ -47,7 +55,7 @@
 export default {
   name: "BestFoodList",
   props: {
-    foodBoards: {
+    bestFoodBoards: {
       type: Array,
     },
   },

@@ -4,6 +4,8 @@ export default {
 
     foodBoards: [],
     foodBoard: null,
+
+    bestFoodBoards:[]
     
   
 }

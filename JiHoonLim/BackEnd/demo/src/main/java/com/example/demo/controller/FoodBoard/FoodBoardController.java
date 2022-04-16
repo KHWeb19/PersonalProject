@@ -42,6 +42,13 @@ public class FoodBoardController {
         return service.getFoodList();
     }
 
+    @GetMapping("/bestFood")
+    public List<FoodBoard> bestFoodList(){
+        log.info("bestFoodList()");
+
+        return service.bestFoodList();
+    }
+
 
 
     @GetMapping("/{boardNo}")

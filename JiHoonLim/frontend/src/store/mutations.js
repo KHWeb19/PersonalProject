@@ -2,7 +2,9 @@ import {
     FETCH_MEMBER,
 
     FETCH_FOOD_BOARD_LIST,
-    FETCH_FOOD_BOARD
+    FETCH_FOOD_BOARD,
+
+    FETCH_BEST_FOOD_LIST
     
 } from './mutation-types'
 
@@ -15,6 +17,10 @@ export default {
     },
     [FETCH_FOOD_BOARD](state, foodBoard){
         state.foodBoard = foodBoard
+    },
+    [FETCH_BEST_FOOD_LIST](state, bestFoodBoards){
+        state.bestFoodBoards = bestFoodBoards
     }
+
 
 }

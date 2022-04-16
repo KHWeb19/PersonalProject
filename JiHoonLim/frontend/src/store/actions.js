@@ -4,6 +4,8 @@ import {
 
     FETCH_FOOD_BOARD_LIST,
     FETCH_FOOD_BOARD,
+
+    FETCH_BEST_FOOD_LIST
     
 } from './mutation-types'
 
@@ -27,6 +29,12 @@ export default {
         return axios.get(`http://localhost:7777/foodBoard/${boardNo}`)
         .then((res)=>{
             commit(FETCH_FOOD_BOARD,res.data)
+        })
+    },
+    fetchBestFoodList({commit}) {
+        return axios.get("http://localhost:7777/foodBoard/bestFood")
+        .then((res)=>{
+            commit(FETCH_BEST_FOOD_LIST,res.data)
         })
     }
     

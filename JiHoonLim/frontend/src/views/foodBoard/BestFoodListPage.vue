@@ -1,5 +1,5 @@
 <template>
-  <div><best-food-list :foodBoards="foodBoards" /></div>
+  <div><best-food-list :bestFoodBoards="bestFoodBoards" /></div>
 </template>
 
 <script>
@@ -12,13 +12,13 @@ export default {
     BestFoodList,
   },
   computed: {
-    ...mapState(["foodBoards"]),
+    ...mapState(["bestFoodBoards"]),
   },
   mounted() {
-    this.fetchFoodBoardList();
+    this.fetchBestFoodList();
   },
   methods: {
-    ...mapActions(["fetchFoodBoardList"]),
+    ...mapActions(["fetchBestFoodList"]),
   },
 };
 </script>
