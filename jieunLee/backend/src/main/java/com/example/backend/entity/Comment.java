@@ -24,14 +24,6 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long commentNo;
 
-//    @Column(name = "board_no")
-//    private Long boardNo;
-
-    @JsonBackReference
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name= "board_no")
-    private Board board;
-
     @Column(length = 32, nullable = false)
     private String writer;
 
@@ -43,5 +35,10 @@ public class Comment {
 
     @UpdateTimestamp
     private Date updDate;
+
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name= "board_no")
+    private Board board;
 
 }

@@ -2,7 +2,7 @@
   <div>
     <menu-bar/>
     <hr style="border: 0; height: 1px; background: #d8d8d8; "/>
-    <board-register-form :member="member" @submit="onSubmit"/>
+    <board-register-form :member="member" :memberNo="memberNo" @submit="onSubmit"/>
   </div>
 </template>
 
@@ -18,6 +18,12 @@ export default {
     MenuBar,
     BoardRegisterForm
   },
+      props: {
+        memberNo: {
+            type: String,
+            required: true
+        }
+    },
   computed: {
         ...mapState(['member'])
     },
@@ -27,8 +33,10 @@ export default {
    methods: {
      ...mapActions(['fetchMember']),
         onSubmit(payload) {
-            const { memberNo, boardImage, writer, content } = payload
-            axios.post('http://localhost:7777/board/register', {memberNo, boardImage, writer, content})
+          console.log(this.memberNo)
+          const memberNo = this.memberNo
+            const { boardImage, writer, content } = payload
+            axios.post(`http://localhost:7777/board/register/${memberNo}`, { boardImage, writer, content})
                 .then(() => {
                     alert('게시물 등록 성공!')
 

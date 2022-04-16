@@ -1,5 +1,6 @@
 package com.example.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -18,6 +19,7 @@ public class Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="member_No")
     private Long memberNo;
 
     @Column(length = 32, nullable = false)
@@ -44,10 +46,9 @@ public class Member {
     @UpdateTimestamp
     private Date updDate;
 
-    //
-//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    @JoinColumn(name = "member_no")
-//    private List<Board> boardList;
+    @JsonManagedReference
+    @OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
+    private List<Board> boards = new ArrayList<>();
 
     public Member(String memberName, String memberId, String password) {
         this.memberName = memberName;

@@ -23,7 +23,6 @@ public class CommentController {
     public void commentRegister(@PathVariable("boardNo") Integer boardNo, @Validated @RequestBody CommentRequest commentRequest) {
         log.info("commentRegister()");
 
-
         commentRequest.setBoardNo(Long.valueOf(boardNo));
         service.register(boardNo, commentRequest);
     }
@@ -34,6 +33,7 @@ public class CommentController {
 
         return service.list(boardNo);
     }
+
     @DeleteMapping("/{commentNo}")
     public void commentRemove (@PathVariable("commentNo") Integer commentNo) {
         log.info("commentRemove()");

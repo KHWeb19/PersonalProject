@@ -1,5 +1,6 @@
 package com.example.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,8 +27,8 @@ public class Board {
     @Column(name="board_no")
     private Long boardNo;
 
-    @Column(name = "member_no")
-    private Long memberNo;
+//    @Column(name = "member_no")
+//    private Long memberNo;
 
     @Column(length = 64, nullable = false)
     private String boardImage;
@@ -43,6 +44,11 @@ public class Board {
 
     @UpdateTimestamp
     private Date updDate;
+
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name= "member_no")
+    private Member member;
 
     @JsonManagedReference
     @OneToMany(mappedBy = "board", fetch = FetchType.EAGER)

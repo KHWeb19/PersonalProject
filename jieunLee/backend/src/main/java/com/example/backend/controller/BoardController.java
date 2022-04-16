@@ -1,6 +1,7 @@
 package com.example.backend.controller;
 
 import com.example.backend.entity.Board;
+import com.example.backend.entity.Comment;
 import com.example.backend.service.BoardService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +19,12 @@ public class BoardController {
     @Autowired
     private BoardService service;
 
-    @PostMapping("/register")
-    public void boardRegister(@Validated @RequestBody Board board) {
+    @PostMapping("/register/{memberNo}")
+    public void boardRegister(@PathVariable("memberNo") Integer memberNo, @Validated @RequestBody BoardRequest boardRequest) {
         log.info("boardRegister()");
 
-        service.register(board);
+        boardRequest.setMemberNo(Long.valueOf(memberNo));
+        service.register(memberNo, boardRequest);
     }
 
     @GetMapping("/list")
@@ -33,17 +35,17 @@ public class BoardController {
     }
 
     @GetMapping("/list/{memberNo}")
-    public List<Board> memberNoBoardList(@PathVariable("memberNo") Integer memberNo) {
-        log.info("myBoardList()");
+    public List<Board> memberBoardList(@PathVariable("memberNo") Integer memberNo) {
+        log.info("memberBoardList()");
 
-        return service.memberNoBoardList(memberNo);
+        return service.memberBoardList(memberNo);
     }
 
-//    @GetMapping("/writerList")
-//    public List<Board> myBoardList() {
-//        log.info("myBoardList()");
+//    @GetMapping("/list/{boardNo}")
+//    public List<Comment> commentList(@PathVariable("boardNo") Integer boardNo) {
+//        log.info("commentList()");
 //
-//        return service.findList();
+//        return service.list(boardNo);
 //    }
 
     @GetMapping("/{boardNo}")
