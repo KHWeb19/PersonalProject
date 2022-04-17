@@ -1,9 +1,6 @@
 package com.example.demo.service.board.freeBoard;
 
-import com.example.demo.entitiy.board.freeBoard.FreeBoard;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import com.example.demo.entity.board.freeBoard.FreeBoard;
 
 import java.util.List;
 

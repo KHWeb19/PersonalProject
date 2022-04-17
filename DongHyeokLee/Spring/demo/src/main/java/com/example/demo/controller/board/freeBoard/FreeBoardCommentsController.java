@@ -1,7 +1,7 @@
 package com.example.demo.controller.board.freeBoard;
 
 import com.example.demo.dto.CommentRequest;
-import com.example.demo.entitiy.board.freeBoard.FreeBoardComments;
+import com.example.demo.entity.board.freeBoard.FreeBoardComments;
 import com.example.demo.service.board.freeBoard.FreeBoardCommentsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

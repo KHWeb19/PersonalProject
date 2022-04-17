@@ -1,4 +1,4 @@
-package com.example.demo.entitiy.board.freeBoard;
+package com.example.demo.entity.board.freeBoard;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;

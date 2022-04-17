@@ -1,4 +1,4 @@
-package com.example.demo.entitiy.board.videoBoard;
+package com.example.demo.entity.board.videoBoard;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

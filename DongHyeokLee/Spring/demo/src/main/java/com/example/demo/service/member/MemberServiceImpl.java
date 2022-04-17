@@ -2,8 +2,8 @@ package com.example.demo.service.member;
 
 import com.example.demo.dto.MemberRequest;
 import com.example.demo.response.DuplicationCheck;
-import com.example.demo.entitiy.member.MemberInfo;
-import com.example.demo.entitiy.member.MemberAuth;
+import com.example.demo.entity.member.MemberInfo;
+import com.example.demo.entity.member.MemberAuth;
 import com.example.demo.repository.member.MemberAuthRepository;
 import com.example.demo.repository.member.MemberRepository;
 import lombok.extern.slf4j.Slf4j;

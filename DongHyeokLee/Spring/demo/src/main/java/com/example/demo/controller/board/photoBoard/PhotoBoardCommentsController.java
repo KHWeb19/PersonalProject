@@ -1,7 +1,7 @@
 package com.example.demo.controller.board.photoBoard;
 
 import com.example.demo.dto.CommentRequest;
-import com.example.demo.entitiy.board.photoBoard.PhotoBoardComments;
+import com.example.demo.entity.board.photoBoard.PhotoBoardComments;
 import com.example.demo.service.board.photoBoard.PhotoBoardCommentsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

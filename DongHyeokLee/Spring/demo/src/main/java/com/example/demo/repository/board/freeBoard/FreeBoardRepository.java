@@ -1,8 +1,7 @@
 package com.example.demo.repository.board.freeBoard;
 
-import com.example.demo.entitiy.board.freeBoard.FreeBoard;
+import com.example.demo.entity.board.freeBoard.FreeBoard;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 

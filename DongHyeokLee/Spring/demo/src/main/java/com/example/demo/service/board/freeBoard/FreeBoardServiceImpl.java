@@ -1,7 +1,7 @@
 package com.example.demo.service.board.freeBoard;
 
 
-import com.example.demo.entitiy.board.freeBoard.FreeBoard;
+import com.example.demo.entity.board.freeBoard.FreeBoard;
 import com.example.demo.repository.board.freeBoard.FreeBoardCommentsRepository;
 import com.example.demo.repository.board.freeBoard.FreeBoardRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -42,6 +42,7 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 
         Optional<FreeBoard> maybeReadBoard = repository.findById(Long.valueOf(boardNo));
 
+        log.info("comments****" + maybeReadBoard.get().getComments());
         if (maybeReadBoard.equals(Optional.empty())){
             log.info("Can't read board!!");
             return null;

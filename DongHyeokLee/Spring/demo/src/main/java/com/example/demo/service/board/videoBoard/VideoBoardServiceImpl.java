@@ -1,6 +1,6 @@
 package com.example.demo.service.board.videoBoard;
 
-import com.example.demo.entitiy.board.videoBoard.VideoBoard;
+import com.example.demo.entity.board.videoBoard.VideoBoard;
 import com.example.demo.repository.board.videoBoard.VideoBoardRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,6 @@ public class VideoBoardServiceImpl implements VideoBoardService {
     @Override
     public void register(VideoBoard board,
                          MultipartFile files) throws Exception {
-
 
         if (files != null) {
             UUID uuid = UUID.randomUUID();

@@ -1,18 +1,13 @@
 package com.example.demo.controller.board.videoBoard;
 
-import com.example.demo.dto.Board;
-import com.example.demo.entitiy.board.photoBoard.PhotoBoard;
-import com.example.demo.entitiy.board.videoBoard.VideoBoard;
+import com.example.demo.entity.board.videoBoard.VideoBoard;
 import com.example.demo.service.board.videoBoard.VideoBoardService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.FileOutputStream;
-import java.time.LocalDate;
 import java.util.List;
 
 
@@ -28,7 +23,7 @@ public class VideoBoardController {
     //등록
     @PostMapping(value = "/register",
             consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
-    public void VideoBoardRegister ( @RequestPart(value="board") Board board,
+    public void VideoBoardRegister ( @RequestPart(value="board") VideoBoard board,
                                      @RequestPart(value="files") MultipartFile files) throws Exception {
         log.info("VideoBoardRegister()" + board + "file" + files);
 
@@ -54,9 +49,9 @@ public class VideoBoardController {
     //수정
     @PutMapping(value = "/{boardNo}",
             consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
-    public Board videoBoardModify (
+    public VideoBoard videoBoardModify (
             @PathVariable("boardNo") Integer boardNo,
-            @RequestPart(value="board") Board board,
+            @RequestPart(value="board") VideoBoard board,
             @RequestPart(value="files", required = false) MultipartFile files) throws Exception {
         log.info("videoBoardModify(): " + board + "boardNo" + boardNo);
 

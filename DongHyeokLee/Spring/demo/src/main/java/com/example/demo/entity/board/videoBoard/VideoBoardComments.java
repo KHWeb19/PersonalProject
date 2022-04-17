@@ -1,8 +1,7 @@
-package com.example.demo.entitiy.board.videoBoard;
+package com.example.demo.entity.board.videoBoard;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 

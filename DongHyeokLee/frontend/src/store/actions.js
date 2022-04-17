@@ -38,8 +38,8 @@ export default {
                 })
     },
     //사진게시판
-    fetchPhotoBoardList ({ commit }) {
-        return axios.get('http://localhost:7777/photoBoard/list')
+    fetchPhotoBoardList ({ commit } , writer) {
+        return axios.post('http://localhost:7777/photoBoard/list', { writer })
                 .then((res) => {
                     commit(FETCH_PHOTO_BOARD_LIST, res.data)
                 })

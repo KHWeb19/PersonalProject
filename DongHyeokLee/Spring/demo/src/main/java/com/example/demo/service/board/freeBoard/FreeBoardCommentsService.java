@@ -1,7 +1,7 @@
 package com.example.demo.service.board.freeBoard;
 
 import com.example.demo.dto.CommentRequest;
-import com.example.demo.entitiy.board.freeBoard.FreeBoardComments;
+import com.example.demo.entity.board.freeBoard.FreeBoardComments;
 
 import java.util.List;
 

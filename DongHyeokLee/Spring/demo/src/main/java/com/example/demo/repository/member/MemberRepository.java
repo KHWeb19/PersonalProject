@@ -1,6 +1,6 @@
 package com.example.demo.repository.member;
 
-import com.example.demo.entitiy.member.MemberInfo;
+import com.example.demo.entity.member.MemberInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

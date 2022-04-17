@@ -4,6 +4,7 @@
         <board-list :boards="photoBoards" 
                     :accept="accept" 
                     :registerPage="`${registerPage}`"
+                    :boardName="`${this.boardName}`"
                     :readPage="`${readPage}`"/>
     </div>   
 </template>
@@ -25,7 +26,9 @@ export default {
         return {
             registerPage : 'PhotoBoardRegisterPage',
             readPage: 'PhotoBoardReadPage',
-            accept: 'jpg'
+            accept: 'jpg',
+            boardName: "photoBoard",
+            writer : this.$store.state.userInfo.nickname,
         }
     },
     computed: {
@@ -36,7 +39,8 @@ export default {
             alert('로그인하세요')
             this.$router.push({name: "HomeView"});
         }else{
-        this.fetchPhotoBoardList()
+            const writer = this.writer
+        this.fetchPhotoBoardList(writer)
         }  
     },
     methods: {

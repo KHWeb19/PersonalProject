@@ -13,7 +13,8 @@
             <div class="subtitle">
                 <p align="center" class="writer">{{ board.writer }}</p>
                 <div class="day"> 
-                {{ board.regDate.substring(0, 19) }}
+                {{ board.regDate.substring(0, 10) }}
+                {{new Date(board.regDate).toLocaleString("ko-KR", {timeZone: "Asia/Seoul"}).toString().substr(13, 8)}}
                 </div>
             </div>
         </div>

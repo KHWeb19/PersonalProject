@@ -3,8 +3,8 @@
       <v-container>
               <v-row>
                   <v-col v-for="board in paginatedData" :key="board.boardNo" class="d-flex child-flex" cols="4">
-                      <router-link :to="{ name:  readPage , params: { boardNo: board.boardNo.toString() } }">
                     <v-card class="img-card" >
+                      <router-link :to="{ name:  readPage , params: { boardNo: board.boardNo.toString() } }">
                         <div>
                           <v-img v-if="accept == 'jpg'"  :src="require(`@/assets/uploadImg/${board.fileName}`)" height="300" ></v-img>
                           <iframe v-if="accept == 'mp4'" :src="require(`@/assets/uploadVideo/${board.fileName}`)" 
@@ -12,16 +12,20 @@
                             allow="autoplay 'none'">
                           </iframe>
                         </div>
+                        </router-link>
                         <v-card-title>{{board.title}}</v-card-title>
                 <v-list-item>
                   <v-list-item-subtitle>
                     <strong>{{ board.writer }}</strong>
                     {{ board.regDate.substring(0, 10) }}
                     조회 {{board.count}}  
+                    <v-icon v-if="board.likeCheck == 0 " @click="board.likeCheck++,board.likeCnt++, like(board.boardNo,board.likeCheck)">mdi-cards-heart-outline</v-icon>
+                    <v-icon v-else  @click="board.likeCheck--,board.likeCnt--, unlike(board.boardNo,board.likeCheck)">mdi-cards-heart</v-icon>
+                    {{ board.likeCnt}}
                   </v-list-item-subtitle>
                 </v-list-item>
                     </v-card>
-                      </router-link>
+                      
                   </v-col>
               </v-row>
       </v-container>
@@ -56,6 +60,8 @@
 
 <script>
 
+import axios from 'axios';
+
 export default {
     name: 'BoardList',
     props: {
@@ -70,12 +76,16 @@ export default {
         },
          accept:{
             type: String
-        }
+        },
+        boardName:{
+          type: String,
+      }
     },
     data () {
         return {
             pageNum: 0,
-            pageSize:6,   
+            pageSize:6,
+            writer: this.$store.state.userInfo.nickname
         }
     },
     methods: {
@@ -84,6 +94,30 @@ export default {
         },
         prevPage () {
             this.pageNum -= 1;
+        },
+        like(boardNo,likeCheck) {
+          const writer = this.writer
+          axios.post(`http://localhost:7777/${this.boardName}` + '/like', 
+                { writer, boardNo, likeCheck })
+                    .then(() => {
+                         
+                    })
+                    .catch(() => {
+                        alert('삭제 실패! 문제 발생!')
+                    })
+                  
+        },
+        unlike(boardNo,likeCheck){
+          const writer = this.writer
+
+           axios.post(`http://localhost:7777/${this.boardName}` + '/unlike', 
+                { writer, boardNo, likeCheck })
+                    .then(() => {
+                      
+                    })
+                    .catch(() => {
+                        alert('삭제 실패! 문제 발생!')
+                    })
         }
     },
     computed: {
@@ -103,7 +137,8 @@ export default {
              end = start + this.pageSize
       
             return this.boards.slice(start, end);
-        }
+        },
+    
     }
 }
 

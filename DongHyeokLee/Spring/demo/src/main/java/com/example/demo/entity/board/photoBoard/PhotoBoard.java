@@ -1,24 +1,27 @@
-package com.example.demo.entitiy.board.photoBoard;
+package com.example.demo.entity.board.photoBoard;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
-@Data
+@Setter
+@Getter
 @Entity
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class PhotoBoard  {
+
     @Id
+    @Column(name="board_no")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long boardNo;
 
@@ -35,26 +38,26 @@ public class PhotoBoard  {
     private String content;
 
     @Column
-    private int count;
+    private int readCnt;
 
-    /*@CreatedDate
-    @Column(length = 128, nullable = false)
-    private String regDate;*/
+    @Column
+    private int likeCheck;
+
+    @Formula("(Select count(1) From photo_board_like c Where c.board_No = board_No)")
+    private int likeCnt;
+
     @CreationTimestamp
     private Date regDate;
-
 
     @UpdateTimestamp
     private Date updDate;
 
-    public PhotoBoard (String fileName) {
-        this.fileName = fileName ;
+    @JsonManagedReference
+    @OneToMany(mappedBy = "photoBoard", fetch = FetchType.EAGER, orphanRemoval = true)
+    private List<PhotoBoardLike> likes = new ArrayList<>();
+
+    public void likeCheckZero(){
+        likeCheck--;
     }
-
-    /*@PrePersist
-    public void onPrePersist(){
-        this.regDate = LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT));
-    }*/
-
 
 }

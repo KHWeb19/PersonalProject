@@ -1,18 +1,17 @@
 package com.example.demo.controller.board.photoBoard;
 
-import com.example.demo.dto.Board;
-import com.example.demo.entitiy.board.freeBoard.FreeBoard;
-import com.example.demo.entitiy.board.photoBoard.PhotoBoard;
+import com.example.demo.dto.BoardRequest;
+import com.example.demo.dto.CommentRequest;
+import com.example.demo.dto.LikeRequest;
+import com.example.demo.entity.board.photoBoard.PhotoBoard;
+import com.example.demo.entity.board.photoBoard.PhotoBoardLike;
 import com.example.demo.service.board.photoBoard.PhotoBoardService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.FileOutputStream;
-import java.time.LocalDate;
 import java.util.List;
 
 
@@ -28,18 +27,20 @@ public class PhotoBoardController {
     //등록
     @PostMapping(value = "/register",
                 consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
-    public void PhotoBoardRegister ( @RequestPart(value="board") Board board,
+    public void PhotoBoardRegister ( @RequestPart(value="board") BoardRequest board,
                                      @RequestPart(value="files") MultipartFile files) throws Exception {
         log.info("PhotoBoardRegister()" + board + "file" + files);
 
        service.register(board, files);
     }
     //목록
-   @GetMapping("/list")
-    public List<PhotoBoard> PhotoBoardList () {
-        log.info("PhotoBoardList()");
+   @PostMapping("/list")
+    public List<PhotoBoard> PhotoBoardList (@RequestBody CommentRequest commentRequest) {
+        log.info("PhotoBoardList()" + commentRequest);
 
-        return service.list();
+        String writer = commentRequest.getWriter();
+
+        return service.list(writer);
     }
     //읽기
    @GetMapping("/{boardNo}")
@@ -53,9 +54,9 @@ public class PhotoBoardController {
     //수정
     @PutMapping(value = "/{boardNo}",
             consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
-    public Board photoBoardModify (
+    public BoardRequest photoBoardModify (
             @PathVariable("boardNo") Integer boardNo,
-            @RequestPart(value="board") Board board,
+            @RequestPart(value="board") BoardRequest board,
             @RequestPart(value="files", required = false) MultipartFile files) throws Exception {
         log.info("photoBoardModify(): " + board + "boardNo" + boardNo);
 
@@ -72,7 +73,23 @@ public class PhotoBoardController {
 
         //service.removeFile(boardNo);
         service.remove(boardNo);
+    }
+
+    @PostMapping("/like")
+    public void photoBoardLike(@RequestBody LikeRequest like){
+        log.info("xxlikeRequest" + like);
+
+          service.doLike(like);
 
     }
 
+    @PostMapping("/unlike")
+    public void photoBoardUnlike(@RequestBody LikeRequest like){
+    // like에 boardNo의 writer이 같으면 삭제 해야되는데 이건 그럼 id값으로 삭제해야되나??
+    //id값을 어디서 구해야하오?? 두개 같으면 쿼리문이 되나??ㅋㅋㅋ
+    //만약에 writer로 보드값 쫙 가져왔는데 거기서 boardNo 가져 온거랑 똑같으면 삭제 하도록??
+    // 아이다 아이디가 있어야 삭제를 하지
+        log.info("liek" + like);
+        service.unDoLike(like);
+    }
 }

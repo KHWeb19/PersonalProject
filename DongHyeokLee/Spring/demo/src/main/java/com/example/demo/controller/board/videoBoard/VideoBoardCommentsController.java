@@ -1,7 +1,7 @@
 package com.example.demo.controller.board.videoBoard;
 
 import com.example.demo.dto.CommentRequest;
-import com.example.demo.entitiy.board.videoBoard.VideoBoardComments;
+import com.example.demo.entity.board.videoBoard.VideoBoardComments;
 import com.example.demo.service.board.videoBoard.VideoBoardCommentsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
