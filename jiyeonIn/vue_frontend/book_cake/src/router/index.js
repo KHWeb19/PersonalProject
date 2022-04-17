@@ -62,7 +62,7 @@ const routes = [
   }
   ,
   {
-    path: '/bookingReadPage/:bookingNo/:id',
+    path: '/bookingReadPage/:bookingNo',
     name: 'BookingReadPage',
     components: {
       default: BookingReadPage

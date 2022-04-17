@@ -29,10 +29,6 @@ import BookingBoardComment from '@/views/boardPage/BookingBoardComment.vue'
                 type: String,
                 required: true
             },
-            id: {
-                type: String,
-                required: true
-            }
         },
         data () {
             return {
@@ -49,7 +45,7 @@ import BookingBoardComment from '@/views/boardPage/BookingBoardComment.vue'
             ...mapState(['cakeLists'])
         },
         created () {
-            this.fetchBookingBoard(this.bookingNo,this.id)
+            this.fetchBookingBoard(this.bookingNo)
                 .catch(() => {
                     alert('게시물 요청 실패')
                     this.$router.push()

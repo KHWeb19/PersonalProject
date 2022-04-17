@@ -65,12 +65,12 @@ public class BookingController {
         return service.list();
     }
 
-    @GetMapping("/read")
-    public BookingInfo bookingReadBoard (@Validated @RequestBody BookingModifyRequest info) {
+    @GetMapping("/{bookingNo}")
+    public BookingInfo bookingReadBoard ( @PathVariable("bookingNo") Integer bookingNo) {
 
-        log.info("checkId:" +info);
+        log.info("checkId:" +bookingNo);
 
-        return service.read(info);
+        return service.read(bookingNo);
     }
 
     @PutMapping("/{bookingNo}")

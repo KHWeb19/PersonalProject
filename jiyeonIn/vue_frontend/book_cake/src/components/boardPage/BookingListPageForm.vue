@@ -54,8 +54,8 @@
                 </td>
                 <td align="center" >
                     <router-link :to="{ name: 'BookingReadPage',
-                        params: { bookingNo: board.bookingNo.toString(), id: 'test1' }}" > 
-                        {{ board.id }} 님의 주문서입니다. 
+                                        params: { bookingNo: board.bookingNo.toString() } }">
+                        {{ board.id }} 님의 주문서입니다.
                     </router-link>
                 </td>
                 <td align="center">
@@ -94,12 +94,6 @@
             return {
                 pageNum: 0,
                 bookingNo:'',
-                id:'',
-                dbrAction: 'test1',
-                arr:[
-                    {bookingNo: this.bookingLists.bookingNo.toString()},
-                    {id: 'test1'}
-                ]
 
             }
         },
@@ -115,6 +109,7 @@
                 const start = this.pageNum * this.pageSize,
                         end = start + this.pageSize;
                 return this.bookingLists.slice(start, end);
+                
             }
         },
         methods: {
@@ -123,14 +118,6 @@
             },
             prevPage () {
             this.pageNum -= 1;
-            },
-            checksomeID(bookingNo) {
-                if(this.dbrAction != this.bookingLists[bookingNo].id && this.dbrAction != 'manager') {
-                alert('해당 아이디만 읽을 수 있습니다!')
-                this.$router.push({
-                            name: 'BookingListPage'
-                            })
-                }
             }
         }
         
