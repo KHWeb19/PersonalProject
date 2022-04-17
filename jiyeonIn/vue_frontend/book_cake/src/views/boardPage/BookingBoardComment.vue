@@ -15,7 +15,8 @@ import { mapState, mapActions } from 'vuex'
         data () {
             return {
                 checkId: (window.localStorage.getItem('id')),
-                comments: ''
+                comments: '',
+                id:''
             }
         }, 
         props: {

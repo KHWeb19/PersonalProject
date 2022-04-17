@@ -17,7 +17,7 @@
 
         <div>
             <form @submit.prevent="onSubmit">
-                <br><br><h4>댓글 : <strong>{{this.checkId}}</strong></h4>
+                <br><br><h4>댓글 : <strong>{{this.id}}</strong></h4>
                 <textarea type="text" v-model="comments" placeholder="댓글을 입력해주세요" class="commentcheck"/><br>
                 <input type="file" id="files1" ref="files1" 
                     multiple v-on:change="handleFileUpload()"/>
@@ -46,7 +46,7 @@
         },
         data () {
             return {
-                checkId: (window.localStorage.getItem('id')),
+                id: (window.localStorage.getItem('id')),
                 comments: ''
             }
         }, 

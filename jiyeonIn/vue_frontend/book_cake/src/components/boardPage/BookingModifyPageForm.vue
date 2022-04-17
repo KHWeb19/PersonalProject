@@ -197,17 +197,6 @@
         },
         methods: {
             onSubmit () {
-
-                // const params = { 
-                //     id: this.BookingBoard.id, 
-                //     date: this.BookingBoard.date,
-                //     time: this.BookingBoard.time, 
-                //     process: this.process, 
-                //     contents: this.BookingBoard.contents, 
-                //     linkInfo:this.BookingBoard.linkInfo,
-                //     cakeArrNo: this.BookingBoard.cakeArrNo, 
-                //     regDate: this.BookingBoard.regDate } 
-
                 this.$emit('submit', { id: this.BookingBoard.id, 
                     date: this.BookingBoard.date,
                     time: this.BookingBoard.time, 
