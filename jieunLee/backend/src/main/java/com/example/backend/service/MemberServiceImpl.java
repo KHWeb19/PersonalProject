@@ -29,9 +29,7 @@ public class MemberServiceImpl implements MemberService{
 
     @Override
     public List<Member> search(String keyWord) {
-        return memberRepository.findByMemberIdContaining(keyWord);
-
-
+        return memberRepository.findByMemberIdContainingOrMemberNameContaining(keyWord, keyWord);
     }
 
     @Override
