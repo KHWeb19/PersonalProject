@@ -90,7 +90,7 @@ import { mapState, mapActions } from 'vuex'
         name: 'ReviewPage',
         data () {
             return {
-                id: (window.localStorage.getItem('id')),
+                checkid: (window.localStorage.getItem('id')),
                 checkuserInfo: window.localStorage.getItem('token'),
                 content: '',
                 headerTitle: [
@@ -156,10 +156,14 @@ import { mapState, mapActions } from 'vuex'
                         })
             },
             editItem(item){
-                this.dialog = true, 
-                this.modifyNo = item.reviewNo
-                this.modifyContent = item.content
-                this.modifyRegDate = item.regDate
+                if(this.checkid == item.id){
+                    this.dialog = true, 
+                    this.modifyNo = item.reviewNo
+                    this.modifyContent = item.content
+                    this.modifyRegDate = item.regDate
+                }else {
+                    alert('수정은 본인만 가능합니다!')
+                }
             },
             handleFileUpload2() {
                 this.files2 = this.$refs.files2.files
@@ -168,10 +172,10 @@ import { mapState, mapActions } from 'vuex'
                 let formData = new FormData()
 
                 let fileInfo = {
-                    id: this.id,
-                    content : this.modifyContent,
-                    regDate : this.modifyRegDate,
-                    reviewNo : this.modifyNo
+                id: this.checkid,
+                content : this.modifyContent,
+                regDate : this.modifyRegDate,
+                reviewNo : this.modifyNo
                 }
                 console.log(fileInfo)
 
@@ -193,10 +197,15 @@ import { mapState, mapActions } from 'vuex'
                         .catch(() => {
                             alert('수정 실패!')
                         })
+
             },
             deleteItem(item){
-                this.deleteDialog = true
-                this.deleteNo = item.reviewNo
+                if(this.checkid == item.id){
+                    this.deleteDialog = true
+                    this.deleteNo = item.reviewNo
+                } else {
+                    alert('삭제는 본인만 가능합니다!')
+                }
             },
             deleteReview(){
 
@@ -211,7 +220,6 @@ import { mapState, mapActions } from 'vuex'
                     "info", new Blob([JSON.stringify(fileInfo)], {type:"application/json"})
                 )
 
-                this.reviewNo = this.deleteNo
                 axios.post('http://localhost:7777/review/delete', formData )
                         .then(() => {
                             alert('삭제가 완료되었습니다!')
