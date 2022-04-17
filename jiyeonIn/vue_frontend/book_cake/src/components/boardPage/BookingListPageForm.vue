@@ -54,7 +54,7 @@
                 </td>
                 <td align="center" >
                     <router-link :to="{ name: 'BookingReadPage',
-                                        params: { bookingNo: board.bookingNo.toString() } }">
+                                        params: { bookingNo: board.bookingNo.toString() }}">
                         {{ board.id }} 님의 주문서입니다.
                     </router-link>
                 </td>

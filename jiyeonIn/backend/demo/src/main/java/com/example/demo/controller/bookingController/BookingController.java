@@ -1,6 +1,6 @@
 package com.example.demo.controller.bookingController;
 
-import com.example.demo.controller.bookingController.request.BookingModifyRequest;
+import com.example.demo.controller.bookingController.request.BookingReadRequest;
 import com.example.demo.controller.bookingController.request.BookingRequest;
 import com.example.demo.entity.booking.BookingInfo;
 import com.example.demo.service.booking.BookingService;
@@ -65,12 +65,14 @@ public class BookingController {
         return service.list();
     }
 
-    @GetMapping("/{bookingNo}")
-    public BookingInfo bookingReadBoard ( @PathVariable("bookingNo") Integer bookingNo) {
+    @RequestMapping(value = "/read",  method = RequestMethod.GET)
+    public BookingInfo bookingReadBoard (@RequestParam(value = "checkBookingNo", required = false) Integer checkBookingNo,
+                                         @RequestParam(value = "checkId", required = false) String checkId) {
 
-        log.info("checkId:" +bookingNo);
 
-        return service.read(bookingNo);
+        log.info("checkNo:" +checkBookingNo + "id:" +checkId);
+
+        return service.read(checkBookingNo,checkId);
     }
 
     @PutMapping("/{bookingNo}")

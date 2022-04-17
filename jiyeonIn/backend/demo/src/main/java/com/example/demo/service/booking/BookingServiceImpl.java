@@ -1,6 +1,7 @@
 package com.example.demo.service.booking;
 
 
+import com.example.demo.controller.bookingController.request.BookingReadRequest;
 import com.example.demo.controller.bookingController.request.BookingRequest;
 import com.example.demo.entity.booking.BookingInfo;
 import com.example.demo.entity.uploadCake.UploadCake;
@@ -73,14 +74,21 @@ public class BookingServiceImpl implements BookingService{
 
     @Transactional
     @Override
-    public BookingInfo read(Integer bookingNo) {
-        Optional<BookingInfo> maybeReadBoard = repository.findById(Long.valueOf(bookingNo));
+    public BookingInfo read(Integer checkBookingNo, String checkId) {
+        Optional<BookingInfo> maybeReadBoard = repository.findById(Long.valueOf(checkBookingNo));
 
         if(maybeReadBoard.equals(Optional.empty())){
             log.info("content is null");
         }
 
-        return maybeReadBoard.get();
+        BookingInfo checkedId = maybeReadBoard.get();
+
+        if(checkedId.getId().equals(checkId)){
+            return checkedId;
+        }else if(checkId.equals("manager")) {
+            return checkedId;
+        }else
+            return null;
     }
 
     @Transactional
