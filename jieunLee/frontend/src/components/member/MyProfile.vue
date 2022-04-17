@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-container style="max-width: 1000px; margin-top: 20px;">
+        <v-container style="max-width: 1000px; margin-top: 85px;">
         <v-flex>
             <div style="display: flex; justify-content: center;">
                 <div style="width: 300px; padding-left: 75px;">

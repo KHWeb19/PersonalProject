@@ -1,7 +1,9 @@
 <template>
   <div>
-    <menu-bar/>
-    <hr style="border: 0; height: 1px; background: #d8d8d8; "/>
+    <div style="z-index: 1; position: fixed; top: 0; left: 0; right: 0;">
+      <menu-bar/>
+      <hr style="border: 0; height: 1px; background: #d8d8d8; "/>
+    </div>
     <board-register-form :member="member" :memberNo="memberNo" @submit="onSubmit"/>
   </div>
 </template>

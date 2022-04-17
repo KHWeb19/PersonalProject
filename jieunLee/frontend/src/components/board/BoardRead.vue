@@ -1,5 +1,5 @@
 <template>
-    <v-container style="width: 1000px; margin-top: 20px; font-size: 14px">
+    <v-container style="width: 1000px; margin-top: 85px; font-size: 14px">
       <v-flex>
             <v-card style="margin-bottom: 30px;">
                 <form @submit.prevent="onSubmit">
@@ -51,33 +51,34 @@
                         </td>
                     </tr>
                     <tr align="left" >
-                        <td colspan="3" style="height: 430px; padding-left: 16px"  > 
-                            <div v-for="comment in comments" :key="comment.commentNo">
-                                <span style="font-weight: bold;">{{ comment.writer }}&nbsp;</span>
-                                {{ comment.content }}
-                                <div style="font-size: 12px; color: grey">
-                                    {{ comment.regDate }}
-                                    <v-menu offset-y min-width="100">
-                                        <template v-slot:activator="{ on }">
-                                            <v-btn icon v-on="on">
-                                                <v-icon>
-                                                    mdi-dots-horizontal
-                                                </v-icon>
-                                            </v-btn> 
-                                        </template>
-                                        <v-list>
-                                            <v-list-item-title> 
-                                                <v-btn @click="onCommentDelete(comment.commentNo)">삭제</v-btn>
-                                            </v-list-item-title>
-                                            <v-list-item-title> 
-                                                <v-btn>수정</v-btn>
-                                            </v-list-item-title>
-                                        </v-list>
-                                    </v-menu>
-                                </div> 
+                        <td colspan="3" style=" padding-left: 16px"  > 
+                            <div style="overflow-y:auto; overflow-x:hidden; width:100%; height:430px;">
+                                <div v-for="comment in comments" :key="comment.commentNo">
+                                    <span style="font-weight: bold;">{{ comment.writer }}&nbsp;</span>
+                                    {{ comment.content }}
+                                    <div style="font-size: 12px; color: grey">
+                                        {{ comment.regDate }}
+                                        <v-menu offset-y min-width="100">
+                                            <template v-slot:activator="{ on }">
+                                                <v-btn icon v-on="on">
+                                                    <v-icon>
+                                                        mdi-dots-horizontal
+                                                    </v-icon>
+                                                </v-btn> 
+                                            </template>
+                                            <v-list>
+                                                <v-list-item-title> 
+                                                    <v-btn @click="onCommentDelete(comment.commentNo)">삭제</v-btn>
+                                                </v-list-item-title>
+                                                <v-list-item-title> 
+                                                    <v-btn>수정</v-btn>
+                                                </v-list-item-title>
+                                            </v-list>
+                                        </v-menu>
+                                    </div> 
+                                </div>
                             </div>
                         </td>
-                        
                     </tr>
                     <tr>
                         <td colspan="2">
@@ -151,13 +152,16 @@ export default {
     data() {
         return {
             loginInfo: JSON.parse(localStorage.getItem('loginInfo')),
-            content: ''
+            content: '',
         }
     },
     computed: {
     ...mapState(['board'])
     },
     methods: {
+        getItemControl() {
+            return `item.actions`;
+        },
         onDelete() {
             const { boardNo } = this
             this.$emit('click', {boardNo})

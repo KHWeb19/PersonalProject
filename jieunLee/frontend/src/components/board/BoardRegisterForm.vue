@@ -1,5 +1,5 @@
 <template>
-    <v-container style="width: 1000px; margin-top: 20px; ">
+    <v-container style="width: 1000px; margin-top: 85px; ">
         <v-flex>
             <v-card style="height: 100%">
                 <form @submit.prevent="onSubmit">
@@ -88,7 +88,7 @@ export default {
                 //
                 console.log(this.loginInfo.memberNo)
                 const { boardImage, content } = this
-                this.$emit('submit', { memberNo: this.loginInfo.memberNo, boardImage, writer: this.loginInfo.memberName, content })
+                this.$emit('submit', { memberNo: this.loginInfo.memberNo, boardImage, writer: this.loginInfo.memberId, content })
             })
             .catch (res => {
                 alert('처리 결과: ' + res.message)

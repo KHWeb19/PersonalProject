@@ -1,7 +1,9 @@
 <template>
   <div>
-    <menu-bar/>
-    <hr style="border: 0; height: 1px; background: #d8d8d8; "/>
+    <div style="z-index: 1; position: fixed; top: 0; left: 0; right: 0;">
+      <menu-bar/>
+      <hr style="border: 0; height: 1px; background: #d8d8d8; "/>
+    </div>
     <board-read :board="board" :boardNo="boardNo" :comments="comments" @click="onDelete" @submit="onSubmit"/>
   </div>
 </template>
@@ -66,7 +68,7 @@ export default {
         onSubmit(payload) {
             const boardNo = this.boardNo
             const {content} = payload
-            axios.post(`http://localhost:7777/comment/register/${boardNo}`, {writer: this.loginInfo.memberName, content})
+            axios.post(`http://localhost:7777/comment/register/${boardNo}`, {writer: this.loginInfo.memberId, content})
                 .then(() => {
                     alert('댓글 등록 성공!')
                         history.go(0);

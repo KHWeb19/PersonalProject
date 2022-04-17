@@ -1,5 +1,5 @@
 <template>
-    <v-container style="width: 1000px; margin-top: 20px; font-size: 14px">
+    <v-container style="width: 1000px; margin-top: 85px; font-size: 14px">
         <v-flex>
             <hr style="border: 0; height: 1px; background: #d8d8d8; "/>
             <br/><br/>

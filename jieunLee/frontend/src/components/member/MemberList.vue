@@ -1,7 +1,10 @@
 <template>
   <div>
-    <menu-bar/>
-    <v-container style="width: 400px; margin-top: 20px; padding-left: 0px">
+    <div style="z-index: 1; position: fixed; top: 0; left: 0; right: 0;">
+      <menu-bar/>
+      <hr style="border: 0; height: 1px; background: #d8d8d8; "/>
+    </div>
+    <v-container style="width: 400px; margin-top: 85px; padding-left: 0px">
         <v-flex>
             <v-card style="padding: 8px">
                 <tr v-for="member in searchMembers" :key="member.memberNo">
