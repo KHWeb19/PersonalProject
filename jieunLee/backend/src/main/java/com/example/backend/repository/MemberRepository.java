@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface MemberRepository extends JpaRepository<Member, Long> {
-    List<Member> findByMemberIdContaining(String keyWord);
+    List<Member> findByMemberIdContainingOrMemberNameContaining(String id, String name);
+
 
     @Query("select m from Member m where m.memberId = :memberId")
     Optional<Member> findByUserId(String memberId);
