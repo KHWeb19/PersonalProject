@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface BoardService {
 
-    public void register (Board board) throws Exception;
+    public void register (Board board, @RequestParam(required = false) MultipartFile file) throws Exception;
     public List<Board> list ();
     public Board read (Long boardNo);
-    public void modify (Board board, Long boardNo) throws Exception;
+    public void modify (Board board, @RequestParam(required = false) MultipartFile file) throws Exception;
     public void remove (Integer boardNo) ;
 }
