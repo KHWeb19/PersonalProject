@@ -86,8 +86,9 @@ export default {
                 console.log(this.files[0].name)
                 this.boardImage = this.files[0].name
                 //
+                console.log(this.loginInfo.memberNo)
                 const { boardImage, content } = this
-                this.$emit('submit', { boardImage, writer: this.loginInfo.memberName, content })
+                this.$emit('submit', { memberNo: this.loginInfo.memberNo, boardImage, writer: this.loginInfo.memberName, content })
             })
             .catch (res => {
                 alert('처리 결과: ' + res.message)
