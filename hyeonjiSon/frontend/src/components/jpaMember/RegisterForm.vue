@@ -24,17 +24,17 @@
         </v-text-field></div>
 
       <div class="input_area">
-        <v-text-field v-model="sn" style="width:350px"
+        <v-text-field v-model="city" style="width:350px"
         placeholder=" *거주 시 입력(예: 서울시, 광주시, 울산시)" :rules="rulesBuis">
         </v-text-field></div>
 
       <div class="input_area">
-        <v-text-field v-model="sn" style="width:350px"
+        <v-text-field v-model="dong" style="width:350px"
         placeholder=" *거주 동 입력(예: 대방동, 청당동)" :rules="rulesBuis">
         </v-text-field></div>
 
       <div class="input_area">
-        <v-text-field v-model="sn" style="width:350px"
+        <v-text-field v-model="address" style="width:350px"
         placeholder=" *시, 동을 제외한 나머지 주소 입력" :rules="rulesBuis">
         </v-text-field></div>
 
@@ -74,9 +74,11 @@ export default {
     return {
       id: '',
       sn: '',
+      city: '',
+      dong: '',
+      address: '',
       pw: '',
       pwConfirm: '',
-
       radioGroup: 1,
       kindsOfMember: [
         '개인', //0
@@ -99,14 +101,14 @@ export default {
       ],
       rulesBuis:[
           v => !!v || '사업자 회원 필수 입력사항입니다.'
-      ]
+      ],
     }
   },
   methods: {
     onSubmit () {
-      const { id, sn, pw, pwConfirm, radioGroup } = this
+      const { id, sn, city, dong, address, pw, pwConfirm, radioGroup } = this
       const auth = (radioGroup == '개인' ? '개인' : '사업자')
-      this.$emit('submit', { id, sn, pw, pwConfirm, auth })
+      this.$emit('submit', { id, sn, city, dong, address, pw, pwConfirm, auth })
     }
   }
 }
