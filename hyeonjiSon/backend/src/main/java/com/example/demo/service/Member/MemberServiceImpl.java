@@ -1,4 +1,4 @@
-package com.example.demo.service;
+package com.example.demo.service.Member;
 
 import com.example.demo.controller.request.MemberRequest;
 import com.example.demo.entity.Member;
@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -26,7 +28,10 @@ public class MemberServiceImpl implements MemberService {
         String encodedPassword = passwordEncoder.encode(memberRequest.getPw());
         memberRequest.setPw(encodedPassword);
         Member memberEntity = new Member(
-                memberRequest.getId(), memberRequest.getSn() , memberRequest.getPw(), memberRequest.getPwConfirm()
+                memberRequest.getId(), memberRequest.getSn() , memberRequest.getPw(),
+                memberRequest.getCity(), memberRequest.getDong(), memberRequest.getAddress(),
+
+                memberRequest.getPwConfirm(), memberRequest.getAuth()
         );
 
         memberRepository.save(memberEntity);
@@ -48,17 +53,9 @@ public class MemberServiceImpl implements MemberService {
             return null;
         }
 
-        /*
-        // 로그인 하는 순간 해당 회원의 멤버번호 가져오기
-        if (loginMember.getUserId().equals(memberRequest.getId())) {
-
-            memberRequest.setMemberNo(loginMember.getMemberNo());
-            memberRequest.setSn(loginMember.getStoreName());
-        }
-        */
-
         MemberRequest response = new MemberRequest(
                 loginMember.getMemberNo(), loginMember.getUserId(), loginMember.getStoreName(), null,
+                loginMember.getCity(), loginMember.getDong(), loginMember.getAddress(), loginMember.getAuth(),
                 loginMember.getPasswordQAnswer() );
 
         return response;
@@ -69,6 +66,20 @@ public class MemberServiceImpl implements MemberService {
         Optional<Member> getMemberInfo = memberRepository.findById(Long.valueOf(memberNo));
 
         return getMemberInfo.get();
+    }
+
+    @Transactional //동작을 멈추지 않도록 하는데 사용한다. service에 사용.
+    @Override
+    public List<Member> findBusiness() {
+        List<Member> businessMember = memberRepository.selectMemberWithRole("사업자");
+
+        // JPA 에서 연관 관계 사용시 쓸대없이 다 출력하지 말자!
+        // 필요한 정보만 산출해서 가져가도록 한다.
+        for (Member member : businessMember) {
+            log.info("id: " + member.getStoreName());
+        }
+
+        return businessMember;
     }
 
     /*

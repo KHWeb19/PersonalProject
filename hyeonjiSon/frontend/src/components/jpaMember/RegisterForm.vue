@@ -4,8 +4,14 @@
     <form @submit.prevent="onSubmit">
       
       <br>
-      <p>나눔 받는 페이지에 게시글을 작성하고 싶으신가요?</p>
-
+      <div class="row">
+        <v-radio-group v-model="radioGroup" row>
+          <!-- 기존에 사용하던 형식의 문법이 마겨서 아래와 같이 작업해야함
+               다소 번거로움이 추가됨 -->
+          <v-radio :label="`${kindsOfMember[0]}`" :value="`${kindsOfMember[0]}`"></v-radio>
+          <v-radio :label="`${kindsOfMember[1]}`" :value="`${kindsOfMember[1]}`"></v-radio>
+        </v-radio-group>
+      </div>
       <br>
 
       <div class="input_area">
@@ -13,7 +19,23 @@
         </v-text-field></div>
 
       <div class="input_area">
-        <v-text-field v-model="sn" style="width:350px" placeholder=" *상호명을 입력해주세요." :rules="rulesSn">
+        <v-text-field v-model="sn" style="width:350px"
+        placeholder=" *닉네임 혹은 (사업자)상호명을 입력해주세요." :rules="rulesSn">
+        </v-text-field></div>
+
+      <div class="input_area">
+        <v-text-field v-model="sn" style="width:350px"
+        placeholder=" *거주 시 입력(예: 서울시, 광주시, 울산시)" :rules="rulesBuis">
+        </v-text-field></div>
+
+      <div class="input_area">
+        <v-text-field v-model="sn" style="width:350px"
+        placeholder=" *거주 동 입력(예: 대방동, 청당동)" :rules="rulesBuis">
+        </v-text-field></div>
+
+      <div class="input_area">
+        <v-text-field v-model="sn" style="width:350px"
+        placeholder=" *시, 동을 제외한 나머지 주소 입력" :rules="rulesBuis">
         </v-text-field></div>
 
       <div class="input_area">
@@ -55,11 +77,17 @@ export default {
       pw: '',
       pwConfirm: '',
 
+      radioGroup: 1,
+      kindsOfMember: [
+        '개인', //0
+        '사업자' //1
+      ],
+
       rulesId:[
           v => !!v || 'ID 입력은 필수입니다.'
       ],
       rulesSn:[
-          v => !!v || '상호명 입력은 필수입니다.',
+          v => !!v || '닉네임/상호명 입력은 필수입니다.',
           v => v.length >= 3 || 'Password must be less than 3 characters'     
       ],
       rulesPw:[
@@ -68,13 +96,17 @@ export default {
       ],
       rulesPwc:[
           v => !!v || '비밀번호 질문의 답은 필수입니다.'
+      ],
+      rulesBuis:[
+          v => !!v || '사업자 회원 필수 입력사항입니다.'
       ]
     }
   },
   methods: {
     onSubmit () {
-      const { id, sn, pw, pwConfirm } = this
-      this.$emit('submit', { id, sn, pw, pwConfirm })
+      const { id, sn, pw, pwConfirm, radioGroup } = this
+      const auth = (radioGroup == '개인' ? '개인' : '사업자')
+      this.$emit('submit', { id, sn, pw, pwConfirm, auth })
     }
   }
 }

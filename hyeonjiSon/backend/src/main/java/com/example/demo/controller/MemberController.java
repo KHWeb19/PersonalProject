@@ -1,13 +1,16 @@
 package com.example.demo.controller;
 
 import com.example.demo.controller.request.MemberRequest;
+import com.example.demo.controller.response.MemberResponse;
 import com.example.demo.entity.Member;
-import com.example.demo.service.MemberService;
+import com.example.demo.service.Member.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -20,7 +23,8 @@ public class MemberController {
 
     @PostMapping("/register")
     public void jpaMemberRegister(@Validated @RequestBody MemberRequest memberRequest) {
-        log.info("register request from vue:() " + memberRequest);
+        log.info("register request from vue:() " + memberRequest.getId() + ", " +
+                (memberRequest.getAuth().equals("사업자") ? "ROLE_BUSINESS" : "ROLE_INDIVIDUAL"));
 
         memberservice.register(memberRequest);
     }
@@ -38,6 +42,21 @@ public class MemberController {
         }
 
         return memberResponse;
+    }
+
+    @GetMapping("/checkBusiness")
+    public List<MemberResponse> checkBusinessMember () {
+        log.info("checkBusiness() ===> findBusinessMember!!!");
+
+        List<Member> businessMember = memberservice.findBusiness();
+        List<MemberResponse> responses = new ArrayList<>();
+
+        for (Member member : businessMember) {
+            responses.add(new MemberResponse(
+                    member.getStoreName(), member.getCity(), member.getDong(), member.getAddress()));
+        }
+
+        return responses;
     }
 
     @GetMapping("/{memberNo}")

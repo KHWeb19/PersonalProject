@@ -17,6 +17,8 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long memberNo;
 
+    @Column(length = 64, nullable = false)
+    private String auth;
 
     @Column(length = 32, nullable = false)
     private String userId;
@@ -25,6 +27,16 @@ public class Member {
 
     @Column(length = 128, nullable = false)
     private String password;
+
+    @Column(length = 32, nullable = false)
+    private String city;
+
+    @Column(length = 32, nullable = false)
+    private String dong;
+
+    @Column(length = 128, nullable = false)
+    private String address;
+
 
     @Column(length = 128, nullable = false)
     private String passwordQAnswer;
@@ -36,10 +48,18 @@ public class Member {
     private Date updDate;
 
 
-    public Member(String userId, String storeName, String password, String passwordQAnswer) {
+    public Member(String userId, String storeName, String password,
+                  String city, String dong, String address, String passwordQAnswer, String auth) {
         this.userId = userId;
         this.storeName = storeName;
         this.password = password;
+
+        this.city = city;
+        this.dong = dong;
+        this.address = address;
+
         this.passwordQAnswer = passwordQAnswer;
+        this.auth = auth;
     }
+
 }
