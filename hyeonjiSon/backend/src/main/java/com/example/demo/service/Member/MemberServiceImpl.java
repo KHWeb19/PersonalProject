@@ -76,7 +76,7 @@ public class MemberServiceImpl implements MemberService {
         // JPA 에서 연관 관계 사용시 쓸대없이 다 출력하지 말자!
         // 필요한 정보만 산출해서 가져가도록 한다.
         for (Member member : businessMember) {
-            log.info("id: " + member.getStoreName());
+            log.info("B-Member: " + member.getStoreName());
         }
 
         return businessMember;

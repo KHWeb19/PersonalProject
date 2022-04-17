@@ -8,5 +8,6 @@ export default {
 
     storeBoards: [],
     storeBoard: null,
+    businessMembers: [],
 
 }
