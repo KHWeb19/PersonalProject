@@ -13,7 +13,7 @@ import java.util.Date;
 @Entity
 @NoArgsConstructor
 @Table(name = "cake_member_auth")
-public class MemberAuth<z> {
+public class MemberAuth {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long memberAuthNo;

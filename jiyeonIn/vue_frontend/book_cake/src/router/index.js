@@ -44,9 +44,14 @@ const routes = [
   }
   ,
   {
-    path: '/myPage',
+    path: '/myPage/:id',
     name: 'MyPage',
-    component: MyPage
+    components: {
+      default: MyPage
+    },
+    props: {
+      default: true
+    }
   }
   ,
   {

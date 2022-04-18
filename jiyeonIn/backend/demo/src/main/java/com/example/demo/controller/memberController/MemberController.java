@@ -1,18 +1,12 @@
 package com.example.demo.controller.memberController;
 
-import com.example.demo.controller.memberController.Response.MemberResponse;
 import com.example.demo.controller.memberController.request.MemberRequest;
-import com.example.demo.entity.member.Member;
-import com.example.demo.entity.member.MemberAuth;
 import com.example.demo.service.member.MemberService;
-import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @Slf4j
 @RestController
@@ -54,4 +48,13 @@ public class MemberController {
 
         return maybeMember;
     }
+
+    @GetMapping("/{id}")
+    public MemberRequest memberInfoRead (
+            @PathVariable("id") String id) {
+        log.info("memberInfoRead():" +id);
+
+        return service.read(id);
+    }
+
 }

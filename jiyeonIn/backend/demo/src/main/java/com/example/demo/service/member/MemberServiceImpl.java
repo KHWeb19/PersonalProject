@@ -11,7 +11,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -82,14 +81,40 @@ public class MemberServiceImpl implements MemberService {
 
     @Transactional
     @Override
-    public Boolean checkUserIdValidation(String id) {
-        Optional<Member> maybeMember = memberRepository.findByUserId(id);
+    public Boolean checkUserIdValidation(String userId) {
+        Optional<Member> maybeMember = memberRepository.findByUserId(userId);
 
         if(maybeMember.isPresent()) {
             return false;
         }else {
             return true;
         }
+    }
+
+    @Transactional
+    @Override
+    public MemberRequest read(String id) {
+
+        Optional<Member> maybeMember = memberRepository.findByUserId(id);
+
+
+        Member loginMember = maybeMember.get();
+
+        Optional<MemberAuth> maybeMemberAuth =
+                memberAuthRepository.findByMemberNo(loginMember.getMemberNo());
+
+
+        MemberAuth memberAuth = maybeMemberAuth.get();
+
+        MemberRequest response = new MemberRequest(
+                id,
+                null,
+                loginMember.getUserName(),
+                memberAuth.getAuth());
+
+        log.info("info:" + response);
+        return response;
+
     }
 
 

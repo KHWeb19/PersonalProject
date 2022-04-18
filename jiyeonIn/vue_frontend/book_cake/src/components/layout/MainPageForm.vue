@@ -27,7 +27,8 @@
                         <button @click="logout" type="submit" style="font-size: small; color: black;">로그아웃 </button>
                     </v-col>
                     <v-col class="col-12 col-sm-1">
-                        <router-link :to="{name: 'MyPage'}" >
+                        <router-link :to="{name: 'MyPage',
+                                            params:{id: this.id}}" >
                             <span style="font-size: small; color: black;">My페이지</span>
                         </router-link>
                     </v-col>
