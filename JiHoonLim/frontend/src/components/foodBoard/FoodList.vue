@@ -10,7 +10,7 @@
       </v-row>
       <v-row>
         <v-col v-for="food in paginatedData" :key="food.boardNo" lg="3" sm="6">
-          <v-card width="500" height="370" class="mx-auto">
+          <v-card width="500" height="400" class="mx-auto">
             <router-link
               :to="{
                 name: 'FoodDetailPage',
@@ -37,9 +37,11 @@
               <v-card-text class="pb-0 pt-0">{{ food.writer }}</v-card-text>
             </v-card-actions>
             <v-card-actions>
-              <v-card-text class="pt-0">추천 수</v-card-text>
-              <v-card-text class="pt-0">{{ food.viewCount }}</v-card-text>
-              <v-card-text class="pt-0">{{ food.regDate }}</v-card-text>
+              <v-card-text class="pb-0 pt-0">추천 수</v-card-text>
+              <v-card-text class="pb-0 pt-0">{{ food.viewCount }}</v-card-text>
+            </v-card-actions>
+            <v-card-actions>
+              <v-card-text class="pb-0 pt-0">{{ food.regDate }}</v-card-text>
             </v-card-actions>
           </v-card>
         </v-col>

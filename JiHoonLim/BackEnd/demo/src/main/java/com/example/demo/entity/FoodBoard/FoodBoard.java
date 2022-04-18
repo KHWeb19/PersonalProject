@@ -2,6 +2,7 @@ package com.example.demo.entity.FoodBoard;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Comment;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -62,6 +64,9 @@ public class FoodBoard {
 
     @UpdateTimestamp
     private LocalDateTime upDate;
+
+    @OneToMany(mappedBy = "foodBoard",fetch = FetchType.EAGER,cascade = CascadeType.REMOVE)
+    private List<FoodBoardComment> comments;
 
 
 }

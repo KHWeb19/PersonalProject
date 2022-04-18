@@ -171,6 +171,7 @@ export default {
       checkbox: false,
       img: this.foodBoard.filename,
       nickName: "",
+      comment: "",
     };
   },
   created() {
