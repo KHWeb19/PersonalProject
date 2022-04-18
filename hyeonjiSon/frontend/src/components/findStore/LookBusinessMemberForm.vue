@@ -27,18 +27,18 @@ import {mapActions, mapState} from 'vuex';
 
 export default {
     name: "LookBusinessMemberForm.vue",
-        props: {
-        businessMember: {
-            type: Array
-        },
-        memberNo: {
-          type: String,
-          required: true
-        }
-    },  
+    props: {
+        //    businessMember: {
+        //        type: Array
+        //    },
+        //    memberNo: {
+        //     type: String,
+        //     required: true
+        //   }
+      //  },  
+    },
     computed: {
         ...mapState(['businessMembers']),
-
     },
     mounted () {
         this.fetchBusinessMember()

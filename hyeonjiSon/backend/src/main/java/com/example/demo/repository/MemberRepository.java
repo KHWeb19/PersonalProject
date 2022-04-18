@@ -14,7 +14,7 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     Optional<Member> findByUserId(String userId);
 
     @Transactional
-    @Query(value = "select * from member where member_no in (auth = :auth)", nativeQuery = true)
+    @Query(value = "select * from member where auth = :auth", nativeQuery = true)
     public List<Member> selectMemberWithRole(String auth);
 
 }
