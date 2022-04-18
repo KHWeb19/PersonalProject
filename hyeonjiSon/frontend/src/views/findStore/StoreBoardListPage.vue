@@ -7,25 +7,15 @@
 </template>
 
 <script>
-import {mapActions, mapState} from 'vuex';
+
 import LookBusinessMemberForm from '@/components/findStore/LookBusinessMemberForm.vue'
 
 export default {
     name: 'storeBoardListPage',
     components:{
         LookBusinessMemberForm
-    },   
-    computed: {
-        ...mapState(['businessMembers']),
+    }, 
 
-    },
-    mounted () {
-        this.fetchBusinessMember()
-    },
-    methods: {
-        ...mapActions(['fetchBusinessMember']),
-
-    }
 }
 </script>
 

@@ -16,7 +16,6 @@ import TipReadPage from '@/views/livingTip/TipReadPage.vue'
 import TipModifyPage from '@/views/livingTip/TipModifyPage.vue'
 
 import StoreBoardListPage from '@/views/findStore/StoreBoardListPage.vue'
-import StoreRegisterPage from '@/views/findStore/StoreRegisterPage.vue'
 
 import DonationInfoPage from '@/views/donateInfo/DonationInfoPage.vue'
 
@@ -101,11 +100,6 @@ const routes = [
     path: '/storeBoardListPage',
     name: 'storeBoardListPage',
     component: StoreBoardListPage
-  },
-  {
-    path: '/storeRegisterPage',
-    name: 'storeRegisterPage',
-    component: StoreRegisterPage
   },
 
 

@@ -3,7 +3,6 @@
     <table >
       <tr>
           <th align="center" width="80">시</th>
-          <th align="center" width="80">구</th>
           <th align="center" width="80">동</th>
           <th align="center" width="300">주소</th>
           <th align="center" width="150">상호명</th>
@@ -13,20 +12,22 @@
               현재 사업자 회원이 없습니다!
           </td>
       </tr>
-      <tr v-else v-for="businessMember in businessMembers" :key=" businessMember.memberNo">
-          <td align="center"> {{ memberNo.city }} </td>
-          <td align="center"> {{ memberNo.dong }} </td>
-          <td align="center"> {{ memberNo.adress }} </td>
-          <td align="center"> {{ memberNo.storeName }} </td>
+      <tr v-else v-for="(businessMember, index) in businessMembers" :key="index">
+          <td align="center"> {{ businessMember.city }} </td>
+          <td align="center"> {{ businessMember.dong }} </td>
+          <td align="center"> {{ businessMember.address }} </td>
+          <td align="center"> {{ businessMember.sn }} </td>
       </tr>
   </table>        
     </div>
 </template>
 
 <script>
+import {mapActions, mapState} from 'vuex';
+
 export default {
     name: "LookBusinessMemberForm.vue",
-    props: {
+        props: {
         businessMember: {
             type: Array
         },
@@ -34,6 +35,17 @@ export default {
           type: String,
           required: true
         }
+    },  
+    computed: {
+        ...mapState(['businessMembers']),
+
+    },
+    mounted () {
+        this.fetchBusinessMember()
+    },
+    methods: {
+        ...mapActions(['fetchBusinessMember']),
+
     }
 }
 </script>
