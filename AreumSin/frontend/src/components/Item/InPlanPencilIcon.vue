@@ -19,7 +19,7 @@
 
               <v-list-item>
                 <v-list-item-content>
-                  <v-list-item-title @click="showDialog">투표 만들기</v-list-item-title>
+                  <v-list-item-title @click="showDialogVote">투표 만들기</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
             </v-list-item-group>
@@ -38,7 +38,7 @@
               <form>
                 <table>
                   <tr>
-                    <td colspan="2">&nbsp;&nbsp;<input class="inputBox" type="text" placeholder="write friendId!" v-model="friendId" required><v-btn @click="onSubmit; isCheck=true">검색</v-btn></td>
+                    <td colspan="2">&nbsp;&nbsp;<input class="inputBox" type="text" placeholder="write friendId!" v-model="friendId" required><v-btn @click="onSubmit">검색</v-btn></td>
                   </tr>
 
                   <tr v-if="findName === null">
@@ -79,6 +79,37 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
+
+      <v-dialog max-width="800" v-model="voteDialog">
+        <v-card class="pa-10">
+          <v-row justify="start">
+            <v-btn @click="closeVoteDialog()"> x </v-btn>
+          </v-row>
+
+          <v-row justify="center">
+            <v-card-title>
+              <span style="font-size: 40px; color: darkolivegreen"><br/>투표!</span>
+            </v-card-title>
+          </v-row>
+
+          <v-row justify="center">
+            <form>
+              <table>
+                <tr style="width: 100%">
+                  <td><input type="text" style="border: black solid 1px; height: 55px"></td>
+                </tr>
+
+
+              </table>
+            </form>
+          </v-row>
+
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="green darken-1">Save</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
     </v-col>
   </v-row>
 </template>
@@ -91,7 +122,8 @@ export default {
     return{
       inviteFriend: false,
       friendId: null,
-      isCheck: true
+      isCheck: true,
+      voteDialog: false,
     }
   },
   props:{
@@ -109,10 +141,14 @@ export default {
     showDialog() {
       this.inviteFriend = true
     },
+    showDialogVote(){
+      this.voteDialog = true
+    },
     onSubmit(){
       const {friendId} = this;
       //console.log({friendId});
       this.$emit('submit',{friendId});
+      this.isCheck = true;
     },
     addFriend(){
       const {friendId} = this;
@@ -123,6 +159,9 @@ export default {
       this.friendId = null;
       this.isCheck = false;
 
+    },
+    closeVoteDialog(){
+      this.voteDialog = false;
     }
   },
   computed: {

@@ -10,6 +10,7 @@ import IdPwSearchPage from "@/views/login/IdPwSearchPage";
 import PlanListView from "@/views/plan/PlanListView";
 import PlanView from "@/views/plan/PlanView";
 import ChangePw from "@/views/login/ChangePw";
+import PlanDayView from "@/views/plan/PlanDayView"
 
 Vue.use(VueRouter)
 
@@ -66,7 +67,13 @@ const routes = [
     name: 'ChangePw',
     component: ChangePw,
     props: true
-  }
+  },
+  {
+    path: '/PlanDay/:day',
+    name: 'PlanDayView',
+    component: PlanDayView,
+    props: true
+  },
 ]
 
 const router = new VueRouter({
