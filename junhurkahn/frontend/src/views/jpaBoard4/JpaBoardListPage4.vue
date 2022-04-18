@@ -81,9 +81,8 @@
 <div align="center">
     <div id="board">
         <h1>사이트 아이디 관리</h1>
-        <router-link :to="{ name: 'JpaBoardRegisterPage4' }">
-            게시물 작성
-        </router-link>
+        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;  <button type="button" class="btn btn-primary btn-lg" @click="pageLink" >Create</button>
+        <br>       
         <jpa-board-list-4 :jpaBoards4="jpaBoards4"/>
     </div>
 </div>
@@ -121,7 +120,11 @@ export default {
         this.fetchJpaBoardList4()
     },
     methods: {
-        ...mapActions(['fetchJpaBoardList4'])
+        ...mapActions(['fetchJpaBoardList4']),
+    
+        pageLink() {
+            this.$router.push({ name: 'JpaBoardRegisterPage4' })
+}
     }
 }
 </script>

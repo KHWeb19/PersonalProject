@@ -1,7 +1,5 @@
 <template>
 
-
-
 <v-app id="inspire">
     <v-app-bar app clipped-right color="blue" dark>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
@@ -11,11 +9,6 @@
     </router-link>
       </v-toolbar-title>
 
-
-
-
-
-
       <v-spacer></v-spacer>
       <slot name="menubar"></slot>
     </v-app-bar>
@@ -24,8 +17,6 @@
         <v-list-item @click.stop="left = !left">
           <v-list-item-action>
 
-              
-           
           </v-list-item-action>
           <v-list-item-action>
              <pre>
@@ -82,9 +73,9 @@
 <div align="center">
     <div id="board">
         <h1>계좌번호</h1>
-        <router-link :to="{ name: 'JpaBoardRegisterPage1' }">
-            게시물 작성
-        </router-link>
+      
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;  <button type="button" class="btn btn-primary btn-lg" @click="pageLink" >Create</button>
+        <br>        
         <jpa-board-list-1 :jpaBoards1="jpaBoards1"/>
         
             </div>
@@ -127,8 +118,13 @@ export default {
         this.fetchJpaBoardList1()
     },
     methods: {
-        ...mapActions(['fetchJpaBoardList1'])
+        ...mapActions(['fetchJpaBoardList1']),
+
+   pageLink() {
+            this.$router.push({ name: 'JpaBoardRegisterPage1' })
+
     }
+}
 }
 </script>
 

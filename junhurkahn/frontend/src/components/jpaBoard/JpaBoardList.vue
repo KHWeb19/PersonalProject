@@ -1,19 +1,19 @@
 <template>
 
+  <div>
+        <br>
+    <div class="input-group mb-3">
+  
+  <span class="input-group-text"  id="inputGroup-sizing-default" @click="findSearch">Find</span>
 
-    <div>
-        <h3>게시물 목록</h3>
-                      <div class="input-group mb-3">
-  <span class="input-group-text" id="inputGroup-sizing-default" @click="findSearch">Find</span>
-
- <input type="text" 
+  <input type="text" 
         class="form-control" 
         ref="keyword"
         aria-label="Sizing example input" 
         aria-describedby="inputGroup-sizing-default">
 
-
 </div>
+
 
         <table class="table">
             <tr align="center">
@@ -80,7 +80,7 @@ export default {
             //alert('지우는 게시물 번호: ' + boardNo)
             axios.delete(`http://localhost:7777/62th/board/${boardNo}`)
             .then(() => {
-                alert('삭제 성공!')
+               
                 this.fetchJpaBoardList();
                 this.$refs.keyword.value = '';
             })

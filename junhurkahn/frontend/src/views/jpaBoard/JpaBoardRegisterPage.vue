@@ -20,13 +20,12 @@ export default {
             const { title, content, writer } = payload
             axios.post('http://localhost:7777/62th/board/register', { title, writer, content })
                     .then(() => {
-                        alert('게시물 등록 성공!')
                         this.$router.push({
                             name: 'JpaBoardListPage'
                         })
                     })
                     .catch(() => {
-                        alert('문제 발생!')
+                      
                     })
         }
     }

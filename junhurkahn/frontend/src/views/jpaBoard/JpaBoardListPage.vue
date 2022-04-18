@@ -78,14 +78,16 @@
 <div align="center">
     <div id="board">
         <h1>텍스트메모</h1>
-        <router-link :to="{ name: 'JpaBoardRegisterPage' }">
-           게시물 작성 
-        </router-link>
-
-        
+      
+       
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;  <button type="button" class="btn btn-primary btn-lg" @click="pageLink" >Create</button>
+        <br>        
         <jpa-board-list :jpaBoards="jpaBoards"/>
     </div>
 </div>
+
+
+
 
 
       <v-footer app color="blue" class="white--text">
@@ -123,13 +125,21 @@ export default {
         this.fetchJpaBoardList()
     },
     methods: {
-        ...mapActions(['fetchJpaBoardList'])
-        
+        ...mapActions(['fetchJpaBoardList']),
+    
+       pageLink() {
+            this.$router.push({ name: 'JpaBoardRegisterPage' })
 
+
+
+        }
+        
+    }
         
     }
     
-}
+
+
 
 </script>
 

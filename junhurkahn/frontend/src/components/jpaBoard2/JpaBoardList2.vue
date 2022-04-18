@@ -1,8 +1,9 @@
 <template>
     <div>
-        <h3>장보기 목록</h3>
-          <div class="input-group mb-3">
-  <span class="input-group-text" id="inputGroup-sizing-default" @click="findSearch">Find</span>
+         <br>
+    <div class="input-group mb-3">
+  
+  <span class="input-group-text"  id="inputGroup-sizing-default" @click="findSearch">Find</span>
 
   <input type="text" 
         class="form-control" 
@@ -79,7 +80,7 @@ export default {
             //alert('지우는 게시물 번호: ' + boardNo)
             axios.delete(`http://localhost:7777/62th/board2/${boardNo}`)
             .then(() => {
-                alert('삭제 성공!')
+             
                 this.fetchJpaBoardList2();
             })
             .catch(() => {

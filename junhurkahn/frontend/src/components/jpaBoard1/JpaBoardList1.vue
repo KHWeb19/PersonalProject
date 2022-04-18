@@ -1,10 +1,10 @@
 <template>
 
     <div>
-        <h3>계좌번호 목록</h3>
+         <br>
     <div class="input-group mb-3">
   
-  <span class="input-group-text" id="inputGroup-sizing-default" @click="findSearch">Find</span>
+  <span class="input-group-text"  id="inputGroup-sizing-default" @click="findSearch">Find</span>
 
   <input type="text" 
         class="form-control" 
@@ -90,7 +90,7 @@ export default {
             //alert('지우는 게시물 번호: ' + boardNo)
             axios.delete(`http://localhost:7777/62th/board1/${boardNo}`)
             .then(() => {
-                alert('삭제 성공!')
+               
                 this.fetchJpaBoardList1();
                 this.$refs.keyword.value = '';
             })
