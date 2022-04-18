@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-container style="width: 250px; margin-top: 20px; padding-right: 0px">
+        <v-container style="width: 250px; margin-top: 85px; padding-right: 0px">
             <v-flex>
                 <v-card style="height: 600px">
                     <router-link style="text-decoration: none;" :to="{

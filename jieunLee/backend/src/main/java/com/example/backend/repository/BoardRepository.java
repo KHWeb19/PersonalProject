@@ -1,12 +1,10 @@
 package com.example.backend.repository;
 
 import com.example.backend.entity.Board;
-import com.example.backend.entity.Comment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 public interface BoardRepository extends JpaRepository<Board, Long> {
@@ -15,6 +13,6 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
 //    @Query("select b from Board b where b.memberNo = :memberNo")
 //    public List<Board> selectMyBoard(Long memberNo);
 
-    @Query("select b from Board b join b.member m where m.memberNo = :memberNo")
-    List<Board> findBoardByMemberNo(@Param("memberNo") Long memberNo);
+    @Query(value = "select * from board where member_no in(select member_no from member where member_no = :memberNo)", nativeQuery = true)
+    List<Board> findAllByMemberNo(@Param("memberNo") Long memberNo);
 }

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-container style="width: 750px; margin-top: 20px; padding-left: 0px">
+        <v-container style="width: 750px; margin-top: 85px; padding-left: 0px">
             <v-flex>
                 <v-card style="height: 600px">
                     <br/>

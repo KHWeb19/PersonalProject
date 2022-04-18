@@ -26,7 +26,7 @@ export default {
             required: true
         }
     },
-            data() {
+    data() {
         return {
             loginInfo: JSON.parse(localStorage.getItem('loginInfo')),
 

@@ -6,7 +6,9 @@ import {
     FETCH_BOARD_LIST,
     FETCH_BOARD_MY_LIST,
     FETCH_COMMENT,
-    FETCH_COMMENT_LIST
+    FETCH_COMMENT_LIST,
+    FETCH_TWO_COMMENT_LIST,
+    // FETCH_LIKES
 } from './mutation-types'
 
 import axios from 'axios'
@@ -58,6 +60,12 @@ export default {
         return axios.get(`http://localhost:7777/comment/list/${boardNo}`)
                 .then((res) => {
                     commit(FETCH_COMMENT_LIST, res.data)
+                })
+    },
+    fetchTwoCommentList ({ commit }, boardNo) {
+        return axios.get(`http://localhost:7777/comment/twoList/${boardNo}`)
+                .then((res) => {
+                    commit(FETCH_TWO_COMMENT_LIST, res.data)
                 })
     },
 

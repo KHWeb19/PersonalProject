@@ -6,7 +6,8 @@ import {
     FETCH_BOARD_LIST,
     FETCH_BOARD_MY_LIST,
     FETCH_COMMENT,
-    FETCH_COMMENT_LIST
+    FETCH_COMMENT_LIST,
+    FETCH_TWO_COMMENT_LIST
 } from './mutation-types'
 
 export default {
@@ -33,5 +34,8 @@ export default {
     },
     [FETCH_COMMENT_LIST] (state, comments) {
         state.comments = comments
+    },
+    [FETCH_TWO_COMMENT_LIST] (state, twoComments) {
+        state.twoComments = twoComments
     },
 }

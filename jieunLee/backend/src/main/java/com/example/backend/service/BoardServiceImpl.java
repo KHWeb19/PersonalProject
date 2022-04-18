@@ -24,20 +24,11 @@ public class BoardServiceImpl implements BoardService {
     private MemberRepository memberRepository;
 
     @Override
-    public void register(Integer memberNo, BoardRequest boardRequest) {
+    public void register(Integer memberNo, Board board) {
 
         Optional<Member> maybeBoard = memberRepository.findById(Long.valueOf(memberNo));
-        Member member = maybeBoard.get();
-
-        Board boardEntity = Board.builder().
-                boardImage(boardRequest.getBoardImage()).
-                content(boardRequest.getContent()).
-                member(member).
-                writer(boardRequest.getWriter())
-                .build();
-
-        memberRepository.save(member);
-        repository.save(boardEntity);
+        board.setMember(maybeBoard.get());
+        repository.save(board);
     }
 
     @Override
@@ -53,7 +44,7 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public List<Board> memberBoardList(Integer memberNo) {
-        List<Board> boards = repository.findBoardByMemberNo(Long.valueOf(memberNo));
+        List<Board> boards = repository.findAllByMemberNo(Long.valueOf(memberNo));
         return boards;
     }
 

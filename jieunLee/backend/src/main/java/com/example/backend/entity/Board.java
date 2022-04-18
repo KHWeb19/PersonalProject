@@ -1,6 +1,7 @@
 package com.example.backend.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,9 +11,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Data
 @Entity
@@ -26,9 +25,6 @@ public class Board {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="board_no")
     private Long boardNo;
-
-//    @Column(name = "member_no")
-//    private Long memberNo;
 
     @Column(length = 64, nullable = false)
     private String boardImage;
@@ -50,7 +46,9 @@ public class Board {
     @JoinColumn(name= "member_no")
     private Member member;
 
-    @JsonManagedReference
     @OneToMany(mappedBy = "board", fetch = FetchType.EAGER)
     private List<Comment> comments = new ArrayList<>();
+
+    @OneToMany(mappedBy = "board", fetch = FetchType.EAGER)
+    private Set<Likes> likeList = new HashSet<>();
 }

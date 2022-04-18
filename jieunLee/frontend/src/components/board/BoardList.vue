@@ -40,7 +40,7 @@
                         </tr>
                         <tr align="left">
                             <td colspan="2" style="padding: 6px 9px">
-                                <v-btn icon>
+                                <v-btn icon @click="onLikes(board.boardNo, loginInfo.memberNo)">
                                     <v-icon color="black">
                                         mdi-heart-outline
                                     </v-icon>
@@ -71,6 +71,15 @@
                                 </router-link>
                             </td>
                         </tr>
+                        <tr>
+                            <!-- <comment-list :boardNo="board.boardNo"/> -->
+                            <!-- <td>
+                                <div v-for="comment in twoComments" :key="comment.commentNo">
+                                    <span style="font-weight: bold;">{{ comment.writer }}&nbsp;</span>
+                                    {{ comment.content }}
+                                </div>
+                            </td> -->
+                        </tr>
                         <tr align="left" style="font-size: 10px">
                             <td colspan="2" style="padding: 8px 0px 16px 16px; color: grey">
                                 {{ board.regDate }}
@@ -100,24 +109,43 @@
 </template>
 
 <script>
+// import CommentList from '@/components/comment/CommentList'
+// import { mapState, mapActions } from 'vuex'
 export default {
     name: 'BoardList',
     props: {
         boards: {
             type: Array
         },
-        boardNo: {
-            type: String,
-            require: true
-        }
+        // twoComments: {
+        //     type: Array
+        // }
     },
+    // components: {
+    //     CommentList
+    // },
     data() {
         return {
             loginInfo: JSON.parse(localStorage.getItem('loginInfo')),
-            content: ''
+            content: '',
         }
     },
+    // computed: {
+    //     ...mapState(['twoComments']),
+    // },
+    // created() {
+    //     this.fetchTwoCommentList(this.boardNo)
+    //         .catch(()=>{
+    //           console.log(this)
+    //             alert('댓글 요청 실패')
+    //             this.$router.push()
+    //         })
+    // },
+    //     mounted () {
+    //     this.fetchTwoCommentList(this.boardNo)
+    // },
     methods: {
+        // ...mapActions(['fetchTwoCommentList']),
         onDelete(boardNo) {
             // console.log(boardNo)
             this.$emit('click', {boardNo})
@@ -125,7 +153,11 @@ export default {
         onSubmit(boardNo) {
             const { content } = this
             this.$emit('submit', { boardNo, content })
-        }
+        },
+        onLikes(boardNo, memberNo) {
+            // console.log(boardNo)
+            this.$emit('click', {boardNo, memberNo})
+        },
     }
 }
 </script>

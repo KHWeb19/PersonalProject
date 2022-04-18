@@ -70,9 +70,6 @@
                                                 <v-list-item-title> 
                                                     <v-btn @click="onCommentDelete(comment.commentNo)">삭제</v-btn>
                                                 </v-list-item-title>
-                                                <v-list-item-title> 
-                                                    <v-btn>수정</v-btn>
-                                                </v-list-item-title>
                                             </v-list>
                                         </v-menu>
                                     </div> 
@@ -133,10 +130,10 @@ import axios from 'axios'
 export default {
     name: 'BoardRead',
     props: {
-        board: {
-            type: Object,
-            require:true
-        },
+        // board: {
+        //     type: Object,
+        //     require:true
+        // },
         boardNo: {
             type: String,
             required: true
@@ -144,14 +141,14 @@ export default {
         comments: {
             type: Array
         },
-        commentNo: {
-            type: String,
-            required: true
-        },
+        // commentNo: {
+        //     type: String,
+        //     required: true
+        // },
     },
     data() {
         return {
-            loginInfo: JSON.parse(localStorage.getItem('loginInfo')),
+            // loginInfo: JSON.parse(localStorage.getItem('loginInfo')),
             content: '',
         }
     },

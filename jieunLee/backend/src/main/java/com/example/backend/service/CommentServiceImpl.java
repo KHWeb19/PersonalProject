@@ -7,6 +7,8 @@ import com.example.backend.repository.BoardRepository;
 import com.example.backend.repository.CommentRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,25 +25,27 @@ public class CommentServiceImpl implements CommentService {
     CommentRepository repository;
 
     @Override
-    public void register(Integer boardNo, CommentRequest commentRequest) {
+    public void register(Integer boardNo, Comment comment) {
 
         Optional<Board> maybeBoard = boardRepository.findById(Long.valueOf(boardNo));
-        Board board = maybeBoard.get();
+        comment.setBoard(maybeBoard.get());
 
-        Comment commentEntity = Comment.builder().
-                content(commentRequest.getContent()).
-                board(board).
-                writer(commentRequest.getWriter())
-                .build();
-
-        boardRepository.save(board);
-        repository.save(commentEntity);
+        repository.save(comment);
     }
 
     @Override
     public List<Comment> list(Integer boardNo) {
-        List<Comment> comments = repository.findCommentByBoardNo(Long.valueOf(boardNo));
-        return comments;
+        return repository.findAllByBoardNo(Long.valueOf(boardNo));
+    }
+
+    @Override
+    public List<Comment> twoList(Integer boardNo) {
+        return repository.findTop2ByBoardNo(Long.valueOf(boardNo));
+    }
+
+    @Override
+    public void modify(Comment comment) {
+        repository.save(comment);
     }
 
     @Override

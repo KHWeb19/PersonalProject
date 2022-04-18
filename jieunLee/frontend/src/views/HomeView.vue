@@ -23,18 +23,27 @@ export default {
         data() {
         return {
             loginInfo: JSON.parse(localStorage.getItem('loginInfo')),
-
         }
     },
     computed: {
         ...mapState(['boards']),
-        
+        // ...mapState(['twoComments']),
     },
+    // created() {
+    //     this.fetchTwoCommentList(this.boardNo)
+    //         .catch(()=>{
+    //           console.log(this)
+    //             alert('댓글 요청 실패')
+    //             this.$router.push()
+    //         })
+    // },
     mounted () {
         this.fetchBoardList()
+        // this.fetchTwoCommentList(this.boardNo)
     },
     methods: {
         ...mapActions(['fetchBoardList']),
+        // ...mapActions(['fetchTwoCommentList']),
         onDelete(payload) {
             const {boardNo} = payload
             axios.delete(`http://localhost:7777/board/${boardNo}`)
@@ -56,7 +65,18 @@ export default {
                     .catch(() => {
                         alert('문제 발생!')
                     })
-        }    
+        },
+        // onLikes(payload) {
+        //     const {boardNo, memberNo} = payload
+        //     axios.post(`http://localhost:7777/likes/${boardNo}/${memberNo}`, {boardNo})
+        //         .then(() => {
+        //             alert('좋아요 등록 성공!')
+        //               history.go(0);
+        //             })
+        //             .catch(() => {
+        //                 alert('문제 발생!')
+        //             })
+        // }        
     }
 }
 </script>

@@ -1,7 +1,6 @@
 package com.example.backend.controller;
 
 import com.example.backend.entity.Board;
-import com.example.backend.entity.Comment;
 import com.example.backend.service.BoardService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +18,13 @@ public class BoardController {
     @Autowired
     private BoardService service;
 
+
+
     @PostMapping("/register/{memberNo}")
-    public void boardRegister(@PathVariable("memberNo") Integer memberNo, @Validated @RequestBody BoardRequest boardRequest) {
+    public void boardRegister(@PathVariable("memberNo") Integer memberNo, @Validated @RequestBody Board board) {
         log.info("boardRegister()");
 
-        boardRequest.setMemberNo(Long.valueOf(memberNo));
-        service.register(memberNo, boardRequest);
+        service.register(memberNo, board);
     }
 
     @GetMapping("/list")
@@ -74,4 +74,5 @@ public class BoardController {
 
         service.remove(boardNo);
     }
+
 }

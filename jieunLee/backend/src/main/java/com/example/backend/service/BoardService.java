@@ -7,7 +7,7 @@ import com.example.backend.entity.Board;
 import java.util.List;
 
 public interface BoardService {
-    public void register (Integer memberNo, BoardRequest boardRequest);
+    public void register (Integer memberNo, Board board);
     public List<Board> list ();
     List<Board> memberBoardList (Integer memberNo);
     public Board read (Integer boardNo);
