@@ -66,6 +66,7 @@ export default {
             .then(res => {
               if (res.data) {
                 alert('로그인 성공!')
+                router.push({name : 'JpaBoardListPage'})
                 this.$store.state.userInfo = res.data
                 this.$cookies.set("user", res.data, 30)
                 this.isLogin = true
@@ -75,7 +76,7 @@ export default {
             })
             .catch(res => {
               alert(res.response.data.message)
-                router.push({name : 'JpaBoardListPage'})
+              
                
             })
       } else {

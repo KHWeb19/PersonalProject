@@ -34,7 +34,8 @@
                     </router-link>
                 
                 <td align="center">
-                    {{ board.regDate }} <button type="button" class="btn btn-outline-primary" @click="change">{{ add }}</button>
+                    {{ board.regDate }} <button type="button" class="btn btn-outline-primary" @click="toggleLable">{{label}}</button>
+
 
  <button type="button" class="btn btn-danger" @click="onDelete(board)">Delete</button>
 
@@ -62,7 +63,8 @@ export default {
 
     data() {
         return {
-            add : false
+           
+             label: '미완료'
         }
     },
       computed: {
@@ -90,11 +92,32 @@ export default {
             this.fetchJpaBoardList2(keyword);
         },
 
+         toggleLable() {
+          
+      if (this.label == '미완료') {
+        this.label = "완료";
+      } else {
+        this.label = "미완료";
+      }
+      
+    },
+
         change() {
             this.add = !this.add;
-        }
+        },
+        toggle() {
+   this.isActive = !this.enable;
+}
         }
     }
       
     
 </script>
+
+<style scoped>
+.danger {
+     background-color: #ff4949;
+    color: #fff;
+  
+}
+</style>
