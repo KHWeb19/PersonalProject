@@ -3,7 +3,7 @@
         <main-page-form></main-page-form>
 
         <div class="myPage">
-            <my-page-form v-if="memberInfo" :memberInfo="memberInfo"></my-page-form>
+            <my-page-form v-if="memberInfo" :memberInfo="memberInfo" @submit="onSubmit"></my-page-form>
         </div>
 
         <footer-form></footer-form>
@@ -15,6 +15,7 @@ import MainPageForm from '@/components/layout/MainPageForm.vue'
 import FooterForm from '@/components/layout/FooterForm.vue'
 import MyPageForm from '@/components/myPage/MyPageForm.vue'
 import { mapState, mapActions } from 'vuex'
+import axios from 'axios'
 
     export default {
         name: 'MyPage',
@@ -22,6 +23,11 @@ import { mapState, mapActions } from 'vuex'
             MainPageForm,
             FooterForm,
             MyPageForm
+        },
+        data(){
+            return{
+                userId:'',
+            }
         },
         props: {
             id: {
@@ -40,7 +46,13 @@ import { mapState, mapActions } from 'vuex'
                     })
         },
         methods: {
-        ...mapActions(['fetchMemberInfo'])
+            ...mapActions(['fetchMemberInfo']),
+            onSubmit(payload) {
+                const { userName, password } = payload
+                
+                this.userId = this.id
+                axios.put(`http://localhost:7777/Member/${this.userId}`, { userName, password })
+            }
         }
     }
 </script>

@@ -13,6 +13,8 @@ import BookingReadPage from '@/views/boardPage/BookingReadPage.vue'
 import BookingModifyPage from '@/views/boardPage/BookingModifyPage.vue'
 import BeforeBooking from '@/views/boardNotice/BeforeBooking.vue'
 import BeforeConfirm from '@/views/boardNotice/BeforeConfirm.vue'
+import MyPageReview from '@/views/myPage/MyPageReview.vue'
+import MyPageBooking from '@/views/myPage/MyPageBooking.vue'
 
 Vue.use(VueRouter)
 
@@ -97,6 +99,28 @@ const routes = [
     path: '/beforeConfirm',
     name: 'BeforeConfirm',
     component: BeforeConfirm
+  }
+  ,
+  {
+    path: '/myPageReview/:id',
+    name: 'MyPageReview',
+    components: {
+      default: MyPageReview
+    },
+    props: {
+      default: true
+    }
+  }
+  ,
+  {
+    path: '/myPageBooking/:id',
+    name: 'MyPageBooking',
+    components: {
+      default: MyPageBooking
+    },
+    props: {
+      default: true
+    }
   }
 ]
 
