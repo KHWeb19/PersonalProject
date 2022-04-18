@@ -1,8 +1,8 @@
 package com.example.demo.service.booking;
 
 
+import com.example.demo.controller.bookingController.request.BookingReadRequest;
 import com.example.demo.controller.bookingController.request.BookingRequest;
-import com.example.demo.controller.uploadFileController.request.UploadRequest;
 import com.example.demo.entity.booking.BookingInfo;
 import com.example.demo.entity.uploadCake.UploadCake;
 import com.example.demo.repository.booking.BookingRepository;
@@ -45,10 +45,11 @@ public class BookingServiceImpl implements BookingService{
 
     }
 
+    @Transactional
     @Override
     public void exceptFilesBooking(BookingRequest info) {
 
-        if(info.getCakeArrNo().equals("0")) {
+        if(info.getCakeArrNo() == 0) {
             BookingInfo bookingInfo2 = new BookingInfo(info.getId(), info.getDate(), info.getTime(), "예약중", info.getContents());
             repository.save(bookingInfo2);
 
@@ -65,23 +66,32 @@ public class BookingServiceImpl implements BookingService{
         }
     }
 
+    @Transactional
     @Override
     public List<BookingInfo> list() {
         return repository.findAll(Sort.by(Sort.Direction.DESC,"bookingNo"));
     }
 
-
+    @Transactional
     @Override
-    public BookingInfo read(Integer bookingNo) {
-        Optional<BookingInfo> maybeReadBoard = repository.findById(Long.valueOf(bookingNo));
+    public BookingInfo read(Integer checkBookingNo, String checkId) {
+        Optional<BookingInfo> maybeReadBoard = repository.findById(Long.valueOf(checkBookingNo));
 
         if(maybeReadBoard.equals(Optional.empty())){
             log.info("content is null");
         }
 
-        return maybeReadBoard.get();
+        BookingInfo checkedId = maybeReadBoard.get();
+
+        if(checkedId.getId().equals(checkId)){
+            return checkedId;
+        }else if(checkId.equals("manager")) {
+            return checkedId;
+        }else
+            return null;
     }
 
+    @Transactional
     @Override
     public void modify(BookingInfo bookingInfo) {
         repository.save(bookingInfo);

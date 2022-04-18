@@ -10,7 +10,7 @@
                 <v-col class="col-6 col-sm-5">
                     <v-img src="@/assets/img/cake2.jpg" max-height="450" max-width="450"/>
                 </v-col>
-                <v-col class="col-6 col-sm-5">
+                <v-col class="col-6 col-sm-4">
                     <div class="notice">
                         <h4> &nbsp;&nbsp;공지사항</h4><br>
                         <ul>

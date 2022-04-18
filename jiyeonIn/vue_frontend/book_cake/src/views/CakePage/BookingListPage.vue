@@ -34,7 +34,15 @@ import { mapState, mapActions } from 'vuex'
         },
         methods: {
             ...mapActions(['fetchBookingLists'])
-        }
+        },
+        created () {
+            if(window.localStorage.getItem('token') == null) {
+                    alert('로그인을 해주세요!')
+                    this.$router.push({
+                        name: 'LoginPage'
+                    })
+                }
+        },
     }
 </script>
 

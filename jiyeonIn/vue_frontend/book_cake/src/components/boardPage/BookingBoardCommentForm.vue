@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <div >
         <div class="textbox" v-for="(comment, index) in boardComments" :key="index">
-                <div v-if="comment.bookingNo == bookingNo">
+                <div v-if="(comment.bookingNo == bookingNo)">
                 <strong> {{ comment.id }} </strong> <br>
                 <span class="comments"> 
                     {{ comment.comments}} 
@@ -15,15 +15,18 @@
             </div>
         </div>
 
-        <form @submit.prevent="onSubmit">
-            <br><br><h4>댓글 : <strong>{{this.id}}</strong></h4>
-            <textarea type="text" v-model="comments" placeholder="댓글을 입력해주세요" class="commentcheck"/><br>
-            <input type="file" id="files1" ref="files1" 
-                multiple v-on:change="handleFileUpload()"/>
-            <v-btn class="commentRegister" type="submit" color="white">
-                <strong>등록</strong>
-            </v-btn>  
-        </form>
+        <div>
+            <form @submit.prevent="onSubmit">
+                <br><br><h4>댓글 : <strong>{{this.id}}</strong></h4>
+                <textarea type="text" v-model="comments" placeholder="댓글을 입력해주세요" class="commentcheck"/><br>
+                <input type="file" id="files1" ref="files1" 
+                    multiple v-on:change="handleFileUpload()"/>
+                <v-btn class="commentRegister" type="submit" color="white">
+                    <strong>등록</strong>
+                </v-btn>  
+            </form>
+        </div>
+        
     </div>
 </template>
 

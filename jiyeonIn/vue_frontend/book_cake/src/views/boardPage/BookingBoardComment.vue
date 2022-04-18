@@ -1,6 +1,7 @@
 <template>
     <div>
-        <booking-board-comment-form :bookingNo="bookingNo" :boardComments="boardComments" @submit="onSubmit"></booking-board-comment-form>
+        <booking-board-comment-form :bookingNo="bookingNo" :boardComments="boardComments" @submit="onSubmit"
+            ></booking-board-comment-form>
     </div>
 </template>
 
@@ -13,8 +14,9 @@ import { mapState, mapActions } from 'vuex'
         name: 'BookingBoardComment',
         data () {
             return {
-                id: (window.localStorage.getItem('id')),
-                comments: ''
+                checkId: (window.localStorage.getItem('id')),
+                comments: '',
+                id:''
             }
         }, 
         props: {

@@ -1,19 +1,15 @@
 package com.example.demo.controller.memberController.Response;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class MemberResponse {
     private String userId;
-    private String auth;
-    private String name;
+    private String password;
+    private String userName;
 
-    public MemberResponse(String userId, String name) {
-        this.userId = userId;
-        this.name = name;
-    }
-
-    public MemberResponse(String auth) {
-        this.auth = auth;
-    }
 }

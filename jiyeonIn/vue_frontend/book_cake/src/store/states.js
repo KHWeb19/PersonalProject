@@ -3,5 +3,6 @@ export default {
     bookingLists:[],
     BookingBoard: null,
     boardComments:[],
-    reviews:[]
+    reviews:[],
+    memberInfo:null
 }

@@ -1,18 +1,17 @@
 package com.example.demo.controller.bookingController;
 
+import com.example.demo.controller.bookingController.request.BookingReadRequest;
 import com.example.demo.controller.bookingController.request.BookingRequest;
 import com.example.demo.entity.booking.BookingInfo;
 import com.example.demo.service.booking.BookingService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.security.core.parameters.P;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.List;
 
 @Slf4j
@@ -66,11 +65,14 @@ public class BookingController {
         return service.list();
     }
 
-    @GetMapping("/{bookingNo}")
-    public BookingInfo bookingBoard (@PathVariable("bookingNo") Integer bookingNo) {
-        log.info("bookingBoard() : "+ bookingNo);
+    @RequestMapping(value = "/read",  method = RequestMethod.GET)
+    public BookingInfo bookingReadBoard (@RequestParam(value = "checkBookingNo", required = false) Integer checkBookingNo,
+                                         @RequestParam(value = "checkId", required = false) String checkId) {
 
-        return service.read(bookingNo);
+
+        log.info("checkNo:" +checkBookingNo + "id:" +checkId);
+
+        return service.read(checkBookingNo,checkId);
     }
 
     @PutMapping("/{bookingNo}")

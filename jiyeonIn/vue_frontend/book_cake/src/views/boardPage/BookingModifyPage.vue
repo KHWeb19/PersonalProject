@@ -19,6 +19,16 @@ import { mapState, mapActions } from 'vuex'
 
     export default {
         name:'BookingModifyPage',
+        data () {
+            return {
+                id: (window.localStorage.getItem('id')),
+                BookingBoard:{
+                    type:Object
+                },
+                checkBookingNo:'',
+                checkId:''
+            }
+        },
         props: {
             bookingNo: {
                 type: String,
@@ -31,12 +41,29 @@ import { mapState, mapActions } from 'vuex'
             BookingModifyPageForm
 
         },
+        mounted() {
+            const params = {checkBookingNo: this.bookingNo, checkId : this.id}
+            
+            axios.get('http://localhost:7777/booking/read', {params})
+                    .then(res => {
+                        if(res.data){
+                        console.log(res.data)
+                        this.BookingBoard = res.data
+                    }else {
+                        alert('접근 가능한 아이디가 아닙니다!')
+                        this.$router.push({
+                            name: 'BookingListPage'
+                        })
+                    }
+                    })
+                    .catch(() => {
+                        alert('읽기 실패')
+                    })
+        },
         computed: {
-            ...mapState(['BookingBoard']),
             ...mapState(['cakeLists'])
         },
         methods: {
-            ...mapActions(['fetchBookingBoard']),
             ...mapActions(['fetchCakeLists']),
             onSubmit (payload) {
                 const { id, date, time, process, contents, linkInfo, cakeArrNo, design, size, price, regDate } = payload
