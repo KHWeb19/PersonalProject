@@ -1,13 +1,13 @@
 package com.example.demo.service.board;
 
-import com.example.demo.dto.BoardRequest;
+import com.example.demo.dto.request.BoardRequest;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.UUID;
 
-public abstract class BoardServiceImpl {
+public abstract class BoardImpl {
 
     public void fileUpload(BoardRequest board, MultipartFile files, String path) throws Exception{
 

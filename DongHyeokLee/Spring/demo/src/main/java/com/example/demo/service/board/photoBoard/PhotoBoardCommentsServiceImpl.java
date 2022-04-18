@@ -1,6 +1,7 @@
 package com.example.demo.service.board.photoBoard;
 
-import com.example.demo.dto.CommentRequest;
+import com.example.demo.dto.request.CommentRequest;
+import com.example.demo.dto.response.PhotoBoardCommentResponse;
 import com.example.demo.entity.board.photoBoard.PhotoBoard;
 import com.example.demo.entity.board.photoBoard.PhotoBoardComments;
 import com.example.demo.repository.board.photoBoard.PhotoBoardCommentsRepository;
@@ -9,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,17 +41,20 @@ public class PhotoBoardCommentsServiceImpl implements PhotoBoardCommentsService 
     }
 
     @Override
-    public List<PhotoBoardComments> list(Integer boardNo) {
-        log.info("boardNo" + boardNo);
+    public List<PhotoBoardCommentResponse> list(Integer boardNo) {
         List<PhotoBoardComments> checkComments = repository.findAllPhotoBoardCommentsByBoardId(Long.valueOf(boardNo));
-        log.info("commentList" + checkComments);
+        List<PhotoBoardCommentResponse> response = new ArrayList<>();
+        for(PhotoBoardComments comment : checkComments){
+            response.add(new PhotoBoardCommentResponse(comment.getWriter(), comment.getComment(), comment.getBoardPhoto().getBoardNo(),
+                    comment.getRegDate(),comment.getCommentNo()));
 
+        }
 
-        return checkComments;
+        return response;
     }
 
     @Override
-    public PhotoBoardComments modify(Integer commentNo, CommentRequest commentRequest) {
+    public PhotoBoardCommentResponse modify(Integer commentNo, CommentRequest commentRequest) {
 
         Optional<PhotoBoard> maybeBoard = boardRepository.findById(Long.valueOf(commentRequest.getBoardNo()));
         PhotoBoard board = maybeBoard.get();
@@ -62,8 +66,12 @@ public class PhotoBoardCommentsServiceImpl implements PhotoBoardCommentsService 
                 .writer(commentRequest.getWriter())
                 .regDate(commentRequest.getRegDate())
                 .build();
+        repository.save(commentModify);
 
-        return repository.save(commentModify);
+        PhotoBoardCommentResponse response = new PhotoBoardCommentResponse(commentModify.getWriter(), commentModify.getComment(),
+                commentModify.getBoardPhoto().getBoardNo(), commentModify.getRegDate(), commentModify.getCommentNo());
+
+        return response;
 
     }
 

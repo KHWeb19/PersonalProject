@@ -1,6 +1,7 @@
 package com.example.demo.service.board.freeBoard;
 
-import com.example.demo.dto.CommentRequest;
+import com.example.demo.dto.request.CommentRequest;
+import com.example.demo.dto.response.FreeBoardCommentResponse;
 import com.example.demo.entity.board.freeBoard.FreeBoard;
 import com.example.demo.entity.board.freeBoard.FreeBoardComments;
 import com.example.demo.repository.board.freeBoard.FreeBoardCommentsRepository;
@@ -9,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,17 +42,22 @@ public class FreeBoardCommentsServiceImpl implements FreeBoardCommentsService {
     }
 
     @Override
-    public List<FreeBoardComments> list(Integer boardNo) {
-        log.info("boardNo" + boardNo);
+    public List<FreeBoardCommentResponse> list(Integer boardNo) {
+
         List<FreeBoardComments> checkComments = repository.findAllFreeBoardCommentsByBoardId(Long.valueOf(boardNo));
-        log.info("commentList" + checkComments);
+        List<FreeBoardCommentResponse> response = new ArrayList<>();
+        for(FreeBoardComments comment : checkComments){
+            response.add(new FreeBoardCommentResponse(comment.getWriter(), comment.getComment(),
+                                                    comment.getFreeBoard().getBoardNo(),
+                                                    comment.getRegDate(),comment.getCommentNo()));
 
+        }
 
-        return checkComments;
+        return response;
     }
 
     @Override
-    public FreeBoardComments modify(Integer commentNo, CommentRequest commentRequest) {
+    public FreeBoardCommentResponse modify(Integer commentNo, CommentRequest commentRequest) {
 
         Optional<FreeBoard> maybeBoard = boardRepository.findById(Long.valueOf(commentRequest.getBoardNo()));
         FreeBoard board = maybeBoard.get();
@@ -63,8 +70,13 @@ public class FreeBoardCommentsServiceImpl implements FreeBoardCommentsService {
                                         .regDate(commentRequest.getRegDate())
                                         .build();
 
-        return repository.save(commentModify);
+        repository.save(commentModify);
 
+        FreeBoardCommentResponse response = new FreeBoardCommentResponse(commentModify.getWriter(),
+                                        commentModify.getComment(), commentModify.getFreeBoard().getBoardNo(),
+                                        commentModify.getRegDate(), commentModify.getCommentNo());
+
+        return response;
     }
 
     @Override

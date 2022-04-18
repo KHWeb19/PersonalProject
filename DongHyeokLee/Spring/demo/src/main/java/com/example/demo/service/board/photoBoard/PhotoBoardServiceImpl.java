@@ -1,15 +1,14 @@
 package com.example.demo.service.board.photoBoard;
 
-import com.example.demo.dto.BoardResponse;
-import com.example.demo.dto.BoardRequest;
-import com.example.demo.dto.LikeRequest;
+import com.example.demo.dto.response.PhotoBoardResponse;
+import com.example.demo.dto.request.BoardRequest;
+import com.example.demo.dto.request.LikeRequest;
 import com.example.demo.entity.board.photoBoard.PhotoBoard;
 import com.example.demo.entity.board.photoBoard.PhotoBoardLike;
 import com.example.demo.repository.board.photoBoard.PhotoBoardLikeRepository;
 import com.example.demo.repository.board.photoBoard.PhotoBoardRepository;
 
-import com.example.demo.service.board.BoardService;
-import com.example.demo.service.board.BoardServiceImpl;
+import com.example.demo.service.board.BoardImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -23,7 +22,7 @@ import java.util.Optional;
 
 @Slf4j
 @Service
-public class PhotoBoardServiceImpl extends BoardServiceImpl implements BoardService {
+public class PhotoBoardServiceImpl extends BoardImpl implements PhotoBoardService {
 
     String path = "uploadImg";
 
@@ -51,20 +50,20 @@ public class PhotoBoardServiceImpl extends BoardServiceImpl implements BoardServ
 
     @Transactional
     @Override
-    public  List<BoardResponse> list() {
+    public  List<PhotoBoardResponse> list() {
                 List<PhotoBoard> photo = repository.findAll(Sort.by(Sort.Direction.DESC, "boardNo"));
-                List<BoardResponse> responses = new ArrayList<>();
+                List<PhotoBoardResponse> response = new ArrayList<>();
                  for(PhotoBoard board : photo){
-                     responses.add(new BoardResponse(board));
+                     response.add(new PhotoBoardResponse(board.getTitle(), board.getContent(), board.getWriter(),
+                             board.getFileName(), board.getBoardNo(), board.getRegDate(), board.getReadCnt(),
+                             board.getLikeCnt(), board.getLikeCheck(), board.getCommentCnt()));
                  }
 
-                 return responses;
-
-
+                 return response;
     }
 
    @Override
-    public BoardResponse read(Integer boardNo) {
+    public PhotoBoardResponse read(Integer boardNo) {
         Optional<PhotoBoard> maybeReadBoard = repository.findById(Long.valueOf(boardNo));
 
         if (maybeReadBoard.equals(Optional.empty())) {
@@ -76,14 +75,15 @@ public class PhotoBoardServiceImpl extends BoardServiceImpl implements BoardServ
         readBoard.readCnt();
         repository.save(readBoard);
 
-        BoardResponse response = new BoardResponse(readBoard);
+        PhotoBoardResponse response = new PhotoBoardResponse(readBoard.getTitle(), readBoard.getContent(), readBoard.getWriter(),
+                readBoard.getFileName(), readBoard.getBoardNo(), readBoard.getRegDate(), readBoard.getReadCnt(),
+                                        readBoard.getLikeCnt(), readBoard.getLikeCheck(), readBoard.getCommentCnt());
 
         return response;
     }
 
     @Override
     public void modify(Integer boardNo, BoardRequest board, MultipartFile files) throws Exception {
-        log.info(board + " " );
 
         //참조 할 수 있도록 boardNo으로 가져오는데 likee에는 boardNo이 중복가능 그럼 결국 writer랑 boardNo으로 가져와야하나?
         //아닌가 애초에 PhotoBoard에 like는 boardNo을 외래키로두고 참조하는것인가 이 게시판에 참조하는걸 다 가져오는게 맞는건가!
@@ -123,7 +123,7 @@ public class PhotoBoardServiceImpl extends BoardServiceImpl implements BoardServ
 
     @Override
     public void doLike(LikeRequest like) {
-
+        //like 테이블에 추가
         Optional<PhotoBoard> maybeBoard = repository.findById(like.getBoardNo());
         PhotoBoard board = maybeBoard.get();
         //board.setLikeCheck(like.getLikeCheck());
@@ -135,12 +135,12 @@ public class PhotoBoardServiceImpl extends BoardServiceImpl implements BoardServ
                         .writer(like.getWriter())
                         .build();
 
-
                  likeRepository.save(doLike);
     }
 
     @Override
     public void unDoLike(LikeRequest like) {
+        //like 테이블에서 삭제
         Optional<PhotoBoardLike> id = likeRepository.findId(like.getBoardNo(), like.getWriter());
             log.info("id " + id);
             PhotoBoardLike likeRemove = id.get();
@@ -148,42 +148,36 @@ public class PhotoBoardServiceImpl extends BoardServiceImpl implements BoardServ
           likeRepository.deleteById(likeRemove.getLikeNo());
     }
 
-    @Transactional
+
     @Override
     public void likeCheck(String writer) {
         //작성자가 좋아요 했는지 찾는다
-        //지금 상당히 비효율적임
+        //지금 상당히 비효율적인 것 같음...
         //애초에 좋아요 눌렀다는게 있으면 좋아요 들어오게??
         //그럼 좋아요 정보 보내주면 그아이디랑 , 라이터가 같으면 좋아요 들어오는쪽으로???
-        //
+
+        //로그인 아이디로 좋아요 누른 boardNo 가져오기
         List<PhotoBoardLike> checkLike = likeRepository.findByWriter(writer);
-        log.info("checkLike" + checkLike);
+
         //로그아웃 되도 likeCnt 1로 유지 되서한번 likeCnt를 0으로 해주는 작업이 필요함
         List<PhotoBoard> photoBoard = repository.findAll();
         for (PhotoBoard board : photoBoard) {
             board.likeCheckZero();
             repository.save(board);
         }
+        //boardNo 같은 게시판 likeCheck 1(true) 만들어주기
+        for (PhotoBoardLike likeCheck : checkLike){
+            Optional<PhotoBoard> findLike =
+                    repository.findById(Long.valueOf(likeCheck.getPhotoBoard().getBoardNo()));
 
-        log.info("hoto" + photoBoard.size());
-        for (PhotoBoardLike likeCheck : checkLike) {
-            for (int i = 1; i <= photoBoard.size(); i++) {
-                //몇번보드에 좋아요 눌렀는지 체크
-                if (likeCheck.getPhotoBoard().getBoardNo() == i) {
-                    //여기는 좋아요 하면 들어 오게되어있음 좋아요 했던게 있으면
-                    // 그럼 좋아요가 1(true)가 되어야함
-                    log.info("또 머선일이고 ㅠㅠ");
-                    //그 보드 찾아서 좋아요로 바꿔줌
-                    Optional<PhotoBoard> findLike = repository.findById(Long.valueOf(i));
-                    PhotoBoard likeTrue = findLike.get();
-
-                    if (likeTrue.getLikeCheck() == 0) {
-                        likeTrue.setLikeCheck(likeTrue.getLikeCheck() + 1);
-                    }
-                    //내용 저장
-                    repository.save(likeTrue);
+            PhotoBoard likeTrue = findLike.get();
+                if (likeTrue.getLikeCheck() == 0) {
+                    likeTrue.setLikeCheck(likeTrue.getLikeCheck() + 1);
                 }
+                //내용 저장
+                repository.save(likeTrue);
             }
+
         }
-    }
+
 }

@@ -1,11 +1,9 @@
 package com.example.demo.controller.board.photoBoard;
 
-import com.example.demo.dto.BoardResponse;
-import com.example.demo.dto.BoardRequest;
-import com.example.demo.dto.CommentRequest;
-import com.example.demo.dto.LikeRequest;
-import com.example.demo.entity.board.photoBoard.PhotoBoard;
-import com.example.demo.service.board.BoardService;
+import com.example.demo.dto.response.PhotoBoardResponse;
+import com.example.demo.dto.request.BoardRequest;
+import com.example.demo.dto.request.CommentRequest;
+import com.example.demo.dto.request.LikeRequest;
 import com.example.demo.service.board.photoBoard.PhotoBoardService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +21,7 @@ import java.util.List;
 public class PhotoBoardController {
 
     @Autowired
-    private BoardService service;
+    private PhotoBoardService service;
 
     //등록
     @PostMapping(value = "/register",
@@ -36,7 +34,7 @@ public class PhotoBoardController {
     }
     //목록
    @PostMapping("/list")
-    public  List<BoardResponse> PhotoBoardList (@RequestBody CommentRequest commentRequest) {
+    public  List<PhotoBoardResponse> PhotoBoardList (@RequestBody CommentRequest commentRequest) {
         log.info("PhotoBoardList()" + commentRequest);
 
         String writer = commentRequest.getWriter();
@@ -47,7 +45,7 @@ public class PhotoBoardController {
     }
     //읽기
    @GetMapping("/{boardNo}")
-    public BoardResponse photoBoardRead (
+    public PhotoBoardResponse photoBoardRead (
             @PathVariable("boardNo") Integer boardNo) {
         log.info("photoBoardRead()");
 

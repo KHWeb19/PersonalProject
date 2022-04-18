@@ -1,6 +1,6 @@
 package com.example.demo.service.board.videoBoard;
 
-import com.example.demo.dto.CommentRequest;
+import com.example.demo.dto.request.CommentRequest;
 import com.example.demo.entity.board.videoBoard.VideoBoardComments;
 import com.example.demo.repository.board.videoBoard.VideoBoardCommentsRepository;
 import lombok.extern.slf4j.Slf4j;

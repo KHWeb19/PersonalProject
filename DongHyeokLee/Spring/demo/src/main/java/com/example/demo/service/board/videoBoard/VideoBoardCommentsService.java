@@ -1,6 +1,6 @@
 package com.example.demo.service.board.videoBoard;
 
-import com.example.demo.dto.CommentRequest;
+import com.example.demo.dto.request.CommentRequest;
 import com.example.demo.entity.board.videoBoard.VideoBoardComments;
 
 import java.util.List;

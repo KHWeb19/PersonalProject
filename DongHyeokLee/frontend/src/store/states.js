@@ -10,6 +10,7 @@ export default {
      photoBoards: [],
      photoBoard: null,
      photoBoardComments:[],
+     photoBoardLike:[],
      //영상게시판
      videoBoards: [],
      videoBoard: null,

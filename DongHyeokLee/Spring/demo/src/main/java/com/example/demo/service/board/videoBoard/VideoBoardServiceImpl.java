@@ -38,9 +38,7 @@ public class VideoBoardServiceImpl implements VideoBoardService {
             saveFile.close();
 
             board.setFileName(fileName);
-
         }
-
         repository.save(board);
     }
 

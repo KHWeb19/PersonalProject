@@ -1,7 +1,7 @@
 package com.example.demo.controller.board.freeBoard;
 
-import com.example.demo.dto.CommentRequest;
-import com.example.demo.entity.board.freeBoard.FreeBoardComments;
+import com.example.demo.dto.request.CommentRequest;
+import com.example.demo.dto.response.FreeBoardCommentResponse;
 import com.example.demo.service.board.freeBoard.FreeBoardCommentsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ public class FreeBoardCommentsController {
 
     //댓글 목록
     @GetMapping("/list/{boardNo}")
-    public List<FreeBoardComments> FreeBoardCommentsList (@PathVariable("boardNo") Integer boardNo) {
+    public List<FreeBoardCommentResponse> FreeBoardCommentsList (@PathVariable("boardNo") Integer boardNo) {
         log.info("FreeBoardCommentsList()");
 
         return service.list(boardNo);
@@ -40,7 +40,7 @@ public class FreeBoardCommentsController {
 
     //댓글 수정
     @PutMapping("/{commentNo}")
-    public FreeBoardComments freeBoardCommentModify (
+    public FreeBoardCommentResponse freeBoardCommentModify (
             @PathVariable("commentNo") Integer commentNo,
             @Validated @RequestBody CommentRequest commentRequest) {
         log.info("freeBoardCommentModify(): " + commentRequest);

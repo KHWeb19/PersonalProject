@@ -85,7 +85,7 @@ export default {
     props: {
       freeBoards: {
             type: Array
-        }   
+        },
     },
     data () {
         return {

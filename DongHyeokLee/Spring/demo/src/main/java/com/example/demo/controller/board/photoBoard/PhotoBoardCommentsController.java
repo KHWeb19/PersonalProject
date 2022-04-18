@@ -1,10 +1,7 @@
 package com.example.demo.controller.board.photoBoard;
 
-import com.example.demo.dto.CommentRequest;
-import com.example.demo.entity.board.freeBoard.FreeBoard;
-import com.example.demo.entity.board.freeBoard.FreeBoardComments;
-import com.example.demo.entity.board.photoBoard.PhotoBoard;
-import com.example.demo.entity.board.photoBoard.PhotoBoardComments;
+import com.example.demo.dto.request.CommentRequest;
+import com.example.demo.dto.response.PhotoBoardCommentResponse;
 import com.example.demo.service.board.photoBoard.PhotoBoardCommentsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +32,7 @@ public class PhotoBoardCommentsController {
 
     //댓글 목록
     @GetMapping("/list/{boardNo}")
-    public List<PhotoBoardComments> PhotoBoardCommentsList (@PathVariable("boardNo") Integer boardNo) {
+    public List<PhotoBoardCommentResponse> PhotoBoardCommentsList (@PathVariable("boardNo") Integer boardNo) {
         log.info("PhotoBoardCommentsList()");
 
         return service.list(boardNo);
@@ -43,7 +40,7 @@ public class PhotoBoardCommentsController {
 
     //댓글 수정
     @PutMapping("/{commentNo}")
-    public PhotoBoardComments photoBoardCommentModify (
+    public PhotoBoardCommentResponse photoBoardCommentModify (
             @PathVariable("commentNo") Integer commentNo,
             @Validated @RequestBody CommentRequest commentRequest) {
         log.info("photoBoardCommentModify(): " + commentRequest);
