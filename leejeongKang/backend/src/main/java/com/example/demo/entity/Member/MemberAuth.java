@@ -1,5 +1,6 @@
-package com.example.demo.entity;
+package com.example.demo.entity.Member;
 
+import com.example.demo.entity.Member.Member;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -23,7 +24,6 @@ public class MemberAuth {
     private String auth;
 
     public MemberAuth(String auth, Member member1) {
-
         this.auth = auth;
         member = member1;
     }

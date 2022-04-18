@@ -1,10 +1,9 @@
-package com.example.demo.repository;
+package com.example.demo.repository.Member;
 
-import com.example.demo.entity.MemberAuth;
+import com.example.demo.entity.Member.MemberAuth;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.security.core.parameters.P;
 
 import java.util.Optional;
 
