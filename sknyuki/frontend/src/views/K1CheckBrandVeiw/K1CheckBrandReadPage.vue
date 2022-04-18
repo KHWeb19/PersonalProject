@@ -4,12 +4,19 @@
         <br>
         <drop-down></drop-down>
      <div align="center">
-        <board-read v-if="board" :board="board"/>
-        <p v-else>로딩중 ...... </p>
 
+
+       
+         
+        <!-- <k-1-check-brand-read v-if="BrandCheckBoard" :BrandCheckBoard="BrandCheckBoard"
+         boardNo="boardNo" />
+        <p v-else>로딩중 ...... </p>-->
+        <k-1-check-brand-read v-if="BrandCheckBoard" :BrandCheckBoard="BrandCheckBoard" :boardNo="boardNo"/>
+
+      
         <div class="버튼" style="padding:20px;">
             <router-link style="text-decoration: none; color:black" 
-            :to="{ name: 'BoardModifyPage', params: { boardNo } }">
+            :to="{ name: 'K1CheckBrandModifyPage', params: { boardNo } }">
                 <v-btn text color="black" rounded x-large
                         style="padding: 10px; width: 90px;">
                     수정하기
@@ -26,7 +33,7 @@
             <br>
 
             <router-link style="text-decoration: none; color:black"
-            :to="{ name: 'BoardListPage' }">
+            :to="{ name: 'K1CheckBrandView' }">
                 <v-btn text color="black" rounded x-large
                         style="padding: 10px; width: 90px;">
                 목록으로
@@ -38,56 +45,54 @@
     </v-container>
 </template>
 <script>
-//import { mapState, mapActions } from 'vuex'
-//import axios from 'axios'
+import { mapState, mapActions } from 'vuex'
+import axios from 'axios'
 import HeaderView from '@/components/home/headerView.vue'
 import DropDown from '@/components/KategoriePage1/DropDown.vue'
+import K1CheckBrandRead from '@/components/BrandCheckBoard/K1CheckBrandRead.vue'
 export default {
     name:'K1CheckBrandReadPage',
     components:{ 
     HeaderView,
     DropDown,
-    /* backend작업시 풀에정
+    K1CheckBrandRead,
+    },
+   
     props: {
         boardNo: {
             type: String,
             required: true
         }   
     },
-  components: {
-        BoardRead
-    },
    
     computed: {
-        ...mapState(['board'])
+        ...mapState(['BrandCheckBoard'])
     },
     created () {
-        this.fetchBoard(this.boardNo)
+        this.fetchBrandCheckBoard(this.boardNo)
                 .catch(err => {
                     alert(err.response.data.message)
                     this.$router.push()
                 })
     },
     methods: {
-        ...mapActions(['fetchBoard']),
+       
+        
+        ...mapActions(['fetchBrandCheckBoard']),
         onDelete () {
             var result = confirm('삭제 하시겠습니까?')
             if(result) {
-                const { boardNo } = this.board
-                axios.delete(`http://localhost:7777/vueboard/${boardNo}`)
+                const { boardNo } = this.BrandCheckBoard
+                axios.delete(`http://localhost:7777/BrandCheckBoard/${boardNo}`)
                         .then(() => {
                             alert('삭제 되었습니다.')
-                            this.$router.push({ name: 'BoardListPage' })
+                            this.$router.push({ name: 'K1CheckBrandView' })
                         })
                         .catch(err => {
                             alert(err.response.data.message)
                         })
             }
         }
-    }
-}
-
-*/
     }
 }
 </script>

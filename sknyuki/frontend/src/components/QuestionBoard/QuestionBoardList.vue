@@ -37,37 +37,31 @@
           <v-row align="center" justify="center">-->
               <div>
                 
-            <v-simple-table style="padding:20px 100px 100px 100px">
-            <v-data-table
+              <v-data-table
                 :headers="headerTitle"
-                :items="BrandCheckboards"
-                :page.sync="page"
+                :items="QuestionBoards"
+                :key="QuestionBoards.boardNo"
                 :items-per-page="10"
-                hide-default-footer
-                class="elevation-1" 
-                @click:row="handleClick"
-                @page-count="pageCount = $event"
+                class="elevation-1" >
+                <template v-slot:[`item.title`]="{ item }">
+                   <router-link :to="{ name: 'K1QuestionReadPage',
+                                        params: { boardNo: item.boardNo.toString() } }">
+                    {{ item.title }}
+                   </router-link>
+                </template>
+                
             ></v-data-table>
-            </v-simple-table>
-                 
+                 <br>
       <v-row  justify="end">
-    <router-link style="text-decoration: none;" :to="{name:'homeView'}">
-      
+    <router-link style="text-decoration: none;" :to="{name:'K1QuestionRegisterPage'}">
     <v-btn class="blue lighten-5">
       <v-icon small>mdi-pencil</v-icon> 글쓰기</v-btn>
     </router-link></v-row>
     <br>
             
-            <div class="text-center pt-2">
-            <v-pagination
-                v-model="page"
-                :length="pageCount"
-                dark
-            ></v-pagination>
             
         <!--name:homeview-> register로 변경예정-->
- 
-            </div>
+
               </div>
 </div>
               
@@ -84,13 +78,10 @@
 export default {
     name:'QuestionBoardList',
     props:{
-      questionList: []
+      QuestionBoards: []
     },
   data () {
     return {
-            page: 1,
-            pageCount: 0,
-            itemsPerPage: 10,
             headerTitle: [
                             { text: '번호', value: 'boardNo', width: "70px" },
                             { text: '제목', value: 'title', width: "200px" },
@@ -102,17 +93,9 @@ export default {
 function: {
     },
     methods: {
-        handleClick(event, idx) {
-            this.$router.push({
-                            name: 'BoardReadPage',
-                            params: { boardNo: String(idx.item.boardNo) }
-                         })
-        }
+        
     },
-    mounted () {
-        console.log(this.BrandCheckboards.regDate)
-        console.log(this.BrandCheckboards.boardNo)
-    }
+    
 }
 </script> 
 

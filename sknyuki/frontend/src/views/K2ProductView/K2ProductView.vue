@@ -5,11 +5,11 @@
         <drop-down></drop-down>
         <div id="board" align=center>
            
-          <h3 style="padding:30px 0px 20px 0px; font-weight:bold">판별 게시판</h3>
+          <h3 style="padding:30px 0px 20px 0px; font-weight:bold">판매중인 상품</h3>
      
 
     <div class="app">
-        <k-1-check-brand-list :BrandCheckBoards="BrandCheckBoards"/>
+        <product-board-list :BrandCheckboards="BrandCheckboards"/>
     </div>
     </div>
      
@@ -18,29 +18,29 @@
     </v-container>
 </template>
 <script>
-import { mapActions, mapState } from 'vuex'
 import HeaderView from '@/components/home/headerView.vue'
 import DropDown from '@/components/KategoriePage1/DropDown.vue'
-import K1CheckBrandList from '@/components/BrandCheckBoard/K1CheckBrandList.vue'
+import ProductBoardList from '@/components/ProductBoard/ProductBoardList.vue'
+//import { mapState, mapActions } from 'vuex'
 
 export default {
-    name:'K1CheckBrandView',
+    name:'K2ProductView',
     components:{ 
     HeaderView,
     DropDown,
-    K1CheckBrandList,
+    ProductBoardList,
+        
     },
-    computed: {
-        ...mapState(['BrandCheckBoards'])
+/* computed: {
+        ...mapState(['BrandCheckboards'])
     },
     mounted () {
-        this.fetchBrandCheckBoardList()
+        this.fetchBrandCheckboards()
     },
     methods: {
-        ...mapActions(['fetchBrandCheckBoardList'])
+        ...mapActions(['fetchBrandCheckboards'])
+    }*/
     }
-}
-
 </script>
 
 <style scoped>

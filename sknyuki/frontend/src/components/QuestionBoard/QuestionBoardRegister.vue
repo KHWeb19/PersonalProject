@@ -53,7 +53,7 @@
 
                 <br>
 
-                <router-link style="text-decoration: none; color:black" :to="{ name: 'K1CheckBrandView' }">
+                <router-link style="text-decoration: none; color:black" :to="{ name: 'K1QuestionView' }">
                     <v-btn text color="black" rounded x-large
                         style="padding: 10px; width: 90px;" type="submit">목록으로
                     </v-btn>
@@ -70,7 +70,7 @@
 import UploadFile1 from '@/components/uploadfile1.vue'
 
 export default {
-    name: 'BoardRegisterForm',
+    name: 'QuestionBoardRegester',
     components:{
         UploadFile1
     },
