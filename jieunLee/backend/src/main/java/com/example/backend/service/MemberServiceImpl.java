@@ -27,6 +27,10 @@ public class MemberServiceImpl implements MemberService{
         return memberRepository.findAll(Sort.by(Sort.Direction.DESC, "memberNo"));
     }
 
+    @Override
+    public List<Member> search(String keyWord) {
+        return memberRepository.findByMemberIdContainingOrMemberNameContaining(keyWord, keyWord);
+    }
 
     @Override
     public void register(MemberRequest memberRequest) {
@@ -34,11 +38,9 @@ public class MemberServiceImpl implements MemberService{
         memberRequest.setPassword(encodedPassword);
 
         Member memberEntity = new Member(
-                memberRequest.getMemberNo(),
                 memberRequest.getMemberName(),
                 memberRequest.getMemberId(),
-                memberRequest.getPassword(),
-                memberRequest.getImageName()
+                memberRequest.getPassword()
         );
 
         memberRepository.save(memberEntity);
@@ -95,6 +97,12 @@ public class MemberServiceImpl implements MemberService{
         }
 
         return maybeReadMember.get();
+    }
+
+    @Override
+    public void profile(Member member) {
+
+        memberRepository.save(member);
     }
 
     @Override

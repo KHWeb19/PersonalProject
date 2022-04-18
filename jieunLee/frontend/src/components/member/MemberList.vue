@@ -1,35 +1,38 @@
 <template>
-    <div>
-        <h3>회원 목록</h3>
-        <table border="1">
-            <tr>
-                <th align="center" width="100">회원넘버</th>
-            </tr>
-            <tr v-if="!members || (Array.isArray(members) && members.length === 0)">
-                <td colspan="1">
-                    현재 등록된 회원이 없습니다!
-                </td>
-            </tr>
-            <tr v-else v-for="board in members" :key="board.memberNo">
-                <td align="left">
-                    <router-link :to="{
-                        name: 'AccountsEditPage',
-                        params: {memberNo: board.memberNo.toString()}}">
-                    {{ board.memberNo }}
-                    </router-link>
-                </td>
-            </tr>
-        </table>
+  <div>
+    <div style="z-index: 1; position: fixed; top: 0; left: 0; right: 0;">
+      <menu-bar/>
+      <hr style="border: 0; height: 1px; background: #d8d8d8; "/>
     </div>
+    <v-container style="width: 400px; margin-top: 85px; padding-left: 0px">
+        <v-flex>
+            <v-card style="padding: 8px">
+                <tr v-for="member in searchMembers" :key="member.memberNo">
+                    <router-link style="text-decoration: none;" :to="{
+                            name: 'MyProfilePage',
+                            params: {memberNo: member.memberNo.toString()}}">
+                        <td align="left" style="width: 400px; padding: 8px">
+                            <b>{{ member.memberId }}</b><br/>{{ member.memberName }}
+                        </td>
+                    </router-link>
+                </tr>
+            </v-card>
+        </v-flex>
+    </v-container>
+  </div>
 </template>
 
 <script>
+import MenuBar from '@/components/MenuBar.vue'
 export default {
     name: 'MemberList',
     props: {
-        members: {
+        searchMembers: {
             type: Array
         }
+    },
+    components: {
+        MenuBar
     }
 }
 </script>

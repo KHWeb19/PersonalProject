@@ -5,11 +5,14 @@ import LoginPage from '@/views/member/LoginPage'
 import RegisterPage from '@/views/member/RegisterPage'
 
 import HomeView from '@/views/HomeView.vue'
+import MemberList from '@/components/member/MemberList'
 import MyProfilePage from '@/views/member/MyProfilePage'
 import AccountsEditPage from '@/views/member/AccountsEditPage'
 import PasswordEditPage from '@/views/member/PasswordEditPage'
 
 import BoardRegisterPage from '@/views/board/BoardRegisterPage'
+import BoardReadPage from '@/views/board/BoardReadPage'
+import BoardModifyPage from '@/views/board/BoardModifyPage'
 
 
 Vue.use(VueRouter)
@@ -28,7 +31,20 @@ const routes = [
   {
     path: '/',
     name: 'HomeView',
-    component: HomeView
+    component: HomeView,
+    props: {
+      default: true
+    }
+  },
+  {
+    path: '/memberList/:keyWord',
+    name: 'MemberList',
+    components: {
+      default: MemberList
+    },
+    props: {
+      default: true
+    }
   },
   {
     path: '/:memberNo',
@@ -61,9 +77,29 @@ const routes = [
     }
   },
   {
-    path: '/board/register',
+    path: '/boardRegister',
     name: 'BoardRegisterPage',
     component: BoardRegisterPage
+  },
+  {
+    path: '/boardRead/:boardNo',
+    name: 'BoardReadPage',
+    components: {
+      default: BoardReadPage
+    },
+    props: {
+      default: true
+    }
+  },
+  {
+    path: '/boardModify/:boardNo',
+    name: 'BoardModifyPage',
+    components: {
+      default: BoardModifyPage
+    },
+    props: {
+      default: true
+    }
   },
 ]
 

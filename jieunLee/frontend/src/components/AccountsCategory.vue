@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-container style="width: 250px; margin-top: 20px; padding-right: 0px">
+        <v-container style="width: 250px; margin-top: 85px; padding-right: 0px">
             <v-flex>
                 <v-card style="height: 600px">
                     <router-link style="text-decoration: none;" :to="{
@@ -68,6 +68,7 @@ export default {
                     this.$cookies.remove("user")
                     this.isLogin = false
                     localStorage.removeItem("loginInfo")
+                    localStorage.removeItem("imageChange")
                     this.$router.push({name: 'LoginPage'})
                 })
                 .catch(()=> {

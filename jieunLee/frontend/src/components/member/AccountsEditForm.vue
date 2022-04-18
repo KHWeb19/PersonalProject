@@ -1,6 +1,6 @@
 <template>
     <div>
-      <v-container style="width: 750px; margin-top: 20px; padding-left: 0px">
+      <v-container style="width: 750px; margin-top: 85px; padding-left: 0px">
         <v-flex >
           <v-card style="height: 600px">
             <div style="display: flex; justify-content: center; padding-top: 25px; padding-bottom:20px">
@@ -14,10 +14,7 @@
                 <label for="files">
                     프로필 사진 바꾸기
                 </label>
-                <input type="file" id="files" ref="files" 
-                            multiple v-on:change="handleFileUpload()"/>
-                <br/>
-                <button v-on:click="onImage()">적용</button>
+                <input type="file" id="files" ref="files" multiple v-on:change="handleFileUpload()"/>
               </td>
             </div>
             <div style="display: flex; justify-content: center;">
@@ -121,8 +118,8 @@ export default {
       handleFileUpload () {
             this.files = this.$refs.files.files
         },
-      onImage () {
-          let formData = new FormData()
+      onSubmit() {
+        let formData = new FormData()
           for (let idx = 0; idx < this.files.length; idx++) {
               formData.append('fileList', this.files[idx])
           }
@@ -136,17 +133,16 @@ export default {
               console.log(this.files[0].name)
               this.imageName = this.files[0].name
               //
-              const {imageName} = this
-              this.$emit('image', {imageName})
+              const { memberName, memberId, imageName, memberWeb, memberIntro } = this
+              this.$emit('submit', { memberName, memberId, imageName, memberWeb, memberIntro})
               localStorage.setItem("imageChange", JSON.stringify(imageName))
           })
           .catch (res => {
               alert('처리 결과: ' + res.message)
+              this.imageName = this.member.imageName
+              const { memberName, memberId, imageName, memberWeb, memberIntro } = this
+              this.$emit('submit', { memberName, memberId, imageName, memberWeb, memberIntro})
           })
-      },
-      onSubmit() {
-        const { memberName, memberId, imageName, memberWeb, memberIntro } = this
-        this.$emit('submit', { memberName, memberId, imageName, memberWeb, memberIntro})
       }
     },
     created() {
@@ -162,7 +158,6 @@ export default {
 
 <style scoped>
 label {
-    cursor: pointer;
     color: blue;
 }
 
@@ -170,7 +165,5 @@ label {
 #files {
     visibility: hidden;
 }
-
-
 
 </style>

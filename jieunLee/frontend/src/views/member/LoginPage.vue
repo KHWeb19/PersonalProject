@@ -1,12 +1,12 @@
 <template>
     <div>
         <login-form @submit="onSubmit"/>
-                <v-btn tile color="teal lighten-4" @click="logout">
-            <v-icon left>
-                mdi-logout
-            </v-icon>
-            로그아웃
-        </v-btn>
+            <!-- <v-btn tile color="teal lighten-4" @click="logout">
+                <v-icon left>
+                    mdi-logout
+                </v-icon>
+                로그아웃
+            </v-btn> -->
     </div>        
 </template>
 
@@ -60,13 +60,13 @@ export default {
                 alert('이미 로그인이 되어 있습니다!')
             }
         },
-        logout() {
-            this.$cookies.remove("user")
-            this.isLogin = false
-            localStorage.removeItem("loginInfo")
+        // logout() {
+        //     this.$cookies.remove("user")
+        //     this.isLogin = false
+        //     localStorage.removeItem("loginInfo")
 
-            alert('로그아웃 성공!')
-        }
+        //     alert('로그아웃 성공!')
+        // }
     }
 }
 </script>

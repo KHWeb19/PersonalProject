@@ -1,6 +1,9 @@
 <template>
   <div>
-    <menu-bar/>
+    <div style="z-index: 1; position: fixed; top: 0; left: 0; right: 0;">
+      <menu-bar/>
+      <hr style="border: 0; height: 1px; background: #d8d8d8; "/>
+    </div>
     <div style="display: flex; justify-content: center;">
       <accounts-category/>
       <password-edit-form v-if="member" :member="member" @submit="onSubmit"/>
@@ -36,7 +39,7 @@ export default {
     ...mapActions(['fetchMember']),
         onSubmit(payload) {
       const {password} = payload
-      axios.put(`http://localhost:7777/member/${this.memberNo}`, 
+      axios.put(`http://localhost:7777/member/pw/${this.memberNo}`, 
       {memberName: this.member.memberName, memberId: this.member.memberId, password, imageName: this.member.imageName, memberWeb: this.member.memberWeb, memberIntro: this.member.memberIntro, regDate: this.member.regDate})
         .then((res) => {
             alert('비밀번호 수정 성공')

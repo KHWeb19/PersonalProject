@@ -27,6 +27,13 @@ public class MemberController {
         return service.list();
     }
 
+    @PostMapping("/search")
+    public List<Member> search (@RequestBody KeyWordRequest keyWord) {
+        log.info("search()"+keyWord);
+
+        return service.search(keyWord.getKeyWord());
+    }
+
 
 
     @PostMapping("/register")
@@ -67,6 +74,18 @@ public class MemberController {
         log.info("memberModify(): " + member);
 
         member.setMemberNo(Long.valueOf(memberNo));
+        service.profile(member);
+
+        return member;
+    }
+
+    @PutMapping("/pw/{memberNo}")
+    public Member passwordModify (
+            @PathVariable("memberNo") Long memberNo,
+            @RequestBody Member member) {
+        log.info("memberModify(): " + member);
+
+        member.setMemberNo(Long.valueOf(memberNo));
         service.modify(member);
 
         return member;
@@ -80,7 +99,7 @@ public class MemberController {
                 log.info("requestUploadFile() - Make file:" + multipartFile.getOriginalFilename());
 
                 FileOutputStream writer = new FileOutputStream(
-                        "../frontend/src/assets/mImages/" + multipartFile.getOriginalFilename()
+                        "../frontend/src/assets/mImage/" + multipartFile.getOriginalFilename()
                 );
                 writer.write(multipartFile.getBytes());
                 writer.close();

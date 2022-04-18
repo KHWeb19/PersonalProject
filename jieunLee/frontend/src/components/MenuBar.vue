@@ -1,7 +1,8 @@
 <template>
-  <v-app-bar color="white">
+  <v-app-bar flat color="white">
     <v-spacer></v-spacer>
     <v-spacer></v-spacer>
+    
     <v-app-bar-title>
       <router-link style="text-decoration: none;" :to="{name: 'HomeView'}">
         <v-img
@@ -19,7 +20,8 @@
                               width: 244px; 
                               height: 36px;
                               padding-left: 10px;" 
-                          type="text" placeholder="검색" />
+                          type="text" placeholder="검색" v-model="keyWord" />
+    <v-btn @click="onSearch">검색</v-btn>
     <v-spacer></v-spacer>
     
     <v-btn icon>
@@ -60,7 +62,7 @@
               <v-btn>설정</v-btn>
             </router-link>
           </v-list-item-title>
-            <v-list-item-title>        
+          <v-list-item-title>        
               <v-btn @click="logout">
                 로그아웃
               </v-btn>
@@ -70,32 +72,39 @@
     <v-spacer></v-spacer>
     <v-spacer></v-spacer>
   </v-app-bar>
+  
 </template>
 
 <script>
 import Vue from 'vue'
 import cookies from 'vue-cookies'
 import { mapActions, mapState } from 'vuex'
+import axios from 'axios';
 
 Vue.use(cookies)
 
   export default {
     name: 'MenuBar',
-    props: {
-      member: {
-          type: Object,
-          require: true
-      }
-    },
     data: () => ({
       loginInfo: JSON.parse(localStorage.getItem('loginInfo')),
-      imageChange: JSON.parse(localStorage.getItem('imageChange'))
+      imageChange: JSON.parse(localStorage.getItem('imageChange')),
+      searchMembers: [],
+      keyWord: ''
     }),
       computed: {
     ...mapState(['member']),
   },
     methods: {
     ...mapActions(['fetchMember']),
+    onSearch() {
+            const keyWord = this.keyWord
+            axios.post('http://localhost:7777/member/search',  { keyWord })
+                    .then((res) => {
+                      
+                        this.$router.push({name: 'MemberList',
+                                    params: { keyWord:keyWord, searchMembers: res.data} })
+                    })
+        },
       logout() {
         localStorage.removeItem("loginInfo")
         localStorage.removeItem("imageChange")
