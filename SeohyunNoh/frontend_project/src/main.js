@@ -19,9 +19,6 @@ new Vue({
   router,
   store,
   vuetify,
-  // beforeCreate() {
-  //   this.$store.dispatch("getMemberInfo")
-  // },
   render: h => h(App)
 }).$mount('#app')
  

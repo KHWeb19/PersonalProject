@@ -10,6 +10,10 @@ import {
     //QNA
     FETCH_QNA_BOARD_LIST,
     FETCH_QNA,
+
+    //COMMENT
+    FETCH_COMMENTS,
+    FETCH_COMMENT
    
 } from './mutation-types'
 
@@ -22,9 +26,10 @@ Vue.use(cookies)
 export default {
     //MEMBER
     fetchUserInfo ({ commit }, id) {
-        return axios.get(`http://localhost:7777/member/mypage/${id}`).then(res => {
-          cookies.set('session', res.data.id)
-          commit(FETCH_USER_INFO, res.data)
+        return axios.get(`http://localhost:7777/member/mypage/${id}`)
+            .then(res => {
+            cookies.set('session', res.data.id)
+            commit(FETCH_USER_INFO, res.data)
         })
     },
       fetchSession ({ commit }, session) {
@@ -59,5 +64,19 @@ export default {
                 commit(FETCH_QNA, res.data)
             })
     },
+
+    //COMMENT
+    fetchComments ({commit}, qnaNo) {
+        return axios.get(`http://localhost:7777/comment/read/${qnaNo}`)
+                    .then(res => {
+                        commit(FETCH_COMMENTS, res.data)
+                    })
+    },
+    fetchComment ({commit}, commentNo) {
+        return axios.get(`http://localhost:7777/comment/read/only/${commentNo}`)
+                    .then((res) => {
+                        commit(FETCH_COMMENT, res.data)
+                    })
+    }
 
 }

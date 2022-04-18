@@ -12,6 +12,10 @@ import {
     //QNA
     FETCH_QNA_BOARD_LIST,
     FETCH_QNA,
+
+    //COMMENT
+    FETCH_COMMENTS,
+    FETCH_COMMENT
    
 } from './mutation-types'
 
@@ -44,4 +48,12 @@ export default {
     [FETCH_QNA] (state, qnaBoard) {
         state.qnaBoard = qnaBoard
     },
+
+    //COMMENT
+    [FETCH_COMMENTS] (state, comments) {
+        state.comments = comments
+    },
+    [FETCH_COMMENT] (state, comment) {
+        state.comment = comment
+    }
 }

@@ -42,10 +42,10 @@ public class QnABoardController {
     }
 
     @PutMapping("/{qnaNo}")
-    public QnABoard noticeBoardModify (
+    public QnABoard qnaBoardModify (
             @PathVariable("qnaNo") Integer qnaNo,
             @RequestBody QnABoard qnABoard) {
-        log.info ("noticeBoardModify(): " + qnABoard);
+        log.info ("qnaBoardModify(): " + qnABoard);
 
         qnABoard.setQnaNo((Long.valueOf(qnaNo)));
         qnaService.modify(qnABoard);
