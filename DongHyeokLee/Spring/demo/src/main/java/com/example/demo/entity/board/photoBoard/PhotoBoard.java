@@ -1,5 +1,6 @@
 package com.example.demo.entity.board.photoBoard;
 
+import com.example.demo.entity.board.freeBoard.FreeBoardComments;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -7,6 +8,7 @@ import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -46,18 +48,30 @@ public class PhotoBoard  {
     @Formula("(Select count(1) From photo_board_like c Where c.board_No = board_No)")
     private int likeCnt;
 
+    @Formula("(Select count(1) From free_board_comments c Where c.board_No = board_No)")
+    private int commentCnt;
+
     @CreationTimestamp
     private Date regDate;
 
     @UpdateTimestamp
     private Date updDate;
 
+
     @JsonManagedReference
-    @OneToMany(mappedBy = "photoBoard", fetch = FetchType.EAGER, orphanRemoval = true)
+    @OneToMany(mappedBy = "photoBoard", fetch = FetchType.LAZY,  cascade = CascadeType.ALL)
     private List<PhotoBoardLike> likes = new ArrayList<>();
 
+    @JsonManagedReference
+    @OneToMany(mappedBy = "boardPhoto", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<PhotoBoardComments> comments = new ArrayList<>();
+
     public void likeCheckZero(){
-        likeCheck--;
+        likeCheck = 0;
+    }
+
+    public void readCnt() {
+        this.readCnt++;
     }
 
 }

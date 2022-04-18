@@ -1,10 +1,11 @@
 package com.example.demo.controller.board.photoBoard;
 
+import com.example.demo.dto.BoardResponse;
 import com.example.demo.dto.BoardRequest;
 import com.example.demo.dto.CommentRequest;
 import com.example.demo.dto.LikeRequest;
 import com.example.demo.entity.board.photoBoard.PhotoBoard;
-import com.example.demo.entity.board.photoBoard.PhotoBoardLike;
+import com.example.demo.service.board.BoardService;
 import com.example.demo.service.board.photoBoard.PhotoBoardService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ import java.util.List;
 public class PhotoBoardController {
 
     @Autowired
-    private PhotoBoardService service;
+    private BoardService service;
 
     //등록
     @PostMapping(value = "/register",
@@ -35,16 +36,18 @@ public class PhotoBoardController {
     }
     //목록
    @PostMapping("/list")
-    public List<PhotoBoard> PhotoBoardList (@RequestBody CommentRequest commentRequest) {
+    public  List<BoardResponse> PhotoBoardList (@RequestBody CommentRequest commentRequest) {
         log.info("PhotoBoardList()" + commentRequest);
 
         String writer = commentRequest.getWriter();
 
-        return service.list(writer);
+        service.likeCheck(writer);
+
+        return service.list();
     }
     //읽기
    @GetMapping("/{boardNo}")
-    public PhotoBoard photoBoardRead (
+    public BoardResponse photoBoardRead (
             @PathVariable("boardNo") Integer boardNo) {
         log.info("photoBoardRead()");
 

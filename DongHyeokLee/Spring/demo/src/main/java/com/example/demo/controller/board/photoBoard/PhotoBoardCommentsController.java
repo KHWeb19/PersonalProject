@@ -1,6 +1,9 @@
 package com.example.demo.controller.board.photoBoard;
 
 import com.example.demo.dto.CommentRequest;
+import com.example.demo.entity.board.freeBoard.FreeBoard;
+import com.example.demo.entity.board.freeBoard.FreeBoardComments;
+import com.example.demo.entity.board.photoBoard.PhotoBoard;
 import com.example.demo.entity.board.photoBoard.PhotoBoardComments;
 import com.example.demo.service.board.photoBoard.PhotoBoardCommentsService;
 import lombok.extern.slf4j.Slf4j;
@@ -24,10 +27,10 @@ public class PhotoBoardCommentsController {
     public void PhotoBoardCommentsRegister ( @PathVariable("boardNo") Integer boardNo,
                                             @Validated @RequestBody CommentRequest commentRequest) {
 
-        log.info("FreeBoardCommentsRegister()" + commentRequest);
-        commentRequest.setBoardNo(Long.valueOf(boardNo));
+        log.info("PhotoBoardCommentsRegister()" + commentRequest);
+        //commentRequest.setBoardNo(Long.valueOf(boardNo));
 
-        service.register(commentRequest);
+        service.register(boardNo, commentRequest);
     }
 
     //댓글 목록
@@ -40,15 +43,14 @@ public class PhotoBoardCommentsController {
 
     //댓글 수정
     @PutMapping("/{commentNo}")
-    public PhotoBoardComments PhotoBoardCommentModify (
+    public PhotoBoardComments photoBoardCommentModify (
             @PathVariable("commentNo") Integer commentNo,
-            @RequestBody PhotoBoardComments photoBoardComments) {
-        log.info("freeBoardCommentModify(): " + photoBoardComments);
+            @Validated @RequestBody CommentRequest commentRequest) {
+        log.info("photoBoardCommentModify(): " + commentRequest);
 
-        photoBoardComments.setCommentNo(Long.valueOf(commentNo));
-        service.modify(photoBoardComments);
 
-        return photoBoardComments;
+        return service.modify(commentNo, commentRequest);
+
     }
 
 

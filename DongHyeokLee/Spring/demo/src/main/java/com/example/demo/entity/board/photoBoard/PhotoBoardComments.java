@@ -1,7 +1,10 @@
 package com.example.demo.entity.board.photoBoard;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.example.demo.entity.board.freeBoard.FreeBoard;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 
@@ -9,17 +12,22 @@ import javax.persistence.*;
 import java.util.Date;
 
 
-@Data
+@Setter
+@Getter
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class PhotoBoardComments {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long commentNo;
 
-    @Column(name= "board_no")
-    private Long boardNo;
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name= "board_no")
+    private PhotoBoard boardPhoto;
 
     @Column(length = 32, nullable = false)
     private String writer;
@@ -27,17 +35,16 @@ public class PhotoBoardComments {
     @Column(length = 64, nullable = false)
     private String comment;
 
-    @CreatedDate
-    @Column(length = 128, nullable = false)
-    private String regDate;
+    @CreationTimestamp
+    private Date regDate;
 
     @UpdateTimestamp
     private Date updDate;
 
-    public PhotoBoardComments(String writer, String comment, Long boardNo){
+    /*public PhotoBoardComments(String writer, String comment, Long boardNo){
         this.writer = writer;
         this.comment = comment;
         this.boardNo = boardNo;
-    }
+    }*/
 
 }

@@ -9,4 +9,5 @@ public interface MemberService {
     public MemberRequest login (MemberRequest memberRequest);
     public void modify (MemberRequest memberRequest);
     public void remove (MemberInfo member);
+
 }

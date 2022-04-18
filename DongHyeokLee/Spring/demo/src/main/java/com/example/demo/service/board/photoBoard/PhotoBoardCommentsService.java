@@ -7,8 +7,8 @@ import com.example.demo.entity.board.photoBoard.PhotoBoardComments;
 import java.util.List;
 
 public interface PhotoBoardCommentsService {
-    public void register (CommentRequest commentRequest);
+    public void register (Integer boardNo, CommentRequest commentRequest);
     public List<PhotoBoardComments> list (Integer boardNo);
-    public void modify (PhotoBoardComments photoBoardComments);
+    public PhotoBoardComments modify (Integer commentNo, CommentRequest commentRequest);
     public void remove (Integer boardNo);
 }

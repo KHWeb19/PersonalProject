@@ -19,6 +19,7 @@
                     <strong>{{ board.writer }}</strong>
                     {{ board.regDate.substring(0, 10) }}
                     조회 {{board.count}}  
+                    <!-- likeCheck ++ , likeCnt++ 해줘서 즉각적으로 바뀌는거 보여주게함-->
                     <v-icon v-if="board.likeCheck == 0 " @click="board.likeCheck++,board.likeCnt++, like(board.boardNo,board.likeCheck)">mdi-cards-heart-outline</v-icon>
                     <v-icon v-else  @click="board.likeCheck--,board.likeCnt--, unlike(board.boardNo,board.likeCheck)">mdi-cards-heart</v-icon>
                     {{ board.likeCnt}}

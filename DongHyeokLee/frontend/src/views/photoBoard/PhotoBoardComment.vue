@@ -43,9 +43,9 @@ export default {
        methods: {
         ...mapActions(['fetchPhotoBoardCommentsList']),
          onSubmit (payload) {
-            const { writer, content } = payload
+            const { writer, comment } = payload
             const boardNo = this.boardNo
-            axios.post(`http://localhost:7777/photoBoardComments/register/${boardNo}`, { writer, content })
+            axios.post(`http://localhost:7777/photoBoardComments/register/${boardNo}`, { writer, comment })
                     .then(() => {
                         alert('댓글 등록')
                         this.$router.go()
