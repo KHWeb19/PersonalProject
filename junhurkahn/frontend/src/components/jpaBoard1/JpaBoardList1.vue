@@ -49,6 +49,7 @@
 
                 <td align="center">
                     {{ board.regDate }}  
+                  
                     <button type="button" class="btn btn-danger" @click="onDelete(board)">Delete</button>
                     
                 </td>
@@ -91,6 +92,7 @@ export default {
             .then(() => {
                 alert('삭제 성공!')
                 this.fetchJpaBoardList1();
+                this.$refs.keyword.value = '';
             })
             .catch(() => {
                 alert('삭제 실패! 문제 발생!')

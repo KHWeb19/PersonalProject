@@ -2,8 +2,16 @@
     <div>
         <h3>사이트아이디 관리</h3>
                       <div class="input-group mb-3">
-  <span class="input-group-text" id="inputGroup-sizing-default">Find</span>
-  <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+    <span class="input-group-text" id="inputGroup-sizing-default" @click="findSearch">Find</span>
+ 
+
+  <input type="text" 
+        class="form-control" 
+        ref="keyword"
+        aria-label="Sizing example input" 
+        aria-describedby="inputGroup-sizing-default">
+
+
 </div>
        <table class="table">
            <tr align="center">
@@ -62,7 +70,7 @@ export default {
         ...mapState(['jpaBoard4'])
        },
 
-        methods: {
+           methods: {
         ...mapActions([
             'fetchJpaBoard4',
             'fetchJpaBoardList4']),
@@ -73,11 +81,11 @@ export default {
             .then(() => {
                 alert('삭제 성공!')
                 this.fetchJpaBoardList4();
+                this.$refs.keyword.value = '';
             })
             .catch(() => {
                 alert('삭제 실패! 문제 발생!')
             })
-        }
         },
 
         findSearch() {
@@ -85,4 +93,6 @@ export default {
             this.fetchJpaBoardList4(keyword);
         }
     }
+   
+}
 </script>

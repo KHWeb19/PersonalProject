@@ -36,6 +36,8 @@ public class JpaBoardServicesImpls1 implements JpaBoardServices1 {
         return repository.findAllByTitleContainingOrWriterContainingOrWriter1Containing(keyword, keyword, keyword);
     }
 
+
+
     @Override
     public JpaBoards1 read(Integer boardNo) {
         Optional<JpaBoards1> maybeReadBoard = repository.findById(Long.valueOf(boardNo));

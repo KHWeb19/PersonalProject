@@ -20,6 +20,8 @@ public class VueJpaMember {
     @Column(length = 20, nullable = false)
     private String pw;
 
+
+
     @CreationTimestamp
     private Date createdDate;
 

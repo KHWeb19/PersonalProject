@@ -2,8 +2,14 @@
     <div>
         <h3>장보기 목록</h3>
           <div class="input-group mb-3">
-  <span class="input-group-text" id="inputGroup-sizing-default">Find</span>
-  <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+  <span class="input-group-text" id="inputGroup-sizing-default" @click="findSearch">Find</span>
+
+  <input type="text" 
+        class="form-control" 
+        ref="keyword"
+        aria-label="Sizing example input" 
+        aria-describedby="inputGroup-sizing-default">
+
 </div>
        <table class="table">
              <tr align="center">
@@ -28,8 +34,8 @@
                     </router-link>
                 
                 <td align="center">
-                    {{ board.regDate }} <button type="button" class="btn btn-primary btn-sm">완료</button>
-<button type="button" class="btn btn-secondary btn-sm">미완료</button> 
+                    {{ board.regDate }} <button type="button" class="btn btn-outline-primary" @click="change">{{ add }}</button>
+
  <button type="button" class="btn btn-danger" @click="onDelete(board)">Delete</button>
 
                      
@@ -40,8 +46,6 @@
 </template>
 
 <script>
-
-
 import axios from 'axios'
 import { mapActions,mapState} from 'vuex'
 
@@ -56,10 +60,14 @@ export default {
         }
     },
 
+    data() {
+        return {
+            add : false
+        }
+    },
       computed: {
         ...mapState(['jpaBoard2'])
        },
-
         methods: {
         ...mapActions([
             'fetchJpaBoard2',
@@ -75,20 +83,18 @@ export default {
             .catch(() => {
                 alert('삭제 실패! 문제 발생!')
             })
-        }
         },
-
+        
         findSearch() {
             const keyword = this.$refs.keyword.value;
             this.fetchJpaBoardList2(keyword);
+        },
+
+        change() {
+            this.add = !this.add;
+        }
         }
     }
-
       
-
     
-
-
-
-
 </script>

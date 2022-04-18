@@ -48,8 +48,13 @@ export default {
                     commit(FETCH_PRODUCT_BOARD, res.data)
                 })
     },
-    fetchJpaBoardList ({ commit }) {
-        return axios.get('http://localhost:7777/62th/board/list')
+   
+    fetchJpaBoardList ({ commit }, keyword) {
+        let url = 'http://localhost:7777/62th/board/list';
+        if (keyword != undefined) {
+            url += '?keyword='+encodeURIComponent(keyword);
+        }
+        return axios.get(url)
             .then((res) => {
                 commit(FETCH_JPA_BOARD_LIST, res.data)
             })
@@ -67,26 +72,39 @@ export default {
     },
 
           
-    fetchJpaBoardList2 ({ commit }) {
-        return axios.get('http://localhost:7777/62th/board2/list2')
+    fetchJpaBoardList2 ({ commit }, keyword) {
+        let url = 'http://localhost:7777/62th/board2/list2';
+        if (keyword != undefined) {
+            url += '?keyword='+encodeURIComponent(keyword);
+        }
+        return axios.get(url)
             .then((res) => {
                 commit(FETCH_JPA_BOARD_LIST2, res.data)
             })
     },
 
-    fetchJpaBoardList3 ({ commit }) {
-        return axios.get('http://localhost:7777/62th/board3/list3')
+    fetchJpaBoardList3 ({ commit }, keyword) {
+        let url = 'http://localhost:7777/62th/board3/list3';
+        if (keyword != undefined) {
+            url += '?keyword='+encodeURIComponent(keyword);
+        }
+        return axios.get(url)
             .then((res) => {
                 commit(FETCH_JPA_BOARD_LIST3, res.data)
             })
     },
 
-    fetchJpaBoardList4 ({ commit }) {
-        return axios.get('http://localhost:7777/62th/board4/list4')
+    fetchJpaBoardList4 ({ commit }, keyword) {
+        let url = 'http://localhost:7777/62th/board4/list4';
+        if (keyword != undefined) {
+            url += '?keyword='+encodeURIComponent(keyword);
+        }
+        return axios.get(url)
             .then((res) => {
                 commit(FETCH_JPA_BOARD_LIST4, res.data)
             })
     },
+
 
 
 

@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 
+import com.example.demo.entity.jpa.JpaBoards1;
 import com.example.demo.entity.jpa.JpaBoards2;
 import com.example.demo.service.order62.JpaBoardServices2;
 import lombok.extern.slf4j.Slf4j;
@@ -28,10 +29,15 @@ public class SmartNoteController2 {
     }
 
     @GetMapping("/list2")
-    public List<JpaBoards2> jpaBoardList () {
+    public List<JpaBoards2> jpaBoardList (String keyword) {
         log.info("jpaBoardList2()");
 
-        return service.list();
+        if (keyword == null) {
+            return service.list();
+        } else {
+            return service.search(keyword);
+        }
+
     }
 
     @GetMapping("/{boardNo}")

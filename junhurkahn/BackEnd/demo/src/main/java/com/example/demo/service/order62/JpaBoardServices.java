@@ -3,6 +3,7 @@ package com.example.demo.service.order62;
 
 import com.example.demo.entity.jpa.JpaBoards;
 
+
 import java.util.List;
 
 public interface JpaBoardServices {
@@ -11,4 +12,6 @@ public interface JpaBoardServices {
     public JpaBoards read (Integer boardNo);
     public void modify (JpaBoards board);
     public void remove (Integer boardNo);
+
+    public List<JpaBoards> search(String keyword);
 }

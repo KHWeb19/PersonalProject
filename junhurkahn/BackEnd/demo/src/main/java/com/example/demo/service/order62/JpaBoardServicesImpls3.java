@@ -1,9 +1,9 @@
 package com.example.demo.service.order62;
 
+
 import com.example.demo.entity.jpa.JpaBoards3;
 
 import com.example.demo.repository.jpa.order63.JpaBoardRepositorys3;
-
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -27,6 +27,11 @@ public class JpaBoardServicesImpls3 implements JpaBoardServices3 {
     @Override
     public List<JpaBoards3> list() {
         return repository.findAll(Sort.by(Sort.Direction.DESC, "boardNo"));
+    }
+
+    @Override
+    public List<JpaBoards3> search(String keyword) {
+        return repository.findAllByTitleContainingOrWriterContainingOrWriter1Containing(keyword, keyword, keyword);
     }
 
     @Override

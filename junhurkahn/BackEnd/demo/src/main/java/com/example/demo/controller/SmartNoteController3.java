@@ -1,13 +1,13 @@
 package com.example.demo.controller;
 
 
-import com.example.demo.entity.jpa.JpaBoards3;
+
 import com.example.demo.service.order62.JpaBoardServices3;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
+import com.example.demo.entity.jpa.JpaBoards3;
 
 import java.util.List;
 
@@ -28,10 +28,15 @@ public class SmartNoteController3 {
     }
 
     @GetMapping("/list3")
-    public List<JpaBoards3> jpaBoardList () {
+    public List<JpaBoards3> jpaBoardList (String keyword) {
         log.info("jpaBoardList3()");
 
-        return service.list();
+        if (keyword == null) {
+            return service.list();
+        } else {
+            return service.search(keyword);
+        }
+
     }
 
     @GetMapping("/{boardNo}")

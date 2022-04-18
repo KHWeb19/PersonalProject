@@ -1,8 +1,8 @@
 package com.example.demo.controller;
 
+
+
 import com.example.demo.entity.jpa.JpaBoards;
-
-
 import com.example.demo.service.order62.JpaBoardServices;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +28,15 @@ public class SmartNoteController {
     }
 
     @GetMapping("/list")
-    public List<JpaBoards> jpaBoardList () {
+    public List<JpaBoards> jpaBoardList (String keyword) {
         log.info("jpaBoardList()");
 
-        return service.list();
+        if (keyword == null) {
+            return service.list();
+        } else {
+            return service.search(keyword);
+        }
+
     }
 
     @GetMapping("/{boardNo}")
