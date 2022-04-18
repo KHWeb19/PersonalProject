@@ -1,14 +1,14 @@
 <template>
   <div class="grey lighten-3" align="center">
-    <v-container class="white" style="width: 1800px">
+    <v-container class="white" style="width: 1700px">
       <v-row justify="center">
         <v-col>
-          <v-card width="1600px">
+          <v-card width="1475px">
             <div class="foodRec-wrap">
               <div class="foodRec-up">
                 <v-img
-                  max-width="1600px"
                   max-height="700px"
+                  width="100%"
                   contain
                   content-class=""
                   :src="
@@ -16,6 +16,7 @@
                   "
                 />
               </div>
+              <v-divider></v-divider>
               <div class="foodRec-cont">
                 <div class="foodRec-left">
                   <div class="foodRec-tit">
@@ -73,6 +74,7 @@
                     style="width: 800px"
                   />
                   <div>
+                    <v-divider></v-divider>
                     <div class="main_title">
                       <b>주의사항</b>
                       <span style="">Tip</span>
@@ -92,6 +94,7 @@
                   </div>
                   <div v-if="checkWriteUser">
                     <v-btn
+                      text
                       :to="{
                         name: 'FoodModifyPage',
                         params: { boardNo: foodBoard.boardNo.toString() },
@@ -101,7 +104,13 @@
 
                     <v-dialog v-model="dialogDelete" width="460">
                       <template v-slot:activator="{ on, attrs }">
-                        <v-btn v-bind="attrs" v-on="on" @click="restCheckbox">
+                        <v-btn
+                          text
+                          v-bind="attrs"
+                          v-on="on"
+                          @click="restCheckbox"
+                          color="red"
+                        >
                           삭제
                         </v-btn>
                       </template>

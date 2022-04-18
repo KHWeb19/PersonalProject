@@ -3,10 +3,6 @@
     <v-container class="white" style="width: 1240px">
       <v-row>
         <v-col> 카테고리 박스 </v-col>
-        <v-col>
-          <v-btn>최신 순</v-btn>
-          <v-btn>조회 순</v-btn>
-        </v-col>
       </v-row>
       <v-row>
         <v-col v-for="food in paginatedData" :key="food.boardNo" lg="3" sm="6">
@@ -37,11 +33,21 @@
               <v-card-text class="pb-0 pt-0">{{ food.writer }}</v-card-text>
             </v-card-actions>
             <v-card-actions>
-              <v-card-text class="pb-0 pt-0">추천 수</v-card-text>
-              <v-card-text class="pb-0 pt-0">{{ food.viewCount }}</v-card-text>
+              <v-card-text class="food_sub_icon"
+                ><v-icon color="orange"> mdi-thumb-up</v-icon>
+                추천수</v-card-text
+              >
+              <v-card-text class="food_sub_icon"
+                ><v-icon color="orange">mdi-eye</v-icon
+                >{{ food.viewCount }}</v-card-text
+              >
+              <v-card-text class="food_sub_icon"
+                ><v-icon color="orange">mdi-comment</v-icon
+                >{{ food.commentCnt }}</v-card-text
+              >
             </v-card-actions>
             <v-card-actions>
-              <v-card-text class="pb-0 pt-0">{{ food.regDate }}</v-card-text>
+              <v-card-text class="food_date">{{ food.regDate }}</v-card-text>
             </v-card-actions>
           </v-card>
         </v-col>
@@ -150,5 +156,14 @@ export default {
 }
 .btn-cover .page-count {
   padding: 0 1rem;
+}
+.food_sub_icon {
+  padding: 0;
+  text-align: center;
+}
+.food_date {
+  padding: 0;
+  text-align: right;
+  color: grey;
 }
 </style>

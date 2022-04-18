@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 
@@ -67,6 +68,9 @@ public class FoodBoard {
 
     @OneToMany(mappedBy = "foodBoard",fetch = FetchType.EAGER,cascade = CascadeType.REMOVE)
     private List<FoodBoardComment> comments;
+
+    @Formula("(SELECT count(1) FROM food_board_comment c WHERE c.food_board_board_no = board_no)")
+    private int commentCnt;
 
 
 }
