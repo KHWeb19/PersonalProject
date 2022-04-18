@@ -36,4 +36,8 @@ export default {
     
     BrandCheckBoards: [],
     BrandCheckBoard: null,
+
+    QuestionBoards: [],
+    QuestionBoard: null,
+
 }
