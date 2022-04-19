@@ -8,6 +8,9 @@ import {
     FETCH_USER_INFO,
     FETCH_SESSION,
 
+    FETCH_CHECK_BRAND_COMMENTS,
+    FETCH_CHECK_BRAND_COMMENT,
+
 } from './mutation-types'
 
 import axios from 'axios'
@@ -53,5 +56,17 @@ export default {
       fetchSession ({ commit }, session) {
         commit(FETCH_SESSION, session)
         console.log(session)
+      },
+
+
+      fetchCheckBrandComments ({ commit }, boardNo) {
+        return axios.get(`http://localhost:7777/BrandCheck/comment/read/${boardNo}`).then(res => {
+          commit(FETCH_CHECK_BRAND_COMMENTS, res.data)
+        })
+      },
+      fetchCheckBrandComment ({ commit }, commentNo) {
+        return axios.get(`http://localhost:7777/BrandCheck/comment/read/only/${commentNo}`).then(res => {
+          commit(FETCH_CHECK_BRAND_COMMENT, res.data)
+        })
       },
 }
