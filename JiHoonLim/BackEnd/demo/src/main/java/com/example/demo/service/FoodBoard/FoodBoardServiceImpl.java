@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -121,6 +122,13 @@ public class FoodBoardServiceImpl implements FoodBoardService{
             Files.delete(filePath);
         }
         repository.deleteById(Long.valueOf(boardNo));
+    }
+
+    @Override
+    public List<FoodBoard> search(String keyWord) {
+        List<FoodBoard> searchResults = repository.findByNameContaining(keyWord);
+
+        return searchResults;
     }
 
 }

@@ -13,6 +13,7 @@ import FoodRegisterPage from '@/views/foodBoard/FoodRegisterPage.vue'
 import FoodDetailPage from '@/views/foodBoard/FoodDetailPage.vue'
 import FoodModifyPage from '@/views/foodBoard/FoodModifyPage.vue'
 import BestFoodListPage from '@/views/foodBoard/BestFoodListPage.vue'
+import FoodSearchPage from '@/views/foodBoard/FoodSearchPage.vue'
 
 import test from '@/views/test.vue'
 Vue.use(VueRouter)
@@ -88,6 +89,16 @@ const routes = [
     path: '/bestFoodList',
     name: 'BestFoodListPage',
     component: BestFoodListPage
+  },
+  {
+    path: '/search/:keyWord',
+    name: 'FoodSearchPage',
+    components: {
+      default: FoodSearchPage
+    },
+    props:{
+      default: true
+    }
   },
 ]
 

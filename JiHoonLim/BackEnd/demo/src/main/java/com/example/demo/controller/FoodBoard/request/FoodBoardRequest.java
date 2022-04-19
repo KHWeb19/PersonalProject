@@ -9,11 +9,14 @@ public class FoodBoardRequest {
     private String material;
     private String order;
 
+
     public FoodBoardRequest(String name, String des, String material, String order){
         this.name = name;
         this.des = des;
         this.material = material;
         this.order = order;
     }
+
+
 
 }

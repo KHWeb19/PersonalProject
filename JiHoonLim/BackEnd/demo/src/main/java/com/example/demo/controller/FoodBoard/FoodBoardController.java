@@ -1,9 +1,12 @@
 package com.example.demo.controller.FoodBoard;
 
+import com.example.demo.controller.FoodBoard.request.FoodBoardRequest;
+import com.example.demo.controller.FoodBoard.request.FoodSearchRequest;
 import com.example.demo.entity.FoodBoard.FoodBoard;
 import com.example.demo.service.FoodBoard.FoodBoardService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -80,5 +83,10 @@ public class FoodBoardController {
         service.remove(boardNo);
     }
 
-
+    @PostMapping("/search")
+    public List<FoodBoard> search(@RequestBody FoodSearchRequest foodSearchRequest){
+        log.info("search()" +foodSearchRequest);
+        String keyWord = foodSearchRequest.getKeyWord();
+        return service.search(keyWord);
+    }
 }

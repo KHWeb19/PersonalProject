@@ -1,7 +1,7 @@
 <template>
   <div class="grey lighten-3">
     <v-container class="white" style="width: 1240px">
-      <v-row justify="center">
+      <v-row>
         <v-col>
           <div class="text_field">
             <v-text-field
@@ -19,9 +19,23 @@
         </v-col>
       </v-row>
       <v-divider></v-divider>
-      <v-col> 카테고리 박스 </v-col>
       <v-row>
-        <v-col v-for="food in paginatedData" :key="food.boardNo" lg="3" sm="6">
+        <v-col
+          class="search_input"
+          v-if="
+            !searchResult ||
+            (Array.isArray(searchResult) && searchResult.length === 0)
+          "
+        >
+          검색 결과가 없습니다.
+        </v-col>
+        <v-col
+          v-else
+          v-for="food in searchResult"
+          :key="food.boardNo"
+          lg="3"
+          sm="6"
+        >
           <v-card width="500" height="400" class="mx-auto">
             <router-link
               :to="{
@@ -68,142 +82,50 @@
           </v-card>
         </v-col>
       </v-row>
-      <v-row>
-        <v-col>
-          <div class="btn-cover">
-            <v-btn :disabled="pageNum === 0" @click="prevPage" class="page-btn">
-              이전
-            </v-btn>
-            <span class="page-count"
-              >{{ pageNum + 1 }} / {{ pageCount }} 페이지</span
-            >
-            <v-btn
-              :disabled="pageNum >= pageCount - 1"
-              @click="nextPage"
-              class="page-btn"
-            >
-              다음
-            </v-btn>
-          </div>
-          <v-btn
-            x-large
-            rounded
-            color="orange lighten-1"
-            class="mx-auto"
-            style="float: right"
-            @click="write"
-          >
-            레시피 작성</v-btn
-          >
-        </v-col>
-      </v-row>
     </v-container>
   </div>
 </template>
+
 <script>
 import axios from "axios";
+
 export default {
-  name: "FoodList",
+  name: "FoodSearchList",
   props: {
-    foodBoards: {
+    searchResult: {
       type: Array,
-    },
-    listArray: {
-      type: Array,
-      required: true,
-    },
-    pageSize: {
-      type: Number,
-      required: false,
-      default: 10,
     },
   },
   data() {
     return {
-      pageNum: 0,
-      sortReset: true,
       keyWord: "",
     };
   },
 
   methods: {
-    write() {
-      if (this.$store.state.userInfo == null) {
-        alert("로그인 후 이용해주세요.");
-        this.$router.push("/login");
-      } else {
-        this.$router.push("/foodRegister");
-      }
-    },
-
-    nextPage() {
-      this.pageNum += 1;
-    },
-    prevPage() {
-      this.pageNum -= 1;
-    },
     search() {
-      if (this.keyWord != "") {
-        const { keyWord } = this;
-        axios
-          .post("http://localhost:7777/foodBoard/search", { keyWord })
-          .then((res) => {
-            console.log(res.data);
-            alert("검색 완료");
-            this.$router.push({
+      const { keyWord } = this;
+      axios
+        .post("http://localhost:7777/foodBoard/search", { keyWord })
+        .then((res) => {
+          console.log(res.data);
+          alert("검색 완료");
+          this.$router
+            .push({
               name: "FoodSearchPage",
               params: { searchResult: res.data, keyWord: this.keyWord },
-            });
-          })
-          .catch(() => {
-            alert("검색 실패");
-          });
-      } else {
-        alert("검색어를 입력해주세요.");
-      }
-    },
-  },
-
-  computed: {
-    pageCount() {
-      let listLeng = this.listArray.length,
-        listSize = this.pageSize,
-        page = Math.floor(listLeng / listSize);
-
-      if (listLeng % listSize > 0) page += 1;
-      return page;
-    },
-    paginatedData() {
-      const start = this.pageNum * this.pageSize,
-        end = start + this.pageSize;
-      return this.listArray.slice(start, end);
+            })
+            .catch(() => {});
+        })
+        .catch(() => {
+          alert("검색 실패");
+        });
     },
   },
 };
 </script>
 
 <style scoped>
-.btn-cover {
-  margin-top: 1.5rem;
-  text-align: center;
-}
-.btn-cover .page-btn {
-  width: 5rem;
-  height: 2rem;
-  letter-spacing: 0.5px;
-}
-.btn-cover .page-count {
-  padding: 0 1rem;
-}
-.food_sub_icon {
-  padding: 0;
-  text-align: center;
-}
-.food_date {
-  padding: 0;
-  text-align: right;
-  color: grey;
-}
 .text_field {
   width: 50%;
   margin: auto;
@@ -216,5 +138,17 @@ export default {
 }
 .v-btn:not(.v-btn--round).v-size--default {
   height: 56px;
+}
+.search_input {
+  text-align: center;
+}
+.food_sub_icon {
+  padding: 0;
+  text-align: center;
+}
+.food_date {
+  padding: 0;
+  text-align: right;
+  color: grey;
 }
 </style>

@@ -24,11 +24,11 @@
               </router-link>
             </div>
             <v-card-subtitle class="pt-3 pb-0"
-              ><v-chip class="ma-2" small>
+              ><v-chip class="ma-1" small>
                 {{ food.mat }}
               </v-chip>
-              <v-chip class="ma-2" small> {{ food.kind }} </v-chip>
-              <v-chip class="ma-2" small> {{ food.way }} </v-chip>
+              <v-chip class="ma-1" small> {{ food.kind }} </v-chip>
+              <v-chip class="ma-1" small> {{ food.way }} </v-chip>
             </v-card-subtitle>
 
             <v-card-title class="pt-0 pb-0"> {{ food.name }} </v-card-title>
@@ -38,15 +38,15 @@
             </v-card-actions>
             <v-card-actions>
               <v-card-text class="food_sub_icon"
-                ><v-icon color="orange"> mdi-thumb-up</v-icon>
+                ><v-icon color="orange" class="pr-1"> mdi-thumb-up</v-icon>
                 추천수</v-card-text
               >
               <v-card-text class="food_sub_icon"
-                ><v-icon color="orange">mdi-eye</v-icon
+                ><v-icon color="orange" class="pr-1">mdi-eye</v-icon
                 >{{ food.viewCount }}</v-card-text
               >
               <v-card-text class="food_sub_icon"
-                ><v-icon color="orange">mdi-comment</v-icon
+                ><v-icon color="orange" class="pr-1">mdi-comment</v-icon
                 >{{ food.commentCnt }}</v-card-text
               >
             </v-card-actions>
