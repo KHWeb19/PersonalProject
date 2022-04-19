@@ -48,10 +48,17 @@ import axios from 'axios'
         methods: {
             ...mapActions(['fetchMemberInfo']),
             onSubmit(payload) {
-                const { userName, password } = payload
+                const { userName, password, auth } = payload
                 
                 this.userId = this.id
-                axios.put(`http://localhost:7777/Member/${this.userId}`, { userName, password })
+                axios.put(`http://localhost:7777/Member/${this.userId}`, { userName, password, auth })
+                        .then(() => {
+                            alert('수정이 완료되었습니다!')
+                            this.$router.go()
+                        })
+                        .catch(() =>{
+                            alert('수정 실패!')
+                        })
             }
         }
     }

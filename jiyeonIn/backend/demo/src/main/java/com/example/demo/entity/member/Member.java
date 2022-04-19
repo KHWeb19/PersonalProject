@@ -1,7 +1,9 @@
 package com.example.demo.entity.member;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -34,6 +36,8 @@ public class Member {
     @UpdateTimestamp
     private Date updDate;
 
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<MemberAuth> authList = new ArrayList<>();
 
@@ -47,6 +51,24 @@ public class Member {
         this.userId = userId;
         this.password = password;
         this.userName = userName;
+
+        if(auth != null) {
+            changeAuth(auth);
+        }
+    }
+    public Member (Long memberNo,String userId, String password, String userName, Date regDate) {
+        this.memberNo = memberNo;
+        this.userId = userId;
+        this.password = password;
+        this.userName = userName;
+        this.regDate = regDate;
+    }
+    public Member (Long memberNo, String userId, String password, String userName,Date regDate, MemberAuth auth) {
+        this.memberNo = memberNo;
+        this.userId = userId;
+        this.password = password;
+        this.userName = userName;
+        this.regDate = regDate;
 
         if(auth != null) {
             changeAuth(auth);

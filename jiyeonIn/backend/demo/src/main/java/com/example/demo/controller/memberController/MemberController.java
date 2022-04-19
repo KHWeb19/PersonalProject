@@ -2,7 +2,6 @@ package com.example.demo.controller.memberController;
 
 import com.example.demo.controller.memberController.Response.MemberResponse;
 import com.example.demo.controller.memberController.request.MemberRequest;
-import com.example.demo.entity.member.Member;
 import com.example.demo.service.member.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,15 +59,15 @@ public class MemberController {
     }
 
     @PutMapping("/{userId}")
-    public Member memberModify(@PathVariable("userId") String userId,
-                               @RequestBody Member member) {
+    public MemberResponse memberModify(@PathVariable("userId") String userId,
+                                       @RequestBody MemberResponse memberResponse) {
         log.info("userId:" +userId);
-        log.info("member : " +member);
+        log.info("member : " +memberResponse);
 
-        member.setUserId(userId);
-        service.modify(member);
+        memberResponse.setUserId(userId);
+        service.modify(memberResponse);
 
-        return member;
+        return memberResponse;
     }
 
 }

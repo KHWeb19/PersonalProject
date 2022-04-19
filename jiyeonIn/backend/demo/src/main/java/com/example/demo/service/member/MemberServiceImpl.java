@@ -1,5 +1,6 @@
 package com.example.demo.service.member;
 
+import com.example.demo.controller.memberController.Response.MemberResponse;
 import com.example.demo.controller.memberController.request.MemberRequest;
 import com.example.demo.entity.member.Member;
 import com.example.demo.entity.member.MemberAuth;
@@ -96,9 +97,8 @@ public class MemberServiceImpl implements MemberService {
     public MemberRequest read(String id) {
 
         Optional<Member> maybeMember = memberRepository.findByUserId(id);
-
-
         Member loginMember = maybeMember.get();
+
 
         Optional<MemberAuth> maybeMemberAuth =
                 memberAuthRepository.findByMemberNo(loginMember.getMemberNo());
@@ -123,35 +123,30 @@ public class MemberServiceImpl implements MemberService {
      */
     @Transactional
     @Override
-    public void modify(Member member) {
+    public void modify(MemberResponse member) {
         log.info("modify member info:" +member);
 
         Optional<Member> maybeMember = memberRepository.findByUserId(member.getUserId());
         Member loginMember = maybeMember.get();
-        log.info("current member info:" +loginMember);
+        log.info("before member info:" +loginMember);
 
-        member.setMemberNo(loginMember.getMemberNo());
-        member.setRegDate(loginMember.getRegDate());
+        Member memberEntity;
 
-        if(member.getPassword().equals("0")){
-            member.setPassword(loginMember.getPassword());
+        if(member.getPassword().equals("no")){
+            memberEntity = new Member(
+                    loginMember.getMemberNo(),member.getUserId(), loginMember.getPassword(),member.getUserName(),loginMember.getRegDate());
+
+            memberRepository.save(memberEntity);
         }else {
             String encodedPassword = passwordEncoder.encode(member.getPassword());
-            member.setPassword(encodedPassword);
+            memberEntity = new Member(
+                    loginMember.getMemberNo(),member.getUserId(), encodedPassword,member.getUserName(),loginMember.getRegDate());
+
+            memberRepository.save(memberEntity);
         }
 
-        log.info("final member info:" +member);
-        memberRepository.save(member);
-
         Optional<MemberAuth> maybeMemberAuth =
-                memberAuthRepository.findByMemberNo(member.getMemberNo());
-
-        MemberAuth memberAuth = maybeMemberAuth.get();
-
-
-        MemberAuth authEntity = new MemberAuth(memberAuth.getAuth(), member);
-
-        memberAuthRepository.save(authEntity);
+                memberAuthRepository.findByMemberNo(loginMember.getMemberNo());
 
     }
 
