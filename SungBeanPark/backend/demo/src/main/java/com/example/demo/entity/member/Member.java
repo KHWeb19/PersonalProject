@@ -1,5 +1,7 @@
 package com.example.demo.entity.member;
 
+import com.example.demo.entity.Cart.Cart;
+import com.sun.istack.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -19,13 +21,12 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long memberNo;
 
-    @Column(length = 64, nullable = false)
+    @Column(length = 32)
     private String userId;
-
-    @Column(length = 64, nullable = false)
+    @Column(length = 64)
     private String password;
 
-    @Column(length = 64, nullable = false)
+    @Column(length = 32)
     private String userName;
 
     @CreationTimestamp
@@ -36,6 +37,10 @@ public class Member {
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<MemberAuth> authList = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name ="member")
+    private List<Cart> authListSecond = new ArrayList<Cart>();
 
     public Member (String userId, String password, String userName) {
         this.userId = userId;
@@ -66,4 +71,6 @@ public class Member {
     public void clearAuthList () {
         authList.clear();
     }
+
+
 }

@@ -1,16 +1,21 @@
 package com.example.demo.service;
 
+import com.example.demo.controller.request.CartRequest;
 import com.example.demo.controller.request.MemberRequest;
+import com.example.demo.entity.Cart.Cart;
 import com.example.demo.entity.member.Member;
 import com.example.demo.entity.member.MemberAuth;
 import com.example.demo.repository.MemberAuthRepository;
 import com.example.demo.repository.MemberRepository;
+import com.example.demo.repository.cart.CartRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -26,10 +31,13 @@ public class MemberServiceImpl implements MemberService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private CartRepository cartRepository;
 
     @Transactional
     @Override
     public void register(MemberRequest memberRequest) {
+
         String encodedPassword = passwordEncoder.encode(memberRequest.getPw());
         memberRequest.setPw(encodedPassword);
 
@@ -91,5 +99,30 @@ public class MemberServiceImpl implements MemberService {
         }
     }
 
+    @Override
+    public void addCart(CartRequest cartRequest) throws Exception {
+        Cart cart = new Cart(cartRequest.getMemberNo(), cartRequest.getCartId(), cartRequest.getImageUrl(), cartRequest.getProductName(),
+                cartRequest.getDiscount(), cartRequest.getProductPrice(), cartRequest.getProductDiscountPrice(), cartRequest.getProductNum(),
+                cartRequest.getGender(), cartRequest.getRating());
 
+        cartRepository.save(cart);
+    }
+
+    @Override
+    public List<Cart> getCartList(Long memberNo) throws Exception {
+        return cartRepository.findCartList(memberNo);
+    }
+
+    @Override
+    public void ModifyProductNum(CartRequest cartRequest) {
+        Cart cart = new Cart(cartRequest.getMemberNo(), cartRequest.getCartId(), cartRequest.getImageUrl(), cartRequest.getProductName(),
+                cartRequest.getDiscount(), cartRequest.getProductPrice(), cartRequest.getProductDiscountPrice(), cartRequest.getProductNum(),
+                cartRequest.getGender(), cartRequest.getRating());
+        cartRepository.save(cart);
+    }
+
+    @Override
+    public void deleteProduct(Long memberNo) throws Exception {
+        cartRepository.deleteById(memberNo);
+    }
 }
