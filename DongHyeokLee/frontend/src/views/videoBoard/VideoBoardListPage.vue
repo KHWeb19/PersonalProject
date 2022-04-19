@@ -4,6 +4,7 @@
         <board-list :boards="videoBoards" 
                     :registerPage="`${registerPage}`"
                     :accept="accept" 
+                    :boardName="`${this.boardName}`"
                     :readPage="`${readPage}`"/>
         
     </div>
@@ -26,14 +27,22 @@ export default {
         return {
             registerPage : 'VideoBoardRegisterPage',
             readPage: 'VideoBoardReadPage',
-            accept: 'mp4'
+            accept: 'mp4',
+            boardName: "videoBoard",
+            writer : this.$store.state.userInfo.nickname,
         }
     },
     computed: {
         ...mapState(['videoBoards']),
     },
     mounted () {
-        this.fetchVideoBoardList()
+         if(!this.$store.state.isLogin){
+            alert('로그인하세요')
+            this.$router.push({name: "HomeView"});
+        }else{
+            const writer = this.writer
+        this.fetchVideoBoardList(writer)
+        }  
         
     },
     methods: {

@@ -6,8 +6,7 @@ import java.util.Date;
 
 @NoArgsConstructor
 @Data
-
-public class PhotoBoardCommentResponse {
+public class CommentResponse {
     private String writer;
     private String comment;
     private Long boardNo;
@@ -15,7 +14,7 @@ public class PhotoBoardCommentResponse {
     private Long commentNo;
 
 
-    public PhotoBoardCommentResponse(String writer, String comment, Long boardNo, Date regDate, Long commentNo){
+    public CommentResponse(String writer, String comment, Long boardNo, Date regDate, Long commentNo){
         this.writer = writer;
         this.comment = comment;
         this.boardNo = boardNo;

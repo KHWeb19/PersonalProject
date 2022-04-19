@@ -48,7 +48,7 @@ public class PhotoBoard  {
     @Formula("(Select count(1) From photo_board_like c Where c.board_No = board_No)")
     private int likeCnt;
 
-    @Formula("(Select count(1) From free_board_comments c Where c.board_No = board_No)")
+    @Formula("(Select count(1) From photo_board_comments c Where c.board_No = board_No)")
     private int commentCnt;
 
     @CreationTimestamp
@@ -63,7 +63,7 @@ public class PhotoBoard  {
     private List<PhotoBoardLike> likes = new ArrayList<>();
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "boardPhoto", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "photoBoard", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<PhotoBoardComments> comments = new ArrayList<>();
 
     public void likeCheckZero(){

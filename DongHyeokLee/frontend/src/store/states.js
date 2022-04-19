@@ -14,5 +14,6 @@ export default {
      //영상게시판
      videoBoards: [],
      videoBoard: null,
-     videoBoardComments:[]
+     videoBoardComments:[],
+     videoBoardLike:[]
 }

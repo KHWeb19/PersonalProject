@@ -57,8 +57,8 @@ export default {
                 })
     },
     //영상게시판
-    fetchVideoBoardList ({ commit }) {
-        return axios.get('http://localhost:7777/videoBoard/list')
+    fetchVideoBoardList ({ commit } , writer) {
+        return axios.post('http://localhost:7777/videoBoard/list', { writer })
                 .then((res) => {
                     commit(FETCH_VIDEO_BOARD_LIST, res.data)
                 })

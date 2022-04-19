@@ -1,7 +1,7 @@
 package com.example.demo.service.board.photoBoard;
 
 import com.example.demo.dto.request.CommentRequest;
-import com.example.demo.dto.response.PhotoBoardCommentResponse;
+import com.example.demo.dto.response.CommentResponse;
 import com.example.demo.entity.board.photoBoard.PhotoBoard;
 import com.example.demo.entity.board.photoBoard.PhotoBoardComments;
 import com.example.demo.repository.board.photoBoard.PhotoBoardCommentsRepository;
@@ -33,7 +33,7 @@ public class PhotoBoardCommentsServiceImpl implements PhotoBoardCommentsService 
 
         PhotoBoardComments comment = PhotoBoardComments.builder()
                 .comment(commentRequest.getComment())
-                .boardPhoto(board)
+                .photoBoard(board)
                 .writer(commentRequest.getWriter())
                 .build();
 
@@ -41,11 +41,11 @@ public class PhotoBoardCommentsServiceImpl implements PhotoBoardCommentsService 
     }
 
     @Override
-    public List<PhotoBoardCommentResponse> list(Integer boardNo) {
+    public List<CommentResponse> list(Integer boardNo) {
         List<PhotoBoardComments> checkComments = repository.findAllPhotoBoardCommentsByBoardId(Long.valueOf(boardNo));
-        List<PhotoBoardCommentResponse> response = new ArrayList<>();
+        List<CommentResponse> response = new ArrayList<>();
         for(PhotoBoardComments comment : checkComments){
-            response.add(new PhotoBoardCommentResponse(comment.getWriter(), comment.getComment(), comment.getBoardPhoto().getBoardNo(),
+            response.add(new CommentResponse(comment.getWriter(), comment.getComment(), comment.getPhotoBoard().getBoardNo(),
                     comment.getRegDate(),comment.getCommentNo()));
 
         }
@@ -54,22 +54,22 @@ public class PhotoBoardCommentsServiceImpl implements PhotoBoardCommentsService 
     }
 
     @Override
-    public PhotoBoardCommentResponse modify(Integer commentNo, CommentRequest commentRequest) {
+    public CommentResponse modify(Integer commentNo, CommentRequest commentRequest) {
 
         Optional<PhotoBoard> maybeBoard = boardRepository.findById(Long.valueOf(commentRequest.getBoardNo()));
         PhotoBoard board = maybeBoard.get();
 
         PhotoBoardComments commentModify = PhotoBoardComments.builder()
                 .commentNo(Long.valueOf(commentNo))
-                .boardPhoto(board)
+                .photoBoard(board)
                 .comment(commentRequest.getComment())
                 .writer(commentRequest.getWriter())
                 .regDate(commentRequest.getRegDate())
                 .build();
         repository.save(commentModify);
 
-        PhotoBoardCommentResponse response = new PhotoBoardCommentResponse(commentModify.getWriter(), commentModify.getComment(),
-                commentModify.getBoardPhoto().getBoardNo(), commentModify.getRegDate(), commentModify.getCommentNo());
+        CommentResponse response = new CommentResponse(commentModify.getWriter(), commentModify.getComment(),
+                commentModify.getPhotoBoard().getBoardNo(), commentModify.getRegDate(), commentModify.getCommentNo());
 
         return response;
 

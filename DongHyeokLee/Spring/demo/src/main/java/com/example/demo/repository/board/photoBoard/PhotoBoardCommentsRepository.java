@@ -9,6 +9,6 @@ import java.util.List;
 
 public interface PhotoBoardCommentsRepository extends JpaRepository<PhotoBoardComments, Long> {
 
-    @Query("select m from PhotoBoardComments m join m.boardPhoto tb where tb.boardNo = :boardNo")
+    @Query("select m from PhotoBoardComments m join m.photoBoard tb where tb.boardNo = :boardNo")
     List<PhotoBoardComments> findAllPhotoBoardCommentsByBoardId(@Param("boardNo") Long boardNo);
 }

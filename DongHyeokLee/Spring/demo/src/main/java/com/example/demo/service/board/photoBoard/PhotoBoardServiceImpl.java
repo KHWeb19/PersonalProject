@@ -1,6 +1,6 @@
 package com.example.demo.service.board.photoBoard;
 
-import com.example.demo.dto.response.PhotoBoardResponse;
+import com.example.demo.dto.response.BoardResponse;
 import com.example.demo.dto.request.BoardRequest;
 import com.example.demo.dto.request.LikeRequest;
 import com.example.demo.entity.board.photoBoard.PhotoBoard;
@@ -8,23 +8,20 @@ import com.example.demo.entity.board.photoBoard.PhotoBoardLike;
 import com.example.demo.repository.board.photoBoard.PhotoBoardLikeRepository;
 import com.example.demo.repository.board.photoBoard.PhotoBoardRepository;
 
-import com.example.demo.service.board.BoardImpl;
+import com.example.demo.service.board.BaseBoardService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Slf4j
 @Service
-public class PhotoBoardServiceImpl extends BoardImpl implements PhotoBoardService {
-
-    String path = "uploadImg";
+public class PhotoBoardServiceImpl extends BaseBoardService {
 
     @Autowired
     private PhotoBoardRepository repository;
@@ -33,7 +30,8 @@ public class PhotoBoardServiceImpl extends BoardImpl implements PhotoBoardServic
     private PhotoBoardLikeRepository likeRepository;
 
     @Override
-    public void register(BoardRequest board, MultipartFile files) throws Exception {
+    public void register(BoardRequest board,
+                         MultipartFile files, String path) throws Exception {
 
         fileUpload(board, files, path);
 
@@ -48,13 +46,13 @@ public class PhotoBoardServiceImpl extends BoardImpl implements PhotoBoardServic
         repository.save(photoBoard);
     }
 
-    @Transactional
+
     @Override
-    public  List<PhotoBoardResponse> list() {
+    public  List<BoardResponse> list() {
                 List<PhotoBoard> photo = repository.findAll(Sort.by(Sort.Direction.DESC, "boardNo"));
-                List<PhotoBoardResponse> response = new ArrayList<>();
+                List<BoardResponse> response = new ArrayList<>();
                  for(PhotoBoard board : photo){
-                     response.add(new PhotoBoardResponse(board.getTitle(), board.getContent(), board.getWriter(),
+                     response.add(new BoardResponse(board.getTitle(), board.getContent(), board.getWriter(),
                              board.getFileName(), board.getBoardNo(), board.getRegDate(), board.getReadCnt(),
                              board.getLikeCnt(), board.getLikeCheck(), board.getCommentCnt()));
                  }
@@ -63,7 +61,7 @@ public class PhotoBoardServiceImpl extends BoardImpl implements PhotoBoardServic
     }
 
    @Override
-    public PhotoBoardResponse read(Integer boardNo) {
+    public BoardResponse read(Integer boardNo) {
         Optional<PhotoBoard> maybeReadBoard = repository.findById(Long.valueOf(boardNo));
 
         if (maybeReadBoard.equals(Optional.empty())) {
@@ -75,7 +73,7 @@ public class PhotoBoardServiceImpl extends BoardImpl implements PhotoBoardServic
         readBoard.readCnt();
         repository.save(readBoard);
 
-        PhotoBoardResponse response = new PhotoBoardResponse(readBoard.getTitle(), readBoard.getContent(), readBoard.getWriter(),
+        BoardResponse response = new BoardResponse(readBoard.getTitle(), readBoard.getContent(), readBoard.getWriter(),
                 readBoard.getFileName(), readBoard.getBoardNo(), readBoard.getRegDate(), readBoard.getReadCnt(),
                                         readBoard.getLikeCnt(), readBoard.getLikeCheck(), readBoard.getCommentCnt());
 
@@ -83,7 +81,7 @@ public class PhotoBoardServiceImpl extends BoardImpl implements PhotoBoardServic
     }
 
     @Override
-    public void modify(Integer boardNo, BoardRequest board, MultipartFile files) throws Exception {
+    public void modify(Integer boardNo, BoardRequest board, MultipartFile files, String path) throws Exception {
 
         //참조 할 수 있도록 boardNo으로 가져오는데 likee에는 boardNo이 중복가능 그럼 결국 writer랑 boardNo으로 가져와야하나?
         //아닌가 애초에 PhotoBoard에 like는 boardNo을 외래키로두고 참조하는것인가 이 게시판에 참조하는걸 다 가져오는게 맞는건가!
@@ -110,7 +108,7 @@ public class PhotoBoardServiceImpl extends BoardImpl implements PhotoBoardServic
     }
 
     @Override
-    public void remove(Integer boardNo) {
+    public void remove(Integer boardNo, String path) {
         //파일삭제
         Optional<PhotoBoard> findFileName = repository.findFileName(Long.valueOf(boardNo));
 

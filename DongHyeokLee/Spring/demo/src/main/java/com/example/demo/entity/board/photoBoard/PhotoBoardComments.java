@@ -27,7 +27,7 @@ public class PhotoBoardComments {
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name= "board_no")
-    private PhotoBoard boardPhoto;
+    private PhotoBoard photoBoard;
 
     @Column(length = 32, nullable = false)
     private String writer;

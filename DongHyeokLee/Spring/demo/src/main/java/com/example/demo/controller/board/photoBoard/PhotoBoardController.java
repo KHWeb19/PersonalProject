@@ -1,10 +1,10 @@
 package com.example.demo.controller.board.photoBoard;
 
-import com.example.demo.dto.response.PhotoBoardResponse;
+import com.example.demo.dto.response.BoardResponse;
 import com.example.demo.dto.request.BoardRequest;
 import com.example.demo.dto.request.CommentRequest;
 import com.example.demo.dto.request.LikeRequest;
-import com.example.demo.service.board.photoBoard.PhotoBoardService;
+import com.example.demo.service.board.photoBoard.PhotoBoardServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -20,8 +20,10 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:8080", allowedHeaders = "*")
 public class PhotoBoardController {
 
+    String path = "uploadImg";
+
     @Autowired
-    private PhotoBoardService service;
+    private PhotoBoardServiceImpl service;
 
     //등록
     @PostMapping(value = "/register",
@@ -30,11 +32,11 @@ public class PhotoBoardController {
                                      @RequestPart(value="files") MultipartFile files) throws Exception {
         log.info("PhotoBoardRegister()" + board + "file" + files);
 
-       service.register(board, files);
+       service.register(board, files, path);
     }
     //목록
    @PostMapping("/list")
-    public  List<PhotoBoardResponse> PhotoBoardList (@RequestBody CommentRequest commentRequest) {
+    public  List<BoardResponse> PhotoBoardList (@RequestBody CommentRequest commentRequest) {
         log.info("PhotoBoardList()" + commentRequest);
 
         String writer = commentRequest.getWriter();
@@ -45,7 +47,7 @@ public class PhotoBoardController {
     }
     //읽기
    @GetMapping("/{boardNo}")
-    public PhotoBoardResponse photoBoardRead (
+    public BoardResponse photoBoardRead (
             @PathVariable("boardNo") Integer boardNo) {
         log.info("photoBoardRead()");
 
@@ -62,7 +64,7 @@ public class PhotoBoardController {
         log.info("photoBoardModify(): " + board + "boardNo" + boardNo);
 
             board.setBoardNo(Long.valueOf(boardNo));
-            service.modify(boardNo, board, files);
+            service.modify(boardNo, board, files , path);
 
         return board;
     }
@@ -73,7 +75,7 @@ public class PhotoBoardController {
         log.info("photoBoardRemove()");
 
         //service.removeFile(boardNo);
-        service.remove(boardNo);
+        service.remove(boardNo, path);
     }
 
     @PostMapping("/like")

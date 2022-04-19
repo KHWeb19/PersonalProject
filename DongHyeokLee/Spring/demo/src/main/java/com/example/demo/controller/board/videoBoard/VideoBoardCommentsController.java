@@ -1,8 +1,8 @@
 package com.example.demo.controller.board.videoBoard;
 
 import com.example.demo.dto.request.CommentRequest;
-import com.example.demo.entity.board.videoBoard.VideoBoardComments;
-import com.example.demo.service.board.videoBoard.VideoBoardCommentsService;
+import com.example.demo.dto.response.CommentResponse;
+import com.example.demo.service.board.videoBoard.VideoBoardCommentsServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -17,7 +17,7 @@ import java.util.List;
 public class VideoBoardCommentsController {
 
     @Autowired
-    private VideoBoardCommentsService service;
+    private VideoBoardCommentsServiceImpl service;
 
     //댓글 등록
     @PostMapping("/register/{boardNo}")
@@ -25,14 +25,14 @@ public class VideoBoardCommentsController {
                                             @Validated @RequestBody CommentRequest commentsRequest) {
 
         log.info("FreeBoardCommentsRegister()" + commentsRequest);
-        commentsRequest.setBoardNo(Long.valueOf(boardNo));
 
-        service.register(commentsRequest);
+
+        service.register(boardNo, commentsRequest);
     }
 
     //댓글 목록
     @GetMapping("/list/{boardNo}")
-    public List<VideoBoardComments> VideoBoardCommentsList (@PathVariable("boardNo") Integer boardNo) {
+    public List<CommentResponse> VideoBoardCommentsList (@PathVariable("boardNo") Integer boardNo) {
         log.info("VideoBoardCommentsList()");
 
         return service.list(boardNo);
@@ -40,15 +40,12 @@ public class VideoBoardCommentsController {
 
     //댓글 수정
     @PutMapping("/{commentNo}")
-    public VideoBoardComments VideoBoardCommentModify (
+    public CommentResponse VideoBoardCommentModify (
             @PathVariable("commentNo") Integer commentNo,
-            @RequestBody VideoBoardComments videoBoardComments) {
-        log.info("freeBoardCommentModify(): " + videoBoardComments);
+            @Validated @RequestBody CommentRequest commentRequest) {
+        log.info("freeBoardCommentModify(): " + commentRequest);
 
-        videoBoardComments.setCommentNo(Long.valueOf(commentNo));
-        service.modify(videoBoardComments);
-
-        return videoBoardComments;
+        return service.modify(commentNo, commentRequest);
     }
 
 

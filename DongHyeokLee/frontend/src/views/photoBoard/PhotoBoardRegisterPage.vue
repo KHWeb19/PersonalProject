@@ -26,11 +26,11 @@ export default {
     },
     methods: {
         onSubmit (payload) {
-            const { title, content, writer, files } = payload
+            const { title, comment, writer, files } = payload
             let formData = new FormData()
             let board = {
                     title,
-                    content,
+                    comment,
                     writer
             }
     

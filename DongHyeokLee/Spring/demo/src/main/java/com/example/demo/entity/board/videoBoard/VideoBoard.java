@@ -1,23 +1,29 @@
 package com.example.demo.entity.board.videoBoard;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.example.demo.entity.board.photoBoard.PhotoBoardComments;
+import com.example.demo.entity.board.photoBoard.PhotoBoardLike;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
-@Data
+@Setter
+@Getter
 @Entity
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class VideoBoard {
+
     @Id
+    @Column(name="board_no")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long boardNo;
 
@@ -34,7 +40,16 @@ public class VideoBoard {
     private String content;
 
     @Column
-    private int count;
+    private int readCnt;
+
+    @Column
+    private int likeCheck;
+
+    @Formula("(Select count(1) From video_board_like c Where c.board_No = board_No)")
+    private int likeCnt;
+
+    @Formula("(Select count(1) From video_board_comments c Where c.board_No = board_No)")
+    private int commentCnt;
 
     @CreationTimestamp
     private Date regDate;
@@ -42,8 +57,21 @@ public class VideoBoard {
     @UpdateTimestamp
     private Date updDate;
 
-    public VideoBoard(String fileName) {
-        this.fileName = fileName ;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "videoBoard", fetch = FetchType.LAZY,  cascade = CascadeType.ALL)
+    private List<VideoBoardLike> likes = new ArrayList<>();
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "videoBoard", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<VideoBoardComments> comments = new ArrayList<>();
+
+    public void likeCheckZero(){
+        likeCheck = 0;
+    }
+
+    public void readCnt() {
+        this.readCnt++;
     }
 
 

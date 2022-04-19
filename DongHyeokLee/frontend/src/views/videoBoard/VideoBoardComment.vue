@@ -23,7 +23,7 @@ export default {
     },
     data () {
     return {
-        boardName: 'photoBoardComments'
+        boardName: 'videoBoardComments'
     }
     },
     components: {
@@ -43,9 +43,9 @@ export default {
        methods: {
         ...mapActions(['fetchVideoBoardCommentsList']),
          onSubmit (payload) {
-            const { writer, content } = payload
+            const { writer, comment } = payload
             const boardNo = this.boardNo
-            axios.post(`http://localhost:7777/videoBoardComments/register/${boardNo}`, { writer, content })
+            axios.post(`http://localhost:7777/videoBoardComments/register/${boardNo}`, { writer, comment })
                     .then(() => {
                         alert('댓글 등록')
                         this.$router.go()
