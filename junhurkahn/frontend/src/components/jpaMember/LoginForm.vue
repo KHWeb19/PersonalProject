@@ -2,17 +2,20 @@
 
   <v-container>
     
-    <form @submit.prevent="onSubmit">
+      
+        <form  @submit.prevent="onSubmit" action="index.html" method="post" >
+            <div class="box">
      
       <h3>로그인 형식</h3>
-      <table border="1">
+      <table>
         <tr>
-          <td>아 이 디</td>
-          <td><input type="text" v-model="id"></td>
+        
+          <input class="username" v-model="id" name="username" type="text" placeholder="User Name" >
         </tr>
+        
         <tr>
-          <td>비밀번호</td>
-          <td><input type="password" v-model="pw"></td>
+       
+           <input class="username"   v-model="pw" name="username" type="password" placeholder="Password">
         </tr>
       </table>
 
@@ -22,9 +25,11 @@
           취소
         </router-link>
       </div>
-      
+      </div>
     </form>
+        
     
+  
   </v-container>
 
 </template>
@@ -50,5 +55,47 @@ export default {
 </script>
 
 <style scoped>
+
+ 
+
+        #absoluteCenteredDiv{
+            position: absolute;
+            top:0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            width:400px;
+            height: 300px;
+            text-align: center;
+       }
+
+        .fpwd{
+            color:#f1c40f;
+            text-decoration: underline;
+        }
+
+          p{
+          font-size:12px;
+          text-decoration: none;
+          color:#ffffff;
+        }
+
+           h1{
+          font-size:1.5em;
+          color:#525252;
+        }
+
+        .username{
+          background:#ecf0f1;
+          border: #ccc 1px solid;
+          border-bottom: #ccc 2px solid;
+          padding: 8px;
+          width:250px;
+          color:#AAAAAA;
+          margin-top:10px;
+          font-size:1em;
+          border-radius:4px;
+        }
 
 </style>

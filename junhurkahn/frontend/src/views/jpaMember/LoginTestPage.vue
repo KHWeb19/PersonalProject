@@ -1,5 +1,7 @@
 <template>
 
+
+
 <v-app id="inspire">
     <v-app-bar app clipped-right color="blue" dark>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
@@ -12,21 +14,34 @@
 
 <div align="center">
  
-  <div>
-    <div>
-      <h2>Login</h2>
-    </div>
-    <login-form @submit="onSubmit"/>
-    <v-spacer></v-spacer>
-    <v-btn tile color="teal lighten-4" @click="logout">
-      <v-icon left>
-        mdi-logout
-      </v-icon>
-      로그 아웃
-    </v-btn>
-  </div>
-</div>
+
+
+ <title>Simple Login Form Template | Tutorial Jinni</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:700,600' rel='stylesheet' type='text/css'>
+
+   <div id="absoluteCenteredDiv">
+        <form action="index.html" method="post">
+            <div class="box">
+                <h1>Login</h1>
+              
+                <login-form @submit="onSubmit"/>
+                
+                
+                <div class="button" v-btn tile color="teal lighten-4" @click="logout" > 로그 아웃</div>
+            </div>
+        </form>
+     
+   
+    </div>   
+</div>     
 </v-app>
+
+
+    
+	
+  
 </template>
 
 <script>
@@ -99,5 +114,77 @@ export default {
 
 <style scoped>
 h3{color: white;}
+
+  
+        body{
+          font-family: 'Open Sans', sans-serif;
+          background:#3498db;
+          margin: 0 auto 0 auto;  
+          width:100%; 
+          text-align:center;
+          margin: 20px 0px 20px 0px;   
+        }
+        p{
+          font-size:12px;
+          text-decoration: none;
+          color:#ffffff;
+        }
+        h1{
+          font-size:1.5em;
+          color:#525252;
+        }
+        .box{
+          background:white;
+          width:300px;
+          border-radius:6px;
+          margin: 0 auto 0 auto;
+          padding:0px 0px 70px 0px;
+          border: #2980b9 4px solid; 
+        }
+        .username{
+          background:#ecf0f1;
+          border: #ccc 1px solid;
+          border-bottom: #ccc 2px solid;
+          padding: 8px;
+          width:250px;
+          color:#AAAAAA;
+          margin-top:10px;
+          font-size:1em;
+          border-radius:4px;
+        }
+        .button{
+          background:#2ecc71;
+          width:125px;
+          padding-top:5px;
+          padding-bottom:5px;
+          color:white;
+          border-radius:4px;
+          border: #27ae60 1px solid;
+          margin-top:20px;
+          margin-bottom:20px;
+          float:left;
+          margin-left:88px;
+          font-weight:800;
+          font-size:0.8em;
+        }
+        .button:hover{
+          background:#2CC06B; 
+        }
+        .fpwd{
+            color:#f1c40f;
+            text-decoration: underline;
+        }
+       #absoluteCenteredDiv{
+            position: absolute;
+            top:0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            width:400px;
+            height: 300px;
+            text-align: center;
+       }
+   
 </style>
 
