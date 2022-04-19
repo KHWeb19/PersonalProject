@@ -29,6 +29,12 @@ public class TipBoardServiceImpl implements TipBoardService {
     }
 
     @Override
+    public List<TipBoard> getTipBoardList() {
+        log.info("getTipBoardList ServiceIMPL");
+        return repository.findAll();
+    }
+
+    @Override
     public TipBoard read(Integer boardNo) {
         Optional<TipBoard> maybeReadBoard = repository.findById(Long.valueOf(boardNo));
 //Optional: null일 수도 있는 객체를 감싸는 일종의 Wrapper 클래스

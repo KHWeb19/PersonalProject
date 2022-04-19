@@ -32,6 +32,12 @@ public class TipBoardController {
         return service.list();
     }
 
+    @GetMapping("getTipBoardList")
+    public List<TipBoard> getTipBoardList(){
+        log.info("getTipBoardList()");
+        return service.getTipBoardList();
+    }
+
     @GetMapping("/{boardNo}")
     public TipBoard tipBoardRead (
             @PathVariable("boardNo") Integer boardNo) {
