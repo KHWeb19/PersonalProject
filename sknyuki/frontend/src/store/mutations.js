@@ -8,6 +8,9 @@ import {
     USER_LOGIN,
     FETCH_USER_INFO,
     FETCH_SESSION,
+
+    FETCH_CHECK_BRAND_COMMENTS,
+    FETCH_CHECK_BRAND_COMMENT
 } from './mutation-types'
 
 export default {
@@ -25,6 +28,7 @@ export default {
       state.QuestionBoard = QuestionBoard
     },
 
+
     [USER_LOGIN] (state, isLogin) {
         state.isLogin = isLogin
         console.log('isLogin: ' + isLogin)
@@ -35,5 +39,13 @@ export default {
       },
       [FETCH_SESSION] (state, session) {
         state.session = session
+      },
+
+
+      [FETCH_CHECK_BRAND_COMMENTS] (state, comments) {
+        state.checkbrandComments = comments
+      },
+      [FETCH_CHECK_BRAND_COMMENT] (state, comment) {
+        state.checkbrandComment = comment
       },
 }
