@@ -1,9 +1,9 @@
 <template>
     <v-container>
-            <v-form enctype="multipart/form-data" @submit.prevent="onBoardSubmit">
+            <v-form @submit.prevent="onReviewSubmit">
                 <table>
                     <v-row justify="center">
-                        <v-col cols="1" class="label">Title</v-col>
+                        <v-col cols="1" class="label" >Title</v-col>
                         <v-col>
                             <v-combobox
                             class="titleFloat"
@@ -11,7 +11,7 @@
                                 :items="items"
                                 label="말머리"
                                 filled
-                                style="width:130px; zoom:1"
+                                style="width:100px; zoom:1"
                                 outlined
                                 dense
                                 color="red darken-3"
@@ -20,14 +20,14 @@
                         </v-col>
                     </v-row>
                     <v-row  wrap justify="center">
-                        <v-col cols="2" class="label" > Content </v-col>
+                        <v-col cols="1" class="label" > Image </v-col>
                         <v-col>
                         <input type="file" id="files" ref="files"  dense style="width:300px"
                                 multiple v-on:change="handleFileUpload()"/>
                         </v-col>
                     </v-row>
                     <v-row justify="center">
-                        <v-col cols="7">
+                        <v-col cols="9">
                             <div class="notice">* 최대 5개의 이미지 등록 가능</div>
                         </v-col>
                     </v-row>
@@ -40,17 +40,21 @@
                             <p/>
                         </div>
                         </v-col>
-                             <v-col cols="12">
+                    </v-row>
+                    <v-row  justify="center">
+                        <v-col cols="3" class="label" style="font-size:23pt">Content</v-col>
+                        <v-col cols="12">
                             <v-textarea style="white-space:pre-line" cols="70" rows="15" 
-                            outlined color="red darken-3" placeholder="글을 작성해주세요"
+                            outlined color="red darken-3" placeholder="글 내용을 작성해주세요"
                             v-model="content">
                             </v-textarea>
                         </v-col>
                     </v-row>
-                 
-                    <v-row wrap>
-                        <v-btn @click="goPage" class="writeBtn" color="black" dark>cancle</v-btn>
-                        <v-btn type="submit" class="writeBtn2" color="red darken-3" dark>write</v-btn>
+                     <v-row wrap>
+                        <v-btn class="writeBtn" color="black" dark>
+                            <router-link :to="{ name: 'ReviewReadPage',
+                                    params: { reviewNo: review.reviewNo.toString() } }" style="color:white">cancle</router-link></v-btn>
+                        <v-btn type="submit" class="writeBtn2" color="red darken-3" dark>Modify</v-btn>
                     </v-row>
                 </table>
             </v-form>
@@ -58,31 +62,31 @@
 </template>
 
 <script>
-
 export default {
-    name:'CommunityBoardWirte',
-    data() {
+    name:'ReviewModify',
+    props: {
+        review: {
+            type: Object,
+            required: true
+        }
+    },
+    data () {
         return {
+            title: '',
+            content: '',
             image :'',
-            title:'',
-            content:'',
             brackets: [],
             items: [
-            '[전자기기]',
-            '[서적]',
-            '[프로젝트]',            
+            '[사담]',
+            '[질문]'
             ],
             files:[],
             filesPreview:[],
-            response: ''
         }
     },
-    created () {
-        this.writer = this.$store.state.userInfo.name
-    },
     methods: {
-        handleFileUpload () {
-             console.log(this.$refs.files.files)
+            handleFileUpload () {
+           console.log(this.$refs.files.files)
 
             if(this.$refs.files.files.length > 5) {
                 alert("선택할 수 있는 이미지 갯수를 초과하셨습니다.")
@@ -104,9 +108,9 @@ export default {
 
             }
         },
-        onBoardSubmit () {
+         onReviewSubmit () {
 
-            const { title, writer, content, brackets} = this
+            const { title, writer, content, brackets, viewCnt} = this
             let formData = new FormData()
 
             for (let idx = 0; idx <  this.$refs.files.files.length; idx++) {
@@ -117,21 +121,24 @@ export default {
             formData.append('writer', writer)
             formData.append('brackets', brackets)
             formData.append('content', content)
+            formData.append('viewCnt', viewCnt)
             
             this.$emit('submit', {formData})
             console.log(formData)
 
         },
-        goPage (){
-            this.$router.push('/review')
-        }
+    },
+    created () {
+        this.writer = this.review.writer
+        this.title = this.review.title
+        this.content = this.review.content
+        this.brackets = this.review.brackets
+        this.viewCnt = this.review.viewCnt
     }
-
 }
 </script>
-<style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap');
 
+<style scoped>
 .label{
     margin-right:3%;
     text-align: center;
@@ -153,6 +160,10 @@ table{
 .v-combobox, .v-text-field, .v-textarea, #files{
     font-family: 'Noto Sans KR', sans-serif;
 }
+.titleFloat {
+    float:left;
+    margin-right:3%;
+}
 .writeBtn {
     position: relative;
     margin-top:1.5%;
@@ -166,10 +177,6 @@ table{
     margin-left:68%;
     float:left;
 }
-.titleFloat {
-    float:left;
-    margin-right:3%;
-}
 .preview {
     position: relative;
     margin-left: auto;
@@ -182,11 +189,12 @@ table{
     font-family: 'Noto Sans KR', sans-serif;
     color: rgb(228, 23, 23);
 }
-
 @media (max-width:700px){
     table {
+        top:4%;
+        margin-left:10px;
         zoom:60%;
-        margin-bottom:30px;
+        margin-bottom:50px;
     }
 }
 </style>

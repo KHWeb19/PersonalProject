@@ -20,17 +20,7 @@ export default {
     name: 'ReviewWritePage',
     methods: {
         onBoardSubmit (payload) {
-            const { title, content, writer, brackets, file} = payload
-
-            let formData = new FormData()
-
-            if (file != null ){formData.append('file', file)}
-            formData.append('title',title)
-            formData.append('content', content)
-            formData.append('writer', writer)
-            formData.append('brackets', brackets)
-
-            console.log(formData)
+            const {formData} = payload
        
             axios.post('http://localhost:7777/board/review/register', formData, { headers: {
                     'Content-Type': 'multipart/form-data'

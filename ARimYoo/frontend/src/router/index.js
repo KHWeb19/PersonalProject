@@ -16,6 +16,8 @@ import CommunityBoardSearchPage from '../views/board/communityBoard/CommunityBoa
 
 import ReviewPage from '../views/board/review/ReviewPage.vue'
 import ReviewWritePage from '../views/board/review/ReviewWritePage.vue'
+import ReviewReadPage from '../views/board/review/ReviewReadPage.vue'
+import ReviewModifyPage from '../views/board/review/ReviewModifyPage.vue'
 
 Vue.use(VueRouter)
 
@@ -117,6 +119,29 @@ const routes = [
         path: '/review/write',
         name: 'ReviewWritePage',
         component: ReviewWritePage,
+        beforeEnter: requireLogin()
+    },
+    {
+        path: '/review/:reviewNo',
+        name: 'ReviewReadPage',
+        components: {
+            default:
+                ReviewReadPage
+        },
+        props: {
+            default: true
+        },
+        beforeEnter: requireLogin()
+    },
+    {
+        path: '/review/modify/:reviewNo',
+        name: 'ReviewModifyPage',
+        components: {
+            default: ReviewModifyPage
+        },
+        props: {
+            default: true
+        },
         beforeEnter: requireLogin()
     },
 

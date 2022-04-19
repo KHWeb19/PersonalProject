@@ -17,7 +17,7 @@
                    <div style="color:#D50000; float:left" >
                        [{{ item.commentCnt }}] &nbsp;
                    </div>
-                   <div v-if="item.fileName">
+                   <div v-if="item.fileName1">
                        <v-icon style="zoom:0.9">
                            mdi-image
                        </v-icon>
