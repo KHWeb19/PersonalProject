@@ -70,4 +70,12 @@ public class MemberController {
         return memberResponse;
     }
 
+    @DeleteMapping("/{id}")
+    public void memberRemove (
+            @PathVariable("id") String id) {
+        log.info("memberRemove()");
+
+        service.remove(id);
+    }
+
 }

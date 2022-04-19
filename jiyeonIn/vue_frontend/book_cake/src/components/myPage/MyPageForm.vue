@@ -39,7 +39,10 @@
                     <v-text-field flat v-model="pw1" type="password"  dense  placeholder="비밀번호 변경 확인" :rules="rules_pw1"></v-text-field>
                     <br>
                     <v-btn color="black" text type="submit" width="260"  style="text-align: center; margin: 0 0 0 18%;">
-                    <v-icon>mdi-login</v-icon>정보 수정하기</v-btn>
+                    정보 수정하기</v-btn>
+                    <br>
+                    <v-btn color="black" text type="button" @click="deleteInfo" width="260"  style="text-align: center; margin: 0 0 0 18%;">
+                    <v-icon>mdi-login</v-icon>회원 탈퇴하기</v-btn>
                 </v-container>
 
                 
@@ -50,6 +53,7 @@
 </template>
 
 <script>
+import axios from 'axios'
     export default {
         name: 'MyPageForm',
         props: {
@@ -91,6 +95,22 @@
                     this.$emit('submit', { userName, password, auth })
                 }
                 
+            },
+            deleteInfo() {
+                alert('지우는 게시물 번호: ' + this.id)
+                axios.delete(`http://localhost:7777/Member/${this.id}`)
+                        .then(() => {
+                            alert('탈퇴되었습니다.')
+                            this.$cookies.remove("user")
+                            this.isLogin = false
+                            this.$store.state.userInfo = null
+                            window.localStorage.removeItem("token")
+                            this.$router.push({ name: 'MainHomepage' })
+                            
+                        })
+                        .catch(() => {
+                            alert('삭제 실패! 문제 발생!')
+                        })
             }
         }
     }

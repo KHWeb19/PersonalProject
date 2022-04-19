@@ -9,4 +9,5 @@ public interface MemberService {
     public Boolean checkUserIdValidation(String id);
     public MemberRequest read(String id);
     public void modify(MemberResponse member);
+    public void remove(String id);
 }

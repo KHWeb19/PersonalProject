@@ -150,5 +150,15 @@ public class MemberServiceImpl implements MemberService {
 
     }
 
+    @Override
+    public void remove(String id) {
+        Optional<Member> maybeMember = memberRepository.findByUserId(id);
+        Member loginMember = maybeMember.get();
+        log.info("before member info:" +loginMember);
+
+        memberRepository.deleteById(loginMember.getMemberNo());
+
+    }
+
 
 }
