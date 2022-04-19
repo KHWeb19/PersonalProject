@@ -8,10 +8,10 @@ import java.util.List;
 
 public interface ReviewService {
 
-    public void register (Review review, @RequestParam(required = false) MultipartFile file) throws Exception;
+    public void register (Review review, @RequestParam(required = false) List<MultipartFile> file) throws Exception;
     public List<Review> list ();
     public Review read (Long reviewNo);
-    public void modify (Review review, @RequestParam(required = false) MultipartFile file) throws Exception;
+    public void modify ( Review review, @RequestParam(required = false) List<MultipartFile> file) throws Exception;
     public void remove (Integer reviewNo) throws Exception ;
     public List<Review> searchList (String keyword);
 }

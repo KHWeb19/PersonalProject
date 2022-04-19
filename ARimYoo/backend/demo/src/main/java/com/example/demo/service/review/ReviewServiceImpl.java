@@ -25,17 +25,33 @@ public class ReviewServiceImpl implements ReviewService {
     ReviewRepository repository;
 
     @Override
-    public void register(Review review, @RequestParam(required = false) MultipartFile file) throws Exception {
+    public void register(Review review, @RequestParam(required = false) List<MultipartFile> file) throws Exception {
 
-        if (file != null) {
-            UUID uuid = UUID.randomUUID();
-            String fileName = uuid + "_" + file.getOriginalFilename();
-            FileOutputStream saveFile = new FileOutputStream("../../frontend/src/assets/back/" + fileName);
+        try {
+            if (file != null) {
+                    for (MultipartFile multipartFile : file) {
+                        UUID uuid = UUID.randomUUID();
+                        String fileName = uuid + "_" + multipartFile.getOriginalFilename();
+                        FileOutputStream saveFile = new FileOutputStream("../../frontend/src/assets/back/review/" + fileName);
 
-            saveFile.write(file.getBytes());
-            saveFile.close();
+                        saveFile.write(multipartFile.getBytes());
+                        saveFile.close();
 
-            review.setFileName(fileName);
+                        if (multipartFile == file.get(0)) {
+                            review.setFileName1(fileName);
+                        } else if ( multipartFile == file.get(1)){
+                            review.setFileName2(fileName);
+                        } else if (multipartFile == file.get(2)) {
+                            review.setFileName3(fileName);
+                        } else if (multipartFile == file.get(3)) {
+                            review.setFileName4(fileName);
+                        } else {
+                            review.setFileName5(fileName);
+                        }
+                    }
+            }
+        } catch (Exception e) {
+            log.info("Upload Fail!!!");
         }
 
         repository.save(review);
@@ -62,39 +78,39 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public void modify(Review review, @RequestParam(required = false) MultipartFile file) throws Exception {
-        log.info(review.getFileName());
+    public void modify(Review review, @RequestParam(required = false) List<MultipartFile> file) throws Exception {
 
-        if (review.getFileName().equals(Optional.empty())) {
-            Path filePath = Paths.get("c:\\khweb19\\PersonalProject\\ARimYoo\\frontend\\src\\assets\\back\\review\\" + review.getFileName());
-            Files.delete(filePath);
+        try {
+            if (file != null) {
+                for (MultipartFile multipartFile : file) {
+                    UUID uuid = UUID.randomUUID();
+                    String fileName = uuid + "_" + multipartFile.getOriginalFilename();
+                    FileOutputStream saveFile = new FileOutputStream("../../frontend/src/assets/back/review/" + fileName);
+
+                    saveFile.write(multipartFile.getBytes());
+                    saveFile.close();
+
+                    if (multipartFile == file.get(0)) {
+                        review.setFileName1(fileName);
+                    } else if ( multipartFile == file.get(1)){
+                        review.setFileName2(fileName);
+                    } else if (multipartFile == file.get(2)) {
+                        review.setFileName3(fileName);
+                    } else if (multipartFile == file.get(3)) {
+                        review.setFileName4(fileName);
+                    } else {
+                        review.setFileName5(fileName);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            log.info("Upload Fail!!!");
         }
-
-        if (file != null) {
-
-            UUID uuid = UUID.randomUUID();
-            String fileName = uuid + "_" + file.getOriginalFilename();
-            FileOutputStream saveFile = new FileOutputStream("../../frontend/src/assets/back/review/" + fileName);
-
-            saveFile.write(file.getBytes());
-            saveFile.close();
-
-            review.setFileName(fileName);
-        }
-
         repository.save(review);
     }
 
     @Override
     public void remove(Integer reviewNo) throws Exception {
-        Optional<Review> selectFile = repository.findById(Long.valueOf(reviewNo));
-        Review deleteFile = selectFile.get();
-        System.out.println(deleteFile.getFileName());
-
-        if (deleteFile.getFileName() != null) {
-            Path filePath = Paths.get("c:\\khweb19\\PersonalProject\\ARimYoo\\frontend\\src\\assets\\back\\review\\" + deleteFile.getFileName());
-            Files.delete(filePath);
-        }
 
         repository.deleteById(Long.valueOf(reviewNo));
     }
@@ -105,5 +121,5 @@ public class ReviewServiceImpl implements ReviewService {
         return findList;
     }
 
-
 }
+

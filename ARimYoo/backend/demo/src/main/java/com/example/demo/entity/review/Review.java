@@ -40,7 +40,19 @@ public class Review {
     private String brackets;
 
     @Column
-    private String fileName;
+    private String fileName1;
+
+    @Column
+    private String fileName2;
+
+    @Column
+    private String fileName3;
+
+    @Column
+    private String fileName4;
+
+    @Column
+    private String fileName5;
 
     @Column
     private int viewCnt = 0;
@@ -69,7 +81,8 @@ public class Review {
         this.viewCnt++;
     }
 
-    public Review (String fileName){
-        this.fileName = fileName;
+    public Review (String fileName1, String fileName2){
+        this.fileName1 = fileName1;
+        this.fileName2 = fileName2;
     }
 }
