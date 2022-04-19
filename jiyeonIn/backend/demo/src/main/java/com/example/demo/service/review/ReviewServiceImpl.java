@@ -102,4 +102,9 @@ public class ReviewServiceImpl implements ReviewService{
         }
     }
 
+    @Override
+    public List<Review> checkIdlist(String checkId) {
+        return repository.findIdList(checkId);
+    }
+
 }

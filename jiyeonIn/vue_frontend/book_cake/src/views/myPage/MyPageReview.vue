@@ -3,7 +3,7 @@
         <main-page-form></main-page-form>
 
         <div class="myPage">
-            <my-page-review-form></my-page-review-form>
+            <my-page-review-form :reviewsIdLists="reviewsIdLists"></my-page-review-form>
         </div>
 
         <footer-form></footer-form>
@@ -14,6 +14,8 @@
 import MainPageForm from '@/components/layout/MainPageForm.vue'
 import FooterForm from '@/components/layout/FooterForm.vue'
 import MyPageReviewForm from '@/components/myPage/MyPageReviewForm.vue'
+import { mapState, mapActions } from 'vuex'
+
     export default {
         name: 'MyPageReview',
         components:{
@@ -27,6 +29,15 @@ import MyPageReviewForm from '@/components/myPage/MyPageReviewForm.vue'
                 type: String,
                 required: true
             }
+        },
+        computed: {
+            ...mapState(['reviewsIdLists'])
+        },
+        mounted() {
+            this.fetchReviewsIdLists(this.id)
+        },
+        methods: {
+            ...mapActions(['fetchReviewsIdLists'])
         }
     }
 </script>

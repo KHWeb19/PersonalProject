@@ -5,7 +5,8 @@ import {
     FETCH_BOARD_COMMENTS,
     FETCH_REVIEWS,
     FETCH_MEMBER_INFO,
-    BOOKING_ID_LISTS
+    BOOKING_ID_LISTS,
+    FETCH_REVIEWS_LISTS
 }from './mutation-types'
 
 export default {
@@ -32,5 +33,8 @@ export default {
     },
     [BOOKING_ID_LISTS] (state, bookingIdLists) {
         state.bookingIdLists = bookingIdLists
+    },
+    [FETCH_REVIEWS_LISTS] (state, reviewsIdLists) {
+        state.reviewsIdLists = reviewsIdLists
     },
 }
