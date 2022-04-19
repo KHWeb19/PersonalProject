@@ -3,7 +3,7 @@
         <main-page-form></main-page-form>
 
         <div class="myPage">
-            <my-page-review-form :reviewsIdLists="reviewsIdLists"></my-page-review-form>
+            <my-page-review-form :reviewsIdLists="reviewsIdLists" @submit="modifySubmit"></my-page-review-form>
         </div>
 
         <footer-form></footer-form>
@@ -15,6 +15,7 @@ import MainPageForm from '@/components/layout/MainPageForm.vue'
 import FooterForm from '@/components/layout/FooterForm.vue'
 import MyPageReviewForm from '@/components/myPage/MyPageReviewForm.vue'
 import { mapState, mapActions } from 'vuex'
+import axios from 'axios'
 
     export default {
         name: 'MyPageReview',
@@ -30,6 +31,11 @@ import { mapState, mapActions } from 'vuex'
                 required: true
             }
         },
+        data() {
+            return {
+
+            }
+        },
         computed: {
             ...mapState(['reviewsIdLists'])
         },
@@ -37,7 +43,42 @@ import { mapState, mapActions } from 'vuex'
             this.fetchReviewsIdLists(this.id)
         },
         methods: {
-            ...mapActions(['fetchReviewsIdLists'])
+            ...mapActions(['fetchReviewsIdLists']),
+            modifySubmit(payload) {
+                const { dbrAction, modifyContent, modifyRegDate, modifyNo, files2 } = payload
+
+                let formData = new FormData()
+
+                let fileInfo = {
+                id: dbrAction,
+                content : modifyContent,
+                regDate : modifyRegDate,
+                reviewNo : modifyNo
+                }
+
+                console.log(fileInfo)
+
+                formData.append(
+                    "info", new Blob([JSON.stringify(fileInfo)], {type:"application/json"})
+                )
+
+                if(files2.length > 0) {
+                    for(let idx = 0; idx <1; idx++) {
+                        formData.append('fileList', this.files2[idx])
+                    }
+                }
+
+                axios.put('http://localhost:7777/review/modify', formData)
+                        .then(() => {
+                            alert('수정되었습니다!')
+                            this.$router.go()
+                        })
+                        .catch(() => {
+                            alert('수정 실패!')
+                        })
+            }
+
+            
         }
     }
 </script>

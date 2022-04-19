@@ -89,7 +89,7 @@
                         <v-card-actions>
                         <v-spacer></v-spacer>
                         <v-btn color="white" @click="deleteDialog = false">돌아가기</v-btn>
-                        <v-btn color="white" @click="deleteDialog = false, deleteReview()">삭제합니다</v-btn>
+                        <v-btn color="white" @click="deleteReview">삭제합니다</v-btn>
                         </v-card-actions>
                     </v-card>   
                 </v-dialog>
@@ -128,6 +128,29 @@
                 reviewNo: '',
                 dbrAction: (window.localStorage.getItem('id')),
                 showArr:[],
+                files2:''
+            }
+        },
+        methods: {
+             editItem(item){
+                this.dialog = true, 
+                this.modifyNo = item.reviewNo
+                this.modifyContent = item.content
+                this.modifyRegDate = item.regDate
+            },
+            deleteItem(item){
+                this.deleteDialog = true
+                this.deleteNo = item.reviewNo
+            },
+            handleFileUpload2() {
+                this.files2 = this.$refs.files2.files
+            },
+            modifySubmit() {
+                const { dbrAction, modifyContent, modifyRegDate, modifyNo, files2 } = this
+                this.$emit('submit', { dbrAction, modifyContent, modifyRegDate, modifyNo, files2 })
+            },
+            deleteReview() {
+
             }
         }
     }
