@@ -42,7 +42,4 @@ public class Member {
         this.address = memberDto.getAddress();
     }
 
-
-
-
 }

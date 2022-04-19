@@ -29,6 +29,9 @@ export default {
         return axios.get(`http://localhost:7777/member/mypage/${id}`)
             .then(res => {
             cookies.set('session', res.data.id)
+
+            console.log("아이디체크: " + res.data.id)
+            
             commit(FETCH_USER_INFO, res.data)
         })
     },

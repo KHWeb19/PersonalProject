@@ -27,6 +27,13 @@
   </v-container>
           -->
 
+
+            <v-btn v-on="on" router :to="{path: '/cartPage'}" icon>
+              <v-badge content="2" vaslue="2" color="green" overlap>
+              <v-icon>mdi-cart</v-icon>
+              </v-badge>
+            </v-btn>
+            
           <!-- 로그인, 장바구니, 마이페이지, 게시판--> 
             <v-btn v-if="isLogin === false" router :to="{path: '/loginPage'}" plain background-color="transparent" color="basil"> 
               LOGIN 
@@ -39,6 +46,8 @@
             <v-btn router :to="{path: '/myPage'}" plain background-color="transparent" color="basil">
               MY PAGE
             </v-btn>   
+
+             
   
             <v-btn plain background-color="transparent" color="basil" router :to="{path: '/noticeListPage'}">
               NOTICE
@@ -46,6 +55,10 @@
 
             <v-btn plain background-color="transparent" color="basil" router :to="{path: '/qnaListPage'}">
               Q&A
+            </v-btn>
+
+            <v-btn v-if="this.userInfo.id === 'admin'" router :to="{ path : '/adminPage'}" plain background-color="transparent" color="basil">
+            ADMIN
             </v-btn>
               
           </v-card-title>
@@ -137,7 +150,7 @@ export default {
 
     },
     computed: {
-      ...mapState(['isLogin'])
+      ...mapState(['userInfo','isLogin'])
     },
     methods: {
       ...mapActions(['fetchSession']),

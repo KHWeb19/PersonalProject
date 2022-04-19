@@ -8,6 +8,8 @@ import LoginPage from '@/views/project/LoginPage.vue'
 import JoinPage from '@/views/project/JoinPage.vue'
 import MyPage from '@/views/project/MyPage.vue'
 
+import AdminPage from '@/views/admin/AdminPage.vue'
+
 import LookBookPage from '@/views/project/LookBookPage.vue'
 
 import NoticeListPage from '@/views/notice/NoticeListPage.vue'
@@ -88,6 +90,11 @@ const routes = [
     component: MyPage
   },
   {
+    path: '/adminPage',
+    name: 'AdminPage',
+    component: AdminPage
+  },
+  {
     path: '/noticeListPage',
     name: 'NoticeListPage',
     component: NoticeListPage
@@ -120,6 +127,7 @@ const routes = [
   {
     path: '/qnaListPage',
     name: 'QnAListPage',
+    beforeEnter: onlyAuthUser,
     component: QnAListPage
   },
   {

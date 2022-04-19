@@ -1,7 +1,8 @@
 <template>
     <div>
-         <v-container fluid fill-height stlye="max-width:600px;">
-            <form ref="form" @submit.prevent="login">
+        <v-container fluid fill-height stlye="max-width:600px;">
+
+            <form ref="form" @submit.prevent="login" lazy-validation>
                 <v-layout align-content-center>
                     <v-flex md12>               
                             <v-toolbar flat>
@@ -33,9 +34,8 @@
                     </v-flex>
                 </v-layout>
             </form>
-    </v-container>
 
-
+        </v-container>
     </div>
 </template>
 
@@ -58,8 +58,8 @@ export default {
         //         '판매자',
         //         '관리자'
         //     ],
-            id: '',
-            pw: '',
+            id: null,
+            pw: null,
             formError: false
         }
     },
@@ -91,16 +91,17 @@ export default {
                 this.$refs[f].validate(true)
             })
 
+
             // const auth = this.auth
             const id = this.id
             const pw = this.pw
 
-             axios.post('http://localhost:7777/member/login', { id, pw }).then(res => {
+             axios.post('http://localhost:7777/member/login', { id, pw })
+                .then(res => {
         
                 if (res.data) {
                 
                 this.$store.commit('USER_LOGIN', res.data)
-                console.log(res.data)
                 
                 this.fetchUserInfo(id)
                 alert('로그인이 완료되었습니다!')
