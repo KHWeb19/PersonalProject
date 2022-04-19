@@ -6,7 +6,7 @@
       </v-row>
       <v-row>
         <v-col v-for="food in bestFoodBoards" :key="food.boardNo" lg="3" sm="6">
-          <v-card width="500" height="400" class="mx-auto">
+          <v-card width="500" height="380" class="mx-auto">
             <div style="position: relative">
               <div class="rankNum">rank</div>
               <router-link
@@ -50,7 +50,7 @@
                 >{{ food.commentCnt }}</v-card-text
               >
             </v-card-actions>
-            <v-card-actions>
+            <v-card-actions class="pl-0 pb-0 pt-0">
               <v-card-text class="food_date">{{ food.regDate }}</v-card-text>
             </v-card-actions>
           </v-card>

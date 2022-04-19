@@ -36,7 +36,7 @@
           lg="3"
           sm="6"
         >
-          <v-card width="500" height="400" class="mx-auto">
+          <v-card width="500" height="380" class="mx-auto">
             <router-link
               :to="{
                 name: 'FoodDetailPage',
@@ -76,7 +76,7 @@
                 >{{ food.commentCnt }}</v-card-text
               >
             </v-card-actions>
-            <v-card-actions>
+            <v-card-actions class="pl-0 pb-0 pt-0">
               <v-card-text class="food_date">{{ food.regDate }}</v-card-text>
             </v-card-actions>
           </v-card>
@@ -104,22 +104,26 @@ export default {
 
   methods: {
     search() {
-      const { keyWord } = this;
-      axios
-        .post("http://localhost:7777/foodBoard/search", { keyWord })
-        .then((res) => {
-          console.log(res.data);
-          alert("검색 완료");
-          this.$router
-            .push({
-              name: "FoodSearchPage",
-              params: { searchResult: res.data, keyWord: this.keyWord },
-            })
-            .catch(() => {});
-        })
-        .catch(() => {
-          alert("검색 실패");
-        });
+      if (this.keyWord != "") {
+        const { keyWord } = this;
+        axios
+          .post("http://localhost:7777/foodBoard/search", { keyWord })
+          .then((res) => {
+            console.log(res.data);
+            alert("검색 완료");
+            this.$router
+              .push({
+                name: "FoodSearchPage",
+                params: { searchResult: res.data, keyWord: this.keyWord },
+              })
+              .catch(() => {});
+          })
+          .catch(() => {
+            alert("검색 실패");
+          });
+      } else {
+        alert("검색어를 입력해주세요.");
+      }
     },
   },
 };

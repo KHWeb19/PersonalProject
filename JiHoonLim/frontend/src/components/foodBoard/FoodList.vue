@@ -3,7 +3,7 @@
     <v-container class="white" style="width: 1240px">
       <v-row justify="center">
         <v-col>
-          <div class="text_field">
+          <div class="text_field mt-3">
             <v-text-field
               v-model="keyWord"
               type="text"
@@ -19,10 +19,43 @@
         </v-col>
       </v-row>
       <v-divider></v-divider>
-      <v-col> 카테고리 박스 </v-col>
+
       <v-row>
+        <v-col>
+          <div class="cate_box">
+            <div class="cate_subBox">
+              <div class="cate_main">재료별</div>
+              <v-chip-group mandatory active-class="orange--text cate_sub">
+                <v-chip v-for="mat in mats" :key="mat">
+                  {{ mat.value }}
+                </v-chip>
+              </v-chip-group>
+            </div>
+            <v-divider></v-divider>
+            <div class="cate_subBox">
+              <div class="cate_main">종류별</div>
+              <v-chip-group mandatory active-class="orange--text cate_sub">
+                <v-chip v-for="kind in kinds" :key="kind">
+                  {{ kind.value }}
+                </v-chip>
+              </v-chip-group>
+            </div>
+            <v-divider></v-divider>
+            <div class="cate_subBox">
+              <div class="cate_main">방법별</div>
+              <v-chip-group mandatory active-class="orange--text cate_sub">
+                <v-chip v-for="way in ways" :key="way">
+                  {{ way.value }}
+                </v-chip>
+              </v-chip-group>
+            </div>
+          </div>
+        </v-col>
+      </v-row>
+
+      <v-row class="mt-5 mb-5s">
         <v-col v-for="food in paginatedData" :key="food.boardNo" lg="3" sm="6">
-          <v-card width="500" height="400" class="mx-auto">
+          <v-card width="500" height="380" class="mx-auto">
             <router-link
               :to="{
                 name: 'FoodDetailPage',
@@ -62,7 +95,7 @@
                 >{{ food.commentCnt }}</v-card-text
               >
             </v-card-actions>
-            <v-card-actions>
+            <v-card-actions class="pl-0 pb-0 pt-0">
               <v-card-text class="food_date">{{ food.regDate }}</v-card-text>
             </v-card-actions>
           </v-card>
@@ -123,6 +156,41 @@ export default {
       pageNum: 0,
       sortReset: true,
       keyWord: "",
+
+      kinds: [
+        { value: "전체" },
+        { value: "밥" },
+        { value: "반찬" },
+        { value: "국물" },
+        { value: "면" },
+        { value: "디저트" },
+        { value: "분식" },
+        { value: "샐러드" },
+        { value: "음료" },
+        { value: "기타" },
+      ],
+      mats: [
+        { value: "전체" },
+        { value: "소고기" },
+        { value: "돼지고기" },
+        { value: "닭고기" },
+        { value: "채소" },
+        { value: "해물" },
+        { value: "계란" },
+        { value: "유제품" },
+        { value: "기타" },
+      ],
+      ways: [
+        { value: "전체" },
+        { value: "구이" },
+        { value: "찜" },
+        { value: "국탕찌개" },
+        { value: "볶음" },
+        { value: "조림" },
+        { value: "튀김" },
+        { value: "무침 / 비빔" },
+        { value: "기타" },
+      ],
     };
   },
 
@@ -216,5 +284,31 @@ export default {
 }
 .v-btn:not(.v-btn--round).v-size--default {
   height: 56px;
+}
+.cate_box {
+  border: 1px solid lightgrey;
+}
+.cate_subBox {
+  display: flex;
+}
+.cate_main {
+  border-right: 1px solid lightgrey;
+  color: orange;
+  font-weight: 500;
+  margin: 0 5px 0 0;
+  text-align: center;
+  padding-top: 6px;
+  font-size: 15px;
+  width: 20%;
+  padding-top: 12px;
+  font-weight: bold;
+  background: #f9f9f9;
+}
+.cate_sub {
+  font-size: 15px;
+  line-height: 1;
+}
+.v-chip-group .v-chip {
+  margin: 4px 15px 4px 5px;
 }
 </style>
