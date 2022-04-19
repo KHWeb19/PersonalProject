@@ -74,7 +74,7 @@ public class CommunityBoardServiceImpl implements CommunityBoardService {
 
             UUID uuid = UUID.randomUUID();
             String fileName = uuid + "_" + file.getOriginalFilename();
-            FileOutputStream saveFile = new FileOutputStream("../../frontend/src/assets/back/" + fileName);
+            FileOutputStream saveFile = new FileOutputStream("../../frontend/src/assets/back/community/" + fileName);
 
             saveFile.write(file.getBytes());
             saveFile.close();
@@ -92,7 +92,7 @@ public class CommunityBoardServiceImpl implements CommunityBoardService {
         System.out.println(deleteFile.getFileName());
 
         if (deleteFile.getFileName() != null) {
-            Path filePath = Paths.get("c:\\khweb19\\PersonalProject\\ARimYoo\\frontend\\src\\assets\\back\\" + deleteFile.getFileName());
+            Path filePath = Paths.get("c:\\khweb19\\PersonalProject\\ARimYoo\\frontend\\src\\assets\\back\\community\\" + deleteFile.getFileName());
             Files.delete(filePath);
         }
 

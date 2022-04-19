@@ -1,29 +1,39 @@
 <template>
     <v-container>
+        <v-card width="300" height="450" class="mx-auto">
+            <router-link to="">
+            <v-img :src="require('@/assets/profile.png')" class="thum"/>
+            </router-link>
+             <v-card-title> 하루 1시간 코드리뷰 </v-card-title>
+             <v-card-actions>
+              <v-card-text class="pb-0 pt-0">writer</v-card-text>
+            </v-card-actions>
+            <v-card-actions>
+              <v-card-text class="pt-0"><v-icon small >mdi-eye</v-icon></v-card-text>
+            </v-card-actions>
+        </v-card>
         <v-row column wrap justify="center">
-            <v-data-table 
-                        :headers="headerTitle" 
-                        :items="reviews"
-                        :key="reviews.reviewNo"
-                        :items-per-page="10"
-                        class="elevation-1 grey lighten-4" 
-                        >
-                <template v-slot:[`item.title`]="{ item }">
-                   <router-link :to="{ name: 'ReviewReadPage',
-                                        params: { reviewNo: item.reviewNo.toString() } }"
-                                        style="color:black; float:left">
-                    {{ item.title }} &nbsp;&nbsp;&nbsp;&nbsp;
-                   </router-link>
-                   <div style="color:#D50000; float:left" >
-                       [{{ item.commentCnt }}] &nbsp;
-                   </div>
-                   <div v-if="item.fileName1">
-                       <v-icon style="zoom:0.9">
-                           mdi-image
-                       </v-icon>
-                   </div>
-                </template>
-            </v-data-table>
+            <v-col v-for="study in paginatedData" :key="study.studyNo" lg="3" sm="6">
+          <v-card width="280" height="370" class="mx-auto">
+            <router-link to="">
+              <v-img
+                :src="require(`@/assets/back/study/${study.filename}`)"
+                height="200px"
+              ></v-img>
+            </router-link>
+
+            <v-card-title> {{ study.title }} </v-card-title>
+
+            <v-card-subtitle> {{ study.des }} </v-card-subtitle>
+
+            <v-card-actions>
+              <v-card-text class="pb-0 pt-0">{{ study.writer }}</v-card-text>
+            </v-card-actions>
+            <v-card-actions>
+              <v-card-text class="pt-0">조회 수</v-card-text>
+            </v-card-actions>
+          </v-card>
+        </v-col>
         </v-row>
         <v-row justify="center" style="margin-top:50px">
             <v-col  cols="7" md="3">
@@ -44,23 +54,14 @@
 import axios from 'axios'
 
 export default {
-    name:'ReviewList',
+    name:'StudyList',
     props: {
-        reviews: {
+        studys: {
             type:Array
         }
     },
     data () {
         return {
-            headerTitle: [
-                { text:'글 번호', value: 'reviewNo', width:'70px'},
-                { text:'말머리', value: 'brackets', width:'70px'},
-                { text: '제목', value: 'title', width: "200px" },
-                { text: '작성자', value: 'writer', width: "100px" },
-                { text: '💛', value: 'likeCnt', width: "50px" },
-                { text: '조회수', value: 'viewCnt', width: "70px" },
-                { text: 'date. ', value: 'regDate', width: "100px" },
-            ],
             keyword:'',
             searchList: []
         }
@@ -89,11 +90,20 @@ export default {
     width:90%;
     font-family: 'Noto Sans KR', sans-serif;
 }
+.v-card {
+    font-family: 'Noto Sans KR', sans-serif;
+}
 .headerTitle{ 
   font-size: 20pt;
 }
 .v-data-table::v-deep th {
   font-size: 14px !important;
+}
+.thum {
+   margin-left:auto;
+   margin-right: auto;
+    width:300px;
+    height:300px;
 }
 .search {
     position: relative;

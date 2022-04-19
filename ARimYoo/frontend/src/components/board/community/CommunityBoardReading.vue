@@ -55,7 +55,7 @@
                     <v-row justify="center">
                         <v-col cols="12" class="label2" style="font-size:23pt">Content</v-col>
                         <img v-if="this.communityBoard.fileName !== null && this.communityBoard.fileName !== 'null'" class="imgArea" 
-                        :src="require(`@/assets/back/${this.communityBoard.fileName}`)"
+                        :src="require(`@/assets/back/community/${this.communityBoard.fileName}`)"
                         >
                     </v-row>
                     <v-row>
@@ -189,7 +189,7 @@ table{
 .extraBtn {
     position: absolute;
     left:80%;
-    top:15%;
+    top:120px;
 }
 a{
     text-emphasis: none;

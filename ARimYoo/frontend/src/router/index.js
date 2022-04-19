@@ -18,6 +18,10 @@ import ReviewPage from '../views/board/review/ReviewPage.vue'
 import ReviewWritePage from '../views/board/review/ReviewWritePage.vue'
 import ReviewReadPage from '../views/board/review/ReviewReadPage.vue'
 import ReviewModifyPage from '../views/board/review/ReviewModifyPage.vue'
+import ReviewSearchPage from '../views/board/review/ReviewSearchPage.vue'
+
+import StudyPage from '../views/board/study/StudyPage.vue'
+import StudyWritePage from '../views/board/study/StudyWritePage.vue'
 
 Vue.use(VueRouter)
 
@@ -26,6 +30,7 @@ const requireLogin = () => (to, from, next) => {
         return next()
     } else {
         alert('로그인이 필요한 서비스입니다.')
+        this.$router.push('/main')
     }
 } 
 
@@ -142,6 +147,29 @@ const routes = [
         props: {
             default: true
         },
+        beforeEnter: requireLogin()
+    },
+    {
+        path: '/review/search',
+        name: 'ReviewSearchPage',
+        components: {
+            default: ReviewSearchPage
+        },
+        props: {
+            default: true
+        },
+        beforeEnter: requireLogin()
+    },
+    {
+        path: '/study',
+        name: 'StudyPage',
+        component: StudyPage,
+        beforeEnter: requireLogin()
+    },
+    {
+        path: '/study/write',
+        name: 'StudyWritePage',
+        component: StudyWritePage,
         beforeEnter: requireLogin()
     },
 

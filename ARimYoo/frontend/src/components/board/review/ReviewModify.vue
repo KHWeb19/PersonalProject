@@ -20,7 +20,7 @@
                         </v-col>
                     </v-row>
                     <v-row  wrap justify="center">
-                        <v-col cols="1" class="label" > Image </v-col>
+                        <v-col cols="2" class="label" > Content </v-col>
                         <v-col>
                         <input type="file" id="files" ref="files"  dense style="width:300px"
                                 multiple v-on:change="handleFileUpload()"/>
@@ -42,7 +42,6 @@
                         </v-col>
                     </v-row>
                     <v-row  justify="center">
-                        <v-col cols="3" class="label" style="font-size:23pt">Content</v-col>
                         <v-col cols="12">
                             <v-textarea style="white-space:pre-line" cols="70" rows="15" 
                             outlined color="red darken-3" placeholder="글 내용을 작성해주세요"

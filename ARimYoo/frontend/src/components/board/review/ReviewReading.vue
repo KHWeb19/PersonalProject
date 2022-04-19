@@ -79,12 +79,12 @@
                         :src="require(`@/assets/back/review/${this.review.fileName5}`)"
                         >
                     </v-row>
-                    <v-row>
-                        <v-col cols="12">
-                            <v-textarea style="white-space:pre-line" cols="75" 
-                            outlined color="red darken-3" readonly
+                    <v-row justify="center">
+                        <v-col cols="12" >
+                            <textarea style="white-space:pre-line" cols="80" rows="10"
+                            outlined color="red darken-3" readonly class="txt" 
                             :value="review.content">
-                            </v-textarea>
+                            </textarea>
                         </v-col>
                     </v-row>
                     <v-row wrap>
@@ -163,7 +163,7 @@ export default {
                 alert ('좋아요 실패 문제발생 !')
             })
             }
-        }
+        },
     }
 }
 </script>
@@ -192,10 +192,17 @@ table{
     margin-left:auto;
     margin-right:auto;
 }
-.v-combobox, .v-text-field, .v-textarea{
+.v-combobox, .v-text-field{
     font-family: 'Noto Sans KR', sans-serif;
 }
-
+.txt {
+    position: relative;
+    text-align: center;
+     font-family: 'Noto Sans KR', sans-serif;
+    padding-top :5%;
+    overflow: visible;
+    outline-color: rgb(197, 30, 30);
+}
 .titleFloat {
     float:left;
     cursor: default;
@@ -210,7 +217,7 @@ table{
 .extraBtn {
     position: absolute;
     left:80%;
-    top:12%;
+    top:120px;
 }
 a{
     text-emphasis: none;
