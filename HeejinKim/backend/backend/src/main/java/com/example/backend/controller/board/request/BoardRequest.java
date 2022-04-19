@@ -1,4 +1,4 @@
-package com.example.backend.controller.member.request;
+package com.example.backend.controller.board.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

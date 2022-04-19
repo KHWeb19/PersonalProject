@@ -16,6 +16,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 
 @Slf4j
@@ -31,8 +32,8 @@ public class BoardServiceImpl implements BoardService{
         if (file != null) {
 
 
-
-            String fileName = file.getOriginalFilename();
+            UUID uuid = UUID.randomUUID();
+            String fileName = uuid + "_" +file.getOriginalFilename();
 
             FileOutputStream saveFile = new FileOutputStream("../../frontend/frontend_pro/src/assets/uploadImg/" + fileName);
 
@@ -56,9 +57,9 @@ public class BoardServiceImpl implements BoardService{
 
         if (file != null) {
 
+            UUID uuid = UUID.randomUUID();
 
-
-            String fileName =  file.getOriginalFilename();
+            String fileName =  uuid + "_" + file.getOriginalFilename();
             FileOutputStream saveFile = new FileOutputStream("../../frontend/frontend_pro/src/assets/uploadImg/" + fileName);
 
             saveFile.write(file.getBytes());

@@ -89,9 +89,10 @@ export default {
     selectCity (city) {
       
       
-      const key = ''
+      const key = 'e39e4f8d4566233ee9cc271d7c918afd'
       
-      axios.get(`https://weathertest13.herokuapp.com/https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${key}`)
+      axios.get(` https://weathertest13.herokuapp.com/https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${key}`)
+      
       //axios.get(`${this.heroku}${this.requestLink}weather?q=${city}&units=metric&appid=${key}`) https://weathertest13.herokuapp.com/
 
         .then(res => {

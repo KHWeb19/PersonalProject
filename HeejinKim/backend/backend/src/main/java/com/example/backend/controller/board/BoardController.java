@@ -1,4 +1,4 @@
-package com.example.backend.controller;
+package com.example.backend.controller.board;
 
 
 import com.example.backend.entity.Board;
