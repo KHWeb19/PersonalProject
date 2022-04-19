@@ -70,6 +70,16 @@
                 <upload-file-1 @selectFile="selectFile"></upload-file-1>
 
                 <h3 align="left">내용 : </h3>
+                
+                <v-select
+            :items="states"
+            label="Brand Type"
+            dense
+            outlined
+            style="width:600px; font-size:20px;"
+             v-model="type"
+          ></v-select> 
+
                 <v-textarea
                     counter
                     outlined
@@ -128,9 +138,17 @@ export default {
         },
     data () {
         return {
-            title: '',
+             title: '',
             content: '',
+            type:'',
             files:[],
+            states: [
+        'HEMES', 'VITTON', 'CHANEL', 'GUCCI',
+        'FENDI', 'PRADA', 'Dior', 'VANCLEE',
+        'Tiffany', 'Cartier', 'bottega',
+        'YSL', 'Supreme', 'BURBERRY', 'THOM', 'BALENCIAGA',
+        'ROLEX', 'IWC', 'PIAGET', 'OMEGA', 'TAG','Others'
+      ],
         }
 },
 methods: {
@@ -141,8 +159,8 @@ methods: {
             onSubmit () {
             var result = confirm('수정 내용을 등록 하시겠습니까?')
             if(result) {
-                const { title, content} = this
-                this.$emit('submitContents', { title, content})
+                const { type, title, content} = this
+                this.$emit('submitContents', {type, title, content})
                 //console.log(this.title,this.content)
 
                 this.$emit("submitFiles",this.files)
@@ -151,6 +169,7 @@ methods: {
             },
                created () {
         //this.id = this.QuestionBoard.id
+        this.type=this.BrandCheckboard.type
         this.boardNo =this.QuestionBoard.boardNo
         this.title = this.QuestionBoard.title
         this.content = this.QuestionBoard.content

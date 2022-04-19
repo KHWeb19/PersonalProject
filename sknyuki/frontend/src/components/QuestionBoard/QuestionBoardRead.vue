@@ -28,9 +28,6 @@
                 style="width:300px; font-size:20px;"
                 outlined type="text" :value="QuestionBoard.writer" readonly/>
           
-
-                
-               
                  <br>
                  <v-card class="mx-auto mt-2 mb-10" width="400" flat>
                      <v-img :src="showFile()" ></v-img>
@@ -38,6 +35,12 @@
                  <br>
 
               <h3 align="left">내용 : </h3>
+
+              <v-text-field
+                dense
+                style="width:600px; font-size:20px;"
+                outlined type="text" :value="BrandCheckBoard.type" readonly />
+
                 <v-textarea
                     outlined
                     id="textarea-rows"
@@ -62,9 +65,10 @@ export default {
     methods:{
         showFile () {
       try {
-        return require(`../../../../backend/demo/images/Question/${this.boardNo}.jpg`)
+        return require(`../../../../backend/demo/images/Question/${this.boardNo}_${this.QuestionBoard.id}.jpg`)
      } catch (e) {
-        return   alert('문제 발생!')
+        console.log(e)
+          console.log(this.boardNo)
      }
         }
     }
