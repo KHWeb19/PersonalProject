@@ -1,6 +1,6 @@
 <template>
   <div class="grey lighten-3">
-    <v-container class="white">
+    <v-container class="white" style="width: 1240px">
       <v-row justify="center">
         <v-col cols="auto" style="padding-bottom: 90px">
           <router-link to="/">
