@@ -12,7 +12,7 @@
                   class="ml-5"
                   style="color: orange"
                   v-if="foodBoardComments"
-                  >{{ foodBoardComments[0].commentCnt }}</span
+                  >{{ foodBoardComments.length }}</span
                 >
               </div>
               <v-divider></v-divider>
@@ -95,14 +95,15 @@ export default {
     return {
       comment: "",
       commentWriter: "",
-      userInfo: this.$store.state.userInfo,
+      userInfo: "",
     };
   },
   created() {
-    this.commentWriter = this.userInfo.nickName;
+    this.userInfo = this.$store.state.userInfo;
   },
   methods: {
     onSubmit() {
+      this.commentWriter = this.userInfo.nickName;
       const { comment, commentWriter } = this;
       this.$emit("submit", { comment, commentWriter });
     },

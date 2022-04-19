@@ -20,6 +20,15 @@
       </v-row>
       <v-divider></v-divider>
       <v-row>
+        <v-col>
+          <div style="countFoodWrap">
+            총
+            <b class="countFood">{{ searchResult.length }}</b
+            >개의 레시피가 검색되었습니다.
+          </div>
+        </v-col>
+      </v-row>
+      <v-row>
         <v-col
           class="search_input"
           v-if="
@@ -154,5 +163,14 @@ export default {
   padding: 0;
   text-align: right;
   color: grey;
+}
+.countFood {
+  font-size: 36px;
+  color: orange;
+}
+.countFoodWrap {
+  font-size: 16px;
+  color: #333;
+  padding: 5px 0 20px 8px;
 }
 </style>

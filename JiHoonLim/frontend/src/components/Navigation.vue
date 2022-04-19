@@ -2,6 +2,7 @@
   <div>
     <template>
       <v-toolbar color="orange lighten-1" dark height="90px">
+        <v-spacer></v-spacer>
         <v-toolbar-title>
           <router-link to="/">
             <v-img
@@ -20,7 +21,6 @@
           </router-link>
         </v-toolbar-title>
         <v-spacer></v-spacer>
-
         <v-toolbar-items style="margin: 15px">
           <v-btn
             text
@@ -52,6 +52,7 @@
               >회원가입</router-link
             >
           </v-btn>
+          <v-spacer></v-spacer>
         </div>
 
         <div v-if="this.$store.state.userInfo">
@@ -107,6 +108,7 @@
             >
           </v-btn>
         </div>
+        <v-spacer></v-spacer>
       </v-toolbar>
     </template>
   </div>

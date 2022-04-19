@@ -2,7 +2,7 @@
   <div class="grey lighten-3">
     <v-container class="white" style="width: 1240px">
       <v-row justify="center">
-        <v-col>
+        <v-col class="pb-0">
           <div class="text_field mt-3">
             <v-text-field
               v-model="keyWord"
@@ -18,7 +18,6 @@
           </div>
         </v-col>
       </v-row>
-      <v-divider></v-divider>
 
       <v-row>
         <v-col>
@@ -26,8 +25,8 @@
             <div class="cate_subBox">
               <div class="cate_main">재료별</div>
               <v-chip-group mandatory active-class="orange--text cate_sub">
-                <v-chip v-for="mat in mats" :key="mat">
-                  {{ mat.value }}
+                <v-chip v-for="(catMat, idx) in catMats" :key="idx">
+                  {{ catMat.value }}
                 </v-chip>
               </v-chip-group>
             </div>
@@ -35,8 +34,8 @@
             <div class="cate_subBox">
               <div class="cate_main">종류별</div>
               <v-chip-group mandatory active-class="orange--text cate_sub">
-                <v-chip v-for="kind in kinds" :key="kind">
-                  {{ kind.value }}
+                <v-chip v-for="(catKind, idx) in catKinds" :key="idx">
+                  {{ catKind.value }}
                 </v-chip>
               </v-chip-group>
             </div>
@@ -44,15 +43,23 @@
             <div class="cate_subBox">
               <div class="cate_main">방법별</div>
               <v-chip-group mandatory active-class="orange--text cate_sub">
-                <v-chip v-for="way in ways" :key="way">
-                  {{ way.value }}
+                <v-chip v-for="(catWay, idx) in catWays" :key="idx">
+                  {{ catWay.value }}
                 </v-chip>
               </v-chip-group>
             </div>
           </div>
         </v-col>
       </v-row>
-
+      <v-row>
+        <v-col>
+          <div style="countFoodWrap">
+            총
+            <b class="countFood">{{ foodBoards.length }}</b
+            >개의 레시피가 있습니다.
+          </div>
+        </v-col>
+      </v-row>
       <v-row class="mt-5 mb-5s">
         <v-col v-for="food in paginatedData" :key="food.boardNo" lg="3" sm="6">
           <v-card width="500" height="380" class="mx-auto">
@@ -157,7 +164,7 @@ export default {
       sortReset: true,
       keyWord: "",
 
-      kinds: [
+      catKinds: [
         { value: "전체" },
         { value: "밥" },
         { value: "반찬" },
@@ -169,7 +176,7 @@ export default {
         { value: "음료" },
         { value: "기타" },
       ],
-      mats: [
+      catMats: [
         { value: "전체" },
         { value: "소고기" },
         { value: "돼지고기" },
@@ -180,7 +187,7 @@ export default {
         { value: "유제품" },
         { value: "기타" },
       ],
-      ways: [
+      catWays: [
         { value: "전체" },
         { value: "구이" },
         { value: "찜" },
@@ -310,5 +317,14 @@ export default {
 }
 .v-chip-group .v-chip {
   margin: 4px 15px 4px 5px;
+}
+.countFood {
+  font-size: 36px;
+  color: orange;
+}
+.countFoodWrap {
+  font-size: 16px;
+  color: #333;
+  padding: 5px 0 20px 8px;
 }
 </style>

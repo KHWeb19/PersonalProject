@@ -89,8 +89,27 @@
                       style="width: 800px"
                     />
                   </div>
+                  <v-divider></v-divider>
                   <div>
-                    <v-text-field :value="foodBoard.viewCount"></v-text-field>
+                    <div style="display: flex">
+                      <v-icon color="orange" class="pr-1"> mdi-eye</v-icon>
+                      <v-text-field flat solo :value="foodBoard.viewCount" />
+                    </div>
+                    <div style="display: flex">
+                      <div>
+                        <v-btn>
+                          <v-icon color="orange" class="pr-1">
+                            mdi-thumb-up</v-icon
+                          >
+                        </v-btn>
+                      </div>
+
+                      <div>
+                        <v-btn>
+                          <v-icon color="orange" class="pr-1"> mdi-cart</v-icon>
+                        </v-btn>
+                      </div>
+                    </div>
                   </div>
                   <div v-if="checkWriteUser">
                     <v-btn
@@ -181,11 +200,14 @@ export default {
       img: this.foodBoard.filename,
       nickName: "",
       comment: "",
+      userInfo: "",
     };
   },
   created() {
-    if (this.$store.state.userInfo != null) {
-      this.nickName = this.$store.state.userInfo.nickName;
+    this.userInfo = this.$store.state.userInfo;
+
+    if (this.userInfo != null) {
+      this.nickName = this.userInfo.nickName;
     }
     if (this.nickName == this.foodBoard.writer) {
       this.checkWriteUser = true;
