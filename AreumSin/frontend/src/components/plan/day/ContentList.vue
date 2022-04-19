@@ -11,12 +11,27 @@
           <table align="center" width="100%" border="1">
             <tr>
               <td>
+                {{day.planDayNo}}
+              </td>
+              <td>
                 {{day.id}}
               </td>
             </tr>
             <tr>
-              <td>
+              <td colspan="3">
                 {{day.content}}
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <v-btn @click="like(day.planDayNo)"><v-icon>mdi-thumb-up-outline</v-icon>{{day.likeCount}}</v-btn>
+              </td>
+              <td>
+                <v-btn @click="hate(day.planDayNo)"><v-icon>mdi-thumb-down-outline</v-icon>{{day.hateCount}}</v-btn>
+              </td>
+              <td>
+                <v-btn @click="remove(day.planDayNo)"><v-icon>mdi-delete</v-icon></v-btn>
               </td>
             </tr>
           </table>
@@ -32,7 +47,25 @@ export default {
   props: {
     dayContent: {
       type: Array,
+    }
+  },
+  data() {
+    return {
 
+    }
+  },
+  methods: {
+    like(planDayNo) {
+      console.log(planDayNo)
+      this.$emit('clickLike', {planDayNo})
+    },
+    hate(planDayNo) {
+      console.log(planDayNo)
+      this.$emit('clickHate', {planDayNo})
+    },
+    remove(planDayNo) {
+      console.log(planDayNo)
+      this.$emit('clickRemove', {planDayNo})
     }
   }
 }

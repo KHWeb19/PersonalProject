@@ -35,6 +35,13 @@ public class PlanDay {
     @CreationTimestamp
     private Date regDate;
 
+    @Column
+    private Integer likeCount;
+
+    @Column
+    private Integer hateCount;
+
+
     public static PlanDay createPlanDay(String id, String content, Integer day, Plan plan){
 
         PlanDay planDay = new PlanDay();
@@ -43,8 +50,35 @@ public class PlanDay {
         planDay.setId(id);
         planDay.setDay(day);
         planDay.setContent(content);
+        planDay.setLikeCount(0);
+        planDay.setHateCount(0);
 
         return planDay;
     }
+
+    public void likeCount(PlanDay planDay, boolean check){
+        int count = planDay.getLikeCount();
+
+        if(check){
+            count++;
+        }else{
+            count--;
+        }
+
+        planDay.setLikeCount(count);
+    }
+
+    public void hateCount(PlanDay planDay, boolean check){
+        int count = planDay.getHateCount();
+
+        if(check){
+            count++;
+        }else{
+            count--;
+        }
+
+        planDay.setHateCount(count);
+    }
+
 
 }

@@ -121,7 +121,7 @@ export default {
   data() {
     return{
       inviteFriend: false,
-      friendId: null,
+      friendId: '',
       isCheck: true,
       voteDialog: false,
     }

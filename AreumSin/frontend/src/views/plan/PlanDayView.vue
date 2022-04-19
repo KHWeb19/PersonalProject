@@ -10,7 +10,7 @@
       </div>
     </div>
 
-    <ContentList v-bind:dayContent="dayContent"></ContentList>
+    <ContentList v-bind:dayContent="dayContent" @clickLike="clickLike" @clickHate="clickHate" @clickRemove="clickRemove"></ContentList>
 
     <hr/>
     <p></p>
@@ -39,7 +39,8 @@ export default {
   data(){
     return{
       date: Number(this.day),
-      planNo: localStorage.getItem('planNo')
+      planNo: localStorage.getItem('planNo'),
+      id: localStorage.getItem('session')
     }
   },
   methods:{
@@ -53,6 +54,35 @@ export default {
       .then((res) => {
         alert('성공' + res)
       })
+    },
+    clickLike(payload){
+      const {planDayNo} = payload;
+      let id = this.id
+      console.log(planDayNo, id);
+      axios.post('http://localhost:7777/planDay/like', {planDayNo, id})
+      .then((res) => {
+        alert('성공' + res.data.likeCount);
+      })
+    },
+    clickHate(payload){
+      const {planDayNo} = payload;
+      let id = this.id
+      console.log(planDayNo, id);
+      axios.post('http://localhost:7777/planDay/hate', {planDayNo, id})
+          .then((res) => {
+            alert('성공' + res);
+          })
+    },
+    clickRemove(payload){
+      const {planDayNo} = payload;
+      let id = this.id
+      console.log(planDayNo, id);
+      axios.post('http://localhost:7777/planDay/remove/',{planDayNo, id})
+          .then((res) => {
+            if(!res.data){
+              alert('지울 수 없습니다. ')
+            }
+          })
     }
   },
   computed: {

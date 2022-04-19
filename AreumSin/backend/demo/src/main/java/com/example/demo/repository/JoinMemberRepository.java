@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import javax.transaction.Transactional;
 import java.util.Optional;
 
-public interface JoinMemberRepository extends JpaRepository<Member, Long> {
+public interface JoinMemberRepository extends JpaRepository<Member, Integer> {
     Boolean existsById(String id);
 
     @Transactional

@@ -7,10 +7,16 @@ import lombok.Setter;
 public class PlanDayResponse {
 
     private String id;
+    private Integer planDayNo;
     private String content;
+    private Integer likeCount;
+    private Integer hateCount;
 
-    public PlanDayResponse(String id, String content) {
+    public PlanDayResponse(String id, Integer planDayNo, String content, Integer likeCount, Integer hateCount) {
         this.id = id;
+        this.planDayNo = planDayNo;
         this.content = content;
+        this.likeCount = likeCount;
+        this.hateCount = hateCount;
     }
 }

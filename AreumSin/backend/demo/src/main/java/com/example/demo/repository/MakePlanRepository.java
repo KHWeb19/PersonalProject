@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 
-public interface MakePlanRepository extends JpaRepository<Plan, Long> {
+public interface MakePlanRepository extends JpaRepository<Plan, Integer> {
     // memberPlanRequest로 변경해서 id값을 member_id를 통해 memberNo를 찾고 그 값을 입력해야함.
     //void findMember
 

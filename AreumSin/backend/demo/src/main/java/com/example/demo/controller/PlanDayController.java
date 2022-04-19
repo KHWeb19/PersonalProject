@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.PlanDay;
+import com.example.demo.request.CountRequest;
 import com.example.demo.request.PlanDayListRequest;
 import com.example.demo.request.PlanDayRequest;
 import com.example.demo.response.PlanDayResponse;
@@ -11,6 +12,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Slf4j
@@ -39,9 +41,34 @@ public class PlanDayController {
         List<PlanDayResponse> planDayResponseList = new ArrayList<>();
         for(PlanDay planDays : planDay){
             log.info("planDayList : "+ planDays.getId());
-            planDayResponseList.add(new PlanDayResponse(planDays.getId(), planDays.getContent()));
+            planDayResponseList.add(new PlanDayResponse(planDays.getId(), planDays.getPlanDayNo(), planDays.getContent(), planDays.getLikeCount(), planDays.getHateCount()));
         }
 
         return planDayResponseList;
+    }
+
+    @PostMapping("/like")
+    public void likeContent(@Validated @RequestBody CountRequest countRequest){
+
+        log.info("lickCount: "+ countRequest.getId());
+
+        planDayService.like(countRequest);
+
+    }
+
+    @PostMapping("/hate")
+    public void hateContent(@Validated @RequestBody CountRequest countRequest){
+
+        log.info("hateContent: "+ countRequest.getId());
+
+        planDayService.hate(countRequest);
+    }
+
+    @PostMapping("/remove")
+    public Boolean removeContent(@Validated @RequestBody CountRequest countRequest){
+
+        log.info("planDayNo : "+ countRequest);
+
+        return planDayService.remove(countRequest);
     }
 }

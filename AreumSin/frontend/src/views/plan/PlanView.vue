@@ -64,7 +64,8 @@ export default {
       findMember: null,
       findId: null,
       findName: null,
-      data: ''
+      data: '',
+      planNo: localStorage.getItem('planNo')
     }
   },
   props: {
@@ -97,9 +98,9 @@ export default {
     },
     addFriend(payload){
       const{friendId} = payload;
-      let planNo = this.planNum;
+      let planNo = this.planNo;
 
-      alert(friendId + "얍!" + this.planNum)
+      alert(friendId + "얍!" + this.planNo)
 
       axios.post('http://localhost:7777/plan/addFriend', {friendId, planNo})
       .then((res) => {
