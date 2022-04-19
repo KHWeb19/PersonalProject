@@ -21,6 +21,7 @@ public class BrandCheckController {
     @Autowired
     private BrandCheckBoardService service;
 
+
     @PostMapping("/register")
     public ResponseEntity BrandCheckBoardRegister(@Validated @RequestBody BrandCheckBoard checkboard) {
         log.info("BrandCheckBoardRegister()");

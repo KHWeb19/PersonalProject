@@ -84,22 +84,23 @@
     </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 export default {
     name:'K1CheckBrandRead',
     props: {
         BrandCheckBoard: {
             type: Object,
         },
-        boardNo: String,
-      
+        boardNo: String,  
+},
+computed: {
+    ...mapState([ 'userInfo' ])
 },
 
     methods:{
-       
-    
         showFile () {
       try {
-          return require(`../../../../backend/demo/images/BrandCheck/${this.boardNo}.jpg`)
+          return require(`../../../../backend/demo/images/BrandCheck/${this.boardNo}_${this.userInfo.id}.jpg`)
      } catch (e) {
           console.log(e)
           console.log(this.boardNo)

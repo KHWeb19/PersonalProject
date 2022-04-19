@@ -9,7 +9,15 @@
      
 
     <div class="app">
-        <k-1-check-brand-list :BrandCheckBoards="BrandCheckBoards"/>
+        <k-1-check-brand-list v-if="isLogin" :BrandCheckBoards="BrandCheckBoards"/>
+        <!--<h2 v-else> 로그인 해주세요</h2>-->
+        
+         <v-snackbar v-else v-model="login" :timeout="timeout" color="secondary" outlined
+        bottom rounded="xl">
+      <p>로그인 해주세요!!</p>
+      <login-page></login-page>
+    </v-snackbar>
+
     </div>
     </div>
      
@@ -22,6 +30,7 @@ import { mapActions, mapState } from 'vuex'
 import HeaderView from '@/components/home/headerView.vue'
 import DropDown from '@/components/KategoriePage1/DropDown.vue'
 import K1CheckBrandList from '@/components/BrandCheckBoard/K1CheckBrandList.vue'
+import LoginPage from '@/views/member/LoginPage.vue'
 
 export default {
     name:'K1CheckBrandView',
@@ -29,12 +38,20 @@ export default {
     HeaderView,
     DropDown,
     K1CheckBrandList,
+    LoginPage,
     },
+     data() {
+    return {
+      login: true,
+      timeout: 2000,
+    }
+  },
     computed: {
-        ...mapState(['BrandCheckBoards'])
+        ...mapState(['BrandCheckBoards','isLogin'])
     },
     mounted () {
         this.fetchBrandCheckBoardList()
+        
     },
     methods: {
         ...mapActions(['fetchBrandCheckBoardList'])

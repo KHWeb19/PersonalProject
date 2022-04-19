@@ -16,10 +16,10 @@ public class FileController {
     @PostMapping("/BrandCheckBoard")
     @ResponseBody
     public String checkBrandFileUpload(@RequestParam(value = "fileList", required = false) List<MultipartFile> fileList,
-                                       @RequestParam("boardNo") Long boardNo){
+                                       @RequestParam("boardNo") Long boardNo, @RequestParam("id") String id){
         try {
             for (MultipartFile multipartFile : fileList) {
-                FileOutputStream writer = new FileOutputStream("./images/BrandCheck/" + boardNo + ".jpg");
+                FileOutputStream writer = new FileOutputStream("./images/BrandCheck/" + boardNo + "_" + id + ".jpg");
                 writer.write(multipartFile.getBytes());
                 writer.close();
             }

@@ -103,7 +103,7 @@
 
                 <br>
 
-                <router-link style="text-decoration: none; color:black" :to="{ name: 'K1CheckBrandView', params: { boardNo: BrandCheckBoard.boardNo.toString() }}">
+                <router-link style="text-decoration: none; color:black" :to="{ name: 'K1CheckBrandReadPage', params: { boardNo: BrandCheckBoard.boardNo.toString() }}">
                     <v-btn text color="black" rounded x-large
                         style="padding: 10px; width: 90px;">수정 취소
                     </v-btn>
@@ -116,7 +116,7 @@
 <script>
 import UploadFile1 from '@/components/uploadfile1.vue'
 export default {
-    name:'K1CheckBrandRead',
+    name:'K1CheckBrandModify',
       components:{
         UploadFile1
     },
