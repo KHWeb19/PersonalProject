@@ -93,6 +93,12 @@ public class BookingServiceImpl implements BookingService{
 
     @Transactional
     @Override
+    public List<BookingInfo> checkIdlist(String checkId) {
+        return repository.findIdList(checkId);
+    }
+
+    @Transactional
+    @Override
     public void modify(BookingInfo bookingInfo) {
         repository.save(bookingInfo);
     }

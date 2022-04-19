@@ -5,19 +5,22 @@
         <div class="left_menu">
             <ul>
                 <li>
-                    <router-link :to="{ name: 'MyPage'}">
+                    <router-link :to="{ name: 'MyPage',
+                                    params: { id: this.id }}">
                         <strong> 나의 정보 수정 </strong>
                     </router-link>
                 </li>
                 <br>
                 <li>
-                    <router-link :to="{ name: 'MyPageBooking'}">
+                    <router-link :to="{ name: 'MyPageBooking',
+                                    params: { id: this.id }}">
                         <strong> 예약 내역 확인  </strong>
                     </router-link>
                 </li>
                 <br>
                 <li>
-                    <router-link :to="{ name: 'MyPageReview'}">
+                    <router-link :to="{ name: 'MyPageReview',
+                                    params: { id: this.id }}">
                         <strong> 후기 내역 확인  </strong>
                     </router-link>
                 </li>

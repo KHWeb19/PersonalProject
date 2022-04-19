@@ -4,5 +4,6 @@ export default {
     BookingBoard: null,
     boardComments:[],
     reviews:[],
-    memberInfo:null
+    memberInfo:null,
+    bookingIdLists:[]
 }

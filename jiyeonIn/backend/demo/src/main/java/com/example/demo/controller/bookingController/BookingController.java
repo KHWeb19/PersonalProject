@@ -65,6 +65,14 @@ public class BookingController {
         return service.list();
     }
 
+    @GetMapping("/list/{checkId}")
+    public List<BookingInfo> bookingList(@PathVariable("checkId") String checkId) {
+        log.info("bookingList()");
+
+
+        return service.checkIdlist(checkId);
+    }
+
     @RequestMapping(value = "/read",  method = RequestMethod.GET)
     public BookingInfo bookingReadBoard (@RequestParam(value = "checkBookingNo", required = false) Integer checkBookingNo,
                                          @RequestParam(value = "checkId", required = false) String checkId) {

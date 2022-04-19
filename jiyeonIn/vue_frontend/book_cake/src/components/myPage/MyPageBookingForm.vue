@@ -36,7 +36,7 @@
                     <th align="center" width="240">등록일자</th>
                 </tr>
 
-                <tr v-if="!bookingLists || (Array.isArray(bookingLists) && bookingLists.length === 0)">
+                <tr v-if="!bookingIdLists || (Array.isArray(bookingIdLists) && bookingIdLists.length === 0)">
                     <td colspan="4">
                         예약 내역이 없습니다!
                     </td>
@@ -79,7 +79,7 @@
     export default {
         name: 'MyPageBookingForm',
         props: {
-            bookingLists: {
+            bookingIdLists: {
                 type: Array,
                 required: true
             },
@@ -98,7 +98,7 @@
         },
         computed: {
             pageCount () {
-                let listLeng = this.bookingLists.length,
+                let listLeng = this.bookingIdLists.length,
                     listSize = this.pageSize,
                     page = Math.floor(listLeng / listSize);
                 if (listLeng % listSize > 0) page += 1
@@ -107,7 +107,7 @@
             paginatedData () {
                 const start = this.pageNum * this.pageSize,
                         end = start + this.pageSize;
-                return this.bookingLists.slice(start, end);
+                return this.bookingIdLists.slice(start, end);
                 
             }
         },

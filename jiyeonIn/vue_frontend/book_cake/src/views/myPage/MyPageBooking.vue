@@ -3,7 +3,7 @@
         <main-page-form></main-page-form>
 
         <div class="myPage">
-            <my-page-booking-form :bookingLists="bookingLists"></my-page-booking-form>
+            <my-page-booking-form :bookingIdLists="bookingIdLists"></my-page-booking-form>
         </div>
 
         <footer-form></footer-form>
@@ -29,14 +29,21 @@ import { mapState, mapActions } from 'vuex'
                 required: true
             }
         },
+        data () {
+            return {
+                
+                checkId:''
+            }
+        }
+        ,
         computed: {
-            ...mapState(['bookingLists'])
+            ...mapState(['bookingIdLists'])
         },
-        mounted () {
-            this.fetchBookingLists()
+        mounted() {
+            this.fetchBookingIdLists(this.id)
         },
         methods: {
-            ...mapActions(['fetchBookingLists'])
+            ...mapActions(['fetchBookingIdLists'])
         }
     }
 </script>
