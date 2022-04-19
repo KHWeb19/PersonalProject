@@ -81,18 +81,19 @@
                     </v-dialog>
                 </form>
                 
+                    <v-dialog v-model="deleteDialog">
+                        <v-card>
+                            <v-card-title class="headline">정말 삭제하시겠습니까?</v-card-title>
+                            <v-card-text>삭제하게 되면 내용은 다시 볼 수 없게 됩니다.</v-card-text>
+                            <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn color="white" @click="deleteDialog = false">돌아가기</v-btn>
+                            <v-btn color="white" type="button" @click="deleteReview">삭제합니다</v-btn>
+                            </v-card-actions>
+                        </v-card>   
+                    </v-dialog>
 
-                <v-dialog v-model="deleteDialog">
-                    <v-card>
-                        <v-card-title class="headline">정말 삭제하시겠습니까?</v-card-title>
-                        <v-card-text>삭제하게 되면 내용은 다시 볼 수 없게 됩니다.</v-card-text>
-                        <v-card-actions>
-                        <v-spacer></v-spacer>
-                        <v-btn color="white" @click="deleteDialog = false">돌아가기</v-btn>
-                        <v-btn color="white" @click="deleteReview">삭제합니다</v-btn>
-                        </v-card-actions>
-                    </v-card>   
-                </v-dialog>
+                
 
         </div>
         
@@ -100,6 +101,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
     export default {
         name: 'MyPageBookingForm',
         props: {
@@ -150,7 +153,25 @@
                 this.$emit('submit', { dbrAction, modifyContent, modifyRegDate, modifyNo, files2 })
             },
             deleteReview() {
+                let formData = new FormData()
 
+                let fileInfo = {
+                    reviewNo : this.deleteNo
+                }
+                console.log(fileInfo)
+
+                formData.append(
+                    "info", new Blob([JSON.stringify(fileInfo)], {type:"application/json"})
+                )
+
+                axios.post('http://localhost:7777/review/delete', formData )
+                        .then(() => {
+                            alert('삭제가 완료되었습니다!')
+                            this.$router.go()
+                        })
+                        .catch(() => {
+                            alert('삭제실패!')
+                        })
             }
         }
     }

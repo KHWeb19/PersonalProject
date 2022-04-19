@@ -3,7 +3,7 @@
         <main-page-form></main-page-form>
 
         <div class="myPage">
-            <my-page-review-form :reviewsIdLists="reviewsIdLists" @submit="modifySubmit"></my-page-review-form>
+            <my-page-review-form :reviewsIdLists="reviewsIdLists" @submit="modifySubmit" ></my-page-review-form>
         </div>
 
         <footer-form></footer-form>
@@ -77,8 +77,6 @@ import axios from 'axios'
                             alert('수정 실패!')
                         })
             }
-
-            
         }
     }
 </script>
