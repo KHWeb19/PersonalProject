@@ -2,6 +2,7 @@ package com.example.backend.service;
 
 import com.example.backend.controller.BoardRequest;
 import com.example.backend.controller.CommentRequest;
+import com.example.backend.controller.MemberRequest;
 import com.example.backend.entity.Board;
 
 import java.util.List;
@@ -11,6 +12,6 @@ public interface BoardService {
     public List<Board> list ();
     List<Board> memberBoardList (Integer memberNo);
     public Board read (Integer boardNo);
-    public void modify (Board board);
+    public void modify (Board board, Integer memberNo);
     public void remove (Integer boardNo);
 }

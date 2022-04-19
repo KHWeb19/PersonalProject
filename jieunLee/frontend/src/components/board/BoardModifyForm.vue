@@ -53,6 +53,7 @@ export default {
     },
     data() {
         return {
+            loginInfo: JSON.parse(localStorage.getItem('loginInfo')),
             boardImage: '',
             content: ''
         }
@@ -60,7 +61,7 @@ export default {
     methods: {
         onSubmit() {
             const {boardImage, content} = this
-            this.$emit('submit', {boardImage, content})
+            this.$emit('submit', {memberNo: this.loginInfo.memberNo, boardImage, content})
         }
     },
     created() {

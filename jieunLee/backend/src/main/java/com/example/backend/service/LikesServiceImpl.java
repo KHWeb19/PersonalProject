@@ -24,14 +24,18 @@ public class LikesServiceImpl implements LikesService {
     LikesRepository repository;
 
     @Override
-    public void register(Integer boardNo,Integer memberNo, Likes likes) {
-        Optional<Board> maybeBoard = boardRepository.findById(Long.valueOf(boardNo));
-        likes.setBoard(maybeBoard.get());
+    public void register(Integer boardNo, Integer memberNo, Likes likes) {
 
-        Optional<Member> maybeMember = memberRepository.findById(Long.valueOf(memberNo));
-        likes.setMember(maybeMember.get());
+//        if(repository.findByMemberNoAndBoard(Long.valueOf(likes.getMemberNo()), likes.getBoard()).isEmpty()) {
+            Optional<Board> maybeBoard = boardRepository.findById(Long.valueOf(boardNo));
+            likes.setBoard(maybeBoard.get());
+            Optional<Member> maybeMember = memberRepository.findById(Long.valueOf(memberNo));
+            likes.setMember(maybeMember.get());
 
-        repository.save(likes);
+            repository.save(likes);
+//        } else {
+//            repository.deleteById(Long.valueOf(likes.getLikedNo()));
+//        }
     }
     @Override
     public void remove(Integer likesNo) {

@@ -1,6 +1,7 @@
 package com.example.backend.service;
 
 
+import com.example.backend.entity.Board;
 import com.example.backend.entity.Comment;
 import com.example.backend.entity.Likes;
 

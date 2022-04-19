@@ -34,8 +34,6 @@ public class MemberController {
         return service.search(keyWord.getKeyWord());
     }
 
-
-
     @PostMapping("/register")
     public void MemberRegister(@Validated @RequestBody MemberRequest memberRequest) {
         log.info("MemberRegister():" + "," +

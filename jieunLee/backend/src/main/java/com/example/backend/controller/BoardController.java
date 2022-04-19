@@ -55,14 +55,15 @@ public class BoardController {
         return service.read(boardNo);
     }
 
-    @PutMapping("/{boardNo}")
+    @PutMapping("/{memberNo}/{boardNo}")
     public Board boardModify (
             @PathVariable("boardNo") Integer boardNo,
-            @RequestBody Board board) {
+            @RequestBody Board board,
+            @PathVariable("memberNo") Integer memberNo) {
         log.info("boardModify(): " + board);
 
         board.setBoardNo(Long.valueOf(boardNo));
-        service.modify(board);
+        service.modify(board, memberNo);
 
         return board;
     }

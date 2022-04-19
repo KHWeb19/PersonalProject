@@ -40,7 +40,7 @@
                         </tr>
                         <tr align="left">
                             <td colspan="2" style="padding: 6px 9px">
-                                <v-btn icon @click="onLikes(board.boardNo, loginInfo.memberNo)">
+                                <v-btn icon @click="onLikes(board.boardNo)">
                                     <v-icon color="black">
                                         mdi-heart-outline
                                     </v-icon>
@@ -154,9 +154,9 @@ export default {
             const { content } = this
             this.$emit('submit', { boardNo, content })
         },
-        onLikes(boardNo, memberNo) {
+        onLikes(boardNo) {
             // console.log(boardNo)
-            this.$emit('click', {boardNo, memberNo})
+            this.$emit('click', {boardNo, memberNo: this.loginInfo.memberNo})
         },
     }
 }

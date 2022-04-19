@@ -4,7 +4,7 @@
       <menu-bar/>
       <hr style="border: 0; height: 1px; background: #d8d8d8; "/>
     </div>
-    <board-list :boards="boards" @click="onDelete" @submit="onSubmit"/>
+    <board-list :boards="boards" @click="onLikes" @submit="onSubmit"/>
   </div>
 </template>
 
@@ -66,17 +66,16 @@ export default {
                         alert('문제 발생!')
                     })
         },
-        // onLikes(payload) {
-        //     const {boardNo, memberNo} = payload
-        //     axios.post(`http://localhost:7777/likes/${boardNo}/${memberNo}`, {boardNo})
-        //         .then(() => {
-        //             alert('좋아요 등록 성공!')
-        //               history.go(0);
-        //             })
-        //             .catch(() => {
-        //                 alert('문제 발생!')
-        //             })
-        // }        
+        onLikes(payload) {
+            const {boardNo, memberNo} = payload
+            axios.post(`http://localhost:7777/likes/${boardNo}/${memberNo}`, {boardNo, memberNo})
+                .then(() => {
+                    alert('좋아요 등록 성공!')
+                    })
+                    .catch(() => {
+                        alert('문제 발생!')
+                    })
+        }        
     }
 }
 </script>
