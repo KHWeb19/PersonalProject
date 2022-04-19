@@ -67,6 +67,12 @@
                 <br>
 
                <h3 align="left">내용 : </h3>
+
+                 <v-text-field
+                dense
+                style="width:600px; font-size:20px;"
+                outlined type="text" :value="BrandCheckBoard.type" readonly />
+
                 <v-textarea
                     outlined
                     id="textarea-rows"
@@ -84,7 +90,6 @@
     </div>
 </template>
 <script>
-import { mapState } from 'vuex'
 export default {
     name:'K1CheckBrandRead',
     props: {
@@ -93,14 +98,11 @@ export default {
         },
         boardNo: String,  
 },
-computed: {
-    ...mapState([ 'userInfo' ])
-},
 
     methods:{
         showFile () {
       try {
-          return require(`../../../../backend/demo/images/BrandCheck/${this.boardNo}_${this.userInfo.id}.jpg`)
+          return require(`../../../../backend/demo/images/BrandCheck/${this.boardNo}_${this.BrandCheckBoard.id}.jpg`)
      } catch (e) {
           console.log(e)
           console.log(this.boardNo)
