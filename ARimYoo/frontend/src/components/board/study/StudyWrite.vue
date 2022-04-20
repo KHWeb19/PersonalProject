@@ -20,7 +20,7 @@
                     <v-row>
                         <v-col cols="3" class="label" > Study Name </v-col>
                         <v-col cols="7">
-                            <v-text-field color="red darken-3"> </v-text-field>
+                            <v-text-field color="red darken-3" v-model="studyName"> </v-text-field>
                         </v-col>
                     </v-row>
                     <v-row>
@@ -41,7 +41,7 @@
                     <v-row>
                         <v-col cols="12" class="label" > Open Link </v-col>
                         <v-col cols="12">
-                            <v-text-field color="red darken-3" placeholder="스터디를 진행하실 오픈링크를 등록해주세요."> </v-text-field>
+                            <v-text-field color="red darken-3" v-model="openLink" placeholder="스터디를 진행하실 오픈링크를 등록해주세요."> </v-text-field>
                         </v-col>
                     </v-row>
                     <v-row justify="center">
@@ -69,9 +69,10 @@ export default {
     data() {
         return {
             image :'',
-            title:'',
+            studyName:'',
+            openLink:'',
             content:'',
-            brackets: [],
+            people: [],
             items: [
             '4',
             '5',
@@ -83,7 +84,7 @@ export default {
         }
     },
     created () {
-        this.writer = this.$store.state.userInfo.name
+        this.firstMember = this.$store.state.userInfo.name
     },
     methods: {
         handleFileUpload () {
@@ -98,20 +99,11 @@ export default {
 
         onStudySubmit () {
 
-            const { title, writer, content, brackets} = this
-            let formData = new FormData()
-
-            for (let idx = 0; idx <  this.$refs.files.files.length; idx++) {
-                  formData.append('file',this.$refs.files.files[idx])
-            }
-
-            formData.append('title',title)
-            formData.append('writer', writer)
-            formData.append('brackets', brackets)
-            formData.append('content', content)
+            const { studyName, firstMember, content, people, openLink} = this
+            const file =  this.$refs.files.files[0]
             
-            this.$emit('submit', {formData})
-            console.log(formData)
+            this.$emit('submit', { studyName, content,firstMember, people, file, openLink })
+            console.log(studyName,content,firstMember,file,people,openLink)
 
         },
         goPage (){

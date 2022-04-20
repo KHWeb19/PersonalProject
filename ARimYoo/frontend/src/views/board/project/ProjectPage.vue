@@ -1,12 +1,12 @@
 <template>
     <v-container id="item">
         <v-row justify="center">
-            <img class="titleImg" src="@/assets/title/studyTitle.png" width=155 >
+            <img class="titleImg" src="@/assets/title/projectTitle.png" width=200 >
             <v-btn @click=goPage class="writeBtn" color="red darken-3" dark fab><v-icon color="white"> mdi-pencil </v-icon></v-btn>
         </v-row>
         <br/>
         <v-row justify="center">
-            <study-list :studies="studies" />
+            <study-list/>
         </v-row>
         <br/>
         <br/>
@@ -21,22 +21,22 @@ import { mapState, mapActions } from 'vuex'
 
 export default {
   components: {StudyList },
-    name:'StudyPage',
+    name:'ProjectPage',
     data () {
         return {
             keyword: ''
         }
     },
     computed: {
-        ...mapState(['studies'])
+        ...mapState(['reviews'])
     },
     mounted () {
-        this.fetchStudyList()
+        this.fetchReviewList()
     },
     methods: {
-        ...mapActions(['fetchStudyList']),
+        ...mapActions(['fetchReviewList']),
         goPage(){
-        this.$router.push('/study/write')
+        this.$router.push('/project/write')
         },
     }
 }

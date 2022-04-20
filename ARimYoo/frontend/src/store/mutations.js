@@ -5,7 +5,11 @@
     FETCH_COMMUNITY_COMMENTS_LIST,
     FETCH_REVIEW_LIST,
     FETCH_REVIEW,
-    FETCH_REVIEW_COMMENTS_LIST
+    FETCH_REVIEW_COMMENTS_LIST,
+    FETCH_STUDY_LIST,
+    FETCH_STUDY,
+    FETCH_STUDY_COMMENTS_LIST,
+    
  } from './mutation-types'
 
 export default {
@@ -30,6 +34,15 @@ export default {
     },
     [FETCH_REVIEW_COMMENTS_LIST](state, reviewComments) {
         state.reviewComments = reviewComments
+    },
+    [FETCH_STUDY_LIST](state, studies) {
+        state.studies = studies
+    },
+    [FETCH_STUDY](state, study) {
+        state.study = study
+    },
+    [FETCH_STUDY_COMMENTS_LIST](state, studyComments) {
+        state.studyComments = studyComments
     }
 
 }

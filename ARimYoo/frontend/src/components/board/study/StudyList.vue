@@ -1,36 +1,35 @@
 <template>
     <v-container>
-        <v-card width="300" height="450" class="mx-auto">
-            <router-link to="">
-            <v-img :src="require('@/assets/profile.png')" class="thum"/>
-            </router-link>
-             <v-card-title> 하루 1시간 코드리뷰 </v-card-title>
-             <v-card-actions>
-              <v-card-text class="pb-0 pt-0">writer</v-card-text>
-            </v-card-actions>
-            <v-card-actions>
-              <v-card-text class="pt-0"><v-icon small >mdi-eye</v-icon></v-card-text>
-            </v-card-actions>
-        </v-card>
         <v-row column wrap justify="center">
-            <v-col v-for="study in paginatedData" :key="study.studyNo" lg="3" sm="6">
-          <v-card width="280" height="370" class="mx-auto">
+            <v-col v-for="study in studies" :key="study.studyNo" lg="3" sm="6">
+            <v-card width="250" height="415" class="mx-auto">
             <router-link to="">
               <v-img
-                :src="require(`@/assets/back/study/${study.filename}`)"
-                height="200px"
+                :src="require(`@/assets/back/study/${study.fileName}`)"
+                class="thum"
               ></v-img>
             </router-link>
-
-            <v-card-title> {{ study.title }} </v-card-title>
-
-            <v-card-subtitle> {{ study.des }} </v-card-subtitle>
-
+            <v-divider />
+            <v-card-title class="pl-5 pt-5"> 
+                    {{ study.studyName }} 
+            </v-card-title>
             <v-card-actions>
-              <v-card-text class="pb-0 pt-0">{{ study.writer }}</v-card-text>
+              <v-card-text class="pl-3 pb-3 pt-0">
+                  <v-icon> mdi-crown </v-icon>&nbsp;{{ study.firstMember }}
+              </v-card-text>
+                <v-card-text class="pl-3 pb-3 pt-0">
+                    <v-icon>mdi-account-multiple </v-icon> 
+                    {{ study.people }}
+                </v-card-text>
             </v-card-actions>
-            <v-card-actions>
-              <v-card-text class="pt-0">조회 수</v-card-text>
+            <v-divider/>
+            <v-card-actions class="bar">
+                <v-card-text class=" pr-0 pt-3">
+                    <v-icon small dark>mdi-message-reply-text</v-icon>&nbsp;&nbsp;
+                </v-card-text>
+                <v-card-text class="pr-0 pt-3" id="colorHandle">
+                    <v-icon small dark>mdi-eye</v-icon>&nbsp;&nbsp;{{study.viewCnt}}
+                </v-card-text>
             </v-card-actions>
           </v-card>
         </v-col>
@@ -56,7 +55,7 @@ import axios from 'axios'
 export default {
     name:'StudyList',
     props: {
-        studys: {
+        studies: {
             type:Array
         }
     },
@@ -102,8 +101,11 @@ export default {
 .thum {
    margin-left:auto;
    margin-right: auto;
-    width:300px;
-    height:300px;
+    width:250px;
+    height:250px;
+}
+#colorHandle {
+    color:white;
 }
 .search {
     position: relative;
@@ -114,6 +116,10 @@ export default {
     padding-left:10px;
     font-family: 'Noto Sans KR', sans-serif;
     float:left;
+}
+.bar {
+    background-color: rgb(0, 0, 0);
+    height:42px;
 }
 .searchBtn {
     position: relative;

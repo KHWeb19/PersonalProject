@@ -23,6 +23,9 @@ import ReviewSearchPage from '../views/board/review/ReviewSearchPage.vue'
 import StudyPage from '../views/board/study/StudyPage.vue'
 import StudyWritePage from '../views/board/study/StudyWritePage.vue'
 
+import ProjectPage from '../views/board/project/ProjectPage.vue'
+import ProjectWritePage from '../views/board/project/ProjectWritePage.vue'
+
 Vue.use(VueRouter)
 
 const requireLogin = () => (to, from, next) => {
@@ -172,8 +175,18 @@ const routes = [
         component: StudyWritePage,
         beforeEnter: requireLogin()
     },
-
-  
+    {
+        path: '/project',
+        name: 'ProjectPage',
+        component: ProjectPage,
+        beforeEnter: requireLogin()
+    },
+    {
+        path: '/project/write',
+        name: 'ProjectWritePage',
+        component: ProjectWritePage,
+        beforeEnter: requireLogin()
+    },
 ]
 
 const router = new VueRouter({

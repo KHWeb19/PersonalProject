@@ -7,6 +7,10 @@ export default {
     reviews: [],
     review: null,
     reviewComments: [],
+
+    studies: [],
+    study: null,
+    studyComments: [],
     
     member: null,
     

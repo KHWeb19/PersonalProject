@@ -1,7 +1,7 @@
 <template>
     <v-container >
         <v-row justify="center">
-            <img class="title" src="@/assets/title/studyTitle.png" width=155 >
+            <img class="title" src="@/assets/title/projectTitle.png" width=200 >
         </v-row>
         <v-row>
             <study-write @submit="onStudySubmit"/>
@@ -18,22 +18,10 @@ import StudyWrite from '@/components/board/study/StudyWrite.vue'
 export default {
   components: { StudyWrite },
 
-    name: 'StudyWritePage',
+    name: 'ProjectWritePage',
     methods: {
-        onStudySubmit (payload) {
-           const { studyName, content, firstMember, people,openLink, file} = payload
-
-            let formData = new FormData()
-
-            if (file != null ){formData.append('file', file)}
-            formData.append('firstMember',firstMember)
-            formData.append('content', content)
-            formData.append('studyName', studyName)
-            formData.append('people', people)
-            formData.append('openLink', openLink)
-
-
-            console.log(formData)
+        onBoardSubmit (payload) {
+            const {formData} = payload
        
             axios.post('http://localhost:7777/board/study/register', formData, { headers: {
                     'Content-Type': 'multipart/form-data'
