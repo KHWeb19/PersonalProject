@@ -31,7 +31,7 @@ public class BoardCommentsServiceImpl implements BoardCommentsService {
         BoardComments comment = BoardComments.builder()
                 .comment(commentRequest.getComment())
                 .board(board)
-                .commentWriter(commentRequest.getWriter())
+                .commentWriter(commentRequest.getCommentWriter())
                 .build();
 
         commentRepository.save(comment);
@@ -52,7 +52,7 @@ public class BoardCommentsServiceImpl implements BoardCommentsService {
         BoardComments commentModify = BoardComments.builder()
                 .commentNo(Long.valueOf(commentNo))
                 .board(board)
-                .commentWriter(commentRequest.getWriter())
+                .commentWriter(commentRequest.getCommentWriter())
                 .comment(commentRequest.getComment())
                 .regDate(commentRequest.getRegDate())
                 .build();
@@ -67,4 +67,6 @@ public class BoardCommentsServiceImpl implements BoardCommentsService {
         commentRepository.deleteById(Long.valueOf(commentNo));
 
     }
+
+
 }

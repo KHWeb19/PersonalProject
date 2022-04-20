@@ -13,4 +13,5 @@ public interface BoardService {
     public Board read (Long boardNo);
     public void modify (Board board, @RequestParam(required = false) MultipartFile file) throws Exception;
     public void remove (Integer boardNo) ;
+    public List<Board> searchList(String keyWord);
 }

@@ -112,4 +112,10 @@ public class BoardServiceImpl implements BoardService{
 
         repository.deleteById(Long.valueOf(boardNo));
     }
+    @Override
+    public List<Board> searchList(String keyWord) {
+        List<Board> findSearchList = repository.findByTitleContaining(keyWord);
+
+        return findSearchList;
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.backend.controller.board;
 
 
+import com.example.backend.controller.board.request.KeyWordRequest;
 import com.example.backend.entity.Board;
 import com.example.backend.service.board.BoardService;
 import lombok.extern.slf4j.Slf4j;
@@ -64,6 +65,14 @@ public class BoardController {
         log.info("boardRemove()");
 
         service.remove(boardNo);
+    }
+
+    @PostMapping("/search")
+    public List<Board> boardSearchList (@RequestBody KeyWordRequest keyWord) {
+        log.info("boardSearchList()"+keyWord );
+        String key = keyWord.getKeyWord();
+
+        return service.searchList(key);
     }
 }
 

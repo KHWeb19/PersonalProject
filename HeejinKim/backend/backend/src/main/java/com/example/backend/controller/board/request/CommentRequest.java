@@ -10,13 +10,13 @@ import java.util.Date;
 public class CommentRequest {
 
     private Long boardNo;
-    private String writer;
+    private String commentWriter;
     private String comment;
     private Date regDate;
 
-    public CommentRequest( Long boardNo,String writer, String comment, Date regDate) {
+    public CommentRequest( Long boardNo,String commentWriter, String comment, Date regDate) {
         this.boardNo = boardNo;
-        this.writer = writer;
+        this.commentWriter = commentWriter;
         this.comment = comment;
         this.regDate = regDate;
 

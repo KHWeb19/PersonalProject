@@ -29,7 +29,7 @@ public class BoardCommentsController {
         service.register(boardNo, commentRequest);
     }
 
-    //댓글 목록
+
     @GetMapping("/list/{boardNo}")
     public List<BoardComments> boardCommentsList (@PathVariable("boardNo") Integer boardNo) {
         log.info("boardCommentsList()");
@@ -37,12 +37,12 @@ public class BoardCommentsController {
         return service.list(boardNo);
     }
 
-    //댓글 수정
+
     @PutMapping("/{commentNo}")
     public BoardComments boardCommentsModify (
             @PathVariable("commentNo") Integer commentNo,
             @Validated @RequestBody CommentRequest commentRequest) {
-        log.info("freeBoardCommentModify(): " + commentRequest);
+        log.info("boardCommentModify(): " + commentRequest);
 
 
         return service.modify(commentNo, commentRequest);
@@ -50,7 +50,7 @@ public class BoardCommentsController {
     }
 
 
-    //댓글 삭제
+
     @DeleteMapping("/{commentNo}")
     public void boardCommentsRemove (
             @PathVariable("commentNo") Integer commentNo) {
