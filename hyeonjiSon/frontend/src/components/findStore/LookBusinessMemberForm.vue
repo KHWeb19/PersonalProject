@@ -1,25 +1,19 @@
 <template>
-    <div>
-    <table >
-      <tr>
-          <th align="center" width="80">시</th>
-          <th align="center" width="80">동</th>
-          <th align="center" width="300">주소</th>
-          <th align="center" width="150">상호명</th>
-      </tr>
-      <tr v-if="!businessMembers || (Array.isArray(businessMembers) && businessMembers.length === 0)">
-          <td align="center" colspan="4">
-              현재 사업자 회원이 없습니다!
-          </td>
-      </tr>
-      <tr v-else v-for="(businessMember, index) in businessMembers" :key="index">
-          <td align="center"> {{ businessMember.city }} </td>
-          <td align="center"> {{ businessMember.dong }} </td>
-          <td align="center"> {{ businessMember.address }} </td>
-          <td align="center"> {{ businessMember.sn }} </td>
-      </tr>
-  </table>        
-    </div>
+    <v-container>
+        <v-row column wrap justify="center">
+            <v-data-table
+                        :headers="headerTitle" 
+                        :items="businessMembers"
+                        :key="businessMembers.memberNo"
+                        :items-per-page="10"
+                        class="elevation-1" 
+                        >
+                <template v-slot:[`item.id`]="{ item }">
+                  <div>{{ item.city}} </div>
+                </template>
+            </v-data-table>
+        </v-row>
+    </v-container>
 </template>
 
 <script>
@@ -28,14 +22,21 @@ import {mapActions, mapState} from 'vuex';
 export default {
     name: "LookBusinessMemberForm.vue",
     props: {
-        //    businessMember: {
-        //        type: Array
-        //    },
-        //    memberNo: {
-        //     type: String,
-        //     required: true
-        //   }
-      //  },  
+        communityBoards: {
+            type:Array
+        }
+    },
+    data () {
+        return {
+            headerTitle: [
+                { text:'시', value: 'city', width:'150px'},
+                { text:'동', value: 'dong', width:'150px'},
+                { text: '주소', value: 'address', width: "350px" },
+                { text: '상호명', value: 'sn', width: "150px" },
+            ],
+            keyword:'',
+            searchList: []
+        }
     },
     computed: {
         ...mapState(['businessMembers']),
