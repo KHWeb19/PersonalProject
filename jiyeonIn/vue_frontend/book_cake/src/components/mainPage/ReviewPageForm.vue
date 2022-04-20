@@ -64,11 +64,12 @@
 }
 
 .reviewForm {
-    padding: 0 0 0 10%;
+    padding: 0 0 0 20%;
+    
 }
 
 .registerReview{
-    margin-left: 30%;
+    margin-left: 25%;
     margin-top: 5px;
 }
 

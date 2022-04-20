@@ -15,6 +15,9 @@ import BeforeBooking from '@/views/boardNotice/BeforeBooking.vue'
 import BeforeConfirm from '@/views/boardNotice/BeforeConfirm.vue'
 import MyPageReview from '@/views/myPage/MyPageReview.vue'
 import MyPageBooking from '@/views/myPage/MyPageBooking.vue'
+import ManagerPageMember from '@/views/managerPage/ManagerPageMember.vue'
+import ManagerPageCake from '@/views/managerPage/ManagerPageCake.vue'
+
 
 Vue.use(VueRouter)
 
@@ -117,6 +120,28 @@ const routes = [
     name: 'MyPageBooking',
     components: {
       default: MyPageBooking
+    },
+    props: {
+      default: true
+    }
+  }
+  ,
+  {
+    path: '/managerPageCake/:id',
+    name: 'ManagerPageCake',
+    components: {
+      default: ManagerPageCake
+    },
+    props: {
+      default: true
+    }
+  }
+  ,
+  {
+    path: '/managerPageMember/:id',
+    name: 'ManagerPageMember',
+    components: {
+      default: ManagerPageMember
     },
     props: {
       default: true

@@ -6,6 +6,7 @@
             <my-page-form v-if="memberInfo" :memberInfo="memberInfo" @submit="onSubmit"></my-page-form>
         </div>
 
+
         <footer-form></footer-form>
     </div>
 </template>
