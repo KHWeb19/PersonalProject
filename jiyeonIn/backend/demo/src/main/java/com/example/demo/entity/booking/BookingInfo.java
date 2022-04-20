@@ -1,6 +1,8 @@
 package com.example.demo.entity.booking;
 
 import com.example.demo.entity.boardComment.BoardComment;
+import com.example.demo.entity.member.Member;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -69,6 +71,11 @@ public class BookingInfo {
     @OneToMany(mappedBy = "bookingInfo", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private List<BoardComment> commentList = new ArrayList();
 
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "member_no")
+    private Member memberInfo;
+
     public BookingInfo(String id, String date, String time, String process, String contents, String linkInfo) {
         this.id = id;
         this.date = date;
@@ -76,6 +83,16 @@ public class BookingInfo {
         this.process = process;
         this.contents = contents;
         this.linkInfo = linkInfo;
+    }
+
+    public BookingInfo(String id, String date, String time, String process, String contents, String linkInfo, Member member) {
+        this.id = id;
+        this.date = date;
+        this.time = time;
+        this.process = process;
+        this.contents = contents;
+        this.linkInfo = linkInfo;
+        memberInfo = member;
     }
 
     public BookingInfo(String id, String date, String time, String process, String contents, String linkInfo, BoardComment boardComment) {
@@ -107,6 +124,20 @@ public class BookingInfo {
         this.price = price;
     }
 
+    public BookingInfo(String id, String date, String time, String process, String contents, String linkInfo, String cakeLinkInfo, String design, String size, String price, Member member) {
+        this.id = id;
+        this.date = date;
+        this.time = time;
+        this.process = process;
+        this.contents = contents;
+        this.linkInfo = linkInfo;
+        this.cakeLinkInfo = cakeLinkInfo;
+        this.design = design;
+        this.size = size;
+        this.price = price;
+        memberInfo = member;
+    }
+
     public BookingInfo(String id, String date, String time, String process, String contents, String linkInfo, String cakeLinkInfo, String design, String size, String price, BoardComment boardComment) {
         this.id = id;
         this.date = date;
@@ -134,6 +165,15 @@ public class BookingInfo {
         this.contents = contents;
     }
 
+    public BookingInfo(String id, String date, String time, String process, String contents, Member member) {
+        this.id = id;
+        this.date = date;
+        this.time = time;
+        this.process = process;
+        this.contents = contents;
+        memberInfo = member;
+    }
+
     public BookingInfo(String id, String date, String time, String process, String contents, BoardComment boardComment) {
         this.id = id;
         this.date = date;
@@ -156,6 +196,19 @@ public class BookingInfo {
         this.design = design;
         this.size = size;
         this.price = price;
+    }
+
+    public BookingInfo(String id, String date, String time, String process, String contents, String cakeLinkInfo, String design, String size, String price, Member member) {
+        this.id = id;
+        this.date = date;
+        this.time = time;
+        this.process = process;
+        this.contents = contents;
+        this.cakeLinkInfo = cakeLinkInfo;
+        this.design = design;
+        this.size = size;
+        this.price = price;
+        memberInfo = member;
     }
 
     public BookingInfo(String id, String date, String time, String process, String contents, String cakeLinkInfo, String design, String size, String price, BoardComment boardComment) {

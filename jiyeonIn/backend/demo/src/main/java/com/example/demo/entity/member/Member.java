@@ -1,5 +1,6 @@
 package com.example.demo.entity.member;
 
+import com.example.demo.entity.booking.BookingInfo;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -40,6 +41,11 @@ public class Member {
     @ToString.Exclude
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<MemberAuth> authList = new ArrayList<>();
+
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @OneToMany(mappedBy = "memberInfo", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    private List<BookingInfo> bookingInfo = new ArrayList<>();
 
     public Member (String userId, String password, String userName) {
         this.userId = userId;
