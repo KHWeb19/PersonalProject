@@ -1,5 +1,9 @@
 <template>
-  <div class="grey lighten-3" align="center">
+  <div
+    class="grey lighten-3"
+    align="center"
+    style="font-family: 'Noto Sans KR', sans-serif"
+  >
     <v-container class="white" style="width: 1700px">
       <v-row justify="center">
         <v-col>
@@ -14,13 +18,15 @@
                   v-if="foodBoardComments"
                   >{{ foodBoardComments.length }}</span
                 >
+                <v-divider></v-divider>
               </div>
-              <v-divider></v-divider>
+
               <v-row>
                 <v-col
                   v-for="commentList in foodBoardComments"
                   :key="commentList.id"
                   cols="12"
+                  class="pt-0 pb-0"
                 >
                   <div class="comment_wrap">
                     <div style="display: flex">
@@ -30,9 +36,9 @@
                       <v-spacer></v-spacer>
                       <h3 class="pb-2 pr-5 pt-2">{{ commentList.regDate }}</h3>
                       <v-btn
-                        class="mt-1 ml-5 mr-5"
+                        class="ml-5 mr-5"
                         text
-                        v-if="commentList.commentWriter == commentWriter"
+                        v-if="commentList.commentWriter == userInfo.nickName"
                         @click="onDelete(commentList.commentNo)"
                         color="red"
                         >삭제</v-btn
@@ -103,9 +109,13 @@ export default {
   },
   methods: {
     onSubmit() {
-      this.commentWriter = this.userInfo.nickName;
-      const { comment, commentWriter } = this;
-      this.$emit("submit", { comment, commentWriter });
+      if (this.$store.state.userInfo != null) {
+        this.commentWriter = this.userInfo.nickName;
+        const { comment, commentWriter } = this;
+        this.$emit("submit", { comment, commentWriter });
+      } else {
+        alert("로그인 해주세요.");
+      }
     },
     onDelete(commentNo) {
       axios
@@ -126,6 +136,7 @@ export default {
 </script>
 
 <style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400&display=swap");
 .comment_title {
   font-size: 24px;
   display: block;

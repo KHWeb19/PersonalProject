@@ -1,5 +1,5 @@
 <template>
-  <div class="grey lighten-3">
+  <div class="grey lighten-3" style="font-family: 'Noto Sans KR', sans-serif">
     <v-container class="white" style="width: 1240px">
       <v-row justify="center">
         <v-col class="pb-0">
@@ -258,6 +258,7 @@ export default {
 </script>
 
 <style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400&display=swap");
 .btn-cover {
   margin-top: 1.5rem;
   text-align: center;

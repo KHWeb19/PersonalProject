@@ -1,5 +1,5 @@
 <template>
-  <div class="grey lighten-3">
+  <div class="grey lighten-3" style="font-family: 'Noto Sans KR', sans-serif">
     <v-container class="white" style="width: 1240px">
       <v-row class="orange lighten-5">
         <v-col>
@@ -46,12 +46,76 @@
           sm="6"
         >
           <v-card width="500" height="380" class="mx-auto">
-            <div style="position: relative">
+            <div v-if="index == 0" style="position: relative">
               <div class="rankNum">
-                <v-btn class="mx-2" fab dark small color="yellow">
-                  <div style="color: black">{{ index + 1 }}</div>
-                </v-btn>
+                <v-img
+                  width="80px"
+                  height="100px"
+                  src="@/assets/img/gold.png"
+                  class="gold"
+                />
               </div>
+              <router-link
+                :to="{
+                  name: 'FoodDetailPage',
+                  params: { boardNo: food.boardNo },
+                }"
+              >
+                <v-img
+                  :src="
+                    require(`@/assets/uploadImg/foodBoard/${food.filename}`)
+                  "
+                  height="200px"
+                ></v-img>
+              </router-link>
+            </div>
+            <div v-else-if="index == 1" style="position: relative">
+              <div class="rankNum">
+                <v-img
+                  width="150px"
+                  height="100%"
+                  src="@/assets/img/silver.png"
+                  class="silver"
+                />
+              </div>
+              <router-link
+                :to="{
+                  name: 'FoodDetailPage',
+                  params: { boardNo: food.boardNo },
+                }"
+              >
+                <v-img
+                  :src="
+                    require(`@/assets/uploadImg/foodBoard/${food.filename}`)
+                  "
+                  height="200px"
+                ></v-img>
+              </router-link>
+            </div>
+            <div v-else-if="index == 2" style="position: relative">
+              <div class="rankNum">
+                <v-img
+                  width="135px"
+                  height="100%"
+                  src="@/assets/img/bronze.png"
+                  class="bronze"
+                />
+              </div>
+              <router-link
+                :to="{
+                  name: 'FoodDetailPage',
+                  params: { boardNo: food.boardNo },
+                }"
+              >
+                <v-img
+                  :src="
+                    require(`@/assets/uploadImg/foodBoard/${food.filename}`)
+                  "
+                  height="200px"
+                ></v-img>
+              </router-link>
+            </div>
+            <div v-else style="position: relative">
               <router-link
                 :to="{
                   name: 'FoodDetailPage',
@@ -115,6 +179,7 @@ export default {
 </script>
 
 <style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400&display=swap");
 .btn-cover .page-count {
   padding: 0 1rem;
 }
@@ -167,5 +232,17 @@ export default {
   right: 20px;
   top: 10px;
   transform: scaleX(-1);
+}
+.gold {
+  right: 18px;
+  top: -12px;
+}
+.silver {
+  right: 45px;
+  top: -30px;
+}
+.bronze {
+  right: 40px;
+  top: -20px;
 }
 </style>
