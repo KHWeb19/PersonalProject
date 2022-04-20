@@ -1,5 +1,6 @@
 package com.example.demo.service.member;
 
+import com.example.demo.controller.memberController.Response.ManagerResponse;
 import com.example.demo.controller.memberController.Response.MemberResponse;
 import com.example.demo.controller.memberController.request.MemberRequest;
 import com.example.demo.entity.member.Member;
@@ -8,10 +9,12 @@ import com.example.demo.repository.MemberAuthRepository;
 import com.example.demo.repository.MemberRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -158,6 +161,14 @@ public class MemberServiceImpl implements MemberService {
 
         memberRepository.deleteById(loginMember.getMemberNo());
 
+    }
+
+    @Override
+    public List<ManagerResponse> list() {
+
+        List<Member> findId = memberRepository.findAll(Sort.by(Sort.Direction.DESC,"bookingNo"));
+
+        return null;
     }
 
 

@@ -38,8 +38,8 @@ public class BookingServiceImpl implements BookingService{
             UploadCake checkCake = uploadCake.get();
 
             BookingInfo bookingInfo1 =
-                    new BookingInfo(info.getId(), info.getDate(), info.getTime(), "예약중", info.getContents(), putLink,
-                            info.getCakeArrNo());
+                    new BookingInfo(info.getId(), info.getDate(), info.getTime(), "예약중", info.getContents(), putLink, checkCake.getLinkInfo(),
+                            checkCake.getDesign(),checkCake.getSize(),checkCake.getPrice());
             repository.save(bookingInfo1);
         }
 
@@ -60,7 +60,8 @@ public class BookingServiceImpl implements BookingService{
 
             BookingInfo bookingInfo1 =
                     new BookingInfo(info.getId(), info.getDate(), info.getTime(), "예약중", info.getContents(),
-                            info.getCakeArrNo());
+                            checkCake.getLinkInfo(), checkCake.getDesign(),checkCake.getSize(),checkCake.getPrice()
+                            );
             repository.save(bookingInfo1);
 
         }
@@ -84,6 +85,7 @@ public class BookingServiceImpl implements BookingService{
         BookingInfo checkedId = maybeReadBoard.get();
 
         if(checkedId.getId().equals(checkId)){
+            log.info("checkedId:"+checkedId);
             return checkedId;
         }else if(checkId.equals("manager")) {
             return checkedId;

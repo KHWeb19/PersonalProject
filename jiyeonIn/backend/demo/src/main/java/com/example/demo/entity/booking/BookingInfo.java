@@ -36,10 +36,19 @@ public class BookingInfo {
     private String contents;
 
     @Column(length = 128, nullable = true)
+    private String cakeLinkInfo;
+
+    @Column(length = 128, nullable = true)
     private String linkInfo;
 
     @Column(length = 32, nullable = true)
-    private Long cakeArrNo;
+    private String design;
+
+    @Column(length = 32, nullable = true)
+    private String size;
+
+    @Column(length = 32, nullable = true)
+    private String price;
 
 
 
@@ -61,14 +70,17 @@ public class BookingInfo {
         this.linkInfo = linkInfo;
     }
 
-    public BookingInfo(String id, String date, String time, String process, String contents, String linkInfo, Long cakeArrNo) {
+    public BookingInfo(String id, String date, String time, String process, String contents, String linkInfo, String cakeLinkInfo, String design, String size, String price) {
         this.id = id;
         this.date = date;
         this.time = time;
         this.process = process;
         this.contents = contents;
         this.linkInfo = linkInfo;
-        this.cakeArrNo = cakeArrNo;
+        this.cakeLinkInfo = cakeLinkInfo;
+        this.design = design;
+        this.size = size;
+        this.price = price;
     }
 
     public BookingInfo(String id, String date, String time, String process, String contents) {
@@ -79,13 +91,16 @@ public class BookingInfo {
         this.contents = contents;
     }
 
-    public BookingInfo(String id, String date, String time, String process, String contents, Long cakeArrNo) {
+    public BookingInfo(String id, String date, String time, String process, String contents, String cakeLinkInfo, String design, String size, String price) {
         this.id = id;
         this.date = date;
         this.time = time;
         this.process = process;
         this.contents = contents;
-        this.cakeArrNo = cakeArrNo;
+        this.cakeLinkInfo = cakeLinkInfo;
+        this.design = design;
+        this.size = size;
+        this.price = price;
     }
 }
 

@@ -1,5 +1,6 @@
 package com.example.demo.controller.memberController;
 
+import com.example.demo.controller.memberController.Response.ManagerResponse;
 import com.example.demo.controller.memberController.Response.MemberResponse;
 import com.example.demo.controller.memberController.request.MemberRequest;
 import com.example.demo.service.member.MemberService;
@@ -7,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @Slf4j
@@ -76,6 +79,13 @@ public class MemberController {
         log.info("memberRemove()");
 
         service.remove(id);
+    }
+
+    @GetMapping("/list")
+    public List<ManagerResponse> managementMember () {
+        log.info("managementMember()");
+
+        return service.list();
     }
 
 }
