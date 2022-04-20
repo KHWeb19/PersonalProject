@@ -1,9 +1,5 @@
 <template>
   <div>
-    <div align="center">
-      <h2>회원 가입 페이지 입니다.</h2>
-    </div>
-
     <vuetify-member-register-form @submit="onSubmit"/>
   </div>
 </template>
@@ -21,8 +17,8 @@ export default {
   },
   methods: {
     onSubmit (payload) {
-      const { id, pw } = payload
-      axios.post('http://localhost:7777/member/register', { id, pw })
+      const { id, pw, email } = payload
+      axios.post('http://localhost:7777/member/register', { id, pw, email })
         .then(res => {
           alert('등록 성공! - ' + res)
         })

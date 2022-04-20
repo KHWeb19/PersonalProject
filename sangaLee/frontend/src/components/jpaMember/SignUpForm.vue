@@ -14,7 +14,7 @@
         </tr>
         <tr>
           <td>비밀번호 확인</td>
-          <td><input type="password" v-model="passwordcheck"></td>
+          <td><input type="password"></td>
         </tr>
         <tr>
           <td>이메일 주소</td>
@@ -39,13 +39,14 @@ export default {
   data () {
     return {
       id: '',
-      pw: ''
+      pw: '',
+      email: ''
     }
   },
   methods: {
     onSubmit () {
-      const { id, pw } = this
-      this.$emit('submit', { id, pw })
+      const { id, pw, email } = this
+      this.$emit('submit', { id, pw, email })
     }
   }
 }

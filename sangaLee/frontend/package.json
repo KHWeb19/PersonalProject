@@ -19,6 +19,7 @@
   "devDependencies": {
     "@babel/core": "^7.12.16",
     "@babel/eslint-parser": "^7.12.16",
+    "@fortawesome/fontawesome-free": "^6.1.1",
     "@mdi/font": "^6.6.95",
     "@morioh/v-lightbox": "^1.0.3",
     "@vue/cli-plugin-babel": "~5.0.0",

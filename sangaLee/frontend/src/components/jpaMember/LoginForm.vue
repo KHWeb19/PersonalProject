@@ -11,22 +11,32 @@
     <div class="square" style="--i:4;"></div>
       <div class="container">
         <div class="form">
-          <h2>LOGO</h2>
+          
           <form @submit.prevent="onSubmit">
+
+            <!-- 아이디 입력 -->
             <div class="inputBox">
               <input type="text" placeholder="ID">
             </div>
+
+            <!-- 비밀번호 입력 -->
             <div class="inputBox">
               <input type="password" placeholder="Password">
             </div>
+
+            <!-- 로그인 버튼 -->
             <div class="inputBox">
               <input type="submit" value="Login">
             </div>
+
+            <!-- 회원가입, 비밀번호 찾기 -->
             <div class="loginfunction">
-            <p class="signup"><router-link style="text-decoration: none;" :to="{ name: 'SignUpPage' }">회원가입</router-link></p>
+            <p class="signup"><router-link :to="{ name: 'SignUpPage' }">회원가입</router-link></p>
             <p class="forget"><router-link :to="{ name:'/forget' }">비밀번호 찾기</router-link></p>
             </div>
+
           </form>
+
         </div>
       </div>
     </div>

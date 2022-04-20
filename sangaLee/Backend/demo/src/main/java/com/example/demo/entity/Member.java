@@ -18,16 +18,13 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long memberNo;
 
-    @NotNull
-    @Column(length = 64)
+    @Column(length = 64, nullable = false)
     private String id;
 
-    @NotNull
-    @Column(length = 64)
+    @Column(length = 64, nullable = false)
     private String pw;
 
-    @NotNull
-    @Column(length = 50)
+    @Column(length = 50, nullable = false)
     private String email;
 
     @CreationTimestamp
