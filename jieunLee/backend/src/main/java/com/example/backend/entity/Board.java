@@ -55,3 +55,4 @@ public class Board {
     @OneToMany(mappedBy = "board", fetch = FetchType.EAGER)
     private Set<Likes> likes = new HashSet<>();
 }
+

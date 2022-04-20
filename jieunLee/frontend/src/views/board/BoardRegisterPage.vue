@@ -39,6 +39,7 @@ export default {
             axios.post(`http://localhost:7777/board/register/${memberNo}`, { boardImage, writer, content})
                 .then(() => {
                     alert('게시물 등록 성공!')
+                    console.log(memberNo)
                     this.$router.push({
                         name: 'HomeView'
                         })

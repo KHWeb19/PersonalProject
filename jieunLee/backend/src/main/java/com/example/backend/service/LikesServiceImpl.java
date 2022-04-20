@@ -24,21 +24,22 @@ public class LikesServiceImpl implements LikesService {
     LikesRepository repository;
 
     @Override
-    public void register(Integer boardNo, Integer memberNo, Likes likes) {
+    public boolean register(Long boardNo, Long memberNo) {
+        Board board = boardRepository.findById(boardNo).orElseThrow();
+        Member member = memberRepository.findById(memberNo).orElseThrow();
 
-//        if(repository.findByMemberNoAndBoard(Long.valueOf(likes.getMemberNo()), likes.getBoard()).isEmpty()) {
-            Optional<Board> maybeBoard = boardRepository.findById(Long.valueOf(boardNo));
-            likes.setBoard(maybeBoard.get());
-            Optional<Member> maybeMember = memberRepository.findById(Long.valueOf(memberNo));
-            likes.setMember(maybeMember.get());
-
-            repository.save(likes);
-//        } else {
-//            repository.deleteById(Long.valueOf(likes.getLikedNo()));
-//        }
+        if(repository.findByMemberAndBoard(member, board).isEmpty()) {
+            repository.save(new Likes(board, member));
+            return true;
+        } else {
+            Optional<Likes> findLikes = repository.findByMemberAndBoard(member, board);
+            Likes likesNo = findLikes.get();
+            repository.deleteById(likesNo.getLikedNo());
+            return false;
+        }
     }
-    @Override
-    public void remove(Integer likesNo) {
-        repository.deleteById(Long.valueOf(likesNo));
-    }
+//    @Override
+//    public void remove(Integer likesNo) {
+//        repository.deleteById(Long.valueOf(likesNo));
+//    }
 }

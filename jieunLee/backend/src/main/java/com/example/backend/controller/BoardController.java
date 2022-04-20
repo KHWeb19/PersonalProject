@@ -18,11 +18,9 @@ public class BoardController {
     @Autowired
     private BoardService service;
 
-
-
     @PostMapping("/register/{memberNo}")
     public void boardRegister(@PathVariable("memberNo") Integer memberNo, @Validated @RequestBody Board board) {
-        log.info("boardRegister()");
+        log.info("boardRegister()" + board);
 
         service.register(memberNo, board);
     }
@@ -41,13 +39,6 @@ public class BoardController {
         return service.memberBoardList(memberNo);
     }
 
-//    @GetMapping("/list/{boardNo}")
-//    public List<Comment> commentList(@PathVariable("boardNo") Integer boardNo) {
-//        log.info("commentList()");
-//
-//        return service.list(boardNo);
-//    }
-
     @GetMapping("/{boardNo}")
     public Board boardRead(@PathVariable("boardNo") Integer boardNo) {
         log.info("boardRead()");
@@ -64,6 +55,7 @@ public class BoardController {
 
         board.setBoardNo(Long.valueOf(boardNo));
         service.modify(board, memberNo);
+
 
         return board;
     }

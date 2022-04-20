@@ -67,15 +67,16 @@ export default {
                     })
         },
         onLikes(payload) {
-            const {boardNo, memberNo} = payload
+            const {likesNo, boardNo, memberNo} = payload
+            console.log(likesNo)
             axios.post(`http://localhost:7777/likes/${boardNo}/${memberNo}`, {boardNo, memberNo})
                 .then(() => {
-                    alert('좋아요 등록 성공!')
+                    alert('좋아요 등록/삭제 성공!')
                     })
                     .catch(() => {
                         alert('문제 발생!')
                     })
-        }        
+        },
     }
 }
 </script>

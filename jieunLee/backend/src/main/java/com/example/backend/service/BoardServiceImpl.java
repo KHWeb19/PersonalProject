@@ -26,7 +26,6 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public void register(Integer memberNo, Board board) {
-
         Optional<Member> maybeMember = memberRepository.findById(Long.valueOf(memberNo));
         board.setMember(maybeMember.get());
         repository.save(board);

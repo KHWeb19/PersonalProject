@@ -1,10 +1,8 @@
 package com.example.backend.controller;
 
-import com.example.backend.entity.Likes;
 import com.example.backend.service.LikesService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
@@ -17,14 +15,14 @@ public class LikesController {
     private LikesService likesService;
 
     @PostMapping("/{boardNo}/{memberNo}")
-    public void likes(@PathVariable("boardNo") Integer boardNo, @PathVariable("memberNo") Integer memberNo, @Validated @RequestBody Likes likes) {
+    public boolean likes(@PathVariable("boardNo") Long boardNo, @PathVariable("memberNo") Long memberNo) {
         log.info("likes()");
-        likesService.register(boardNo, memberNo, likes);
+        return likesService.register(boardNo, memberNo);
     }
 
-    @DeleteMapping("/{boardNo}")
-    public void unLikes(@PathVariable("boardNo") Integer likesNo) {
-        log.info("unLikes()");
-        likesService.remove(likesNo);
-    }
+//    @DeleteMapping("/{likesNo}")
+//    public void unLikes(@PathVariable("likesNo") Integer likesNo) {
+//        log.info("unLikes()");
+//        likesService.remove(likesNo);
+//    }
 }

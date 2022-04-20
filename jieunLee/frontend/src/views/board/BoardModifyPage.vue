@@ -39,8 +39,9 @@ export default {
         ...mapActions(['fetchBoard']),
         onSubmit(payload) {
             const {memberNo, boardImage, content} = payload
+            console.log(memberNo)
             axios.put(`http://localhost:7777/board/${memberNo}/${this.boardNo}`, 
-            {member: this.board.member, boardImage, writer: this.board.writer, content, regDate: this.board.regDate})
+            { boardImage, writer: this.board.writer, content, regDate: this.board.regDate})
                 .then(res => {
                     alert('게시물 수정 성공')
                     console.log(this.board)
