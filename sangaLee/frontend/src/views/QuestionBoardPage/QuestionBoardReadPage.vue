@@ -45,7 +45,7 @@ export default {
         onDelete () {
             const { boardNo } = this.board
             //alert('지우는 게시물 번호: ' + boardNo)
-            axios.delete(`http://localhost:7777/49th/vueboard/${boardNo}`)
+            axios.delete(`http://localhost:7777/Questionboard/${boardNo}`)
                     .then(() => {
                         alert('삭제 성공!')
                         this.$router.push({ name: 'BoardListPage' })
