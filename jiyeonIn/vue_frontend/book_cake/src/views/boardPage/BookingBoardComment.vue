@@ -16,7 +16,8 @@ import { mapState, mapActions } from 'vuex'
             return {
                 checkId: (window.localStorage.getItem('id')),
                 comments: '',
-                id:''
+                id:'',
+                boardComment: this.boardComments
             }
         }, 
         props: {
@@ -32,7 +33,7 @@ import { mapState, mapActions } from 'vuex'
             ...mapState(['boardComments'])
         },
         mounted() {
-            this.fetchBoardComments()
+            this.fetchBoardComments(this.bookingNo)
         },
         methods: {
             ...mapActions(['fetchBoardComments']),

@@ -9,5 +9,5 @@ public interface BoardCommentService {
 
     public void includeCommentRegister(BoardCommentRequest info, String originalFilename);
     public void exceptFileCommentRegister(BoardCommentRequest info);
-    public List<BoardComment> list();
+    public List<BoardComment> list(Integer bookingNo);
 }

@@ -30,8 +30,8 @@ export default {
                     commit(FETCH_BOOKING_BOARD, res.data)
                 })
     },
-    fetchBoardComments ({commit}) {
-        return axios.get('http://localhost:7777/boardComment/list')
+    fetchBoardComments ({commit}, bookingNo) {
+        return axios.get(`http://localhost:7777/boardComment/list/${bookingNo}`)
                 .then((res) => {
                     commit(FETCH_BOARD_COMMENTS, res.data)
                 })

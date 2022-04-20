@@ -1,5 +1,7 @@
 package com.example.demo.entity.boardComment;
 
+import com.example.demo.entity.booking.BookingInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
@@ -24,8 +26,10 @@ public class BoardComment {
     @Column(length = 128, nullable = false)
     private String comments;
 
-    @Column(length = 32, nullable = false)
-    private Long bookingNo;
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "booking_no")
+    private BookingInfo bookingInfo;
 
     @Column(length = 128, nullable = true)
     private String commentLinkInfo;
@@ -39,17 +43,28 @@ public class BoardComment {
         this.regDate = LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
     }
 
-    public BoardComment(String id, String comments, Long bookingNo, String commentLinkInfo){
+    public BoardComment(String id, String comments, String commentLinkInfo){
         this.id = id;
         this.comments = comments;
-        this.bookingNo = bookingNo;
         this.commentLinkInfo = commentLinkInfo;
     }
 
-    public BoardComment(String id, String comments, Long bookingNo){
+    public BoardComment(String id, String comments, String commentLinkInfo, BookingInfo info){
         this.id = id;
         this.comments = comments;
-        this.bookingNo = bookingNo;
+        this.commentLinkInfo = commentLinkInfo;
+        bookingInfo = info;
+    }
+
+    public BoardComment(String id, String comments){
+        this.id = id;
+        this.comments = comments;
+    }
+
+    public BoardComment(String id, String comments, BookingInfo info){
+        this.id = id;
+        this.comments = comments;
+        bookingInfo = info;
     }
 
 }
