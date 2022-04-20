@@ -18,7 +18,7 @@ export default{
             }
             axios.get("admins", config)*/
             axios.get("admins")
-            .then(this.$router.push("dummy request success"))
+            .then(console.log("dummy success"))
             .catch(console.log("dummy request failed"))
 
         }

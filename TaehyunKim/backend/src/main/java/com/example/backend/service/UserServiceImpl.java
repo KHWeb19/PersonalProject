@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -41,6 +42,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     }
 
+    @Override
+    public void addRoleToUser(String username, String rolename) {
+        User user = userRepo.findByUsername(username);
+        Role role = roleRepo.findByName(rolename);
+
+        user.getRoles().add(role);
+
+    }
 
     @Override
     public User saveUser(User user) {
@@ -70,10 +79,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public void addRoleToUser(String username, String roleName) {
-        User user = userRepo.findByUsername(username);
-        Role role = roleRepo.findByName(roleName);
+    public Optional<User> getUserByEmail(String email) { return Optional.ofNullable(userRepo.findByEmail(email));}
 
-        user.getRoles().add(role);
+    @Override
+    public Optional<User> getUserByUserName(String username) {
+        return Optional.ofNullable(userRepo.findByUsername(username));
     }
 }

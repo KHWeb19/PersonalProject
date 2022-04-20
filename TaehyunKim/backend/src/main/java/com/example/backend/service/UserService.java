@@ -3,7 +3,9 @@ package com.example.backend.service;
 import com.example.backend.entity.Role;
 import com.example.backend.entity.User;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Optional;
 
 public interface UserService {
     User saveUser(User user);
@@ -11,5 +13,7 @@ public interface UserService {
     User getUser(String username);
     List<User> getUsers();
     List<Role> getRoles();
-    void addRoleToUser(String username, String roleName);
+    void addRoleToUser(String username, String rolename);
+    Optional<User> getUserByEmail(String email);
+    Optional<User> getUserByUserName(String username);
 }

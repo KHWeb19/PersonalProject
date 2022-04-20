@@ -1,4 +1,5 @@
 import axios from "axios"
+import router from "../router/index.js"
 
 axios.defaults.baseURL = "http://localhost:1234/api/"
 
@@ -6,21 +7,16 @@ axios.defaults.baseURL = "http://localhost:1234/api/"
 axios.interceptors.request.use((config) =>
     
     {
-        console.log("Interceptor before request")
-        config.headers.common['Authorization'] = `Bearer ${localStorage.getItem("access_token")}`
+        if (localStorage.getItem("access_token"))
+            config.headers.common['Authorization'] = `Bearer ${localStorage.getItem("access_token")}`
         return config
     },
 
     (error) => {
-        //so Maybe get rid of localstorage if you failed to log in with it?
-        //well there is still a possibility of failing with unauthorized right
-        console.log("error before request")
         return Promise.reject(error)
     }
     
 )
-
-
 
 axios.interceptors.response.use((response)=>{return response}, async (error) => 
     {
@@ -28,7 +24,7 @@ axios.interceptors.response.use((response)=>{return response}, async (error) =>
 
         const originalRequest = error.config
 
-        if (error.response.status === 401 && !refresh){
+        if (error.response.status === 401 && !refresh && localStorage.getItem("access_token")){
             refresh = true
             const {status,data} = await axios.post('refreshtoken', {}, {withCredentials: true})
 
@@ -37,6 +33,10 @@ axios.interceptors.response.use((response)=>{return response}, async (error) =>
                 originalRequest.headers['Authorization'] = `Bearer ${data.access_token}`
                 return axios(originalRequest)
             }
+        }
+        else if (error.response.status === 403){
+            alert("해당 요청에 대한 권한이 없습니다")
+            router.push({name:"home"})
         }    
     refresh = false
     return error    

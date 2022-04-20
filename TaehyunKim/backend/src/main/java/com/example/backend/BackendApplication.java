@@ -26,22 +26,24 @@ public class BackendApplication {
 	@Bean
 	CommandLineRunner run(UserService userService){
 		return args ->{
-			userService.saveRole(new Role(null, "ROLE_ADMIN"));
-			userService.saveRole(new Role(null, "ROLE_USER"));
-			userService.saveRole(new Role(null, "ROLE_PLEB"));
+			userService.saveRole(new Role(null, "ROLE_ADMIN", new ArrayList<>()));
+			userService.saveRole(new Role(null, "ROLE_USER", new ArrayList<>()));
 
-			userService.saveUser(new User(null, "admin", "123", new ArrayList<>(), "johnsnow@gmail.com",
-					"John", "Snow", new Date()));
-			userService.saveUser(new User(null, "user1", "123", new ArrayList<>(), "tyrionlannister@gmail.com",
-					"Tyrion", "Lannister", new Date()));
-			userService.saveUser(new User(null, "user2", "password456", new ArrayList<>(), "hodor@gmail.com",
-					"Hodor", null, new Date()));
+			userService.saveUser(new User(null, "admin123@gmail.com", "admin", "12345678",
+					"john", "snow", new Date(), new ArrayList<>()));
+			userService.saveUser(new User(null, "user123@gmail.com", "user", "12345678",
+					"tyrion", "lannister", new Date(), new ArrayList<>()));
+
 
 			userService.addRoleToUser("admin", "ROLE_ADMIN");
 			userService.addRoleToUser("admin", "ROLE_USER");
+			userService.addRoleToUser("user", "ROLE_USER");
+
+
+			/*
 			userService.addRoleToUser("user1", "ROLE_USER");
 			userService.addRoleToUser("user2", "ROLE_PLEB");
-
+			*/
 
 		};
 	}

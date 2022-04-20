@@ -68,11 +68,11 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         */
 
 
-        Cookie cookie = new Cookie("refresh_token", refresh_token);
-        cookie.setPath("/");
-        cookie.setHttpOnly(true);
-        response.addCookie(cookie);
-
+        Cookie refresh_cookie = new Cookie("refresh_token", refresh_token);
+        refresh_cookie.setPath("/");
+        refresh_cookie.setSecure(true);
+        refresh_cookie.setHttpOnly(true);
+        response.addCookie(refresh_cookie);
 
         Map<String, String> tokens = new HashMap<>();
         tokens.put("access_token", access_token);
