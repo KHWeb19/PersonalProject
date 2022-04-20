@@ -42,4 +42,7 @@ export default {
 
     checkbrandComments: [],
     checkbrandComment: [],
+
+    QuestionComments:[],
+    QuestionComment:[],
 }

@@ -10,26 +10,31 @@ import {
     FETCH_SESSION,
 
     FETCH_CHECK_BRAND_COMMENTS,
-    FETCH_CHECK_BRAND_COMMENT
+    FETCH_CHECK_BRAND_COMMENT,
+
+    FETCH_QUESTION_COMMENTS,
+    FETCH_QUESTION_COMMENT,
 } from './mutation-types'
 
 export default {
     [FETCH_BRAND_CHECK_BOARD_LIST] (state, brandCheckBoards) {
         state.BrandCheckBoards = brandCheckBoards
-    },
+   },
+
     [FETCH_BRAND_CHECK_BOARD ] (state, brandCheckBoard) {
         state.BrandCheckBoard = brandCheckBoard
-    },
+   },
 
     [FETCH_QUESTION_BOARD_LIST] (state, QuestionBoards) {
       state.QuestionBoards = QuestionBoards
    },
+
     [FETCH_QUESTION_BOARD ] (state, QuestionBoard) {
       state.QuestionBoard = QuestionBoard
-    },
+   },
 
 
-    [USER_LOGIN] (state, isLogin) {
+      [USER_LOGIN] (state, isLogin) {
         state.isLogin = isLogin
         console.log('isLogin: ' + isLogin)
       },
@@ -45,7 +50,16 @@ export default {
       [FETCH_CHECK_BRAND_COMMENTS] (state, comments) {
         state.checkbrandComments = comments
       },
+      
       [FETCH_CHECK_BRAND_COMMENT] (state, comment) {
         state.checkbrandComment = comment
+      },
+
+      [FETCH_QUESTION_COMMENTS] (state, comments) {
+        state.QuestionComments = comments
+      },
+
+      [FETCH_QUESTION_COMMENT] (state, comment) {
+        state.QuestionComment = comment
       },
 }
