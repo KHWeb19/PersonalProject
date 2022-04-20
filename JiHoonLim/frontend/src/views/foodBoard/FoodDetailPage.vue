@@ -18,7 +18,6 @@ export default {
   name: "FoodDetailPage",
   props: {
     boardNo: {
-      type: String,
       required: true,
     },
   },
@@ -50,6 +49,7 @@ export default {
         )
         .then(() => {
           alert("댓글 등록 성공");
+          this.$router.go();
         })
         .catch(() => {
           alert("댓글 등록 실패");

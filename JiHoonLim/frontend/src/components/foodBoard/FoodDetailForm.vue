@@ -1,5 +1,9 @@
 <template>
-  <div class="grey lighten-3" align="center">
+  <div
+    class="grey lighten-3"
+    align="center"
+    style="font-family: 'Noto Sans KR', sans-serif"
+  >
     <v-container class="white" style="width: 1700px">
       <v-row justify="center">
         <v-col>
@@ -20,31 +24,149 @@
               <div class="foodRec-cont">
                 <div class="foodRec-left">
                   <div class="foodRec-tit">
-                    <h2>
-                      {{ foodBoard.name }}
-                    </h2>
-                    <div class="foodRec-cat">
-                      <v-chip class="tag" large outlined>
-                        # {{ foodBoard.mat }}
-                      </v-chip>
-                      <v-chip class="tag" large outlined>
-                        # {{ foodBoard.kind }}
-                      </v-chip>
-                      <v-chip class="tag" large outlined>
-                        # {{ foodBoard.way }}
-                      </v-chip>
-                    </div>
+                    <div style="display: flex; justify-content: space-between">
+                      <h2>
+                        {{ foodBoard.name }}
+                      </h2>
 
-                    <v-textarea
-                      type="text"
-                      readonly
-                      :value="foodBoard.des"
-                      flat
-                      solo
-                      auto-grow
-                      class="textArea"
-                    />
+                      <div style="display: flex">
+                        <v-text-field
+                          :value="foodBoard.regDate"
+                          readonly
+                          solo
+                          flat
+                          style="width: 160px; margin-top: 2px"
+                        />
+                        <div v-if="checkWriteUser">
+                          <v-btn
+                            text
+                            :to="{
+                              name: 'FoodModifyPage',
+                              params: { boardNo: foodBoard.boardNo.toString() },
+                            }"
+                            >수정</v-btn
+                          >
+
+                          <v-dialog v-model="dialogDelete" width="460">
+                            <template v-slot:activator="{ on, attrs }">
+                              <v-btn
+                                text
+                                v-bind="attrs"
+                                v-on="on"
+                                @click="restCheckbox"
+                                color="red"
+                              >
+                                삭제
+                              </v-btn>
+                            </template>
+
+                            <v-card>
+                              <v-card-title class="text-h5 orange lighten-3">
+                                게시물 삭제
+                              </v-card-title>
+                              <v-card-text class="mt-5 pb-0">
+                                게시물 삭제를 원하시면 <br />
+                                버튼을 체크하시고 <br />
+                                삭제 버튼을 클릭해주세요.
+                              </v-card-text>
+                              <v-container class="pt-0 pb-0" fluid>
+                                <v-checkbox
+                                  v-model="checkbox"
+                                  label="삭제 동의 버튼."
+                                ></v-checkbox>
+                              </v-container>
+                              <v-divider></v-divider>
+
+                              <v-card-actions>
+                                <v-spacer></v-spacer>
+                                <v-btn
+                                  color="orange lighten-3"
+                                  text
+                                  :disabled="!checkbox"
+                                  @click="onDelete"
+                                >
+                                  삭제
+                                </v-btn>
+                                <v-btn
+                                  color="orange lighten-3"
+                                  text
+                                  @click="dialogDelete = false"
+                                >
+                                  취소
+                                </v-btn>
+                              </v-card-actions>
+                            </v-card>
+                          </v-dialog>
+                        </div>
+                      </div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between">
+                      <div class="foodRec-cat">
+                        <v-chip class="tag" large outlined>
+                          # {{ foodBoard.mat }}
+                        </v-chip>
+                        <v-chip class="tag" large outlined>
+                          # {{ foodBoard.kind }}
+                        </v-chip>
+                        <v-chip class="tag" large outlined>
+                          # {{ foodBoard.way }}
+                        </v-chip>
+                      </div>
+                      <div>
+                        <div style="display: flex">
+                          <div style="display: flex">
+                            <v-icon
+                              color="orange"
+                              class="pr-1"
+                              style="height: 45px; padding-top: 6px"
+                            >
+                              mdi-eye</v-icon
+                            >
+                            <v-text-field
+                              flat
+                              solo
+                              readonly
+                              style="width: 50px"
+                              :value="foodBoard.viewCount"
+                            />
+                          </div>
+                          <div style="display: flex">
+                            <v-btn text class="mt-2">
+                              <v-icon color="orange"> mdi-thumb-up</v-icon>
+                            </v-btn>
+                            <v-text-field
+                              flat
+                              solo
+                              readonly
+                              style="width: 50px"
+                              :value="foodBoard.viewCount"
+                            />
+                          </div>
+
+                          <div>
+                            <v-btn text>
+                              <v-icon color="orange" class="pr-1">
+                                mdi-cart</v-icon
+                              ><span style="font-weight: bold"
+                                >내 보관함에 추가</span
+                              >
+                            </v-btn>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
+                  <v-textarea
+                    type="text"
+                    readonly
+                    :value="foodBoard.des"
+                    rows="5"
+                    flat
+                    solo
+                    auto-grow
+                    class="textAreaLeft"
+                  />
+                  <v-divider></v-divider>
                   <div class="main_title">
                     <b>조리순서</b>
                     <span style="">Steps</span>
@@ -54,9 +176,10 @@
                     :value="foodBoard.content"
                     auto-grow
                     readonly
-                    flat
                     solo
-                    style
+                    flat
+                    rows="10"
+                    class="textAreaLeft"
                   />
                 </div>
 
@@ -67,11 +190,12 @@
                   </div>
                   <v-textarea
                     :value="foodBoard.material"
+                    rows="10"
                     auto-grow
                     solo
                     flat
                     readonly
-                    style="width: 800px"
+                    class="textAreaRight"
                   />
                   <div>
                     <v-divider></v-divider>
@@ -82,95 +206,14 @@
 
                     <v-textarea
                       :value="foodBoard.tip"
+                      rows="5"
                       auto-grow
                       solo
                       flat
                       readonly
                       style="width: 800px"
+                      class="textAreaRight"
                     />
-                  </div>
-                  <v-divider></v-divider>
-                  <div>
-                    <div style="display: flex">
-                      <v-icon color="orange" class="pr-1"> mdi-eye</v-icon>
-                      <v-text-field flat solo :value="foodBoard.viewCount" />
-                    </div>
-                    <div style="display: flex">
-                      <div>
-                        <v-btn>
-                          <v-icon color="orange" class="pr-1">
-                            mdi-thumb-up</v-icon
-                          >
-                        </v-btn>
-                      </div>
-
-                      <div>
-                        <v-btn>
-                          <v-icon color="orange" class="pr-1"> mdi-cart</v-icon>
-                        </v-btn>
-                      </div>
-                    </div>
-                  </div>
-                  <div v-if="checkWriteUser">
-                    <v-btn
-                      text
-                      :to="{
-                        name: 'FoodModifyPage',
-                        params: { boardNo: foodBoard.boardNo.toString() },
-                      }"
-                      >수정</v-btn
-                    >
-
-                    <v-dialog v-model="dialogDelete" width="460">
-                      <template v-slot:activator="{ on, attrs }">
-                        <v-btn
-                          text
-                          v-bind="attrs"
-                          v-on="on"
-                          @click="restCheckbox"
-                          color="red"
-                        >
-                          삭제
-                        </v-btn>
-                      </template>
-
-                      <v-card>
-                        <v-card-title class="text-h5 orange lighten-3">
-                          게시물 삭제
-                        </v-card-title>
-                        <v-card-text class="mt-5 pb-0">
-                          게시물 삭제를 원하시면 <br />
-                          버튼을 체크하시고 <br />
-                          삭제 버튼을 클릭해주세요.
-                        </v-card-text>
-                        <v-container class="pt-0 pb-0" fluid>
-                          <v-checkbox
-                            v-model="checkbox"
-                            label="삭제 동의 버튼."
-                          ></v-checkbox>
-                        </v-container>
-                        <v-divider></v-divider>
-
-                        <v-card-actions>
-                          <v-spacer></v-spacer>
-                          <v-btn
-                            color="orange lighten-3"
-                            text
-                            :disabled="!checkbox"
-                            @click="onDelete"
-                          >
-                            삭제
-                          </v-btn>
-                          <v-btn
-                            color="orange lighten-3"
-                            text
-                            @click="dialogDelete = false"
-                          >
-                            취소
-                          </v-btn>
-                        </v-card-actions>
-                      </v-card>
-                    </v-dialog>
                   </div>
                 </div>
               </div>
@@ -238,8 +281,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400&display=swap");
 .main_title {
-  float: left;
   font-size: 24px;
 
   color: #000;
@@ -259,7 +302,6 @@ export default {
   padding: 15px;
   font-size: 30px;
   font-weight: bold;
-  border-bottom: 1px solid #dbdbdb;
 }
 .foodRec-cat {
   margin-top: 30px;
@@ -273,23 +315,19 @@ export default {
   text-align: left;
   padding: 15px;
   width: 70%;
+  height: 100%;
   border-left: 1px solid #dbdbdb;
   border-right: 1px solid #dbdbdb;
 }
 
 .foodRec-right {
+  text-align: left;
   padding: 15px;
   width: 30%;
+  height: 100%;
   border-right: 1px solid #dbdbdb;
 }
 
-.v-textarea {
-  display: block;
-  font-size: 20px;
-  color: #666;
-  font-weight: lighter;
-  line-height: 2;
-}
 h2 {
   font-size: 45px;
   color: #333;
@@ -303,5 +341,13 @@ h2 {
   background: #fff;
   border-radius: 50px;
   margin-right: 10px;
+}
+.textAreaLeft {
+  font-size: 22px;
+  color: #666;
+}
+.textAreaRight {
+  font-size: 17px;
+  color: #666;
 }
 </style>
