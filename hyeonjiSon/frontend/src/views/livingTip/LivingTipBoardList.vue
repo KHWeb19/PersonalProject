@@ -1,6 +1,10 @@
 <template>
 <div class="board_wrap">
-<v-container>
+
+   <v-container  v-if="this.$store.state.userInfo == null">
+      <h1> 로그인 후 이용 가능한 페이지 입니다. </h1>
+   </v-container>
+<v-container v-if="this.$store.state.userInfo != null">
          <v-row>
                <v-text-field v-model="search" label="Search" append-icon="mdi-magnify" 
             solo hide-details></v-text-field>
