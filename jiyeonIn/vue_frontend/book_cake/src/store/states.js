@@ -7,4 +7,5 @@ export default {
     memberInfo:null,
     bookingIdLists:[],
     reviewsIdLists:[],
+    memberLists:[],
 }

@@ -3,7 +3,7 @@
         <main-page-form></main-page-form>
 
         <div class="myPage">
-            <manager-page-member-form></manager-page-member-form>
+            <manager-page-member-form :memberLists="memberLists"></manager-page-member-form>
         </div>
 
 
@@ -15,6 +15,7 @@
 import MainPageForm from '@/components/layout/MainPageForm.vue'
 import FooterForm from '@/components/layout/FooterForm.vue'
 import ManagerPageMemberForm from '../../components/manager/ManagerPageMemberForm.vue'
+import { mapState, mapActions } from 'vuex'
 
     export default {
         name: 'ManagerPageCake',
@@ -29,6 +30,15 @@ import ManagerPageMemberForm from '../../components/manager/ManagerPageMemberFor
                 userId:'',
             }
         },
+        computed: {
+            ...mapState(['memberLists'])
+        },
+        mounted () {
+            this.fetchMemberLists()
+        },
+        methods :{
+            ...mapActions(['fetchMemberLists'])
+        }
     }
 </script>
 

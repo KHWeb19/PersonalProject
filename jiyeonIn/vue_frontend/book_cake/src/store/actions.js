@@ -6,7 +6,8 @@ import {
     FETCH_REVIEWS,
     FETCH_MEMBER_INFO,
     BOOKING_ID_LISTS,
-    FETCH_REVIEWS_LISTS
+    FETCH_REVIEWS_LISTS,
+    FETCH_MEMBER_LISTS
 } from './mutation-types'
 
 import axios from 'axios'
@@ -58,6 +59,12 @@ export default {
         return axios.get(`http://localhost:7777/review/list/${id}`)
                 .then((res) => {
                     commit(FETCH_REVIEWS_LISTS, res.data)
+                })
+    },
+    fetchMemberLists ({commit}) {
+        return axios.get('http://localhost:7777/Member/list')
+                .then((res) => {
+                    commit(FETCH_MEMBER_LISTS, res.data)
                 })
     },
     

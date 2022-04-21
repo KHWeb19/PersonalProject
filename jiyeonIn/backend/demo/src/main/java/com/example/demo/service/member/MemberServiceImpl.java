@@ -153,6 +153,7 @@ public class MemberServiceImpl implements MemberService {
 
     }
 
+    @Transactional
     @Override
     public void remove(String id) {
         Optional<Member> maybeMember = memberRepository.findByUserId(id);
@@ -163,12 +164,10 @@ public class MemberServiceImpl implements MemberService {
 
     }
 
+    @Transactional
     @Override
-    public List<ManagerResponse> list() {
-
-        List<Member> findId = memberRepository.findAll(Sort.by(Sort.Direction.DESC,"bookingNo"));
-
-        return null;
+    public List<Member> list() {
+        return memberRepository.findAll(Sort.by(Sort.Direction.DESC,"memberNo"));
     }
 
 

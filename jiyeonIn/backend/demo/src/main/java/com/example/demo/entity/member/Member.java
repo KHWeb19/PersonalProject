@@ -10,6 +10,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.util.*;
 
 @Data
@@ -38,17 +39,17 @@ public class Member {
 
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<MemberAuth> authList = new ArrayList<>();
+    @OneToMany(mappedBy = "member",fetch = FetchType.EAGER , cascade = CascadeType.REMOVE)
+    private Set<MemberAuth> authList = new HashSet<>();
 
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    @OneToMany(mappedBy = "memberInfo", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-    private List<BookingInfo> bookingInfo = new ArrayList<>();
+    @OneToMany(mappedBy = "memberInfo", fetch = FetchType.EAGER  , cascade = CascadeType.REMOVE)
+    private Set<BookingInfo> bookingInfo = new HashSet<>();
 
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    @OneToMany(mappedBy = "memberReview", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "memberReview", fetch = FetchType.EAGER , cascade = CascadeType.REMOVE)
     private Set<Review> review = new HashSet<>();
 
     public Member (String userId, String password, String userName) {
@@ -89,7 +90,7 @@ public class Member {
 
     public void addAuth (MemberAuth auth) {
         if (authList == null) {
-            authList = new ArrayList();
+            authList = new HashSet();
         }
 
         authList.add(auth);

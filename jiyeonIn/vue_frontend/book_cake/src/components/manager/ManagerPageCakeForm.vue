@@ -12,7 +12,7 @@
                 <br>
                 <li>
                     <router-link :to="{ name: 'ManagerPageCake'}">
-                        <strong> 케이크 정보 확인  </strong>
+                        <strong> 케이크 정보 확인 </strong>
                     </router-link>
                 </li>
             </ul>

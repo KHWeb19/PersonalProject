@@ -3,6 +3,7 @@ package com.example.demo.controller.memberController;
 import com.example.demo.controller.memberController.Response.ManagerResponse;
 import com.example.demo.controller.memberController.Response.MemberResponse;
 import com.example.demo.controller.memberController.request.MemberRequest;
+import com.example.demo.entity.member.Member;
 import com.example.demo.service.member.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,7 +83,7 @@ public class MemberController {
     }
 
     @GetMapping("/list")
-    public List<ManagerResponse> managementMember () {
+    public List<Member> managementMember () {
         log.info("managementMember()");
 
         return service.list();

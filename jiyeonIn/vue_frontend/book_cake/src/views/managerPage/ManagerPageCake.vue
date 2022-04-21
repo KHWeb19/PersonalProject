@@ -13,7 +13,7 @@
 <script>
 import MainPageForm from '@/components/layout/MainPageForm.vue'
 import FooterForm from '@/components/layout/FooterForm.vue'
-import ManagerPageCakeForm from '../../components/manager/ManagerPageCakeForm.vue'
+import ManagerPageCakeForm from '@/components/manager/ManagerPageCakeForm.vue'
 
     export default {
         name: 'ManagerPageCake',
@@ -25,7 +25,6 @@ import ManagerPageCakeForm from '../../components/manager/ManagerPageCakeForm.vu
         },
         data(){
             return{
-                userId:'',
             }
         },
     }
