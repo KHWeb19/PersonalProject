@@ -12,8 +12,8 @@ import java.util.Optional;
 public interface HateRepository extends JpaRepository<Hate, Integer> {
 
     @Transactional
-    @Query("select h from Hate h where h.planDay.planDayNo = :planDayNo")
-    Optional<Hate> findByDayHate(Integer planDayNo);
+    @Query("select h from Hate h where h.planDay.planDayNo = :planDayNo and h.id = :id")
+    Optional<Hate> findByDayHate(Integer planDayNo, String id);
 
     @Transactional
     @Query("select h from Hate h where h.planDay.planDayNo = :planDayNo")
@@ -22,4 +22,8 @@ public interface HateRepository extends JpaRepository<Hate, Integer> {
     @Transactional
     @Query("select h from Hate h where h.planDay.planDayNo = :planDayNo")
     List<Hate> findByLike(Integer planDayNo);
+
+    @Transactional
+    @Query("select h from Hate h where h.planDay.planDayNo = :planDayNo and h.id = :id")
+    Hate findBYHateForRemove(String id, Integer planDayNo);
 }

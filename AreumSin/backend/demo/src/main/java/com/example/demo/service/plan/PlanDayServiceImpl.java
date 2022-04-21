@@ -93,7 +93,7 @@ public class PlanDayServiceImpl implements PlanDayService{
     @Override
     public void like(CountRequest countRequest) {
 
-        Optional<Like> likeMember = likeRepository.findByDayLike(countRequest.getPlanDayNo());
+        Optional<Like> likeMember = likeRepository.findByDayLike(countRequest.getPlanDayNo(), countRequest.getId());
         PlanDay planDay = planDayRepository.findByPlan(countRequest.getPlanDayNo());
 
         // likeMember가 비워있으면 좋아요 누른 사람이 없다.
@@ -121,13 +121,26 @@ public class PlanDayServiceImpl implements PlanDayService{
 
                 //log.info(member.getId()+ ", " + countRequest.getId());
                 if(member.getId().equals(countRequest.getId())){
-                    log.info("둘이 같을 경우"+ countRequest.getPlanDayNo());
-                    likeRepository.deleteById(countRequest.getPlanDayNo());
+                    log.info("둘이 같을 경우: "+ countRequest.getPlanDayNo()+"아이디 : "+ countRequest.getId());
+
+                    //likeRepository.deleteById(countRequest.getPlanDayNo());
+
+                    Like like = likeRepository.findBYLikeForRemove(countRequest.getId(), countRequest.getPlanDayNo());
+
+                    System.out.println("::: like ::: " + like.getId());
+                    likeRepository.delete(like);
+
                     planDay.likeCount(planDay, false);
                     log.info("planDay Count!: " + planDay.getLikeCount());
                 }else{
                     log.info("둘이 다른 경우 "+ countRequest.getPlanDayNo());
+                    Like like = Like.createLikeMember(countRequest.getId(), planDay);
+
+                    likeRepository.save(like);
+
                     planDay.likeCount(planDay, true);
+
+                    planDayRepository.save(planDay);
                     log.info("planDay Count!: " + planDay.getLikeCount());
                 }
 
@@ -140,7 +153,7 @@ public class PlanDayServiceImpl implements PlanDayService{
 
     @Override
     public void hate(CountRequest countRequest) {
-        Optional<Hate> hateMember = hateRepository.findByDayHate(countRequest.getPlanDayNo());
+        Optional<Hate> hateMember = hateRepository.findByDayHate(countRequest.getPlanDayNo(), countRequest.getId());
         PlanDay planDay = planDayRepository.findByPlan(countRequest.getPlanDayNo());
 
         log.info("얍! 여기까지 오니?! ");
@@ -163,7 +176,10 @@ public class PlanDayServiceImpl implements PlanDayService{
                 log.info(member.getId());
 
                 if(member.getId().equals(countRequest.getId())){
-                    hateRepository.deleteById(countRequest.getPlanDayNo());
+
+                    Hate hate = hateRepository.findBYHateForRemove(countRequest.getId(), countRequest.getPlanDayNo());
+                    hateRepository.delete(hate);
+
                     planDay.hateCount(planDay, false);
                     log.info("planDay HateCount!: " + planDay.getHateCount());
                 }else{

@@ -3,12 +3,15 @@ package com.example.demo.service.plan;
 import com.example.demo.entity.Member;
 import com.example.demo.entity.MemberPlan;
 import com.example.demo.entity.Plan;
+import com.example.demo.entity.Vote;
 import com.example.demo.repository.JoinMemberRepository;
 import com.example.demo.repository.MakePlanRepository;
 import com.example.demo.repository.MemberPlanRepository;
+import com.example.demo.repository.VoteRepository;
 import com.example.demo.request.MemberPlanRequest;
 import com.example.demo.request.MemberRequest;
 import com.example.demo.request.PlanFriend;
+import com.example.demo.request.VoteRequest;
 import com.example.demo.response.FriendMemberResponse;
 import com.example.demo.response.PlanResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -31,6 +34,9 @@ public class MakePlanServiceImpl implements MakePlanService{
 
     @Autowired
     MemberPlanRepository memberPlanRepository;
+
+    @Autowired
+    VoteRepository voteRepository;
 
     @Transactional
     @Override
@@ -126,6 +132,27 @@ public class MakePlanServiceImpl implements MakePlanService{
         }
 
         return listMember;
+    }
+
+    @Override
+    public void voteSave(VoteRequest voteRequest) {
+        Plan plan = planRepository.findByPlan(voteRequest.getPlanNo());
+
+        Vote vote = Vote.voteCreate(voteRequest.getVoteContent(), plan);
+
+        voteRepository.save(vote);
+    }
+
+    @Override
+    public List<Vote> voteList(Integer planNo) {
+
+        List<Vote> voteLists = voteRepository.findAllVote(planNo);
+
+        for(Vote voteList : voteLists){
+            log.info("voteNo" + voteList.getVoteNo());
+        }
+
+        return voteLists;
     }
 
 

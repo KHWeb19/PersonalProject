@@ -2,12 +2,15 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Member;
 import com.example.demo.entity.MemberPlan;
+import com.example.demo.entity.Vote;
 import com.example.demo.request.MemberPlanRequest;
 import com.example.demo.request.MemberRequest;
 import com.example.demo.request.PlanFriend;
+import com.example.demo.request.VoteRequest;
 import com.example.demo.response.FriendMemberResponse;
 import com.example.demo.response.MemberListResponse;
 import com.example.demo.response.PlanResponse;
+import com.example.demo.response.VoteResponse;
 import com.example.demo.service.join.JoinMemberService;
 import com.example.demo.service.plan.MakePlanService;
 import lombok.extern.slf4j.Slf4j;
@@ -92,4 +95,26 @@ public class MakePlanController {
         return responses;
     }
 
+    @PostMapping("/vote")
+    public void voteSave(@Validated @RequestBody VoteRequest voteRequest){
+        log.info("voteSave() " + voteRequest.getVoteContent());
+
+        planService.voteSave(voteRequest);
+    }
+
+    @GetMapping("/vote/{planNo}")
+    public List<VoteResponse> voteList(@PathVariable("planNo") Integer planNo){
+        log.info("voteList() " + planNo);
+
+        List<Vote> voteList = planService.voteList(planNo);
+        List<VoteResponse> voteResponses = new ArrayList<>();
+
+        for(Vote vote : voteList){
+            log.info("voteNo() : "+vote.getVoteNo() + ", " + vote.getVoteContent());
+
+            voteResponses.add(new VoteResponse(vote.getVoteNo(), vote.getVoteContent()));
+        }
+
+        return voteResponses;
+    }
 }
