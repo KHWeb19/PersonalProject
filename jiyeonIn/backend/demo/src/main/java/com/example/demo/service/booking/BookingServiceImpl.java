@@ -97,6 +97,7 @@ public class BookingServiceImpl implements BookingService{
             log.info("checkedId:"+checkedId);
             return checkedId;
         }else if(checkId.equals("manager")) {
+            log.info("i am manager");
             return checkedId;
         }else
             return null;
