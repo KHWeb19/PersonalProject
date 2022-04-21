@@ -11,8 +11,8 @@ import java.util.Optional;
 public interface LikeRepository extends JpaRepository<Like, Integer> {
 
     @Transactional
-    @Query("select l from Like l where l.planDay.planDayNo = :planDayNo")
-    Optional<Like> findByDayLike(Integer planDayNo);
+    @Query("select l from Like l where l.planDay.planDayNo = :planDayNo and l.id = :id")
+    Optional<Like> findByDayLike(Integer planDayNo, String id);
 
     @Transactional
     @Query("select l from Like l where l.planDay.planDayNo = :planDayNo")
@@ -21,5 +21,9 @@ public interface LikeRepository extends JpaRepository<Like, Integer> {
     @Transactional
     @Query("select l from Like l where l.planDay.planDayNo = :planDayNo")
     List<Like> findByLike(Integer planDayNo);
+
+    @Transactional
+    @Query("select l from Like l where l.id = :id and l.planDay.planDayNo = :planDayNo")
+    Like findBYLikeForRemove(String id, Integer planDayNo);
 
 }
