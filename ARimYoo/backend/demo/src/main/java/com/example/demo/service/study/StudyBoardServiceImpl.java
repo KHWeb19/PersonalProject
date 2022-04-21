@@ -1,6 +1,7 @@
 package com.example.demo.service.study;
 
 import com.example.demo.entity.communityBoard.CommunityBoard;
+import com.example.demo.entity.review.Review;
 import com.example.demo.entity.study.Study;
 import com.example.demo.entity.study.StudyBoard;
 import com.example.demo.repository.study.StudyBoardRepository;
@@ -91,5 +92,11 @@ public class StudyBoardServiceImpl implements StudyBoardService {
     @Override
     public void modify(StudyBoard studyBoard) throws Exception {
         repository.save(studyBoard);
+    }
+
+    @Override
+    public List<StudyBoard> searchList (String keyword) {
+        List<StudyBoard> findList = repository.findByStudyNameContaining(keyword);
+        return findList;
     }
 }

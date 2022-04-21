@@ -24,6 +24,7 @@ import StudyPage from '../views/board/study/StudyPage.vue'
 import StudyWritePage from '../views/board/study/StudyWritePage.vue'
 import StudyReadPage from '../views/board/study/StudyReadPage.vue'
 import StudyModifyPage from '../views/board/study/StudyModifyPage.vue'
+import StudySearchPage from '../views/board/study/StudySearchPage.vue'
 
 import ProjectPage from '../views/board/project/ProjectPage.vue'
 import ProjectWritePage from '../views/board/project/ProjectWritePage.vue'
@@ -194,6 +195,17 @@ const routes = [
         name: 'StudyModifyPage',
         components: {
             default: StudyModifyPage
+        },
+        props: {
+            default: true
+        },
+        beforeEnter: requireLogin()
+    },
+    {
+        path: '/study/search',
+        name: 'StudySearchPage',
+        components: {
+            default: StudySearchPage
         },
         props: {
             default: true
