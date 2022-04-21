@@ -85,5 +85,6 @@ public class FoodBoard {
     @Formula("(SELECT count(1) FROM food_board_like c WHERE c.food_board_board_no = board_no)")
     private int likeCnt;
 
-
+    @Column
+    private Integer rankScore = viewCount + likeCnt;
 }

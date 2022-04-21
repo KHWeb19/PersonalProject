@@ -18,7 +18,7 @@ public interface FoodBoardRepository extends JpaRepository<FoodBoard, Long> {
     @Query("update FoodBoard vc set vc.viewCount = vc.viewCount + 1 where vc.boardNo = :boardNo")
     void updateViewCount(@Param("boardNo") Long boardNo);
 
-    List<FoodBoard> findTop10ByOrderByViewCountDesc();
+    List<FoodBoard> findTop10ByOrderByRankScoreDesc();
 
     List<FoodBoard> findByNameContaining(String keyWord);
 }

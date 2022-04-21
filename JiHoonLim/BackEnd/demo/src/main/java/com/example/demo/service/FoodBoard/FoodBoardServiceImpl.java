@@ -62,7 +62,7 @@ public class FoodBoardServiceImpl implements FoodBoardService{
 
     @Override
     public List<FoodBoard> bestFoodList() {
-        return repository.findTop10ByOrderByViewCountDesc();
+        return repository.findTop10ByOrderByRankScoreDesc();
 
     }
 
