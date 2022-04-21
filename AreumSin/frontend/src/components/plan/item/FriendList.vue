@@ -3,6 +3,7 @@
     <v-row class="ps-2">
       <v-col>
         <v-card class="pa-8">
+
           <table width="100%">
             <tr>
               <td colspan="2">초대된 사람</td>
@@ -10,11 +11,10 @@
 
             <tr v-for="member in inviteMember" :key="member.memberId">
               <td>{{ member.memberName}}</td>
-              <td>{{ member.memberColor}}</td>
+              <!-- <td>{{ member.memberColor}}</td> -->
             </tr>
-
           </table>
-          <v-btn @click="clickEvent">클릭</v-btn>
+
         </v-card>
       </v-col>
     </v-row>
