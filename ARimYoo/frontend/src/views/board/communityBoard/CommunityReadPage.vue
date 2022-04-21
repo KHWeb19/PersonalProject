@@ -75,7 +75,7 @@ export default {
 
 <style scoped>
 .title{
-    margin-top:3%;
+    margin-top:4%;
     margin-bottom: 5%;
 }
 

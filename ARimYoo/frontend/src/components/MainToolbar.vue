@@ -1,6 +1,6 @@
 <template>
     <v-container>
-        <v-toolbar class="mx-auto " dark height="45">
+        <v-toolbar color="black" dark class="mx-auto" height="45">
             <v-layout row wrap>
                 <v-tabs v-model="tabs" height="45">
                     <v-tab v-show="neverNoShow">
@@ -27,7 +27,7 @@
                                 </v-icon>
                                 </v-btn>
                             </template>
-                            <v-list  dark>
+                            <v-list class="black" dark>
                                 <v-list-item
                                     v-for="item in more"
                                     :key="item.title"
@@ -37,8 +37,7 @@
                                     {{ item.title }}
                                 </v-list-item>
                             </v-list>
-                        </v-menu> 
-                    
+                        </v-menu>
                 </v-tabs>
             </v-layout>
         </v-toolbar>
@@ -80,10 +79,7 @@ export default {
 
 <style scoped>
 .v-toolbar {
-    position:fixed;
-    top:15%;
-    width: 75%;
-    z-index:20 ;
+    width: 100%;
 }
 .v-tab {
     position:relative;

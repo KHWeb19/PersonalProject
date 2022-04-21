@@ -55,7 +55,7 @@ export default {
 
 <style scoped>
 .titleImg{
-    margin-top:3%;
+    margin-top:4%;
     margin-bottom: 6%;
 }
 .writeBtn {
