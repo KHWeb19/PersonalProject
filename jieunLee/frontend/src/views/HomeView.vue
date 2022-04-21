@@ -4,13 +4,15 @@
       <menu-bar/>
       <hr style="border: 0; height: 1px; background: #d8d8d8; "/>
     </div>
-    <board-list :boards="boards" @click="onLikes" @submit="onSubmit"/>
+          <my-likes-list :loginLikes="loginLikes"/>
+    <board-list :boards="boards" :loginLikes="loginLikes" @click="onLikes" @submit="onSubmit"/>
   </div>
 </template>
 
 <script>
 import MenuBar from '@/components/MenuBar.vue'
 import BoardList from '@/components/board/BoardList.vue'
+import MyLikesList from '@/components/member/MyLikesList.vue'
 import { mapState, mapActions } from 'vuex'
 import axios from 'axios'
 
@@ -18,7 +20,8 @@ export default {
   name: 'HomeView',
   components: {
     MenuBar,
-    BoardList
+    BoardList,
+        MyLikesList
     },
         data() {
         return {
@@ -27,22 +30,20 @@ export default {
     },
     computed: {
         ...mapState(['boards']),
+            ...mapState(['loginLikes']),
         // ...mapState(['twoComments']),
     },
     // created() {
-    //     this.fetchTwoCommentList(this.boardNo)
-    //         .catch(()=>{
-    //           console.log(this)
-    //             alert('댓글 요청 실패')
-    //             this.$router.push()
-    //         })
+    //       this.fetchLoginLikes(this.loginInfo.memberNo)
     // },
     mounted () {
         this.fetchBoardList()
+            this.fetchLoginLikes(this.loginInfo.memberNo)
         // this.fetchTwoCommentList(this.boardNo)
     },
     methods: {
         ...mapActions(['fetchBoardList']),
+              ...mapActions(['fetchLoginLikes']),
         // ...mapActions(['fetchTwoCommentList']),
         onDelete(payload) {
             const {boardNo} = payload
@@ -68,7 +69,7 @@ export default {
         },
         onLikes(payload) {
             const {boardNo, memberNo} = payload
-            axios.post(`http://localhost:7777/likes/${boardNo}/${memberNo}`, {boardNo, memberNo})
+            axios.post(`http://localhost:7777/likes/${boardNo}/${memberNo}`, {boardNo, boardCheck: boardNo, memberNo})
                 .then(() => {
                     history.go(0);
                 })

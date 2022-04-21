@@ -37,15 +37,45 @@
                             <td colspan="2">
                                 <v-img width="672px" :src="require(`@/assets/mImage/${board.boardImage}`)"/>
                             </td>
-                        </tr>
-                        <tr align="left">
-                            <td colspan="2" style="padding: 6px 9px">
-                                <v-btn icon @click="onLikes(board.boardNo)">
-                                    <v-icon color="black">
-                                        mdi-heart-outline
+                        </tr >
+                        <!-- <tr align="left"  >
+                            <div v-for="likes in loginLikes" :key="likes.likedNo"  >
+                            <td style="padding: 6px 9px" colspan="2" v-if="likes.boardCheck==board.boardNo" >
+                                <v-btn icon @click="onLikes(board.boardNo)" >
+                                    <v-icon  color="black">
+                                        mdi-cards-heart
                                     </v-icon>
                                 </v-btn>
-                                <v-btn icon>
+                                <v-btn icon @click="onLikes(board.boardNo)">
+                                    <v-icon color="black">
+                                        mdi-chat-outline
+                                    </v-icon>
+                                </v-btn>
+                            </td>
+                            </div>
+                            <div > 
+                            <td style="padding: 6px 9px" colspan="2">
+                                <v-btn icon @click="onLikes(board.boardNo)" >
+                                    <v-icon  color="black">
+                                        mdi-cards-heart-outline
+                                    </v-icon>
+                                </v-btn>
+                                <v-btn icon @click="onLikes(board.boardNo)">
+                                    <v-icon color="black">
+                                        mdi-chat-outline
+                                    </v-icon>
+                                </v-btn>
+                            </td>
+                            </div>
+                        </tr> -->
+                        <tr align="left"  >
+                            <td style="padding: 6px 9px" colspan="2">
+                                <v-btn icon @click="onLikes(board.boardNo)" >
+                                    <v-icon  color="black">
+                                        mdi-cards-heart-outline
+                                    </v-icon>
+                                </v-btn>
+                                <v-btn icon @click="onLikes(board.boardNo)">
                                     <v-icon color="black">
                                         mdi-chat-outline
                                     </v-icon>
@@ -96,14 +126,14 @@
                             </td>
                         </tr>
                         <tr align="left">
-                                <td style="padding: 14px 0px 14px 16px;">
-                                    <textarea type="text" style="width: 100%; height: 18px"  placeholder="댓글 달기..." v-model="content"/>
-                                </td>
-                                <td align="right"> 
-                                    <v-btn text color="primary" type="submit">
-                                        게시
-                                    </v-btn>
-                                </td>
+                            <td style="padding: 14px 0px 14px 16px;">
+                                <textarea type="text" style="width: 100%; height: 18px"  placeholder="댓글 달기..." v-model="content"/>
+                            </td>
+                            <td align="right"> 
+                                <v-btn text color="primary" type="submit">
+                                    게시
+                                </v-btn>
+                            </td>
                         </tr>
                         
                     </table>
@@ -114,45 +144,24 @@
 </template>
 
 <script>
-// import CommentList from '@/components/comment/CommentList'
-// import { mapState, mapActions } from 'vuex'
 export default {
     name: 'BoardList',
     props: {
         boards: {
             type: Array
         },
-        // twoComments: {
-        //     type: Array
-        // }
+        loginLikes: {
+            type: Array
+        }
     },
-    // components: {
-    //     CommentList
-    // },
     data() {
         return {
             loginInfo: JSON.parse(localStorage.getItem('loginInfo')),
             content: '',
         }
     },
-    // computed: {
-    //     ...mapState(['twoComments']),
-    // },
-    // created() {
-    //     this.fetchTwoCommentList(this.boardNo)
-    //         .catch(()=>{
-    //           console.log(this)
-    //             alert('댓글 요청 실패')
-    //             this.$router.push()
-    //         })
-    // },
-    //     mounted () {
-    //     this.fetchTwoCommentList(this.boardNo)
-    // },
     methods: {
-        // ...mapActions(['fetchTwoCommentList']),
         onDelete(boardNo) {
-            // console.log(boardNo)
             this.$emit('click', {boardNo})
         },
         onSubmit(boardNo) {
