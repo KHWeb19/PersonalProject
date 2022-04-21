@@ -1,6 +1,5 @@
 package com.example.demo.entity.study;
 
-import com.example.demo.entity.review.Review;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;

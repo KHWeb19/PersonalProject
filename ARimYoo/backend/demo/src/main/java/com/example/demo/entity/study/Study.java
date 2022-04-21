@@ -1,5 +1,6 @@
 package com.example.demo.entity.study;
 
+import com.example.demo.entity.communityBoard.CommunityBoard;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -27,15 +28,18 @@ public class Study {
     private String fileName;
 
     @Column
-    private String content;
-
-    @Column
     private String openLink;
 
     @Column
     private String toDo;
 
-    @Column
-    private int viewCnt = 0;
+    public Study(String studyName, String firstMember, int people, Long studyNo, String fileName, String openLink) {
+        this.studyNo = studyNo;
+        this.studyName = studyName;
+        this.firstMember = firstMember;
+        this.people = people;
+        this.fileName = fileName;
+        this.openLink = openLink;
+    }
 
 }
