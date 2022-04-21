@@ -2,7 +2,9 @@ package com.example.demo.service.review;
 
 import com.example.demo.controller.reviewController.request.RequestDelete;
 import com.example.demo.controller.reviewController.request.ReviewRequest;
+import com.example.demo.entity.member.Member;
 import com.example.demo.entity.review.Review;
+import com.example.demo.repository.MemberRepository;
 import com.example.demo.repository.review.ReviewRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,19 +25,28 @@ public class ReviewServiceImpl implements ReviewService{
     @Autowired
     ReviewRepository repository;
 
+    @Autowired
+    MemberRepository memberRepository;
+
     @Transactional
     @Override
     public void includeImgReview(ReviewRequest info, String originalFilename) {
         String file = info.getId() +"."+ originalFilename;
 
-        Review review = new Review(info.getId(), info.getContent(), file);
+        Optional<Member> findMemberNo = memberRepository.findByUserId(info.getId());
+        Member member = findMemberNo.get();
+
+        Review review = new Review(info.getId(), info.getContent(), file, member);
         repository.save(review);
     }
 
     @Transactional
     @Override
     public void exceptImgReview(ReviewRequest info) {
-        Review review = new Review(info.getId(), info.getContent());
+        Optional<Member> findMemberNo = memberRepository.findByUserId(info.getId());
+        Member member1 = findMemberNo.get();
+
+        Review review = new Review(info.getId(), info.getContent(), member1);
         repository.save(review);
     }
 
@@ -100,6 +111,11 @@ public class ReviewServiceImpl implements ReviewService{
 
             repository.deleteById(reviewNo);
         }
+    }
+
+    @Override
+    public List<Review> checkIdlist(String checkId) {
+        return repository.findIdList(checkId);
     }
 
 }

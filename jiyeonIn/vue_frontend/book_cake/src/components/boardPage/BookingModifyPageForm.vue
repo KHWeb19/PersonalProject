@@ -51,13 +51,13 @@
                 <p>* 픽업 시간 : {{BookingBoard.time}}</p>
             </v-row>
             <v-row >
-                <p>* 디자인 : {{cakeLists[((BookingBoard.cakeArrNo) -1)].design}}</p>
+                <p>* 디자인 : {{BookingBoard.design}}</p>
             </v-row>
             <v-row >
-                <p>* 사이즈 : {{cakeLists[((BookingBoard.cakeArrNo) -1)].size}}</p>
+                <p>* 사이즈 : {{BookingBoard.size}}</p>
             </v-row>
             <v-row >
-                <p>* 가격 : {{cakeLists[((BookingBoard.cakeArrNo) -1)].price}}</p>
+                <p>* 가격 : {{BookingBoard.price}}</p>
             </v-row>
             <v-row >
                 <p>* 요청사항 : {{BookingBoard.contents}}</p>
@@ -67,7 +67,7 @@
             </v-row>
             <v-row >
                 <v-col class="col-12 col-sm-6">
-                    <v-img v-bind:src="require(`@/assets/uploadImg/${this.cakeLists[(this.BookingBoard.cakeArrNo-1)].linkInfo}`)" contain />
+                    <v-img v-bind:src="require(`@/assets/uploadImg/${BookingBoard.cakeLinkInfo}`)" contain />
                 </v-col>
             </v-row>
             <v-row >
@@ -83,13 +83,13 @@
                 <p>* 픽업 시간 : {{BookingBoard.time}}</p>
             </v-row>
             <v-row >
-                <p>* 디자인 : {{cakeLists[((BookingBoard.cakeArrNo) -1)].design}}</p>
+                <p>* 디자인 : {{BookingBoard.design}}</p>
             </v-row>
             <v-row >
-                <p>* 사이즈 : {{cakeLists[((BookingBoard.cakeArrNo) -1)].size}}</p>
+                <p>* 사이즈 : {{BookingBoard.size}}</p>
             </v-row>
             <v-row >
-                <p>* 가격 : {{cakeLists[((BookingBoard.cakeArrNo) -1)].price}}</p>
+                <p>* 가격 : {{BookingBoard.price}}</p>
             </v-row>
             <v-row >
                 <p>* 요청사항 : {{BookingBoard.contents}}</p>
@@ -99,7 +99,7 @@
             </v-row>
             <v-row >
                 <v-col class="col-12 col-sm-6">
-                    <v-img v-bind:src="require(`@/assets/uploadImg/${cakeLists[((this.BookingBoard.cakeArrNo)-1)].linkInfo}`)" contain />
+                    <v-img v-bind:src="require(`@/assets/uploadImg/${BookingBoard.cakeLinkInfo}`)" contain />
                 </v-col>
             </v-row>
             <v-row >
@@ -107,7 +107,7 @@
             </v-row>
             <v-row >
                 <v-col class="col-12 col-sm-6">
-                    <v-img v-bind:src="require(`@/assets/bookingImg/${this.BookingBoard.linkInfo}`)" contain />
+                    <v-img v-bind:src="require(`@/assets/bookingImg/${BookingBoard.linkInfo}`)" contain />
                 </v-col>
             </v-row>
             <v-row >
@@ -130,7 +130,7 @@
             </v-row>
             <v-row >
                 <v-col class="col-12 col-sm-6">
-                     <v-img v-bind:src="require(`@/assets/bookingImg/${this.BookingBoard.linkInfo}`)" contain />
+                     <v-img v-bind:src="require(`@/assets/bookingImg/${BookingBoard.linkInfo}`)" contain />
                 </v-col>
             </v-row>
             <v-row >
@@ -152,7 +152,7 @@
                 *디자인 관련 이미지가 없습니다!
             </v-row>
             <v-row >
-                <p></p><br>
+                <br><br>
             </v-row>
         </v-container>
 
@@ -201,9 +201,12 @@
                     date: this.BookingBoard.date,
                     time: this.BookingBoard.time, 
                     process: this.process, 
-                    contents: this.BookingBoard.contents, 
+                    contents: this.BookingBoard.contents,
+                    cakeLinkInfo:this.BookingBoard.cakeLinkInfo,
                     linkInfo:this.BookingBoard.linkInfo,
-                    cakeArrNo: this.BookingBoard.cakeArrNo, 
+                    design: this.BookingBoard.design,
+                    size: this.BookingBoard.size,
+                    price: this.BookingBoard.price,
                     regDate: this.BookingBoard.regDate })
             }
         }

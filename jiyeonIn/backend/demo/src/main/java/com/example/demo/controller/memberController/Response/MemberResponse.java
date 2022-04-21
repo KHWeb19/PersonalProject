@@ -11,5 +11,6 @@ public class MemberResponse {
     private String userId;
     private String password;
     private String userName;
+    private String auth;
 
 }

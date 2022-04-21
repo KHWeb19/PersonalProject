@@ -4,7 +4,9 @@ package com.example.demo.service.booking;
 import com.example.demo.controller.bookingController.request.BookingReadRequest;
 import com.example.demo.controller.bookingController.request.BookingRequest;
 import com.example.demo.entity.booking.BookingInfo;
+import com.example.demo.entity.member.Member;
 import com.example.demo.entity.uploadCake.UploadCake;
+import com.example.demo.repository.MemberRepository;
 import com.example.demo.repository.booking.BookingRepository;
 import com.example.demo.repository.upload.UploadRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -24,13 +26,18 @@ public class BookingServiceImpl implements BookingService{
     @Autowired
     UploadRepository uploadRepository;
 
+    @Autowired
+    MemberRepository memberRepository;
+
     @Transactional
     @Override
     public void register(BookingRequest info, String originalFilename) {
         String putLink = info.getDate()+"."+info.getId()+"."+originalFilename;
+        Optional<Member> findMemberNo = memberRepository.findByUserId(info.getId());
+        Member member = findMemberNo.get();
 
         if(info.getCakeArrNo() == 0) {
-            BookingInfo bookingInfo2 = new BookingInfo(info.getId(), info.getDate(), info.getTime(), "예약중", info.getContents(), putLink);
+            BookingInfo bookingInfo2 = new BookingInfo(info.getId(), info.getDate(), info.getTime(), "예약중", info.getContents(), putLink, member);
             repository.save(bookingInfo2);
 
         }else {
@@ -38,8 +45,8 @@ public class BookingServiceImpl implements BookingService{
             UploadCake checkCake = uploadCake.get();
 
             BookingInfo bookingInfo1 =
-                    new BookingInfo(info.getId(), info.getDate(), info.getTime(), "예약중", info.getContents(), putLink,
-                            info.getCakeArrNo());
+                    new BookingInfo(info.getId(), info.getDate(), info.getTime(), "예약중", info.getContents(), putLink, checkCake.getLinkInfo(),
+                            checkCake.getDesign(),checkCake.getSize(),checkCake.getPrice(), member);
             repository.save(bookingInfo1);
         }
 
@@ -48,9 +55,11 @@ public class BookingServiceImpl implements BookingService{
     @Transactional
     @Override
     public void exceptFilesBooking(BookingRequest info) {
+        Optional<Member> findMemberNo = memberRepository.findByUserId(info.getId());
+        Member member1 = findMemberNo.get();
 
         if(info.getCakeArrNo() == 0) {
-            BookingInfo bookingInfo2 = new BookingInfo(info.getId(), info.getDate(), info.getTime(), "예약중", info.getContents());
+            BookingInfo bookingInfo2 = new BookingInfo(info.getId(), info.getDate(), info.getTime(), "예약중", info.getContents(), member1);
             repository.save(bookingInfo2);
 
         }else {
@@ -60,7 +69,8 @@ public class BookingServiceImpl implements BookingService{
 
             BookingInfo bookingInfo1 =
                     new BookingInfo(info.getId(), info.getDate(), info.getTime(), "예약중", info.getContents(),
-                            info.getCakeArrNo());
+                            checkCake.getLinkInfo(), checkCake.getDesign(),checkCake.getSize(),checkCake.getPrice(), member1
+                            );
             repository.save(bookingInfo1);
 
         }
@@ -84,11 +94,19 @@ public class BookingServiceImpl implements BookingService{
         BookingInfo checkedId = maybeReadBoard.get();
 
         if(checkedId.getId().equals(checkId)){
+            log.info("checkedId:"+checkedId);
             return checkedId;
         }else if(checkId.equals("manager")) {
+            log.info("i am manager");
             return checkedId;
         }else
             return null;
+    }
+
+    @Transactional
+    @Override
+    public List<BookingInfo> checkIdlist(String checkId) {
+        return repository.findIdList(checkId);
     }
 
     @Transactional

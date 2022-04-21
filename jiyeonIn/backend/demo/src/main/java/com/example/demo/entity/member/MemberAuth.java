@@ -36,4 +36,10 @@ public class MemberAuth {
         this.auth = auth;
         member = memberTable;
     }
+
+    public MemberAuth(Long memberAuthNo, String auth, Member memberTable) {
+        this.memberAuthNo = memberAuthNo;
+        this.auth = auth;
+        member = memberTable;
+    }
 }

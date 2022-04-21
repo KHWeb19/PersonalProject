@@ -32,6 +32,8 @@ public class BoardCommentController {
 
         info.setBookingNo(Long.valueOf(bookingNo));
 
+        log.info("here is: " +info);
+
         if(fileList != null) {
             try{
                 for(MultipartFile multipartFile : fileList){
@@ -56,11 +58,11 @@ public class BoardCommentController {
         return "Upload Success!!";
     }
 
-    @GetMapping("/list")
-    public List<BoardComment> boardCommentList() {
+    @GetMapping("/list/{bookingNo}")
+    public List<BoardComment> boardCommentList(@PathVariable("bookingNo") Integer bookingNo) {
         log.info("boardCommentList()");
 
-        return service.list();
+        return service.list(bookingNo);
     }
 
 

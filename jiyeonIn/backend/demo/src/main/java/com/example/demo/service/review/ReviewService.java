@@ -19,4 +19,6 @@ public interface ReviewService {
     public void exceptImgModify(Review info) throws IOException;
 
     public void remove(RequestDelete request) throws IOException;
+
+    public List<Review> checkIdlist(String checkId);
 }

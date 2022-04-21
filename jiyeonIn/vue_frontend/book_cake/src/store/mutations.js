@@ -4,7 +4,10 @@ import {
     FETCH_BOOKING_BOARD,
     FETCH_BOARD_COMMENTS,
     FETCH_REVIEWS,
-    FETCH_MEMBER_INFO
+    FETCH_MEMBER_INFO,
+    BOOKING_ID_LISTS,
+    FETCH_REVIEWS_LISTS,
+    FETCH_MEMBER_LISTS
 }from './mutation-types'
 
 export default {
@@ -25,5 +28,17 @@ export default {
     },
     [FETCH_MEMBER_INFO] (state, memberInfo) {
         state.memberInfo = memberInfo
-    }
+    },
+    [FETCH_MEMBER_INFO] (state, memberInfo) {
+        state.memberInfo = memberInfo
+    },
+    [BOOKING_ID_LISTS] (state, bookingIdLists) {
+        state.bookingIdLists = bookingIdLists
+    },
+    [FETCH_REVIEWS_LISTS] (state, reviewsIdLists) {
+        state.reviewsIdLists = reviewsIdLists
+    },
+    [FETCH_MEMBER_LISTS] (state, memberLists) {
+        state.memberLists = memberLists
+    },
 }

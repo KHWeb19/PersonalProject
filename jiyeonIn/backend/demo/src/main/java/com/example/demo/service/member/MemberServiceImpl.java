@@ -1,5 +1,7 @@
 package com.example.demo.service.member;
 
+import com.example.demo.controller.memberController.Response.ManagerResponse;
+import com.example.demo.controller.memberController.Response.MemberResponse;
 import com.example.demo.controller.memberController.request.MemberRequest;
 import com.example.demo.entity.member.Member;
 import com.example.demo.entity.member.MemberAuth;
@@ -7,10 +9,12 @@ import com.example.demo.repository.MemberAuthRepository;
 import com.example.demo.repository.MemberRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -96,9 +100,8 @@ public class MemberServiceImpl implements MemberService {
     public MemberRequest read(String id) {
 
         Optional<Member> maybeMember = memberRepository.findByUserId(id);
-
-
         Member loginMember = maybeMember.get();
+
 
         Optional<MemberAuth> maybeMemberAuth =
                 memberAuthRepository.findByMemberNo(loginMember.getMemberNo());
@@ -123,36 +126,48 @@ public class MemberServiceImpl implements MemberService {
      */
     @Transactional
     @Override
-    public void modify(Member member) {
+    public void modify(MemberResponse member) {
         log.info("modify member info:" +member);
 
         Optional<Member> maybeMember = memberRepository.findByUserId(member.getUserId());
         Member loginMember = maybeMember.get();
-        log.info("current member info:" +loginMember);
+        log.info("before member info:" +loginMember);
 
-        member.setMemberNo(loginMember.getMemberNo());
-        member.setRegDate(loginMember.getRegDate());
+        Member memberEntity;
 
-        if(member.getPassword().equals("0")){
-            member.setPassword(loginMember.getPassword());
+        if(member.getPassword().equals("no")){
+            memberEntity = new Member(
+                    loginMember.getMemberNo(),member.getUserId(), loginMember.getPassword(),member.getUserName(),loginMember.getRegDate());
+
+            memberRepository.save(memberEntity);
         }else {
             String encodedPassword = passwordEncoder.encode(member.getPassword());
-            member.setPassword(encodedPassword);
+            memberEntity = new Member(
+                    loginMember.getMemberNo(),member.getUserId(), encodedPassword,member.getUserName(),loginMember.getRegDate());
+
+            memberRepository.save(memberEntity);
         }
 
-        log.info("final member info:" +member);
-        memberRepository.save(member);
-
         Optional<MemberAuth> maybeMemberAuth =
-                memberAuthRepository.findByMemberNo(member.getMemberNo());
+                memberAuthRepository.findByMemberNo(loginMember.getMemberNo());
 
-        MemberAuth memberAuth = maybeMemberAuth.get();
+    }
 
+    @Transactional
+    @Override
+    public void remove(String id) {
+        Optional<Member> maybeMember = memberRepository.findByUserId(id);
+        Member loginMember = maybeMember.get();
+        log.info("before member info:" +loginMember);
 
-        MemberAuth authEntity = new MemberAuth(memberAuth.getAuth(), member);
+        memberRepository.deleteById(loginMember.getMemberNo());
 
-        memberAuthRepository.save(authEntity);
+    }
 
+    @Transactional
+    @Override
+    public List<Member> list() {
+        return memberRepository.findAll(Sort.by(Sort.Direction.DESC,"memberNo"));
     }
 
 

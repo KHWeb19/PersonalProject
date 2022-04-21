@@ -1,14 +1,17 @@
 package com.example.demo.entity.member;
 
+import com.example.demo.entity.booking.BookingInfo;
+import com.example.demo.entity.review.Review;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import javax.transaction.Transactional;
+import java.util.*;
 
 @Data
 @Entity
@@ -34,8 +37,20 @@ public class Member {
     @UpdateTimestamp
     private Date updDate;
 
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<MemberAuth> authList = new ArrayList<>();
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @OneToMany(mappedBy = "member",fetch = FetchType.EAGER , cascade = CascadeType.REMOVE)
+    private Set<MemberAuth> authList = new HashSet<>();
+
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @OneToMany(mappedBy = "memberInfo", fetch = FetchType.EAGER  , cascade = CascadeType.REMOVE)
+    private Set<BookingInfo> bookingInfo = new HashSet<>();
+
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @OneToMany(mappedBy = "memberReview", fetch = FetchType.EAGER , cascade = CascadeType.REMOVE)
+    private Set<Review> review = new HashSet<>();
 
     public Member (String userId, String password, String userName) {
         this.userId = userId;
@@ -52,12 +67,30 @@ public class Member {
             changeAuth(auth);
         }
     }
+    public Member (Long memberNo,String userId, String password, String userName, Date regDate) {
+        this.memberNo = memberNo;
+        this.userId = userId;
+        this.password = password;
+        this.userName = userName;
+        this.regDate = regDate;
+    }
+    public Member (Long memberNo, String userId, String password, String userName,Date regDate, MemberAuth auth) {
+        this.memberNo = memberNo;
+        this.userId = userId;
+        this.password = password;
+        this.userName = userName;
+        this.regDate = regDate;
+
+        if(auth != null) {
+            changeAuth(auth);
+        }
+    }
 
     public void changeAuth(MemberAuth auth) {}
 
     public void addAuth (MemberAuth auth) {
         if (authList == null) {
-            authList = new ArrayList();
+            authList = new HashSet();
         }
 
         authList.add(auth);

@@ -1,5 +1,6 @@
 package com.example.demo.controller.memberController;
 
+import com.example.demo.controller.memberController.Response.ManagerResponse;
 import com.example.demo.controller.memberController.Response.MemberResponse;
 import com.example.demo.controller.memberController.request.MemberRequest;
 import com.example.demo.entity.member.Member;
@@ -8,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @Slf4j
@@ -60,15 +63,30 @@ public class MemberController {
     }
 
     @PutMapping("/{userId}")
-    public Member memberModify(@PathVariable("userId") String userId,
-                               @RequestBody Member member) {
+    public MemberResponse memberModify(@PathVariable("userId") String userId,
+                                       @RequestBody MemberResponse memberResponse) {
         log.info("userId:" +userId);
-        log.info("member : " +member);
+        log.info("member : " +memberResponse);
 
-        member.setUserId(userId);
-        service.modify(member);
+        memberResponse.setUserId(userId);
+        service.modify(memberResponse);
 
-        return member;
+        return memberResponse;
+    }
+
+    @DeleteMapping("/{id}")
+    public void memberRemove (
+            @PathVariable("id") String id) {
+        log.info("memberRemove()");
+
+        service.remove(id);
+    }
+
+    @GetMapping("/list")
+    public List<Member> managementMember () {
+        log.info("managementMember()");
+
+        return service.list();
     }
 
 }

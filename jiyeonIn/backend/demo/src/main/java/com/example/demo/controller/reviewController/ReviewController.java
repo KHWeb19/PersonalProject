@@ -2,6 +2,7 @@ package com.example.demo.controller.reviewController;
 
 import com.example.demo.controller.reviewController.request.RequestDelete;
 import com.example.demo.controller.reviewController.request.ReviewRequest;
+import com.example.demo.entity.booking.BookingInfo;
 import com.example.demo.entity.review.Review;
 import com.example.demo.service.review.ReviewService;
 import lombok.extern.slf4j.Slf4j;
@@ -59,6 +60,14 @@ public class ReviewController {
     @GetMapping("/list")
     public List<Review> reviewList() {
         return service.list();
+    }
+
+
+    @GetMapping("/list/{checkId}")
+    public List<Review> reviewIdList(@PathVariable("checkId") String checkId) {
+        log.info("bookingList()");
+
+        return service.checkIdlist(checkId);
     }
 
 

@@ -20,17 +20,25 @@
 
             <v-container v-if="checkuserInfo != null">
                 <v-row>
-                    <v-col class="col-12 col-sm-10">
+                    <v-col class="col-12 col-sm-9">
                         <span>{{id}}님, 안녕하세요</span>
                     </v-col>
                     <v-col class="col-12 col-sm-1">
                         <button @click="logout" type="submit" style="font-size: small; color: black;">로그아웃 </button>
                     </v-col>
-                    <v-col class="col-12 col-sm-1">
-                        <router-link :to="{name: 'MyPage',
+                    <v-col class="col-12 col-sm-2">
+                        <div v-if="this.id != 'manager'">
+                            <router-link :to="{name: 'MyPage',
                                             params:{id: this.id}}" >
-                            <span style="font-size: small; color: black;">My페이지</span>
-                        </router-link>
+                                <span style="font-size: small; color: black;">My페이지</span>
+                            </router-link>
+                        </div>
+                        <div v-if="this.id == 'manager'">
+                            <router-link :to="{name: 'ManagerPageMember',
+                                            params:{id: this.id}}" >
+                                <span style="font-size: small; color: black;">관리자 페이지</span>
+                            </router-link>
+                        </div>
                     </v-col>
                 </v-row>
             </v-container>
