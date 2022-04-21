@@ -22,6 +22,8 @@ import QnARegisterPage from '@/views/qna/QnARegisterPage.vue'
 import QnAReadPage from '@/views/qna/QnAReadPage.vue'
 import QnAModifyPage from '@/views/qna/QnAModifyPage.vue'
 
+import AddCategoryPage from '@/views/category/AddCategoryPage.vue'
+
 import WomenOuterCategoryPage from '@/views/womenCategory/WomenOuterCategoryPage.vue'
 import ProductDetailPage from '@/views/womenCategory/ProductDetailPage.vue'
 
@@ -154,6 +156,11 @@ const routes = [
     props: {
       default: true
     }
+  },
+  {
+    path: '/addCategoryPAge',
+    name: 'AddCategoryPage',
+    component: AddCategoryPage
   },
   {
     path: '/womenOuterCategoryPage',

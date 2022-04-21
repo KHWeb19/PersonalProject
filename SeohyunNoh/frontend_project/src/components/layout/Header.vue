@@ -1,7 +1,7 @@
 <template>
       <v-card color="basil">
           <v-card-title>
-            <h1 class="font-weight-bold text-h2 basil--text" @click="mainPageLink">
+            <h1 plain class="font-weight-bold text-h2 basil--text" @click="btnMainPage">
               SELECTSHOP
             </h1>
           
@@ -28,27 +28,23 @@
           -->
 
 
-            <v-btn v-on="on" router :to="{path: '/cartPage'}" icon>
-              <v-badge content="2" vaslue="2" color="green" overlap>
+            <!-- 로그인, 장바구니, 마이페이지, 게시판--> 
+
+            <v-btn v-if="isLogin === true" router :to="{path: '/cartPage'}" icon>
               <v-icon>mdi-cart</v-icon>
-              </v-badge>
             </v-btn>
-            
-          <!-- 로그인, 장바구니, 마이페이지, 게시판--> 
+
             <v-btn v-if="isLogin === false" router :to="{path: '/loginPage'}" plain background-color="transparent" color="basil"> 
               LOGIN 
             </v-btn>
-            <v-btn v-else @click="logout"  plain background-color="transparent" color="basil"> 
+            <v-btn v-else @click="logout" router :to="{path: '/mainPage'}" plain background-color="transparent" color="basil"> 
               LOGOUT 
             </v-btn>
-
 
             <v-btn router :to="{path: '/myPage'}" plain background-color="transparent" color="basil">
               MY PAGE
             </v-btn>   
 
-             
-  
             <v-btn plain background-color="transparent" color="basil" router :to="{path: '/noticeListPage'}">
               NOTICE
             </v-btn>
@@ -154,8 +150,8 @@ export default {
     },
     methods: {
       ...mapActions(['fetchSession']),
-        mainPageLink() {
-            this.$router.push({ path: '/mainPage' })
+        btnMainPage() {
+          this.$router.push({name: 'MainPage'})
         },
         logout() {
             // axios.post('http://localhost:7777/member/logout')
@@ -168,6 +164,7 @@ export default {
             this.$store.commit('USER_LOGIN', !this.isLogin)
             this.fetchSession(this.$cookies.remove('session'))
             this.$store.commit('FETCH_USER_INFO', [])
+            alert("로그아웃 되었습니다.")
         }
     }
 }

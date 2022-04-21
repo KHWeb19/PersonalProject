@@ -11,6 +11,6 @@ public interface MemberService {
     public boolean validationId(String id) throws Exception;
     public Optional<Member> userInfo(String id) throws Exception;
     public Member findById(String id) throws Exception;
-    void modify(Member member, MemberDto memberDto) throws Exception;
+    public void modify(Member member, MemberDto memberDto) throws Exception;
     public void remove(Member member) throws Exception;
 }

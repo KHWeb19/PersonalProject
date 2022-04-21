@@ -15,7 +15,14 @@ import {
 
     //COMMENT
     FETCH_COMMENTS,
-    FETCH_COMMENT
+    FETCH_COMMENT,
+
+    //PRODUCT
+    FETCH_CATEGORIES,
+    FETCH_CATEGORY,
+
+    FETCH_PRODUCTS,
+    FETCH_PRODUCT,
    
 } from './mutation-types'
 
@@ -55,5 +62,20 @@ export default {
     },
     [FETCH_COMMENT] (state, comment) {
         state.comment = comment
+    },
+
+    //PRODUCT
+    [FETCH_CATEGORY] (state, category) {
+        state.category = category
+    },
+    [FETCH_CATEGORIES] (state, categories) {
+        state.categories = categories
+    },
+
+    [FETCH_PRODUCT] (state, product) {
+        state.product = product
+    },
+    [FETCH_PRODUCTS] (state, products) {
+        state.products = products
     }
 }

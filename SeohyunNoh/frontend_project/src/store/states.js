@@ -36,5 +36,13 @@ export default {
 
     //COMMENT
     comments: [],
-    comment: []
+    comment: [],
+
+    //PRODUCT
+    products: [],
+    product: [],
+
+    category: [],
+    categories: []
+   
 }

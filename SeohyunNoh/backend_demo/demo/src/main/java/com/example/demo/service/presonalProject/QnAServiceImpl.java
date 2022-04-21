@@ -49,4 +49,11 @@ public class QnAServiceImpl implements QnAService {
     public void remove(Integer qnaNo) {
         qnaRepository.deleteById(Long.valueOf(qnaNo));
     }
+
+    @Override
+    public List<QnABoard> userRead(String id) throws Exception {
+        List<QnABoard> qnABoards = qnaRepository.userRead(id);
+
+        return qnABoards;
+    }
 }

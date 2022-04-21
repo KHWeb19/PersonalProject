@@ -42,6 +42,8 @@ public class MemberServiceImpl implements MemberService{
 
             Member loginMember = maybeMember.get();
 
+            log.info(String.valueOf(loginMember));
+
             if(!passwordEncoder.matches(member.getPw(), loginMember.getPw())){
                 return false;
             }
@@ -75,8 +77,9 @@ public class MemberServiceImpl implements MemberService{
 
     @Override
     public void modify(Member member, MemberDto memberDto) throws Exception {
-        String encodedPassword = passwordEncoder.encode(memberDto.getPw());
-        memberDto.setPw(encodedPassword);
+        // modify를 할 때 패스워드가 한 번 더 암호화돼서 덮어써지니까 재로그인이 안됨
+//        String encodedPassword = passwordEncoder.encode(memberDto.getPw());
+//        memberDto.setPw(encodedPassword);
 
         member.updateMember(memberDto);
 

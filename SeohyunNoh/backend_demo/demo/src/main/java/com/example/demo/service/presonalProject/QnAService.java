@@ -11,4 +11,5 @@ public interface QnAService {
     public QnABoard read(Integer qnaNo);
     public void modify(QnABoard qnABoard);
     public void remove(Integer qnaNo);
+    public List<QnABoard> userRead(String id) throws Exception;
 }
