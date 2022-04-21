@@ -26,7 +26,8 @@
                     <th align="center" width="140">이름</th>
                     <th align="center" width="80">예약</th>
                     <th align="center" width="80">후기</th>
-                    <th align="center" width="240">등록일자</th>
+                    <th align="center" width="140">등록일자</th>
+                    <th align="center" width="50"></th>
                 </tr>
 
                 <tr v-if="!memberLists || (Array.isArray(memberLists) && memberLists.length === 0)">
@@ -50,6 +51,9 @@
                     <td align="center">
                         {{board.regDate.substring(0, 10)}}
                     </td>
+                     <td align="center">
+                        <button @click="checkDetail(board)"><v-icon>mdi-triangle-small-down</v-icon></button>
+                    </td>
                 </tr>
             </table>
 
@@ -61,6 +65,84 @@
                 <button :disabled="pageNum >= pageCount - 1" @click="nextPage" class="page-btn">
                     다음
                 </button>
+            </div>
+            <br><br>
+
+
+
+
+            <div class="showDetails" v-show="showDetail">
+                <hr>
+                <v-btn color="black" text type="button" @click="closeDetail" class="closeBtn"> 상세 내용 닫기</v-btn>
+                <br><br>
+                <h4>예약 내역</h4>
+                <table>
+                <tr>
+                    <th align="center" width="100">번호</th>
+                    <th align="center" width="140">진행사항</th>
+                    <th align="center" width="300">제목</th>
+                    <th align="center" width="240">등록일자</th>
+                </tr>
+
+                <tr v-if="!boardList || (Array.isArray(boardList) && boardList.length === 0)">
+                    <td colspan="4">
+                        예약 내역이 없습니다!
+                    </td>
+                </tr>
+                <tr v-else v-for="board in boardList" :key="board.bookingNo" >
+                    <td align="center">
+                        {{ board.bookingNo }}
+                    </td>
+                    <td align="center">
+                        {{ board.process }}
+                    </td>
+                    <td align="center" >
+                        <router-link :to="{ name: 'BookingReadPage',
+                                            params: { bookingNo: board.bookingNo.toString() }}">
+                            {{ board.id }} 님의 주문서입니다.
+                        </router-link>
+                    </td>
+                    <td align="center">
+                        {{ board.regDate}}
+                    </td>
+                </tr>
+            </table>
+
+            <div class="btn-cover">
+                <button :disabled="pageNum === 0" @click="prevPage" class="page-btn">
+                    이전
+                </button>
+                <span class="page-count">{{ pageNum + 1 }} / {{ pageCount }} 페이지</span>
+                <button :disabled="pageNum >= pageCount - 1" @click="nextPage" class="page-btn">
+                    다음
+                </button>
+            </div>                
+
+
+                <p>후기 내역</p>
+                 <v-data-table :headers="headerTitle" :items="review"  class="elevation-0" >
+                    
+                    <template v-slot:[`item.reviewFile`]="{ item }" >
+                        <img v-if="item.reviewFile != null" v-bind:src="require(`@/assets/review/${item.reviewFile}`)" height="230px"/>
+                        <img v-if="item.reviewFile == null" v-bind:src="require(`@/assets/review/nullImg.png`)" height="230px"/>
+                    </template>   
+
+                    <template v-slot:[`item.actions`] ="{ item }" >
+                    <v-icon
+                        small
+                        class="mr-2"
+                        @click="editItem(item)"
+                    >
+                        mdi-pencil
+                    </v-icon>
+                    <v-icon
+                        small
+                        @click="deleteItem(item)"
+                    >
+                        mdi-delete
+                    </v-icon>
+                    </template>
+                </v-data-table>
             </div>
         </div>
         
@@ -86,6 +168,16 @@
                 pageNum: 0,
                 bookingNo:'',
                 id: (window.localStorage.getItem('id')),
+                showDetail: false,
+                 headerTitle: [
+                { text:'no', value: 'reviewNo', width:'70px'},
+                { text:'reviewFile', value: 'reviewFile', width:'70px'},
+                { text: 'content', value: 'content', width: "350px" },
+                { text: 'writer', value: 'id', width: "90px" },
+                { text: 'date', value: 'regDate', width: "150px" },
+                ],
+                review:[],
+                boardList:[]
             }
         },
         computed: {
@@ -109,6 +201,14 @@
             },
             prevPage () {
             this.pageNum -= 1;
+            },
+            checkDetail(board) {
+                this.review = board.review
+                this.boardList = board.bookingInfo
+                this.showDetail = true
+            },
+            closeDetail() {
+                this.showDetail = false
             }
         }
     }
@@ -117,11 +217,10 @@
 <style scoped>
 .myPageForm{
     display: grid;
-    grid-template-columns: 150px 900px;
+    grid-template-columns: 150px 1000px;
 }
 .left_menu {
     width: 200px;
-    height: 500px;
     border-right-width:3px; border-right-color:rgb(226, 154, 154);; border-right-style:dotted;
     padding: 3%;
 }
@@ -180,5 +279,7 @@ table tr td a {
 .btn-cover .page-count {
   padding: 0 1rem;
 }
+
+
 
 </style>
