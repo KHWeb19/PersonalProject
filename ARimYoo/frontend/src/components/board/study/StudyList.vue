@@ -2,10 +2,11 @@
     <v-container>
         <v-row column wrap justify="center">
             <v-col v-for="study in studies" :key="study.studyNo" lg="3" sm="6">
-            <v-card width="250" height="415" class="mx-auto">
-            <router-link to="">
+            <v-card width="280" height="435" class="mx-auto">
+            <router-link :to="{ name: 'StudyReadPage',
+                                        params: { studyNo: study.studyNo.toString() }}">
               <v-img
-                :src="require(`@/assets/back/study/${study.fileName}`)"
+                :src="require(`@/assets/back/studyBoard/${study.fileName}`)"
                 class="thum"
               ></v-img>
             </router-link>
@@ -15,14 +16,13 @@
             </v-card-title>
             <v-card-actions>
               <v-card-text class="pl-3 pb-3 pt-0">
-                  <v-icon> mdi-crown </v-icon>&nbsp;{{ study.firstMember }}
+                  <v-icon> mdi-crown </v-icon>&nbsp;{{ study.writer }}
               </v-card-text>
                 <v-card-text class="pl-3 pb-3 pt-0">
                     <v-icon>mdi-account-multiple </v-icon> 
                     {{ study.people }}
                 </v-card-text>
             </v-card-actions>
-            <v-divider/>
             <v-card-actions class="bar">
                 <v-card-text class=" pr-0 pt-3">
                     <v-icon small dark>mdi-message-reply-text</v-icon>&nbsp;&nbsp;
@@ -101,8 +101,8 @@ export default {
 .thum {
    margin-left:auto;
    margin-right: auto;
-    width:250px;
-    height:250px;
+    width:280px;
+    height:280px;
 }
 #colorHandle {
     color:white;
@@ -119,7 +119,7 @@ export default {
 }
 .bar {
     background-color: rgb(0, 0, 0);
-    height:42px;
+    height:35px;
 }
 .searchBtn {
     position: relative;
