@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
@@ -21,9 +22,6 @@ public class Board {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="board_no")
     private Long boardNo;
-
-//    @Column(name = "member_no")
-//    private Long memberNo;
 
     @Column(length = 64, nullable = false)
     private String boardImage;

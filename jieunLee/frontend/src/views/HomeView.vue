@@ -60,22 +60,21 @@ export default {
             axios.post(`http://localhost:7777/comment/register/${boardNo}`, {boardNo, writer: this.loginInfo.memberName, content})
                 .then(() => {
                     alert('댓글 등록 성공!')
-                      history.go(0);
-                    })
-                    .catch(() => {
-                        alert('문제 발생!')
-                    })
+                    history.go(0);
+                })
+                .catch(() => {
+                    alert('문제 발생!')
+                })
         },
         onLikes(payload) {
-            const {likesNo, boardNo, memberNo} = payload
-            console.log(likesNo)
+            const {boardNo, memberNo} = payload
             axios.post(`http://localhost:7777/likes/${boardNo}/${memberNo}`, {boardNo, memberNo})
                 .then(() => {
-                    alert('좋아요 등록/삭제 성공!')
-                    })
-                    .catch(() => {
-                        alert('문제 발생!')
-                    })
+                    history.go(0);
+                })
+                .catch(() => {
+                    alert('문제 발생!')
+                })
         },
     }
 }

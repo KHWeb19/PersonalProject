@@ -33,8 +33,8 @@ public class LikesServiceImpl implements LikesService {
             return true;
         } else {
             Optional<Likes> findLikes = repository.findByMemberAndBoard(member, board);
-            Likes likesNo = findLikes.get();
-            repository.deleteById(likesNo.getLikedNo());
+            Likes likes = findLikes.get();
+            repository.deleteById(likes.getLikedNo());
             return false;
         }
     }

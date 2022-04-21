@@ -33,7 +33,7 @@ public class BoardController {
     }
 
     @GetMapping("/list/{memberNo}")
-    public List<Board> memberBoardList(@PathVariable("memberNo") Integer memberNo) {
+    public List<Board> memberBoardList(@PathVariable("memberNo") Long memberNo) {
         log.info("memberBoardList()");
 
         return service.memberBoardList(memberNo);

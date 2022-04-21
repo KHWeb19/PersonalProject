@@ -10,7 +10,7 @@ import java.util.List;
 public interface BoardService {
     public void register (Integer memberNo, Board board);
     public List<Board> list ();
-    List<Board> memberBoardList (Integer memberNo);
+    List<Board> memberBoardList (Long memberNo);
     public Board read (Integer boardNo);
     public void modify (Board board, Integer memberNo);
     public void remove (Integer boardNo);

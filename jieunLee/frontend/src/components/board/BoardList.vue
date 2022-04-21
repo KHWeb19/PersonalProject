@@ -52,6 +52,11 @@
                                 </v-btn>
                             </td>
                         </tr>
+                        <tr v-if="board.likes.length" align="left">
+                            <td colspan="2" style="padding: 0px 0px 8px 16px">
+                                <div id="likesCnt">{{ board.likes.length }}명이 좋아합니다</div>
+                            </td>
+                        </tr>
                         <tr align="left">
                             <td colspan="2" style="padding-left: 16px">
                                 <div style="display: flex;">
@@ -155,7 +160,6 @@ export default {
             this.$emit('submit', { boardNo, content })
         },
         onLikes(boardNo) {
-            // console.log(boardNo)
             this.$emit('click', {boardNo, memberNo: this.loginInfo.memberNo})
         },
     }

@@ -21,7 +21,7 @@
                               height: 36px;
                               padding-left: 10px;" 
                           type="text" placeholder="검색" v-model="keyWord" />
-    <v-btn @click="onSearch">검색</v-btn>
+    <v-btn icon @click="onSearch"><v-icon>mdi-arrow-right</v-icon></v-btn>
     <v-spacer></v-spacer>
     
     <v-btn icon>

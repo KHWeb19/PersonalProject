@@ -37,7 +37,7 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public List<Board> memberBoardList(Integer memberNo) {
+    public List<Board> memberBoardList(Long memberNo) {
         List<Board> boards = repository.findAllByMemberNo(Long.valueOf(memberNo));
         return boards;
     }
