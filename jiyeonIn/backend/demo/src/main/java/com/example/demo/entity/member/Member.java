@@ -1,6 +1,7 @@
 package com.example.demo.entity.member;
 
 import com.example.demo.entity.booking.BookingInfo;
+import com.example.demo.entity.review.Review;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -9,9 +10,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Data
 @Entity
@@ -46,6 +45,11 @@ public class Member {
     @ToString.Exclude
     @OneToMany(mappedBy = "memberInfo", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private List<BookingInfo> bookingInfo = new ArrayList<>();
+
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @OneToMany(mappedBy = "memberReview", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    private Set<Review> review = new HashSet<>();
 
     public Member (String userId, String password, String userName) {
         this.userId = userId;
