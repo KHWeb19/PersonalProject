@@ -21,7 +21,7 @@
                         <v-col cols="5">
                             {{ commentList.comment }}
                         </v-col>
-                        <v-col cols="2">
+                        <v-col cols="3">
                             {{ commentList.date}}
                         </v-col>
                         <template v-if="commentList.commentWriter == commentWriter">
