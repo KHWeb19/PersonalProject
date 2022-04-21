@@ -21,7 +21,7 @@
                         <v-col cols="5">
                             {{ commentList.comment }}
                         </v-col>
-                        <v-col cols="2">
+                        <v-col cols="3">
                             {{ commentList.date}}
                         </v-col>
                         <template v-if="commentList.commentWriter == commentWriter">
@@ -59,7 +59,7 @@ export default {
         comDelete (commentId) {
       
             //alert('지우는 게시물 번호: ' + boardNo)
-            axios.delete(`http://localhost:7777/board/studyBoard/comment/${commentId}`, {commentId})
+            axios.delete(`http://localhost:7777/board/study/comment/${commentId}`, {commentId})
                     .then(() => {
                         alert('댓글이 삭제되었습니다.')
                         history.go(0)
