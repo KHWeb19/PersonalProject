@@ -14,8 +14,12 @@ export default {
     name: 'storeBoardListPage',
     components:{
         LookBusinessMemberForm
-    }, 
-    
+    },
+    data() {
+        return {
+            keyWord: ''
+        }
+    }
 
 }
 </script>

@@ -82,6 +82,13 @@ public class MemberServiceImpl implements MemberService {
         return businessMember;
     }
 
+    @Override
+    public List<Member> searchList (String keyWord) {
+        List<Member> searchResults = memberRepository.findByDongContaining(keyWord);
+
+        return searchResults;
+    }
+
     /*
         @Override
     public void modify(JpaBoard board) {

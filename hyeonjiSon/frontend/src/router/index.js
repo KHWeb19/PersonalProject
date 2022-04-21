@@ -16,6 +16,7 @@ import TipReadPage from '@/views/livingTip/TipReadPage.vue'
 import TipModifyPage from '@/views/livingTip/TipModifyPage.vue'
 
 import StoreBoardListPage from '@/views/findStore/StoreBoardListPage.vue'
+import StoreSearchPage from '@/views/findStore/StoreSearchPage.vue'
 
 import DonationInfoPage from '@/views/donateInfo/DonationInfoPage.vue'
 
@@ -101,8 +102,18 @@ const routes = [
     name: 'storeBoardListPage',
     component: StoreBoardListPage
   },
+  {
+    path: '/storeSearchPage/:keyWord',
+    name: 'storeSearchPage',
+    components: {
+      default: StoreSearchPage
+    },
+    props: {
+      default: true
+    }
+  },
 
-
+  
   {
     path: '/donationInfoPage',
     name: 'donationInfoPage',

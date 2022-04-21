@@ -24,26 +24,25 @@
         <v-row column wrap justify="center">
             <v-data-table
                         :headers="headerTitle" 
-                        :items="businessMembers"
-                        :key="businessMembers.memberNo"
+                        :items="searchList"
+                        :key="searchList.memberNo"
                         :items-per-page="10"
                         class="elevation-1" 
                         >
-
             </v-data-table>
         </v-row>
     </v-container>
 </template>
 
 <script>
-import {mapActions, mapState} from 'vuex';
 import axios from 'axios';
 
 export default {
-    name: "LookBusinessMemberForm.vue",
+    name: "StoreSearchList.vue",
     props: {
-       businessMembers: {
-            type:Array
+        searchList: {
+            type:Array,
+            required: true
         }
     },
     data () {
@@ -52,20 +51,13 @@ export default {
                 { text:'시', value: 'city', width:'150px'},
                 { text:'동', value: 'dong', width:'150px'},
                 { text: '주소', value: 'address', width: "350px" },
-                { text: '상호명', value: 'sn', width: "150px" },
+                { text: '상호명', value: 'storeName', width: "150px" },
             ],
             keyWord:'',
-            searchList: []
-        }
-    },
-    computed: {
-        ...mapState(['businessMembers']),
-    },
-    mounted () {
-        this.fetchBusinessMember()
+
+}
     },
     methods: {
-        ...mapActions(['fetchBusinessMember']),
         search(){
                 const {keyWord} = this;
                 console.log(keyWord)
@@ -73,7 +65,7 @@ export default {
                 .then((res) => {
                     alert('검색완료')
                     console.log(res.data)
-                    this.$router.push({name: 'storeSearchPage', params: { searchList: res.data }})
+                    this.$router.push( this.$router.currentRoute, {params: { searchList: res.data }})
                 })                                                          //keyWord: this.keyWord
                 .catch (() => {
                     alert('문제 발생!')

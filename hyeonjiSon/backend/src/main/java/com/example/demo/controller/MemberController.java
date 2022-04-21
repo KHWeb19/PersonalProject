@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.controller.request.MemberRequest;
+import com.example.demo.controller.request.MemberSearchRequest;
 import com.example.demo.controller.response.MemberResponse;
 import com.example.demo.entity.Member;
 import com.example.demo.service.Member.MemberService;
@@ -59,6 +60,13 @@ public class MemberController {
         return responses;
     }
 
+    @PostMapping("/search")
+    public List<Member> search(@RequestBody MemberSearchRequest memberSearchRequest){
+        log.info("search()" + memberSearchRequest);
+        String keyWord = memberSearchRequest.getKeyWord();
+        return memberservice.searchList(keyWord);
+    }
+
     @GetMapping("/{memberNo}")
     public Member jpaMemberRead(
             @PathVariable("memberNo") Long memberNo) {
@@ -66,5 +74,7 @@ public class MemberController {
 
         return memberservice.read(memberNo);
     }
+
+
 }
 

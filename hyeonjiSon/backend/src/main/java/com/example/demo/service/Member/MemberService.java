@@ -11,4 +11,5 @@ public interface MemberService {
     public MemberRequest login (MemberRequest memberRequest);
     public Member read (Long memberNo);
     List<Member> findBusiness ();
+    public List<Member> searchList (String keyWord);
 }
