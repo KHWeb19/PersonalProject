@@ -1,7 +1,9 @@
 package com.example.demo.entity.FoodBoard;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.Comment;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Formula;
@@ -13,7 +15,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -69,8 +73,17 @@ public class FoodBoard {
     @OneToMany(mappedBy = "foodBoard",fetch = FetchType.EAGER,cascade = CascadeType.REMOVE)
     private List<FoodBoardComment> comments;
 
+
     @Formula("(SELECT count(1) FROM food_board_comment c WHERE c.food_board_board_no = board_no)")
     private int commentCnt;
+
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @OneToMany(mappedBy = "foodBoard",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<FoodBoardLike> likes = new HashSet<>();
+
+    @Formula("(SELECT count(1) FROM food_board_like c WHERE c.food_board_board_no = board_no)")
+    private int likeCnt;
 
 
 }

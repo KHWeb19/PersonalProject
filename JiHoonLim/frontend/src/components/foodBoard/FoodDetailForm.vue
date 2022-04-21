@@ -131,7 +131,7 @@
                             />
                           </div>
                           <div style="display: flex">
-                            <v-btn text class="mt-2">
+                            <v-btn text class="mt-2" @click="clickLike">
                               <v-icon color="orange"> mdi-thumb-up</v-icon>
                             </v-btn>
                             <v-text-field
@@ -139,7 +139,7 @@
                               solo
                               readonly
                               style="width: 50px"
-                              :value="foodBoard.viewCount"
+                              :value="foodBoard.likeCnt"
                             />
                           </div>
 
@@ -244,13 +244,17 @@ export default {
       nickName: "",
       comment: "",
       userInfo: "",
+      userId: "",
+      boardNo: "",
     };
   },
   created() {
     this.userInfo = this.$store.state.userInfo;
+    this.boardNo = this.foodBoard.boardNo;
 
     if (this.userInfo != null) {
       this.nickName = this.userInfo.nickName;
+      this.userId = this.userInfo.id;
     }
     if (this.nickName == this.foodBoard.writer) {
       this.checkWriteUser = true;
@@ -275,6 +279,28 @@ export default {
     },
     restCheckbox() {
       this.checkbox = false;
+    },
+    clickLike() {
+      if (this.userInfo != null) {
+        const { boardNo, userId } = this;
+
+        axios
+          .post(`http://localhost:7777/foodBoard/like/${boardNo}`, {
+            userId,
+          })
+          .then((res) => {
+            if (res.data) {
+              alert("좋아요 성공");
+            } else {
+              alert("좋아요 실패");
+            }
+          })
+          .catch(() => {
+            alert("오류 발생");
+          });
+      } else {
+        alert("로그인 후 이용해주세요.");
+      }
     },
   },
 };

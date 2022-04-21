@@ -74,7 +74,7 @@
             <v-card-actions>
               <v-card-text class="food_sub_icon"
                 ><v-icon color="orange" class="pr-1"> mdi-thumb-up</v-icon>
-                추천수</v-card-text
+                {{ food.likeCnt }}</v-card-text
               >
               <v-card-text class="food_sub_icon"
                 ><v-icon color="orange" class="pr-1">mdi-eye</v-icon
