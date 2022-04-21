@@ -2,11 +2,10 @@ package com.example.demo.controller.Member;
 
 import com.example.demo.controller.Member.request.MemberRequest;
 import com.example.demo.entity.Member.Member;
+import com.example.demo.entity.Member.MemberCart;
 import com.example.demo.service.Member.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -149,5 +148,11 @@ public class MemberController {
     @DeleteMapping("/deleteMember/{memberNo}")
     public void deleteMember(@PathVariable("memberNo") Long memberNo){
         service.deleteMember(memberNo);
+    }
+
+    @PostMapping("/myCart/register/{memberNo}")
+    public void addMyCart(@PathVariable("memberNo") Integer memberNo, @Validated @RequestBody MemberCart memberCart){
+        log.info("" +memberCart);
+
     }
 }

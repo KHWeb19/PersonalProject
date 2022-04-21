@@ -3,7 +3,9 @@ package com.example.demo.service.Member;
 import com.example.demo.controller.Member.request.MemberRequest;
 import com.example.demo.entity.Member.Member;
 import com.example.demo.entity.Member.MemberAuth;
+import com.example.demo.entity.Member.MemberCart;
 import com.example.demo.repository.Member.MemberAuthRepository;
+import com.example.demo.repository.Member.MemberCartRepository;
 import com.example.demo.repository.Member.MemberRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +13,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +25,9 @@ public class MemberServiceImpl implements MemberService {
 
     @Autowired
     private MemberAuthRepository memberAuthRepository;
+
+    @Autowired
+    private MemberCartRepository memberCartRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -210,6 +214,8 @@ public class MemberServiceImpl implements MemberService {
     public void deleteMember(Long memberNo) {
         memberRepository.deleteById(memberNo);
     }
+
+
 
 
 }

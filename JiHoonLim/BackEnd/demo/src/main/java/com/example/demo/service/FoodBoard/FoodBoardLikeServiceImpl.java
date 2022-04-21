@@ -2,7 +2,6 @@ package com.example.demo.service.FoodBoard;
 
 import com.example.demo.entity.FoodBoard.FoodBoard;
 import com.example.demo.entity.FoodBoard.FoodBoardLike;
-import com.example.demo.entity.Member.Member;
 import com.example.demo.repository.FoodBoard.FoodBoardLikeRepository;
 import com.example.demo.repository.FoodBoard.FoodBoardRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -19,16 +18,17 @@ public class FoodBoardLikeServiceImpl implements FoodBoardLikeService{
     @Autowired
     FoodBoardRepository foodRepository;
 
+
+
     @Override
     public boolean addLike(String member, Long boardNo) {
         FoodBoard foodBoard = foodRepository.findById(boardNo).orElseThrow();
 
-        if (likeRepository.findByMemberAndFoodBoard(member,foodBoard).isEmpty()){
+        if (likeRepository.findByMemberAndFoodBoard(member,foodBoard).isEmpty()) {
             likeRepository.save(new FoodBoardLike(foodBoard, member));
             return true;
         }
         return false;
     }
-
 
 }

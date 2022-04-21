@@ -144,7 +144,7 @@
                           </div>
 
                           <div>
-                            <v-btn text>
+                            <v-btn text @click="myCart">
                               <v-icon color="orange" class="pr-1">
                                 mdi-cart</v-icon
                               ><span style="font-weight: bold"
@@ -246,6 +246,17 @@ export default {
       userInfo: "",
       userId: "",
       boardNo: "",
+
+      name: this.foodBoard.name,
+      des: this.foodBoard.des,
+      material: this.foodBoard.material,
+      content: this.foodBoard.content,
+      writer: this.foodBoard.writer,
+      tip: this.foodBoard.tip,
+      chooseKind: this.foodBoard.chooseKind,
+      chooseMat: this.foodBoard.chooseMat,
+      chooseWay: this.foodBoard.chooseWay,
+      filename: this.foodBoard.filename,
     };
   },
   created() {
@@ -291,8 +302,9 @@ export default {
           .then((res) => {
             if (res.data) {
               alert("좋아요 성공");
+              this.$router.go();
             } else {
-              alert("좋아요 실패");
+              alert("이미 좋아요를 누르셨습니다.");
             }
           })
           .catch(() => {
@@ -300,6 +312,21 @@ export default {
           });
       } else {
         alert("로그인 후 이용해주세요.");
+      }
+    },
+    myCart() {
+      if (this.userInfo != null) {
+        axios
+          .post(
+            `http://localhost:7777/member/myCart/register/${this.userInfo.memberNo}`,
+            {}
+          )
+          .then(() => {
+            alert("장바구니 등록 성공");
+          })
+          .catch(() => {
+            alert("등록 실패");
+          });
       }
     },
   },
