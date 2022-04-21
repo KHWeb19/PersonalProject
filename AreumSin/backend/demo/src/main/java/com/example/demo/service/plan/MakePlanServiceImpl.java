@@ -1,19 +1,9 @@
 package com.example.demo.service.plan;
 
-import com.example.demo.entity.Member;
-import com.example.demo.entity.MemberPlan;
-import com.example.demo.entity.Plan;
-import com.example.demo.entity.Vote;
-import com.example.demo.repository.JoinMemberRepository;
-import com.example.demo.repository.MakePlanRepository;
-import com.example.demo.repository.MemberPlanRepository;
-import com.example.demo.repository.VoteRepository;
-import com.example.demo.request.MemberPlanRequest;
-import com.example.demo.request.MemberRequest;
-import com.example.demo.request.PlanFriend;
-import com.example.demo.request.VoteRequest;
+import com.example.demo.entity.*;
+import com.example.demo.repository.*;
+import com.example.demo.request.*;
 import com.example.demo.response.FriendMemberResponse;
-import com.example.demo.response.PlanResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,6 +27,12 @@ public class MakePlanServiceImpl implements MakePlanService{
 
     @Autowired
     VoteRepository voteRepository;
+
+    @Autowired
+    VoteResultGoodRepository voteResultGoodRepository;
+
+    @Autowired
+    VoteResultBadRepository voteResultBadRepository;
 
     @Transactional
     @Override
@@ -153,6 +149,70 @@ public class MakePlanServiceImpl implements MakePlanService{
         }
 
         return voteLists;
+    }
+
+    @Override
+    public void voteGood(DecisionMakingRequest decisionMakingRequest) {
+        log.info("여기까지 왔니..? ");
+        Optional<VoteResultGood> maybeVotedGood = voteResultGoodRepository.findByMaybeVotedMember(decisionMakingRequest.getVoteNo(), decisionMakingRequest.getId());
+        Optional<VoteResultBad> maybeVotedBad = voteResultBadRepository.findByMaybeVotedMember(decisionMakingRequest.getVoteNo(), decisionMakingRequest.getId());
+
+        Vote vote = voteRepository.findVoteByVoteNo(decisionMakingRequest.getVoteNo());
+
+        if(maybeVotedGood.equals(Optional.empty()) && maybeVotedBad.equals(Optional.empty())){
+            log.info("이 사람은 처음 투표하는 사람입니다!");
+
+            VoteResultGood voteResultGoodEntity = VoteResultGood.voteResultCreate(decisionMakingRequest.getId(), vote);
+            voteResultGoodRepository.save(voteResultGoodEntity);
+
+            vote.voteResultAgreement(vote, true);
+            voteRepository.save(vote);
+
+            log.info("찬성한 사람은 몇명?" + vote.getAgreement());
+        }else if(!maybeVotedGood.equals(Optional.empty())){
+            log.info("이 사람은 투표를 한 사람입니다.");
+            VoteResultGood voteGoodResult = voteResultGoodRepository.findByVoteMember(decisionMakingRequest.getVoteNo(), decisionMakingRequest.getId());
+            voteResultGoodRepository.delete(voteGoodResult);
+
+            log.info("찬성한 사람은 몇명?" + vote.getAgreement());
+            vote.voteResultAgreement(vote, false);
+
+            voteRepository.save(vote);
+        } else{
+            log.info("이미 투표를 했습니다!!!!!!!");
+        }
+
+    }
+
+    @Override
+    public void voteBad(DecisionMakingRequest decisionMakingRequest) {
+        Optional<VoteResultBad> maybeVotedBad = voteResultBadRepository.findByMaybeVotedMember(decisionMakingRequest.getVoteNo(), decisionMakingRequest.getId());
+        Optional<VoteResultGood> maybeVotedGood = voteResultGoodRepository.findByMaybeVotedMember(decisionMakingRequest.getVoteNo(), decisionMakingRequest.getId());
+
+        Vote vote = voteRepository.findVoteByVoteNo(decisionMakingRequest.getVoteNo());
+
+        if(maybeVotedGood.equals(Optional.empty()) && maybeVotedBad.equals(Optional.empty())){
+            log.info("이 사람은 처음 투표하는 사람입니다!");
+
+            VoteResultBad voteResultBadEntity = VoteResultBad.voteResultCreate(decisionMakingRequest.getId(), vote);
+            voteResultBadRepository.save(voteResultBadEntity);
+
+            vote.voteResultOpposition(vote, true);
+            voteRepository.save(vote);
+
+            log.info("찬성한 사람은 몇명?" + vote.getAgreement());
+        }else if(!maybeVotedBad.equals(Optional.empty())){
+            log.info("이 사람은 투표를 한 사람입니다.");
+            VoteResultBad voteResult = voteResultBadRepository.findByVoteMember(decisionMakingRequest.getVoteNo(), decisionMakingRequest.getId());
+            voteResultBadRepository.delete(voteResult);
+
+            log.info("찬성한 사람은 몇명?" + vote.getAgreement());
+            vote.voteResultOpposition(vote, false);
+            voteRepository.save(vote);
+        } else{
+            log.info("이미 투표를 했습니다");
+        }
+
     }
 
 

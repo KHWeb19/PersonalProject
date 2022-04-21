@@ -1,7 +1,7 @@
 import {
     FETCH_DAY_CONTENT,
     FETCH_INVITE_MEMBER,
-    FETCH_USER_PLANS
+    FETCH_USER_PLANS, FETCH_VOTE_CONTENT
 } from './mutation-types'
 
 export default {
@@ -18,5 +18,9 @@ export default {
     [FETCH_DAY_CONTENT] (state, dayContent) {
 
         state.dayContent = dayContent;
+    },
+    [FETCH_VOTE_CONTENT] (state, voteContent) {
+        state.voteContents = voteContent;
     }
+
 }

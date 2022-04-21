@@ -25,7 +25,7 @@
 
             <tr>
               <td>
-                <v-btn @click="like(day.planDayNo)"><v-icon>mdi-thumb-up-outline</v-icon>{{day.likeCount}}</v-btn>
+                <v-btn @click="like(day)"><v-icon>mdi-thumb-up-outline</v-icon>{{day.likeCount}}</v-btn>
               </td>
               <td>
                 <v-btn @click="hate(day.planDayNo)"><v-icon>mdi-thumb-down-outline</v-icon>{{day.hateCount}}</v-btn>
@@ -55,7 +55,8 @@ export default {
     }
   },
   methods: {
-    like(planDayNo) {
+    like(day) {
+      let planDayNo = day.planDayNo;
       console.log(planDayNo)
       this.$emit('clickLike', {planDayNo})
     },

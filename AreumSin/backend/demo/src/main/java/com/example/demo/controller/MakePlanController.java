@@ -3,10 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.entity.Member;
 import com.example.demo.entity.MemberPlan;
 import com.example.demo.entity.Vote;
-import com.example.demo.request.MemberPlanRequest;
-import com.example.demo.request.MemberRequest;
-import com.example.demo.request.PlanFriend;
-import com.example.demo.request.VoteRequest;
+import com.example.demo.request.*;
 import com.example.demo.response.FriendMemberResponse;
 import com.example.demo.response.MemberListResponse;
 import com.example.demo.response.PlanResponse;
@@ -112,9 +109,23 @@ public class MakePlanController {
         for(Vote vote : voteList){
             log.info("voteNo() : "+vote.getVoteNo() + ", " + vote.getVoteContent());
 
-            voteResponses.add(new VoteResponse(vote.getVoteNo(), vote.getVoteContent()));
+            voteResponses.add(new VoteResponse(vote.getVoteNo(), vote.getVoteContent(), vote.getAgreement(), vote.getOpposition()));
         }
 
         return voteResponses;
+    }
+
+    @PostMapping("/voteGood")
+    public void voteGood(@Validated @RequestBody DecisionMakingRequest decisionMakingRequest){
+        log.info("voteGood(): "+decisionMakingRequest.getVoteNo());
+
+        planService.voteGood(decisionMakingRequest);
+    }
+
+    @PostMapping("/voteBad")
+    public void voteBad(@Validated @RequestBody DecisionMakingRequest decisionMakingRequest){
+        log.info("voteBad(): "+decisionMakingRequest.getVoteNo());
+
+        planService.voteBad(decisionMakingRequest);
     }
 }

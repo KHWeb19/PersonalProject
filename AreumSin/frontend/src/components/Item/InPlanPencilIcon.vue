@@ -96,17 +96,15 @@
             <form>
               <table>
                 <tr style="width: 100%">
-                  <td><input type="text" style="border: black solid 1px; height: 55px"></td>
+                  <td><input type="text" style="border: black solid 1px; height: 55px" v-model="vote"></td>
                 </tr>
-
-
               </table>
             </form>
           </v-row>
 
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="green darken-1">Save</v-btn>
+            <v-btn color="green darken-1" @click="sendVote">Save</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -124,6 +122,7 @@ export default {
       friendId: '',
       isCheck: true,
       voteDialog: false,
+      vote: '',
     }
   },
   props:{
@@ -149,6 +148,11 @@ export default {
       //console.log({friendId});
       this.$emit('submit',{friendId});
       this.isCheck = true;
+    },
+    sendVote(){
+      const {vote} = this;
+      this.$emit('sendVote', {vote})
+      this.voteDialog = false;
     },
     addFriend(){
       const {friendId} = this;

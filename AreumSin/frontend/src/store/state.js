@@ -3,4 +3,5 @@ export default {
     userPlans: [],
     inviteMember: [],
     dayContent: [],
+    voteContents: [],
 }

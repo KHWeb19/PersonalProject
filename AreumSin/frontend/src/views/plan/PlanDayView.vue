@@ -96,6 +96,8 @@ export default {
         console.log(res + "성공");
         this.$store.commit(FETCH_DAY_CONTENT, res.data);
       })
+
+
   }
 }
 </script>

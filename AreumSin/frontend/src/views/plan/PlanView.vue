@@ -14,7 +14,7 @@
       </v-col>
 
       <v-col cols="3">
-        <PlanBoard></PlanBoard>
+        <PlanBoard @voteGood="voteGood" @voteBad="voteBad"></PlanBoard>
       </v-col>
 
       <v-col>
@@ -34,15 +34,8 @@
       </v-col>
     </v-row>
 
-    <v-row>
-      <v-col>
-        <table border="1">
-          <tr><v-btn>클릭</v-btn></tr>
-        </table>
-      </v-col>
-    </v-row>
 
-    <InPlanPencilIcon @submit="onSubmit" :findId="findId" :findName="findName" @addSubmit="addFriend" ></InPlanPencilIcon>
+    <InPlanPencilIcon @submit="onSubmit" :findId="findId" :findName="findName" @addSubmit="addFriend" @sendVote="sendVote"></InPlanPencilIcon>
 
   </v-container>
 </template>
@@ -65,7 +58,8 @@ export default {
       findId: null,
       findName: null,
       data: '',
-      planNo: localStorage.getItem('planNo')
+      planNo: localStorage.getItem('planNo'),
+      id: localStorage.getItem('session')
     }
   },
   props: {
@@ -96,6 +90,15 @@ export default {
             this.findName = res.data.memberName;
           })
     },
+    sendVote(payload){
+      const {vote} = payload;
+      console.log({vote});
+      let planNo = this.planNo
+      axios.post('http://localhost:7777/plan/vote', {vote, planNo})
+        .then((res) => {
+          console.log(res);
+        })
+    },
     addFriend(payload){
       const{friendId} = payload;
       let planNo = this.planNo;
@@ -107,6 +110,22 @@ export default {
         console.log(res.data + "성공!")
       })
     },
+    voteGood(payload){
+      const {voteNo} = payload;
+      let id = this.id;
+      axios.post('http://localhost:7777/plan/voteGood', {voteNo, id})
+        .then((res) => {
+          alert(res + '성공');
+        })
+    },
+    voteBad(payload){
+      const {voteNo} = payload;
+      let id = this.id;
+      axios.post('http://localhost:7777/plan/voteBad', {voteNo, id})
+          .then((res) => {
+            alert(res + '성공');
+          })
+    }
   },
   created() {
 
