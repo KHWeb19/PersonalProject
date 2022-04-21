@@ -36,13 +36,15 @@ export default {
     onSubmit (payload) {
       if (!this.isLogin) {
         const {id, pw} = payload
-        axios.post('http://localhost:7777/Member/login', {id, pw})
+        axios.post('http://localhost:7777/member/login', {id, pw})
             .then(res => {
               if (res.data) {
                 alert('로그인 성공!')
                 this.$store.state.userInfo = res.data
                 this.$cookies.set("user", res.data, 30)
                 this.isLogin = true
+                // 로그인 성공시 DashBoardPage로 이동
+                window.location.href = "DashBoardPage";
               }
             })
             .catch(res => {
@@ -58,6 +60,7 @@ export default {
       this.$store.state.userInfo = null
 
       alert('로그아웃 성공!')
+      window.location.href = "LoginPage";
     }
   }
 }

@@ -14,7 +14,7 @@ section {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: linear-gradient(to bottom, #f1f4f9, #dff1ff);
+    background: linear-gradient(to bottom, #f1f4f9, #6768ab);
 }
 /* 배경 작업시 건들이기로
 section .color{
@@ -156,15 +156,15 @@ section .color:nth-child(3) {
     border-bottom: 1px solid rgba(255,255,255,0.2);
     font-size: 16px;
     letter-spacing: 1px;
-    color: #fff;
+    color: #000;
     box-shadow: 0 5px 15px rgba(0,0,0,0.05);
 }
 .form .inputBox input::placeholder {
-    color: #015C92;
+    color: #000;
 }
 .form .inputBox input[type="submit"] {
     background: #fff;
-    color: #666;
+    color: #000;
     max-width: 100%;
     cursor: pointer;
     margin-bottom: 20px;

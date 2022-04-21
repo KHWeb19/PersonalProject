@@ -21,6 +21,7 @@ export default {
       axios.post('http://localhost:7777/member/register', { id, pw, email })
         .then(res => {
           alert('등록 성공! - ' + res)
+
         })
         .catch(res => {
           alert(res.response.data.message)

@@ -35,6 +35,8 @@ const routes = [
     name: 'DashBoardPage',
     component: DashBoardPage
   },
+
+  
   { // 자료 게시판 목록
     path: '/DataBoardListPage',
     name: 'DataBoardListPage',
@@ -55,6 +57,8 @@ const routes = [
     name: 'DataBoardRegisterPage',
     component: DataBoardRegisterPage
   },
+
+
   { // 질문 게시판 목록
     path: '/QuestionBoardListPage',
     name: 'QuestionBoardListPage',

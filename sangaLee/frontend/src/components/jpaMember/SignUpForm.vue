@@ -1,35 +1,48 @@
 <template>
-  <v-container>
-    <form @submit.prevent="onSubmit">
-      <h3>회원가입</h3>
+  <section>
+      <div class="container">
+        <div class="form">
 
-      <table>
-        <tr>
-          <td>아이디</td>
-          <td><input type="text" v-model="id"></td>
-        </tr>
-        <tr>
-          <td>비밀번호</td>
-          <td><input type="password" v-model="pw"></td>
-        </tr>
-        <tr>
-          <td>비밀번호 확인</td>
-          <td><input type="password"></td>
-        </tr>
-        <tr>
-          <td>이메일 주소</td>
-          <td><input type="text" v-model="email"></td>
-        </tr>
-      </table>
+          <form @submit.prevent="onSubmit">
 
-      <div>
-        <button type="submit">가입하기</button>
-        <router-link :to="{ name: 'LoginPage' }">
-          취소
-        </router-link>
+            <h2>회원가입</h2>
+            <!-- 아이디 입력 -->
+            <div class="inputBox">
+              <input type="text" v-model="id" placeholder="아이디를 입력해주세요.">
+            </div>
+
+            <!-- 비밀번호 입력 -->
+            <div class="inputBox">
+              <input type="pw" v-model="pw" placeholder="비밀번호를 입력해주세요.">
+            </div>
+            
+            <!-- 비밀번호 확인 -->
+            <div class="inputBox">
+              <input type="pwcheck" placeholder="비밀번호를 한번 더 입력해주세요.">
+            </div>
+
+            <!-- 이메일 -->
+            <div class="inputBox">
+              <input type="email" v-model="email" placeholder="이메일 주소를 입력해주세요.">
+            </div>
+
+            <!-- 가입하기 버튼 -->
+            <div class="inputBox">
+            <input type="submit" value="가입하기">
+            </div>
+
+            <!--
+            취소 버튼 : 로그인 페이지로 이동
+            <div class="inputBox">
+            <router-link :to="{ name: 'LoginPage' }">취소</router-link>
+            </div>
+            -->
+
+          </form>
+
+        </div>
       </div>
-    </form>
-  </v-container>
+  </section>
 </template>
 
 <script>
@@ -47,10 +60,11 @@ export default {
     onSubmit () {
       const { id, pw, email } = this
       this.$emit('submit', { id, pw, email })
+
     }
   }
 }
 
 </script>
 
-<style scoped src="../../assets/css/MainLoginStyle.css"></style>
+<style scoped src="../../assets/css/SignupStyle.css"></style>
