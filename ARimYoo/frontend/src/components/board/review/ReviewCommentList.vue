@@ -13,7 +13,7 @@
                         <v-btn  type="submit" class="commentBtn" color="red darken-3" dark>input</v-btn>
                     </v-col>
                 </v-row>
-                    <v-row v-for="commentList in communityComments" 
+                    <v-row v-for="commentList in reviewComments" 
                         :key="commentList.commentId" justify="center" class="commentList">
                         <v-col cols="2">
                             {{ commentList.commentWriter}}
@@ -41,9 +41,9 @@
 import axios from 'axios'
 
 export default {
-    name:'CommentList',
+    name:'ReviewCommentList',
     props: {
-        communityComments : {
+        reviewComments : {
             type:Array
         },
     },
@@ -59,14 +59,14 @@ export default {
         comDelete (commentId) {
       
             //alert('지우는 게시물 번호: ' + boardNo)
-            axios.delete(`http://localhost:7777/board/community/comment/${commentId}`, {commentId})
+            axios.delete(`http://localhost:7777/board/review/comment/${commentId}`, {commentId})
                     .then(() => {
                         alert('댓글이 삭제되었습니다.')
                         history.go(0)
                     })
                     .catch(() => {
                         alert('삭제 실패! 문제 발생!')
-                        console.log(commentId, this.boardNo)
+                        console.log(commentId, this.reviewNo)
                     })
 
         },

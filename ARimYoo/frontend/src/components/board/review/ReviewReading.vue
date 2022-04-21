@@ -2,10 +2,10 @@
     <v-container>
                 <table>
                     <v-row>
-                        <v-text-field class="date" color="red darken-3" rounded readonly :value="communityBoard.regDate"/>
+                        <v-text-field class="date" color="red darken-3" rounded readonly :value="review.regDate"/>
                     </v-row>
                     <v-divider/>
-                     <v-row v-if="communityBoard.writer == this.$store.state.userInfo.name">
+                     <v-row v-if="review.writer == this.$store.state.userInfo.name">
                         <v-menu offset-y bottom>
                             <template v-slot:activator="{ attrs, on }">
                                 <v-btn
@@ -21,8 +21,8 @@
                             </template>
                             <v-list class="black" dark>
                                 <v-list-item>
-                                    <router-link :to="{name:'CommunityModifyPage', 
-                                    params: { boardNo: communityBoard.boardNo.toString()}}" style="color:white">Modify
+                                    <router-link :to="{name:'ReviewModifyPage', 
+                                    params: { reviewNo: review.reviewNo.toString()}}" style="color:white">Modify
                                     </router-link>
                                 </v-list-item>
                                 <v-list-item>
@@ -37,33 +37,54 @@
                         <v-col>
                             <v-text-field
                                 class="titleFloat"
-                                :value="communityBoard.brackets"
-                                style="width:100px; zoom:1.1; cursor:default"
+                                :value="review.brackets"
+                                style="width:120px; zoom:1.1; cursor:default"
                                 rounded
                                 readonly
                                 color="red darken-3"
                                 ></v-text-field>
-                            <v-text-field class="titleFloat"  rounded style="width:500px; zoom:1.1" color="red darken-3" readonly :value="communityBoard.title"/>
+                            <v-text-field class="titleFloat"  rounded style="width:500px; zoom:1.1" color="red darken-3" readonly :value="review.title"/>
                         </v-col>
                     </v-row>
                      <v-row>
                         <v-col cols="1" class="label"> Writer</v-col>
                         <v-col>
-                        <v-text-field filled rounded  style="width:150px" color="red darken-3" readonly :value="communityBoard.writer"/>
+                        <v-text-field filled rounded  style="width:150px" color="red darken-3" readonly :value="review.writer"/>
                         </v-col>
                     </v-row>
                     <v-row justify="center">
                         <v-col cols="12" class="label2" style="font-size:23pt">Content</v-col>
-                        <img v-if="this.communityBoard.fileName !== null && this.communityBoard.fileName !== 'null'" class="imgArea" 
-                        :src="require(`@/assets/back/community/${this.communityBoard.fileName}`)"
+                        <img v-if="this.review.fileName1 !== null && this.review.fileName1 !== 'null'" class="imgArea" 
+                        :src="require(`@/assets/back/review/${this.review.fileName1}`)"
                         >
                     </v-row>
-                    <v-row>
-                        <v-col cols="12">
-                            <v-textarea style="white-space:pre-line" cols="75" 
-                            outlined color="red darken-3" readonly
-                            :value="communityBoard.content">
-                            </v-textarea>
+                    <v-row justify="center">
+                        <img v-if="this.review.fileName2 !== null && this.review.fileName2 !== 'null'" class="imgArea" 
+                        :src="require(`@/assets/back/review/${this.review.fileName2}`)"
+                        >
+                    </v-row>
+        
+                    <v-row justify="center">
+                         <img v-if="this.review.fileName3 !== null && this.review.fileName3 !== 'null'" class="imgArea" 
+                        :src="require(`@/assets/back/review/${this.review.fileName3}`)"
+                        >
+                    </v-row>
+                    <v-row justify="center">
+                         <img v-if="this.review.fileName4 !== null && this.review.fileName4 !== 'null'" class="imgArea" 
+                        :src="require(`@/assets/back/review/${this.review.fileName4}`)"
+                        >
+                    </v-row>
+                    <v-row justify="center">
+                         <img v-if="this.review.fileName5 !== null && this.review.fileName5 !== 'null'" class="imgArea" 
+                        :src="require(`@/assets/back/review/${this.review.fileName5}`)"
+                        >
+                    </v-row>
+                    <v-row justify="center">
+                        <v-col cols="12" >
+                            <textarea style="white-space:pre-line" cols="80" rows="10"
+                            outlined color="red darken-3" readonly class="txt" 
+                            :value="review.content">
+                            </textarea>
                         </v-col>
                     </v-row>
                     <v-row wrap>
@@ -76,7 +97,7 @@
                             </v-btn>
                         </v-col>
                                 <div class="likeCnt">
-                            {{ communityBoard.likeCnt }}
+                            {{ review.likeCnt }}
                             </div>
 
                     </v-row>
@@ -90,46 +111,46 @@ import { mapActions } from 'vuex'
 
 export default {
 
-    name:'CommunityBoardRead',
+    name:'ReviewReading',
     props: {
-        communityBoard: {
+        review: {
             type: Object,
             required: true
         }
     },
     data () {
         return {
-        fileName: this.communityBoard.fileName,
+        fileName1: this.review.fileName1,
         }
     },
     created () {
-        this.boardNo = this.communityBoard.boardNo
+        this.reviewNo = this.review.reviewNo
         this.who = this.$store.state.userInfo.id
     },
     methods: {
-        ...mapActions(['fetchCommunityCommentsList']),
+        ...mapActions(['fetchReviewCommentsList']),
         goPage () {
-            this.$router.push('/community')
+            this.$router.push('/review')
         },
         onDelete () {
-            const { boardNo, fileName } = this.communityBoard
+            const { reviewNo, fileName1, fileName2, fileName3, fileName4, fileName5 } = this.review
             //alert('지우는 게시물 번호: ' + boardNo)
-            axios.delete(`http://localhost:7777/board/community/${boardNo}`, {fileName})
+            axios.delete(`http://localhost:7777/board/review/${reviewNo}`, {fileName1,  fileName2, fileName3, fileName4, fileName5})
                     .then(() => {
                         alert('게시글이 삭제되었습니다.')
-                        this.$router.push({ name: 'CommunityPage' })
+                        this.$router.push({ name: 'ReviewPage' })
                     })
                     .catch(() => {
                         alert('삭제 실패! 문제 발생!')
                     })
         },
         like () {
-            const { boardNo, who } = this
-            console.log(boardNo, who)
+            const { reviewNo, who } = this
+            console.log(reviewNo, who)
             if (this.iLike == true ){
                 alert("이미 좋아요 하셨습니다 !")
             } else {
-            axios.post(`http://localhost:7777/board/community/${boardNo}/like`, {who})
+            axios.post(`http://localhost:7777/board/review/${reviewNo}/like`, {who})
                  .then((res) => {
                     if (res.data == false) {
                     alert("이미 좋아요 하셨습니다!")
@@ -142,7 +163,7 @@ export default {
                 alert ('좋아요 실패 문제발생 !')
             })
             }
-        }
+        },
     }
 }
 </script>
@@ -164,17 +185,24 @@ export default {
 table{
     position: relative;
     background-color: rgb(245, 244, 244);
-    padding-left: 12%;
-    padding-right: 12%;
+    padding-left: 11%;
+    padding-right: 11%;
     padding-top: 2%;
     padding-bottom: 7%;
     margin-left:auto;
     margin-right:auto;
 }
-.v-combobox, .v-text-field, .v-textarea{
+.v-combobox, .v-text-field{
     font-family: 'Noto Sans KR', sans-serif;
 }
-
+.txt {
+    position: relative;
+    text-align: center;
+     font-family: 'Noto Sans KR', sans-serif;
+    padding-top :5%;
+    overflow: visible;
+    outline-color: rgb(197, 30, 30);
+}
 .titleFloat {
     float:left;
     cursor: default;
@@ -199,6 +227,7 @@ a{
     position: relative;
     max-height: 500px;
     max-width: 600px;
+    margin-top: 4%;
 }
 .likeCnt {
      font-family: 'Noto Sans KR', sans-serif;

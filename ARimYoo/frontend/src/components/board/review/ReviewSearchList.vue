@@ -4,20 +4,20 @@
             <v-data-table 
                         :headers="headerTitle" 
                         :items="searchList"
-                        :key="searchList.boardNo"
+                        :key="searchList.reviewNo"
                         :items-per-page="10"
                         class="elevation-1 grey lighten-4" 
                         >
                 <template v-slot:[`item.title`]="{ item }">
-                   <router-link :to="{ name: 'CommunityReadPage',
-                                        params: { boardNo: item.boardNo.toString() } }"
+                   <router-link :to="{ name: 'ReviewReadPage',
+                                        params: { reviewNo: item.reviewNo.toString() } }"
                                         style="color:black; float:left">
                     {{ item.title }} &nbsp;&nbsp;&nbsp;&nbsp;
                    </router-link>
                    <div style="color:#D50000; float:left" >
                        [{{ item.commentCnt }}] &nbsp;
                    </div>
-                   <div v-if="item.fileName">
+                   <div v-if="item.fileName1">
                        <v-icon style="zoom:0.9">
                            mdi-image
                        </v-icon>
@@ -44,7 +44,7 @@
 import axios from 'axios'
 
 export default {
-    name:'CommunityBoardSearchList',
+    name:'ReviewSearchList',
        props: {
         searchList : {
             type: Array,
@@ -54,7 +54,7 @@ export default {
      data () {
         return {
             headerTitle: [
-                { text:'글 번호', value: 'boardNo', width:'70px'},
+                { text:'글 번호', value: 'reviewNo', width:'70px'},
                 { text:'말머리', value: 'brackets', width:'70px'},
                 { text: '제목', value: 'title', width: "200px" },
                 { text: '작성자', value: 'writer', width: "100px" },
@@ -69,10 +69,10 @@ export default {
            goSearch(){
                 const {keyword} = this
                 console.log(keyword)
-                axios.post('http://localhost:7777/board/community/search', {keyword})
+                axios.post('http://localhost:7777/board/review/search', {keyword})
                 .then((res) => {
                     console.log(res.data)
-                    this.$router.push({name: 'CommunityBoardSearchPage', params: { searchList: res.data }})
+                    this.$router.push({name: 'ReviewSearchPage', params: { searchList: res.data }})
                 })
                 .catch (() => {
                     alert('문제 발생!')

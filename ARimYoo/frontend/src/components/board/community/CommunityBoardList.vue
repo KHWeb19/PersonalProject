@@ -71,7 +71,6 @@ export default {
                 console.log(keyword)
                 axios.post('http://localhost:7777/board/community/search', {keyword})
                 .then((res) => {
-                    alert('검색완료.')
                     console.log(res.data)
                     this.$router.push({name: 'CommunityBoardSearchPage', params: { searchList: res.data }})
                 })

@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package com.example.demo.controller.communityBoard;
 
 import com.example.demo.service.communityBoard.CommunityBoardLikeService;
 import lombok.extern.slf4j.Slf4j;

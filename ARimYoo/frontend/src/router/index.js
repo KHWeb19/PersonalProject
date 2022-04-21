@@ -8,11 +8,25 @@ import JoinPage from '../views/main/JoinPage.vue'
 import JoinPage2 from '../views/main/JoinPage2.vue'
 import MyPage from '../views/my/MyPage.vue'
 
-import CommunityPage from '../views/board/CommunityPage.vue'
-import CommunityWritePage from '../views/board/CommunityWritePage.vue'
-import CommunityReadPage from '../views/board/CommunityReadPage.vue'
-import CommunityModifyPage from '../views/board/CommunityModifyPage.vue'
-import CommunityBoardSearchPage from '../views/board/CommunityBoardSearchPage.vue'
+import CommunityPage from '../views/board/communityBoard/CommunityPage.vue'
+import CommunityWritePage from '../views/board/communityBoard/CommunityWritePage.vue'
+import CommunityReadPage from '../views/board/communityBoard/CommunityReadPage.vue'
+import CommunityModifyPage from '../views/board/communityBoard/CommunityModifyPage.vue'
+import CommunityBoardSearchPage from '../views/board/communityBoard/CommunityBoardSearchPage.vue'
+
+import ReviewPage from '../views/board/review/ReviewPage.vue'
+import ReviewWritePage from '../views/board/review/ReviewWritePage.vue'
+import ReviewReadPage from '../views/board/review/ReviewReadPage.vue'
+import ReviewModifyPage from '../views/board/review/ReviewModifyPage.vue'
+import ReviewSearchPage from '../views/board/review/ReviewSearchPage.vue'
+
+import StudyPage from '../views/board/study/StudyPage.vue'
+import StudyWritePage from '../views/board/study/StudyWritePage.vue'
+import StudyReadPage from '../views/board/study/StudyReadPage.vue'
+import StudyModifyPage from '../views/board/study/StudyModifyPage.vue'
+
+import ProjectPage from '../views/board/project/ProjectPage.vue'
+import ProjectWritePage from '../views/board/project/ProjectWritePage.vue'
 
 Vue.use(VueRouter)
 
@@ -21,6 +35,7 @@ const requireLogin = () => (to, from, next) => {
         return next()
     } else {
         alert('로그인이 필요한 서비스입니다.')
+        this.$router.push('/main')
     }
 } 
 
@@ -67,7 +82,8 @@ const routes = [
     {
         path: '/community/write',
         name: 'CommunityWritePage',
-        component: CommunityWritePage
+        component: CommunityWritePage,
+        beforeEnter: requireLogin()
     },
     {
         path: '/community/:boardNo',
@@ -78,7 +94,8 @@ const routes = [
         },
         props: {
             default: true
-        }
+        },
+        beforeEnter: requireLogin()
     },
     {
         path: '/community/modify/:boardNo',
@@ -89,7 +106,7 @@ const routes = [
         props: {
             default: true
         },
-
+        beforeEnter: requireLogin()
     },
     {
         path: '/community/search',
@@ -99,10 +116,102 @@ const routes = [
         },
         props: {
             default: true
-        }
-    }
-
-  
+        },
+        beforeEnter: requireLogin()
+    },
+    {
+        path: '/review',
+        name: 'ReviewPage',
+        component: ReviewPage,
+        beforeEnter: requireLogin()
+    },
+    {
+        path: '/review/write',
+        name: 'ReviewWritePage',
+        component: ReviewWritePage,
+        beforeEnter: requireLogin()
+    },
+    {
+        path: '/review/:reviewNo',
+        name: 'ReviewReadPage',
+        components: {
+            default:
+                ReviewReadPage
+        },
+        props: {
+            default: true
+        },
+        beforeEnter: requireLogin()
+    },
+    {
+        path: '/review/modify/:reviewNo',
+        name: 'ReviewModifyPage',
+        components: {
+            default: ReviewModifyPage
+        },
+        props: {
+            default: true
+        },
+        beforeEnter: requireLogin()
+    },
+    {
+        path: '/review/search',
+        name: 'ReviewSearchPage',
+        components: {
+            default: ReviewSearchPage
+        },
+        props: {
+            default: true
+        },
+        beforeEnter: requireLogin()
+    },
+    {
+        path: '/study',
+        name: 'StudyPage',
+        component: StudyPage,
+        beforeEnter: requireLogin()
+    },
+    {
+        path: '/study/write',
+        name: 'StudyWritePage',
+        component: StudyWritePage,
+        beforeEnter: requireLogin()
+    },
+    {
+        path: '/study/:studyNo',
+        name: 'StudyReadPage',
+        components: {
+            default:
+                StudyReadPage
+        },
+        props: {
+            default: true
+        },
+        beforeEnter: requireLogin()
+    },
+    {
+        path: '/study/modify/:studyNo',
+        name: 'StudyModifyPage',
+        components: {
+            default: StudyModifyPage
+        },
+        props: {
+            default: true
+        },
+        beforeEnter: requireLogin()
+    },
+    {
+        path: '/project',
+        name: 'ProjectPage',
+        component: ProjectPage,
+        beforeEnter: requireLogin()
+    },
+    {
+        path: '/project/write',
+        name: 'ProjectWritePage',
+        component: ProjectWritePage,
+        beforeEnter: requireLogin()
+    },
 ]
 
 const router = new VueRouter({

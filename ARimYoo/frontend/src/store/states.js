@@ -3,6 +3,14 @@ export default {
     communityBoards: [],
     communityBoard: null,
     communityComments: [],
+
+    reviews: [],
+    review: null,
+    reviewComments: [],
+
+    studies: [],
+    study: null,
+    studyComments: [],
     
     member: null,
     

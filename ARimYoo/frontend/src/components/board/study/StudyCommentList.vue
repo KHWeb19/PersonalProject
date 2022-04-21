@@ -4,16 +4,16 @@
             <table>
                 <v-row justify="center">
                     <v-col cols="1" style="font-size:15pt" class="label">
-                        Comment
+                        Ask
                     </v-col>
-                    <v-col cols="8">
+                    <v-col cols="7">
                         <v-textarea color="red darken-3" cols="80" rows="1" v-model="comment"/>
                     </v-col>
                     <v-col cols="1">
                         <v-btn  type="submit" class="commentBtn" color="red darken-3" dark>input</v-btn>
                     </v-col>
                 </v-row>
-                    <v-row v-for="commentList in communityComments" 
+                    <v-row v-for="commentList in studyComments" 
                         :key="commentList.commentId" justify="center" class="commentList">
                         <v-col cols="2">
                             {{ commentList.commentWriter}}
@@ -21,7 +21,7 @@
                         <v-col cols="5">
                             {{ commentList.comment }}
                         </v-col>
-                        <v-col cols="2">
+                        <v-col cols="3">
                             {{ commentList.date}}
                         </v-col>
                         <template v-if="commentList.commentWriter == commentWriter">
@@ -41,9 +41,9 @@
 import axios from 'axios'
 
 export default {
-    name:'CommentList',
+    name:'StudyCommentList',
     props: {
-        communityComments : {
+        studyComments : {
             type:Array
         },
     },
@@ -59,14 +59,14 @@ export default {
         comDelete (commentId) {
       
             //alert('지우는 게시물 번호: ' + boardNo)
-            axios.delete(`http://localhost:7777/board/community/comment/${commentId}`, {commentId})
+            axios.delete(`http://localhost:7777/board/study/comment/${commentId}`, {commentId})
                     .then(() => {
                         alert('댓글이 삭제되었습니다.')
                         history.go(0)
                     })
                     .catch(() => {
                         alert('삭제 실패! 문제 발생!')
-                        console.log(commentId, this.boardNo)
+                        console.log(commentId, this.studyNo)
                     })
 
         },
@@ -84,8 +84,6 @@ export default {
 table {
     position: relative;
     background-color: rgb(245, 244, 244);
-    padding-left: 2%;
-    padding-right: 2%;
     padding-top:3%;
     padding-bottom:3%;
     margin-left:auto;
@@ -94,7 +92,7 @@ table {
 }
 .label{
     font-family: 'Noto Sans KR', sans-serif;
-    margin-right:4%;
+
 }
 .v-textarea {
     font-family: 'Noto Sans KR', sans-serif;

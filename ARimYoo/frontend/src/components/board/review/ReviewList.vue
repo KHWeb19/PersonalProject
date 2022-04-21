@@ -3,21 +3,21 @@
         <v-row column wrap justify="center">
             <v-data-table 
                         :headers="headerTitle" 
-                        :items="searchList"
-                        :key="searchList.boardNo"
+                        :items="reviews"
+                        :key="reviews.reviewNo"
                         :items-per-page="10"
                         class="elevation-1 grey lighten-4" 
                         >
                 <template v-slot:[`item.title`]="{ item }">
-                   <router-link :to="{ name: 'CommunityReadPage',
-                                        params: { boardNo: item.boardNo.toString() } }"
+                   <router-link :to="{ name: 'ReviewReadPage',
+                                        params: { reviewNo: item.reviewNo.toString() } }"
                                         style="color:black; float:left">
                     {{ item.title }} &nbsp;&nbsp;&nbsp;&nbsp;
                    </router-link>
                    <div style="color:#D50000; float:left" >
                        [{{ item.commentCnt }}] &nbsp;
                    </div>
-                   <div v-if="item.fileName">
+                   <div v-if="item.fileName1">
                        <v-icon style="zoom:0.9">
                            mdi-image
                        </v-icon>
@@ -25,11 +25,11 @@
                 </template>
             </v-data-table>
         </v-row>
-           <v-row justify="center" style="margin-top:50px">
-            <v-col  cols="3">
+        <v-row justify="center" style="margin-top:50px">
+            <v-col  cols="7" md="3">
             <input type="text" class="search" v-model="keyword"/>
             </v-col>
-            <v-col cols="1">
+            <v-col cols="2" md="1">
                 <v-btn class="searchBtn" @click=goSearch color="red darken-3" dark small>
                     <v-icon>
                         mdi-magnify
@@ -44,17 +44,16 @@
 import axios from 'axios'
 
 export default {
-    name:'CommunityBoardSearchList',
-       props: {
-        searchList : {
-            type: Array,
-            required: true
+    name:'ReviewList',
+    props: {
+        reviews: {
+            type:Array
         }
-       },
-     data () {
+    },
+    data () {
         return {
             headerTitle: [
-                { text:'글 번호', value: 'boardNo', width:'70px'},
+                { text:'글 번호', value: 'reviewNo', width:'70px'},
                 { text:'말머리', value: 'brackets', width:'70px'},
                 { text: '제목', value: 'title', width: "200px" },
                 { text: '작성자', value: 'writer', width: "100px" },
@@ -62,25 +61,25 @@ export default {
                 { text: '조회수', value: 'viewCnt', width: "70px" },
                 { text: 'date. ', value: 'regDate', width: "100px" },
             ],
-            keyword:''
+            keyword:'',
+            searchList: []
         }
-     },
-     methods: {
-           goSearch(){
+    },
+    methods: {
+        goSearch(){
                 const {keyword} = this
                 console.log(keyword)
-                axios.post('http://localhost:7777/board/community/search', {keyword})
+                axios.post('http://localhost:7777/board/review/search', {keyword})
                 .then((res) => {
                     console.log(res.data)
-                    this.$router.push({name: 'CommunityBoardSearchPage', params: { searchList: res.data }})
+                    this.$router.push({name: 'ReviewSearchPage', params: { searchList: res.data }})
                 })
                 .catch (() => {
                     alert('문제 발생!')
                 })
             }
         }
-     }
-
+    } 
 </script>
 
 <style scoped>
@@ -97,14 +96,18 @@ export default {
   font-size: 14px !important;
 }
 .search {
+    position: relative;
     width:300px;
     height:30px;
     background-color: rgb(240, 238, 238);
     outline-color: rgb(211, 32, 32);
     padding-left:10px;
     font-family: 'Noto Sans KR', sans-serif;
+    float:left;
 }
 .searchBtn {
-    margin-left:1%;
+    position: relative;
+    float:left;
+    margin-left:10%;
 }
 </style>
