@@ -75,7 +75,7 @@ export default {
 
 <style scoped>
 .titleImg{
-    margin-top:5%;
+    margin-top:3%;
     margin-bottom: 5%;
 }
 

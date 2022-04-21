@@ -55,13 +55,13 @@ export default {
 
 <style scoped>
 .titleImg{
-    margin-top:5%;
+    margin-top:3%;
     margin-bottom: 6%;
 }
 .writeBtn {
     position: absolute;
     left:78%;
-    top:9%;
+    top:40px;
     zoom:1.15;
 }
 @media (max-width:700px){

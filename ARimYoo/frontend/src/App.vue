@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <div v-if="$route.name !=='EnterVellup' && $route.name !== 'JoinPage' && $route.name !== 'JoinPage2'">
-        <v-container v-if="$store.state.token">
+        <v-container v-if="$store.state.token" class="fix">
             <v-layout row>
                 <div class="btnSet2">
                     <div class="float">
@@ -31,7 +31,7 @@
                 </div>
             </v-layout>
         </v-container>
-        <v-container v-else>
+        <v-container v-else class="fix">
             <v-row>
                 <div class="btnSet"> 
                         <div class="float">
@@ -44,16 +44,16 @@
             </v-row>
         </v-container>
 
-      <div class="header">
-          <button><img src ="@/assets/main/banner.png" width="270" @click="goToMain"></button>
-      </div>
+      <table class="header">
+          <button><img src ="@/assets/main/banner.png" width="200" @click="goToMain"></button>
+      </table>
       <div class="menuBar">  
-          <main-toolbar/>
+          <main-toolbar />
       </div>
     </div>
 
     <v-main>
-      <v-container fluid justify-center class="py-0 px-0">
+      <v-container fluid justify-center class="main">
         <router-view></router-view>
       </v-container>
     </v-main>
@@ -101,10 +101,13 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap');
 
 .header {
-    position: relative;
-    left: 20%;
-    padding-top: 5px;
+    position: fixed;
+    z-index:20 ;
+    left: 17%;
+    padding-top: 15px;
     padding-bottom: 20px;
+    padding-right: 200%;
+    background-color: white;
 }
 .btnSet{
   position: absolute;
@@ -121,10 +124,20 @@ export default {
     font-size: 16px;
     padding-top:2%;
 }
+.main {
+    position: relative;
+    top:150px;
+}
 .float {
   float: left;
   margin-right:7px;
 }
+.fix{
+    position: fixed;
+    left:15%;
+     z-index:21 ;
+}
+
 </style>
 
 <style>
