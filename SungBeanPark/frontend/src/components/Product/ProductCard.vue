@@ -55,7 +55,7 @@
                       </dl>
                     </div>
                   </a>
-                  <button @click="Cart(product)">장바구니</button>
+                  <button @click="addToCart(product)">장바구니</button>
                 </li>
               </ul>
             </div>
@@ -82,7 +82,7 @@ export default {
   methods: {
     ...mapActions(["fetchProductList"]),
 
-    Cart(product) {
+    addToCart(product) {
       const { productName, productPrice } = product
       axios
         .post(
@@ -99,7 +99,7 @@ export default {
     },
   },
   computed: {
-    ...mapState(["members", "User", "loginMemberNo"]),
+    ...mapState(["members", "member", "loginMemberNo"]),
   },
 
   filters: {

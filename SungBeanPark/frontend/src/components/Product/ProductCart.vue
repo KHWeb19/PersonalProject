@@ -1,6 +1,6 @@
 <template>
   <ul class="cart-content-list">
-    <li v-for="(product, idx) in CartList" :key="idx" class="cart-content-item">
+    <li v-for="cart in CartList" :key="cart.id" class="cart-content-item">
       <article class="cart-content-product">
         <ul class="cart-content-option">
           <li class="cart-content-option-list">
@@ -9,7 +9,6 @@
                 <div class="product-small-card select">
                   <input type="checkbox" />
                 </div>
-
                 <div class="product-small-card">
                   <a class="product-small-item" href="/">
                     <div class="product-small-img">
@@ -37,7 +36,6 @@
                             {{ product.productName }}
                           </h4>
                           <button
-                            @click="deleteProduct(product.cartId)"
                             class="delete-button"
                             type="button"
                             aria-label="해당 상품을 삭제하기"
@@ -120,8 +118,6 @@
   </ul>
 </template>
 <script>
-import product from "@/product.js"
-import { mapState } from "vuex"
 export default {
   name: "ProductCart",
 
@@ -130,24 +126,22 @@ export default {
       type: Array,
     },
     computed: {
-      ...mapState(["User"]),
+      cartList() {
+        return this.$store.state.cartList
+      },
     },
-  },
-  data() {
-    return {
-      inventory: product,
-      quantity: 0,
-    }
-  },
-  computed: {
-    ...mapState(["User"]),
-  },
-  filters: {
-    pricePoint: function (value) {
-      return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    created() {
+      this.mainCartList()
     },
-    ratingPoint: function (value) {
-      return value.toString().replace(/\B(?=(\d{1})+(?!\d))/g, ".")
+    data() {},
+
+    filters: {
+      pricePoint: function (value) {
+        return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+      },
+      ratingPoint: function (value) {
+        return value.toString().replace(/\B(?=(\d{1})+(?!\d))/g, ".")
+      },
     },
   },
 }
