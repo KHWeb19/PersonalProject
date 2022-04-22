@@ -38,7 +38,7 @@ export default {
                 localStorage.setItem("userInfo", JSON.stringify(res.data))
                 localStorage.setItem("session", res.data.id);
                 //this.$store.commit('addUser', res.data.id);
-                this.$router.push({name: 'PlanView', params: {id: res.data.id}});
+                this.$router.push({name: 'PlanListView', params: {id: res.data.id}});
               }
             })
             .catch(() => {

@@ -7,7 +7,11 @@ import MyPage from "@/views/MyPage";
 import LoginPage from "@/views/login/LoginPage";
 import RegisterPage from "@/views/login/RegisterPage";
 import IdPwSearchPage from "@/views/login/IdPwSearchPage";
+import PlanListView from "@/views/plan/PlanListView";
 import PlanView from "@/views/plan/PlanView";
+import ChangePw from "@/views/login/ChangePw";
+import PlanDayView from "@/views/plan/PlanDayView"
+import MapView from "@/views/MapView.vue"
 
 Vue.use(VueRouter)
 
@@ -48,11 +52,34 @@ const routes = [
     component: IdPwSearchPage
   },
   {
-    path: '/planPage',
+    path: '/planListPage',
+    name: 'PlanListView',
+    component: PlanListView,
+    props: true
+  },
+  {
+    path: '/PlanPage/:day',
     name: 'PlanView',
     component: PlanView,
     props: true
-  }
+  },
+  {
+    path: '/changePw',
+    name: 'ChangePw',
+    component: ChangePw,
+    props: true
+  },
+  {
+    path: '/PlanDay/:day',
+    name: 'PlanDayView',
+    component: PlanDayView,
+    props: true
+  },
+  {
+    path: '/mapView',
+    name: 'MapView',
+    component: MapView
+  },
 ]
 
 const router = new VueRouter({

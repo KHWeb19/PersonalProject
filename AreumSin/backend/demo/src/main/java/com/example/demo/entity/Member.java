@@ -58,4 +58,17 @@ public class Member {
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<MemberPlan> memberPlans = new ArrayList<>();
 
+    public void addMemberPlan(MemberPlan memberPlan){
+        memberPlans.add(memberPlan);
+        memberPlan.setMember(this);
+    }
+
+    public static Member inviteMember(Member member, MemberPlan... memberPlans) {
+
+        for(MemberPlan memberPlan : memberPlans) {
+            member.addMemberPlan(memberPlan);
+        }
+        return member;
+    }
+
 }

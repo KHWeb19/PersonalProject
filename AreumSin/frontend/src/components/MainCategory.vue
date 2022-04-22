@@ -2,17 +2,17 @@
   <v-container>
     <v-row align="center">
       <v-col cols="3"  sm="3" md="3" lg="3">
-        <v-btn style="margin-left: 20px" fab @click="myPage"> 사용자 </v-btn>
+        <v-btn style="margin-left: 20px" fab @click="checkLogin" x-large> 사용자 </v-btn>
       </v-col>
       <v-spacer></v-spacer>
       <v-col>
-        <v-btn class="ca red lighten-2" @click="planLink" outlined> PLAN </v-btn>
+        <v-btn class="ca red lighten-2" @click="planLink" x-large outlined> PLAN </v-btn>
       </v-col>
       <v-col>
-        <v-btn class="ca blue lighten-2" @click="searchLink" outlined> SEARCH </v-btn>
+        <v-btn class="ca blue lighten-2" @click="searchLink" x-large outlined> SEARCH </v-btn>
       </v-col>
       <v-col>
-        <v-btn class="ca green lighten-2" @click="boardLink" outlined> BOARD </v-btn>
+        <v-btn class="ca green lighten-2" @click="boardLink" x-large outlined> BOARD </v-btn>
       </v-col>
     </v-row>
     <hr size="20px" style="margin-top: 10px;">
@@ -25,7 +25,11 @@ export default {
   name: "MainCategory",
   methods: {
     planLink(){
-      this.$router.push({name: 'HomeView'})
+      if(localStorage.getItem("session") === null) {
+        this.$router.push({name: 'HomeView'})
+      }else {
+        this.$router.push({name: 'PlanListView'})
+      }
     },
     searchLink() {
       this.$router.push({name: 'SearchView'})
@@ -33,8 +37,13 @@ export default {
     boardLink(){
       this.$router.push({name: 'BoardView'})
     },
-    myPage(){
-      this.$router.push({name: 'LoginPage'})
+    checkLogin(){
+      if(localStorage.getItem("session") === null){
+        this.$router.push({name: 'LoginPage'})
+      }else{
+        this.$router.push({name: 'MyPage'})
+      }
+
     }
   }
 }
@@ -42,6 +51,6 @@ export default {
 
 <style scoped>
 .ca{
-  width: 190px;
+  width: 230px;
 }
 </style>

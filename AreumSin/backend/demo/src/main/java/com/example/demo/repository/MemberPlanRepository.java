@@ -11,7 +11,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-public interface MemberPlanRepository extends JpaRepository<MemberPlan, Long> {
+public interface MemberPlanRepository extends JpaRepository<MemberPlan, Integer> {
 
     //@Query("SELECT member.user_name FROM member_plan LEFT JOIN member ON member_plan.user_no = member.user_no JOIN plan ON member_plan.plan_no = plan.plan_no;")
     //select plan.plan_name from member_plan join member on member_plan.user_no = member_plan.user_no join plan on member_plan.plan_no = plan.plan_no where member.user_no = 1;
@@ -29,4 +29,8 @@ public interface MemberPlanRepository extends JpaRepository<MemberPlan, Long> {
     @Transactional
     @Query("select mp from MemberPlan mp join mp.plan p join mp.member m where m.memberNo = :memberNo")
     List<MemberPlan> findAll(@Param("memberNo") Integer memberNo);
+
+    @Transactional
+    @Query("select mp from MemberPlan mp join mp.plan p join mp.member m where p.planNo = :planNo")
+    List<MemberPlan> findAllMember(@Param("planNo") Integer planNo);
 }
