@@ -4,9 +4,11 @@
         <v-flex >
           <v-card style="height: 600px">
             <div style="display: flex; justify-content: center; padding-top: 25px; padding-bottom:20px">
-              <td style="padding-left: 120px;">
-                <v-img v-if="member.imageName" style=" margin-left: 25px" width="38" :src="require(`@/assets/mImage/${member.imageName}`)"/>
-                <v-img v-else style=" margin-left: 25px" width="38" src="@/assets/logo.png"/>
+              <td style="padding-left: 120px;  margin-left: 25px">
+                <div style="border-radius: 70%; overflow: hidden;">
+                  <v-img v-if="member.imageName" width="38" :src="require(`@/assets/mImage/${member.imageName}`)"/>
+                  <v-img v-else width="38" src="@/assets/profile.jpg"/>
+                </div>
               </td>
               <td style="margin-left: 20px;"> 
                 {{member.memberId}}

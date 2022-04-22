@@ -42,9 +42,11 @@
     <v-menu offset-y min-width="230px">
       <template v-slot:activator="{ on }">
         <v-btn icon v-on="on">
-                <v-img v-if="imageChange" max-width="24" height="24" :src="require(`@/assets/mImage/${imageChange}`)"/>
-                <v-img v-else-if="loginInfo.imageName" max-width="24" height="24" :src="require(`@/assets/mImage/${loginInfo.imageName}`)"/>
-                <v-img v-else max-width="24" height="24"  src="@/assets/logo.png"/>
+          <div style="border-radius: 70%; overflow: hidden;">
+            <v-img v-if="imageChange" max-width="24" height="24" :src="require(`@/assets/mImage/${imageChange}`)"/>
+            <v-img v-else-if="loginInfo.imageName" max-width="24" height="24" :src="require(`@/assets/mImage/${loginInfo.imageName}`)"/>
+            <v-img v-else max-width="24" height="24"  src="@/assets/profile.jpg"/>
+          </div>
         </v-btn> 
       </template>
       <v-list>

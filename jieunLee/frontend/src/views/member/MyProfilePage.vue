@@ -5,7 +5,7 @@
         <hr style="border: 0; height: 1px; background: #d8d8d8; "/>
       </div>
 
-      <my-profile v-if="member" :member="member"/>
+      <my-profile v-if="member" :member="member" :myBoards="myBoards"/>
       <p v-else>로딩중......</p>
       <my-board-list :myBoards="myBoards" @click="onDelete"/>
   </div>
