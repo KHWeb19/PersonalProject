@@ -1,6 +1,7 @@
 package com.example.demo.controller.uploadFileController;
 
 import com.example.demo.controller.uploadFileController.request.UploadRequest;
+import com.example.demo.entity.review.Review;
 import com.example.demo.entity.uploadCake.UploadCake;
 import com.example.demo.repository.upload.UploadRepository;
 import com.example.demo.service.uploadCakeImpl.UploadCakeService;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 @Slf4j
@@ -85,5 +87,67 @@ public class UploadController {
         log.info("uploadCakeList()");
 
         return service.list();
+    }
+
+    @PutMapping("/modify")
+    public UploadCake modifyUploadCake (
+            @RequestPart(value = "info", required = false) UploadCake info,
+            @RequestPart(value = "fileList",required = false) List<MultipartFile> fileList) throws IOException {
+
+        log.info("UploadCake info: " + info);
+        log.info("fileList: " +fileList);
+
+
+        if(fileList != null) {
+            try {
+                for (MultipartFile multipartFile : fileList) {
+                    log.info("requestUploadFile() - Make file: " +
+                            multipartFile.getOriginalFilename());
+
+                    if(info.getDesign().equals("family")) {
+                        FileOutputStream writer = new FileOutputStream(
+                                "../../vue_frontend/book_cake/src/assets/uploadImg/family/" +multipartFile.getOriginalFilename());
+                        log.info("디렉토리에 파일 배치 성공!");
+
+                        writer.write(multipartFile.getBytes());
+                        writer.close();
+                        service.includeImgModify(info, multipartFile.getOriginalFilename());
+                    }else if (info.getDesign().equals("birthday")) {
+                        FileOutputStream writer = new FileOutputStream(
+                                "../../vue_frontend/book_cake/src/assets/uploadImg/birthday/" +multipartFile.getOriginalFilename());
+                        log.info("디렉토리에 파일 배치 성공!");
+
+                        writer.write(multipartFile.getBytes());
+                        writer.close();
+                        service.includeImgModify(info, multipartFile.getOriginalFilename());
+                    }else if (info.getDesign().equals("friend")) {
+                        FileOutputStream writer = new FileOutputStream(
+                                "../../vue_frontend/book_cake/src/assets/uploadImg/friend/" +multipartFile.getOriginalFilename());
+                        log.info("디렉토리에 파일 배치 성공!");
+
+                        writer.write(multipartFile.getBytes());
+                        writer.close();
+                        service.includeImgModify(info, multipartFile.getOriginalFilename());
+                    }else if (info.getDesign().equals("lover")) {
+                        FileOutputStream writer = new FileOutputStream(
+                                "../../vue_frontend/book_cake/src/assets/uploadImg/lover/" +multipartFile.getOriginalFilename());
+                        log.info("디렉토리에 파일 배치 성공!");
+
+                        writer.write(multipartFile.getBytes());
+                        writer.close();
+                        service.includeImgModify(info, multipartFile.getOriginalFilename());
+                    }
+                }
+            } catch (Exception e) {
+                log.info("modify cake have problem!!");
+                return null;
+            }
+        }else if(fileList == null) {
+            service.exceptImgModify(info);
+        }
+
+        log.info("upload cake Modify(): Success!!!");
+        return info;
+
     }
 }
