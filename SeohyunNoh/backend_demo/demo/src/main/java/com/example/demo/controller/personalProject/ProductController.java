@@ -34,6 +34,9 @@ public class ProductController {
             return new ResponseEntity<>(new ApiResponse(false,"category does not exists"), HttpStatus.BAD_REQUEST);
         }
         productService.createProduct(productDto, optionalCategory.get());
+
+        log.info("createProduct()");
+
         return new ResponseEntity<>(new ApiResponse(true,"product has been added"), HttpStatus.CREATED);
     }
 
@@ -47,10 +50,10 @@ public class ProductController {
     @PostMapping("/update/{productId}")
     public ResponseEntity<ApiResponse> updateProduct(@PathVariable("productId") Integer productId, @RequestBody ProductDto productDto) throws Exception {
         Optional<Category> optionalCategory = categoryRepository.findById(productDto.getCategoryId());
-        if(optionalCategory.isEmpty()) {
-            return new ResponseEntity<>(new ApiResponse(false,"category does not exists"), HttpStatus.BAD_REQUEST);
+        if (!optionalCategory.isPresent()) {
+            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "category does not exists"), HttpStatus.BAD_REQUEST);
         }
         productService.updateProduct(productDto, productId);
-        return new ResponseEntity<>(new ApiResponse(true,"product has been updated"), HttpStatus.OK);
+        return new ResponseEntity<ApiResponse>(new ApiResponse(true, "product has been updated"), HttpStatus.OK);
     }
 }

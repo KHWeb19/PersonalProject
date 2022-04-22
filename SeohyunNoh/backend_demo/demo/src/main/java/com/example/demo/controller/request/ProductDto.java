@@ -17,7 +17,7 @@ import javax.persistence.Id;
 public class ProductDto {
     private Integer id;
     private String name;
-    private String imageURl;
+    private String imageURL;
     private double price;
     private String description;
     private Integer categoryId;

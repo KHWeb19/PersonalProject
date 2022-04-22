@@ -52,11 +52,6 @@ export default {
   components: {
     ModifyMyPage
   },
-  data () {
-     return {
-
-    }
-  },
   computed: {
     ...mapState([ 'userInfo', 'isLogin' ])
   }

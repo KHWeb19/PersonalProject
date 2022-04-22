@@ -10,6 +10,15 @@ import MyPage from '@/views/project/MyPage.vue'
 
 import AdminPage from '@/views/admin/AdminPage.vue'
 
+import AddCategory from '@/views/category/AddCategory.vue'
+import Category from '@/views/category/Category.vue'
+import ListProducts from '@/views/category/ListProducts.vue'
+import EditCategory from '@/views/category/EditCategory.vue'
+
+import Product from '@/views/product/Product.vue'
+import AddProduct from '@/views/product/AddProduct.vue'
+import EditProduct from '@/views/product/EditProduct.vue'
+
 import LookBookPage from '@/views/project/LookBookPage.vue'
 
 import NoticeListPage from '@/views/notice/NoticeListPage.vue'
@@ -22,12 +31,12 @@ import QnARegisterPage from '@/views/qna/QnARegisterPage.vue'
 import QnAReadPage from '@/views/qna/QnAReadPage.vue'
 import QnAModifyPage from '@/views/qna/QnAModifyPage.vue'
 
-import AddCategoryPage from '@/views/AddCategoryPage.vue'
+
 
 // import WomenOuterCategoryPage from '@/views/womenCategory/WomenOuterCategoryPage.vue'
 // import ProductDetailPage from '@/views/womenCategory/ProductDetailPage.vue'
 
-import CartPage from '@/views/pay/CartPage.vue'
+
 
 
 Vue.use(VueRouter)
@@ -97,6 +106,56 @@ const routes = [
     component: AdminPage
   },
   {
+    path: '/addCategory',
+    name: 'AddCategory',
+    component: AddCategory
+  },
+  {
+    path: '/category',
+    name: 'Category',
+    component: Category
+  },
+  {
+    path: '/listProducts/:id',
+    name: 'ListProducts',
+    components: {
+      default: ListProducts
+    },
+    props: {
+      default: true
+    }
+  },
+  {
+    path: '/editCategory/:id',
+    name: 'EditCategory',
+    components: {
+      default: EditCategory
+    },
+    props: {
+      default: true
+    }
+  },
+  {
+    path: '/addProduct',
+    name: 'AddProduct',
+    component: AddProduct
+  },
+  {
+    path: '/product',
+    name: 'Product',
+    component: Product
+  },
+  {
+    path: '/editProduct/:id',
+    name: 'EditProduct',
+    components: {
+      default: EditProduct
+    },
+    props: {
+      default: true
+    }
+  },
+  {
     path: '/noticeListPage',
     name: 'NoticeListPage',
     component: NoticeListPage
@@ -157,11 +216,6 @@ const routes = [
       default: true
     }
   },
-  {
-    path: '/addCategoryPage',
-    name: 'AddCategoryPage',
-    component: AddCategoryPage
-  },
   // {
   //   path: '/womenOuterCategoryPage',
   //   name: 'WomenOuterCategoryPage',
@@ -176,11 +230,6 @@ const routes = [
     path: '/lookBookPage',
     name: 'LookBookPage',
     component: LookBookPage
-  },
-  {
-    path: '/cartPage',
-    name: 'CartPage',
-    component: CartPage
   }
 
 ]

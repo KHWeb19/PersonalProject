@@ -24,6 +24,8 @@ public class CategoryController {
     public ResponseEntity<ApiResponse> createCategory(@RequestBody Category category) {
         categoryService.createCategory(category);
 
+        log.info("create category()");
+
         return new ResponseEntity<>(new ApiResponse(true, "create a new category"), HttpStatus.CREATED);
     }
 
@@ -36,10 +38,13 @@ public class CategoryController {
     public ResponseEntity<ApiResponse> updateCategory(@PathVariable("categoryId") int categoryId, @RequestBody Category category) {
 
         if(!categoryService.findById(categoryId)) {
+            log.info("category does not exist");
            return new ResponseEntity<>(new ApiResponse(false,"category does not exist"), HttpStatus.NOT_FOUND);
        }
 
         categoryService.editCategory(categoryId,category);
+
+        log.info("update category");
 
         return new ResponseEntity<>(new ApiResponse(true,"category has been updated"), HttpStatus.OK);
     }

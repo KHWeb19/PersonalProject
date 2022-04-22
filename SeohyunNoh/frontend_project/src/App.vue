@@ -41,27 +41,52 @@
     </v-app-bar> -->
 
     <v-main>
-      <router-view/>
+      <router-view v-if="categories && products" :categories="categories" :products="products" @fetchData="fetchData"/>
     </v-main> 
 
-    <Footer/>
   </v-app> 
 </template>
 
 <script>
 
 import Header from './components/layout/Header.vue'
-// import Footer from './components/layout/Footer.vue'
+import axios from 'axios'
 
 export default {
   name: 'App',
   components: {
     Header,
-    // Footer
+
   },
-  data: () => ({
-    //
-  }),
+  data() {
+    return {
+      products: null,
+      categories: null
+    }
+  },
+  methods: {
+    async fetchData() {
+      await axios.get('http://localhost:7777/category/list')
+      .then((res) => {
+        this.categories = res.data
+      })
+      .catch((err) => {
+        console.log('err: ' + err)
+      })
+
+       await axios.get('http://localhost:7777/product/list')
+      .then((res) => {
+        this.products = res.data
+        console.log(this.products)
+      })
+      .catch((err) => {
+        console.log('err: ' + err)
+      })
+    }
+  },
+  mounted() {
+    this.fetchData()
+  }
 }
 </script>
 

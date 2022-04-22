@@ -3,15 +3,18 @@ package com.example.demo.service.personalProject;
 import com.example.demo.controller.request.ProductDto;
 import com.example.demo.entity.personalProject.Category;
 import com.example.demo.entity.personalProject.Product;
+import com.example.demo.exceptions.ProductNotExistsException;
 import com.example.demo.repository.personalProject.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class ProductServiceImpl implements ProductService{
 
     @Autowired
@@ -21,22 +24,23 @@ public class ProductServiceImpl implements ProductService{
     public void createProduct(ProductDto productDto, Category category) {
         Product product = new Product();
         product.setDescription(productDto.getDescription());
-        product.setImageURl(productDto.getImageURl());
+        product.setImageURL(productDto.getImageURL());
         product.setName(productDto.getName());
         product.setCategory(category);
         product.setPrice(productDto.getPrice());
-
         productRepository.save(product);
     }
 
-    public ProductDto getProductDto (Product product) {
+    @Override
+    public ProductDto getProductDto(Product product) {
         ProductDto productDto = new ProductDto();
+
         productDto.setDescription(product.getDescription());
-        productDto.setImageURl(product.getImageURl());
+        productDto.setImageURL(product.getImageURL());
         productDto.setName(product.getName());
         productDto.setCategoryId(product.getCategory().getId());
         productDto.setPrice(product.getPrice());
-        product.setId(product.getId());
+        productDto.setId(product.getId());
 
         return productDto;
     }
@@ -63,10 +67,19 @@ public class ProductServiceImpl implements ProductService{
         Product product = optionalProduct.get();
 
         product.setDescription(productDto.getDescription());
-        product.setImageURl(productDto.getImageURl());
+        product.setImageURL(productDto.getImageURL());
         product.setName(productDto.getName());
         product.setPrice(productDto.getPrice());
 
         productRepository.save(product);
+    }
+
+    @Override
+    public Product findById(Integer productId) throws ProductNotExistsException {
+        Optional<Product> optionalProduct = productRepository.findById(productId);
+        if (optionalProduct.isEmpty()) {
+            throw new ProductNotExistsException("product id is invalid: " + productId);
+        }
+        return optionalProduct.get();
     }
 }

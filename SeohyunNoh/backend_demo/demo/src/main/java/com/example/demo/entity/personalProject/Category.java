@@ -1,6 +1,8 @@
 package com.example.demo.entity.personalProject;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -8,6 +10,8 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name="category")
 public class Category {
 
