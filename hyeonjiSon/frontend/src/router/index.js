@@ -11,6 +11,7 @@ import ProjectIntroducePage from '@/views/introduce/ProjectIntroducePage.vue'
 import RecycleGuideMainPage from '@/views/recycleGuide/RecycleGuideMainPage.vue'
 
 import LivingTipBoardList from '@/views/livingTip/LivingTipBoardList.vue'
+import LivingTipSearchList from '@/views/livingTip/LivingTipSearchList.vue'
 import TipRegisterPage from '@/views/livingTip/TipRegisterPage.vue'
 import TipReadPage from '@/views/livingTip/TipReadPage.vue'
 import TipModifyPage from '@/views/livingTip/TipModifyPage.vue'
@@ -76,6 +77,16 @@ const routes = [
     path: '/livingTipBoardList',
     name: 'livingTipBoardList',
     component: LivingTipBoardList
+  },
+  {
+    path: '/livingTipSearchList/:keyWord',
+    name: 'livingTipSearchList',
+    components: {
+      default: LivingTipSearchList
+    },
+    props: {
+      default: true
+    }
   },
   {
     path: '/tipRegisterPage',

@@ -25,9 +25,16 @@
             </v-col>
         </v-row>
 
-
          <v-row>
-            <v-col v-for="tipBoard in paginatedData" 
+            <v-col
+            class="search_input"
+            v-if="!searchList ||
+                (Array.isArray(searchList) && searchList.length === 0)"
+            >
+                검색 결과가 없습니다.
+            </v-col>
+
+            <v-col v-for="tipBoard in searchList" 
                      :key="tipBoard.boardNo" lg="3" sm="6">
                <v-card @click="tipRead(tipBoard.boardNo)"
                      style="margin:10px; width: 250px; height: 300px;">              
@@ -44,52 +51,23 @@
             </v-col>
          </v-row>
          
-         <v-row>
-            <v-col>
-            <div class="btn-cover">
-                <v-btn :disabled="pageNum === 0" @click="prevPage" class="page-btn">
-                이전
-                </v-btn>
-                <span class="page-count"
-                >{{ pageNum + 1 }} / {{ pageCount }} 페이지</span
-                >
-                <v-btn
-                :disabled="pageNum >= pageCount - 1"
-                @click="nextPage"
-                class="page-btn"
-                >
-                다음
-                </v-btn>
-            </div>
-            </v-col>
-         </v-row>
 
         </v-container>
     </div>
 </template>
 
 <script>
-import axios from 'axios';
+import axios from 'axios'
 
 export default {
-    name: 'TipBoardList',
+    name: 'TipSearchList',
     props: {
-        tipBoards: {
+        searchList: {
             type: Array
-        },
-        listArray: {
-            type: Array,
-            required: true,
-        },
-        pageSize: {
-            type: Number,
-            required: false,
-            default: 8,
         }
     },
     data() {
         return {
-            pageNum: 0,
             keyWord: ''
         }
     },
@@ -110,28 +88,8 @@ export default {
                 .catch(() => {
                 alert("검색 실패");
             });
-        },
-        nextPage() {
-            this.pageNum += 1;
-        },
-        prevPage() {
-            this.pageNum -= 1;
-        },
-    },
-    computed: {
-        pageCount() {
-            let listLeng = this.listArray.length,
-                listSize = this.pageSize,
-                page = Math.floor(listLeng / listSize);
-            if (listLeng % listSize > 0) page += 1;
-            return page;
-        },
-        paginatedData() {
-            const start = this.pageNum * this.pageSize,
-                end = start + this.pageSize;
-            return this.listArray.slice(start, end);
-        },
-    },
+        }
+    }
 }
 </script>
 

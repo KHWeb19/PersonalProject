@@ -5,21 +5,10 @@
       <h1> 로그인 후 이용 가능한 페이지 입니다. </h1>
    </v-container>
 <v-container v-if="this.$store.state.userInfo != null">
-         <v-row>
-               <v-text-field v-model="search" label="Search" append-icon="mdi-magnify" 
-            solo hide-details></v-text-field>
-            
-            <v-btn @click="register">
-            <v-icon>add</v-icon>
-            </v-btn>
-         </v-row>
-
    <br>
-
          <tip-board-list :tipBoards="tipBoards"
                           :list-array="pageArray"/>
    <br>
-
 </v-container>
 </div>
 </template>
@@ -36,7 +25,7 @@ export default {
    },
    data () {
       return {
-         search: '',
+         keyWord: '',
          pageArray: [],
 }
    },
@@ -47,10 +36,7 @@ export default {
         this.fetchTipBoardList()
     },
     methods: {
-         ...mapActions(['fetchTipBoardList', 'fetchTipBoard']),
-         register() {
-            this.$router.push({ name:'tipRegisterPage' })
-         }        
+         ...mapActions(['fetchTipBoardList', 'fetchTipBoard']),      
     },
     created() {
       axios

@@ -1,5 +1,8 @@
 package com.example.demo.controller;
 
+import com.example.demo.controller.request.MemberSearchRequest;
+import com.example.demo.controller.request.TipSearchRequest;
+import com.example.demo.entity.Member;
 import com.example.demo.entity.TipBoard;
 import com.example.demo.service.TipBoard.TipBoardService;
 import lombok.extern.slf4j.Slf4j;
@@ -36,6 +39,14 @@ public class TipBoardController {
     public List<TipBoard> getTipBoardList(){
         log.info("getTipBoardList()");
         return service.getTipBoardList();
+    }
+
+    @PostMapping("/search")
+    public List<TipBoard> searchTipBoard(@RequestBody TipSearchRequest tipSearchRequest){
+        log.info("search()" + tipSearchRequest);
+        String keyWord = tipSearchRequest.getKeyWord();
+        return service.searchList(keyWord);
+
     }
 
     @GetMapping("/{boardNo}")

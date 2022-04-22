@@ -1,5 +1,6 @@
 package com.example.demo.service.TipBoard;
 
+import com.example.demo.entity.Member;
 import com.example.demo.entity.TipBoard;
 import com.example.demo.repository.TipBoardRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +33,13 @@ public class TipBoardServiceImpl implements TipBoardService {
     public List<TipBoard> getTipBoardList() {
         log.info("getTipBoardList ServiceIMPL");
         return repository.findAll();
+    }
+
+    @Override
+    public List<TipBoard> searchList (String keyWord) {
+        List<TipBoard> searchResults = repository.findByWriterContaining(keyWord);
+
+        return searchResults;
     }
 
     @Override

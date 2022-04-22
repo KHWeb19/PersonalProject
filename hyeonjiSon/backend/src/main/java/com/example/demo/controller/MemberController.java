@@ -78,7 +78,6 @@ public class MemberController {
 
  */
 
-
     @PostMapping("/search")
     public List<Member> search(@RequestBody MemberSearchRequest memberSearchRequest){
         log.info("search()" + memberSearchRequest);
