@@ -3,6 +3,7 @@ package com.example.demo.service.presonalProject;
 import com.example.demo.controller.request.MemberDto;
 import com.example.demo.entity.personalProject.Member;
 
+import java.lang.reflect.Member;
 import java.util.Optional;
 
 public interface MemberService {
