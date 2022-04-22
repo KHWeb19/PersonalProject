@@ -13,32 +13,29 @@
                     </div>
                     <div>
                       <div
-                        style="
-                          position: absolute;
-                          left: 700px;
-                          width: 250px;
-                          height: 250px;
-                        "
+                        style="width: 900px; margin-bottom: 15px; display: flex"
                       >
-                        <div>대표 이미지</div>
-
-                        <input
-                          placeholder="대표"
-                          type="file"
-                          id="files"
-                          ref="files"
-                          multiple
-                          v-on:change="handlerFileUpload()"
-                          class="profile_img_upload"
-                        />
-
-                        <v-img
-                          :src="image"
-                          class="preview"
-                          style="max-width: 250px; max-height: 250px"
-                        />
+                        <h2 class="mb-5 mr-5">대표 이미지 등록</h2>
+                        <div>
+                          <input
+                            placeholder="대표"
+                            type="file"
+                            id="files"
+                            ref="files"
+                            multiple
+                            v-on:change="handlerFileUpload()"
+                          />
+                        </div>
                       </div>
 
+                      <div>
+                        <div>
+                          <v-img :src="image" class="preview" />
+                        </div>
+                        <div v-if="image == ''" class="previewText">
+                          이미지 미리보기 <br />(1465 X 695 권장)
+                        </div>
+                      </div>
                       <div>
                         <tr>
                           <td>
@@ -335,4 +332,22 @@ export default {
 </script>
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400&display=swap");
+
+.preview {
+  max-width: 250px;
+  max-height: 125px;
+  width: 250px;
+  height: 125px;
+  position: absolute;
+  left: 700px;
+  top: 95px;
+  border: 1px dotted black;
+  background-color: lightgray;
+}
+.previewText {
+  position: absolute;
+  right: 125px;
+  top: 135px;
+  text-align: center;
+}
 </style>
