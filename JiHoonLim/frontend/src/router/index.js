@@ -14,6 +14,7 @@ import FoodDetailPage from '@/views/foodBoard/FoodDetailPage.vue'
 import FoodModifyPage from '@/views/foodBoard/FoodModifyPage.vue'
 import BestFoodListPage from '@/views/foodBoard/BestFoodListPage.vue'
 import FoodSearchPage from '@/views/foodBoard/FoodSearchPage.vue'
+import MyCartFoodPage from '@/views/member/MyCartFoodPage.vue'
 
 import test from '@/views/test.vue'
 Vue.use(VueRouter)
@@ -99,6 +100,11 @@ const routes = [
     props:{
       default: true
     }
+  },
+  {
+    path: '/myCartFood',
+    name: 'MyCartFoodPage',
+    component: MyCartFoodPage
   },
 ]
 

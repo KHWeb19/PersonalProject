@@ -7,6 +7,6 @@ export default {
 
     bestFoodBoards:[],
     foodBoardComments:[],
-    
+    myCartFoods:[],
   
 }

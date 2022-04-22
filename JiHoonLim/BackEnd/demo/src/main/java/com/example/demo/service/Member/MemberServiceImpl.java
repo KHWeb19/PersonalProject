@@ -267,5 +267,10 @@ public class MemberServiceImpl implements MemberService {
 
     }
 
+    @Override
+    public List<MemberCart> myCartList() {
+        return memberCartRepository.findAll(Sort.by(Sort.Direction.DESC,"boardNo"));
+    }
+
 
 }

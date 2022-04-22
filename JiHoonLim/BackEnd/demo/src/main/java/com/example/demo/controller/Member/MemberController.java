@@ -154,6 +154,8 @@ public class MemberController {
         service.deleteMember(memberNo);
     }
 
+
+
     @PostMapping("/myCart/register/{memberNo}")
     public boolean addMyCart(@PathVariable("memberNo") Long memberNo, @Validated @RequestBody MemberCartRequest memberCartRequest){
         log.info("addCart" +memberCartRequest);
@@ -161,5 +163,12 @@ public class MemberController {
         memberCartRequest.setMemberNo(memberNo);
 
         return service.addMyFood(memberCartRequest);
+    }
+
+    @GetMapping("/myCart/list")
+    public List<MemberCart> memberCartList(){
+        log.info("memberCartList()");
+
+        return service.myCartList();
     }
 }

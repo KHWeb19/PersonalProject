@@ -125,7 +125,7 @@ export default {
         { text: "레시피", route: "/foodList" },
       ],
       items: [
-        { title: "내 보관함", link: "/" },
+        { title: "내 보관함", link: "/myCartFood" },
         { title: "회원 정보 수정", link: "/memberInfo" },
       ],
       isLogin: false,
