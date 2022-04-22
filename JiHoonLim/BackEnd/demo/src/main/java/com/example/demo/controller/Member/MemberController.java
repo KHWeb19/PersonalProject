@@ -1,5 +1,6 @@
 package com.example.demo.controller.Member;
 
+import com.example.demo.controller.Member.request.MemberCartRequest;
 import com.example.demo.controller.Member.request.MemberRequest;
 import com.example.demo.entity.FoodBoard.FoodBoard;
 import com.example.demo.entity.Member.Member;
@@ -154,11 +155,11 @@ public class MemberController {
     }
 
     @PostMapping("/myCart/register/{memberNo}")
-    public void addMyCart(@PathVariable("memberNo") Long memberNo, @Validated @RequestBody FoodBoard foodBoard){
-        log.info("" +foodBoard);
+    public boolean addMyCart(@PathVariable("memberNo") Long memberNo, @Validated @RequestBody MemberCartRequest memberCartRequest){
+        log.info("addCart" +memberCartRequest);
 
-        Long boardNo = foodBoard.getBoardNo();
+        memberCartRequest.setMemberNo(memberNo);
 
-        service.addMyFood(memberNo,boardNo);
+        return service.addMyFood(memberCartRequest);
     }
 }

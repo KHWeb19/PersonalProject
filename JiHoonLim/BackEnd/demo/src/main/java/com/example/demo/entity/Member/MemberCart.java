@@ -59,13 +59,19 @@ public class MemberCart {
     @Column
     private String filepath;
 
-    @CreatedDate
-    private String regDate = LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT));
+    public MemberCart(Long cartNo, Long memberNo, Long boardNo, String name, String writer, String des, String kind, String mat, String way, String filename, String filepath){
+        this.cartNo = cartNo;
+        this.memberNo = memberNo;
+        this.boardNo = boardNo;
+        this.name = name;
+        this.writer = writer;
+        this.des = des;
+        this.kind = kind;
+        this.mat = mat;
+        this.way = way;
+        this.filename = filename;
+        this.filepath = filepath;
+    }
 
 
-    @Formula("(SELECT count(1) FROM food_board_comment c WHERE c.food_board_board_no = board_no)")
-    private int commentCnt;
-
-    @Formula("(SELECT count(1) FROM food_board_like c WHERE c.food_board_board_no = board_no)")
-    private int likeCnt;
 }

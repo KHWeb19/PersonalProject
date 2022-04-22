@@ -1,5 +1,6 @@
 package com.example.demo.service.Member;
 
+import com.example.demo.controller.Member.request.MemberCartRequest;
 import com.example.demo.controller.Member.request.MemberRequest;
 import com.example.demo.entity.Member.Member;
 import com.example.demo.entity.Member.MemberCart;
@@ -22,5 +23,5 @@ public interface MemberService {
     public MemberRequest modifyEmail(Long memberNo, String email, MemberRequest memberRequest);
     public void deleteMember(Long memberNo);
 
-    public void addMyFood(Long memberNo, Long boardNo);
+    public boolean addMyFood(MemberCartRequest memberCartRequest);
 }

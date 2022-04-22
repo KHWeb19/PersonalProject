@@ -245,7 +245,7 @@ export default {
       comment: "",
       userInfo: "",
       userId: "",
-      boardNo: "",
+      boardNo: this.foodBoard.boardNo,
 
       name: this.foodBoard.name,
       des: this.foodBoard.des,
@@ -259,9 +259,9 @@ export default {
       filename: this.foodBoard.filename,
     };
   },
+
   created() {
     this.userInfo = this.$store.state.userInfo;
-    this.boardNo = this.foodBoard.boardNo;
 
     if (this.userInfo != null) {
       this.nickName = this.userInfo.nickName;
@@ -316,18 +316,25 @@ export default {
     },
     myCart() {
       if (this.userInfo != null) {
-        const { boardNo } = this;
+        const { foodBoard } = this;
         axios
           .post(
             `http://localhost:7777/member/myCart/register/${this.userInfo.memberNo}`,
-            { boardNo }
+            foodBoard
           )
-          .then(() => {
-            alert("장바구니 등록 성공");
+          .then((res) => {
+            if (res.data) {
+              alert("보관함 등록 성공");
+              this.$router.go();
+            } else {
+              alert("이미 등록하셨습니다.");
+            }
           })
           .catch(() => {
             alert("등록 실패");
           });
+      } else {
+        alert("로그인 후 이용해주세요.");
       }
     },
   },
