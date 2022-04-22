@@ -11,7 +11,10 @@
     FETCH_STUDY_COMMENTS_LIST,
     FETCH_PROJECT_LIST,
     FETCH_PROJECT,
-    FETCH_PROJECT_COMMENTS_LIST
+    FETCH_PROJECT_COMMENTS_LIST,
+    FETCH_MARKET_LIST,
+    FETCH_MARKET,
+    FETCH_MARKET_COMMENTS_LIST,
  } from './mutation-types'
 
 import axios from 'axios'
@@ -95,9 +98,27 @@ export default {
             })
     },
     fetchProjectCommentsList({ commit }, projectNo) {
-        return axios.get(`http://localhost:7777/board/project/${projectNo}/comment/list`)
+        return axios.get(`http://localhost:7777/board/review/${projectNo}/comment/list`)
             .then((res) => {
                 commit(FETCH_PROJECT_COMMENTS_LIST, res.data)
+            })
+    },
+    fetchMarketList({ commit }) {
+        return axios.get('http://localhost:7777/board/market/list')
+            .then((res) => {
+                commit(FETCH_MARKET_LIST, res.data)
+            })
+    },
+    fetchMarket({ commit }, boardNo) {
+        return axios.get(`http://localhost:7777/board/market/${boardNo}`)
+            .then((res) => {
+                commit(FETCH_MARKET, res.data)
+            })
+    },
+    fetchMarketCommentsList({ commit }, boardNo) {
+        return axios.get(`http://localhost:7777/board/market/${boardNo}/comment/list`)
+            .then((res) => {
+                commit(FETCH_MARKET_COMMENTS_LIST, res.data)
             })
     }
 }

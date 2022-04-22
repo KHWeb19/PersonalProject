@@ -12,6 +12,9 @@
     FETCH_PROJECT_LIST,
     FETCH_PROJECT,
     FETCH_PROJECT_COMMENTS_LIST,
+    FETCH_MARKET_LIST,
+    FETCH_MARKET,
+    FETCH_MARKET_COMMENTS_LIST,
     
  } from './mutation-types'
 
@@ -55,6 +58,15 @@ export default {
     },
     [FETCH_PROJECT_COMMENTS_LIST](state, projectComments) {
         state.projectComments = projectComments
+    },
+    [FETCH_MARKET_LIST](state, markets) {
+        state.markets = markets
+    },
+    [FETCH_MARKET](state, market) {
+        state.market = market
+    },
+    [FETCH_MARKET_COMMENTS_LIST](state, marketComments) {
+        state.marketComments = marketComments
     }
 
 }

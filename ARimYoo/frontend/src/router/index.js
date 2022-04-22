@@ -32,6 +32,12 @@ import ProjectReadPage from '../views/board/project/ProjectReadPage.vue'
 import ProjectModifyPage from '../views/board/project/ProjectModifyPage.vue'
 import ProjectSearchPage from '../views/board/project/ProjectSearchPage.vue'
 
+import MarketPage from '../views/board/market/MarketPage.vue'
+import MarketWritePage from '../views/board/market/MarketWritePage.vue'
+import MarketReadPage from '../views/board/market/MarketReadPage.vue'
+import MarketModifyPage from '../views/board/market/MarketModifyPage.vue'
+import MarketSearchPage from '../views/board/market/MarketSearchPage.vue'
+
 Vue.use(VueRouter)
 
 const requireLogin = () => (to, from, next) => {
@@ -255,6 +261,52 @@ const routes = [
         name: 'ProjectSearchPage',
         components: {
             default: ProjectSearchPage
+        },
+        props: {
+            default: true
+        },
+        beforeEnter: requireLogin()
+    },
+    {
+        path: '/market',
+        name: 'MarketPage',
+        component: MarketPage,
+        beforeEnter: requireLogin()
+    },
+    {
+        path: '/market/write',
+        name: 'MarketWritePage',
+        component: MarketWritePage,
+        beforeEnter: requireLogin()
+    },
+    {
+        path: '/market/:boardNo',
+        name: 'MarketReadPage',
+        components: {
+            default:
+                MarketReadPage
+        },
+        props: {
+            default: true
+        },
+        beforeEnter: requireLogin()
+    },
+    {
+        path: '/market/modify/:boardNo',
+        name: 'MarketModifyPage',
+        components: {
+            default: MarketModifyPage
+        },
+        props: {
+            default: true
+        },
+        beforeEnter: requireLogin()
+    },
+    {
+        path: '/market/search',
+        name: 'MarketSearchPage',
+        components: {
+            default: MarketSearchPage
         },
         props: {
             default: true
