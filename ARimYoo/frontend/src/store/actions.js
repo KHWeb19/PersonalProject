@@ -8,7 +8,10 @@
     FETCH_REVIEW_COMMENTS_LIST,
     FETCH_STUDY_LIST,
     FETCH_STUDY,
-    FETCH_STUDY_COMMENTS_LIST
+    FETCH_STUDY_COMMENTS_LIST,
+    FETCH_PROJECT_LIST,
+    FETCH_PROJECT,
+    FETCH_PROJECT_COMMENTS_LIST
  } from './mutation-types'
 
 import axios from 'axios'
@@ -78,5 +81,23 @@ export default {
             .then((res) => {
             commit(FETCH_STUDY_COMMENTS_LIST, res.data)
         })
+    },
+    fetchProjectList({ commit }) {
+        return axios.get('http://localhost:7777/board/project/list')
+            .then((res) => {
+                commit(FETCH_PROJECT_LIST, res.data)
+            })
+    },
+    fetchProject({ commit }, projectNo) {
+        return axios.get(`http://localhost:7777/board/project/${projectNo}`)
+            .then((res) => {
+                commit(FETCH_PROJECT, res.data)
+            })
+    },
+    fetchProjectCommentsList({ commit }, projectNo) {
+        return axios.get(`http://localhost:7777/board/project/${projectNo}/comment/list`)
+            .then((res) => {
+                commit(FETCH_PROJECT_COMMENTS_LIST, res.data)
+            })
     }
 }

@@ -9,6 +9,9 @@
     FETCH_STUDY_LIST,
     FETCH_STUDY,
     FETCH_STUDY_COMMENTS_LIST,
+    FETCH_PROJECT_LIST,
+    FETCH_PROJECT,
+    FETCH_PROJECT_COMMENTS_LIST,
     
  } from './mutation-types'
 
@@ -43,6 +46,15 @@ export default {
     },
     [FETCH_STUDY_COMMENTS_LIST](state, studyComments) {
         state.studyComments = studyComments
+    },
+    [FETCH_PROJECT_LIST](state, projects) {
+        state.projects = projects
+    },
+    [FETCH_PROJECT](state, project) {
+        state.project = project
+    },
+    [FETCH_PROJECT_COMMENTS_LIST](state, projectComments) {
+        state.projectComments = projectComments
     }
 
 }

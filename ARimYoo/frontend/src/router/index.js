@@ -28,6 +28,9 @@ import StudySearchPage from '../views/board/study/StudySearchPage.vue'
 
 import ProjectPage from '../views/board/project/ProjectPage.vue'
 import ProjectWritePage from '../views/board/project/ProjectWritePage.vue'
+import ProjectReadPage from '../views/board/project/ProjectReadPage.vue'
+import ProjectModifyPage from '../views/board/project/ProjectModifyPage.vue'
+import ProjectSearchPage from '../views/board/project/ProjectSearchPage.vue'
 
 Vue.use(VueRouter)
 
@@ -222,6 +225,40 @@ const routes = [
         path: '/project/write',
         name: 'ProjectWritePage',
         component: ProjectWritePage,
+        beforeEnter: requireLogin()
+    },
+    {
+        path: '/project/:projectNo',
+        name: 'ProjectReadPage',
+        components: {
+            default:
+                ProjectReadPage
+        },
+        props: {
+            default: true
+        },
+        beforeEnter: requireLogin()
+    },
+    {
+        path: '/project/modify/:projectNo',
+        name: 'ProjectModifyPage',
+        components: {
+            default: ProjectModifyPage
+        },
+        props: {
+            default: true
+        },
+        beforeEnter: requireLogin()
+    },
+    {
+        path: '/project/search',
+        name: 'ProjectSearchPage',
+        components: {
+            default: ProjectSearchPage
+        },
+        props: {
+            default: true
+        },
         beforeEnter: requireLogin()
     },
 ]

@@ -12,6 +12,10 @@ export default {
     study: null,
     studyComments: [],
     
+    projects: [],
+    project: null,
+    projectComments: [],
+    
     member: null,
     
     token: localStorage.getItem('token'),
