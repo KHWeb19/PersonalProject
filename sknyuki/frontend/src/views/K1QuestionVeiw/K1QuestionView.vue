@@ -2,43 +2,54 @@
     <v-container>
         <header-view></header-view>
         <br>
-        <drop-down></drop-down>
+        
          <div id="board" align=center>
            
           <h3 style="padding:30px 0px 20px 0px; font-weight:bold">질문 게시판</h3>
           
           <div class="app">
-        <question-board-list :BrandCheckboards="BrandCheckboards"/>
+        <question-board-list v-if="isLogin" :QuestionBoards="QuestionBoards"/>
+       
+        
+        <v-snackbar v-else v-model="login" :timeout="timeout" color="secondary" outlined
+        bottom rounded="xl">
+      <p>로그인 해주세요!!</p>
+      <login-page></login-page>
+    </v-snackbar>
           </div>
          </div>
-        
-        
-
 
     </v-container>
 </template>
 <script>
 import HeaderView from '@/components/home/headerView.vue'
-import DropDown from '@/components/KategoriePage1/DropDown.vue'
 import QuestionBoardList from '@/components/QuestionBoard/QuestionBoardList.vue'
+import { mapState, mapActions } from 'vuex'
+import LoginPage from '@/views/member/LoginPage.vue'
 
 export default {
     name:'K1QuestionView',
     components:{ 
     HeaderView,
-    DropDown,
     QuestionBoardList,
+    LoginPage,
         
    },
-/* computed: {
-        ...mapState(['BrandCheckboards'])
+     data() {
+    return {
+      login: true,
+      timeout: 2000,
+    }
+    },
+ computed: {
+        ...mapState(['QuestionBoards','isLogin'])
     },
     mounted () {
-        this.fetchBoardList()
+        this.fetchQuestionBoardList()
     },
     methods: {
-        ...mapActions(['fetchBoardList'])
-    }*/
+        ...mapActions(['fetchQuestionBoardList'])
+    }
     }
 </script>
 

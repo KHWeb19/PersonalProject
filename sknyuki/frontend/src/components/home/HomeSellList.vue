@@ -3,7 +3,7 @@
      <p>proto type</p>
     <v-row align="center" justify="center">
         <!--name:homeview변경예정-->
-    <router-link style="text-decoration: none;" :to="{name:'homeView'}">
+    <router-link style="text-decoration: none;" :to="{name:'K2ProductView'}">
     <v-btn class="blue lighten-5">모든 판매 상품 보러가기</v-btn>
     </router-link></v-row>
     <br>

@@ -2,12 +2,8 @@
 
 <v-container>
     <div>
-        <router-link style="text-decoration: none;" :to="{ name: 'homeView' }">
-        &nbsp;회원가입/
-    </router-link>
-    <router-link style="text-decoration: none;" :to="{ name: 'homeView' }">
-        로그인
-    </router-link>
+   <login-page v-if="!isLogin"></login-page>
+   <login-info v-else></login-info>
     
 
     </div>
@@ -45,22 +41,38 @@
 
 
 <script>
-//import axios from 'axios'
+
+import LoginInfo from '@/components/member/LoginInfo'
+import LoginPage from '@/views/member/LoginPage.vue'
+
+import { mapState } from 'vuex'
+
+
 export default {
      name: 'HeaderView',
+     components:{
+       LoginPage,
+       LoginInfo,
+          
+     },
   data () {
     return {
+      search: '',
       tab: null,
       tabs: [ 
           { name: "Home", route: `/` }, 
           { name: "명품 판별", route: `/K1CheckBrandView` }, 
           { name: "질문 게시판", route: `/K1QuestionView` }, 
-          { name: "판매 중", route: `/` }, 
-          { name: "판매 완료", route: `/` }, 
-          { name: "마이 페이지", route: `/` }, 
+          { name: "판매 중", route: `/K2ProductView` }, 
+          { name: "판매 완료", route: `/K2ProductView` }, 
+          { name: "마이 페이지", route: `/MyPage` }, 
+
         ]
       }
-  }
+  },
+  computed: {
+      ...mapState([ 'isLogin' ])
+    }
 }
 </script>
 <style>

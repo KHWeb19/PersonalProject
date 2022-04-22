@@ -9,7 +9,7 @@
         <br>
         <home-brand-check-list></home-brand-check-list>
         <br>
-        <home-question-board :QuestionBoards="QuestionBoards"/>
+        <home-question-board/>
   </div>
 </v-container>
 </template>

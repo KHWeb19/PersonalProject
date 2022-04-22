@@ -64,10 +64,10 @@ function: {
                          })
         }
     },
-      mounted () {
-        console.log(this.QuestionBoards.regDate)
-        console.log(this.QuestionBoards.boardNo)
-  }
+      //mounted () {
+     //   console.log(this.QuestionBoards.regDate)
+       // console.log(this.QuestionBoards.boardNo)
+ //}
 }
 </script>
 <style scoped>
