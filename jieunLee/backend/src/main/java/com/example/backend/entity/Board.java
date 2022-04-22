@@ -1,13 +1,10 @@
 package com.example.backend.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
@@ -41,14 +38,19 @@ public class Board {
     @UpdateTimestamp
     private Date updDate;
 
-    @JsonBackReference
+    @JsonBackReference(value="member-board")
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name= "member_no")
     private Member member;
 
+    @JsonManagedReference(value="board-comment")
     @OneToMany(mappedBy = "board", fetch = FetchType.EAGER)
     private List<Comment> comments = new ArrayList<>();
 
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @JsonManagedReference(value="board-likes")
     @OneToMany(mappedBy = "board", fetch = FetchType.EAGER)
-    private Set<Likes> likeList = new HashSet<>();
+    private Set<Likes> likes = new HashSet<>();
 }
+

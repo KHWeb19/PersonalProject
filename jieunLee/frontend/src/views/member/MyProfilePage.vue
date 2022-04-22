@@ -4,7 +4,8 @@
         <menu-bar/>
         <hr style="border: 0; height: 1px; background: #d8d8d8; "/>
       </div>
-      <my-profile v-if="member" :member="member"/>
+
+      <my-profile v-if="member" :member="member" :myBoards="myBoards"/>
       <p v-else>로딩중......</p>
       <my-board-list :myBoards="myBoards" @click="onDelete"/>
   </div>
@@ -16,6 +17,7 @@ import MenuBar from '@/components/MenuBar.vue'
 import { mapActions, mapState } from 'vuex'
 import MyBoardList from '@/components/board/MyBoardList.vue'
 import axios from 'axios'
+
 
 export default {
   name: 'MyProfilePage',
@@ -29,11 +31,13 @@ export default {
     MyProfile,
     MenuBar,
     MyBoardList,
+
   },
 
   computed: {
     ...mapState(['member']),
     ...mapState(['myBoards']),
+
     
   },
   created() {
@@ -47,13 +51,16 @@ export default {
           alert('게시판 정보 요청 실패')
           this.$router.push()
       })
+
   },
   mounted () {
     this.fetchBoardMyList(this.memberNo)
+
   },
   methods: {
       ...mapActions(['fetchMember']),
       ...mapActions(['fetchBoardMyList']),
+
       onDelete() {
             const {boardNo} = this.board
             axios.delete(`http://localhost:7777/board/${boardNo}`)

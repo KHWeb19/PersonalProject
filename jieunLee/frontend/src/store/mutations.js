@@ -7,7 +7,8 @@ import {
     FETCH_BOARD_MY_LIST,
     FETCH_COMMENT,
     FETCH_COMMENT_LIST,
-    FETCH_TWO_COMMENT_LIST
+    FETCH_TWO_COMMENT_LIST,
+    FETCH_LOGIN_LIKES
 } from './mutation-types'
 
 export default {
@@ -37,5 +38,8 @@ export default {
     },
     [FETCH_TWO_COMMENT_LIST] (state, twoComments) {
         state.twoComments = twoComments
+    },
+    [FETCH_LOGIN_LIKES] (state, loginLikes) {
+        state.loginLikes = loginLikes
     },
 }

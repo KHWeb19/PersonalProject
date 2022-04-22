@@ -21,7 +21,7 @@ public class Comment {
 
     @Id
     @Column(name = "comment_no")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long commentNo;
 
     @Column(length = 32, nullable = false)
@@ -36,7 +36,7 @@ public class Comment {
     @UpdateTimestamp
     private Date updDate;
 
-    @JsonBackReference
+    @JsonBackReference(value="board-comment")
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name= "board_no")
     private Board board;

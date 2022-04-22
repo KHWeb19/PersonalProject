@@ -2,6 +2,7 @@ package com.example.backend.service;
 
 import com.example.backend.controller.BoardRequest;
 import com.example.backend.controller.CommentRequest;
+import com.example.backend.controller.MemberRequest;
 import com.example.backend.entity.Board;
 import com.example.backend.entity.Comment;
 import com.example.backend.entity.Member;
@@ -25,9 +26,8 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public void register(Integer memberNo, Board board) {
-
-        Optional<Member> maybeBoard = memberRepository.findById(Long.valueOf(memberNo));
-        board.setMember(maybeBoard.get());
+        Optional<Member> maybeMember = memberRepository.findById(Long.valueOf(memberNo));
+        board.setMember(maybeMember.get());
         repository.save(board);
     }
 
@@ -36,14 +36,8 @@ public class BoardServiceImpl implements BoardService {
         return repository.findAll(Sort.by(Sort.Direction.DESC, "boardNo"));
     }
 
-//    @Override
-//    public List<Board> memberNoBoardList(Integer memberNo) {
-//        List<Board> myBoard = repository.selectMyBoard(Long.valueOf(memberNo));
-//        return myBoard;
-//    }
-
     @Override
-    public List<Board> memberBoardList(Integer memberNo) {
+    public List<Board> memberBoardList(Long memberNo) {
         List<Board> boards = repository.findAllByMemberNo(Long.valueOf(memberNo));
         return boards;
     }
@@ -60,7 +54,9 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public void modify(Board board) {
+    public void modify(Board board, Integer memberNo) {
+        Optional<Member> maybeMember = memberRepository.findById(Long.valueOf(memberNo));
+        board.setMember(maybeMember.get());
         repository.save(board);
     }
 

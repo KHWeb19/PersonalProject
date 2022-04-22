@@ -18,7 +18,7 @@ import java.util.List;
 public class Member {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="member_No")
     private Long memberNo;
 
@@ -46,7 +46,7 @@ public class Member {
     @UpdateTimestamp
     private Date updDate;
 
-    @JsonManagedReference
+    @JsonManagedReference(value="member-board")
     @OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
     private List<Board> boards = new ArrayList<>();
 

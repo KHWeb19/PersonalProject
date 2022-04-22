@@ -37,19 +37,86 @@
                             <td colspan="2">
                                 <v-img width="672px" :src="require(`@/assets/mImage/${board.boardImage}`)"/>
                             </td>
-                        </tr>
-                        <tr align="left">
-                            <td colspan="2" style="padding: 6px 9px">
-                                <v-btn icon @click="onLikes(board.boardNo, loginInfo.memberNo)">
-                                    <v-icon color="black">
-                                        mdi-heart-outline
+                        </tr >
+                        <!-- <tr align="left"  >
+                            <div v-for="likes in loginLikes" :key="likes.likedNo"  >
+                            <td style="padding: 6px 9px" colspan="2" v-if="likes.boardCheck==board.boardNo" >
+                                <v-btn icon @click="onLikes(board.boardNo)" >
+                                    <v-icon  color="black">
+                                        mdi-cards-heart
                                     </v-icon>
                                 </v-btn>
-                                <v-btn icon>
+                                <v-btn icon @click="onLikes(board.boardNo)">
                                     <v-icon color="black">
                                         mdi-chat-outline
                                     </v-icon>
                                 </v-btn>
+                            </td>
+                            </div>
+                            <div > 
+                            <td style="padding: 6px 9px" colspan="2">
+                                <v-btn icon @click="onLikes(board.boardNo)" >
+                                    <v-icon  color="black">
+                                        mdi-cards-heart-outline
+                                    </v-icon>
+                                </v-btn>
+                                <v-btn icon @click="onLikes(board.boardNo)">
+                                    <v-icon color="black">
+                                        mdi-chat-outline
+                                    </v-icon>
+                                </v-btn>
+                            </td>
+                            </div>
+                        </tr> -->
+                        <tr align="left"  >
+                            <div v-for="likes in loginLikes" :key="likes.likedNo"  >
+                            <td style="padding: 6px 9px" colspan="2" v-if="likes.boardCheck==board.boardNo" >
+                                <v-btn icon @click="onLikes(board.boardNo)" >
+                                    <v-icon  color="black">
+                                        mdi-cards-heart
+                                    </v-icon>
+                                </v-btn>
+                                <v-btn icon @click="onLikes(board.boardNo)">
+                                    <v-icon color="black">
+                                        mdi-chat-outline
+                                    </v-icon>
+                                </v-btn>
+                            </td>
+                            </div>
+                            <div>
+                            <!-- <div v-for="likes in loginLikes" :key="likes.likedNo"  > -->
+                            <!-- <td style="padding: 6px 9px" colspan="2" v-if="likes.boardCheck!=board.boardNo">-->
+                            <td style="padding: 6px 9px" colspan="2">
+                                <v-btn icon @click="onLikes(board.boardNo)" >
+                                    <v-icon  color="black">
+                                        mdi-cards-heart-outline
+                                    </v-icon>
+                                </v-btn>
+                                <v-btn icon @click="onLikes(board.boardNo)">
+                                    <v-icon color="black">
+                                        mdi-chat-outline
+                                    </v-icon>
+                                </v-btn>
+                            </td>
+                            </div>
+                        </tr>
+                        <!-- <tr align="left"  >
+                            <td style="padding: 6px 9px" colspan="2">
+                                <v-btn icon @click="onLikes(board.boardNo)" >
+                                    <v-icon  color="black">
+                                        mdi-cards-heart-outline
+                                    </v-icon>
+                                </v-btn>
+                                <v-btn icon @click="onLikes(board.boardNo)">
+                                    <v-icon color="black">
+                                        mdi-chat-outline
+                                    </v-icon>
+                                </v-btn>
+                            </td>
+                        </tr> -->
+                        <tr v-if="board.likes.length" align="left">
+                            <td colspan="2" style="padding: 0px 0px 8px 16px">
+                                <div id="likesCnt">{{ board.likes.length }}명이 좋아합니다</div>
                             </td>
                         </tr>
                         <tr align="left">
@@ -62,12 +129,12 @@
                                 </div>
                             </td>
                         </tr>
-                        <tr>
+                        <tr v-if="board.comments.length"> 
                             <td style="padding-left: 16px;">
                                 <router-link style="text-decoration: none; color: grey" :to="{
                                     name: 'BoardReadPage',
                                     params: {boardNo: board.boardNo.toString()}}">
-                                    댓글 모두 보기
+                                    댓글 {{ board.comments.length}}개 모두 보기
                                 </router-link>
                             </td>
                         </tr>
@@ -91,14 +158,14 @@
                             </td>
                         </tr>
                         <tr align="left">
-                                <td style="padding: 14px 0px 14px 16px;">
-                                    <textarea type="text" style="width: 100%; height: 18px"  placeholder="댓글 달기..." v-model="content"/>
-                                </td>
-                                <td align="right"> 
-                                    <v-btn text color="primary" type="submit">
-                                        게시
-                                    </v-btn>
-                                </td>
+                            <td style="padding: 14px 0px 14px 16px;">
+                                <textarea type="text" style="width: 100%; height: 18px"  placeholder="댓글 달기..." v-model="content"/>
+                            </td>
+                            <td align="right"> 
+                                <v-btn text color="primary" type="submit">
+                                    게시
+                                </v-btn>
+                            </td>
                         </tr>
                         
                     </table>
@@ -109,54 +176,51 @@
 </template>
 
 <script>
-// import CommentList from '@/components/comment/CommentList'
-// import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions } from 'vuex'
+import axios from 'axios'
 export default {
     name: 'BoardList',
     props: {
         boards: {
             type: Array
         },
-        // twoComments: {
+        // loginLikes: {
         //     type: Array
         // }
     },
-    // components: {
-    //     CommentList
-    // },
     data() {
         return {
             loginInfo: JSON.parse(localStorage.getItem('loginInfo')),
             content: '',
         }
     },
-    // computed: {
-    //     ...mapState(['twoComments']),
-    // },
-    // created() {
-    //     this.fetchTwoCommentList(this.boardNo)
-    //         .catch(()=>{
-    //           console.log(this)
-    //             alert('댓글 요청 실패')
-    //             this.$router.push()
-    //         })
-    // },
-    //     mounted () {
-    //     this.fetchTwoCommentList(this.boardNo)
-    // },
+    computed: {
+        ...mapState(['loginLikes']),
+    },
+    mounted () {
+        this.fetchLoginLikes(this.loginInfo.memberNo)
+    },
     methods: {
-        // ...mapActions(['fetchTwoCommentList']),
+        ...mapActions(['fetchLoginLikes']),
         onDelete(boardNo) {
-            // console.log(boardNo)
+            console.log(boardNo)
             this.$emit('click', {boardNo})
         },
         onSubmit(boardNo) {
             const { content } = this
             this.$emit('submit', { boardNo, content })
         },
-        onLikes(boardNo, memberNo) {
-            // console.log(boardNo)
-            this.$emit('click', {boardNo, memberNo})
+        // onLikes(boardNo) {
+        //     this.$emit('click', {boardNo, memberNo: this.loginInfo.memberNo})
+        // },
+        onLikes(boardNo) {
+            axios.post(`http://localhost:7777/likes/${boardNo}/${this.loginInfo.memberNo}`, {boardNo, boardCheck: boardNo, memberNo: this.loginInfo.memberNo})
+                .then(() => {
+                    history.go(0);
+                })
+                .catch(() => {
+                    alert('문제 발생!')
+                })
         },
     }
 }

@@ -27,17 +27,24 @@ export default {
             require: true
         }
     },
+    data () {
+        return {
+                        loginInfo: JSON.parse(localStorage.getItem('loginInfo')),
+        }
+    },
     computed: {
         ...mapState(['board'])
     },
     methods: {
         ...mapActions(['fetchBoard']),
         onSubmit(payload) {
-            const {boardImage, content} = payload
-            axios.put(`http://localhost:7777/board/${this.boardNo}`, 
-            {boardImage, writer: this.board.writer, memberNo: this.board.memberNo, content, regDate: this.board.regDate})
+            const {memberNo, boardImage, content} = payload
+            console.log(memberNo)
+            axios.put(`http://localhost:7777/board/${memberNo}/${this.boardNo}`, 
+            { boardImage, writer: this.board.writer, content, regDate: this.board.regDate})
                 .then(res => {
                     alert('게시물 수정 성공')
+                    console.log(this.board)
                     this.$router.push({
                         name: 'BoardReadPage',
                         params: {boardNo: res.data.boardNo.toString()}

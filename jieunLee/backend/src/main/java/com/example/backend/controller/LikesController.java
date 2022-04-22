@@ -1,11 +1,15 @@
 package com.example.backend.controller;
 
+import com.example.backend.entity.Board;
+import com.example.backend.entity.Comment;
 import com.example.backend.entity.Likes;
 import com.example.backend.service.LikesService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -17,14 +21,28 @@ public class LikesController {
     private LikesService likesService;
 
     @PostMapping("/{boardNo}/{memberNo}")
-    public void likes(@PathVariable("boardNo") Integer boardNo, @PathVariable("memberNo") Integer memberNo, @Validated @RequestBody Likes likes) {
+    public boolean likes(@PathVariable("boardNo") Long boardNo, @PathVariable("memberNo") Long memberNo, @Validated @RequestBody Likes likes) {
         log.info("likes()");
-        likesService.register(boardNo, memberNo, likes);
+        return likesService.register(boardNo, memberNo, likes);
     }
 
-    @DeleteMapping("/{boardNo}")
-    public void unLikes(@PathVariable("boardNo") Integer likesNo) {
-        log.info("unLikes()");
-        likesService.remove(likesNo);
+    @GetMapping("/list/{boardNo}/{memberNo}")
+    public List<Likes> likesList(@PathVariable("boardNo") Long boardNo, @PathVariable("memberNo") Long memberNo) {
+        log.info("likesList()");
+
+        return likesService.list(boardNo, memberNo);
     }
+
+//    @GetMapping("/list/{memberNo}")
+//    public List<Likes> likesList(@PathVariable("memberNo") Long memberNo) {
+//        log.info("likesList()");
+//
+//        return likesService.list(memberNo);
+//    }
+
+//    @DeleteMapping("/{likesNo}")
+//    public void unLikes(@PathVariable("likesNo") Integer likesNo) {
+//        log.info("unLikes()");
+//        likesService.remove(likesNo);
+//    }
 }
