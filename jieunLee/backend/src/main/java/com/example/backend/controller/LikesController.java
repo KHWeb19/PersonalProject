@@ -26,12 +26,19 @@ public class LikesController {
         return likesService.register(boardNo, memberNo, likes);
     }
 
-    @GetMapping("/list/{memberNo}")
-    public List<Likes> likesList(@PathVariable("memberNo") Long memberNo) {
+    @GetMapping("/list/{boardNo}/{memberNo}")
+    public List<Likes> likesList(@PathVariable("boardNo") Long boardNo, @PathVariable("memberNo") Long memberNo) {
         log.info("likesList()");
 
-        return likesService.list(memberNo);
+        return likesService.list(boardNo, memberNo);
     }
+
+//    @GetMapping("/list/{memberNo}")
+//    public List<Likes> likesList(@PathVariable("memberNo") Long memberNo) {
+//        log.info("likesList()");
+//
+//        return likesService.list(memberNo);
+//    }
 
 //    @DeleteMapping("/{likesNo}")
 //    public void unLikes(@PathVariable("likesNo") Integer likesNo) {

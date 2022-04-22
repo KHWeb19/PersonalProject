@@ -9,6 +9,6 @@ import java.util.List;
 
 public interface LikesService {
     public boolean register (Long boardNo, Long memberNo, Likes likes);
-    List<Likes> list (Long memberNo);
+    List<Likes> list (Long boardNo, Long memberNo);
 //    public void remove (Integer likesNo);
 }
