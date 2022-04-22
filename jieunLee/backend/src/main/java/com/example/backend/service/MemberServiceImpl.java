@@ -40,7 +40,8 @@ public class MemberServiceImpl implements MemberService{
         Member memberEntity = new Member(
                 memberRequest.getMemberName(),
                 memberRequest.getMemberId(),
-                memberRequest.getPassword()
+                memberRequest.getPassword(),
+                memberRequest.getPasswordHint()
         );
 
         memberRepository.save(memberEntity);
@@ -68,6 +69,7 @@ public class MemberServiceImpl implements MemberService{
             memberRequest.setMemberName(loginMember.getMemberName());
             memberRequest.setMemberId(loginMember.getMemberId());
             memberRequest.setPassword(loginMember.getPassword());
+            memberRequest.setPasswordHint(loginMember.getPasswordHint());
             memberRequest.setImageName(loginMember.getImageName());
             memberRequest.setMemberWeb(loginMember.getMemberWeb());
             memberRequest.setMemberIntro(loginMember.getMemberIntro());
@@ -79,6 +81,7 @@ public class MemberServiceImpl implements MemberService{
                 memberRequest.getMemberName(),
                 memberRequest.getMemberId(),
                 null,
+                memberRequest.getPasswordHint(),
                 memberRequest.getImageName(),
                 memberRequest.getMemberWeb(),
                 memberRequest.getMemberIntro(),

@@ -14,8 +14,8 @@ export default {
     },
     methods: {
         onSubmit (payload) {
-        const { memberName, memberId, password } = payload
-        axios.post('http://localhost:7777/member/register', { memberName, memberId, password })
+        const { memberName, memberId, password, passwordHint } = payload
+        axios.post('http://localhost:7777/member/register', { memberName, memberId, password, passwordHint })
             .then(res => {
                 alert('등록 성공! - ' + res)
                 this.$router.push({name: 'LoginPage'})

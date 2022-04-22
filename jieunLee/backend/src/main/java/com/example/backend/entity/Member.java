@@ -28,8 +28,11 @@ public class Member {
     @Column(length = 32, nullable = false)
     private String memberId;
 
-    @Column(length = 64)
+    @Column(length = 64, nullable = false)
     private String password;
+
+    @Column(length = 32, nullable = false)
+    private String passwordHint;
 
     @Column(length = 64)
     private String imageName;
@@ -50,9 +53,10 @@ public class Member {
     @OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
     private List<Board> boards = new ArrayList<>();
 
-    public Member(String memberName, String memberId, String password) {
+    public Member(String memberName, String memberId, String password, String passwordHint) {
         this.memberName = memberName;
         this.memberId = memberId;
         this.password = password;
+        this.passwordHint = passwordHint;
     }
 }
