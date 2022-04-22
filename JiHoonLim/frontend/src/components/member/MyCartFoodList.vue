@@ -1,12 +1,17 @@
 <template>
   <div class="grey lighten-3" style="font-family: 'Noto Sans KR', sans-serif">
     <v-container class="white" style="width: 1240px">
+      <v-row class="orange lighten-5">
+        <v-col>
+          <div class="main_tit_box">내 보관함</div>
+        </v-col>
+      </v-row>
       <v-row>
         <v-col>
           <div style="countFoodWrap">
             총
             <b class="countFood">{{ myCartFoods.length }}</b
-            >개의 레시피가 있습니다.
+            >개의 레시피가 보관되어 있습니다.
           </div>
         </v-col>
       </v-row>
@@ -35,8 +40,19 @@
 
             <v-card-title class="pt-0 pb-0"> {{ food.name }} </v-card-title>
 
-            <v-card-actions>
+            <v-card-actions class="pt-0 pb-0">
               <v-card-text class="pb-0 pt-0">{{ food.writer }}</v-card-text>
+              <v-card-text class="pb-0 pt-0"
+                ><v-btn
+                  icon
+                  text
+                  class="deleteBtn"
+                  color="red"
+                  @click="deleteFood(food.cartNo)"
+                >
+                  삭제
+                </v-btn></v-card-text
+              >
             </v-card-actions>
           </v-card>
         </v-col>
@@ -66,6 +82,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "MyCartFoodList",
   props: {
@@ -93,6 +111,17 @@ export default {
     },
     prevPage() {
       this.pageNum -= 1;
+    },
+    deleteFood(cartNo) {
+      axios
+        .delete(`http://localhost:7777/member/myCart/delete/${cartNo}`)
+        .then(() => {
+          alert("삭제되었습니다.");
+          this.$router.go();
+        })
+        .catch(() => {
+          alert("삭제요청실패");
+        });
     },
   },
   computed: {
@@ -161,5 +190,17 @@ export default {
   font-size: 16px;
   color: #333;
   padding: 5px 0 20px 8px;
+}
+.main_tit_box {
+  text-align: left;
+  font-size: 35px;
+  color: #333;
+  padding: 8px 0 8px 0;
+  font-style: italic;
+  position: relative;
+}
+.deleteBtn {
+  padding: 0;
+  float: right;
 }
 </style>

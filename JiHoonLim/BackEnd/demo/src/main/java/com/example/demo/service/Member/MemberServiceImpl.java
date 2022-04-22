@@ -272,5 +272,10 @@ public class MemberServiceImpl implements MemberService {
         return memberCartRepository.findCartList(memberNo);
     }
 
+    @Override
+    public void remove(Long cartNo) {
+        memberCartRepository.deleteById(cartNo);
+    }
+
 
 }

@@ -171,4 +171,11 @@ public class MemberController {
 
         return service.myCartList(memberNo);
     }
+
+    @DeleteMapping("/myCart/delete/{cartNo}")
+    public void myCartRemove(@PathVariable("cartNo")Long cartNo){
+        log.info("myCartRemove()");
+
+        service.remove(cartNo);
+    }
 }
