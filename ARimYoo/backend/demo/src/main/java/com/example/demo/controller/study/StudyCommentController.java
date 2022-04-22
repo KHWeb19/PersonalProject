@@ -1,6 +1,5 @@
 package com.example.demo.controller.study;
 
-import com.example.demo.entity.review.ReviewComment;
 import com.example.demo.entity.study.StudyComment;
 import com.example.demo.service.study.StudyCommentService;
 import lombok.extern.slf4j.Slf4j;
@@ -34,7 +33,7 @@ public class StudyCommentController {
     }
 
     @DeleteMapping("/comment/{commentId}")
-    public void delete (@PathVariable ("commentId") Long commentId , ReviewComment reviewComment) {
+    public void delete (@PathVariable ("commentId") Long commentId , StudyComment studyComment) {
         log.info("Comment remove()");
         service.delete(commentId);
     }
