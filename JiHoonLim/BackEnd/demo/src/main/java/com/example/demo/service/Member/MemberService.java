@@ -22,5 +22,5 @@ public interface MemberService {
     public MemberRequest modifyEmail(Long memberNo, String email, MemberRequest memberRequest);
     public void deleteMember(Long memberNo);
 
-
+    public void addMyFood(Long memberNo, Long boardNo);
 }

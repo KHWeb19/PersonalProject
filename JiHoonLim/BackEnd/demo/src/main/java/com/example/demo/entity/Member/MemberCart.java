@@ -39,14 +39,10 @@ public class MemberCart {
     @Column(length = 32, nullable = false)
     private String writer;
 
-    @Column(nullable = false)
-    private String material;
 
     @Column(nullable = false)
     private String des;
 
-    @Column
-    private String tip;
 
     @Column(nullable = false)
     private String kind;
@@ -57,36 +53,18 @@ public class MemberCart {
     @Column(nullable = false)
     private String way;
 
-    @Lob
-    private String content;
-
     @Column
     private String filename;
 
     @Column
     private String filepath;
 
-    @Column
-    private Integer viewCount = 0;
-
-
     @CreatedDate
     private String regDate = LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT));
-
-    @UpdateTimestamp
-    private LocalDateTime upDate;
-
-    @OneToMany(mappedBy = "foodBoard",fetch = FetchType.EAGER,cascade = CascadeType.REMOVE)
-    private List<FoodBoardComment> comments;
 
 
     @Formula("(SELECT count(1) FROM food_board_comment c WHERE c.food_board_board_no = board_no)")
     private int commentCnt;
-
-    @EqualsAndHashCode.Exclude
-    @ToString.Exclude
-    @OneToMany(mappedBy = "foodBoard",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private Set<FoodBoardLike> likes = new HashSet<>();
 
     @Formula("(SELECT count(1) FROM food_board_like c WHERE c.food_board_board_no = board_no)")
     private int likeCnt;

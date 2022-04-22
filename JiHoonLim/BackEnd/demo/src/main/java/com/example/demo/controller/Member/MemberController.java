@@ -1,8 +1,10 @@
 package com.example.demo.controller.Member;
 
 import com.example.demo.controller.Member.request.MemberRequest;
+import com.example.demo.entity.FoodBoard.FoodBoard;
 import com.example.demo.entity.Member.Member;
 import com.example.demo.entity.Member.MemberCart;
+import com.example.demo.service.FoodBoard.FoodBoardService;
 import com.example.demo.service.Member.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,7 @@ public class MemberController {
 
     @Autowired
     private MemberService service;
+
 
     @GetMapping("/list")
     public List<Member> memberList(){
@@ -151,8 +154,11 @@ public class MemberController {
     }
 
     @PostMapping("/myCart/register/{memberNo}")
-    public void addMyCart(@PathVariable("memberNo") Integer memberNo, @Validated @RequestBody MemberCart memberCart){
-        log.info("" +memberCart);
+    public void addMyCart(@PathVariable("memberNo") Long memberNo, @Validated @RequestBody FoodBoard foodBoard){
+        log.info("" +foodBoard);
 
+        Long boardNo = foodBoard.getBoardNo();
+
+        service.addMyFood(memberNo,boardNo);
     }
 }

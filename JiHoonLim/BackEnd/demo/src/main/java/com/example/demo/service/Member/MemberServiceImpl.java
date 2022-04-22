@@ -1,9 +1,11 @@
 package com.example.demo.service.Member;
 
 import com.example.demo.controller.Member.request.MemberRequest;
+import com.example.demo.entity.FoodBoard.FoodBoard;
 import com.example.demo.entity.Member.Member;
 import com.example.demo.entity.Member.MemberAuth;
 import com.example.demo.entity.Member.MemberCart;
+import com.example.demo.repository.FoodBoard.FoodBoardRepository;
 import com.example.demo.repository.Member.MemberAuthRepository;
 import com.example.demo.repository.Member.MemberCartRepository;
 import com.example.demo.repository.Member.MemberRepository;
@@ -28,6 +30,9 @@ public class MemberServiceImpl implements MemberService {
 
     @Autowired
     private MemberCartRepository memberCartRepository;
+
+    @Autowired
+    private FoodBoardRepository foodBoardRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -215,7 +220,31 @@ public class MemberServiceImpl implements MemberService {
         memberRepository.deleteById(memberNo);
     }
 
+    @Override
+    public void addMyFood(Long memberNo, Long boardNo) {
+        Optional<FoodBoard> maybeFood = foodBoardRepository.findById(boardNo);
 
+        FoodBoard cartFood = maybeFood.get();
+
+        log.info(""+cartFood);
+
+        MemberCart memberCart = new MemberCart();
+        memberCart.setBoardNo(cartFood.getBoardNo());
+        memberCart.setMemberNo(memberNo);
+        memberCart.setName(cartFood.getName());
+        memberCart.setWriter(cartFood.getWriter());
+        memberCart.setDes(cartFood.getDes());
+        memberCart.setKind(cartFood.getKind());
+        memberCart.setWay(cartFood.getWay());
+        memberCart.setMat(cartFood.getMat());
+        memberCart.setFilename(cartFood.getFilename());
+        memberCart.setFilepath(cartFood.getFilepath());
+        memberCart.setRegDate(cartFood.getRegDate());
+        memberCart.setCommentCnt(cartFood.getCommentCnt());
+        memberCart.setLikeCnt(cartFood.getLikeCnt());
+
+        memberCartRepository.save(memberCart);
+    }
 
 
 }

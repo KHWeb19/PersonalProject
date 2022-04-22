@@ -316,10 +316,11 @@ export default {
     },
     myCart() {
       if (this.userInfo != null) {
+        const { boardNo } = this;
         axios
           .post(
             `http://localhost:7777/member/myCart/register/${this.userInfo.memberNo}`,
-            {}
+            { boardNo }
           )
           .then(() => {
             alert("장바구니 등록 성공");
