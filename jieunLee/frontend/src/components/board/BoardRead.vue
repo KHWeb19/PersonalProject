@@ -52,7 +52,7 @@
                     </tr>
                     <tr align="left" >
                         <td colspan="3" style=" padding-left: 16px"  > 
-                            <div style="overflow-y:auto; overflow-x:hidden; width:100%; height:430px;">
+                            <div style="overflow-y:auto; overflow-x:hidden; width:100%; height:400px;">
                                 <div v-for="comment in comments" :key="comment.commentNo">
                                     <span style="font-weight: bold;">{{ comment.writer }}&nbsp;</span>
                                     {{ comment.content }}
@@ -82,9 +82,9 @@
                         <hr style="border: 0; height: 1px; background: #d8d8d8; "/>
                         </td>
                     </tr>
-                    <tr align="left" >
+                    <!-- <tr align="left" >
                         <td colspan="2" style="height: 20px; padding: 6px 9px">
-                            <v-btn icon>
+                            <v-btn icon @click="onLikes()">
                                 <v-icon color="black">
                                     mdi-heart-outline
                                 </v-icon>
@@ -95,6 +95,37 @@
                                 </v-icon>
                             </v-btn>
                         </td>
+                    </tr> -->
+                    <tr align="left">
+                            <td style="padding: 6px 9px" colspan="2" v-if="loginLikes.length>0" >
+                                <v-btn icon @click="onLikes(board.boardNo)" >
+                                    <v-icon  color="black">
+                                        mdi-cards-heart
+                                    </v-icon>
+                                </v-btn>
+                                <v-btn icon @click="onLikes(board.boardNo)">
+                                    <v-icon color="black">
+                                        mdi-chat-outline
+                                    </v-icon>
+                                </v-btn>
+                            </td>
+                            <td style="padding: 6px 9px" colspan="2" v-else>
+                                <v-btn icon @click="onLikes(board.boardNo)" >
+                                    <v-icon  color="black">
+                                        mdi-cards-heart-outline
+                                    </v-icon>
+                                </v-btn>
+                                <v-btn icon @click="onLikes(board.boardNo)">
+                                    <v-icon color="black">
+                                        mdi-chat-outline
+                                    </v-icon>
+                                </v-btn>
+                            </td>
+                        </tr>
+                    <tr v-if="board.likes.length" align="left">
+                            <td colspan="2" style="padding: 0px 0px 8px 16px">
+                                <div id="likesCnt">좋아요 {{ board.likes.length }}개</div>
+                            </td>
                     </tr>
                     <tr align="left" style="height: 10px; font-size: 10px">
                         <td colspan="2" style="padding: 0px 0px 8px 16px; color: grey">
@@ -148,14 +179,22 @@ export default {
     },
     data() {
         return {
-            // loginInfo: JSON.parse(localStorage.getItem('loginInfo')),
+            loginInfo: JSON.parse(localStorage.getItem('loginInfo')),
             content: '',
         }
     },
     computed: {
-    ...mapState(['board'])
+    ...mapState(['board']),
+    ...mapState(['loginLikes']),
+    
+    },
+    mounted () {
+        this.fetchLoginLikes({boardNo: this.boardNo, memberNo: this.loginInfo.memberNo})
     },
     methods: {
+        ...mapActions(['fetchComment']),
+        ...mapActions(['fetchLoginLikes']),
+
         getItemControl() {
             return `item.actions`;
         },
@@ -167,7 +206,6 @@ export default {
             const { content } = this
             this.$emit('submit', { content })
         },
-        ...mapActions(['fetchComment']),
         onCommentDelete(commentNo) {
             console.log(commentNo)
             axios.delete(`http://localhost:7777/comment/${commentNo}`)
@@ -177,6 +215,16 @@ export default {
                 })
                 .catch(()=> {
                     alert('삭제실패 문제발생')
+                })
+        },
+        onLikes() {
+            const { boardNo } = this
+            axios.post(`http://localhost:7777/likes/${boardNo}/${this.loginInfo.memberNo}`, {boardNo, boardCheck: boardNo, memberNo: this.loginInfo.memberNo})
+                .then(() => {
+                    history.go(0);
+                })
+                .catch(() => {
+                    alert('문제 발생!')
                 })
         },
     }

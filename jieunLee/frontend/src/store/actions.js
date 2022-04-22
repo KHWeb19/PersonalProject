@@ -68,8 +68,8 @@ export default {
                     commit(FETCH_TWO_COMMENT_LIST, res.data)
                 })
     },
-    fetchLoginLikes({ commit }, memberNo) {
-        return axios.get(`http://localhost:7777/likes/list/${memberNo}`)
+    fetchLoginLikes({ commit }, {boardNo, memberNo}) {
+        return axios.get(`http://localhost:7777/likes/list/${boardNo}/${memberNo}`)
                 .then((res) => {
                     commit(FETCH_LOGIN_LIKES, res.data)
                 })

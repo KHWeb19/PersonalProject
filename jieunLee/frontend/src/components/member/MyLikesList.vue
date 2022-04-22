@@ -5,7 +5,7 @@
             <br/><br/>
             <v-row>
                 <v-col v-for="likes in loginLikes" :key="likes.likedNo">
-                    <div>{{loginLikes.length}}</div>
+                    <div>{{likes}}</div>
                 </v-col>
             </v-row>
             

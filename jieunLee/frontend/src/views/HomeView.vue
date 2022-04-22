@@ -4,15 +4,15 @@
       <menu-bar/>
       <hr style="border: 0; height: 1px; background: #d8d8d8; "/>
     </div>
-          <my-likes-list :loginLikes="loginLikes"/>
-    <board-list :boards="boards" :loginLikes="loginLikes" @click="onLikes" @submit="onSubmit"/>
+    <!-- <my-likes-list :loginLikes="loginLikes"/> -->
+    <board-list :boards="boards" :loginLikes="loginLikes" @click="onDelete" @submit="onSubmit"/>
   </div>
 </template>
 
 <script>
 import MenuBar from '@/components/MenuBar.vue'
 import BoardList from '@/components/board/BoardList.vue'
-import MyLikesList from '@/components/member/MyLikesList.vue'
+// import MyLikesList from '@/components/member/MyLikesList.vue'
 import { mapState, mapActions } from 'vuex'
 import axios from 'axios'
 
@@ -21,9 +21,9 @@ export default {
   components: {
     MenuBar,
     BoardList,
-        MyLikesList
+    // MyLikesList
     },
-        data() {
+    data() {
         return {
             loginInfo: JSON.parse(localStorage.getItem('loginInfo')),
         }

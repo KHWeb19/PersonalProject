@@ -69,6 +69,23 @@
                             </div>
                         </tr> -->
                         <tr align="left"  >
+                            <div v-for="likes in loginLikes" :key="likes.likedNo"  >
+                            <td style="padding: 6px 9px" colspan="2" v-if="likes.boardCheck==board.boardNo" >
+                                <v-btn icon @click="onLikes(board.boardNo)" >
+                                    <v-icon  color="black">
+                                        mdi-cards-heart
+                                    </v-icon>
+                                </v-btn>
+                                <v-btn icon @click="onLikes(board.boardNo)">
+                                    <v-icon color="black">
+                                        mdi-chat-outline
+                                    </v-icon>
+                                </v-btn>
+                            </td>
+                            </div>
+                            <div>
+                            <!-- <div v-for="likes in loginLikes" :key="likes.likedNo"  > -->
+                            <!-- <td style="padding: 6px 9px" colspan="2" v-if="likes.boardCheck!=board.boardNo">-->
                             <td style="padding: 6px 9px" colspan="2">
                                 <v-btn icon @click="onLikes(board.boardNo)" >
                                     <v-icon  color="black">
@@ -81,7 +98,22 @@
                                     </v-icon>
                                 </v-btn>
                             </td>
+                            </div>
                         </tr>
+                        <!-- <tr align="left"  >
+                            <td style="padding: 6px 9px" colspan="2">
+                                <v-btn icon @click="onLikes(board.boardNo)" >
+                                    <v-icon  color="black">
+                                        mdi-cards-heart-outline
+                                    </v-icon>
+                                </v-btn>
+                                <v-btn icon @click="onLikes(board.boardNo)">
+                                    <v-icon color="black">
+                                        mdi-chat-outline
+                                    </v-icon>
+                                </v-btn>
+                            </td>
+                        </tr> -->
                         <tr v-if="board.likes.length" align="left">
                             <td colspan="2" style="padding: 0px 0px 8px 16px">
                                 <div id="likesCnt">{{ board.likes.length }}명이 좋아합니다</div>
@@ -97,12 +129,12 @@
                                 </div>
                             </td>
                         </tr>
-                        <tr>
+                        <tr v-if="board.comments.length"> 
                             <td style="padding-left: 16px;">
                                 <router-link style="text-decoration: none; color: grey" :to="{
                                     name: 'BoardReadPage',
                                     params: {boardNo: board.boardNo.toString()}}">
-                                    댓글 모두 보기
+                                    댓글 {{ board.comments.length}}개 모두 보기
                                 </router-link>
                             </td>
                         </tr>
@@ -144,15 +176,17 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
+import axios from 'axios'
 export default {
     name: 'BoardList',
     props: {
         boards: {
             type: Array
         },
-        loginLikes: {
-            type: Array
-        }
+        // loginLikes: {
+        //     type: Array
+        // }
     },
     data() {
         return {
@@ -160,16 +194,33 @@ export default {
             content: '',
         }
     },
+    computed: {
+        ...mapState(['loginLikes']),
+    },
+    mounted () {
+        this.fetchLoginLikes(this.loginInfo.memberNo)
+    },
     methods: {
+        ...mapActions(['fetchLoginLikes']),
         onDelete(boardNo) {
+            console.log(boardNo)
             this.$emit('click', {boardNo})
         },
         onSubmit(boardNo) {
             const { content } = this
             this.$emit('submit', { boardNo, content })
         },
+        // onLikes(boardNo) {
+        //     this.$emit('click', {boardNo, memberNo: this.loginInfo.memberNo})
+        // },
         onLikes(boardNo) {
-            this.$emit('click', {boardNo, memberNo: this.loginInfo.memberNo})
+            axios.post(`http://localhost:7777/likes/${boardNo}/${this.loginInfo.memberNo}`, {boardNo, boardCheck: boardNo, memberNo: this.loginInfo.memberNo})
+                .then(() => {
+                    history.go(0);
+                })
+                .catch(() => {
+                    alert('문제 발생!')
+                })
         },
     }
 }
