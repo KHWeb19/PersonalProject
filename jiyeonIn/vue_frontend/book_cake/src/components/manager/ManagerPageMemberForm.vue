@@ -61,7 +61,8 @@
                 </v-data-table>
                 </v-card>
 
-                <v-dialog v-model="dialog" >
+                <v-dialog v-model="dialog">
+                    <div style="background-color: white;">
                         <h4>예약 내역</h4>
                     <table>
                         <tr>
@@ -130,6 +131,8 @@
                         </v-icon>
                         </template>
                     </v-data-table>
+                    </div>
+                    
                 </v-dialog>
 
         </div>
@@ -182,7 +185,7 @@
         },
         computed: {
             pageCount () {
-                let listLeng = this.memberLists.length,
+                let listLeng = this.boardList.length,
                     listSize = this.pageSize,
                     page = Math.floor(listLeng / listSize);
                 if (listLeng % listSize > 0) page += 1
@@ -191,7 +194,7 @@
             paginatedData () {
                 const start = this.pageNum * this.pageSize,
                         end = start + this.pageSize;
-                return this.memberLists.slice(start, end);
+                return this.boardList.slice(start, end);
                 
             }
         },
@@ -251,7 +254,6 @@ a {
 table {
   width: 100%;
   border-collapse: collapse;
-  background-color: white;
 }
 table th {
   font-size: 1.1rem;
@@ -285,7 +287,6 @@ table tr td a {
 .btn-cover .page-count {
   padding: 0 1rem;
 }
-
 
 
 </style>
