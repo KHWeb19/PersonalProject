@@ -1,12 +1,14 @@
 package com.example.demo.controller.Member;
 
+import com.example.demo.controller.Member.request.MemberCartRequest;
 import com.example.demo.controller.Member.request.MemberRequest;
+import com.example.demo.entity.FoodBoard.FoodBoard;
 import com.example.demo.entity.Member.Member;
+import com.example.demo.entity.Member.MemberCart;
+import com.example.demo.service.FoodBoard.FoodBoardService;
 import com.example.demo.service.Member.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +23,7 @@ public class MemberController {
 
     @Autowired
     private MemberService service;
+
 
     @GetMapping("/list")
     public List<Member> memberList(){
@@ -149,5 +152,30 @@ public class MemberController {
     @DeleteMapping("/deleteMember/{memberNo}")
     public void deleteMember(@PathVariable("memberNo") Long memberNo){
         service.deleteMember(memberNo);
+    }
+
+
+
+    @PostMapping("/myCart/register/{memberNo}")
+    public boolean addMyCart(@PathVariable("memberNo") Long memberNo, @Validated @RequestBody MemberCartRequest memberCartRequest){
+        log.info("addCart" +memberCartRequest);
+
+        memberCartRequest.setMemberNo(memberNo);
+
+        return service.addMyFood(memberCartRequest);
+    }
+
+    @GetMapping("/myCart/list/{memberNo}")
+    public List<MemberCart> memberCartList(@PathVariable("memberNo")Long memberNo){
+        log.info("memberCartList()");
+
+        return service.myCartList(memberNo);
+    }
+
+    @DeleteMapping("/myCart/delete/{cartNo}")
+    public void myCartRemove(@PathVariable("cartNo")Long cartNo){
+        log.info("myCartRemove()");
+
+        service.remove(cartNo);
     }
 }

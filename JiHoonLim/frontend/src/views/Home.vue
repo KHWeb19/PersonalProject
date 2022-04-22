@@ -1,39 +1,53 @@
 <template>
   <div class="grey lighten-3">
-    <v-container class="slide">
-      <swiper class="swiper" :options="swiperOption">
-        <swiper-slide v-for="image in images" :key="image">
-          <v-img :src="image"></v-img>
-        </swiper-slide>
-        <div class="swiper-pagination" slot="pagination"></div>
-        <div class="swiper-button-prev" slot="button-prev"></div>
-        <div class="swiper-button-next" slot="button-next"></div>
-      </swiper>
-    </v-container>
-    <v-container class="pt-0 pb-0">
+    <v-container class="white" style="width: 1240px">
       <v-row>
-        <v-col>
-          <v-card>
-            <div class="bottom_box">
-              <v-img
-                class="responseive-img img_box"
-                src="@/assets/img/bjw.jpg"
-              ></v-img>
-
-              <div class="text_box grey lighten-5">
-                <h2>백종원</h2>
-                <h3>( 골목식당 -- 명언 -- )</h3>
-                <p>" 이 사회는 자기가 좋아하는 <br />일을 해야 행복하다. "</p>
-                <p>" 자신이 좋아하는 일에 <br />도전하길 바란다. "</p>
-              </div>
-
-              <v-img
-                class="responsive-img img_box"
-                src="@/assets/img/bjw.jpg"
-                style="transform: scaleX(-1)"
-              ></v-img>
-            </div>
-          </v-card>
+        <v-col class="col">
+          <div class="grey lighten-3">
+            <v-container class="slide">
+              <swiper class="swiper" :options="swiperOption">
+                <swiper-slide v-for="image in images" :key="image">
+                  <v-img :src="image"></v-img>
+                </swiper-slide>
+                <div class="swiper-pagination" slot="pagination"></div>
+                <div class="swiper-button-prev" slot="button-prev"></div>
+                <div class="swiper-button-next" slot="button-next"></div>
+              </swiper>
+            </v-container>
+            <v-container class="pt-0 pb-0">
+              <v-row>
+                <v-col>
+                  <v-card>
+                    <div class="bottom_box">
+                      <v-img
+                        class="responseive-img img_box"
+                        src="@/assets/img/bjw.jpg"
+                      ></v-img>
+                      <v-img
+                        class="responseive-img img_box"
+                        src="https://img3.daumcdn.net/thumb/R658x0.q70/?fname=https://t1.daumcdn.net/news/202105/21/plock/20210521204241383xorq.png"
+                      ></v-img>
+                      <!--<div class="text_box grey lighten-5">
+                        <h2>백종원</h2>
+                        <h3>( 골목식당 -- 명언 -- )</h3>
+                        <p>
+                          " 이 사회는 자기가 좋아하는 <br />일을 해야 행복하다.
+                          "
+                        </p>
+                        <p>" 자신이 좋아하는 일에 <br />도전하길 바란다. "</p>
+                      </div>
+                      -->
+                      <v-img
+                        class="responsive-img img_box"
+                        src="@/assets/img/bjw.jpg"
+                        style="transform: scaleX(-1)"
+                      ></v-img>
+                    </div>
+                  </v-card>
+                </v-col>
+              </v-row>
+            </v-container>
+          </div>
         </v-col>
       </v-row>
     </v-container>
@@ -53,9 +67,9 @@ export default {
   data() {
     return {
       images: [
-        "https://img.hani.co.kr/imgdb/resize/2019/0531/00502615_20190531.JPG",
-        "https://static.hubzum.zumst.com/hubzum/2018/02/14/09/21aeae60c28f46268e6be882ff4a46a7.jpg",
-        "https://t1.daumcdn.net/cfile/tistory/995BAE345C17421B11",
+        "http://ottogi.okitchen.co.kr/pds/upfile/2020-08-25_427865954[13].jpg",
+        "http://ottogi.okitchen.co.kr/pds/upfile/2020-08-23_214060951[9].jpg",
+        "http://ottogi.okitchen.co.kr/pds/upfile/2020-08-24_427854552[1].jpg",
       ],
       swiperOption: {
         grabCursor: true,
@@ -84,7 +98,7 @@ export default {
 }
 
 .img_box {
-  width: 35%;
+  width: 33%;
 }
 .text_box {
   display: flex;
@@ -110,11 +124,13 @@ export default {
   font-size: 22.5px;
   font-weight: bold;
 }
-
+.col {
+  padding: 0;
+}
 .slide {
   padding: 0;
   height: 700px;
-  margin: auto;
+  margin: 0;
 }
 
 .swiper {

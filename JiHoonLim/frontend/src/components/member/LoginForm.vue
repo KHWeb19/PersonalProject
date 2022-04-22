@@ -1,6 +1,6 @@
 <template>
-  <div class="grey lighten-3">
-    <v-container class="white">
+  <div class="grey lighten-3" style="font-family: 'Noto Sans KR', sans-serif">
+    <v-container class="white" style="width: 1240px">
       <v-row justify="center">
         <v-col cols="auto" style="padding-bottom: 90px">
           <router-link to="/">
@@ -102,3 +102,6 @@ export default {
   },
 };
 </script>
+<style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400&display=swap");
+</style>

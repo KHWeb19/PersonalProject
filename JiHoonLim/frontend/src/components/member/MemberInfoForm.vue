@@ -1,6 +1,6 @@
 <template>
-  <div class="grey lighten-3">
-    <v-container class="white">
+  <div class="grey lighten-3" style="font-family: 'Noto Sans KR', sans-serif">
+    <v-container class="white" style="width: 1240px">
       <v-row justify="center">
         <v-col cols="auto" style="padding-bottom: 90px">
           <router-link to="/">
@@ -420,12 +420,11 @@ export default {
             nickName,
           })
           .then((res) => {
-            alert(
-              "닉네임이 변경되었습니다. 수정된 정보를 확인하고 싶다면 새로고침 해주세요."
-            );
+            alert("닉네임이 변경되었습니다.");
             localStorage.setItem("userInfo", JSON.stringify(res.data));
 
             this.dialogNick = false;
+            this.$router.go();
           });
       }
     },
@@ -439,12 +438,11 @@ export default {
             email,
           })
           .then((res) => {
-            alert(
-              "이메일이 변경되었습니다. 수정된 정보를 확인하고 싶다면 새로고침 해주세요."
-            );
+            alert("이메일이 변경되었습니다. ");
             localStorage.setItem("userInfo", JSON.stringify(res.data));
 
             this.dialogEmail = false;
+            this.$router.go();
           });
       }
     },
@@ -478,3 +476,7 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400&display=swap");
+</style>

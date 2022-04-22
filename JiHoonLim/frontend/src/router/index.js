@@ -8,8 +8,13 @@ import SearchUserIdPage from '@/views/member/SearchUserIdPage.vue'
 import SearchUserPwPage from '@/views/member/SearchUserPwPage.vue'
 import MemberInfoPage from '@/views/member/MemberInfoPage.vue'
 
-
 import FoodListPage from '@/views/foodBoard/FoodListPage.vue'
+import FoodRegisterPage from '@/views/foodBoard/FoodRegisterPage.vue'
+import FoodDetailPage from '@/views/foodBoard/FoodDetailPage.vue'
+import FoodModifyPage from '@/views/foodBoard/FoodModifyPage.vue'
+import BestFoodListPage from '@/views/foodBoard/BestFoodListPage.vue'
+import FoodSearchPage from '@/views/foodBoard/FoodSearchPage.vue'
+import MyCartFoodPage from '@/views/member/MyCartFoodPage.vue'
 
 import test from '@/views/test.vue'
 Vue.use(VueRouter)
@@ -56,7 +61,51 @@ const routes = [
     name: 'FoodListPage',
     component: FoodListPage
   },
-  
+  {
+    path: '/foodRegister',
+    name: 'FoodRegisterPage',
+    component: FoodRegisterPage
+  },
+  {
+    path: '/foodDetail/:boardNo',
+    name: 'FoodDetailPage',
+    components: {
+      default: FoodDetailPage
+    },
+    props: {
+      default: true
+    }
+  },
+  {
+    path: '/foodModify/:boardNo',
+    name: 'FoodModifyPage',
+    components: {
+      default: FoodModifyPage
+    },
+    props: {
+      default: true
+    }
+  },
+  {
+    path: '/bestFoodList',
+    name: 'BestFoodListPage',
+    component: BestFoodListPage
+  },
+  {
+    path: '/search/:keyWord',
+    name: 'FoodSearchPage',
+    components: {
+      default: FoodSearchPage
+    },
+    props:{
+      default: true
+    }
+  },
+  {
+    path: '/myCartFood',
+    name: 'MyCartFoodPage',
+    component: MyCartFoodPage
+  },
 ]
 
 const router = new VueRouter({

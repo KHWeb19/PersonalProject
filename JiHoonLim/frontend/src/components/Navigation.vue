@@ -2,6 +2,7 @@
   <div>
     <template>
       <v-toolbar color="orange lighten-1" dark height="90px">
+        <v-spacer></v-spacer>
         <v-toolbar-title>
           <router-link to="/">
             <v-img
@@ -20,7 +21,6 @@
           </router-link>
         </v-toolbar-title>
         <v-spacer></v-spacer>
-
         <v-toolbar-items style="margin: 15px">
           <v-btn
             text
@@ -52,6 +52,7 @@
               >회원가입</router-link
             >
           </v-btn>
+          <v-spacer></v-spacer>
         </div>
 
         <div v-if="this.$store.state.userInfo">
@@ -107,6 +108,7 @@
             >
           </v-btn>
         </div>
+        <v-spacer></v-spacer>
       </v-toolbar>
     </template>
   </div>
@@ -119,11 +121,11 @@ export default {
     return {
       links: [
         { text: "공지사항", route: "/announcement" },
-        { text: "인기 순위", route: "/best" },
+        { text: "인기 순위", route: "/bestFoodList" },
         { text: "레시피", route: "/foodList" },
       ],
       items: [
-        { title: "내 보관함", link: "/" },
+        { title: "내 보관함", link: "/myCartFood" },
         { title: "회원 정보 수정", link: "/memberInfo" },
       ],
       isLogin: false,
@@ -142,13 +144,14 @@ export default {
       this.$store.state.userInfo = null;
       localStorage.removeItem("userInfo");
       alert("로그아웃 성공");
-      this.$router.push("/login");
+      history.go(0);
     },
   },
 };
 </script>
 
 <style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400&display=swap");
 a {
   text-decoration: none;
 }
