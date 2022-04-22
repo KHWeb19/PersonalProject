@@ -8,11 +8,16 @@
 import StoreSearchList from '@/components/findStore/StoreSearchList.vue';
 
 export default {
-    name: "StoreSearchPage",
+    name: "storeSearchPage",
     components: {
         StoreSearchList
 
     },
+    data() {
+        return {
+            keyWord: ''
+        }
+    },    
     props: {
         searchList: {
             type: Array,

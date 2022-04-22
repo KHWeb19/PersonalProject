@@ -17,6 +17,10 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     @Query(value = "select * from member where auth = :auth", nativeQuery = true)
     public List<Member> selectMemberWithRole(String auth);
 
+   // @Transactional
+   // @Query(value = "select*from member where auth = :auth and dong = :keyWord", nativeQuery = true)
+   // public List<Member> selectMemberWithDong(String auth, String keyWord);
+
     List<Member> findByDongContaining(String keyWord);
 }
 

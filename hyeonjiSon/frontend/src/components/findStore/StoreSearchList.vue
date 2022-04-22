@@ -38,7 +38,7 @@
 import axios from 'axios';
 
 export default {
-    name: "StoreSearchList.vue",
+    name: "storeSearchList",
     props: {
         searchList: {
             type:Array,
@@ -54,18 +54,18 @@ export default {
                 { text: '상호명', value: 'storeName', width: "150px" },
             ],
             keyWord:'',
-
-}
+            //searchList: [] <-이건 넣으면 Duplicated key라는 메세지가 뜬다고
+        }
     },
     methods: {
         search(){
-                const {keyWord} = this;
+                const {keyWord} = this
                 console.log(keyWord)
                 axios.post('http://localhost:7777/jpaMember/search', {keyWord})
                 .then((res) => {
                     alert('검색완료')
                     console.log(res.data)
-                    this.$router.push( this.$router.currentRoute, {params: { searchList: res.data }})
+                    this.$router.push( { name: 'storeSearchPage', params: { searchList: res.data, keyWord: this.keyWord }})
                 })                                                          //keyWord: this.keyWord
                 .catch (() => {
                     alert('문제 발생!')

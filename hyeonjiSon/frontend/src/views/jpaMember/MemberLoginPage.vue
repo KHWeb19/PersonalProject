@@ -46,6 +46,7 @@ export default {
               this.$cookies.set("user", res.data, 60*60*12)// 12 시간
               //"토큰", "input_value", 만료 시간
               this.isLogin = true
+            this.$router.push({ name: 'home' })              
           })
           .catch(res => { //에러 캐치한 경우 동작
             alert('로그인 실패!' + res.data)

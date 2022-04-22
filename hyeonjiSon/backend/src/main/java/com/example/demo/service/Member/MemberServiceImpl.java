@@ -82,6 +82,22 @@ public class MemberServiceImpl implements MemberService {
         return businessMember;
     }
 
+/*
+    @Transactional //동작을 멈추지 않도록 하는데 사용한다. service에 사용.
+    @Override
+    public List<Member> findDong(String auth, String keyWord) {
+        List<Member> dongMember = memberRepository.selectMemberWithDong("사업자", keyWord);
+
+        // JPA 에서 연관 관계 사용시 쓸대없이 다 출력하지 말자!
+        // 필요한 정보만 산출해서 가져가도록 한다.
+        for (Member member : dongMember) {
+            log.info("dong-Member: " + member.getStoreName());
+        }
+
+        return dongMember;
+    }
+ */
+
     @Override
     public List<Member> searchList (String keyWord) {
         List<Member> searchResults = memberRepository.findByDongContaining(keyWord);

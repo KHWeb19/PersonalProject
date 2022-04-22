@@ -59,22 +59,42 @@ public class MemberController {
 
         return responses;
     }
+/*
+    @PostMapping("/search")
+    public List<MemberResponse> search (String keyWord) {
+        log.info("find Business+findDong Member");
+
+        List<Member> dongMember = memberservice.findDong(keyWord);
+        List<MemberResponse> responses = new ArrayList<>();
+
+        for (Member member : dongMember) {
+            responses.add(new MemberResponse(
+                    member.getStoreName(), member.getCity(), member.getDong(), member.getAddress()));
+        }
+
+        return responses;
+    }
+
+
+ */
+
 
     @PostMapping("/search")
     public List<Member> search(@RequestBody MemberSearchRequest memberSearchRequest){
         log.info("search()" + memberSearchRequest);
         String keyWord = memberSearchRequest.getKeyWord();
         return memberservice.searchList(keyWord);
+
     }
 
-    @GetMapping("/{memberNo}")
+/*
+       @GetMapping("/{memberNo}")
     public Member jpaMemberRead(
             @PathVariable("memberNo") Long memberNo) {
         log.info("Member information Read()" + memberNo);
 
         return memberservice.read(memberNo);
     }
-
-
+*/
 }
 
