@@ -1,6 +1,6 @@
 <template>
   <div>
-    <my-cart-food-list :myCartFoods="myCartFoods" />
+    <my-cart-food-list :myCartFoods="myCartFoods" :list-array="pageArray" />
   </div>
 </template>
 
@@ -18,27 +18,32 @@ export default {
   data() {
     return {
       pageArray: [],
+      memberNo: "",
     };
   },
   computed: {
     ...mapState(["myCartFoods"]),
   },
   mounted() {
-    this.fetchMyCartFoodList();
+    this.fetchMyCartFoodList(this.memberNo);
   },
   methods: {
     ...mapActions(["fetchMyCartFoodList"]),
   },
 
   created() {
-    axios
-      .get("http://localhost:7777/member/myCart/list")
-      .then((res) => {
-        this.pageArray = res.data;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (this.$store.state.userInfo != null) {
+      this.memberNo = this.$store.state.userInfo.memberNo;
+
+      axios
+        .get(`http://localhost:7777/member/myCart/list/${this.memberNo}`)
+        .then((res) => {
+          this.pageArray = res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   },
 };
 </script>

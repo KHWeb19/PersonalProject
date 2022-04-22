@@ -45,8 +45,8 @@ export default {
             commit(FETCH_FOOD_BOARD_COMMENTS_LIST,res.data)
         })
     },
-    fetchMyCartFoodList({commit}) {
-        return axios.get("http://localhost:7777/member/myCart/list")
+    fetchMyCartFoodList({commit},memberNo) {
+        return axios.get(`http://localhost:7777/member/myCart/list/${memberNo}`)
         .then((res)=>{
             commit(FETCH_MY_CART_FOOD_LIST, res.data)
         })

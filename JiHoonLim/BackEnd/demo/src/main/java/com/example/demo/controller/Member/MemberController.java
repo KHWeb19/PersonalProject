@@ -165,10 +165,10 @@ public class MemberController {
         return service.addMyFood(memberCartRequest);
     }
 
-    @GetMapping("/myCart/list")
-    public List<MemberCart> memberCartList(){
+    @GetMapping("/myCart/list/{memberNo}")
+    public List<MemberCart> memberCartList(@PathVariable("memberNo")Long memberNo){
         log.info("memberCartList()");
 
-        return service.myCartList();
+        return service.myCartList(memberNo);
     }
 }

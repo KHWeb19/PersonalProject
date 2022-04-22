@@ -268,8 +268,8 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public List<MemberCart> myCartList() {
-        return memberCartRepository.findAll(Sort.by(Sort.Direction.DESC,"boardNo"));
+    public List<MemberCart> myCartList(Long memberNo) {
+        return memberCartRepository.findCartList(memberNo);
     }
 
 

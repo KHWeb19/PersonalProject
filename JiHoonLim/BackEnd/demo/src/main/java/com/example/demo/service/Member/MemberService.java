@@ -24,5 +24,5 @@ public interface MemberService {
     public void deleteMember(Long memberNo);
 
     public boolean addMyFood(MemberCartRequest memberCartRequest);
-    public List<MemberCart> myCartList();
+    public List<MemberCart> myCartList(Long memberNo);
 }
