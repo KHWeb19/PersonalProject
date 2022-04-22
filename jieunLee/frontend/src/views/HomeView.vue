@@ -30,7 +30,7 @@ export default {
     },
     computed: {
         ...mapState(['boards']),
-            ...mapState(['loginLikes']),
+            // ...mapState(['loginLikes']),
         // ...mapState(['twoComments']),
     },
     // created() {
