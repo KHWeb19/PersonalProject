@@ -44,19 +44,19 @@ public class JoinMemberServiceImpl implements JoinMemberService{
 
         if(maybeMember.equals(Optional.empty())){
             log.info("No id!");
-            return new MemberRequest(null, null, null, null, null);
+            return null;
         }
 
         Member loginMember = maybeMember.get();
 
         if(!passwordEncoder.matches(memberRequest.getPw(), loginMember.getPw())){
             log.info("Wrong password!");
-            return new MemberRequest(null, null, null, null,  null);
+            return null;
         }
 
         //Optional<Member> memberSessionKey = repository.findById(loginMember.getSessionKey());
 
-        MemberRequest response = new MemberRequest(memberRequest.getId(), null, null, null,  loginMember.getSessionKey());
+        MemberRequest response = new MemberRequest(memberRequest.getId(), null);
         System.out.println("response = " + response);
         return response;
     }

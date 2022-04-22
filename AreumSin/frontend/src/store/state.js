@@ -4,4 +4,5 @@ export default {
     inviteMember: [],
     dayContent: [],
     voteContents: [],
+    userInfo: [],
 }

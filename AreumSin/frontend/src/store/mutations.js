@@ -21,6 +21,20 @@ export default {
     },
     [FETCH_VOTE_CONTENT] (state, voteContent) {
         state.voteContents = voteContent;
+    },
+    addUser (state, userInfo) {
+        console.log(userInfo);
+        //state.userInfo = state.userInfo.concat(userInfo);
+        /*for(let i = 0; i < userInfo.length; i++){
+            //state.userInfo[i] = userInfo[i];
+            console.log("addUser() " + state.userInfo);
+        }*/
+
+        state.userInfo = userInfo;
+        for(let i = 0; i < userInfo.length; i++){
+            //state.userInfo[i] = userInfo[i];
+            console.log("addUser() " + state.userInfo[i]);
+        }
     }
 
 }
