@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+import MainPage from '../views/MainPage.vue';
+
 import LoginPage from '../views/jpaMemberPage/LoginPage.vue'
 import SignUpPage from '@/views/jpaMemberPage/SignUpPage.vue'
 
@@ -20,8 +22,13 @@ Vue.use(VueRouter)
 
 const routes = [
 
-  { // 로그인
+  { // 메인 페이지
     path: '/',
+    name: 'MainPage',
+    component: MainPage
+  },
+  { // 로그인
+    path: '/LoginPage',
     name: 'LoginPage',
     component: LoginPage
   },
