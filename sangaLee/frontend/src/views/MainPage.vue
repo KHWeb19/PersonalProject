@@ -14,7 +14,7 @@
     <!-- 로그인 페이지 이동 버튼 -->
     <div class="buttonA">
     <router-link :to="{name: 'LoginPage'}">
-        <button><div class="fontA">로그인</div></button>
+        <button><div class="fontA">시작하기</div></button>
     </router-link>
     </div>
     
@@ -26,7 +26,7 @@
     </div>
     </div>
 
-    <!-- 배경 -->
+    <!-- 배경 이미지  -->
     <div class="marni">
     <v-img src="@/assets/img/Marni4.png"></v-img>
     </div>
@@ -66,6 +66,7 @@ h1 {
 .fontA, .fontB {
 color: #6768ab;
 }
+
 .buttonA, .buttonB {
 transition: box-shadow 0.3s ease, color 0.3s ease;
 display: inline-block;
@@ -104,18 +105,6 @@ box-shadow: -4px -4px 10px rgba(255, 255, 255, 0.2), 4px 4px 6px #e8e8f3, inset 
     margin-top: -490px;
     margin-left: 1000px;
     position: absolute;
-    animation: animate 10s linear infinite;
-    animation-delay: calc(1s * var(--i));
-}
-@keyframes animate {
-    0%, 50%
-    {
-       transform: translateY(-10px); 
-    }
-    50%, 0%
-    {
-        transform: translateY(10px);
-    }
 }
 .Other6 {    
     width: 200px;
