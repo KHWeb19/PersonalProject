@@ -94,7 +94,7 @@
                             <input type="radio" @change="confirmCake2" v-model="checkIndex2" :value="index" name="checkSelectCake"/> 
                         </v-list-item-action>
 
-                        <v-list-item-content style="width:200px; height:260px;">
+                        <v-list-item-content style="width:200px; height:200px;">
                             <v-img v-bind:src="require(`@/assets/uploadImg/${item.linkInfo}`)" contain />
                         </v-list-item-content>
 

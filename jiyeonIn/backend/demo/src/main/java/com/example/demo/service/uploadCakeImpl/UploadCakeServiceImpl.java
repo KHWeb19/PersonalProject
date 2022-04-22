@@ -85,4 +85,9 @@ public class UploadCakeServiceImpl implements UploadCakeService{
             uploadRepository.save(info);
         }
     }
+
+    @Override
+    public void remove(Integer cakeNo) {
+        uploadRepository.deleteById(Long.valueOf(cakeNo));
+    }
 }

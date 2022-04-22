@@ -11,4 +11,5 @@ public interface UploadCakeService {
     public List<UploadCake> list();
     public void includeImgModify(UploadCake info, String originalFilename);
     public void exceptImgModify(UploadCake info);
+    public void remove(Integer cakeNo);
 }

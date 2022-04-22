@@ -1,5 +1,6 @@
 package com.example.demo.controller.uploadFileController;
 
+import com.example.demo.controller.reviewController.request.RequestDelete;
 import com.example.demo.controller.uploadFileController.request.UploadRequest;
 import com.example.demo.entity.review.Review;
 import com.example.demo.entity.uploadCake.UploadCake;
@@ -148,6 +149,12 @@ public class UploadController {
 
         log.info("upload cake Modify(): Success!!!");
         return info;
+    }
 
+    @PostMapping("/delete/{cakeNo}")
+    public void deleteReview (@PathVariable("cakeNo") Integer cakeNo) {
+        log.info("deleteReview():" +cakeNo);
+
+        service.remove(cakeNo);
     }
 }
