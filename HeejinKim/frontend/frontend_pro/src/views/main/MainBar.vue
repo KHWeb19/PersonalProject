@@ -134,7 +134,8 @@ export default {
 
                 {
                     text: 'Reservation',
-                    name: 'Reservation',
+                    name: 'ReservationPage',
+                    route:'/reservation',
                 },
                 {
                     text: 'Notice',
@@ -233,6 +234,7 @@ export default {
             this.$store.state.session = null
             this.$store.state.auth = null
             //window.location.reload();
+            this.$router.push({ name: 'Home' })
         },
      
     
