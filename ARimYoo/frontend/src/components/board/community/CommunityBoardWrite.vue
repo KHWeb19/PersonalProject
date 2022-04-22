@@ -52,7 +52,7 @@
 <script>
 
 export default {
-    name:'CommunityBoardWirte',
+    name:'CommunityBoardWrite',
     data() {
         return {
             image :'',

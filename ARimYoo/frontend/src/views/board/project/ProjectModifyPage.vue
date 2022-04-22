@@ -4,7 +4,7 @@
             <img class="title" src="@/assets/title/projectTitle.png" width=200 >
         </v-row>
         <v-row>
-            <project-write @submit="onProjectSubmit"/>
+            <project-modify :project="project" @submit="onProjectModify"/>
         </v-row>
     </v-container>
 </template>
@@ -12,37 +12,50 @@
 <script>
 
 import axios from 'axios'
-import ProjectWrite from '@/components/board/project/ProjectWrite.vue'
+
+import { mapActions, mapState } from 'vuex'
+import ProjectModify from '@/components/board/project/ProjectModify.vue'
 
 
 export default {
-  components: { ProjectWrite },
+  components: { ProjectModify },
 
     name: 'ProjectWritePage',
+    props: {
+        projectNo :{
+            type: String,
+            required: true
+        }
+    },
+    computed: {
+        ...mapState(['project'])
+    },
     methods: {
-       onProjectSubmit (payload) {
-           const { projectName, content, writer, people,openLink, file} = payload
+        ...mapActions(['fetchProject']),
+        onProjectModify (payload) {
+           const { fileName, writer, projectName, viewCnt, people, content, openLink} = payload
+           console.log(payload)
 
             let formData = new FormData()
 
-            if (file != null ){formData.append('file', file)}
+            formData.append('fileName', fileName)
             formData.append('writer',writer)
             formData.append('content', content)
             formData.append('projectName', projectName)
             formData.append('people', people)
             formData.append('openLink', openLink)
+            formData.append('viewCnt',viewCnt)
 
-
-            console.log(formData)
        
-            axios.post('http://localhost:7777/board/project/register', formData, { headers: {
+            axios.put(`http://localhost:7777/board/project/${this.projectNo}`,formData, { headers: {
                     'Content-Type': 'multipart/form-data'
                 }})
-                    .then(() => {
-                        alert('게시글이 등록되셨습니다.')
+                    .then((res) => {
+                        alert('게시글이 수정되셨습니다.')
 
-                        this.$router.push({
-                            name: 'ProjectPage'
+                     this.$router.push({
+                            name: 'ProjectReadPage',
+                            params: { projectNo: res.data.projectNo.toString() }
                         })
                     })
                     .catch(() => {

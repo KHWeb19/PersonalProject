@@ -6,7 +6,7 @@
         </v-row>
         <br/>
         <v-row justify="center">
-            <study-list/>
+            <project-list :projects="projects" :list-array="pageArray"/>
         </v-row>
         <br/>
         <br/>
@@ -15,26 +15,38 @@
 </template>
 
 <script>
-import StudyList from '@/components/board/study/StudyList.vue'
+import ProjectList from '@/components/board/project/ProjectList.vue'
+
 import { mapState, mapActions } from 'vuex'
+import axios from 'axios'
 
 
 export default {
-  components: {StudyList },
+  components: {ProjectList},
     name:'ProjectPage',
     data () {
         return {
-            keyword: ''
+            keyword: '',
+            pageArray:[]
         }
     },
     computed: {
-        ...mapState(['reviews'])
+        ...mapState(['projects'])
     },
+    created() {
+          axios.get("http://localhost:7777/board/project/list")
+            .then((res) => {
+                 this.pageArray = res.data;
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        },
     mounted () {
-        this.fetchReviewList()
+        this.fetchProjectList()
     },
     methods: {
-        ...mapActions(['fetchReviewList']),
+        ...mapActions(['fetchProjectList']),
         goPage(){
         this.$router.push('/project/write')
         },
@@ -44,13 +56,13 @@ export default {
 
 <style scoped>
 .titleImg{
-    margin-top:5%;
+    margin-top:4%;
     margin-bottom: 6%;
 }
 .writeBtn {
     position: absolute;
     left:78%;
-    top:9%;
+    top:40px;
     zoom:1.15;
 }
 @media (max-width:700px){

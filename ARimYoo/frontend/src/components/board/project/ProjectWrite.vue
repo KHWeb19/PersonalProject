@@ -1,6 +1,6 @@
 <template>
     <v-container>
-            <v-form enctype="multipart/form-data" @submit.prevent="onStudySubmit">
+            <v-form enctype="multipart/form-data" @submit.prevent="onProjectSubmit">
                 <table>
                     <v-row justify="center">
                             <p v-if="this.files.length == 0" class="beforeAttach" rows="10">
@@ -18,9 +18,9 @@
                     </v-row>
                     <v-divider/>
                     <v-row>
-                        <v-col cols="3" class="label" > Study Name </v-col>
-                        <v-col cols="7">
-                            <v-text-field color="red darken-3" v-model="studyName"> </v-text-field>
+                        <v-col cols="2" class="label" > Project Name </v-col>
+                        <v-col cols="8">
+                            <v-text-field color="red darken-3" v-model="projectName"> </v-text-field>
                         </v-col>
                     </v-row>
                     <v-row>
@@ -41,7 +41,7 @@
                     <v-row>
                         <v-col cols="12" class="label" > Open Link </v-col>
                         <v-col cols="12">
-                            <v-text-field color="red darken-3" v-model="openLink" placeholder="스터디를 진행하실 오픈링크를 등록해주세요."> </v-text-field>
+                            <v-text-field color="red darken-3" v-model="openLink" placeholder="프로젝트를 진행하실 오픈링크를 등록해주세요."> </v-text-field>
                         </v-col>
                     </v-row>
                     <v-row justify="center">
@@ -65,19 +65,15 @@
 <script>
 
 export default {
-    name:'StudyWrite',
+    name:'ProjectWirte',
     data() {
         return {
             image :'',
-            studyName:'',
+            projectName:'',
             openLink:'',
             content:'',
             people: [],
-            items: [
-            '4',
-            '5',
-            '6', '7', '8', '9', '10',
-            ],
+            items: ['4', '5', '6', '7', '8', '9', '10'],
             files:[],
             filesPreview:[],
             response: ''
@@ -97,19 +93,19 @@ export default {
             this.files = this.$refs.files.files[0]
         },
 
-        onStudySubmit () {
+        onProjectSubmit () {
 
-            const { studyName, writer, content, people, openLink} = this
+            const { projectName, writer, content, people, openLink} = this
             const file =  this.$refs.files.files[0]
-             var result = confirm('한번 스터디를 만드시면 모집글 외 수정 불가능합니다.')
+             var result = confirm('한번 프로젝트 그룹을 만드시면 모집글 외 수정 불가능합니다.')
              if (result) {
-            this.$emit('submit', { studyName, content,writer, people, file, openLink })
-            console.log(studyName,content,writer,file,people,openLink)
+            this.$emit('submit', { projectName, content,writer, people, file, openLink })
+            console.log(projectName,content,writer,file,people,openLink)
              }
 
         },
         goPage (){
-            this.$router.push('/study')
+            this.$router.push('/project')
         }
     }
 
