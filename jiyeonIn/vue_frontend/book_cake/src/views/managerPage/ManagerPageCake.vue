@@ -55,7 +55,7 @@ import axios from 'axios'
 
                 if(files2.length > 0) {
                     for(let idx = 0; idx <1; idx++) {
-                        formData.append('fileList', this.files2[idx])
+                        formData.append('fileList', files2[idx])
                     }
                 }
 
