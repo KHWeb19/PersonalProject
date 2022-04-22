@@ -4,14 +4,11 @@ import com.example.demo.controller.request.MemberDto;
 import com.example.demo.controller.session.UserInfo;
 import com.example.demo.entity.personalProject.Member;
 import com.example.demo.entity.personalProject.NoticeBoard;
-import com.example.demo.service.presonalProject.MemberService;
+import com.example.demo.service.personalProject.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;

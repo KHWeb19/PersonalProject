@@ -1,13 +1,12 @@
 package com.example.demo.controller.personalProject;
 
 import com.example.demo.entity.personalProject.NoticeBoard;
-import com.example.demo.service.presonalProject.NoticeBoardService;
+import com.example.demo.service.personalProject.NoticeBoardService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 @Slf4j

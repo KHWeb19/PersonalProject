@@ -34,15 +34,15 @@ export default {
     qnaBoards: [],
     qnaBoard: null,
 
-    //COMMENT
-    comments: [],
-    comment: [],
+    // //COMMENT
+    // comments: [],
+    // comment: [],
 
-    //PRODUCT
-    products: [],
-    product: [],
+    // //PRODUCT
+    // products: [],
+    // product: [],
 
-    category: [],
-    categories: []
+    // category: [],
+    // categories: []
    
 }

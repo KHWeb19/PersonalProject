@@ -3,14 +3,11 @@ package com.example.demo.controller.personalProject;
 import com.example.demo.controller.request.CommentDto;
 import com.example.demo.entity.personalProject.Comment;
 import com.example.demo.entity.personalProject.QnABoard;
-import com.example.demo.service.presonalProject.CommentService;
+import com.example.demo.service.personalProject.CommentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

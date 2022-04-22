@@ -1,4 +1,4 @@
-package com.example.demo.service.presonalProject;
+package com.example.demo.service.personalProject;
 
 import com.example.demo.controller.request.CommentDto;
 import com.example.demo.entity.personalProject.Comment;
@@ -6,11 +6,9 @@ import com.example.demo.entity.personalProject.QnABoard;
 import com.example.demo.repository.personalProject.CommentRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @Service

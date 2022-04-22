@@ -1,4 +1,4 @@
-package com.example.demo.service.presonalProject;
+package com.example.demo.service.personalProject;
 
 import com.example.demo.controller.request.CommentDto;
 import com.example.demo.entity.personalProject.Comment;

@@ -1,4 +1,4 @@
-package com.example.demo.service.presonalProject;
+package com.example.demo.service.personalProject;
 
 import com.example.demo.controller.request.MemberDto;
 import com.example.demo.entity.personalProject.Member;
@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.GenericDeclaration;
 import java.util.Optional;
 
 @Slf4j

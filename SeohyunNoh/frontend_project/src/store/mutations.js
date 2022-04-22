@@ -17,12 +17,12 @@ import {
     FETCH_COMMENTS,
     FETCH_COMMENT,
 
-    //PRODUCT
-    FETCH_CATEGORIES,
-    FETCH_CATEGORY,
+    // //PRODUCT
+    // FETCH_CATEGORIES,
+    // FETCH_CATEGORY,
 
-    FETCH_PRODUCTS,
-    FETCH_PRODUCT,
+    // FETCH_PRODUCTS,
+    // FETCH_PRODUCT,
    
 } from './mutation-types'
 
@@ -64,18 +64,18 @@ export default {
         state.comment = comment
     },
 
-    //PRODUCT
-    [FETCH_CATEGORY] (state, category) {
-        state.category = category
-    },
-    [FETCH_CATEGORIES] (state, categories) {
-        state.categories = categories
-    },
+    // //PRODUCT
+    // [FETCH_CATEGORY] (state, category) {
+    //     state.category = category
+    // },
+    // [FETCH_CATEGORIES] (state, categories) {
+    //     state.categories = categories
+    // },
 
-    [FETCH_PRODUCT] (state, product) {
-        state.product = product
-    },
-    [FETCH_PRODUCTS] (state, products) {
-        state.products = products
-    }
+    // [FETCH_PRODUCT] (state, product) {
+    //     state.product = product
+    // },
+    // [FETCH_PRODUCTS] (state, products) {
+    //     state.products = products
+    // }
 }

@@ -2,7 +2,7 @@ package com.example.demo.controller.personalProject;
 
 import com.example.demo.entity.personalProject.NoticeBoard;
 import com.example.demo.entity.personalProject.QnABoard;
-import com.example.demo.service.presonalProject.QnAService;
+import com.example.demo.service.personalProject.QnAService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

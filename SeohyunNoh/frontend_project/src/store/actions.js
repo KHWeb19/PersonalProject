@@ -15,12 +15,12 @@ import {
     FETCH_COMMENTS,
     FETCH_COMMENT,
 
-    //PRODUCT
-    FETCH_CATEGORIES,
-    FETCH_CATEGORY,
+    // //PRODUCT
+    // FETCH_CATEGORIES,
+    // FETCH_CATEGORY,
 
-    FETCH_PRODUCTS,
-    FETCH_PRODUCT,
+    // FETCH_PRODUCTS,
+    // FETCH_PRODUCT,
    
 } from './mutation-types'
 
@@ -89,32 +89,32 @@ export default {
                     })
     },
 
-    //PRODUCT
-    fetchCategories ({commit}) {
-        return axios.get('http://localhost:7777/category/list')
-                    .then((res) => {
-                        commit(FETCH_CATEGORIES, res.data)
-                    })
-    },
-    fetchCategory ({commit}, categoryId) {
-        return axios.get(`http://localhost:7777/category/update/${categoryId}}`)
-                    .then((res) => {
-                        commit(FETCH_CATEGORY, res.data)
-                    })
-    },
+    // //PRODUCT
+    // fetchCategories ({commit}) {
+    //     return axios.get('http://localhost:7777/category/list')
+    //                 .then((res) => {
+    //                     commit(FETCH_CATEGORIES, res.data)
+    //                 })
+    // },
+    // fetchCategory ({commit}, categoryId) {
+    //     return axios.get(`http://localhost:7777/category/update/${categoryId}}`)
+    //                 .then((res) => {
+    //                     commit(FETCH_CATEGORY, res.data)
+    //                 })
+    // },
 
 
-    fetchProducts ({commit}) {
-        return axios.get('http://localhost:7777/product/list')
-        .then((res) => {
-            commit(FETCH_PRODUCTS, res.data)
-        }) 
-    },
-    fetchProduct ({commit}, productId) {
-        return axios.get(`http://localhost:7777/product/update/${productId}`)
-        .then((res) => {
-            commit(FETCH_PRODUCT, res.data)
-        }) 
-    }
+    // fetchProducts ({commit}) {
+    //     return axios.get('http://localhost:7777/product/list')
+    //     .then((res) => {
+    //         commit(FETCH_PRODUCTS, res.data)
+    //     }) 
+    // },
+    // fetchProduct ({commit}, productId) {
+    //     return axios.get(`http://localhost:7777/product/update/${productId}`)
+    //     .then((res) => {
+    //         commit(FETCH_PRODUCT, res.data)
+    //     }) 
+    // }
 
 }

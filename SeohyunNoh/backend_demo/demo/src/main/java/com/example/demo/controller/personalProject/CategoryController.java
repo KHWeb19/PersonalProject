@@ -2,7 +2,7 @@ package com.example.demo.controller.personalProject;
 
 import com.example.demo.common.ApiResponse;
 import com.example.demo.entity.personalProject.Category;
-import com.example.demo.service.presonalProject.CategoryService;
+import com.example.demo.service.personalProject.CategoryService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

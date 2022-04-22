@@ -22,13 +22,13 @@ import QnARegisterPage from '@/views/qna/QnARegisterPage.vue'
 import QnAReadPage from '@/views/qna/QnAReadPage.vue'
 import QnAModifyPage from '@/views/qna/QnAModifyPage.vue'
 
-import AddCategoryPage from '@/views/category/AddCategoryPage.vue'
+import AddCategoryPage from '@/views/AddCategoryPage.vue'
 
-import WomenOuterCategoryPage from '@/views/womenCategory/WomenOuterCategoryPage.vue'
-import ProductDetailPage from '@/views/womenCategory/ProductDetailPage.vue'
+// import WomenOuterCategoryPage from '@/views/womenCategory/WomenOuterCategoryPage.vue'
+// import ProductDetailPage from '@/views/womenCategory/ProductDetailPage.vue'
 
 import CartPage from '@/views/pay/CartPage.vue'
-import PayPage from '@/views/pay/PayPage.vue'
+
 
 Vue.use(VueRouter)
 
@@ -158,20 +158,20 @@ const routes = [
     }
   },
   {
-    path: '/addCategoryPAge',
+    path: '/addCategoryPage',
     name: 'AddCategoryPage',
     component: AddCategoryPage
   },
-  {
-    path: '/womenOuterCategoryPage',
-    name: 'WomenOuterCategoryPage',
-    component: WomenOuterCategoryPage
-  },
-  {
-    path: '/productDetail',
-    name: 'ProductDetailPage',
-    component: ProductDetailPage
-  },
+  // {
+  //   path: '/womenOuterCategoryPage',
+  //   name: 'WomenOuterCategoryPage',
+  //   component: WomenOuterCategoryPage
+  // },
+  // {
+  //   path: '/productDetail',
+  //   name: 'ProductDetailPage',
+  //   component: ProductDetailPage
+  // },
   {
     path: '/lookBookPage',
     name: 'LookBookPage',
@@ -181,11 +181,6 @@ const routes = [
     path: '/cartPage',
     name: 'CartPage',
     component: CartPage
-  },
-  {
-    path: '/payPage',
-    name: 'PayPage',
-    component: PayPage
   }
 
 ]
