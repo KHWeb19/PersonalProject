@@ -17,7 +17,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("/board/community")
-@CrossOrigin(origins ="http://localhost:8080", allowedHeaders = "*")
+@CrossOrigin(origins ="http://localhost:8081", allowedHeaders = "*")
 public class BoardController {
 
     @Autowired

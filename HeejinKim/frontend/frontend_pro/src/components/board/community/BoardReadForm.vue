@@ -8,17 +8,17 @@
                 </v-col>
             </v-row>
 
-                <v-row>
+            <v-row>
                 <v-col cols="1" class="label"> Writer</v-col>
                 <v-col>
-                <v-text-field rounded style="width:150px" readonly :value="board.writer"/>
+                    <v-text-field rounded style="width:150px" readonly :value="board.writer"/>
                 </v-col>
             </v-row>
 
             <v-row>
                 <v-col cols="1" class="label"> Date</v-col>
                 <v-col>
-                <v-text-field class="date" rounded readonly :value="board.regDate"/>
+                    <v-text-field class="date" rounded readonly :value="board.regDate"/>
                 </v-col>
             </v-row>
 
@@ -33,18 +33,17 @@
 
             <v-row justify="center">
                 <img v-if="this.board.fileName !== null && this.board.fileName !== 'null'" class="addImg" 
-                :src="require(`@/assets/uploadImg/${this.board.fileName}`)"
-                >
+                :src="require(`@/assets/uploadImg/${this.board.fileName}`)">
             </v-row>
             
             <v-row>
                 <v-btn @click="backPage" class="backBtn" dark> Back</v-btn>
             </v-row>
 
-            <v-row v-if="board.writer == this.$store.state.session.userId">  
+            <v-row v-if="board.writer == this.userId">  
     
-                <router-link :to="{name:'BoardModify', 
-                params: { boardNo: board.boardNo.toString()}}" style="text-decoration:none"><v-btn class="modifyBtn">Modify</v-btn>
+                <router-link :to="{name:'BoardModify', params:{boardNo: board.boardNo.toString()}}" style="text-decoration:none">
+                    <v-btn class="modifyBtn">Modify</v-btn>
                 </router-link>
         
                 <v-btn @click=onDelete dark>Delete</v-btn>
@@ -67,18 +66,21 @@ export default {
             required: true
         }
     },
+
     data () {
         return {
 
-        fileName: this.board.fileName
+        fileName: this.board.fileName,
+        
 
         }
     },
     created () {
         this.boardNo = this.board.boardNo
+        this.userId = this.$store.state.session.userId
     },
     methods: {
-        ...mapActions(['fetchBoardList']),
+        ...mapActions(['fetchBoardList','fetchCommentsList']),
         backPage () {
             this.$router.push('/communityBoard')
         },
@@ -87,7 +89,7 @@ export default {
             
             axios.delete(`http://localhost:7777/board/community/${boardNo}`, {fileName})
                     .then(() => {
-                        alert('게시글이 삭제되었습니다.')
+                        alert('게시글 삭제')
                         this.$router.push({ name: 'BoardList' })
                     })
                     .catch(() => {

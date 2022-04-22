@@ -44,7 +44,9 @@
 
 <script>
 export default {
-    name:'CommunityBoardWirte',
+
+    name:'BoardRegisterForm',
+    
     data() {
         return {
 
@@ -64,16 +66,17 @@ export default {
             console.log('add Image')
 
             var image = this.$refs['files'].files[0]
+
             const url = URL.createObjectURL(image)
             this.image = url
-            this.files = this.$refs.files.files[0]
 
-           
+            this.files = this.$refs.files.files[0]
             
         },
         onSubmit () {
             const { title, content,writer } = this
             const file =  this.$refs.files.files[0]
+
             this.$emit('submit', { title, content,writer,file })
             console.log(title,content,writer,file)
         },

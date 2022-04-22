@@ -10,6 +10,7 @@
       <v-text-field
         v-model="search"
         append-icon="mdi-magnify"
+        
         label="Search"
         single-line
         hide-details
@@ -45,6 +46,9 @@
 </template>
 
 <script>
+
+//import axios from 'axios'
+
 export default {
 
   name: "BoardListForm",
@@ -73,6 +77,20 @@ export default {
       console.log("글 번호: " + idx.item.boardNo)
       this.$router.push({name: 'BoardRead', params: {boardNo: String(idx.item.boardNo)}})
     },
+    /*
+    @click="keySearch"
+    keySearch(){
+      const {keyWord} = this
+      console.log(keyWord)
+      axios.post('http://localhost:7777/board/community/search', {keyWord})
+      .then((res) => {
+          console.log(res.data)
+          this.$router.push({name: 'CommunityBoardSearchPage', params: { searchList: res.data }})
+      })
+      .catch (() => {
+          alert('문제 발생!')
+      })
+            }*/
   }
 }
 </script>

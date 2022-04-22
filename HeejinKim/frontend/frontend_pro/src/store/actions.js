@@ -1,6 +1,7 @@
 import{
     FETCH_BOARD,
-    FETCH_BOARD_LIST
+    FETCH_BOARD_LIST,
+    FETCH_BOARD_COMMENTS_LIST,
 
 
 
@@ -38,6 +39,12 @@ export default {
             .then((res) => {
                 commit(FETCH_BOARD, res.data)
             })
+    },
+    fetchBoardCommentsList({ commit }, boardNo ) {
+        return axios.get(`http://localhost:7777/boardComments/list/${boardNo}`)
+                .then((res) => {
+                    commit(FETCH_BOARD_COMMENTS_LIST, res.data)
+                })
     },
 
 

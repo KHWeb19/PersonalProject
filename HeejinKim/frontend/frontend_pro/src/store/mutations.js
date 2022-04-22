@@ -9,6 +9,8 @@ import {
     FETCH_BOARD,
     FETCH_BOARD_LIST,
 
+    FETCH_BOARD_COMMENTS_LIST,
+
 
 /*
     COOKIE_SESSION,
@@ -29,6 +31,9 @@ export default {
     },
     [FETCH_BOARD] (state, board) {
         state.board = board
+    },
+    [FETCH_BOARD_COMMENTS_LIST] (state, boardComments) {
+        state.boardComments = boardComments
     },
 
 

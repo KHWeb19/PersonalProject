@@ -4,13 +4,17 @@ members:[],
 member:null,
 
 isAuth: false,
-//isAuth: true,(일단 작업하려면 이렇게 해놓고)
+//isAuth: true,,(일단 작업하려면 이렇게 해놓고)
 
 auth: null,
 auths: [],
 
-boards: [],
+//커뮤니티 게시판
 board: null,
+boards: [],
+
+
+boardComments:[],
 
 /*
 session: null,
@@ -19,9 +23,5 @@ loginMemberNo: null,
 auth: null */
 
 session: [],
-
-
-
-
 
 }
