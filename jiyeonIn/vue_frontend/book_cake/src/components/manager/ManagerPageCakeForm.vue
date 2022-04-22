@@ -22,7 +22,17 @@
         <div class="right_content">
             <h4>케이크 정보 확인</h4>
 
-            <v-data-table :headers="headerTitle" :items="cakeLists"  class="elevation-0" >
+            <v-card>
+            <v-card-title>
+            <v-text-field
+                v-model="search"
+                append-icon="mdi-magnify"
+                label="Search"
+                single-line
+                hide-details
+            ></v-text-field>
+            </v-card-title>
+            <v-data-table :headers="headerTitle" :items="cakeLists" :search="search"  class="elevation-0" >
                     
                     <template v-slot:[`item.linkInfo`]="{ item }" >
                         <img v-if="item.linkInfo != null" v-bind:src="require(`@/assets/uploadImg/${item.linkInfo}`)" height="230px"/>
@@ -44,6 +54,7 @@
                     </v-icon>
                     </template>
                 </v-data-table>
+                </v-card>
 
                 <form @submit.prevent="modifySubmit">
                     <v-dialog v-model="dialog" >
@@ -122,6 +133,7 @@ import axios from 'axios'
                 design: '',
                 size: '',
                 price:'', 
+                search:'',
                 
             }
         },
