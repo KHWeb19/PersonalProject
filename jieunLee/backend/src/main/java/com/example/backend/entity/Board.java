@@ -1,6 +1,7 @@
 package com.example.backend.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -38,7 +39,7 @@ public class Board {
     @UpdateTimestamp
     private Date updDate;
 
-    @JsonBackReference(value="member-board")
+    @JsonIgnoreProperties({"boards"})
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name= "member_no")
     private Member member;

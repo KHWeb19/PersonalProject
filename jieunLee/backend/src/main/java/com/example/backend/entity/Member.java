@@ -1,5 +1,6 @@
 package com.example.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -49,7 +50,7 @@ public class Member {
     @UpdateTimestamp
     private Date updDate;
 
-    @JsonManagedReference(value="member-board")
+    @JsonIgnoreProperties({"member"})
     @OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
     private List<Board> boards = new ArrayList<>();
 
