@@ -1,0 +1,22 @@
+server:
+  port: 1234
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/user_db?allowPublicKeyRetrieval=true&serverTimezone=UTC&usessl=false
+    username: thkim
+    password: thkim@123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    dialect: org.hibernate.dialect.MySQL8Dialect
+  jpa:
+    database: mysql
+    open-in-view: false
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+
+

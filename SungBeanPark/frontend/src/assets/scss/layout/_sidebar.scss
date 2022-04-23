@@ -1,0 +1,55 @@
+.sidebar {
+  $sidebar-width: 240px;
+  $padding: 8px;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: $sidebar-level;
+  height: 100vh;
+  width: 240px;
+  padding: 32px 20px;
+  overflow-y: auto;
+  background-color: $black;
+  transform: translate3d(-#{$sidebar-width}, 0, 0);
+  transition: transform 300ms ease-in-out;
+  overscroll-behavior: contain;
+
+  &.active {
+    transform: translate3d(0, 0, 0);
+  }
+
+  &-header {
+    padding: 0 12px;
+
+    .logo {
+      @include flexbox(center);
+      a {
+        display: block;
+      }
+
+      img {
+        display: block;
+        width: auto;
+        height: 20px;
+      }
+    }
+  }
+
+  &-nav {
+    margin-top: 16px;
+    li {
+      border-bottom: 1px solid $border;
+      a {
+        @include text-style(18, $tertiary);
+        display: block;
+        padding: $padding;
+
+        &:hover {
+          color: $white;
+          transition: color 300ms ease-in-out;
+        }
+      }
+    }
+  }
+}

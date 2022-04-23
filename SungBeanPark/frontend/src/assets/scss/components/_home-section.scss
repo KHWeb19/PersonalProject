@@ -1,0 +1,14 @@
+.home-section {
+  @include flexbox;
+  height: 50px;
+  background-color: $border;
+  text-align: center;
+
+  &-content {
+    @include text-style(14, $dark);
+
+    a {
+      color: $blue;
+    }
+  }
+}

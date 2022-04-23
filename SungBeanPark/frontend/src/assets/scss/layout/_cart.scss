@@ -1,0 +1,80 @@
+.cart {
+  padding-top: 8px;
+  position: relative;
+
+  &-content {
+    &-wrap {
+      padding: 0 16px;
+    }
+    &-header {
+      @include flexbox(between);
+      height: 32px;
+
+      &.left {
+        @include text-style(16, $dark);
+
+        span {
+          margin-left: 4px;
+        }
+      }
+      &.right {
+        @include text-style(14, $dark);
+      }
+    }
+
+    &-footer {
+      @include flexbox(between);
+      margin: 8px 0;
+      .btn-group {
+        @include text-style(14);
+      }
+      .option {
+        margin-right: 8px;
+      }
+    }
+  }
+
+  &-sidebar {
+    &-sticky {
+      position: sticky;
+      top: 140px;
+    }
+    &-wrap {
+      padding: 0 16px;
+    }
+    &-price {
+      @include flexbox(between);
+      margin-top: 16px;
+      margin-bottom: 16px;
+
+      &.total {
+        @include text-style(16, $black);
+        font-weight: 700;
+
+        .number {
+          @include text-style(24, $black);
+        }
+      }
+    }
+
+    &-delivery {
+      @include text-style(16, $dark);
+      padding: 8px;
+      margin-bottom: 8px;
+      border-top: 1px solid $border;
+      border-bottom: 1px solid $border;
+      text-align: center;
+    }
+
+    &-btn {
+      margin-bottom: 8px;
+      .btn-black {
+        width: 100%;
+      }
+    }
+  }
+
+  @include responsive(T) {
+    padding-top: 48px;
+  }
+}

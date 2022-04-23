@@ -1,0 +1,12 @@
+.global-header {
+  height: 100%;
+  padding-top: 32px;
+  padding-bottom: 16px;
+
+  .gnb {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 30;
+  }
+}

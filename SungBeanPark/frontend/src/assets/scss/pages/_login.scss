@@ -1,0 +1,102 @@
+.login {
+  @include pos-center;
+  height: 100%;
+
+  &-container {
+    margin-top: 64px;
+  }
+
+  &-header {
+    @include text-style(18);
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  &-member-id,
+  &-member-password {
+    margin-bottom: 16px;
+    width: 254px;
+    height: 46px;
+    border: 1px solid $border;
+    border-radius: 4px;
+
+    ::placeholder {
+      color: $tertiary;
+      font-size: 14px;
+    }
+
+    input {
+      padding: 10px;
+    }
+  }
+
+  .btn-black {
+    width: 254px;
+  }
+  &-util {
+    @include inline-flexbox(between);
+    margin-top: 16px;
+
+    input {
+      margin-right: 4px;
+    }
+
+    label {
+      color: $dark;
+      font-size: 14px;
+      display: inline-block;
+    }
+    &-find {
+      @include inline-flexbox(between);
+      margin-left: 4px;
+      .id {
+        ::after {
+          margin: 0 4px;
+          content: "|";
+        }
+      }
+
+      a {
+        @include text-style(14, $tertiary);
+      }
+    }
+  }
+
+  &-btn-kakao {
+    width: 254px;
+    height: 46px;
+    border-radius: 4px;
+    color: $black;
+    background-color: $yellow;
+    font-weight: 700;
+    margin-top: 16px;
+  }
+
+  &-btn-naver {
+    width: 254px;
+    height: 46px;
+    border-radius: 4px;
+    color: $white;
+    background-color: $green;
+    font-weight: 700;
+    margin-top: 16px;
+  }
+
+  &-bottom-text {
+    text-align: center;
+    margin-top: 40px;
+    span {
+      font-size: 12px;
+      margin-right: 8px;
+      color: $blue;
+    }
+    a {
+      color: $blue;
+      border: 2px solid $blue;
+      padding: 4px;
+      border-radius: 24px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+  }
+}

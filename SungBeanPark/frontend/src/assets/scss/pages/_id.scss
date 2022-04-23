@@ -1,0 +1,46 @@
+.id {
+  @include pos-center;
+  height: 100%;
+
+  &-container {
+    margin-top: 64px;
+  }
+  &-header {
+    @include text-style(18);
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  &-input-label {
+    margin-left: 8px;
+    margin-bottom: 8px;
+  }
+
+  input {
+    width: 254px;
+    height: 46px;
+    margin-bottom: 40px;
+    border: 1px solid $border;
+    border-radius: 4px;
+    padding: 8px;
+
+    ::placeholder {
+      @include text-style(14, $tertiary);
+    }
+  }
+
+  &-input-button {
+    @include text-style(14);
+    margin-left: -72px;
+    margin-top: 10px;
+    position: absolute;
+    height: 24px;
+    width: 64px;
+    background-color: $border;
+    border-radius: 4px;
+  }
+
+  .btn-black {
+    width: 254px;
+  }
+}
