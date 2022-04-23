@@ -1,0 +1,16 @@
+.gnb-icon-button {
+  @include flexbox;
+  width: 32px;
+  height: 32px;
+  font-size: 24px;
+  color: $tertiary;
+
+  :hover {
+    color: $white;
+    transition: color 300ms ease-in-out;
+  }
+
+  &.is-menu {
+    color: $tertiary;
+  }
+}

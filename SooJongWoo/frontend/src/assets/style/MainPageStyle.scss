@@ -1,0 +1,150 @@
+// 메인상단 이미지 스타일
+.AllIn {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    color: white;
+	padding-left: 5%;
+    background: {
+    image: linear-gradient(to bottom,  rgba(172, 172, 172, 0.014) 0%,rgba(0, 0, 0, 0.75) 100%),
+    url('@/assets/image/sea42.jpeg');
+    size: cover;
+    }
+	.content {
+		color: #fff;
+		font-size: 4em;
+	}
+	.content h2:nth-child(1) {
+		color: #fff;
+		-webkit-text-stroke: 2px white;
+	}
+	
+	.content h2:nth-child(2) {
+		color: #03a9f4;
+		animation: animate 4s  infinite;
+		position: absolute;
+	}
+
+}
+.main-bar{
+    position: absolute;
+    top: 2%;
+    left:1%;
+}
+.login-locate {
+    padding: 10px 0px 10px 0px;
+    position: absolute;
+    right: 0.5%;
+    top:1.5%;
+}
+.menubar {
+    padding-top: 100px;
+    padding-left: 40px;
+}
+.account {
+    padding-left: 40vw;
+}
+.container{
+    width: 100%;
+    position: absolute;
+    bottom: 20%;
+}
+
+// 실시간 예약 버튼
+.btn2 {
+    margin: 5%;
+}
+.btn2:hover {
+    opacity: 1;
+    background-color: white;
+}
+
+// 설명글 스타일
+h3 {
+    text-align: center;
+    margin: 5% 0% 5% 0%;
+}
+
+p {
+    font-size: 18px;
+    text-align: center;
+    padding: 5px 0px 5px 0px;
+    margin: 5px 10px;
+}
+h2 {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: "Poppins", sans-serif;
+}
+
+body {
+	display: flex;
+	background: #000;
+	min-height: 100vh;
+	align-items: center;
+	justify-content: center;
+}
+
+@keyframes animate {
+	0%,
+	100% {
+		clip-path: polygon(
+			0% 45%,
+			16% 44%,
+			33% 50%,
+			54% 60%,
+			70% 61%,
+			84% 59%,
+			100% 52%,
+			100% 100%,
+			0% 100%
+		);
+	}
+
+	50% {
+		clip-path: polygon(
+			0% 60%,
+			15% 65%,
+			34% 66%,
+			51% 62%,
+			67% 50%,
+			84% 45%,
+			100% 46%,
+			100% 100%,
+			0% 100%
+		);
+	}
+}
+
+.swiper {
+	height: 500px;
+	width: 100%;
+
+	.swiper-slide {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+		font-weight: bold;
+	}
+}
+
+.btn2 {
+	margin: 5%;
+}
+.btn2:hover {
+	color: #ffffff;
+}
+.btn2:hover::before {
+	opacity: 1;
+	background-color: #6098FF;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
