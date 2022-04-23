@@ -26,7 +26,6 @@ public class LikesServiceImpl implements LikesService {
 
     @Override
     public boolean register(Long boardNo, Long memberNo, Likes likes) {
-        //좋아요 등록과 삭제를 따로 구현해서 버튼이 바뀌게해보자
         Board board = boardRepository.findById(boardNo).orElseThrow();
         Member member = memberRepository.findById(memberNo).orElseThrow();
 
@@ -38,8 +37,7 @@ public class LikesServiceImpl implements LikesService {
             return true;
         } else {
             Optional<Likes> maybeLikes = repository.findByMemberAndBoard(member, board);
-            Likes findLikes = maybeLikes.get();
-            repository.deleteById(findLikes.getLikedNo());
+            repository.deleteById(maybeLikes.get().getLikedNo());
             return false;
         }
     }

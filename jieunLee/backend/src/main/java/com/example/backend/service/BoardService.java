@@ -13,5 +13,5 @@ public interface BoardService {
     List<Board> memberBoardList (Long memberNo);
     public Board read (Integer boardNo);
     public void modify (Board board, Integer memberNo);
-    public void remove (Integer boardNo);
+    public void remove (Long boardNo);
 }
