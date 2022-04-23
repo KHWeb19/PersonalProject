@@ -42,6 +42,11 @@ public class Member {
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<MemberAuth> authList = new ArrayList();
 
+    @OneToOne(mappedBy = "member", cascade = CascadeType.ALL)
+    private Reservation reservation;
+
+
+
     public Member (String userId, String password, String passwordCheck, String email) {
         this.userId = userId;
         this.password = password;
