@@ -1,71 +1,96 @@
 <template>
-    <div>
-        <v-container>
-        <v-row justify="center" style="margin-top:50px">
+    <v-container>
 
-            <v-btn @click="register">
-               <v-icon>add</v-icon>
-            </v-btn>
+        <template>
+            <v-row justify="center" style="margin-top:50px">
 
-            <v-spacer></v-spacer>
-            <v-text-field
-               class="search"
-               v-model="keyWord"
-               label="Search"
-               placeholder="검색어를 입력해주세요."
-               single-line
-               hide-details
-            ></v-text-field>
-            <v-col cols="2" md="1">
-                <v-btn class="searchBtn" @click="search" dark small>
-                    <v-icon>
-                        mdi-magnify
-                    </v-icon>
+                <v-btn @click="register">
+                <v-icon>add</v-icon>
                 </v-btn>
-            </v-col>
-        </v-row>
+
+                <v-spacer></v-spacer>
+                <v-text-field
+                class="search"
+                v-model="keyWord"
+                label="Search"
+                placeholder="작성자를 검색해주세요."
+                single-line
+                hide-details
+                ></v-text-field>
+                <v-col cols="2" md="1">
+                    <v-btn class="searchBtn" @click="search" dark small>
+                        <v-icon>
+                            mdi-magnify
+                        </v-icon>
+                    </v-btn>
+                </v-col>
+            </v-row>
+        </template>
+    <br>
 
 
-         <v-row>
+    <template>
+        <v-card class="pa-3" flat>
+          <v-row>
             <v-col v-for="tipBoard in paginatedData" 
-                     :key="tipBoard.boardNo" lg="3" sm="6">
-               <v-card @click="tipRead(tipBoard.boardNo)"
-                     style="margin:10px; width: 250px; height: 300px;">              
-               <v-toolbar dark>
-                     <router-link :to="{ name: 'TipReadPage',
-                                                params: { boardNo: tipBoard.boardNo.toString() } }">      
-                  <v-toolbar-title>{{ tipBoard.title }}</v-toolbar-title>
-                     </router-link>
-               </v-toolbar>   
+                     :key="tipBoard.boardNo"
+                     cols="12" sm="6" md="4" lg="3">
+               <v-hover v-slot="{hover}" close-delay="50">
+                    <v-card
+                            :elevation="hover ? 16:2" class="{ 'on-hover': hover }" 
+                            @click="readTip(tipBoard.boardNo, tipBoard.id)"
+                            style="margin: 10px; width: 320px; height: 300px;">              
+                    <v-toolbar dark class="tipTitle">     
+                                <v-toolbar-title>{{ tipBoard.title }}</v-toolbar-title>
+                            <v-spacer></v-spacer>
+                                <v-icon color="green"> mdi-cards-heart </v-icon>
+                                &ensp;
+                                <span> 15 </span>
+                    </v-toolbar>
 
-                     <v-card-text>{{ tipBoard.content }} </v-card-text>
-                           <v-divider></v-divider>
-               </v-card>
+                        <v-card-text cols="12">{{ tipBoard.content.substr(0,203) }} </v-card-text>
+
+                        <v-card-text class="card-text-id caption" style="color: green">
+                            <v-divider style="margin-bottom:10px"></v-divider>
+                            {{ tipBoard.writer.substr(0,6) }}
+                        </v-card-text>
+                        <v-card-text class="card-text-date caption">
+                            {{new Date(tipBoard.regDate).toLocaleString("ko-KR", {timeZone: "Asia/Seoul"}).toString().substr(0, 11)}}
+                        </v-card-text>
+                    </v-card>
+               </v-hover>
             </v-col>
-         </v-row>
-         
+          </v-row>
+        </v-card>
+
+    </template>
+    
+    <template>
          <v-row>
             <v-col>
             <div class="btn-cover">
-                <v-btn :disabled="pageNum === 0" @click="prevPage" class="page-btn">
+                <v-btn
+                    :disabled="pageNum === 0"
+                    @click="prevPage"
+                    class="page-btn">
                 이전
                 </v-btn>
                 <span class="page-count"
                 >{{ pageNum + 1 }} / {{ pageCount }} 페이지</span
                 >
                 <v-btn
-                :disabled="pageNum >= pageCount - 1"
-                @click="nextPage"
-                class="page-btn"
+                    :disabled="pageNum >= pageCount - 1"
+                    @click="nextPage"
+                    class="page-btn"
                 >
                 다음
                 </v-btn>
             </div>
             </v-col>
          </v-row>
+    </template>
 
-        </v-container>
-    </div>
+    </v-container>
 </template>
 
 <script>
@@ -96,7 +121,10 @@ export default {
     methods: {
         register() {
             this.$router.push({ name:'tipRegisterPage' })
-        }, 
+        },
+        readTip(boardNo, id) {
+            this.$router.push({ name:'TipReadPage', params: {boardNo: boardNo, id: id} })
+        },
         search() {
             const { keyWord } = this;
             axios.post("http://localhost:7777/tipboard/search", { keyWord })
@@ -137,4 +165,16 @@ export default {
 
 <style scoped>
 
+.tipTitle {
+      font-size: 12px;
+}
+.card-text-id {
+  position: absolute;
+  bottom: 0;
+}
+.card-text-date {
+  position: absolute;
+  bottom: 0;
+  text-align: right;
+}
 </style>
