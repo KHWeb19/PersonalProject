@@ -31,9 +31,6 @@
                     type="password" v-model="password" />
                   </td>
               </tr>
-              
-
-
             </table>
             <br/>
             <div style="text-align: center">
