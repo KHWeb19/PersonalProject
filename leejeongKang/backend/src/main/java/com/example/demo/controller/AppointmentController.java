@@ -1,6 +1,9 @@
 package com.example.demo.controller;
 
+import com.example.demo.controller.request.AppointmentRequest;
 import com.example.demo.entity.Appointment.Appointment;
+import com.example.demo.entity.Doctor.Doctor;
+import com.example.demo.entity.Member.Member;
 import com.example.demo.service.Appointment.AppointmentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +23,10 @@ public class AppointmentController {
     private AppointmentService service;
 
     @PostMapping("/register")
-    public void AptRegister (@Validated @RequestBody Appointment appointment) {
+    public void AptRegister (@Validated @RequestBody AppointmentRequest appointmentRequest) {
         log.info("AppointmentRegister()");
 
-        service.register(appointment);
+        service.register(appointmentRequest);
     }
 
     @GetMapping("/list")

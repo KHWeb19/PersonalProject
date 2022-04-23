@@ -1,7 +1,14 @@
 package com.example.demo.service.Appointment;
 
+import com.example.demo.controller.request.AppointmentRequest;
+import com.example.demo.controller.request.DoctorRequest;
+import com.example.demo.controller.request.MemberRequest;
 import com.example.demo.entity.Appointment.Appointment;
+import com.example.demo.entity.Doctor.Doctor;
+import com.example.demo.entity.Member.Member;
 import com.example.demo.repository.Appointment.AppointmentRepository;
+import com.example.demo.repository.Doctor.DoctorRepository;
+import com.example.demo.repository.Member.MemberRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -20,8 +27,18 @@ public class AppointmentServiceImpl implements AppointmentService{
 
     @Override
     @Transactional
-    public void register (Appointment appointment) {
-        repository.save(appointment);
+    public void register (AppointmentRequest appointmentRequest) {
+
+        Member member = new Member(appointmentRequest.getMemberNo());
+
+        Doctor doctor = new Doctor(appointmentRequest.getDoctorNo());
+
+        Appointment appointmentEntity = new Appointment(
+                appointmentRequest.getDate(), appointmentRequest.getTime(),
+                member, doctor);
+
+        repository.save(appointmentEntity);
+
     }
 
     @Override
