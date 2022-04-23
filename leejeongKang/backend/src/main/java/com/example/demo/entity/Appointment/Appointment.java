@@ -29,9 +29,6 @@ public class Appointment {
     @Column(length = 20)
     private String time;
 
-    @Column(length = 20)
-    private Long test;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "memberNo")
     @NotNull
