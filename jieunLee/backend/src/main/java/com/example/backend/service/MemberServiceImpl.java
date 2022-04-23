@@ -6,6 +6,8 @@ import com.example.backend.entity.Comment;
 import com.example.backend.entity.Likes;
 import com.example.backend.entity.Member;
 import com.example.backend.repository.BoardRepository;
+import com.example.backend.repository.CommentRepository;
+import com.example.backend.repository.LikesRepository;
 import com.example.backend.repository.MemberRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,12 @@ public class MemberServiceImpl implements MemberService{
 
     @Autowired
     BoardRepository boardRepository;
+
+    @Autowired
+    LikesRepository likesRepository;
+
+    @Autowired
+    CommentRepository commentRepository;
 
     @Override
     public List<Member> list() {
@@ -162,14 +170,14 @@ public class MemberServiceImpl implements MemberService{
         Member member = memberRepository.findById(memberNo).orElseThrow();
         Optional<Board> maybeBoard = boardRepository.findByMember(member);
         if(!maybeBoard.isEmpty()) {
-//            Board board = repository.findById(boardNo).orElseThrow();
-//
-//            Optional<Comment> maybeComment = commentRepository.findByBoard(board);
-//            commentRepository.deleteById(maybeComment.get().getCommentNo());
-//
-//            Optional<Likes> maybeLikes = likesRepository.findByBoard(board);
-//            likesRepository.deleteById(maybeLikes.get().getLikedNo());
-
+            Optional<Comment> maybeComment = commentRepository.findByBoard(maybeBoard.get());
+            if(!maybeComment.isEmpty()) {
+                commentRepository.deleteById(maybeComment.get().getCommentNo());
+            }
+            Optional<Likes> maybeLikes = likesRepository.findByBoard(maybeBoard.get());
+            if(!maybeLikes.isEmpty()) {
+                likesRepository.deleteById(maybeLikes.get().getLikedNo());
+            }
             boardRepository.deleteById(maybeBoard.get().getBoardNo());
         }
         memberRepository.deleteById(Long.valueOf(memberNo));
