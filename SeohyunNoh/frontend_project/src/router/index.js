@@ -18,6 +18,8 @@ import EditCategory from '@/views/category/EditCategory.vue'
 import Product from '@/views/product/Product.vue'
 import AddProduct from '@/views/product/AddProduct.vue'
 import EditProduct from '@/views/product/EditProduct.vue'
+import ShowDetails from '@/views/product/ShowDetails.vue'
+import TopProducts from '@/views/product/TopProducts.vue'
 
 import LookBookPage from '@/views/project/LookBookPage.vue'
 
@@ -146,10 +148,25 @@ const routes = [
     component: Product
   },
   {
+    path: '/topProducts',
+    name: 'TopProducts',
+    component: TopProducts
+  },
+  {
     path: '/editProduct/:id',
     name: 'EditProduct',
     components: {
       default: EditProduct
+    },
+    props: {
+      default: true
+    }
+  },
+  {
+    path: '/showDetails/:id',
+    name: 'ShowDetails',
+    components: {
+      default: ShowDetails
     },
     props: {
       default: true

@@ -4,14 +4,16 @@
       <img class="card-img-top embed-responsive-item" :src="product.imageURL" alt="Product Image"/>
     </div>
     <div class="card-body">
-     <!-- <router-link :to="{ name: 'ShowDetails', params: { id: product.id } }"
-        ><h5 class="card-title">{{ product.name }}</h5></router-link
-      >
-      <p class="card-text"><sup>$</sup>{{ product.price }}</p>
-      <p class="card-text font-italic">
-        {{ product.description.substring(0, 65) }}...
-      </p> -->
-        <router-link :to="{ name: 'EditProduct', params: { id: product.id } }">
+        <router-link :to="{ name: 'ShowDetails', params: { id: product.id } }"
+            ><h5 class="card-title">{{ product.name }}</h5></router-link
+        >
+        <p class="card-text"><sup>₩</sup>{{ product.price }}</p>
+
+        <p class="card-text font-italic">
+            {{ product.description }}
+        </p>
+
+        <router-link :to="{ name: 'EditProduct', params: { id: product.id } }" v-show="$route.name == 'Product'">
             <button class="btn btn-primary">Edit</button>   
         </router-link>    
     </div>
@@ -26,16 +28,16 @@ export default {
       product: {
 
       }
-     },
-//   methods: {
-//     showDetails() {
-//       this.$router.push({
-//         name: "ShowDetails",
-//         params: { id: this.product.id },
-//       });
-//     },
-//   },
-};
+    },
+  methods: {
+    showDetails() {
+      this.$router.push({
+        name: 'ShowDetails',
+        params: { id: this.product.id },
+      })
+    },
+  },
+}
 </script>
 
 <style scoped>

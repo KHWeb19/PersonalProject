@@ -44,6 +44,7 @@
       <router-view v-if="categories && products" :categories="categories" :products="products" @fetchData="fetchData"/>
     </v-main> 
 
+  <Footer/>
   </v-app> 
 </template>
 
@@ -51,11 +52,13 @@
 
 import Header from './components/layout/Header.vue'
 import axios from 'axios'
+import Footer from './components/layout/Footer.vue'
 
 export default {
   name: 'App',
   components: {
     Header,
+    Footer,
 
   },
   data() {

@@ -82,9 +82,9 @@
                     gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
                     height="400px"
                 >
-                <h1 class="text-center font-size">Top Picks</h1>
+                <h1 class="text-center font-size">Top Products</h1>
                     <div class="text-center">
-                    <v-btn  href="/womenOuterCategory" class="white--text " outlined>SHOP NOW</v-btn>
+                    <v-btn router :to="{ path: '/topProducts' }" class="white--text " outlined>SHOP NOW</v-btn>
                     </div>
                 </v-img>
                 </v-card>
@@ -101,7 +101,7 @@
                 >
                     <h1 class="text-center font-size">New Arrivals</h1>
                     <div class="text-center">
-                    <v-btn  href="/womenOuterCategory" class="white--text" outlined>SHOP NOW</v-btn>
+                    <v-btn  href="/" class="white--text" outlined>SHOP NOW</v-btn>
                     </div>
                 </v-img>
                 </v-card>
