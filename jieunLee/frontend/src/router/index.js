@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 
 import LoginPage from '@/views/member/LoginPage'
 import RegisterPage from '@/views/member/RegisterPage'
+import ForgetPasswordPage from '@/views/member/ForgetPasswordPage'
+import FindPasswordPage from '@/views/member/FindPasswordPage'
 
 import HomeView from '@/views/HomeView.vue'
 import MemberList from '@/components/member/MemberList'
@@ -27,6 +29,21 @@ const routes = [
     path: '/register',
     name: 'RegisterPage',
     component: RegisterPage,
+  },
+  {
+    path: '/forgetPassword',
+    name: 'ForgetPasswordPage',
+    component: ForgetPasswordPage,
+  },
+  {
+    path: '/findPassword/:memberNo',
+    name: 'FindPasswordPage',
+    components: {
+      default: FindPasswordPage
+    },
+    props: {
+      default: true
+    }
   },
   {
     path: '/',
