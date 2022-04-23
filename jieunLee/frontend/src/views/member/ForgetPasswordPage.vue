@@ -15,12 +15,16 @@ export default {
     methods: {
         onSubmit(payload) {
             const {memberId, passwordHint} = payload
-                axios.post('http://localhost:7777/member/fogetPassword', {memberId, passwordHint})
+                axios.post('http://localhost:7777/member/forgetPassword', {memberId, passwordHint})
                     .then(res => {
                         if(res.data) {
-                            this.$router.push({name: 'LoginPage'})
+                            console.log(res.data)
+                            this.$router.push({
+                                name: 'FindPasswordPage',
+                                params: {memberNo: res.data.memberNo.toString()}
+                            })
                         }else {
-                            alert('다시 확인해주세요')
+                            alert('정보를 다시 확인해주세요')
                         }
                     })
                     .catch(res => {

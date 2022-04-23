@@ -54,7 +54,20 @@ public class MemberController {
         } else {
             log.info("로그인 실패!");
         }
+        return memberResponse;
+    }
 
+    @PostMapping("/forgetPassword")
+    public MemberRequest forgetPassword (@RequestBody MemberRequest memberRequest) {
+        log.info("forgetPassword(): " + memberRequest);
+
+        MemberRequest memberResponse = service.forget(memberRequest);
+
+        if (memberResponse != null) {
+            log.info("정보 일치!");
+        } else {
+            log.info("정보 불일치!");
+        }
         return memberResponse;
     }
 

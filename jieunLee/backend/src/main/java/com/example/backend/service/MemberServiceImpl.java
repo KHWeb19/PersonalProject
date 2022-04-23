@@ -91,6 +91,40 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
+    public MemberRequest forget(MemberRequest memberRequest) {
+        Optional<Member> maybeMember = memberRepository.findByUserId(memberRequest.getMemberId());
+
+        if (maybeMember.equals(Optional.empty())) {
+            log.info("이런 사람 없다!");
+            return null;
+        }
+
+        Member loginMember = maybeMember.get();
+
+        if (!memberRequest.getPasswordHint().matches(loginMember.getPasswordHint())) {
+            log.info("힌트 답 잘못 입력!");
+            return null;
+        }
+
+        if (loginMember.getMemberId().equals(memberRequest.getMemberId())) {
+            memberRequest.setMemberNo(loginMember.getMemberNo());
+        }
+
+        MemberRequest response = new MemberRequest(
+                memberRequest.getMemberNo(),
+                memberRequest.getMemberName(),
+                memberRequest.getMemberId(),
+                null,
+                memberRequest.getPasswordHint(),
+                memberRequest.getImageName(),
+                memberRequest.getMemberWeb(),
+                memberRequest.getMemberIntro(),
+                memberRequest.getRegData());
+
+        return response;
+    }
+
+    @Override
     public Member read(Long memberNo) {
         Optional<Member> maybeReadMember = memberRepository.findById(Long.valueOf(memberNo));
 

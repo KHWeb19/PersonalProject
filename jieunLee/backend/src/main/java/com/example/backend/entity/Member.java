@@ -22,13 +22,13 @@ public class Member {
     @Column(name="member_No")
     private Long memberNo;
 
-    @Column(length = 32, nullable = false)
+    @Column(length = 32)
     private String memberName;
 
     @Column(length = 32, nullable = false)
     private String memberId;
 
-    @Column(length = 64, nullable = false)
+    @Column(length = 64)
     private String password;
 
     @Column(length = 32, nullable = false)

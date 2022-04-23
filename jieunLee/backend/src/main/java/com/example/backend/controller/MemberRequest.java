@@ -27,4 +27,8 @@ public class MemberRequest {
         this.memberIntro = memberIntro;
         this.regData = regData;
     }
+
+    public MemberRequest (String password) {
+        this.password = password;
+    }
 }
