@@ -4,14 +4,14 @@
         <v-flex>
             <div style="display: flex; justify-content: center;">
 
-                <div style="border-radius: 70%; overflow: hidden;  margin-right: 105px;">
-                    <v-img v-if="member.imageName" width="150px" :src="require(`@/assets/mImage/${member.imageName}`)"/>
-                    <v-img v-else width="150px" src="@/assets/profile.jpg"/>
+                <div style="border-radius: 70%; overflow: hidden;  margin-right: 45px;">
+                    <v-img v-if="member.imageName" width="150px" height="150px" :src="require(`@/assets/mImage/${member.imageName}`)"/>
+                    <v-img v-else width="150px" height="150px" src="@/assets/profile.jpg"/>
                 </div>
 
-                <div style="width: 620px;">
+                <div style="width: 620px;  padding-left: 50px;">
                     <div style="display: flex;">
-                        <div style="font-size: 28px">{{member.memberId}}</div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <div style="font-size: 28px;">{{member.memberId}}</div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <router-link style="text-decoration: none;" :to="{
                             name: 'AccountsEditPage',
                             params: {memberNo: member.memberNo.toString()}}">

@@ -51,11 +51,15 @@
                                         mdi-cards-heart-outline
                                     </v-icon>
                                 </v-btn>
-                                <v-btn icon @click="onLikes(board.boardNo)">
-                                    <v-icon color="black">
-                                        mdi-chat-outline
-                                    </v-icon>
-                                </v-btn>
+                                <router-link style="text-decoration: none; color: grey" :to="{
+                                    name: 'BoardReadPage',
+                                    params: {boardNo: board.boardNo.toString()}}">
+                                    <v-btn icon>
+                                        <v-icon color="black">
+                                            mdi-chat-outline
+                                        </v-icon>
+                                    </v-btn>
+                                </router-link>
                             </td>
                         </tr>
                         <tr v-if="board.likes.length" align="left">
@@ -86,7 +90,7 @@
                             <!-- <comment-list :boardNo="board.boardNo"/> -->
                             <!-- <td>
                                 <div v-for="comment in twoComments" :key="comment.commentNo">
-                                    <span style="font-weight: bold;">{{ comment.writer }}&nbsp;</span>
+                                    <span style="font-weight: bold;">{{ comment.member.memberId }}&nbsp;</span>
                                     {{ comment.content }}
                                 </div>
                             </td> -->
@@ -152,13 +156,13 @@ export default {
         },
         onSubmit(boardNo) {
             const { content } = this
-            this.$emit('submit', { boardNo, content })
+            this.$emit('submit', { boardNo, memberNo: this.loginInfo.memberNo, content })
         },
         // onLikes(boardNo) {
         //     this.$emit('click', {boardNo, memberNo: this.loginInfo.memberNo})
         // },
         onLikes(boardNo) {
-            axios.post(`http://localhost:7777/likes/${boardNo}/${this.loginInfo.memberNo}`, {boardNo, boardCheck: boardNo, memberNo: this.loginInfo.memberNo})
+            axios.post(`http://localhost:7777/likes/${boardNo}/${this.loginInfo.memberNo}`, {boardNo, memberNo: this.loginInfo.memberNo})
                 .then(() => {
                     history.go(0);
                 })

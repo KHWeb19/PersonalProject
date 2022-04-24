@@ -1,16 +1,17 @@
 package com.example.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Data
 @Entity
@@ -50,9 +51,15 @@ public class Member {
     @UpdateTimestamp
     private Date updDate;
 
-    @JsonIgnoreProperties({"member"})
     @OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
     private List<Board> boards = new ArrayList<>();
+
+    //이거는 필요없긴함 없애보자
+//    @EqualsAndHashCode.Exclude
+//    @ToString.Exclude
+//    @JsonIgnoreProperties({"member"})
+//    @OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
+//    private Set<Comment> memberComments = new HashSet<>();
 
     public Member(String memberName, String memberId, String password, String passwordHint) {
         this.memberName = memberName;

@@ -57,8 +57,8 @@ export default {
                 })
         },
         onSubmit(payload) {
-            const { boardNo, content} = payload
-            axios.post(`http://localhost:7777/comment/register/${boardNo}`, {boardNo, writer: this.loginInfo.memberName, content})
+            const { boardNo, memberNo, content} = payload
+            axios.post(`http://localhost:7777/comment/register/${boardNo}/${memberNo}`, {boardNo, memberNo, content})
                 .then(() => {
                     alert('댓글 등록 성공!')
                     history.go(0);
@@ -69,7 +69,7 @@ export default {
         },
         onLikes(payload) {
             const {boardNo, memberNo} = payload
-            axios.post(`http://localhost:7777/likes/${boardNo}/${memberNo}`, {boardNo, boardCheck: boardNo, memberNo})
+            axios.post(`http://localhost:7777/likes/${boardNo}/${memberNo}`, {boardNo})
                 .then(() => {
                     history.go(0);
                 })

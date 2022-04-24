@@ -41,7 +41,7 @@ export default {
             const {memberNo, boardImage, content} = payload
             console.log(memberNo)
             axios.put(`http://localhost:7777/board/${memberNo}/${this.boardNo}`, 
-            { boardImage, writer: this.board.writer, content, regDate: this.board.regDate})
+            { boardImage, content, regDate: this.board.regDate})
                 .then(res => {
                     alert('게시물 수정 성공')
                     console.log(this.board)

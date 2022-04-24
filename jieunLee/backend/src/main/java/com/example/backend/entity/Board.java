@@ -27,9 +27,6 @@ public class Board {
     @Column(length = 64, nullable = false)
     private String boardImage;
 
-    @Column(length = 32, nullable = false)
-    private String writer;
-
     @Lob
     private String content;
 

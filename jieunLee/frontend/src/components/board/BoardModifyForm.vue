@@ -26,7 +26,7 @@
                                 <v-img width="672px" :src="require(`@/assets/mImage/${board.boardImage}`)"/>
                             </td>
                             <td style="font-weight: bold">
-                                <input style="margin: 16px" type="text" :value="board.writer" disabled/>
+                                <input style="margin: 16px" type="text" :value="board.member.memberId" disabled/>
                             </td>
                         </tr>
                         <tr>

@@ -10,8 +10,14 @@
                         </td>
                     </tr>
                     <tr>
-                        <td style="height: 20px; padding: 14px 0px 14px 16px; font-weight: bold;">
-                            {{ board.writer }}
+                        <td style="width: 32px; padding: 10px 14px 10px 16px; ">
+                            <div style="border-radius: 70%; overflow: hidden; width: 32px ">
+                                <v-img v-if="board.member.imageName" width="32" :src="require(`@/assets/mImage/${board.member.imageName}`)"/>
+                                <v-img v-else width="32" src="@/assets/profile.jpg"/>
+                            </div>
+                        </td>
+                        <td style="font-weight: bold;">
+                            {{ board.member.memberId }}
                         </td>
                         <td align="right" style="padding-right: 12px;"> 
                             <v-menu offset-y min-width="100">
@@ -36,26 +42,38 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2">
+                        <td colspan="3">
                         <hr style="border: 0; height: 1px; background: #d8d8d8; "/>
                         </td>
                     </tr>
                     <tr align="left">
-                        <td colspan="2" style="height: 50px; padding-left: 16px">
+                        <td style="width: 32px; padding: 10px 14px 10px 16px; ">
+                            <div style="border-radius: 70%; overflow: hidden; width: 32px ">
+                                <v-img v-if="board.member.imageName" width="32" :src="require(`@/assets/mImage/${board.member.imageName}`)"/>
+                                <v-img v-else width="32" src="@/assets/profile.jpg"/>
+                            </div>
+                        </td>
+                        <td colspan="3" style="height: 50px;">
                             <div style="display: flex;">
                                 <div style="font-weight: bold;" >
-                                    {{ board.writer }}&nbsp;
+                                    {{ board.member.memberId }}&nbsp;
                                 </div>
                                 {{ board.content }}
                             </div>
                         </td>
                     </tr>
                     <tr align="left" >
-                        <td colspan="3" style=" padding-left: 16px"  > 
-                            <div style="overflow-y:auto; overflow-x:hidden; width:100%; height:400px;">
+                        <td colspan="4" style=" padding-left: 16px"  > 
+                            <div style="overflow-y:auto; overflow-x:hidden; width:100%; height:390px;">
                                 <div v-for="comment in comments" :key="comment.commentNo">
-                                    <span style="font-weight: bold;">{{ comment.writer }}&nbsp;</span>
-                                    {{ comment.content }}
+                                    <div style="display: flex;">
+                                        <div style="border-radius: 70%; overflow: hidden; width: 32px ">
+                                            <v-img v-if="comment.member.imageName" width="32" :src="require(`@/assets/mImage/${comment.member.imageName}`)"/>
+                                            <v-img v-else width="32" src="@/assets/profile.jpg"/>
+                                        </div>
+                                        <span style="padding: 5px 0px 0px 14px"><b>{{ comment.member.memberId }}&nbsp;</b>{{ comment.content }}</span>
+                                        
+                                    </div>
                                     <div style="font-size: 12px; color: grey">
                                         {{ comment.regDate }}
                                         <v-menu offset-y min-width="100">
@@ -78,7 +96,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2">
+                        <td colspan="3">
                         <hr style="border: 0; height: 1px; background: #d8d8d8; "/>
                         </td>
                     </tr>
@@ -97,48 +115,56 @@
                         </td>
                     </tr> -->
                     <tr align="left">
-                            <td style="padding: 6px 9px" colspan="2" v-if="loginLikes.length>0" >
+                            <td style="padding: 6px 9px" colspan="3" v-if="loginLikes.length>0" >
                                 <v-btn icon @click="onLikes(board.boardNo)" >
                                     <v-icon  color="black">
                                         mdi-cards-heart
                                     </v-icon>
                                 </v-btn>
-                                <v-btn icon @click="onLikes(board.boardNo)">
-                                    <v-icon color="black">
-                                        mdi-chat-outline
-                                    </v-icon>
-                                </v-btn>
+                                <router-link style="text-decoration: none; color: grey" :to="{
+                                    name: 'BoardReadPage',
+                                    params: {boardNo: board.boardNo.toString()}}">
+                                    <v-btn icon>
+                                        <v-icon color="black">
+                                            mdi-chat-outline
+                                        </v-icon>
+                                    </v-btn>
+                                </router-link>
                             </td>
-                            <td style="padding: 6px 9px" colspan="2" v-else>
+                            <td style="padding: 6px 9px" colspan="3" v-else>
                                 <v-btn icon @click="onLikes(board.boardNo)" >
                                     <v-icon  color="black">
                                         mdi-cards-heart-outline
                                     </v-icon>
                                 </v-btn>
-                                <v-btn icon @click="onLikes(board.boardNo)">
-                                    <v-icon color="black">
-                                        mdi-chat-outline
-                                    </v-icon>
-                                </v-btn>
+                                <router-link style="text-decoration: none; color: grey" :to="{
+                                    name: 'BoardReadPage',
+                                    params: {boardNo: board.boardNo.toString()}}">
+                                    <v-btn icon>
+                                        <v-icon color="black">
+                                            mdi-chat-outline
+                                        </v-icon>
+                                    </v-btn>
+                                </router-link>
                             </td>
                         </tr>
                     <tr v-if="board.likes.length" align="left">
-                            <td colspan="2" style="padding: 0px 0px 8px 16px">
+                            <td colspan="3" style="padding: 0px 0px 8px 16px">
                                 <div id="likesCnt">좋아요 {{ board.likes.length }}개</div>
                             </td>
                     </tr>
                     <tr align="left" style="height: 10px; font-size: 10px">
-                        <td colspan="2" style="padding: 0px 0px 8px 16px; color: grey">
+                        <td colspan="3" style="padding: 0px 0px 8px 16px; color: grey">
                             {{ board.regDate }}
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2">
+                        <td colspan="3">
                         <hr style="border: 0; height: 1px; background: #d8d8d8; "/>
                         </td>
                     </tr>
                     <tr align="left">
-                        <td style="height: 20px; padding: 14px 0px 14px 16px;">
+                        <td colspan="2" style="height: 20px; padding: 14px 0px 14px 16px;">
                             <input type="text" placeholder="댓글 달기..." v-model="content"/>
                         </td>
                         <td align="right"> 
@@ -204,7 +230,7 @@ export default {
         },
         onSubmit() {
             const { content } = this
-            this.$emit('submit', { content })
+            this.$emit('submit', { memberNo: this.loginInfo.memberNo, content })
         },
         onCommentDelete(commentNo) {
             console.log(commentNo)
@@ -219,7 +245,7 @@ export default {
         },
         onLikes() {
             const { boardNo } = this
-            axios.post(`http://localhost:7777/likes/${boardNo}/${this.loginInfo.memberNo}`, {boardNo, boardCheck: boardNo, memberNo: this.loginInfo.memberNo})
+            axios.post(`http://localhost:7777/likes/${boardNo}/${this.loginInfo.memberNo}`, {boardNo, memberNo: this.loginInfo.memberNo})
                 .then(() => {
                     history.go(0);
                 })
