@@ -29,7 +29,7 @@
                 outlined type="text" :value="QuestionBoard.writer" readonly/>
           
                  <br>
-                 <v-card class="mx-auto mt-2 mb-10" width="400" flat>
+                 <v-card class="mx-auto mt-2 mb-10" width="800" flat>
                      <v-img :src="showFile()" ></v-img>
                  </v-card>
                  <br>
@@ -39,13 +39,13 @@
               <v-text-field
                 dense
                 style="width:600px; font-size:20px;"
-                outlined type="text" :value="BrandCheckBoard.type" readonly />
+                outlined type="text" :value="QuestionBoard.type" readonly />
 
                 <v-textarea
                     outlined
                     id="textarea-rows"
                     placeholder=""
-                    rows="8" :value="QuestionBoard.content" readonly>
+                    rows="15" :value="QuestionBoard.content" readonly>
                 </v-textarea>
 
 

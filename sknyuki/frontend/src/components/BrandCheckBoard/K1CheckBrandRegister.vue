@@ -30,10 +30,20 @@
 
             <upload-file-1 @selectFile="selectFile"></upload-file-1>
           
-           
+         
 
-            <h3 align="left" >내용 : </h3>           
-           
+
+            <h3 align="left" >내용 : </h3>   
+
+           <v-select
+            :items="states"
+            label="Brand Type"
+            dense
+            outlined
+            style="width:600px; font-size:20px;"
+             v-model="type"
+          ></v-select>     
+
             <v-textarea
             counter
             outlined
@@ -79,7 +89,15 @@ export default {
             title: '',
             writer: '',
             content: '',
+            type:'',
             files:[],
+            states: [
+        'HEMES', 'VITTON', 'CHANEL', 'GUCCI',
+        'FENDI', 'PRADA', 'Dior', 'VANCLEE',
+        'Tiffany', 'Cartier', 'bottega',
+        'YSL', 'Supreme', 'BURBERRY', 'THOM', 'BALENCIAGA',
+        'ROLEX', 'IWC', 'PIAGET', 'OMEGA', 'TAG','Others'
+      ],
         }
     },
     methods: {
@@ -90,9 +108,9 @@ export default {
             onSubmit () {
             var result = confirm('등록 하시겠습니까?')
             if(result) {
-                const { title, writer, content} = this
-                this.$emit('submitContents', { title, writer, content})
-                console.log(this.title,this.writer,this.content)
+                const { title, writer, type, content} = this
+                this.$emit('submitContents', { title, writer, type,content})
+                console.log(this.title,this.writer,this.type ,this.content)
 
                 this.$emit("submitFiles",this.files)
                 console.log(this.files)

@@ -11,4 +11,5 @@ public interface BrandCheckBoardService {
     public BrandCheckBoard read (Integer boardNo);
     public void modify (BrandCheckBoard board);
     public void remove (Integer boardNo);
+    List<BrandCheckBoard> userRead(String id) throws Exception;
 }

@@ -17,10 +17,11 @@
 
 
 export default {
-    name: 'UploadFile',
+    name: 'UploadFile1',
     data () {
         return {
             files: [],
+          
         }
     },
     methods: {

@@ -2,7 +2,7 @@
 <div>
     <br>
                         
-          <v-card class="pa-3" color="primary" flat>
+          <v-card class="pa-3" flat>
             <v-row>
               <v-col v-for="productBoard in productBoards" :key="productBoard.productBoardNo"
                 cols="12" sm="6" md="4" lg="3">

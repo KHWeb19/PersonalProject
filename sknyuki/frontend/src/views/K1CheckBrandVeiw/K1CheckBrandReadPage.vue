@@ -2,12 +2,14 @@
     <v-container>
         <header-view></header-view>
         <br>
-        <drop-down></drop-down>
      <div align="center">
        
 
         <k-1-check-brand-read v-if="BrandCheckBoard" :BrandCheckBoard="BrandCheckBoard" :boardNo="boardNo"/>
         <p v-else>로딩중 ...... </p>
+
+
+        <read-check-brand-comment :boardNo="boardNo"/>
 
        <div v-if="userInfo.id == BrandCheckBoard.id" style="padding:20px;">
             <router-link style="text-decoration: none; color:black" 
@@ -44,14 +46,14 @@
 import { mapState, mapActions } from 'vuex'
 import axios from 'axios'
 import HeaderView from '@/components/home/headerView.vue'
-import DropDown from '@/components/KategoriePage1/DropDown.vue'
 import K1CheckBrandRead from '@/components/BrandCheckBoard/K1CheckBrandRead.vue'
+import ReadCheckBrandComment from '@/components/comment/ReadCheckBrandComment'
 export default {
     name:'K1CheckBrandReadPage',
     components:{ 
     HeaderView,
-    DropDown,
     K1CheckBrandRead,
+    ReadCheckBrandComment,
     },
    
     props: {

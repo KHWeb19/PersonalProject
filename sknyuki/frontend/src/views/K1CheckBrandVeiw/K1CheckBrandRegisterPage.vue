@@ -2,7 +2,7 @@
     <v-container>
         <header-view></header-view>
         <br>
-        <drop-down></drop-down>
+       
            <div align="center">
         <k-1-check-brand-register @submitContents="contentsSubmit"
          @submitFiles="filesSubmit"/>
@@ -13,14 +13,12 @@
 <script>
 import K1CheckBrandRegister from '@/components/BrandCheckBoard/K1CheckBrandRegister.vue'
 import HeaderView from '@/components/home/headerView.vue'
-import DropDown from '@/components/KategoriePage1/DropDown.vue'
 import axios from 'axios'
 import { mapState } from 'vuex'
 export default {
     name:'K1CheckBrandRegisterPage',
     components:{ 
     HeaderView,
-    DropDown,
     K1CheckBrandRegister
     },
 data () {
@@ -41,7 +39,7 @@ computed: {
             console.log(typeof(title))
             axios.post('http://localhost:7777/BrandCheckBoard/register', { id, title, writer, type,content})
                     .then(res => {
-                        alert('등록 성공! - ' + res)
+                        //alert('등록 성공! - ' + res)
                         this.boardNo=res.data.boardNo
                         
 //console.log(res)

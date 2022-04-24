@@ -45,10 +45,10 @@ public class FileController {
     @PostMapping("/QuestionBoard")
     @ResponseBody
     public String QuestionFileUpload(@RequestParam(value = "fileList", required = false) List<MultipartFile> fileList,
-                                     @RequestParam("boardNo") Long boardNo) {
+                                     @RequestParam("boardNo") Long boardNo, @RequestParam("id") String id) {
         try {
             for (MultipartFile multipartFile : fileList) {
-                FileOutputStream writer = new FileOutputStream("./images/Question/" + boardNo + ".jpg");
+                FileOutputStream writer = new FileOutputStream("./images/Question/" + boardNo + "_" + id + ".jpg");
                 writer.write(multipartFile.getBytes());
                 writer.close();
             }

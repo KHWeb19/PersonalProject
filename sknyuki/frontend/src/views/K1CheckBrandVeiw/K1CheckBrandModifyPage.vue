@@ -2,7 +2,6 @@
     <v-container>
         <header-view></header-view>
         <br>
-        <drop-down></drop-down>
            <div align="center">
       
       <k-1-check-brand-modify v-if="BrandCheckBoard" :BrandCheckBoard="BrandCheckBoard" 
@@ -14,7 +13,6 @@
 </template>
 <script>
 import HeaderView from '@/components/home/headerView.vue'
-import DropDown from '@/components/KategoriePage1/DropDown.vue'
 import K1CheckBrandModify from '@/components/BrandCheckBoard/K1CheckBrandModify.vue'
 import axios from 'axios'
 import { mapActions, mapState } from 'vuex'
@@ -24,7 +22,6 @@ export default {
     name:'K1CheckBrandModifyPage',
     components:{ 
     HeaderView,
-    DropDown,
     K1CheckBrandModify,
     },
     props:{

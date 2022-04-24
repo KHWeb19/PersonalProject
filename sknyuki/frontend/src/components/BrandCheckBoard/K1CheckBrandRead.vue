@@ -61,7 +61,7 @@
 
 
                 <br>
-                 <v-card class="mx-auto mt-2 mb-10" width="400" flat>
+                 <v-card class="mx-auto mt-2 mb-10" width="800" flat>
                      <v-img :src="showFile()" ></v-img>
                  </v-card>
                 <br>
@@ -77,7 +77,8 @@
                     outlined
                     id="textarea-rows"
                     placeholder=""
-                    rows="8" :value="BrandCheckBoard.content" readonly>
+                    style="width:100%;"
+                    rows="15" :value="BrandCheckBoard.content" readonly>
                 </v-textarea>
 
                 <!--<h3 align="left">내용 : </h3>
@@ -106,10 +107,10 @@ export default {
      } catch (e) {
           console.log(e)
           console.log(this.boardNo)
-        return   alert('문제 발생!')
+        
         
     }    
-},
+}
     }
 }
 </script>

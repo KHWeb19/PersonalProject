@@ -17,6 +17,12 @@ public class QuestionBoard {
     @Column(length = 128, nullable = false)
     private String title;
 
+    @Column(length = 60, nullable = false)
+    private String type;
+
+    @Column(length = 60, nullable = false)
+    private String id;
+
     @Column(length = 32, nullable = false)
     private String writer;
 

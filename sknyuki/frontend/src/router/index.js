@@ -12,6 +12,7 @@ import K1QuestionRegisterPage from '@/views/K1QuestionVeiw/K1QuestionRegisterPag
 import K2ProductView from '@/views/K2ProductView/K2ProductView'
 import K1QuestionModifyPage from '@/views/K1QuestionVeiw/K1QuestionModifyPage.vue'
 import MyPage from '@/views/member/MyPage'
+import K2ProductRegisterPage from '@/views/K2ProductView/K2ProductRegisterPage.vue'
 
 Vue.use(VueRouter)
 
@@ -96,6 +97,12 @@ props:{
   default: true
 }
 },
+{
+  path: '/K2ProductRegisterPage',
+  name: 'K2ProductRegisterPage',
+  component: K2ProductRegisterPage
+},
+
 ]
 
 const router = new VueRouter({

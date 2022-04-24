@@ -2,14 +2,13 @@
     <v-container>
         <header-view></header-view>
         <br>
-        <drop-down></drop-down>
         <div id="board" align=center>
            
           <h3 style="padding:30px 0px 20px 0px; font-weight:bold">판매중인 상품</h3>
      
 
     <div class="app">
-        <product-board-list :BrandCheckboards="BrandCheckboards"/>
+        <product-board-list :productBoards="productBoards"/>
     </div>
     </div>
      
@@ -19,7 +18,6 @@
 </template>
 <script>
 import HeaderView from '@/components/home/headerView.vue'
-import DropDown from '@/components/KategoriePage1/DropDown.vue'
 import ProductBoardList from '@/components/ProductBoard/ProductBoardList.vue'
 //import { mapState, mapActions } from 'vuex'
 
@@ -27,18 +25,17 @@ export default {
     name:'K2ProductView',
     components:{ 
     HeaderView,
-    DropDown,
     ProductBoardList,
         
     },
 /* computed: {
-        ...mapState(['BrandCheckboards'])
+        ...mapState(['productBoards'])
     },
     mounted () {
-        this.fetchBrandCheckboards()
+        this.fetchproductBoards()
     },
     methods: {
-        ...mapActions(['fetchBrandCheckboards'])
+        ...mapActions(['fetchproductBoards'])
     }*/
     }
 </script>
