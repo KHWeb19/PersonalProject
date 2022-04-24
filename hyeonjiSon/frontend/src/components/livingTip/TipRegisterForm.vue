@@ -1,4 +1,5 @@
 <template>
+<div align="center">
     <v-container>
     <form @submit.prevent="onSubmit">
         <table>
@@ -11,7 +12,7 @@
             <tr>
                 <td>작성자</td>
                 <td>
-                    <input type="text" v-model="writer" placeholder=" *필수 입력"/>
+                    <input type="text" v-model="this.$store.state.userInfo.sn" placeholder=" *필수 입력"/>
                 </td>
             </tr>
             <tr>
@@ -39,6 +40,7 @@
         </div>
     </form>
     </v-container>
+</div>
 </template>
 
 <script>

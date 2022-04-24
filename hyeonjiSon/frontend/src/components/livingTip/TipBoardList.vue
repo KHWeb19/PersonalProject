@@ -45,7 +45,7 @@
                             <v-spacer></v-spacer>
                                 <v-icon color="green"> mdi-cards-heart </v-icon>
                                 &ensp;
-                                <span> 15 </span>
+                                <span> {{ tipBoard.likeCnt }} </span>
                     </v-toolbar>
 
                         <v-card-text cols="12">{{ tipBoard.content.substr(0,203) }} </v-card-text>

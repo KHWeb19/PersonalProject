@@ -1,5 +1,5 @@
 <template>
-    <div>
+<div align="center">
        <h1> Register Page </h1>
        <br>
        <tip-register-form @submit="onSubmit"/>

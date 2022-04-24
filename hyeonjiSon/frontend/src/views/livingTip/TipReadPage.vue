@@ -1,16 +1,19 @@
 <template>
-    <div align="center">
-        <h2>Vue + Spring 게시판 읽기</h2>
+    <div>
+
+        <v-container style="width: 800px;">
+                <v-row>
+                    <v-btn @click="goList">게시판으로</v-btn>
+                    <v-spacer></v-spacer>
+                    <v-btn @click="modify(tipBoard.boardNo)">수정</v-btn>
+                    &ensp;
+                    <v-btn @click="onDelete">삭제</v-btn>
+                </v-row>
+        </v-container>
+
         <tip-read-form v-if="tipBoard" :tipBoard="tipBoard"/>
         <p v-else>로딩중 ....... </p>
 
-        <router-link :to="{ name: 'TipModifyPage', params: { boardNo } }">
-            게시물 수정
-        </router-link>
-        <button @click="onDelete">삭제</button>
-        <router-link :to="{ name: 'livingTipBoardList' }">
-            돌아가기
-        </router-link>
     </div>
 </template>
 
@@ -41,6 +44,12 @@ export default {
     },
     methods: {
         ...mapActions(['fetchTipBoard']),
+        goList(){
+            this.$router.push({ name: 'livingTipBoardList' })
+        },
+        modify(boardNo){
+            this.$router.push({ name: 'TipModifyPage', params: { boardNo } })
+        },
         onDelete () {
             const { boardNo } = this.tipBoard
             //alert('지우는 게시물 번호: ' + boardNo)
