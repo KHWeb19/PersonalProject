@@ -3,6 +3,7 @@ package com.example.demo.service.study;
 import com.example.demo.entity.Member;
 import com.example.demo.entity.study.Study;
 import com.example.demo.entity.study.StudyBoard;
+import com.example.demo.repository.MemberRepository;
 import com.example.demo.repository.study.StudyBoardRepository;
 import com.example.demo.repository.study.StudyRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -29,7 +30,7 @@ public class StudyBoardServiceImpl implements StudyBoardService {
     @Autowired
     private StudyRepository repository2;
     @Autowired
-    private StudyMemberRepository memberRepository;
+    private MemberRepository memberRepository;
 
     @Override
     public void register (StudyBoard study, Study studyGroup, Member member, @RequestParam(required = false) MultipartFile file) throws Exception {
@@ -55,8 +56,12 @@ public class StudyBoardServiceImpl implements StudyBoardService {
 
         repository2.save(studyGroup);
 
-        log.info("studyNo" + studyGroup.getStudyNo());
-        member.addStudy(studyGroup);
+        Optional<Member> makeStudy = memberRepository.findById(Long.valueOf(member.getMemberNo()));
+        Member getMember = makeStudy.get();
+        getMember.addStudy(studyGroup);
+        memberRepository.save(getMember);
+
+        log.info("study" + member.getStudy());
 
     }
 
