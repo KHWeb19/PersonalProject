@@ -62,7 +62,7 @@ public class BoardController {
 
     @DeleteMapping("/{boardNo}")
     public void boardRemove (
-            @PathVariable("boardNo") Integer boardNo) {
+            @PathVariable("boardNo") Long boardNo) {
         log.info("boardRemove()");
 
         service.remove(boardNo);

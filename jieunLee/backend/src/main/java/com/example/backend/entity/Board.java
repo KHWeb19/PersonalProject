@@ -1,13 +1,17 @@
 package com.example.backend.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Data
@@ -26,19 +30,16 @@ public class Board {
     @Column(length = 64, nullable = false)
     private String boardImage;
 
-    @Column(length = 32, nullable = false)
-    private String writer;
-
     @Lob
     private String content;
 
-    @CreationTimestamp
-    private Date regDate;
+    @CreatedDate
+    private String regDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일"));
 
     @UpdateTimestamp
     private Date updDate;
 
-    @JsonBackReference(value="member-board")
+    @JsonIgnoreProperties({"boards"})
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name= "member_no")
     private Member member;

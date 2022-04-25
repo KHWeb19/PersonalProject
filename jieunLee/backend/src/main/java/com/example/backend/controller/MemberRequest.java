@@ -10,23 +10,25 @@ public class MemberRequest {
     private String memberName;
     private String memberId;
     private String password;
+    private String passwordHint;
     private String imageName;
     private String memberWeb;
     private String memberIntro;
     private Date regData;
 
-    public MemberRequest (Long memberNo, String memberName, String memberId, String password, String imageName, String memberWeb, String memberIntro, Date regData) {
+    public MemberRequest (Long memberNo, String memberName, String memberId, String password, String passwordHint, String imageName, String memberWeb, String memberIntro, Date regData) {
         this.memberNo = memberNo;
         this.memberName = memberName;
         this.memberId = memberId;
         this.password = password;
+        this.passwordHint = passwordHint;
         this.imageName = imageName;
         this.memberWeb = memberWeb;
         this.memberIntro = memberIntro;
         this.regData = regData;
     }
 
-    public MemberRequest (Long memberNo) {
-        this.memberNo = memberNo;
+    public MemberRequest (String password) {
+        this.password = password;
     }
 }

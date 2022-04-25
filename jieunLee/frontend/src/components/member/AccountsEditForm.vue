@@ -1,16 +1,16 @@
 <template>
     <div>
-      <v-container style="width: 750px; margin-top: 85px; padding-left: 0px">
+      <v-container style="width: 700px; margin-top: 85px; padding-left: 0px">
         <v-flex >
-          <v-card style="height: 600px">
+          <v-card style="height: 620px">
             <div style="display: flex; justify-content: center; padding-top: 25px; padding-bottom:20px">
-              <td style="padding-left: 120px;  margin-left: 25px">
+              <td style="padding-left: 120px;  margin: 6px 0px 0px 62px;">
                 <div style="border-radius: 70%; overflow: hidden;">
                   <v-img v-if="member.imageName" width="38" :src="require(`@/assets/mImage/${member.imageName}`)"/>
                   <v-img v-else width="38" src="@/assets/profile.jpg"/>
                 </div>
               </td>
-              <td style="margin-left: 20px;"> 
+              <td style="margin-left: 15px;"> 
                 {{member.memberId}}
                 <br/>
                 <label for="files">
@@ -37,7 +37,7 @@
                 </tr>
                 <tr>
                     <td></td>
-                    <td style="width: 300px; font-size: 12px; padding-top: 10px">사람들이 이름, 별명 또는 비즈니스 이름 등 회원님의 알려진 이름을 사용하여 회원님의 계정을 찾을 수 있도록 도와주세요.</td>
+                    <td style="width: 300px; color: grey; font-size: 12px; padding: 5px 0px 0px 5px">사람들이 이름, 별명 또는 비즈니스 이름 등 회원님의 알려진 이름을 사용하여 회원님의 계정을 찾을 수 있도록 도와주세요.</td>
                 </tr>
                 <br/>
                 <tr>
@@ -82,9 +82,27 @@
                     </textarea>
                     </td>
                 </tr>
+                <br/>
+                <tr>
+                    <td></td>
+                    <td style="color: grey; font-size: 12px; padding: 0px 0px 5px 5px">공개 프로필에는 포함되지 않습니다.</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right; padding-right: 10px">비밀번호 힌트</td>
+                    <td>
+                      <input style="
+                      margin: 3px;
+                      border: 1px solid #d6d6d6; 
+                      border-radius: 3px; 
+                      width: 300px; 
+                      height: 35px;
+                      padding-left: 5px;" 
+                      type="text" placeholder="ex) 좋아하는 색깔은?" v-model="passwordHint"/>
+                    </td>
+                </tr>
+                
               </table>
-              <br/>
-              <div style="text-align: center">
+              <div style="text-align: center; padding-top: 26px">
                 <v-btn style="height: 30px;" color="blue" class="white--text" type="submit">제출</v-btn>
               </div>
             </form>
@@ -135,15 +153,15 @@ export default {
               console.log(this.files[0].name)
               this.imageName = this.files[0].name
               //
-              const { memberName, memberId, imageName, memberWeb, memberIntro } = this
-              this.$emit('submit', { memberName, memberId, imageName, memberWeb, memberIntro})
+              const { memberName, memberId, imageName, memberWeb, memberIntro, passwordHint } = this
+              this.$emit('submit', { memberName, memberId, imageName, memberWeb, memberIntro, passwordHint})
               localStorage.setItem("imageChange", JSON.stringify(imageName))
           })
           .catch (res => {
               alert('처리 결과: ' + res.message)
               this.imageName = this.member.imageName
-              const { memberName, memberId, imageName, memberWeb, memberIntro } = this
-              this.$emit('submit', { memberName, memberId, imageName, memberWeb, memberIntro})
+              const { memberName, memberId, imageName, memberWeb, memberIntro, passwordHint } = this
+              this.$emit('submit', { memberName, memberId, imageName, memberWeb, memberIntro, passwordHint})
           })
       }
     },
@@ -153,6 +171,7 @@ export default {
       this.imageName = this.member.imageName
       this.memberWeb = this.member.memberWeb
       this.memberIntro = this.member.memberIntro
+      this.passwordHint = this.member.passwordHint
     }
 
 }

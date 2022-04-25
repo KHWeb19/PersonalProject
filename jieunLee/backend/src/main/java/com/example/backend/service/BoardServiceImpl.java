@@ -5,8 +5,11 @@ import com.example.backend.controller.CommentRequest;
 import com.example.backend.controller.MemberRequest;
 import com.example.backend.entity.Board;
 import com.example.backend.entity.Comment;
+import com.example.backend.entity.Likes;
 import com.example.backend.entity.Member;
 import com.example.backend.repository.BoardRepository;
+import com.example.backend.repository.CommentRepository;
+import com.example.backend.repository.LikesRepository;
 import com.example.backend.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -22,7 +25,13 @@ public class BoardServiceImpl implements BoardService {
     BoardRepository repository;
 
     @Autowired
-    private MemberRepository memberRepository;
+    MemberRepository memberRepository;
+
+    @Autowired
+    LikesRepository likesRepository;
+
+    @Autowired
+    CommentRepository commentRepository;
 
     @Override
     public void register(Integer memberNo, Board board) {
@@ -61,7 +70,19 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public void remove(Integer boardNo) {
+    public void remove(Long boardNo) {
+        Board board = repository.findById(boardNo).orElseThrow();
+
+        Optional<Comment> maybeComment = commentRepository.findByBoard(board);
+        if(!maybeComment.isEmpty()) {
+            commentRepository.deleteById(maybeComment.get().getCommentNo());
+        }
+
+        Optional<Likes> maybeLikes = likesRepository.findByBoard(board);
+        if(!maybeLikes.isEmpty()) {
+            likesRepository.deleteById(maybeLikes.get().getLikedNo());
+        }
+
         repository.deleteById(Long.valueOf(boardNo));
     }
 }

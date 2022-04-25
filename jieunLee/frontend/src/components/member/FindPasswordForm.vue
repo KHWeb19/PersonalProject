@@ -1,18 +1,16 @@
 <template>
     <div>
-        <v-container style="width: 700px; margin-top: 85px; padding-left: 0px">
+        <v-container style="width: 750px; margin-top: 85px; padding-left: 0px">
             <v-flex>
-                <v-card style="height: 620px">
+                <v-card style="height: 600px">
                     <br/>
           <div style="display: flex; justify-content: center;">
           <form @submit.prevent="onSubmit"  >
             <table>
               <tr>
-                  <td style="padding-left: 120px;  margin: 6px 0px 0px 62px;">
-                    <div style="border-radius: 70%; overflow: hidden;">
-                      <v-img v-if="member.imageName" width="38" :src="require(`@/assets/mImage/${member.imageName}`)"/>
-                      <v-img v-else width="38" src="@/assets/profile.jpg"/>
-                    </div>
+                  <td style="text-align: right; padding-right: 10px">                    
+                    <v-img v-if="member.imageName" style=" margin-left: 25px" width="38" :src="require(`@/assets/mImage/${member.imageName}`)"/>
+                    <v-img v-else style=" margin-left: 25px" width="38" src="@/assets/logo.png"/>
                   </td>
                   <td style="padding-left: 10px; font-size: 24px">
                       {{member.memberId}}
@@ -33,9 +31,6 @@
                     type="password" v-model="password" />
                   </td>
               </tr>
-              
-
-
             </table>
             <br/>
             <div style="text-align: center">
@@ -52,7 +47,7 @@
 
 <script>
 export default {
-    name: 'PasswordEditForm',
+    name: 'FindPasswordForm',
     props: {
       member: {
         type: Object,

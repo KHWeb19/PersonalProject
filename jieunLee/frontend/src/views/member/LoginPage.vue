@@ -1,12 +1,6 @@
 <template>
     <div>
         <login-form @submit="onSubmit"/>
-            <!-- <v-btn tile color="teal lighten-4" @click="logout">
-                <v-icon left>
-                    mdi-logout
-                </v-icon>
-                로그아웃
-            </v-btn> -->
     </div>        
 </template>
 
@@ -26,7 +20,6 @@ export default {
     data() {
         return {
             isLogin: false,
-            
         }
     },
     mounted() {
@@ -48,7 +41,6 @@ export default {
                             this.isLogin = true
                             this.$router.push({name: 'HomeView'})
                             localStorage.setItem("loginInfo", JSON.stringify(res.data))
-                            
                         } else {
                             alert('로그인 실패!')
                         }
@@ -59,14 +51,7 @@ export default {
             } else {
                 alert('이미 로그인이 되어 있습니다!')
             }
-        },
-        // logout() {
-        //     this.$cookies.remove("user")
-        //     this.isLogin = false
-        //     localStorage.removeItem("loginInfo")
-
-        //     alert('로그아웃 성공!')
-        // }
+        }
     }
 }
 </script>

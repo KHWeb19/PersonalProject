@@ -1,15 +1,17 @@
 package com.example.backend.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 @Data
 @Entity
@@ -24,14 +26,11 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long commentNo;
 
-    @Column(length = 32, nullable = false)
-    private String writer;
-
     @Lob
     private String content;
 
-    @CreationTimestamp
-    private Date regDate;
+    @CreatedDate
+    private String regDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일"));
 
     @UpdateTimestamp
     private Date updDate;
@@ -40,5 +39,10 @@ public class Comment {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name= "board_no")
     private Board board;
+
+    @JsonIgnoreProperties({"boards"})
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name= "member_no")
+    private Member member;
 
 }

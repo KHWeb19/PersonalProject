@@ -3,8 +3,10 @@ package com.example.backend.service;
 import com.example.backend.controller.CommentRequest;
 import com.example.backend.entity.Board;
 import com.example.backend.entity.Comment;
+import com.example.backend.entity.Member;
 import com.example.backend.repository.BoardRepository;
 import com.example.backend.repository.CommentRepository;
+import com.example.backend.repository.MemberRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -17,6 +19,8 @@ import java.util.Optional;
 @Service
 public class CommentServiceImpl implements CommentService {
 
+    @Autowired
+    MemberRepository memberRepository;
 
     @Autowired
     BoardRepository boardRepository;
@@ -25,10 +29,12 @@ public class CommentServiceImpl implements CommentService {
     CommentRepository repository;
 
     @Override
-    public void register(Integer boardNo, Comment comment) {
+    public void register(Integer boardNo, Integer memberNo, Comment comment) {
 
         Optional<Board> maybeBoard = boardRepository.findById(Long.valueOf(boardNo));
         comment.setBoard(maybeBoard.get());
+        Optional<Member> maybeMember = memberRepository.findById(Long.valueOf(memberNo));
+        comment.setMember(maybeMember.get());
 
         repository.save(comment);
     }

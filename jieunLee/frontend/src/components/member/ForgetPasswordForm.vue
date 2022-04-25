@@ -3,7 +3,10 @@
             <v-flex>
                 <v-card>
                     <form @submit.prevent="onSubmit"  >
-                        <img style="margin: 40px 0px 40px 0px;" src="@/assets/vuelogo.png"/>
+                        <img style="margin: 40px 0px 18px 0px;" src="@/assets/vuelogo.png"/>
+                        <h4>로그인에 문제가 있나요?</h4>
+                        <div style="color: grey; font-size: 14px">아이디와 좋아하는 색깔을 입력하시면<br/>계정의 비밀번호를 변경 할 수 있습니다.</div>
+                        <br/>
                         <div>
                             <input style="background-color: #fafafa; 
                                 margin: 3px;
@@ -22,13 +25,18 @@
                                 width: 268px; 
                                 height: 38px;
                                 padding-left: 5px;" 
-                            type="password" placeholder="비밀번호" v-model="password"/>
+                            type="text" placeholder="좋아하는 색깔은?" v-model="passwordHint"/>
                         </div>
-                        <div><v-btn style="margin: 10px; width: 268px; height: 30px;" color="blue" class="white--text" type="submit">로그인</v-btn></div>
+                        <div>
+                            <v-btn style="margin: 10px; width: 268px; height: 30px;" color="blue" class="white--text" type="submit">비밀번호 변경</v-btn>
+                        </div>
                     </form>
+                    
+                    <br/>
+                    <span style="color: grey; font-size: 14px">또는</span>
                     <div>
-                        <router-link style="text-decoration: none;" :to="{name: 'ForgetPasswordPage'}">
-                            <button style="margin-top: 50px;" class="indigo--text" type="button">비밀번호를 잊으셨나요?</button>
+                        <router-link style="text-decoration: none;" :to="{name: 'RegisterPage'}">
+                            <button class="black--text">&nbsp;새 계정 만들기</button>
                         </router-link>
                     </div>
                     <br/>
@@ -36,9 +44,8 @@
                 <br/>
                 <v-card style="width: 350px; height: 63px; display: table-cell; vertical-align: middle;">
                     <div>
-                        계정이 없으신가요?
-                        <router-link style="text-decoration: none;" :to="{name: 'RegisterPage'}">
-                        <button class="blue--text" type="button">&nbsp;가입하기</button>
+                        <router-link style="text-decoration: none;" :to="{name: 'LoginPage'}">
+                            <button class="black--text">로그인으로 돌아가기</button>
                         </router-link>
                     </div>
                 </v-card>
@@ -49,17 +56,17 @@
 
 <script>
 export default {
-    name: "LoginForm.vue",
+    name: "ForgetPasswordForm",
     data() {
         return {
             memberId: '',
-            password: ''
+            passwordHint: ''
         }
     },
     methods: {
         onSubmit() {
-            const {memberId, password} = this
-            this.$emit('submit', {memberId, password})
+            const {memberId, passwordHint} = this
+            this.$emit('submit', {memberId, passwordHint})
         }
     }
 }

@@ -1,10 +1,10 @@
 <template>
-    <v-container style="width: 1000px; margin-top: 85px; ">
+    <v-container style="width: 1000px; margin-top: 95px; font-size: 16px">
         <v-flex>
             <v-card style="height: 100%">
                 <form @submit.prevent="onSubmit">
                     <table style="width: 100%;" >
-                        <tr >
+                        <tr>
                             <td width="33%" >
                                 <v-btn icon>
                                     <router-link style="text-decoration: none;" :to="{name: 'HomeView' }">
@@ -23,19 +23,29 @@
                         </tr>
                     </table>
                     <hr style="border: 0; height: 1px; background: #d8d8d8; "/>
-                    <table style="width: 100%; border-collapse : collapse;">
-                        <tr>
-                            <td v-if="!priview" rowspan="2" colspan="2" width="66%" >
+                    <table style="border-collapse : collapse;">
+                        <tr >
+                            <td v-if="!priview" rowspan="2" colspan="2" height="700px" width="700px">
                                 <label for="files">
-                                    <span style="margin-left: 250px">컴퓨터에서 사진 선택</span>
+                                    <span style="margin-left: 270px">컴퓨터에서 사진 선택</span>
                                 </label>
                                 <input type="file" id="files" ref="files" multiple v-on:change="handleFileUpload()"/>
                             </td>
-                            <td v-else align="center" rowspan="2" colspan="2" width="66%" >
-                                <v-img width="672px" :src="priview" />
+                            <td v-else rowspan="2" colspan="2" width="700px" >
+                                <v-img max-height="700px" max-width="700px" :src="priview" />
                             </td>
+                            
                             <td style="font-weight: bold">
-                                <input style="margin: 16px" type="text" v-model="loginInfo.memberId" disabled/>
+                                <div style="display: flex; margin: 0px 16px; height: 60px">
+                                    <div style="padding: 16px 12px 0px 0px">
+                                        <div style="border-radius: 70%; overflow: hidden;">
+                                            <v-img v-if="imageChange" max-width="28" height="28" :src="require(`@/assets/mImage/${imageChange}`)"/>
+                                            <v-img v-else-if="loginInfo.imageName" max-width="28" height="28" :src="require(`@/assets/mImage/${loginInfo.imageName}`)"/>
+                                            <v-img v-else max-width="28" height="28"  src="@/assets/profile.jpg"/>
+                                        </div>
+                                    </div>
+                                    <input type="text"  v-model="loginInfo.memberId" disabled/>
+                                </div>
                             </td>
                         </tr>
                         <tr>
@@ -88,7 +98,7 @@ export default {
                 //
                 // console.log(this.loginInfo.memberNo)
                 const { boardImage, content } = this
-                this.$emit('submit', { memberNo: this.loginInfo.memberNo, boardImage, writer: this.loginInfo.memberId, content })
+                this.$emit('submit', { memberNo: this.loginInfo.memberNo, boardImage, content })
             })
             .catch (res => {
                 alert('처리 결과: ' + res.message)

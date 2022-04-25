@@ -1,7 +1,7 @@
 <template>
     <td>
         <div v-for="comment in twoComments" :key="comment.commentNo">
-            <span style="font-weight: bold;">{{ comment.writer }}&nbsp;</span>
+            <span style="font-weight: bold;">{{ comment.member.memberId }}&nbsp;</span>
             {{ comment.content }}
         </div>
     </td>

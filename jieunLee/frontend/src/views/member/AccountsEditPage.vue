@@ -46,11 +46,13 @@ export default {
   methods: {
     ...mapActions(['fetchMember']),
     onSubmit(payload) {
-      const {memberName, memberId, imageName, memberWeb, memberIntro} = payload
+      const {memberName, memberId, imageName, memberWeb, memberIntro, passwordHint} = payload
       axios.put(`http://localhost:7777/member/${this.memberNo}`, 
-      {memberName, memberId, password: this.member.password, imageName, memberWeb, memberIntro, regDate: this.member.regDate})
+      {memberName, memberId, password: this.member.password, passwordHint, imageName, memberWeb, memberIntro, regDate: this.member.regDate})
         .then(res => {
             alert('프로필 수정 성공')
+            // localStorage.removeItem("userInfo")
+            // localStorage.setItem("userInfo", JSON.stringify(res.data))
               this.$router.push({
                   name: 'MyProfilePage',
                   params: {memberNo: res.data.memberNo.toString()}

@@ -19,9 +19,6 @@ public class Likes {
     @Column(name="like_no")
     private Long likedNo;
 
-    @Column(name="board_check")
-    private Long boardCheck;
-
     @JsonBackReference
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name= "member_no")
@@ -31,9 +28,4 @@ public class Likes {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name= "board_no")
     private Board board;
-
-    public Likes(Board board, Member member) {
-        this.board = board;
-        this.member = member;
-    }
 }

@@ -2,24 +2,22 @@
     <div>
         <v-container style="width: 250px; margin-top: 85px; padding-right: 0px">
             <v-flex>
-                <v-card style="height: 600px">
+                <v-card style="height: 620px">
                     <router-link style="text-decoration: none;" :to="{
                         name: 'AccountsEditPage',
                         params: {memberNo: loginInfo.memberNo.toString()}}">
-                        <v-btn>프로필 편집</v-btn>
+                        <v-btn text block style="height: 52px;">프로필 편집</v-btn>
                     </router-link>
-                    <br/>
                     <router-link style="text-decoration: none;" :to="{
                         name: 'PasswordEditPage',
                         params: {memberNo: loginInfo.memberNo.toString()}}">
-                        <v-btn>비밀번호 변경</v-btn>
+                        <v-btn text block style="height: 52px;">비밀번호 변경</v-btn>
                     </router-link>
-                    <br/>
                     <v-layout>
                         <v-dialog persisten max-width="400">
                             <!-- 버튼의 on 동작 시 다이얼로그를 띄운다 -->
                             <template v-slot:activator="{ on }">
-                                <v-btn color="white" v-on="on">회원탈퇴</v-btn>
+                                <v-btn text block style="height: 52px;" v-on="on">회원탈퇴</v-btn>
                             </template>
                             <template v-slot:default="dialog">
                                 <v-card>
