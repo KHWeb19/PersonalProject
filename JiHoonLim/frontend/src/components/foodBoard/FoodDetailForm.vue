@@ -249,6 +249,7 @@ export default {
       checkbox: false,
       img: this.foodBoard.filename,
       nickName: "",
+      auth: "",
       comment: "",
       userInfo: this.$store.state.userInfo,
       userId: "",
@@ -271,8 +272,9 @@ export default {
     if (this.userInfo != null) {
       this.nickName = this.userInfo.nickName;
       this.userId = this.userInfo.id;
+      this.auth = this.userInfo.auth;
     }
-    if (this.nickName == this.foodBoard.writer) {
+    if (this.nickName == this.foodBoard.writer || this.auth == "관리자") {
       this.checkWriteUser = true;
     } else {
       this.checkWriteUser = false;
