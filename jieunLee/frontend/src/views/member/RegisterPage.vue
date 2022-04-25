@@ -17,8 +17,12 @@ export default {
         const { memberName, memberId, password, passwordHint } = payload
         axios.post('http://localhost:7777/member/register', { memberName, memberId, password, passwordHint })
             .then(res => {
-                alert('등록 성공! - ' + res)
-                this.$router.push({name: 'LoginPage'})
+                if(res.data) {
+                    alert(memberName + '님 가입이 완료 되었습니다!')
+                    this.$router.push({name: 'LoginPage'})
+                } else {
+                    alert('아이디 중복!')
+                }
             })
             .catch(res => {
                 alert(res.response.data.message)

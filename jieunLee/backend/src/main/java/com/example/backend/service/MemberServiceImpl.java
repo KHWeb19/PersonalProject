@@ -48,18 +48,25 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public void register(MemberRequest memberRequest) {
-        String encodedPassword = passwordEncoder.encode(memberRequest.getPassword());
-        memberRequest.setPassword(encodedPassword);
+    public Member register(MemberRequest memberRequest) {
+        Optional<Member> maybeMember = memberRepository.findByUserId(memberRequest.getMemberId());
 
-        Member memberEntity = new Member(
-                memberRequest.getMemberName(),
-                memberRequest.getMemberId(),
-                memberRequest.getPassword(),
-                memberRequest.getPasswordHint()
-        );
+        if (!maybeMember.equals(Optional.empty())) {
+            log.info("아이디 중복!");
+            return null;
+        } else {
+            String encodedPassword = passwordEncoder.encode(memberRequest.getPassword());
+            memberRequest.setPassword(encodedPassword);
 
-        memberRepository.save(memberEntity);
+            Member memberEntity = new Member(
+                    memberRequest.getMemberName(),
+                    memberRequest.getMemberId(),
+                    memberRequest.getPassword(),
+                    memberRequest.getPasswordHint()
+            );
+            memberRepository.save(memberEntity);
+            return memberEntity;
+        }
     }
 
     @Override

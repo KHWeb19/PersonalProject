@@ -35,12 +35,13 @@ public class MemberController {
     }
 
     @PostMapping("/register")
-    public void MemberRegister(@Validated @RequestBody MemberRequest memberRequest) {
-        log.info("MemberRegister():" + "," +
+    public Member MemberRegister(@Validated @RequestBody MemberRequest memberRequest) {
+        log.info("MemberRegister():" +
                 memberRequest.getMemberName() + ", " +
                 memberRequest.getMemberId() + ", " +
-                memberRequest.getPassword());
-        service.register(memberRequest);
+                memberRequest.getPassword() + ", " +
+                memberRequest.getPasswordHint());
+        return service.register(memberRequest);
     }
 
     @PostMapping("/login")
