@@ -1,5 +1,6 @@
  import { 
     FETCH_MEMBER,
+    FETCH_MEMBER_STUDY_LIST,
     FETCH_COMMUNITY_BOARD_LIST,
     FETCH_COMMUNITY_BOARD,
     FETCH_COMMUNITY_COMMENTS_LIST,
@@ -26,6 +27,12 @@ export default {
             .then((res) => {
                 commit(FETCH_MEMBER, res.data)
         })
+    },
+    fetchMemberStudyList({ commit }, memberNo) {
+        return axios.get(`http://localhost:7777/study/list/${memberNo}`)
+            .then((res) => {
+                commit(FETCH_MEMBER_STUDY_LIST, res.data)
+            })
     },
     fetchCommunityBoardList({ commit }) {
         return axios.get('http://localhost:7777/board/community/list')

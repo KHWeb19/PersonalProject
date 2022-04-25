@@ -1,7 +1,6 @@
 package com.example.demo.service.study;
 
-import com.example.demo.entity.communityBoard.CommunityBoard;
-import com.example.demo.entity.review.Review;
+import com.example.demo.entity.Member;
 import com.example.demo.entity.study.Study;
 import com.example.demo.entity.study.StudyBoard;
 import com.example.demo.repository.study.StudyBoardRepository;
@@ -29,9 +28,11 @@ public class StudyBoardServiceImpl implements StudyBoardService {
     private StudyBoardRepository repository;
     @Autowired
     private StudyRepository repository2;
+    @Autowired
+    private StudyMemberRepository memberRepository;
 
     @Override
-    public void register (StudyBoard study, Study studyGroup, @RequestParam(required = false) MultipartFile file) throws Exception {
+    public void register (StudyBoard study, Study studyGroup, Member member, @RequestParam(required = false) MultipartFile file) throws Exception {
 
         if (file != null) {
             UUID uuid = UUID.randomUUID();
@@ -53,6 +54,10 @@ public class StudyBoardServiceImpl implements StudyBoardService {
         studyGroup.setOpenLink(study.getOpenLink());
 
         repository2.save(studyGroup);
+
+        log.info("studyNo" + studyGroup.getStudyNo());
+        member.addStudy(studyGroup);
+
     }
 
     @Override

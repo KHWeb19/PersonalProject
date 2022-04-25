@@ -1,8 +1,6 @@
 package com.example.demo.service.study;
 
 import com.example.demo.entity.study.Study;
-import com.example.demo.entity.study.StudyBoard;
-import com.example.demo.repository.study.StudyBoardRepository;
 import com.example.demo.repository.study.StudyRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,20 +18,9 @@ public class StudyServiceImpl implements StudyService{
     @Autowired
     private StudyRepository repository;
 
-    @Override
-    public void register (Study study, @RequestParam(required = false) MultipartFile file) throws Exception {
+    @Autowired
+    private StudyMemberRepository memberRepository;
 
-        if (file != null) {
-            UUID uuid = UUID.randomUUID();
-            String fileName = uuid + "-" + file.getOriginalFilename();
-            FileOutputStream saveFile = new FileOutputStream("../../frontend/src/assets/back/study/" + fileName);
 
-            saveFile.write(file.getBytes());
-            saveFile.close();
 
-            study.setFileName(fileName);
-
-        }
-        repository.save(study);
-    }
 }

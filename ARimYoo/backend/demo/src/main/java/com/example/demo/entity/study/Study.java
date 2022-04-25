@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -25,6 +26,9 @@ public class Study {
     private int people;
 
     @Column
+    private int joinCnt;
+
+    @Column
     private String fileName;
 
     @Column
@@ -32,6 +36,10 @@ public class Study {
 
     @Column
     private String toDo;
+
+    public void increaseJoinCnt () {
+        this.joinCnt++ ;
+    }
 
     public Study(String studyName, String firstMember, int people, Long studyNo, String fileName, String openLink) {
         this.studyNo = studyNo;

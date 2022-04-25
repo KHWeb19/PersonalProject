@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import com.example.demo.entity.study.Study;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,7 +9,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.util.*;
 
 @Data
 @Entity
@@ -45,6 +47,17 @@ public class Member {
 
     @UpdateTimestamp
     private Date lastModifiedDate;
+
+    @OneToMany
+    @JoinColumn(name= "memberNo")
+    @JsonIgnore
+    private List<Study> study = new ArrayList<>();
+
+    // 스터디 추가
+    public void addStudy(Study study) {
+        this.study.add(study);
+    }
+
 
     public Member (Long memberNo, String userId, String password, String userName, String userBirth,
                    String userIntro, String userProfilePic) {

@@ -1,7 +1,7 @@
 package com.example.demo.controller.study;
 
 import com.example.demo.controller.Request.keywordRequest;
-import com.example.demo.entity.communityBoard.CommunityBoard;
+import com.example.demo.entity.Member;
 import com.example.demo.entity.study.Study;
 import com.example.demo.entity.study.StudyBoard;
 import com.example.demo.service.study.StudyBoardService;
@@ -22,11 +22,10 @@ public class StudyBoardController {
     @Autowired
     private StudyBoardService service;
 
-
     @PostMapping("/register")
-    public void StudyRegister (@Validated StudyBoard study, Study studyGroup, @RequestParam(required = false) MultipartFile file) throws Exception {
+    public void StudyRegister (@Validated StudyBoard study, Study studyGroup, Member member, @RequestParam(required = false) MultipartFile file) throws Exception {
         log.info ("StudyRegister();" + file);
-        service.register(study, studyGroup, file);
+        service.register(study, studyGroup, member, file);
     }
 
     @GetMapping("/list")

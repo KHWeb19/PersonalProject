@@ -1,10 +1,7 @@
 <template>
     <div>
         <v-container>
-        <v-layout class="mx-auto">
-            <v-img contain class="responsive-img" src="@/assets/main/test.jpg"/>
-            <v-img contain class="deco responsive-img" src="@/assets/main/mainTitle.png"/>
-        </v-layout>
+            <main-vellup/>
         </v-container>
         
     </div>
@@ -13,11 +10,12 @@
 
 
 <script>
-
+import MainVellup from '@/components/MainVellup.vue'
 
 export default {
     name: 'MainVellupPage',
     components: {
+        MainVellup
 
     },
 

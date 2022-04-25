@@ -85,6 +85,7 @@ export default {
     },
     created () {
         this.writer = this.$store.state.userInfo.name
+        this.memberNo = this.$store.state.userInfo.memberNo
     },
     methods: {
         handleFileUpload () {
@@ -99,12 +100,12 @@ export default {
 
         onStudySubmit () {
 
-            const { studyName, writer, content, people, openLink} = this
+            const { studyName, writer, content, people, openLink, memberNo} = this
             const file =  this.$refs.files.files[0]
              var result = confirm('한번 스터디를 만드시면 모집글 외 수정 불가능합니다.')
              if (result) {
-            this.$emit('submit', { studyName, content,writer, people, file, openLink })
-            console.log(studyName,content,writer,file,people,openLink)
+            this.$emit('submit', { studyName, content,writer, people, file, openLink, memberNo })
+            console.log(studyName,content,writer,file,people,openLink, memberNo)
              }
 
         },

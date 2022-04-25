@@ -1,5 +1,6 @@
  import {
     FETCH_MEMBER,
+    FETCH_MEMBER_STUDY_LIST,
     FETCH_COMMUNITY_BOARD_LIST,
     FETCH_COMMUNITY_BOARD,
     FETCH_COMMUNITY_COMMENTS_LIST,
@@ -22,6 +23,9 @@ export default {
 
     [FETCH_MEMBER](state, userInfo) {
         state.userInfo = userInfo
+    },
+    [FETCH_MEMBER_STUDY_LIST](state, memberStudies) {
+        state.memberStudies = memberStudies
     },
     [FETCH_COMMUNITY_BOARD_LIST](state, communityBoards) {
         state.communityBoards = communityBoards 

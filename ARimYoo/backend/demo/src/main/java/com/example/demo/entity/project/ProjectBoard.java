@@ -2,6 +2,7 @@ package com.example.demo.entity.project;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
 
@@ -14,26 +15,29 @@ public class ProjectBoard {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long projectNo;
 
-    @Column
+    @Column (nullable = false)
     private String projectName;
 
-    @Column
+    @Column (nullable = false)
     private String writer;
 
-    @Column
+    @Column (nullable = false)
     private int people;
 
-    @Column
+    @Column (nullable = false)
     private String fileName;
 
-    @Column
+    @Column (nullable = false)
     private String content;
 
-    @Column
+    @Column (nullable = false)
     private String openLink;
 
     @Column
     private int viewCnt = 0;
+
+    @Formula("(SELECT count(1) FROM project_comment c WHERE c.project_board_project_no = project_no)")
+    private int commentCnt;
 
     public void increaseViewCnt() {
         this.viewCnt++;

@@ -24,8 +24,8 @@
                 </v-card-text>
             </v-card-actions>
             <v-card-actions class="bar">
-                <v-card-text class=" pr-0 pt-3">
-                    <v-icon small dark>mdi-message-reply-text</v-icon>&nbsp;&nbsp;
+                <v-card-text class=" pr-0 pt-3" id="colorHandle">
+                    <v-icon small dark>mdi-message-reply-text</v-icon>&nbsp;&nbsp; {{project.commentCnt}}
                 </v-card-text>
                 <v-card-text class="pr-0 pt-3" id="colorHandle">
                     <v-icon small dark>mdi-eye</v-icon>&nbsp;&nbsp;{{project.viewCnt}}
