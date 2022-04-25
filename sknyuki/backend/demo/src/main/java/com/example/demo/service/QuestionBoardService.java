@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.entity.BrandCheckBoard;
 import com.example.demo.entity.QuestionBoard;
 
 import java.util.List;
@@ -10,4 +11,5 @@ public interface QuestionBoardService {
     public QuestionBoard read (Integer boardNo);
     public void modify (QuestionBoard board);
     public void remove (Integer boardNo);
+    List<QuestionBoard> userRead(String id) throws Exception;
 }
