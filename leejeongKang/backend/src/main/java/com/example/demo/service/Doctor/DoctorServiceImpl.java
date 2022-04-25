@@ -27,7 +27,7 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     @Transactional
     public List<Doctor> list() {
-        return repository.findAll(Sort.by(Sort.Direction.DESC, "doctorNo"));
+        return repository.findAll(Sort.by(Sort.Direction.ASC, "major"));
     }
 
     @Override
