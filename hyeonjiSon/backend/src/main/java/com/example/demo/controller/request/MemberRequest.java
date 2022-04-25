@@ -31,4 +31,5 @@ public class MemberRequest {
         this.pwConfirm = pwQAnswer;
         this.auth = auth;
     }
+
 }

@@ -4,25 +4,13 @@
     <form @submit.prevent="onSubmit">
         <table>
             <tr>
-                <td>제목</td>
+                <td class="guide">제목</td>
                 <td>
                     <input type="text" v-model="title" placeholder=" *필수 입력"/>
                 </td>
             </tr>
             <tr>
-                <td>작성자</td>
-                <td>
-                    <input type="text" v-model="this.$store.state.userInfo.sn" placeholder=" *필수 입력"/>
-                </td>
-            </tr>
-            <tr>
-                <td>비밀번호</td>
-                <td>
-                    <input type="text" v-model="password" placeholder=" *필수 입력"/>
-                </td>
-            </tr>
-            <tr>
-                <td>본문</td>
+                <td class="guide">본문</td>
                 <td>
                     <textarea cols="50" rows="20" v-model="content" placeholder=" *내용을 작성해주세요.">
                     </textarea>
@@ -49,15 +37,17 @@ export default {
     data () {
         return {
             title: '',
-            writer: '',
-            password: '',
+            writer: this.$store.state.userInfo.storeName,
             content: '',
         }
     },
+    created () {
+        this.writer = this.$store.state.userInfo.storeName
+    },    
     methods: {
         onSubmit () {
-            const { title, writer, password, content } = this
-            this.$emit('submit', { title, writer, password, content })
+            const { title, writer, content } = this
+            this.$emit('submit', { title, writer, content })
         }
     }
     
@@ -66,7 +56,27 @@ export default {
 
 
 <style scoped>
+.guide{
+    font-weight: bold;
+}
+table {
+    border: collapse;
+    border-radius: 10px;
+}
 tr {
     height: 50px;
+}
+input {
+    height: 35px;
+    margin: 0px;
+}
+th, td {
+    border-bottom: 1px solid #444444;
+    margin: 0px;
+    padding: 10px;
+  }
+td{
+    
+    vertical-align: top;
 }
 </style>

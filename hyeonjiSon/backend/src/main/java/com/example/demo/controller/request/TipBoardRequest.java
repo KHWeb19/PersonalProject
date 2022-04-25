@@ -9,7 +9,7 @@ public class TipBoardRequest {
     private String writer;
     private String password;
 
-    public TipBoardRequest (Long boarNo, String title, String writer, String password) {
+    public TipBoardRequest (Long boardNo, String title, String writer, String password) {
         this.boardNo = boardNo;
         this.title = title;
         this.writer = writer;
