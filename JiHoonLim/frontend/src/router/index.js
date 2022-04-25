@@ -16,6 +16,9 @@ import BestFoodListPage from '@/views/foodBoard/BestFoodListPage.vue'
 import FoodSearchPage from '@/views/foodBoard/FoodSearchPage.vue'
 import MyCartFoodPage from '@/views/member/MyCartFoodPage.vue'
 
+import NoticeListPage from '@/views/noticeBoard/NoticeListPage.vue'
+import NoticeRegisterPage from '@/views/noticeBoard/NoticeRegisterPage.vue'
+
 import test from '@/views/test.vue'
 Vue.use(VueRouter)
 
@@ -105,6 +108,16 @@ const routes = [
     path: '/myCartFood',
     name: 'MyCartFoodPage',
     component: MyCartFoodPage
+  },
+  {
+    path: '/noticeRegister',
+    name: 'NoticeRegisterPage',
+    component: NoticeRegisterPage
+  },
+  {
+    path: '/noticeList',
+    name: 'NoticeListPage',
+    component: NoticeListPage
   },
 ]
 

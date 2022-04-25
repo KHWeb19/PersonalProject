@@ -6,7 +6,10 @@ import {
 
     FETCH_BEST_FOOD_LIST,
     FETCH_FOOD_BOARD_COMMENTS_LIST,
-    FETCH_MY_CART_FOOD_LIST
+    FETCH_MY_CART_FOOD_LIST,
+
+    FETCH_NOTICE_BOARD_LIST,
+    FETCH_NOTICE_BOARD,
     
 } from './mutation-types'
 
@@ -28,6 +31,12 @@ export default {
     },
     [FETCH_MY_CART_FOOD_LIST](state, myCartFoods){
         state.myCartFoods = myCartFoods
+    },
+    [FETCH_NOTICE_BOARD_LIST](state, noticeBoards){
+        state.noticeBoards = noticeBoards
+    },
+    [FETCH_NOTICE_BOARD](state, noticeBoard){
+        state.noticeBoard = noticeBoard
     },
 
 

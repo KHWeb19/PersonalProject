@@ -120,7 +120,7 @@ export default {
   data() {
     return {
       links: [
-        { text: "공지사항", route: "/announcement" },
+        { text: "공지사항", route: "/noticeList" },
         { text: "인기 순위", route: "/bestFoodList" },
         { text: "레시피", route: "/foodList" },
       ],

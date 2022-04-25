@@ -39,7 +39,7 @@ public class NoticeBoardController {
         return service.read(boardNo);
     }
 
-    @GetMapping("/{boardNo}")
+    @PutMapping("/{boardNo}")
     public NoticeBoard noticeBoardModify(@PathVariable("boardNo")Long boardNo, @RequestBody NoticeBoard noticeBoard){
         log.info("noticeBoardModify()");
 
