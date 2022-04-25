@@ -70,7 +70,7 @@ export default {
         { text: "글번호", value: "boardNo", width: "100px", align: "center" },
         { text: "제목", value: "title", width: "500px", align: "left" },
         { text: "작성자", value: "writer", width: "150px", align: "center" },
-        { text: "조회수", width: "100px", align: "center" },
+        { text: "조회수", value: "viewCount", width: "100px", align: "center" },
         { text: "작성일자", value: "regDate", width: "300px", align: "center" },
       ],
     };

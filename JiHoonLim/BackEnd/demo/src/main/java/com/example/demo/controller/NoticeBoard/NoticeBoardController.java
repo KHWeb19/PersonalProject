@@ -35,6 +35,7 @@ public class NoticeBoardController {
     @GetMapping("/{boardNo}")
     public NoticeBoard noticeBoardRead(@PathVariable("boardNo")Long boardNo){
         log.info("noticeBoardRead()" +boardNo);
+        service.updateViewCount(boardNo);
 
         return service.read(boardNo);
     }

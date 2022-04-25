@@ -47,7 +47,12 @@
                   />
                 </div>
                 <div>
-                  <v-text-field flat solo readonly label="조회수" />
+                  <v-text-field
+                    flat
+                    solo
+                    readonly
+                    :value="noticeBoard.viewCount"
+                  />
                 </div>
                 <div v-if="noticeBoard.writer == this.nickName">
                   <v-btn

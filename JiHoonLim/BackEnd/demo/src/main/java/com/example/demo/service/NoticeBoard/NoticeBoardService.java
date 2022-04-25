@@ -9,4 +9,6 @@ public interface NoticeBoardService {
     public NoticeBoard read(Long boardNo);
     public void modify(NoticeBoard noticeBoard);
     public void remove(Long boardNo);
+
+    public void updateViewCount(Long boardNo);
 }

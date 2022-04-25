@@ -25,6 +25,9 @@ public class NoticeBoard {
     @Lob
     private String content;
 
+    @Column
+    private Integer viewCount = 0;
+
     @CreatedDate
     private String regDate = LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT));
 

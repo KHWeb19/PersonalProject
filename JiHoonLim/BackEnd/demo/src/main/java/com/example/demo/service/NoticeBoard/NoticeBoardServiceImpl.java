@@ -48,4 +48,9 @@ public class NoticeBoardServiceImpl implements NoticeBoardService{
     public void remove(Long boardNo) {
         repository.deleteById(boardNo);
     }
+
+    @Override
+    public void updateViewCount(Long boardNo) {
+        repository.updateViewCount(boardNo);
+    }
 }
