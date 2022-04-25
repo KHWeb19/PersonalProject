@@ -1,7 +1,6 @@
 package com.example.demo.entity.member;
 
 import com.example.demo.entity.Cart.Cart;
-import com.sun.istack.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -19,6 +18,7 @@ import java.util.List;
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "member_no")
     private Long memberNo;
 
     @Column(length = 32)
@@ -35,30 +35,16 @@ public class Member {
     @UpdateTimestamp
     private Date updDate;
 
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name ="member_no")
     private List<MemberAuth> authList = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name ="member")
-    private List<Cart> authListSecond = new ArrayList<Cart>();
 
     public Member (String userId, String password, String userName) {
         this.userId = userId;
         this.password = password;
         this.userName = userName;
     }
-
-    public Member (String userId, String password, String userName, MemberAuth auth) {
-        this.userId = userId;
-        this.password = password;
-        this.userName = userName;
-
-        if(auth != null) {
-            changeAuth(auth);
-        }
-    }
-
-    public void changeAuth(MemberAuth auth) {}
 
     public void addAuth (MemberAuth auth) {
         if (authList == null) {
@@ -67,6 +53,8 @@ public class Member {
 
         authList.add(auth);
     }
+
+
 
     public void clearAuthList () {
         authList.clear();

@@ -2,10 +2,13 @@ package com.example.demo.controller.member;
 
 import com.example.demo.controller.request.CartRequest;
 import com.example.demo.controller.request.MemberRequest;
+import com.example.demo.controller.request.MemberSearchRequest;
 import com.example.demo.entity.Cart.Cart;
+import com.example.demo.entity.member.Member;
 import com.example.demo.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -24,7 +27,7 @@ public class MemberController {
 
     @PostMapping("/register")
     public void registerMember(@Validated @RequestBody MemberRequest memberRequest) {
-        log.info("MemberRegister()" + memberRequest.getId() + ", " + memberRequest.getPw() + ", " + memberRequest.getName() + ", "+ memberRequest.getAuth());
+        log.info("MemberRegister()" + memberRequest.getUserId() + ", " + memberRequest.getPw() + ", " + memberRequest.getName() + ", "+ memberRequest.getAuth());
 
         service.register(memberRequest);
     }
@@ -52,38 +55,59 @@ public class MemberController {
         return maybeMember;
     }
 
-    @PostMapping("/addCart/{memberNo}")
-    public  ResponseEntity<Void> addCart(@PathVariable("memberNo")Long memberNo, @Validated @RequestBody CartRequest cartRequest) throws  Exception {
+    @GetMapping("/{memberNo}")
+    public Member read (
+            @PathVariable("memberNo") Long memberNo) {
+        log.info("read()" + memberNo);
+
+        return service.read(memberNo);
+    }
+
+    @PutMapping("/modify/{memberNo}")
+    public Member memberModify(@PathVariable("memberNo") Long memberNo,
+                                       @RequestBody Member member) {
+        log.info("memberModify :");
+
+        return service.modify(memberNo, member);
+    }
+
+    @DeleteMapping("/{memberNo}")
+    public void memberRemove (
+            @PathVariable("memberNo") Long memberNo) {
+        log.info("memberRemove()");
+
+        service.remove(memberNo);
+    }
+
+    @GetMapping("/list")
+    public List<Member> memberList () {
+        log.info("memberList()");
+
+        return service.list();
+    }
+
+    @PostMapping("/search")
+    public List<Member> search(@RequestBody MemberSearchRequest memberSearchRequest){
+        log.info("search()" + memberSearchRequest);
+        String keyWord = memberSearchRequest.getKeyWord();
+        return service.searchName(keyWord);
+
+    }
+
+    @PostMapping("/addToCart/{memberNo}")
+    public ResponseEntity<Void> addToCart(@PathVariable("memberNo")Long memberNo, @Validated @RequestBody CartRequest cartRequest) throws  Exception {
         System.out.println(memberNo);
         cartRequest.setMemberNo(memberNo);
-        service.addCart(cartRequest);
-        return new ResponseEntity<Void>(HttpStatus.OK);
+        service.addToCart(cartRequest);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/getCartList/{memberNo}")
-    public ResponseEntity<List<Cart>> getCartList(@PathVariable("memberNo") Long memberNo) throws  Exception {
+    @GetMapping("/addToCart/list/{memberNo}")
+    public ResponseEntity<List<Cart>> cartList(@PathVariable("memberNo") Long memberNo) throws  Exception {
 
+        service.cartList(memberNo);
 
-        service.getCartList(memberNo);
-
-        return new ResponseEntity<>(service.getCartList(memberNo),HttpStatus.OK);
+        return new ResponseEntity<>(service.cartList(memberNo),HttpStatus.OK);
     }
 
-    @PostMapping("/ModifyProductNum/{memberNo}")
-    public ResponseEntity<Void> ModifyProductNum (@PathVariable("memberNo") Long memberNo, @Validated @RequestBody CartRequest cartRequest) throws  Exception {
-
-        cartRequest.setMemberNo(memberNo);
-
-        service.ModifyProductNum(cartRequest);
-
-        return  new ResponseEntity<Void>(HttpStatus.OK);
-    }
-
-    @PostMapping("/deleteProduct/{cartId}")
-    public ResponseEntity<Void> deleteProduct(@PathVariable("cartId")Long cartId) throws  Exception {
-
-        service.deleteProduct(cartId);
-
-        return new ResponseEntity<Void>(HttpStatus.OK);
-    }
 }

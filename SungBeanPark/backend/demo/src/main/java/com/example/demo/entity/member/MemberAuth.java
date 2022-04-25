@@ -19,10 +19,8 @@ public class MemberAuth {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long memberAuthNo;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "for_member_no")
-    @JsonIgnore
-    private Member member;
+    @Column(name = "member_no")
+    private Long member;
 
     @Column(length = 64, nullable = false)
     private String auth;
@@ -33,9 +31,9 @@ public class MemberAuth {
     @UpdateTimestamp
     private Date updDate;
 
-    public MemberAuth(String auth, Member memberTable) {
+
+    public MemberAuth(String auth){
         this.auth = auth;
-        member = memberTable;
     }
 }
 
