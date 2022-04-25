@@ -45,7 +45,7 @@
                                 width: 268px; 
                                 height: 38px;
                                 padding-left: 5px;" 
-                            type="text" placeholder="좋아하는 색깔은?" v-model="passwordHint"/>
+                            type="text" placeholder="비밀번호 힌트" v-model="passwordHint"/>
                         </div>
                         <div><v-btn style="margin: 10px; width: 268px; height: 30px;" color="blue" class="white--text" type="submit">가입</v-btn></div>
                     </form>
@@ -68,18 +68,18 @@
 <script>
 export default {
     data () {
-    return {
-        memberName: '',
-        memberId: '',
-        password: '',
-        passwordHint: ''
+        return {
+            memberName: '',
+            memberId: '',
+            password: '',
+            passwordHint: ''
+        }
+    },
+    methods: {
+        onSubmit () {
+        const { memberName, memberId, password, passwordHint } = this
+        this.$emit('submit', { memberName, memberId, password, passwordHint })
+        }
     }
-  },
-  methods: {
-    onSubmit () {
-      const { memberName, memberId, password, passwordHint } = this
-      this.$emit('submit', { memberName, memberId, password, passwordHint })
-    }
-  }
 }
 </script>
