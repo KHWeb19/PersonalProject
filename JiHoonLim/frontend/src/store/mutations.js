@@ -10,6 +10,8 @@ import {
 
     FETCH_NOTICE_BOARD_LIST,
     FETCH_NOTICE_BOARD,
+
+    FETCH_REGISTER_MEMBER,
     
 } from './mutation-types'
 
@@ -38,7 +40,9 @@ export default {
     [FETCH_NOTICE_BOARD](state, noticeBoard){
         state.noticeBoard = noticeBoard
     },
-
+    [FETCH_REGISTER_MEMBER](state, registerMembers){
+        state.registerMembers = registerMembers
+    },
 
 
 }

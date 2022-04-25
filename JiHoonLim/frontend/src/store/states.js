@@ -11,5 +11,7 @@ export default {
 
     noticeBoards: [],
     noticeBoard: null,
+
+    registerMembers:[],
   
 }

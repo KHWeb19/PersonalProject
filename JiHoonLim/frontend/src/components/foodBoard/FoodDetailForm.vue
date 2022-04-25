@@ -224,6 +224,12 @@
                   </div>
                 </div>
               </div>
+              <v-btn
+                class="mt-3 mb-3 orange lighten-2"
+                style="float: right"
+                to="/foodList"
+                >목록</v-btn
+              >
             </div>
           </v-card>
         </v-col>

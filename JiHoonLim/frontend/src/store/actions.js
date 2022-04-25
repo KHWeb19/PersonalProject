@@ -11,6 +11,8 @@ import {
 
     FETCH_NOTICE_BOARD_LIST,
     FETCH_NOTICE_BOARD,
+
+    FETCH_REGISTER_MEMBER,
     
 } from './mutation-types'
 
@@ -64,6 +66,12 @@ export default {
         return axios.get(`http://localhost:7777/noticeBoard/${boardNo}`)
         .then((res)=>{
             commit(FETCH_NOTICE_BOARD,res.data)
+        })
+    },
+    fetchRegisterMember({commit}) {
+        return axios.get("http://localhost:7777/memberManage/list")
+        .then((res)=>{
+            commit(FETCH_REGISTER_MEMBER, res.data)
         })
     },
 }
