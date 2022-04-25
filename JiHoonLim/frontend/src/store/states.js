@@ -8,5 +8,8 @@ export default {
     bestFoodBoards:[],
     foodBoardComments:[],
     myCartFoods:[],
+
+    noticeBoards: [],
+    noticeBoard: null,
   
 }

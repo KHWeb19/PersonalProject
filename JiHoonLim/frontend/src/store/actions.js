@@ -8,6 +8,9 @@ import {
     FETCH_BEST_FOOD_LIST,
     FETCH_FOOD_BOARD_COMMENTS_LIST,
     FETCH_MY_CART_FOOD_LIST,
+
+    FETCH_NOTICE_BOARD_LIST,
+    FETCH_NOTICE_BOARD,
     
 } from './mutation-types'
 
@@ -49,6 +52,18 @@ export default {
         return axios.get(`http://localhost:7777/member/myCart/list/${memberNo}`)
         .then((res)=>{
             commit(FETCH_MY_CART_FOOD_LIST, res.data)
+        })
+    },
+    fetchNoticeBoardList({commit}) {
+        return axios.get("http://localhost:7777/noticeBoard/list")
+        .then((res)=>{
+            commit(FETCH_NOTICE_BOARD_LIST, res.data)
+        })
+    },
+    fetchNoticeBoard({commit},boardNo) {
+        return axios.get(`http://localhost:7777/noticeBoard/${boardNo}`)
+        .then((res)=>{
+            commit(FETCH_NOTICE_BOARD,res.data)
         })
     },
 }

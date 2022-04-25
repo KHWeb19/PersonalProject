@@ -31,11 +31,18 @@
 
                       <div style="display: flex">
                         <v-text-field
+                          :value="foodBoard.writer"
+                          readonly
+                          solo
+                          flat
+                          style="width: 100px; margin-top: 2px"
+                        />
+                        <v-text-field
                           :value="foodBoard.regDate"
                           readonly
                           solo
                           flat
-                          style="width: 160px; margin-top: 2px"
+                          style="width: 200px; margin-top: 2px"
                         />
                         <div v-if="checkWriteUser">
                           <v-btn
@@ -243,7 +250,7 @@ export default {
       img: this.foodBoard.filename,
       nickName: "",
       comment: "",
-      userInfo: "",
+      userInfo: this.$store.state.userInfo,
       userId: "",
       boardNo: this.foodBoard.boardNo,
 
@@ -261,8 +268,6 @@ export default {
   },
 
   created() {
-    this.userInfo = this.$store.state.userInfo;
-
     if (this.userInfo != null) {
       this.nickName = this.userInfo.nickName;
       this.userId = this.userInfo.id;
