@@ -16,7 +16,7 @@
                     </v-list-item>
                     
                     <v-divider></v-divider>
-                    <img :src="showFile(productBoard.writer,productBoard.productBoardNo)"  width="100%"/>
+                    <img :src="showFile(productBoard.boardNo,productBoard.id)"  width="100%"/>
 
 
                     <v-card-text class="caption">
@@ -50,7 +50,7 @@ export default {
         
          showFile (a,b) {
       try {
-        return require(`../../../../frontend/images/ProductBoardImages/${a}_${b}.png`) 
+        return require(`../../../../backend/demo/images/Product/${a}_${b}.jpg`) 
     } catch (e) {
                 return require(`@/assets/logo.png`)
                 }
@@ -66,8 +66,8 @@ export default {
     },
 
     mounted () {
-        console.log(this.QuestionBoards.regDate)
-        console.log(this.QuestionBoards.boardNo)
+        console.log(this.productBoards.regDate)
+        console.log(this.productBoards.boardNo)
     }
 }
 }

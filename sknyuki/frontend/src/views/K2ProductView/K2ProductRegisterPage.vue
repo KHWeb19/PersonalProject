@@ -1,9 +1,9 @@
 <template>
-<div>
+<v-container>
       <header-view></header-view>
       <product-board-register></product-board-register>
    
-</div>
+</v-container>
 </template>
 
 <script>
