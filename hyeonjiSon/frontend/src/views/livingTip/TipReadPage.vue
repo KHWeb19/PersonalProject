@@ -4,15 +4,19 @@
         <v-container style="width: 800px;">
                 <v-row>
                     <v-btn @click="goList">게시판으로</v-btn>
-                    <v-spacer></v-spacer>
-                    <v-btn @click="modify(tipBoard.boardNo)">수정</v-btn>
-                    &ensp;
-                    <v-btn @click="onDelete">삭제</v-btn>
                 </v-row>
         </v-container>
 
         <tip-read-form v-if="tipBoard" :tipBoard="tipBoard"/>
         <p v-else>로딩중 ....... </p>
+
+
+        <v-container v-if="this.$store.state.userInfo.sn == tipBoard.writer">
+            <v-spacer></v-spacer>
+                <v-btn @click="modify(tipBoard.boardNo)">수정</v-btn>
+                &ensp;
+                <v-btn @click="onDelete">삭제</v-btn>
+        </v-container>
 
     </div>
 </template>
