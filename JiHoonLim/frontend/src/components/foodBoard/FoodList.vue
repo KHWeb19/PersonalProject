@@ -53,7 +53,7 @@
       </v-row>
       <v-row>
         <v-col>
-          <div style="countFoodWrap">
+          <div class="countFoodWrap">
             총
             <b class="countFood">{{ foodBoards.length }}</b
             >개의 레시피가 있습니다.

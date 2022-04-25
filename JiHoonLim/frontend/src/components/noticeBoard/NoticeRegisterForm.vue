@@ -15,7 +15,7 @@
                       <tr>
                         <td>
                           <v-text-field
-                            style="width: 500px"
+                            style="width: 700px"
                             v-model="title"
                             label="제목"
                             clearable
@@ -28,7 +28,7 @@
                       <tr>
                         <td>
                           <v-text-field
-                            style="width: 300px"
+                            style="width: 700px"
                             v-model="userInfo.nickName"
                             label="작성자"
                             clearable
@@ -51,6 +51,7 @@
                         auto-grow
                         outlined
                         color="orange"
+                        rows="10"
                       />
                     </td>
                   </tr>
@@ -98,3 +99,7 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400&display=swap");
+</style>
