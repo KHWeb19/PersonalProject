@@ -57,6 +57,8 @@ public class TipBoardController {
         return service.read(boardNo);
     }
 
+    //비밀번호 대조
+
     @PutMapping("/{boardNo}")
     public TipBoard tipBoardModify (
             @PathVariable("boardNo") Integer boardNo,

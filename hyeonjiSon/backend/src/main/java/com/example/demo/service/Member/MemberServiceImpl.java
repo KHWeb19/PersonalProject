@@ -53,10 +53,19 @@ public class MemberServiceImpl implements MemberService {
             return null;
         }
 
+        if (loginMember.getUserId().equals(memberRequest.getId())) {
+
+            memberRequest.setMemberNo(loginMember.getMemberNo());
+            memberRequest.setSn(loginMember.getStoreName());
+            memberRequest.setCity(loginMember.getCity());
+            memberRequest.setDong(loginMember.getDong());
+            memberRequest.setAddress(loginMember.getAddress());
+        }
+
         MemberRequest response = new MemberRequest(
-                loginMember.getMemberNo(), loginMember.getUserId(), loginMember.getStoreName(), null,
-                loginMember.getCity(), loginMember.getDong(), loginMember.getAddress(), loginMember.getAuth(),
-                loginMember.getPasswordQAnswer() );
+                memberRequest.getMemberNo(), memberRequest.getId(), memberRequest.getSn(), null,
+                memberRequest.getCity(), memberRequest.getDong(), memberRequest.getAddress(), memberRequest.getAuth(),
+                memberRequest.getPwConfirm() );
 
         return response;
     }

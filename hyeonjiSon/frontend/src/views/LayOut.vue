@@ -76,7 +76,6 @@ export default {
     },
 data () {
     return {
-        isLogin: false,
         loginInfo: JSON.parse(localStorage.getItem('loginInfo')),
         drawer: false,
         left: false,

@@ -9,9 +9,6 @@
                     &ensp;
                     <v-btn @click="onDelete">삭제</v-btn>
                 </v-row>
-                <v-row>
-                    <match-pw-pop-up/>
-                </v-row>
         </v-container>
 
         <tip-read-form v-if="tipBoard" :tipBoard="tipBoard"/>
@@ -24,7 +21,6 @@
 import axios from 'axios'
 import { mapActions, mapState } from 'vuex'
 import TipReadForm from '@/components/livingTip/TipReadForm.vue'
-import MatchPwPopUp from '@/components/livingTip/matchPwPopUp.vue'
 export default {
     name: 'TipReadPage',
     props: {
@@ -35,7 +31,6 @@ export default {
     },
     components: {
         TipReadForm,
-        MatchPwPopUp
     },
     computed: {
         ...mapState(['tipBoard'])

@@ -32,4 +32,6 @@ public class MemberRequest {
         this.auth = auth;
     }
 
+    public MemberRequest (Long memberNo){}
+
 }

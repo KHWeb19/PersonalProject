@@ -36,16 +36,18 @@ export default {
     name: 'TipRegisterForm.vue',
     data () {
         return {
+            userInfo: JSON.parse(localStorage.getItem('userInfo')),
             title: '',
-            writer: this.$store.state.userInfo.storeName,
+            writer: this.$store.state.userInfo.sn,
             content: '',
         }
     },
     created () {
-        this.writer = this.$store.state.userInfo.storeName
+        this.writer = this.$store.state.userInfo.sn
     },    
     methods: {
         onSubmit () {
+            console.log(this.$store.state.userInfo.sn)
             const { title, writer, content } = this
             this.$emit('submit', { title, writer, content })
         }
