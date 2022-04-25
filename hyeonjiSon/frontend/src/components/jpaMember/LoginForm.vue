@@ -1,7 +1,7 @@
 <template>
 <div align="center">
   <v-container>
-    <form @submit.prevent="onSubmit">
+    <form name="loginForm" @submit.prevent="onSubmit">
       
       <br>
       <p> 프로젝트 이름에 오신 것을 환영합니다. <br> 회원 정보를 입력해주세요. </p>
@@ -37,6 +37,11 @@ export default {
     FindPwPopUp
   },
   name: "VuetifyMemberRegisterForm.vue",
+  props: {
+    loginForm :{
+      type: Object
+    }
+  },
   data () {
     return {
       id: '',

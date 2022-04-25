@@ -51,9 +51,9 @@
     </v-navigation-drawer>
 
     <v-container>
-      <v-content id="content">
+      <v-main id="content">
         <router-view/>
-      </v-content>
+      </v-main>
     </v-container>
   </v-app>
 </template>
@@ -76,7 +76,6 @@ export default {
     },
 data () {
     return {
-        isLogin: false,
         loginInfo: JSON.parse(localStorage.getItem('loginInfo')),
         drawer: false,
         left: false,
@@ -84,8 +83,8 @@ data () {
         navrouters: [
           { icon: 'mdi-leaf-circle-outline', text: '프로젝트 소개', name: 'home', route: '/projectIntroducePage' },
           { icon: 'mdi-recycle-variant', text: '분리수거 안내', name: 'home', route: '/recycleGuideMainPage' },
-          { icon: 'mdi-note-edit-outline', text: '생활 정보 공유', name: 'home', route: '/livingTipBoardPage' },
-          { icon: 'mdi-store-marker-outline', text: '나눔 받는 가게', name: 'home', route: '/boardStorePage' },
+          { icon: 'mdi-note-edit-outline', text: '생활 정보 공유', name: 'home', route: '/livingTipBoardList' },
+          { icon: 'mdi-store-marker-outline', text: '나눔 받는 가게', name: 'home', route: '/storeBoardListPage' },
           { icon: 'mdi-hand-heart-outline', text: '기부 정보', name: 'home', route: '/donationInfoPage' },
           { icon: 'mdi-email-send-outline', text: '메일 제보', name: 'home', route: '/emailReportPage' }
         ]

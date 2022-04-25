@@ -10,9 +10,14 @@ import ProjectIntroducePage from '@/views/introduce/ProjectIntroducePage.vue'
 
 import RecycleGuideMainPage from '@/views/recycleGuide/RecycleGuideMainPage.vue'
 
-import LivingTipBoardPage from '@/views/livingTip/LivingTipBoardPage.vue'
+import LivingTipBoardList from '@/views/livingTip/LivingTipBoardList.vue'
+import LivingTipSearchList from '@/views/livingTip/LivingTipSearchList.vue'
+import TipRegisterPage from '@/views/livingTip/TipRegisterPage.vue'
+import TipReadPage from '@/views/livingTip/TipReadPage.vue'
+import TipModifyPage from '@/views/livingTip/TipModifyPage.vue'
 
-import BoardStorePage from '@/views/findStore/BoardStorePage.vue'
+import StoreBoardListPage from '@/views/findStore/StoreBoardListPage.vue'
+import StoreSearchPage from '@/views/findStore/StoreSearchPage.vue'
 
 import DonationInfoPage from '@/views/donateInfo/DonationInfoPage.vue'
 
@@ -20,6 +25,13 @@ import EmailReportPage from '@/views/emailReport/EmailReportPage.vue'
 
 
 Vue.use(VueRouter)
+
+const originalPush = VueRouter.prototype.push;
+VueRouter.prototype.push = function push(location) {
+	return originalPush.call(this, location).catch(err => {
+		if (err.name !== 'NavigationDuplicated') throw err;
+	});
+};
 
 const routes = [
   {
@@ -60,16 +72,66 @@ const routes = [
     name: 'recycleGuideMainPage',
     component: RecycleGuideMainPage
   },
+  
   {
-    path: '/livingTipBoardPage',
-    name: 'livingTipBoardPage',
-    component: LivingTipBoardPage
+    path: '/livingTipBoardList',
+    name: 'livingTipBoardList',
+    component: LivingTipBoardList
   },
   {
-    path: '/boardStorePage',
-    name: 'boardStorePage',
-    component: BoardStorePage
+    path: '/livingTipSearchList/:keyWord',
+    name: 'livingTipSearchList',
+    components: {
+      default: LivingTipSearchList
+    },
+    props: {
+      default: true
+    }
   },
+  {
+    path: '/tipRegisterPage',
+    name: 'tipRegisterPage',
+    component: TipRegisterPage
+  },
+  {
+    path: '/tipReadPage/:boardNo',
+    name: 'TipReadPage',
+    components: {
+      default: TipReadPage
+    },
+    props: {
+      default: true
+    }
+  },
+  {
+    path: '/tipModifyPage/:boardNo',
+    name: 'TipModifyPage',
+    components: {
+      default: TipModifyPage
+    },
+    props: {
+      default: true
+    }
+  },
+
+
+  {
+    path: '/storeBoardListPage',
+    name: 'storeBoardListPage',
+    component: StoreBoardListPage
+  },
+  {
+    path: '/storeSearchPage/:keyWord',
+    name: 'storeSearchPage',
+    components: {
+      default: StoreSearchPage
+    },
+    props: {
+      default: true
+    }
+  },
+
+  
   {
     path: '/donationInfoPage',
     name: 'donationInfoPage',

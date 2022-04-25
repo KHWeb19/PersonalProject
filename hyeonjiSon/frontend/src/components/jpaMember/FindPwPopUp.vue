@@ -29,21 +29,12 @@
 </template>
 
 <script>
-import axios from 'axios'
 
 export default {
    name: "FindPwPopUp",
    methods: {
-   btn_click (payload) {
-       const { id, pwConfirm } = payload
-      axios.post('http://localhost:7777/jpaMember/findPw', { id, pwConfirm }) //Spring Controller에 연동하여 전달
-      .then(res => { //then 정상적으로 데이터를 받았을 경우 동작
-         alert(' 비밀번호는 ' + res)
-      })
-      .catch(res => { //에러 캐치한 경우 동작
-         alert('잘못된 정보입니다.' + res)
-      })
-      //finally 동작 여부와 무관하게 무조건 실행됨
+   btn_click () {
+      
    }
    }
     
