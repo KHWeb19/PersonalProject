@@ -2,7 +2,9 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import SearchView from "@/views/SearchView";
-import BoardView from "@/views/BoardView";
+import BoardView from "@/views/board/BoardView";
+import BoardReadView from "@/views/board/BoardReadView";
+import BoardModifyView from "@/views/board/BoardModifyView";
 import MyPage from "@/views/MyPage";
 import LoginPage from "@/views/login/LoginPage";
 import RegisterPage from "@/views/login/RegisterPage";
@@ -79,6 +81,18 @@ const routes = [
     path: '/mapView',
     name: 'MapView',
     component: MapView
+  },
+  {
+    path: '/boardRead/:boardNo',
+    name: 'BoardReadView',
+    component: BoardReadView,
+    props: true
+  },
+  {
+    path: '/boardModify/:boardNo',
+    name: 'BoardModifyView',
+    component: BoardModifyView,
+    props: true
   },
 ]
 

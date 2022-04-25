@@ -5,4 +5,8 @@ export default {
     dayContent: [],
     voteContents: [],
     userInfo: [],
+    boardList: [],
+    boardRead: null,
+    boardReadImg: [],
+    boardListComment: [],
 }
