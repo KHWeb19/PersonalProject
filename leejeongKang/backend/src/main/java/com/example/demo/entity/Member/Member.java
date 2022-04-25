@@ -5,7 +5,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Data
@@ -35,6 +34,9 @@ public class Member {
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<MemberAuth> authList = new ArrayList<>();
 
+    /*@OneToMany(mappedBy = "appointment")
+    private List<Appointment> apt = new ArrayList<>(); */
+
     public Member(String id, String password, String name, String birth, String phone) {
         this.id = id;
         this.password = password;
@@ -43,7 +45,7 @@ public class Member {
         this.phone = phone;
     }
 
-    public Member(Long memberNo, String id, String password, String name, String birth, String phone) {
+    public Member(Long memberNo) {
         this.memberNo = memberNo;
         this.id = id;
         this.password = password;

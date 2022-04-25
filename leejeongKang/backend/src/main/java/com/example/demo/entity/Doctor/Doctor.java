@@ -15,7 +15,7 @@ public class Doctor {
     private Long doctorNo;
 
     @Column(length = 20, nullable = false)
-    private String name;
+    private String doctorName;
 
     @Column(length = 20, nullable = false)
     private String major;
@@ -23,7 +23,11 @@ public class Doctor {
     @Lob
     private String information;
 
-    //의사 이미지
-
+    public Doctor(Long doctorNo) {
+        this.doctorNo = doctorNo;
+        this.doctorName=doctorName;
+        this.major=major;
+        this.information=information;
+    }
 }
 

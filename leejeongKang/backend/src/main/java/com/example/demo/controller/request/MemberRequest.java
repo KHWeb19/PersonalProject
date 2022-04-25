@@ -3,8 +3,6 @@ package com.example.demo.controller.request;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-
 @NoArgsConstructor
 @Data
 public class MemberRequest {
@@ -16,6 +14,7 @@ public class MemberRequest {
     private String phone;
     private String auth;
 
+    //회원가입용
     public MemberRequest (String id, String password, String name, String birth, String phone, String auth){
         this.id=id;
         this.password=password;
@@ -25,15 +24,12 @@ public class MemberRequest {
         this.auth=auth;
     }
 
-    public MemberRequest (String id, String password){
-        this.id = id;
-        this.password = password;
-    }
-
+    //checkID
     public MemberRequest (String id){
         this.id = id;
     }
 
+    //로그인
     public MemberRequest (Long memberNo, String id, String password, String name, String birth, String phone){
         this.memberNo = memberNo;
         this.id=id;
