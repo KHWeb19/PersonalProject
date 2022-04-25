@@ -31,8 +31,8 @@
                                 </label>
                                 <input type="file" id="files" ref="files" multiple v-on:change="handleFileUpload()"/>
                             </td>
-                            <td v-else align="center" rowspan="2" colspan="2" width="66%" >
-                                <v-img width="672px" :src="priview" />
+                            <td v-else align="center" rowspan="2" colspan="2">
+                                <v-img max-height="663px" max-width="663px" :src="priview" />
                             </td>
                             <td style="font-weight: bold">
                                 <input style="margin: 16px" type="text" v-model="loginInfo.memberId" disabled/>

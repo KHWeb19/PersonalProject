@@ -1,12 +1,12 @@
 <template>
-    <v-container style="width: 1000px; margin-top: 85px; font-size: 14px">
+    <v-container style="width: 1200px; margin-top: 95px; font-size: 14px">
       <v-flex>
             <v-card style="margin-bottom: 30px;">
                 <form @submit.prevent="onSubmit">
                 <table style="width: 100%">
                     <tr >
                         <td rowspan="20" width="672px">
-                            <v-img width="672px" :src="require(`@/assets/mImage/${board.boardImage}`)"/>
+                            <v-img width="735px" :src="require(`@/assets/mImage/${board.boardImage}`)"/>
                         </td>
                     </tr>
                     <tr>
@@ -19,7 +19,7 @@
                         <td style="font-weight: bold;">
                             {{ board.member.memberId }}
                         </td>
-                        <td align="right" style="padding-right: 12px;"> 
+                        <td v-if="board.member.memberId==this.loginInfo.memberId" align="right" style="padding-right: 12px;"> 
                             <v-menu offset-y min-width="100">
                                 <template v-slot:activator="{ on }">
                                     <v-btn icon v-on="on">
@@ -47,50 +47,56 @@
                         </td>
                     </tr>
                     <tr align="left">
-                        <td style="width: 32px; padding: 10px 14px 10px 16px; ">
+                        <td style="width: 32px; padding: 5px 14px 16px 16px; ">
                             <div style="border-radius: 70%; overflow: hidden; width: 32px ">
                                 <v-img v-if="board.member.imageName" width="32" :src="require(`@/assets/mImage/${board.member.imageName}`)"/>
                                 <v-img v-else width="32" src="@/assets/profile.jpg"/>
                             </div>
                         </td>
-                        <td colspan="3" style="height: 50px;">
+                        <td colspan="3" style="height: 50px;  padding: 14px 0px 16px 0px">
                             <div style="display: flex;">
-                                <div style="font-weight: bold;" >
+                                <div style="font-weight: bold; padding-bottom: 6px" >
                                     {{ board.member.memberId }}&nbsp;
                                 </div>
                                 {{ board.content }}
                             </div>
+                            <span style="font-size: 12px; color: grey">{{ board.regDate }}</span>
                         </td>
                     </tr>
                     <tr align="left" >
                         <td colspan="4" style=" padding-left: 16px"  > 
-                            <div style="overflow-y:auto; overflow-x:hidden; width:100%; height:390px;">
+                            <div style="overflow-y:auto; overflow-x:hidden; width:100%; max-height:435px;">
                                 <div v-for="comment in comments" :key="comment.commentNo">
-                                    <div style="display: flex;">
-                                        <div style="border-radius: 70%; overflow: hidden; width: 32px ">
-                                            <v-img v-if="comment.member.imageName" width="32" :src="require(`@/assets/mImage/${comment.member.imageName}`)"/>
-                                            <v-img v-else width="32" src="@/assets/profile.jpg"/>
+                                    <div style="display: flex; min-width: 32px; min-height: 32px">
+                                        <div style="padding: 3px 15px 0px 0px">
+                                            <div style="border-radius: 70%; overflow: hidden; min-width: 32px; min-height: 32px">
+                                                <v-img v-if="comment.member.imageName" width="32" :src="require(`@/assets/mImage/${comment.member.imageName}`)"/>
+                                                <v-img v-else width="32" src="@/assets/profile.jpg"/>
+                                            </div>
                                         </div>
-                                        <span style="padding: 5px 0px 0px 14px"><b>{{ comment.member.memberId }}&nbsp;</b>{{ comment.content }}</span>
-                                        
+                                        <div style="padding-bottom: 10px">
+                                            <b>{{ comment.member.memberId }}&nbsp;</b>{{ comment.content }}  
+                                            <div   style="display: flex">
+                                                <div style="font-size: 12px; color: grey">{{ comment.regDate }}</div>
+                                                <v-menu offset-y min-width="100">
+                                                    <template v-slot:activator="{ on }">
+                                                        <!-- <v-btn v-if="comment.member.memberId==this.loginInfo.memberId" icon v-on="on"> -->
+                                                        <v-btn icon v-on="on">
+                                                            <v-icon>
+                                                                mdi-dots-horizontal
+                                                            </v-icon>
+                                                        </v-btn> 
+                                                    </template>
+                                                    <v-list>
+                                                        <v-list-item-title > 
+                                                            <v-btn @click="onCommentDelete(comment.commentNo)">삭제</v-btn>
+                                                        </v-list-item-title>
+                                                    </v-list>
+                                                </v-menu>  
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div style="font-size: 12px; color: grey">
-                                        {{ comment.regDate }}
-                                        <v-menu offset-y min-width="100">
-                                            <template v-slot:activator="{ on }">
-                                                <v-btn icon v-on="on">
-                                                    <v-icon>
-                                                        mdi-dots-horizontal
-                                                    </v-icon>
-                                                </v-btn> 
-                                            </template>
-                                            <v-list>
-                                                <v-list-item-title> 
-                                                    <v-btn @click="onCommentDelete(comment.commentNo)">삭제</v-btn>
-                                                </v-list-item-title>
-                                            </v-list>
-                                        </v-menu>
-                                    </div> 
+                                    
                                 </div>
                             </div>
                         </td>
@@ -149,9 +155,14 @@
                             </td>
                         </tr>
                     <tr v-if="board.likes.length" align="left">
-                            <td colspan="3" style="padding: 0px 0px 8px 16px">
-                                <div id="likesCnt">좋아요 {{ board.likes.length }}개</div>
-                            </td>
+                        <td colspan="3" style="padding: 0px 0px 8px 16px">
+                            좋아요 {{ board.likes.length }}개
+                        </td>
+                    </tr>
+                    <tr v-else>
+                        <td colspan="3" style="padding: 0px 0px 8px 16px">
+                            <br/>
+                        </td>
                     </tr>
                     <tr align="left" style="height: 10px; font-size: 10px">
                         <td colspan="3" style="padding: 0px 0px 8px 16px; color: grey">

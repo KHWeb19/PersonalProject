@@ -1,5 +1,5 @@
 <template>
-    <v-container style="width: 700px; margin-top: 85px; font-size: 14px">
+    <v-container style="width: 643px; margin-top: 85px;">
       <v-flex>
             <v-card style="height: 320px" v-if="!boards || (Array.isArray(boards) && boards.length === 0)">
                     현재 등록된 게시물이 없습니다!
@@ -41,7 +41,7 @@
                         </tr>
                         <tr align="center">
                             <td colspan="3">
-                                <v-img width="672px" :src="require(`@/assets/mImage/${board.boardImage}`)"/>
+                                <v-img width="615px" :src="require(`@/assets/mImage/${board.boardImage}`)"/>
                             </td>
                         </tr >
                         <tr align="left"  >
