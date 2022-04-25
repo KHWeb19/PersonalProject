@@ -53,7 +53,7 @@
                   <v-btn
                     text
                     :to="{
-                      name: 'noticeModifyPage',
+                      name: 'NoticeModifyPage',
                       params: { boardNo: noticeBoard.boardNo.toString() },
                     }"
                     >수정</v-btn

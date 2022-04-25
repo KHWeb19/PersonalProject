@@ -1,12 +1,17 @@
 <template>
   <div>
-    <notice-modify-form :noticeBoard="noticeBoard" />
+    <notice-modify-form
+      v-if="noticeBoard"
+      :noticeBoard="noticeBoard"
+      @submit="onSubmit"
+    />
   </div>
 </template>
 
 <script>
 import NoticeModifyForm from "@/components/noticeBoard/NoticeModifyForm.vue";
 import { mapActions, mapState } from "vuex";
+import axios from "axios";
 
 export default {
   name: "NoticeModifyPage",
@@ -24,6 +29,27 @@ export default {
   },
   methods: {
     ...mapActions(["fetchNoticeBoard"]),
+    onSubmit(payload) {
+      const { title, content } = payload;
+
+      axios
+        .put(`http://localhost:7777/noticeBoard/${this.boardNo}`, {
+          title,
+          writer: this.noticeBoard.writer,
+          content,
+          regDate: this.noticeBoard.regDate,
+        })
+        .then((res) => {
+          alert("수정 성공");
+          this.$router.push({
+            name: "NoticeReadPage",
+            params: { boardNo: res.data.boardNo.toString() },
+          });
+        })
+        .catch(() => {
+          alert("수정 실패");
+        });
+    },
   },
   created() {
     this.fetchNoticeBoard(this.boardNo).catch(() => {
