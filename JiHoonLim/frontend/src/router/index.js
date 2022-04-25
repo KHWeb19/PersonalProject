@@ -18,6 +18,7 @@ import MyCartFoodPage from '@/views/member/MyCartFoodPage.vue'
 
 import NoticeListPage from '@/views/noticeBoard/NoticeListPage.vue'
 import NoticeRegisterPage from '@/views/noticeBoard/NoticeRegisterPage.vue'
+import NoticeReadPage from '@/views/noticeBoard/NoticeReadPage.vue'
 
 import test from '@/views/test.vue'
 Vue.use(VueRouter)
@@ -118,6 +119,16 @@ const routes = [
     path: '/noticeList',
     name: 'NoticeListPage',
     component: NoticeListPage
+  },
+  {
+    path: '/noticeRead/:boardNo',
+    name: 'NoticeReadPage',
+    components: {
+      default: NoticeReadPage
+    },
+    props: {
+      default: true
+    }
   },
 ]
 

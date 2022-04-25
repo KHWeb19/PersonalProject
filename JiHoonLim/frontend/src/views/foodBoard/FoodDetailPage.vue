@@ -28,14 +28,14 @@ export default {
   computed: {
     ...mapState(["foodBoard", "foodBoardComments"]),
   },
-  mounted() {
-    this.fetchFoodBoardCommentList(this.boardNo).catch(() => {
-      alert("댓글 요청 실패");
-    });
-  },
+
   created() {
     this.fetchFoodBoard(this.boardNo).catch(() => {
       alert("게시물 요청 실패");
+    });
+
+    this.fetchFoodBoardCommentList(this.boardNo).catch(() => {
+      alert("댓글 요청 실패");
     });
   },
   methods: {
