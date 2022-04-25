@@ -52,11 +52,8 @@
                 <td align="center">
                     {{ board.process }}
                 </td>
-                <td align="center" >
-                    <router-link :to="{ name: 'BookingReadPage',
-                                        params: { bookingNo: board.bookingNo.toString() }}">
-                        {{ board.id }} 님의 주문서입니다.
-                    </router-link>
+                <td align="center">
+                    <a @click="checkRightId(board)">{{ board.id }} 님의 주문서입니다.</a>
                 </td>
                 <td align="center">
                     {{ board.regDate}}
@@ -94,7 +91,7 @@
             return {
                 pageNum: 0,
                 bookingNo:'',
-
+                checkId: (window.localStorage.getItem('id')),
             }
         },
         computed: {
@@ -118,6 +115,17 @@
             },
             prevPage () {
             this.pageNum -= 1;
+            },
+            checkRightId(board){
+                if(board.id == this.checkId || this.checkId == 'manager'){
+                    this.$router.push({
+                    name: 'BookingReadPage',
+                    params: { bookingNo: board.bookingNo.toString() }
+                    })
+                }else {
+                    alert('접근 가능한 아이디가 아닙니다!')
+                    this.$router.go()
+                }
             }
         }
         
