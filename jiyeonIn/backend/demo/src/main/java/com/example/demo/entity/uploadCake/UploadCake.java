@@ -41,4 +41,12 @@ public class UploadCake {
         this.linkInfo = linkInfo;
     }
 
+    public UploadCake(Long cakeNo, String design, String size, String price, String linkInfo){
+        this.cakeNo = cakeNo;
+        this.design = design;
+        this.size = size;
+        this.price = price;
+        this.linkInfo = linkInfo;
+    }
+
 }

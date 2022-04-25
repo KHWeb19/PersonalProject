@@ -3,7 +3,10 @@
         <div class="calenderPage">
             <h4>픽업일자 & 시간</h4>
             <calender-test @submit="calendarInform"></calender-test>
-            <p style="font-size: 13px; padding: 5px;">*예약 확정 후 최소 3일 이상 소요되니, 이에 맞추어 픽업일 입력 부탁 드립니다. <br> *일요일, 월요일은 휴무입니다.</p>
+            <p style="font-size: 13px; padding: 5px;">
+                *날짜, 시간 선택 후 확정 버튼 눌러주세요! <br>
+                *예약 확정 후 최소 3일 이상 소요되니, 이에 맞추어 픽업일 입력 부탁 드립니다. 
+                <br> *일요일, 월요일은 휴무입니다.</p>
             
         </div>
         
@@ -50,7 +53,7 @@
             
             <v-virtual-scroll
                 :items="cakeLists"
-                height="600" width="750" item-height="250" 
+                height="900" width="850" item-height="300" 
                 style="left: 10%;top: 10%;"
                 class="virtualScroll"
                 v-if="this.chooseDesBol != 'mine'">
@@ -58,10 +61,10 @@
                 <template v-slot="{ item, index }">
                     <v-list-item :key="index">
                         <v-list-item-action>
-                            <input type="radio" @change="confirmCake" v-model="checkIndex" :value="index" name="checkOwnCake"/> 
+                            <input type="radio" @change="confirmCake(item)" v-model="checkIndex" :value="index" name="checkOwnCake"/> 
                         </v-list-item-action>
 
-                        <v-list-item-content style="width:200px; height:260px;">
+                        <v-list-item-content style="width:310px; height:310px;">
                             <v-img v-bind:src="require(`@/assets/uploadImg/${item.linkInfo}`)" contain />
                         </v-list-item-content>
 
@@ -75,7 +78,6 @@
                                 price: {{item.price}}
                             </v-list-item-title>
                         </v-list-item-content>
-                        
                     </v-list-item>
                     <v-divider></v-divider>
                 </template>
@@ -83,7 +85,7 @@
 
             <v-virtual-scroll
                 :items="chooseDesignArr"
-                height="600" width="750" item-height="250" 
+                height="800" width="750" item-height="300" 
                 class="virtualScroll"
                 style="left: 10%;top: 10%;"
                 v-if="this.chooseDesBol == 'mine'">
@@ -91,10 +93,10 @@
                 <template v-slot="{ item, index }">
                     <v-list-item :key="index">
                         <v-list-item-action>
-                            <input type="radio" @change="confirmCake2" v-model="checkIndex2" :value="index" name="checkSelectCake"/> 
+                            <input type="radio" @change="confirmCake2(item)" v-model="checkIndex2" :value="index" name="checkSelectCake"/> 
                         </v-list-item-action>
 
-                        <v-list-item-content style="width:200px; height:260px;">
+                        <v-list-item-content style="width:310px; height:310px;">
                             <v-img v-bind:src="require(`@/assets/uploadImg/${item.linkInfo}`)" contain />
                         </v-list-item-content>
 
@@ -108,11 +110,11 @@
                                 price: {{item.price}}
                             </v-list-item-title>
                         </v-list-item-content>
-                        
                     </v-list-item>
                     <v-divider></v-divider>
                 </template>
             </v-virtual-scroll>
+            
             </div>
         </div>
 
@@ -218,87 +220,26 @@ export default {
             this.chooseDesBol = 'mine'
             this.isShow = false
         },
-        confirmCake(){
-            console.log(this.checkIndex)
-            
-            for(let i=0; i< this.cakeLists.length ; i++) {
-                if(this.checkIndex == i) {
-                    this.outDesign = this.cakeLists[i].design
-                    this.outSize = this.cakeLists[i].size 
-                    this.outPrice = this.cakeLists[i].price
-                    this.outImg = this.cakeLists[i].linkInfo
-                    this.cakeArrNo = ((this.checkIndex) +1)
-                    
-                    break
-                }
-            }
+        confirmCake(item){
+            console.log(item.cakeNo)
 
-            console.log(this.cakeArrNo)
+            this.outDesign = item.design
+            this.outSize = item.size
+            this.outPrice = item.price
+            this.cakeArrNo = item.cakeNo
+
             this.isShow = true
 
         },
-         confirmCake2(){
-             console.log(this.checkIndex2)
+         confirmCake2(item){
+             console.log(item.cakeNo)
              this.isShow = true
+
+            this.outDesign = item.design
+            this.outSize = item.size
+            this.outPrice = item.price
+            this.cakeArrNo = item.cakeNo
         
-            if((this.chooseDesignArr[0].design) == 'birthday'){
-                for(let i=0 ; i< this.chooseDesignArr.length ; i++){
-                    if((this.checkIndex2) == (i)){
-                        let num = ((this.chooseDesignArr[i].cakeNo) - 1)
-                         this.outDesign = this.cakeLists[num].design
-                         this.outSize = this.cakeLists[num].size 
-                         this.outPrice = this.cakeLists[num].price
-                         this.cakeArrNo = (this.chooseDesignArr[i].cakeNo)
-                         this.outImg = this.cakeLists[num].linkInfo
-
-                        console.log(this.cakeArrNo)
-                         break
-                    }
-                }          
-            }else if(this.chooseDesignArr[0].design == 'family'){
-                for(let i=0 ; i< this.chooseDesignArr.length ; i++){
-                    if((this.checkIndex2) == (i)){
-                        let num = ((this.chooseDesignArr[i].cakeNo) - 1)
-                         this.outDesign = this.cakeLists[num].design
-                         this.outSize = this.cakeLists[num].size 
-                         this.outPrice = this.cakeLists[num].price
-                         this.cakeArrNo = (this.chooseDesignArr[i].cakeNo)
-                         this.outImg = this.cakeLists[num].linkInfo
-
-                        console.log(this.cakeArrNo)
-                         break
-                    }
-                }            
-            }
-            else if(this.chooseDesignArr[0].design == 'friend'){
-                for(let i=0 ; i< this.chooseDesignArr.length ; i++){
-                    if((this.checkIndex2) == (i)){
-                        let num = ((this.chooseDesignArr[i].cakeNo) - 1)
-                         this.outDesign = this.cakeLists[num].design
-                         this.outSize = this.cakeLists[num].size 
-                         this.outPrice = this.cakeLists[num].price
-                         this.cakeArrNo = (this.chooseDesignArr[i].cakeNo)
-                         this.outImg = this.cakeLists[num].linkInfo
-
-                        console.log(this.cakeArrNo)
-                         break
-                    }
-                }           
-            }else if(this.chooseDesignArr[0].design == 'lover'){
-                for(let i=0 ; i< this.chooseDesignArr.length ; i++){
-                    if((this.checkIndex2) == (i)){
-                        let num = ((this.chooseDesignArr[i].cakeNo) - 1)
-                         this.outDesign = this.cakeLists[num].design
-                         this.outSize = this.cakeLists[num].size 
-                         this.outPrice = this.cakeLists[num].price
-                         this.cakeArrNo = (this.chooseDesignArr[i].cakeNo)
-                         this.outImg = this.cakeLists[num].linkInfo
-
-                        console.log(this.cakeArrNo)
-                         break
-                    }
-                }          
-            }
          },
         
         handleFileUpload() {
