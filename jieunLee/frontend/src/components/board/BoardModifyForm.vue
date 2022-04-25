@@ -1,5 +1,5 @@
 <template>
-    <v-container style="width: 1000px; margin-top: 85px; ">
+    <v-container style="width: 1000px; margin-top: 95px; ">
         <v-flex>
             <v-card style="height: 100%">
                 <form @submit.prevent="onSubmit">
@@ -22,11 +22,20 @@
                     <hr style="border: 0; height: 1px; background: #d8d8d8; "/>
                     <table style="width: 100%; border-collapse : collapse;">
                         <tr>
-                            <td align="center" rowspan="2" colspan="2" width="66%" >
-                                <v-img width="672px" :src="require(`@/assets/mImage/${board.boardImage}`)"/>
+                            <td align="center" rowspan="2" colspan="2" width="700px%" >
+                                <v-img max-height="700px" width="700px" :src="require(`@/assets/mImage/${board.boardImage}`)"/>
                             </td>
                             <td style="font-weight: bold">
-                                <input style="margin: 16px" type="text" :value="board.member.memberId" disabled/>
+                                <div style="display: flex; margin: 0px 16px; height: 60px">
+                                    <div style="padding: 16px 12px 0px 0px">
+                                        <div style="border-radius: 70%; overflow: hidden;">
+                                            <v-img v-if="imageChange" max-width="28" height="28" :src="require(`@/assets/mImage/${imageChange}`)"/>
+                                            <v-img v-else-if="loginInfo.imageName" max-width="28" height="28" :src="require(`@/assets/mImage/${loginInfo.imageName}`)"/>
+                                            <v-img v-else max-width="28" height="28"  src="@/assets/profile.jpg"/>
+                                        </div>
+                                    </div>
+                                    <input type="text"  v-model="board.member.memberId" disabled/>
+                                </div>
                             </td>
                         </tr>
                         <tr>

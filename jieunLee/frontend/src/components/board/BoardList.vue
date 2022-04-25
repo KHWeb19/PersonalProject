@@ -1,5 +1,5 @@
 <template>
-    <v-container style="width: 643px; margin-top: 85px;">
+    <v-container style="width: 643px; margin-top: 85px; font-size: 14px">
       <v-flex>
             <v-card style="height: 320px" v-if="!boards || (Array.isArray(boards) && boards.length === 0)">
                     현재 등록된 게시물이 없습니다!
@@ -17,6 +17,7 @@
                             <td style="font-weight: bold;">
                                 {{ board.member.memberId }}
                             </td>
+                            <!-- <td v-if="this.loginInfo.memberId==board.member.memberId" align="right" style="padding-right: 12px;">  -->
                             <td align="right" style="padding-right: 12px;"> 
                                 <v-menu offset-y min-width="100">
                                     <template v-slot:activator="{ on }">
@@ -64,7 +65,7 @@
                         </tr>
                         <tr v-if="board.likes.length" align="left">
                             <td colspan="3" style="padding: 0px 0px 8px 16px">
-                                <div id="likesCnt">{{ board.likes.length }}명이 좋아합니다</div>
+                                {{ board.likes.length }}명이 좋아합니다
                             </td>
                         </tr>
                         <tr align="left">

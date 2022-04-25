@@ -74,10 +74,14 @@ public class BoardServiceImpl implements BoardService {
         Board board = repository.findById(boardNo).orElseThrow();
 
         Optional<Comment> maybeComment = commentRepository.findByBoard(board);
-        commentRepository.deleteById(maybeComment.get().getCommentNo());
+        if(!maybeComment.isEmpty()) {
+            commentRepository.deleteById(maybeComment.get().getCommentNo());
+        }
 
         Optional<Likes> maybeLikes = likesRepository.findByBoard(board);
-        likesRepository.deleteById(maybeLikes.get().getLikedNo());
+        if(!maybeLikes.isEmpty()) {
+            likesRepository.deleteById(maybeLikes.get().getLikedNo());
+        }
 
         repository.deleteById(Long.valueOf(boardNo));
     }

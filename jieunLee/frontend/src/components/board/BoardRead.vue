@@ -4,9 +4,10 @@
             <v-card style="margin-bottom: 30px;">
                 <form @submit.prevent="onSubmit">
                 <table style="width: 100%">
+
                     <tr >
-                        <td rowspan="20" width="672px">
-                            <v-img width="735px" :src="require(`@/assets/mImage/${board.boardImage}`)"/>
+                        <td rowspan="20" width="740">
+                            <v-img width="740" max-height="740"  :src="require(`@/assets/mImage/${board.boardImage}`)"/>
                         </td>
                     </tr>
                     <tr>
@@ -65,7 +66,7 @@
                     </tr>
                     <tr align="left" >
                         <td colspan="4" style=" padding-left: 16px"  > 
-                            <div style="overflow-y:auto; overflow-x:hidden; width:100%; max-height:435px;">
+                            <div style="overflow-y:auto; overflow-x:hidden; width:100%; height:435px;">
                                 <div v-for="comment in comments" :key="comment.commentNo">
                                     <div style="display: flex; min-width: 32px; min-height: 32px">
                                         <div style="padding: 3px 15px 0px 0px">
