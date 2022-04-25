@@ -1,7 +1,7 @@
 <template>
     <v-container >
         <v-row justify="center">
-            <img class="title" src="@/assets/title/studyTitle.png" width=155 >
+            <img class="title" src="@/assets/title/projectTitle.png" width=155 >
         </v-row>
         <v-row>
             <study-modify :study="study" @submit="onStudyModify"/>
@@ -68,7 +68,7 @@ export default {
 
 <style scoped>
 .title{
-    margin-top:5%;
+    margin-top:4%;
     margin-bottom: 5%;
 }
 @media (max-width:700px){

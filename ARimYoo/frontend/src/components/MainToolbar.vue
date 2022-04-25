@@ -1,8 +1,8 @@
 <template>
     <v-container>
-        <v-toolbar color="black" dark class="mx-auto" height="55">
+        <v-toolbar color="black" dark class="mx-auto" height="45">
             <v-layout row wrap>
-                <v-tabs v-model="tabs">
+                <v-tabs v-model="tabs" height="45">
                     <v-tab v-show="neverNoShow">
                         <router-link to="/main">Home</router-link>
                     </v-tab> 
@@ -38,8 +38,6 @@
                                 </v-list-item>
                             </v-list>
                         </v-menu>
-                   
-                    
                 </v-tabs>
             </v-layout>
         </v-toolbar>
@@ -81,7 +79,7 @@ export default {
 
 <style scoped>
 .v-toolbar {
-    width: 95%;
+    width: 100%;
 }
 .v-tab {
     position:relative;

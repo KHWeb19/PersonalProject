@@ -69,7 +69,7 @@ export default {
 
 <style scoped>
 .title{
-    margin-top:5%;
+    margin-top:4%;
     margin-bottom: 5%;
 }
 @media (max-width:700px){

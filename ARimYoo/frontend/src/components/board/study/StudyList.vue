@@ -1,7 +1,7 @@
 <template>
     <v-container>
         <v-row column wrap justify="center">
-            <v-col v-for="study in studies" :key="study.studyNo" lg="3" sm="6">
+            <v-col v-for="study in paginatedData" :key="study.studyNo" lg="3" sm="6">
             <v-card width="280" height="435" class="mx-auto">
             <router-link :to="{ name: 'StudyReadPage',
                                         params: { studyNo: study.studyNo.toString() }}">
@@ -34,6 +34,19 @@
           </v-card>
         </v-col>
         </v-row>
+        <v-row justify="end" style="margin-top:50px">
+            <div class="pageBtn">
+                <v-btn :disabled="pageNum === 0" small @click="prevPage" color="red darken-3" dark>
+                    <v-icon>mdi-arrow-left-bold</v-icon>
+                </v-btn>&nbsp;
+                <span class="page-count">
+                    {{ pageNum + 1 }} / {{ pageCount }}
+                </span>&nbsp;
+                <v-btn :disabled="pageNum >= pageCount - 1" @click="nextPage" small color="red darken-3">
+                    <v-icon>mdi-arrow-right-bold</v-icon>
+                </v-btn>
+          </div>
+        </v-row>
         <v-row justify="center" style="margin-top:50px">
             <v-col  cols="7" md="3">
             <input type="text" class="search" v-model="keyword"/>
@@ -58,26 +71,57 @@ export default {
         studies: {
             type:Array
         }
+        ,
+        listArray: {
+            type: Array,
+            required: true,
+        },
+        pageSize: {
+            type: Number,
+            required: false,
+            default: 16,
+        }
     },
     data () {
         return {
             keyword:'',
-            searchList: []
+            searchList: [],
+            pageNum:0
         }
+    },
+    computed : {
+        pageCount() {
+      let listLeng = this.listArray.length,
+        listSize = this.pageSize,
+        page = Math.floor(listLeng / listSize);
+      if (listLeng % listSize > 0) page += 1;
+      return page;
+    },
+    paginatedData() {
+      const start = this.pageNum * this.pageSize,
+        end = start + this.pageSize;
+      return this.listArray.slice(start, end);
+    },
     },
     methods: {
         goSearch(){
                 const {keyword} = this
                 console.log(keyword)
-                axios.post('http://localhost:7777/board/review/search', {keyword})
+                axios.post('http://localhost:7777/board/study/search', {keyword})
                 .then((res) => {
                     console.log(res.data)
-                    this.$router.push({name: 'ReviewSearchPage', params: { searchList: res.data }})
+                    this.$router.push({name: 'StudySearchPage', params: { searchList: res.data }})
                 })
                 .catch (() => {
                     alert('문제 발생!')
                 })
-            }
+            },
+                nextPage() {
+      this.pageNum += 1;
+    },
+    prevPage() {
+      this.pageNum -= 1;
+    },
         }
     } 
 </script>
@@ -125,5 +169,8 @@ export default {
     position: relative;
     float:left;
     margin-left:10%;
+}
+.pageBtn{
+    font-family: 'Noto Sans KR', sans-serif;
 }
 </style>

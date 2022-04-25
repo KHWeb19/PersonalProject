@@ -24,9 +24,19 @@ import StudyPage from '../views/board/study/StudyPage.vue'
 import StudyWritePage from '../views/board/study/StudyWritePage.vue'
 import StudyReadPage from '../views/board/study/StudyReadPage.vue'
 import StudyModifyPage from '../views/board/study/StudyModifyPage.vue'
+import StudySearchPage from '../views/board/study/StudySearchPage.vue'
 
 import ProjectPage from '../views/board/project/ProjectPage.vue'
 import ProjectWritePage from '../views/board/project/ProjectWritePage.vue'
+import ProjectReadPage from '../views/board/project/ProjectReadPage.vue'
+import ProjectModifyPage from '../views/board/project/ProjectModifyPage.vue'
+import ProjectSearchPage from '../views/board/project/ProjectSearchPage.vue'
+
+import MarketPage from '../views/board/market/MarketPage.vue'
+import MarketWritePage from '../views/board/market/MarketWritePage.vue'
+import MarketReadPage from '../views/board/market/MarketReadPage.vue'
+import MarketModifyPage from '../views/board/market/MarketModifyPage.vue'
+import MarketSearchPage from '../views/board/market/MarketSearchPage.vue'
 
 Vue.use(VueRouter)
 
@@ -201,6 +211,17 @@ const routes = [
         beforeEnter: requireLogin()
     },
     {
+        path: '/study/search',
+        name: 'StudySearchPage',
+        components: {
+            default: StudySearchPage
+        },
+        props: {
+            default: true
+        },
+        beforeEnter: requireLogin()
+    },
+    {
         path: '/project',
         name: 'ProjectPage',
         component: ProjectPage,
@@ -210,6 +231,86 @@ const routes = [
         path: '/project/write',
         name: 'ProjectWritePage',
         component: ProjectWritePage,
+        beforeEnter: requireLogin()
+    },
+    {
+        path: '/project/:projectNo',
+        name: 'ProjectReadPage',
+        components: {
+            default:
+                ProjectReadPage
+        },
+        props: {
+            default: true
+        },
+        beforeEnter: requireLogin()
+    },
+    {
+        path: '/project/modify/:projectNo',
+        name: 'ProjectModifyPage',
+        components: {
+            default: ProjectModifyPage
+        },
+        props: {
+            default: true
+        },
+        beforeEnter: requireLogin()
+    },
+    {
+        path: '/project/search',
+        name: 'ProjectSearchPage',
+        components: {
+            default: ProjectSearchPage
+        },
+        props: {
+            default: true
+        },
+        beforeEnter: requireLogin()
+    },
+    {
+        path: '/market',
+        name: 'MarketPage',
+        component: MarketPage,
+        beforeEnter: requireLogin()
+    },
+    {
+        path: '/market/write',
+        name: 'MarketWritePage',
+        component: MarketWritePage,
+        beforeEnter: requireLogin()
+    },
+    {
+        path: '/market/:boardNo',
+        name: 'MarketReadPage',
+        components: {
+            default:
+                MarketReadPage
+        },
+        props: {
+            default: true
+        },
+        beforeEnter: requireLogin()
+    },
+    {
+        path: '/market/modify/:boardNo',
+        name: 'MarketModifyPage',
+        components: {
+            default: MarketModifyPage
+        },
+        props: {
+            default: true
+        },
+        beforeEnter: requireLogin()
+    },
+    {
+        path: '/market/search',
+        name: 'MarketSearchPage',
+        components: {
+            default: MarketSearchPage
+        },
+        props: {
+            default: true
+        },
         beforeEnter: requireLogin()
     },
 ]

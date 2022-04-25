@@ -1,5 +1,6 @@
 package com.example.demo.controller.study;
 
+import com.example.demo.controller.Request.keywordRequest;
 import com.example.demo.entity.communityBoard.CommunityBoard;
 import com.example.demo.entity.study.Study;
 import com.example.demo.entity.study.StudyBoard;
@@ -58,6 +59,13 @@ public class StudyBoardController {
         log.info("remove()");
         service.remove(studyNo);
 
+    }
+
+    @PostMapping("/search")
+    public List<StudyBoard> searchList (@RequestBody keywordRequest keyword) {
+        log.info("searchList! " + keyword);
+        String key = keyword.getKeyword();
+        return service.searchList(key);
     }
 
 }

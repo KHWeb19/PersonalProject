@@ -65,7 +65,7 @@
 <script>
 
 export default {
-    name:'CommunityBoardWirte',
+    name:'StudyWrite',
     data() {
         return {
             image :'',

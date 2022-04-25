@@ -1,6 +1,7 @@
 package com.example.demo.service.study;
 
 import com.example.demo.entity.communityBoard.CommunityBoard;
+import com.example.demo.entity.review.Review;
 import com.example.demo.entity.study.Study;
 import com.example.demo.entity.study.StudyBoard;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,4 +16,5 @@ public interface StudyBoardService {
     public StudyBoard read (Long studyNo);
     public void modify (StudyBoard studyBoard) throws Exception;
     public void remove (Integer studyNo) throws Exception ;
+    public List<StudyBoard> searchList (String keyword);
 }
