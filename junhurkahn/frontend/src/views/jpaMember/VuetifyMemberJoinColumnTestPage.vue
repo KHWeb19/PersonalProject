@@ -1,17 +1,47 @@
 
 
 <template>
+<div class="p-3 mb-2 bg-light text-dark">
+
+<div>
+  <v-card color="basil">
+    <v-card-title class="text-center justify-center py-6">
+      <h1 class="font-weight-bold text-h2 basil--text"  >
+       Note
+      </h1>
+    </v-card-title>
+
+    <v-tabs
+      v-model="tab"
+      background-color="transparent"
+      color="basil"
+      grow
+    >
+      <v-tab
+      >
+      
 
 
-<v-app id="inspire">
-    <v-app-bar app clipped-right color="blue" dark>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title>
-        <router-link style="text-decoration: none;"  :to="{ name: '' }">
-     <h3>스마트 노트</h3>
-    </router-link>
-      </v-toolbar-title>
-    </v-app-bar>
+      </v-tab>
+    </v-tabs>
+
+    <v-tabs-items v-model="tab">
+      <v-tab-item
+        v-for="item in items"
+        :key="item"
+      >
+        <v-card
+          color="basil"
+          flat
+        >
+          <v-card-text>{{ text }}</v-card-text>
+        </v-card>
+      </v-tab-item>
+    </v-tabs-items>
+
+    
+
+  </v-card>
 
 
     <meta charset="UTF-8">
@@ -33,14 +63,14 @@
      </form>
   </div>
   </div>
-
-</v-app>
+</div>
+</div>
 </template>
 
 <script>
 
 import VuetifyMemberJoinColumnTestForm from '@/components/jpaMember/VuetifyMemberJoinColumnTestForm.vue'
-import LookBusinessMemberForm from '@/components/jpaMember/LookBusinessMemberForm.vue'
+
 import axios from 'axios'
 import router from '@/router'
 
@@ -48,7 +78,7 @@ export default {
   name: "VuetifyMemberJoinColumnTestPage",
   components: {
     VuetifyMemberJoinColumnTestForm,
-    LookBusinessMemberForm
+    
   },
   methods: {
     onSubmit (payload) {
@@ -78,7 +108,7 @@ h3{color: white;}
   
         body{
           font-family: 'Open Sans', sans-serif;
-          background:#3498db;
+          background:#99c5e2;
           margin: 0 auto 0 auto;  
           width:100%; 
           text-align:center;
@@ -99,7 +129,7 @@ h3{color: white;}
           border-radius:6px;
           margin: 0 auto 0 auto;
           padding:0px 0px 70px 0px;
-          border: #2980b9 4px solid; 
+          border: #356859 4px solid; 
         }
         .username{
           background:#ecf0f1;

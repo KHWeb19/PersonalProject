@@ -1,6 +1,7 @@
 <template>
-    <div>
-         <br>
+ <div class="bx">
+  <div>
+        <br>
     <div class="input-group mb-3">
   
   <span class="input-group-text"  id="inputGroup-sizing-default" @click="findSearch">Find</span>
@@ -12,22 +13,25 @@
         aria-describedby="inputGroup-sizing-default">
 
 </div>
-       <table class="table">
-             <tr align="center">
-               <th scope="col">번호</th>
-      <th scope="col">이름</th>
-      <th scope="col">생년월일</th>
-      <th scope="col">메모</th>
-      <th scope="col">등록날자</th>
+
+
+  <table class="table table-success table-striped">
+
+            <tr align="center"  >
+                <th scope="col" >번호</th>
+               <th scope="col">아름</th>
+               <th scope="col">생년월일</th>
+                <th scope="col">메모</th>
+               <th scope="col">등록일자</th>
             </tr>
             <tr v-if="!jpaBoards3 || (Array.isArray(jpaBoards3) && jpaBoards3.length === 0)">
-                <td colspan="5">
+                <td colspan="4">
                     현재 등록된 게시물이 없습니다!
                 </td>
             </tr>
             <tr v-else v-for="board in jpaBoards3" :key="board.boardNo">
                 <td align="center">
-                    {{ board.boardNo }}
+                    {{ board.boardNo }} 
                 </td>
                 <td align="center">
                     <router-link :to="{ name: 'JpaBoardReadPage3',
@@ -37,17 +41,25 @@
                 </td>
                 <td align="center">
                     {{ board.writer }}
-                 </td>
-                <td align="center">
-                    {{ board.content }}
                 </td>
                 <td align="center">
-                    {{ board.regDate }} 
-                     <button type="button" class="btn btn-danger" @click="onDelete(board)">Delete</button>
+                    {{ board.content}}
+                </td>
+
+
+                <td align="center">
+                    {{ board.regDate }}
+                     
+                     <button type="button" class="btn btn-outline-danger" @click="onDelete(board)">Delete</button>
                 </td>
             </tr>
-        </table>
+            
+   </table>
     </div>
+ </div>
+
+
+  
 </template>
 
 <script>
@@ -70,7 +82,7 @@ export default {
         ...mapState(['jpaBoard3'])
        },
 
-          methods: {
+         methods: {
         ...mapActions([
             'fetchJpaBoard3',
             'fetchJpaBoardList3']),
@@ -79,7 +91,7 @@ export default {
             //alert('지우는 게시물 번호: ' + boardNo)
             axios.delete(`http://localhost:7777/62th/board3/${boardNo}`)
             .then(() => {
-              
+               
                 this.fetchJpaBoardList3();
                 this.$refs.keyword.value = '';
             })
@@ -95,4 +107,23 @@ export default {
     }
    
 }
+
+
+
+
+    
+
+
 </script>
+
+<style scoped>
+
+.basil {
+  background-color: #FFFBE6 !important;
+}
+
+.box {
+    background: #FFFBE6;
+}
+
+</style>

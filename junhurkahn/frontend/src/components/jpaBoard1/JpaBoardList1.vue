@@ -1,7 +1,9 @@
 <template>
+ 
+  <div class="bx">
 
-    <div>
-         <br>
+  <div>
+        <br>
     <div class="input-group mb-3">
   
   <span class="input-group-text"  id="inputGroup-sizing-default" @click="findSearch">Find</span>
@@ -13,19 +15,21 @@
         aria-describedby="inputGroup-sizing-default">
 
 </div>
-        <table class="table">
-            
-           <tr align="center">
-                
-      <th scope="col">번호</th>
-      <th scope="col">은행명</th>
-      <th scope="col">계좌번호</th>
-      <th scope="col">소유자이름</th>
-      <th scope="col">날짜</th>
+
+
+  <table class="table table-success table-striped">
+
+            <tr align="center"  >
+                <th scope="col" >번호</th>
+               <th scope="col">은행이름</th>
+               <th scope="col">계좌번호</th>
+               <th scope="col">소유자이름</th>
+
+               <th scope="col">등록일자</th>
             </tr>
             <tr v-if="!jpaBoards1 || (Array.isArray(jpaBoards1) && jpaBoards1.length === 0)">
-                <td colspan="5">
-                    현재 등록된 게시물이 없습니다! 
+                <td colspan="4">
+                    현재 등록된 게시물이 없습니다!
                 </td>
             </tr>
             <tr v-else v-for="board in jpaBoards1" :key="board.boardNo">
@@ -48,15 +52,17 @@
 
 
                 <td align="center">
-                    {{ board.regDate }}  
-                  
-                    <button type="button" class="btn btn-danger" @click="onDelete(board)">Delete</button>
-                    
+                    {{ board.regDate }}
+                     
+                     <button type="button" class="btn btn-outline-danger" @click="onDelete(board)">Delete</button>
                 </td>
             </tr>
-        </table>
+            
+   </table>
     </div>
+  </div>
 
+  
 </template>
 
 <script>
@@ -66,22 +72,20 @@ import { mapActions,mapState} from 'vuex'
 
 
 export default {
- 
+  
     name: 'JpaBoardList1',
     props: {
       jpaBoards1: {
-            
             type: Array,
              required: true
         }
     },
-       computed: {
+
+      computed: {
         ...mapState(['jpaBoard1'])
        },
 
-     
-
-     methods: {
+         methods: {
         ...mapActions([
             'fetchJpaBoard1',
             'fetchJpaBoardList1']),
@@ -106,8 +110,23 @@ export default {
     }
    
 }
+
+
+
+
     
 
 
-
 </script>
+
+<style scoped>
+
+.basil {
+  background-color: #FFFBE6 !important;
+}
+
+.box {
+    background: #FFFBE6;
+}
+
+</style>

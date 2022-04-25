@@ -1,6 +1,6 @@
 <template>
   <DaumNewsCrawlerPage>
-    <template #menubar>
+    <template>
        <router-link style="text-decoration: none;" :to="{ name: 'LoginTestPage' }">
       <h3>&nbsp;&nbsp;&nbsp;&nbsp;로그인&nbsp;&nbsp;&nbsp;&nbsp;</h3>
     </router-link>

@@ -1,6 +1,7 @@
 <template>
-    <div>
-         <br>
+ <div class="bx">
+  <div>
+        <br>
     <div class="input-group mb-3">
   
   <span class="input-group-text"  id="inputGroup-sizing-default" @click="findSearch">Find</span>
@@ -12,22 +13,25 @@
         aria-describedby="inputGroup-sizing-default">
 
 </div>
-       <table class="table">
-           <tr align="center">
-                <th scope="col">번호</th>
-      <th scope="col">사이트이름</th>
-      <th scope="col">사이트 주소</th>
-      <th scope="col">사이트 아이디</th>
-      <th scope="col">등록날짜</th>
+
+
+  <table class="table table-success table-striped">
+
+            <tr align="center"  >
+                <th scope="col" >번호</th>
+               <th scope="col">사이트 이름</th>
+               <th scope="col">사이트 아이디</th>
+                <th scope="col">사이트 주소</th>
+               <th scope="col">등록일자</th>
             </tr>
             <tr v-if="!jpaBoards4 || (Array.isArray(jpaBoards4) && jpaBoards4.length === 0)">
-                <td colspan="5">
+                <td colspan="4">
                     현재 등록된 게시물이 없습니다!
                 </td>
             </tr>
             <tr v-else v-for="board in jpaBoards4" :key="board.boardNo">
                 <td align="center">
-                    {{ board.boardNo }}
+                    {{ board.boardNo }} 
                 </td>
                 <td align="center">
                     <router-link :to="{ name: 'JpaBoardReadPage4',
@@ -38,19 +42,27 @@
                 <td align="center">
                     {{ board.writer }}
                 </td>
-                  <td align="center">
-                    {{ board.writer1 }}
+                <td align="center">
+                    {{ board.writer1}}
                 </td>
+
+
                 <td align="center">
                     {{ board.regDate }}
-                    <button type="button" class="btn btn-danger" @click="onDelete(board)">Delete</button>
+                     
+                     <button type="button" class="btn btn-outline-danger" @click="onDelete(board)">Delete</button>
                 </td>
             </tr>
-        </table>
+            
+   </table>
     </div>
+ </div>
+
+  
 </template>
 
 <script>
+
 import axios from 'axios'
 import { mapActions,mapState} from 'vuex'
 
@@ -69,7 +81,7 @@ export default {
         ...mapState(['jpaBoard4'])
        },
 
-           methods: {
+         methods: {
         ...mapActions([
             'fetchJpaBoard4',
             'fetchJpaBoardList4']),
@@ -94,4 +106,23 @@ export default {
     }
    
 }
+
+
+
+
+    
+
+
 </script>
+
+<style scoped>
+
+.basil {
+  background-color: #FFFBE6 !important;
+}
+
+.box {
+    background: #FFFBE6;
+}
+
+</style>

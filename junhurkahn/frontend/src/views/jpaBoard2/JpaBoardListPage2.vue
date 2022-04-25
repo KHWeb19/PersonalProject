@@ -1,74 +1,68 @@
-<template>
+<template >
+
+<div class="p-3 mb-2 bg-light text-dark">
 
 
+<div>
+  
 
-<v-app id="inspire">
-    <v-app-bar app clipped-right color="blue" dark>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title>
-        <router-link style="text-decoration: none;"  :to="{ name: 'JpaBoardListPage' }">
-     <h3>장보기 메모</h3>
+<body>
+  <v-card color="basil">
+    <v-card-title class="text-center justify-center py-6">
+      <h1 class="font-weight-bold text-h2 basil--text"  >
+      Note
+      </h1>
+    </v-card-title>
+
+    <v-tabs
+      v-model="tab"
+      background-color="transparent"
+      color="basil"
+      grow
+    >
+      <v-tab
+      >  
+           <router-link style="text-decoration: none;" :to="{ name: 'JpaBoardListPage' }">  
+      <h3>&nbsp;&nbsp;&nbsp;&nbsp;텍스트 메모&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</h3>
     </router-link>
-      </v-toolbar-title>
+
+      <router-link style="text-decoration: none;" :to="{ name: 'JpaBoardListPage1' }">
+      <h3>&nbsp;&nbsp;&nbsp;&nbsp;계좌번호 메모 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</h3>
+    </router-link>
+
+          <router-link style="text-decoration: none;" :to="{ name: 'JpaBoardListPage3' }">
+      <h3>&nbsp;&nbsp;&nbsp;&emsp;생일 메모&nbsp;&nbsp;&nbsp;&nbsp;</h3>
+    </router-link>
+
+     <router-link style="text-decoration: none;" :to="{ name: 'JpaBoardListPage4' }">
+      <h3>&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;사이트아이디 메모&nbsp;</h3>
+    </router-link>
+    
 
 
 
+      </v-tab>
+    </v-tabs>
 
+    <v-tabs-items v-model="tab">
+      <v-tab-item
+        v-for="item in items"
+        :key="item"
+         color="basil"
+      >
+        <v-card
+          color="basil"
+          flat
+        >
+          <v-card-text>{{ text }}</v-card-text>
+        </v-card>
+      </v-tab-item>
+    </v-tabs-items>
 
+    
 
-      <v-spacer></v-spacer>
-      <slot name="menubar"></slot>
-    </v-app-bar>
-    <v-navigation-drawer v-model="drawer" app>
-      <v-list dense>
-        <v-list-item @click.stop="left = !left">
-          <v-list-item-action>
+  </v-card>
 
-              
-           
-          </v-list-item-action>
-          <v-list-item-action>
-             <pre>
-            <h1>생활편의</h1>
-             </pre>
-            <router-link style="text-decoration: none;" :to="{ name: 'JpaBoardListPage1' }">
-              <h4>계좌번호관리</h4> 
-             </router-link>
-             <p>
-             </p>
-             
-             <router-link style="text-decoration: none;" :to="{ name: 'JpaBoardListPage2' }">
-              <h4>장보기 목록</h4> 
-             </router-link>
-
-               <p>
-             </p>
-           
-           
-              <router-link style="text-decoration: none;" :to="{ name: 'JpaBoardListPage3' }">
-              <h4>생일 관리</h4> 
-             </router-link>
-
-               <p>
-             </p>
-           <router-link style="text-decoration: none;" :to="{ name: 'JpaBoardListPage4' }">
-              <h4>사이트 아이디 관리</h4> 
-             </router-link>
-               <p>
-             </p>
-            <pre>
-              <h1>일반메모</h1>
-            </pre>
-
-               <router-link style="text-decoration: none;" :to="{ name: 'JpaBoardListPage' }">
-              <h4>텍스트 메모</h4> 
-             </router-link>
-          </v-list-item-action>          
-        </v-list-item>
-
-
-      </v-list>
-    </v-navigation-drawer>
 
 
 
@@ -78,40 +72,70 @@
         </slot>
       </v-content>
     </v-container>
-    
+
 <div align="center">
     <div id="board">
-        <h1>장보기 목록</h1>
-      &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;  <button type="button" class="btn btn-primary btn-lg" @click="pageLink" >Create</button>
-        <br>       
+       <h1 class="font-weight-bold text-h3 basil--text"  >
+       장보기 메모
+      </h1>
+      
+       
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;  <v-btn
+      class="mx-2"
+      fab
+      dark
+      color="green"
+       @click="pageLink"
+    >
+      <v-icon dark>
+        mdi-plus
+      </v-icon>
+    </v-btn>
+     
+        <br>        
         <jpa-board-list-2 :jpaBoards2="jpaBoards2"/>
     </div>
 </div>
 
 
-      <v-footer app color="blue" class="white--text">
+
+
+
+
+      <v-footer app color="#FFFBE6" class="white--text">
       <v-spacer></v-spacer>
       <span>&copy; EDDI</span>
     </v-footer>
-</v-app>
-
-
+</body> 
+</div>
+</div>
 </template>
 
+
 <script>
+
 import JpaBoardList2 from '@/components/jpaBoard2/JpaBoardList2.vue'
 import { mapState, mapActions } from 'vuex'
+
+
 export default {
     name: 'JpaBoardListPage2',
-    
-    data () {
+
+ data () {
     return {
       drawer: false,
-      left: false
-    }
-  },
+      left: false,
+   
+        
+      }
+    },
+  
+    
+  
+    
     components: {
-      JpaBoardList2
+      JpaBoardList2,
+      
     },
     computed: {
         ...mapState(['jpaBoards2'])
@@ -121,16 +145,34 @@ export default {
     },
     methods: {
         ...mapActions(['fetchJpaBoardList2']),
-
-          pageLink() {
+    
+       pageLink() {
             this.$router.push({ name: 'JpaBoardRegisterPage2' })
 
+
+
+        }
+        
     }
+        
     }
-}
+    
+
+
+
 </script>
 
 
 <style scoped>
-h3{color: white;}
+h3{color: green;}
+h1{color: green;}
+
+.basil {
+  background-color: #FFFBE6 !important;
+}
+.basil--text {
+  color: #356859 !important;
+}
+
 </style>
+

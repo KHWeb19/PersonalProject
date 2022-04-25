@@ -26,14 +26,14 @@
 <script>
 
 import VuetifyMemberJoinColumnTestForm from '@/components/jpaMember/VuetifyMemberJoinColumnTestForm.vue'
-import LookBusinessMemberForm from '@/components/jpaMember/LookBusinessMemberForm.vue'
+
 import axios from 'axios'
 
 export default {
   name: "JpaMemberAuthTestPage",
   components: {
     VuetifyMemberJoinColumnTestForm,
-    LookBusinessMemberForm
+  
   },
   methods: {
     onSubmit (payload) {

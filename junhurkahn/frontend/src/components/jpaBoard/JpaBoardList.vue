@@ -1,23 +1,27 @@
 <template>
-
-  <div>
+ 
+  <div class="b">
         <br>
-    <div class="input-group mb-3">
+    <div class="input-group mb-3" >
+    
   
   <span class="input-group-text"  id="inputGroup-sizing-default" @click="findSearch">Find</span>
+        
 
   <input type="text" 
+        
         class="form-control" 
         ref="keyword"
         aria-label="Sizing example input" 
-        aria-describedby="inputGroup-sizing-default">
+        aria-describedby="inputGroup-sizing-default"
+        >
 
-</div>
+    </div>
 
+  <table class="table table-success table-striped">
 
-        <table class="table">
-            <tr align="center">
-                <th scope="col">번호</th>
+            <tr align="center"  >
+                <th scope="col" >번호</th>
                <th scope="col">제목</th>
                <th scope="col">작성자</th>
                <th scope="col">등록일자</th>
@@ -42,13 +46,16 @@
                 </td>
                 <td align="center">
                     {{ board.regDate }}
-                     <button type="button" class="btn btn-danger" @click="onDelete(board)">Delete</button>
+                     
+                     <button type="button" class="btn btn-outline-danger" @click="onDelete(board)">Delete</button>
                 </td>
             </tr>
-        </table>
+            
+   </table>
     </div>
 
-
+  
+  
 </template>
 
 <script>
@@ -104,3 +111,17 @@ export default {
 
 
 </script>
+
+<style scoped>
+
+.basil {
+  background-color: #FFFBE6 !important;
+}
+
+.box {
+    background: #FFFBE6;
+}
+
+ 
+        
+</style>
