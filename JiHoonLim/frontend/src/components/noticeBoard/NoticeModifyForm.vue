@@ -66,7 +66,15 @@
                   >
                     수정
                   </v-btn>
-                  <v-btn to="foodList" large rounded color="orange lighten-1">
+                  <v-btn
+                    :to="{
+                      name: 'NoticeReadPage',
+                      params: { boardNo: noticeBoard.boardNo.toString() },
+                    }"
+                    large
+                    rounded
+                    color="orange lighten-1"
+                  >
                     취소
                   </v-btn>
                 </div>

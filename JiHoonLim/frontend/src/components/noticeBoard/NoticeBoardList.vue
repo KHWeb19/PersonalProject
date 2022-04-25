@@ -41,6 +41,7 @@
       <v-row>
         <v-col>
           <v-btn
+            v-if="loginAuth == '관리자'"
             x-large
             rounded
             color="orange lighten-1"
@@ -66,6 +67,8 @@ export default {
   },
   data() {
     return {
+      userInfo: "",
+      loginAuth: "",
       headers: [
         { text: "글번호", value: "boardNo", width: "100px", align: "center" },
         { text: "제목", value: "title", width: "500px", align: "left" },
@@ -79,6 +82,15 @@ export default {
     register() {
       this.$router.push("/noticeRegister");
     },
+  },
+  created() {
+    if (this.$store.state.userInfo != null) {
+      this.userInfo = this.$store.state.userInfo;
+      this.loginAuth = this.userInfo.auth;
+    } else {
+      alert("로그인 후 이용해주세요.");
+      this.$router.push("/login");
+    }
   },
 };
 </script>

@@ -82,6 +82,9 @@ public class MemberServiceImpl implements MemberService {
 
         Member loginMember = maybeMember.get();
 
+        Optional<MemberAuth> maybeMemberAuth = memberAuthRepository.findByMemberNo(loginMember.getMemberNo());
+        MemberAuth loginMemberAuth = maybeMemberAuth.get();
+
         if (!passwordEncoder.matches(memberRequest.getPw(), loginMember.getPw())) {
             log.info("Wrong Pw");
             return null;
@@ -92,6 +95,7 @@ public class MemberServiceImpl implements MemberService {
             memberRequest.setName(loginMember.getName());
             memberRequest.setNickName(loginMember.getNickName());
             memberRequest.setEmail(loginMember.getEmail());
+            memberRequest.setAuth(loginMemberAuth.getAuth());
         }
 
         MemberRequest response = new MemberRequest(
