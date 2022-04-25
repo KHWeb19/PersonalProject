@@ -38,7 +38,7 @@
                       <v-btn
                         class="ml-5 mr-5"
                         text
-                        v-if="commentList.commentWriter == userInfo.nickName"
+                        v-if="commentList.commentWriter == nickName"
                         @click="onDelete(commentList.commentNo)"
                         color="red"
                         >삭제</v-btn
@@ -101,11 +101,15 @@ export default {
     return {
       comment: "",
       commentWriter: "",
-      userInfo: "",
+      userInfo: this.$store.state.userInfo,
+      nickName: "",
     };
   },
+
   created() {
-    this.userInfo = this.$store.state.userInfo;
+    if (this.$store.state.userInfo != null) {
+      this.nickName = this.$store.state.userInfo.nickName;
+    }
   },
   methods: {
     onSubmit() {

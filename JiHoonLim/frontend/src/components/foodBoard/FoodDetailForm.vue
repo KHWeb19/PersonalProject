@@ -250,7 +250,7 @@ export default {
       img: this.foodBoard.filename,
       nickName: "",
       comment: "",
-      userInfo: "",
+      userInfo: this.$store.state.userInfo,
       userId: "",
       boardNo: this.foodBoard.boardNo,
 
@@ -268,9 +268,7 @@ export default {
   },
 
   created() {
-    this.userInfo = this.$store.state.userInfo;
-
-    if (this.userInfo != "") {
+    if (this.userInfo != null) {
       this.nickName = this.userInfo.nickName;
       this.userId = this.userInfo.id;
     }

@@ -49,6 +49,66 @@
                 <div>
                   <v-text-field flat solo readonly label="조회수" />
                 </div>
+                <div v-if="noticeBoard.writer == this.nickName">
+                  <v-btn
+                    text
+                    :to="{
+                      name: 'noticeModifyPage',
+                      params: { boardNo: noticeBoard.boardNo.toString() },
+                    }"
+                    >수정</v-btn
+                  >
+                  <v-dialog v-model="dialogDelete" width="460">
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-btn
+                        text
+                        v-bind="attrs"
+                        v-on="on"
+                        @click="restCheckbox"
+                        color="red"
+                      >
+                        삭제
+                      </v-btn>
+                    </template>
+
+                    <v-card>
+                      <v-card-title class="text-h5 orange lighten-3">
+                        게시물 삭제
+                      </v-card-title>
+                      <v-card-text class="mt-5 pb-0">
+                        게시물 삭제를 원하시면 <br />
+                        버튼을 체크하시고 <br />
+                        삭제 버튼을 클릭해주세요.
+                      </v-card-text>
+                      <v-container class="pt-0 pb-0" fluid>
+                        <v-checkbox
+                          v-model="checkbox"
+                          label="삭제 동의 버튼."
+                        ></v-checkbox>
+                      </v-container>
+                      <v-divider></v-divider>
+
+                      <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn
+                          color="orange lighten-3"
+                          text
+                          :disabled="!checkbox"
+                          @click="onDelete"
+                        >
+                          삭제
+                        </v-btn>
+                        <v-btn
+                          color="orange lighten-3"
+                          text
+                          @click="dialogDelete = false"
+                        >
+                          취소
+                        </v-btn>
+                      </v-card-actions>
+                    </v-card>
+                  </v-dialog>
+                </div>
               </div>
               <v-divider></v-divider>
               <div style="display: flex">
@@ -79,6 +139,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "NoticeReadForm",
   props: {
@@ -87,9 +149,38 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      userInfo: "",
+      nickName: "",
+      dialogDelete: false,
+      checkbox: false,
+    };
+  },
+  created() {
+    if (this.$store.state.userInfo != null) {
+      this.userInfo = this.$store.state.userInfo;
+      this.nickName = this.userInfo.nickName;
+    }
+  },
   methods: {
     goList() {
       this.$router.push("/noticeList");
+    },
+    onDelete() {
+      const { boardNo } = this.noticeBoard;
+      axios
+        .delete(`http://localhost:7777/noticeBoard/${boardNo}`)
+        .then(() => {
+          alert("삭제 성공!");
+          this.$router.push({ name: "NoticeListPage" });
+        })
+        .catch(() => {
+          alert("삭제 실패");
+        });
+    },
+    restCheckbox() {
+      this.checkbox = false;
     },
   },
 };

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <notice-read-form :noticeBoard="noticeBoard" />
+    <notice-read-form v-if="noticeBoard" :noticeBoard="noticeBoard" />
   </div>
 </template>
 
