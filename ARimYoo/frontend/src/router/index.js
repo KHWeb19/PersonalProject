@@ -8,7 +8,6 @@ import JoinPage from '../views/main/JoinPage.vue'
 import JoinPage2 from '../views/main/JoinPage2.vue'
 import MyPage from '../views/my/MyPage.vue'
 import MyWith from '../views/my/MyWith.vue'
-import MyStudy from '@/components/form/MyStudy.vue'
 
 import CommunityPage from '../views/board/communityBoard/CommunityPage.vue'
 import CommunityWritePage from '../views/board/communityBoard/CommunityWritePage.vue'
@@ -89,12 +88,6 @@ const routes = [
         path: '/myWith',
         name: 'MyWith',
         component: MyWith,
-        beforeEnter: requireLogin()
-    },
-    {
-        path: '/myStudy/:studyNo',
-        name: 'MyStudy',
-        component: MyStudy,
         beforeEnter: requireLogin()
     },
     

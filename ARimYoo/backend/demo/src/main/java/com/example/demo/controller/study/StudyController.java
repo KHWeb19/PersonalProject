@@ -25,7 +25,7 @@ public class StudyController {
         return service.list(memberNo);
     }
 
-    @PostMapping("join/{memberNo}")
+    @PostMapping("/join/{memberNo}")
     public boolean join (@PathVariable("memberNo") Long memberNo, @RequestBody Study study) {
         log.info("join study !" + memberNo);
         return service.join(memberNo, study);

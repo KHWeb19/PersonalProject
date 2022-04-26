@@ -1,6 +1,9 @@
 package com.example.demo.service.project;
 
+import com.example.demo.entity.Member;
 import com.example.demo.entity.project.Project;
+import com.example.demo.entity.study.Study;
+import com.example.demo.repository.MemberRepository;
 import com.example.demo.repository.project.ProjectRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.FileOutputStream;
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -18,20 +23,60 @@ public class ProjectServiceImpl implements ProjectService {
     @Autowired
     private ProjectRepository repository;
 
+    @Autowired
+    private MemberRepository memberRepository;
+
     @Override
-    public void register (Project project, @RequestParam(required = false) MultipartFile file) throws Exception {
+    public List<Project> list (Long memberNo) {
+        Member member = memberRepository.findById(Long.valueOf(memberNo)).get();
 
-        if (file != null) {
-            UUID uuid = UUID.randomUUID();
-            String fileName = uuid + "-" + file.getOriginalFilename();
-            FileOutputStream saveFile = new FileOutputStream("../../frontend/src/assets/back/project/" + fileName);
+        log.info("study List" + member.getProject());
+        return member.getProject();
+    }
 
-            saveFile.write(file.getBytes());
-            saveFile.close();
+    @Override
+    public boolean join (Long memberNo, Project project) {
+        Optional<Member> findMember = memberRepository.findById(Long.valueOf(memberNo));
+        Member getMember = findMember.get();
+        log.info("member" + findMember.get());
 
-            project.setFileName(fileName);
+        Optional<Project> findProject = repository.findById(Long.valueOf(project.getProjectNo()));
+        Project getProject = findProject.get();
+        log.info("member" + findProject.get());
 
+        if (getProject.getPeople() == getProject.getJoinCnt()) {
+            log.info("정원을 모두 초과 !" + getProject.getPeople() + getProject.getJoinCnt());
+
+            return false;
+
+        } else {
+            getProject.increaseJoinCnt();
+            repository.save(getProject);
+            getMember.addProject(getProject);
+            memberRepository.save(getMember);
+
+            log.info("project" + getMember.getProject());
+
+            return true;
         }
+
+    }
+    @Override
+    public Project read (Long projectNo){
+        Optional<Project> maybeReadProject = repository.findById(Long.valueOf(projectNo));
+
+        if (maybeReadProject.equals(Optional.empty())) {
+            log.info("Can't read board!");
+            return null;
+        } else {
+            Project project = maybeReadProject.get();
+            log.info("Project" + project);
+            return maybeReadProject.get();
+        }
+    }
+
+    @Override
+    public void toDoRegister (Project project){
         repository.save(project);
     }
 }

@@ -2,6 +2,8 @@
     FETCH_MEMBER,
     FETCH_MEMBER_STUDY_LIST,
     FETCH_MEMBER_STUDY,
+    FETCH_MEMBER_PROJECT_LIST,
+    FETCH_MEMBER_PROJECT,
     FETCH_COMMUNITY_BOARD_LIST,
     FETCH_COMMUNITY_BOARD,
     FETCH_COMMUNITY_COMMENTS_LIST,
@@ -30,6 +32,12 @@ export default {
     },
     [FETCH_MEMBER_STUDY](state, memberStudy) {
         state.memberStudy = memberStudy
+    },
+    [FETCH_MEMBER_PROJECT_LIST](state, memberProjects) {
+        state.memberProjects = memberProjects
+    },
+    [FETCH_MEMBER_PROJECT](state, memberProject) {
+        state.memberProject = memberProject
     },
     [FETCH_COMMUNITY_BOARD_LIST](state, communityBoards) {
         state.communityBoards = communityBoards 

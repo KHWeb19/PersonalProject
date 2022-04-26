@@ -23,6 +23,8 @@ export default {
     member: null,
     memberStudies: [],
     memberStudy: null,
+    memberProjects: [],
+    memberProject: null,
     
     token: localStorage.getItem('token'),
     userInfo: JSON.parse(localStorage.getItem('userInfo'))

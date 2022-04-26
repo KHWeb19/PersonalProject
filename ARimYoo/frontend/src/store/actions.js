@@ -2,6 +2,8 @@
     FETCH_MEMBER,
     FETCH_MEMBER_STUDY_LIST,
     FETCH_MEMBER_STUDY,
+    FETCH_MEMBER_PROJECT_LIST,
+    FETCH_MEMBER_PROJECT,
     FETCH_COMMUNITY_BOARD_LIST,
     FETCH_COMMUNITY_BOARD,
     FETCH_COMMUNITY_COMMENTS_LIST,
@@ -40,6 +42,18 @@ export default {
             .then((res) => {
             commit(FETCH_MEMBER_STUDY,res.data)
         })
+    },
+    fetchMemberProjectList({ commit }, memberNo) {
+        return axios.get(`http://localhost:7777/project/list/${memberNo}`)
+            .then((res) => {
+                commit(FETCH_MEMBER_PROJECT_LIST, res.data)
+            })
+    },
+    fetchMemberProject({ commit }, projectNo) {
+        return axios.get(`http://localhost:7777/project/${projectNo}`)
+            .then((res) => {
+                commit(FETCH_MEMBER_PROJECT, res.data)
+            })
     },
     fetchCommunityBoardList({ commit }) {
         return axios.get('http://localhost:7777/board/community/list')
