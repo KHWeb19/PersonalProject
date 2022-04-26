@@ -26,7 +26,7 @@ public class Study {
     private int people;
 
     @Column
-    private int joinCnt;
+    private int joinCnt = 1;
 
     @Column
     private String fileName;
