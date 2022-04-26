@@ -85,15 +85,6 @@ public class ProjectBoardServiceImpl implements ProjectBoardService {
 
     @Override
     public void remove(Integer projectNo) throws Exception {
-        Optional<ProjectBoard> selectFile = repository.findById(Long.valueOf(projectNo));
-        ProjectBoard deleteFile = selectFile.get();
-        System.out.println(deleteFile.getFileName());
-
-        if (deleteFile.getFileName() != null) {
-            Path filePath = Paths.get("c:\\khweb19\\PersonalProject\\ARimYoo\\frontend\\src\\assets\\back\\projectBoard\\" + deleteFile.getFileName());
-            Files.delete(filePath);
-        }
-
         repository.deleteById(Long.valueOf(projectNo));
     }
 

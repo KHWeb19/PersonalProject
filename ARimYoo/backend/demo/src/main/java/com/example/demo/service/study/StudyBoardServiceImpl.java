@@ -87,15 +87,6 @@ public class StudyBoardServiceImpl implements StudyBoardService {
 
     @Override
     public void remove(Integer studyNo) throws Exception {
-        Optional<StudyBoard> selectFile = repository.findById(Long.valueOf(studyNo));
-        StudyBoard deleteFile = selectFile.get();
-        System.out.println(deleteFile.getFileName());
-
-        if (deleteFile.getFileName() != null) {
-            Path filePath = Paths.get("c:\\khweb19\\PersonalProject\\ARimYoo\\frontend\\src\\assets\\back\\studyBoard\\" + deleteFile.getFileName());
-            Files.delete(filePath);
-        }
-
         repository.deleteById(Long.valueOf(studyNo));
     }
 
