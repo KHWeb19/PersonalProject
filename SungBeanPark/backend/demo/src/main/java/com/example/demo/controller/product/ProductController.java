@@ -2,50 +2,72 @@ package com.example.demo.controller.product;
 
 
 
+import com.example.demo.controller.request.ProductRequest;
 import com.example.demo.entity.product.Product;
 import com.example.demo.service.product.ProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+
+import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.FileOutputStream;
 import java.util.List;
-import java.util.Optional;
 
-
+@Slf4j
 @RestController
 @RequestMapping("/product")
 @CrossOrigin(origins = "http://localhost:8080", allowedHeaders = "*")
-@Slf4j
 public class ProductController {
 
     @Autowired
-    ProductService productService;
+    private ProductService productService;
 
     @PostMapping("/register")
-    public ResponseEntity<Void> register (@Validated @RequestBody Product product) throws  Exception{
+    public void productRegister(@Validated Product product, @RequestParam(required = false)MultipartFile file) throws Exception {
+        log.info("productRegister()" + file);
 
-        productService.register(product);
-        return  new ResponseEntity<Void>(HttpStatus.OK);
+        productService.register(product,file);
     }
 
-    @GetMapping("getProductList")
-    public ResponseEntity<List<Product>> getProductList() throws  Exception {
-        productService.getProductList();
+    @GetMapping("/list")
+    public List<Product> list () {
+        log.info("list()");
 
-        return new ResponseEntity<>(productService.getProductList(),HttpStatus.OK);
-    }
-    @GetMapping("/getProduct/{productId}")
-    public ResponseEntity<Product> getProduct (@PathVariable("productId") Long productId) throws  Exception {
-
-        Optional<Product> product = productService.getProduct(productId);
-        Product product1  = product.get();
-        return new ResponseEntity<>(product1,HttpStatus.OK);
+        return productService.list();
     }
 
 
+
+    @GetMapping("/{productId}")
+    public Product read (
+            @PathVariable("productId") Long productId) {
+        log.info("read()" + productId);
+
+        return productService.read(productId);
+    }
+
+
+    @PutMapping("/{productId}")
+    public Product productModify(
+            @PathVariable("productId") Long productId, Product product,@RequestParam(required = false) MultipartFile file) throws Exception {
+        log.info("productModify() " + productId + " "+ product.getFileName());
+
+        product.setProductId(Long.valueOf(productId));
+        productService.modify(product,file);
+
+
+        return product;
+    }
+
+    @DeleteMapping("/{productId}")
+    public void productRemove(
+            @PathVariable("productId") Long productId, Product product) throws Exception {
+        log.info("productRemove()" + productId);
+
+        productService.remove(productId);
+    }
 }
