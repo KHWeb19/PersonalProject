@@ -151,7 +151,7 @@
 </template>
 
 <script>
-//import axios from "axios";
+import axios from "axios";
 
 export default {
   name: "MemberManageModifyForm",
@@ -171,6 +171,7 @@ export default {
       checkbox: false,
       radioGroup: "",
       kindsAuth: ["개인", "매니저", "관리자"],
+      memberNo: this.registerMember.memberNo,
     };
   },
   methods: {
@@ -180,7 +181,15 @@ export default {
 
       this.$emit("submit", { auth });
     },
-    deleteMember() {},
+    deleteMember() {
+      const { memberNo } = this;
+      axios
+        .delete(`http://localhost:7777/memberManage/${memberNo}`)
+        .then(() => {
+          alert("회원탈퇴가 완료되었습니다.");
+          this.$router.push("/memberManage");
+        });
+    },
     resetCheckbox() {
       this.checkbox = false;
     },

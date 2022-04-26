@@ -10,4 +10,5 @@ public interface MemberManageService {
     public Member memberRead(Long memberNo);
     public MemberAuth memberAuthRead(Long memberNo);
     public void modify (MemberAuth memberAuth);
+    public void remove (Long memberNo);
 }

@@ -57,4 +57,11 @@ public class MemberManageController {
 
         return memberAuth;
     }
+
+    @DeleteMapping("/{memberNo}")
+    public void memberRemove(@PathVariable("memberNo")Long memberNo){
+        log.info("memberRemove() " +memberNo);
+
+        service.remove(memberNo);
+    }
 }

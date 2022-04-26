@@ -60,4 +60,9 @@ public class MemberManageServiceImpl implements MemberManageService{
     public void modify(MemberAuth memberAuth) {
         memberAuthRepository.save(memberAuth);
     }
+
+    @Override
+    public void remove(Long memberNo) {
+        memberRepository.deleteById(memberNo);
+    }
 }
