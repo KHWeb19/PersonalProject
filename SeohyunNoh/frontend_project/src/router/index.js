@@ -21,6 +21,9 @@ import EditProduct from '@/views/product/EditProduct.vue'
 import ShowDetails from '@/views/product/ShowDetails.vue'
 import TopProducts from '@/views/product/TopProducts.vue'
 
+import Cart from '@/views/cart/Cart.vue'
+
+
 import LookBookPage from '@/views/project/LookBookPage.vue'
 
 import NoticeListPage from '@/views/notice/NoticeListPage.vue'
@@ -171,6 +174,11 @@ const routes = [
     props: {
       default: true
     }
+  },
+  {
+    path: '/cart',
+    name: 'Cart',
+    component: Cart
   },
   {
     path: '/noticeListPage',

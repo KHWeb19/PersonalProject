@@ -22,6 +22,7 @@
             </div>
             <input type="number" class="form-control" v-model="quantity" />
           </div>
+
             <!-- 장바구니 담기 --> 
           <div class="input-group col-md-3 col-4 p-0">
             <button class="btn" type="button" id="add-to-cart-button" @click="addToCart">
@@ -39,9 +40,6 @@
             <li>ut doloremque dolore corrupti, architecto iusto beatae.</li>
           </ul>
         </div>
-        <!-- <button id="wishlist-button" class="btn mr-3 p-1 py-0" @click="addToWishlist()">
-          {{ wishListString }}
-        </button> -->
       </div>
     </div>
   </div>
@@ -49,7 +47,7 @@
 
 <script>
 
-// import axios from "axios"
+import axios from 'axios'
 
 export default {
   data() {
@@ -57,7 +55,6 @@ export default {
       product: {},
       category: {},
       quantity: 1,
-    //   wishListString: "Add to wishlist",
     };
   },
   props: {
@@ -69,35 +66,24 @@ export default {
       }
   },
   methods: {
-    // addToWishlist() {
-    //   if (!this.token) {
-    //     // user is not logged in
-    //     // show some error
-    //     swal({
-    //       text: "please login to add item in wishlist",
-    //       icon: "error",
-    //     });
-    //     return;
-    //   }
-    //   // add item to wishlist
-    //   axios
-    //     .post(`${this.baseURL}wishlist/add?token=${this.token}`, {
-    //       id: this.product.id,
-    //     })
-    //     .then((res) => {
-    //       if (res.status === 201) {
-    //         this.wishListString = "Added to Wishlist";
-    //         swal({
-    //           text: "Added to Wishlist",
-    //           icon: "success",
-    //         });
-    //       }
-    //     })
-    //     .catch((err) => {
-    //       console.log("err", err);
-    //     });
-    // },
     addToCart() {
+
+      const Cart = {
+        memberId: this.$store.state.userInfo.id,
+        productId: this.id,
+        quantity: this.quantity
+      }
+        axios.post('http://localhost:7777/cart/add', Cart)
+        .then((res) =>{
+          if(res.status == 201) {
+            alert("장바구니에 담았습니다.")
+            console.log(res)
+            this.$emit("fetchData")
+          }
+        }) 
+        .catch((err) => {
+          console.log(err)
+        })
     //   axios
     //     .post(`${this.baseURL}/cart/add?token=${this.token}`, {
     //       productId: this.id,
@@ -126,9 +112,6 @@ export default {
 <style>
 .category {
   font-weight: 400;
-}
-#wishlist-button {
-  background-color: #b9b9b9;
 }
 #add-to-cart-button {
   background-color: #febd69;

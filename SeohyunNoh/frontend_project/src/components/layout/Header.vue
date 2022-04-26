@@ -30,7 +30,7 @@
 
             <!-- 로그인, 장바구니, 마이페이지, 게시판--> 
 
-            <v-btn v-if="isLogin === true" router :to="{path: '/cartPage'}" icon>
+            <v-btn v-if="isLogin === true" router :to="{path: '/cart'}" icon>
               <v-icon>mdi-cart</v-icon>
             </v-btn>
 

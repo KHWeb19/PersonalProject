@@ -64,7 +64,9 @@ export default {
   data() {
     return {
       products: null,
-      categories: null
+      categories: null,
+      cartCount: 0,
+      id: ''
     }
   },
   methods: {
@@ -85,9 +87,21 @@ export default {
       .catch((err) => {
         console.log('err: ' + err)
       })
+
+      // if(this.token) {
+      //   axios.get(`http://localhost:7777/cart/list?id=${this.id}`)
+      //   .then ((res) => {
+      //     const result = res.data
+      //     this.cartCount = result.cartItems.length
+      //   })
+      //   .catch((err) => {
+      //     console.log('cart err' + err)
+      //   })
+      // }
     }
   },
   mounted() {
+    this.id = this.$store.state.userInfo.id
     this.fetchData()
   }
 }
