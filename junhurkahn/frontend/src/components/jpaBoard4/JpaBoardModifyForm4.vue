@@ -1,46 +1,48 @@
 <template>
     <div>
         <form @submit.prevent="onSubmit">
-           <table border="1">
+            <table>
+           <div class="box">
                 <tr>
-                    <td>사이트아이디 수정하기</td>
+                  
                     <td>
-                        <input type="text" :value="jpaBoard4.boardNo" disabled/>
+                          <input type="text" class="form-control" :value="jpaBoard4.boardNo" disabled/>
                     </td>
                 </tr>
                 <tr>
-                    <td>사이트아이디</td>
+                 
                     <td>
-                        <input type="text" v-model="title"/>
+                          <input type="text"  v-model="title" class="form-control">
                     </td>
                 </tr>
 
               <tr>
-                <td>사이트이름</td>
+              
                 <td>
-                    <input type="text" v-model="writer1"/>
+                    <input type="text"  v-model="writer1" class="form-control">
                 </td>
             </tr>
 
                 <tr>
-                    <td>사이트주소</td>
+                  
                     <td>
-                        <input type="text" :value="jpaBoard4.writer"/>
+                        <input type="text"  v-model="writer" class="form-control">
                     </td>
                 </tr>
                 <tr>
-                    <td>등록일자</td>
+                 
                     <td>
-                        <input type="text" :value="jpaBoard4.regDate" disabled/>
+                           <input type="text" class="form-control" :value="jpaBoard4.regDate" disabled/>
                     </td>
                 </tr>
                 <tr>
-                    <td>본문</td>
+                  
                     <td>
-                        <textarea cols="50" rows="20" v-model="content">
-                        </textarea>
+                      <textarea cols="100" rows="30" v-model="content" class="form-control">
+                    </textarea>
                     </td>
                 </tr>
+           </div>
             </table>
 
             <div>
@@ -50,8 +52,12 @@
                     취소
                 </router-link>
             </div>
+            
         </form>
+    
     </div>
+    
+    
 </template>
 
 <script>
@@ -67,19 +73,31 @@ export default {
         return {
             title: '',
             writer:'',
+            writer1:'',
             content: ''
         }
     },
     methods: {
         onSubmit () {
-            const { title, content, writer } = this
-            this.$emit('submit', { title, content, writer })
+            const { title, content, writer, writer1 } = this
+            this.$emit('submit', { title, content, writer, writer1 })
         }
     },
     created () {
         this.title = this.jpaBoard4.title
         this.content = this.jpaBoard4.content
         this.writer = this.jpaBoard4.writer
+        this.writer1 = this.jpaBoard4.writer1
     }
 }
 </script>
+
+<style scoped>
+
+ .box{
+          background:white;
+          
+         border: #356859 4px solid;
+        }
+
+</style>

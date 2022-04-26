@@ -1,19 +1,21 @@
 <template>
     <form @submit.prevent="onSubmit">
-        <table border="1">
+        <table>
+           <div class="box">
             <tr>
-                <td>가게이름</td>
+              
                 <td>
-                    <input type="text" v-model="content"/>
+                   <input type="text"  v-model="content" class="form-control" >
                 </td>
             </tr>
             <tr>
-                <td>물건목록</td>
+               
                 <td>
-                    <textarea cols="50" rows="20" v-model="title">
+                    <textarea cols="100" rows="30" v-model="title" class="form-control">
                     </textarea>
                 </td>
             </tr>
+           </div>
         </table>
 
         <div>
@@ -42,3 +44,13 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+
+ .box{
+          background:white;
+          
+           border: #356859 4px solid;
+        }
+
+</style>

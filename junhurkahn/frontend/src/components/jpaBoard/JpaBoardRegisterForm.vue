@@ -1,26 +1,38 @@
 <template>
     <form @submit.prevent="onSubmit">
-       <table border="1">
-            <tr>
-                <td>제목</td>
+       <table>
+           <div class="box">
+          
+            
+             <tr>
+               
                 <td>
-                    <input type="text" v-model="title"/>
+                    <input type="text"  v-model="title" class="form-control">
+                </td>
+                
+                
+            </tr>
+            
+            
+
+
+            
+            <tr>
+                <td>
+                     <input type="text"  v-model="writer" class="form-control" >
+                   
                 </td>
             </tr>
             <tr>
-                <td>작성자</td>
+               
                 <td>
-                    <input type="text" v-model="writer"/>
-                </td>
-            </tr>
-            <tr>
-                <td>본문</td>
-                <td>
-                    <textarea cols="50" rows="20" v-model="content">
+                    <textarea cols="100" rows="30" v-model="content" class="form-control">
                     </textarea>
                 </td>
             </tr>
+           </div>
         </table>
+        
 
         <div>
             <button type="submit">등록</button>
@@ -28,7 +40,11 @@
                 취소
             </router-link>
         </div>
+        
+    
     </form>
+    
+    
 </template>
 
 <script>
@@ -38,7 +54,7 @@ export default {
     data () {
         return {
             title: '제목을 작성하세요.',
-            writer: '너님',
+            writer: '작성자를 작성하세요',
             content: '본문을 작성하세요.'
         }
     },
@@ -50,3 +66,15 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+
+  .box{
+          background:white;
+          
+          border: #356859 4px solid;
+        }
+        
+
+</style>
+

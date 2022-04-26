@@ -1,32 +1,35 @@
 <template>
     <div>
         <form @submit.prevent="onSubmit">
-            <table border="1">
+             <table >
+           <div class="box">
+
                 <tr>
-                    <td>물건목록 수정하기</td>
+                  
                     <td>
-                        <input type="text" :value="jpaBoard2.boardNo" disabled/>
+                         <input type="text" class="form-control" :value="jpaBoard2.boardNo" disabled/>
                     </td>
                 </tr>
                 <tr>
-                    <td>물건목록</td>
+                    
                     <td>
-                        <input type="text" v-model="content"/>
+                        <input type="text"  v-model="content" class="form-control">
                     </td>
                 </tr>
                 <tr>
-                    <td>등록일자</td>
+                   
                     <td>
-                        <input type="text" :value="jpaBoard2.regDate" disabled/>
+                        <input type="text" class="form-control" :value="jpaBoard2.regDate" readonly/>
                     </td>
                 </tr>
                 <tr>
-                    <td>가게이름</td>
+                  
                     <td>
-                        <textarea cols="50" rows="20" v-model="title">
+                         <textarea cols="100" rows="30" v-model="title" class="form-control">
                         </textarea>
                     </td>
                 </tr>
+           </div>
             </table>
 
             <div>
@@ -69,3 +72,12 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+
+ .box{
+          background:white;
+          
+          border: #356859 4px solid;
+ }
+</style>

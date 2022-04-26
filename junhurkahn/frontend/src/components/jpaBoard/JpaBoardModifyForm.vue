@@ -1,38 +1,45 @@
 <template>
     <div>
+
         <form @submit.prevent="onSubmit">
-            <table border="1">
+
+             <table>
+           <div class="box">
+
                 <tr>
-                    <td>게시물 번호</td>
+                    
                     <td>
-                        <input type="text" :value="jpaBoard.boardNo" disabled/>
+                         <input type="text" class="form-control" :value="jpaBoard.boardNo" disabled/>
                     </td>
                 </tr>
                 <tr>
-                    <td>제목</td>
+                    
                     <td>
-                        <input type="text" v-model="title"/>
+                       <input type="text"  v-model="title" class="form-control">
+                    </td>
+
+                </tr>
+
+                <tr>
+                   
+                    <td>
+                         <input type="text"  v-model="writer" class="form-control" >
                     </td>
                 </tr>
                 <tr>
-                    <td>작성자</td>
+                    
                     <td>
-                        <input type="text" :value="jpaBoard.writer" disabled/>
+                         <input type="text" class="form-control" :value="jpaBoard.regDate" readonly/>
                     </td>
                 </tr>
                 <tr>
-                    <td>등록일자</td>
+                 
                     <td>
-                        <input type="text" :value="jpaBoard.regDate" disabled/>
+                       <textarea cols="100" rows="30" v-model="content" class="form-control">
+                    </textarea>
                     </td>
                 </tr>
-                <tr>
-                    <td>본문</td>
-                    <td>
-                        <textarea cols="50" rows="20" v-model="content">
-                        </textarea>
-                    </td>
-                </tr>
+           </div>
             </table>
 
             <div>
@@ -43,7 +50,10 @@
                 </router-link>
             </div>
         </form>
+        
     </div>
+    
+    
 </template>
 
 <script>
@@ -59,18 +69,31 @@ export default {
     data () {
         return {
             title: '',
+            writer: '',
             content: ''
         }
     },
     methods: {
         onSubmit () {
-            const { title, content } = this
-            this.$emit('submit', { title, content })
+            const { title, writer, content } = this
+            this.$emit('submit', { title, content,writer })
         }
     },
     created () {
         this.title = this.jpaBoard.title
+        this.writer = this.jpaBoard.writer
+        
         this.content = this.jpaBoard.content
+
     }
 }
 </script>
+
+<style scoped>
+ .box{
+          background:white;
+          
+          border: #356859 4px solid;
+        }
+
+</style>
