@@ -22,7 +22,7 @@
             :items="noticeBoards"
             :items-per-page="10"
             :key="noticeBoards.boardNo"
-            class="elevation-5"
+            class="elevation-3"
           >
             <template v-slot:[`item.title`]="{ item }">
               <router-link
@@ -41,10 +41,10 @@
       <v-row>
         <v-col>
           <v-btn
-            v-if="loginAuth == '관리자'"
+            v-if="loginAuth == '관리자' || loginAuth == '매니저'"
             x-large
             rounded
-            color="orange lighten-1"
+            color="orange lighten-3"
             class="mx-auto"
             style="float: right"
             @click="register"

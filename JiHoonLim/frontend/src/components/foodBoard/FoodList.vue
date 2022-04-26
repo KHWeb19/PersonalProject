@@ -128,7 +128,7 @@
           <v-btn
             x-large
             rounded
-            color="orange lighten-1"
+            color="orange lighten-3"
             class="mx-auto"
             style="float: right"
             @click="write"

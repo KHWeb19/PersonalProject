@@ -69,7 +69,10 @@
           -->
           <span
             class="text-center"
-            v-if="this.$store.state.userInfo.auth == '개인'"
+            v-if="
+              this.$store.state.userInfo.auth == '개인' ||
+              this.$store.state.userInfo.auth == '매니저'
+            "
           >
             <v-menu open-on-hover offset-y>
               <template v-slot:activator="{ on, attrs }">
