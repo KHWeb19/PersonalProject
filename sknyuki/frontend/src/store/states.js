@@ -45,4 +45,7 @@ export default {
 
     QuestionComments:[],
     QuestionComment:[],
+
+    ProductBoardSs:[],
+    ProductBoardS:[],
 }

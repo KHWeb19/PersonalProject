@@ -13,6 +13,9 @@ import {
 
     FETCH_QUESTION_COMMENTS,
     FETCH_QUESTION_COMMENT,
+    
+    FETCH_PRODUCT_BOARDS_LIST,
+    FETCH_PRODUCT_BOARDS,
 
 } from './mutation-types'
 
@@ -83,4 +86,19 @@ export default {
           commit(FETCH_QUESTION_COMMENT, res.data)
         })
       },
+
+
+      fetchProductBoardsList ({ commit }) {
+        return axios.get('http://localhost:7777/ProductBoardS/list')
+            .then((res) => {
+                commit(FETCH_PRODUCT_BOARDS_LIST, res.data)
+              // console.log(res)
+            })
+    },
+    fetchProductBoards ({ commit }, boardNo) {
+        return axios.get(`http://localhost:7777/ProductBoardS/${boardNo}`)
+            .then((res) => {
+                commit(FETCH_PRODUCT_BOARDS, res.data)
+            })
+    },
 }

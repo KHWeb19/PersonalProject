@@ -14,6 +14,10 @@ import {
 
     FETCH_QUESTION_COMMENTS,
     FETCH_QUESTION_COMMENT,
+
+    FETCH_PRODUCT_BOARDS_LIST,
+    FETCH_PRODUCT_BOARDS,
+
 } from './mutation-types'
 
 export default {
@@ -62,4 +66,13 @@ export default {
       [FETCH_QUESTION_COMMENT] (state, comment) {
         state.QuestionComment = comment
       },
+
+
+      [FETCH_PRODUCT_BOARDS_LIST] (state, ProductBoardSs) {
+        state.ProductBoardSs = ProductBoardSs
+   },
+
+      [FETCH_PRODUCT_BOARDS] (state, ProductBoardS) {
+         state.ProductBoardS = ProductBoardS
+   },
 }

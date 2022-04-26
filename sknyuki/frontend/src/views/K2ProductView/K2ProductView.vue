@@ -8,35 +8,47 @@
      
 
     <div class="app">
-        <product-board-list :productBoards="productBoards"/>
-    </div>
-    </div>
-     
-
+        <product-board-list v-if="isLogin" :ProductBoardSs="ProductBoardSs"/>
+    
+    
+      <v-snackbar v-else v-model="login" :timeout="timeout" color="secondary" outlined
+        bottom rounded="xl">
+      <p>로그인 해주세요!!</p>
+      <login-page></login-page>
+    </v-snackbar>
+</div>
+</div>
 
     </v-container>
 </template>
 <script>
 import HeaderView from '@/components/home/headerView.vue'
 import ProductBoardList from '@/components/ProductBoard/ProductBoardList.vue'
-//import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions } from 'vuex'
+import LoginPage from '@/views/member/LoginPage.vue'
 
 export default {
     name:'K2ProductView',
     components:{ 
     HeaderView,
     ProductBoardList,
-        
+    LoginPage,
     },
-/* computed: {
-        ...mapState(['productBoards'])
+    data() {
+    return {
+      login: true,
+      timeout: 2000,
+    }
+    },
+ computed: {
+        ...mapState(['ProductBoardSs','isLogin'])
     },
     mounted () {
-        this.fetchproductBoards()
+        this.fetchProductBoardsList()
     },
     methods: {
-        ...mapActions(['fetchproductBoards'])
-    }*/
+        ...mapActions(['fetchProductBoardsList'])
+    }
     }
 </script>
 

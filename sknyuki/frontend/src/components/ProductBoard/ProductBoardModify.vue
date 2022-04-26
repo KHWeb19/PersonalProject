@@ -1,7 +1,7 @@
 <template>
 <form @submit.prevent="onSubmit">
    <div class="app">
-            <h3 style="padding:30px 0px 30px 0px; font-weight:bold" align="center">게시글 작성</h3>
+            <h3 style="padding:30px 0px 30px 0px; font-weight:bold" align="center">게시글 수정</h3>
   <v-sheet class="mt-5 mb-10">
     <v-row>
       <v-col cols="12" md="8">
@@ -83,7 +83,7 @@
               <v-col>
                 <router-link style="text-decoration: none; color:black" :to="{ name: 'K2ProductView' }">
                     <v-btn text color="black" rounded x-large
-                        style="padding: 10px; width: 30px;" type="submit">목록으로
+                        style="padding: 10px; width: 30px;" type="submit">수정 취소
                     </v-btn>
                 </router-link>
               </v-col>
@@ -108,6 +108,12 @@ export default {
        UploadFile1,
       RankDescription, 
     },
+     props: {
+        ProductBoardS: {
+            type: Object,
+            required: true
+        }
+        },
      data () {
         return {
             type: '',
@@ -135,16 +141,23 @@ export default {
             this.files=files
         },
          onSubmit () {
-            var result = confirm('등록 하시겠습니까?')
+            var result = confirm('수정 내용을 등록 하시겠습니까?')
             if(result) {
                 const { type, name, size, price, brandrank, accessories, status} = this
                 this.$emit('submitContents', { type, name, size, price, brandrank, accessories, status})
-                console.log(this.type,this.name,this.size ,this.price)
+                //console.log(this.type,this.name,this.size ,this.price)
 
                 this.$emit("submitFiles",this.files)
-                console.log(this.files)
+                //console.log(this.files)
             }
-         }
+         },
+         created () {
+        //this.id = this.ProductBoardS.id
+        this.type=this.ProductBoardS.type
+        this.boardNo =this.ProductBoardS.boardNo
+        this.title = this.ProductBoardS.title
+        this.content = this.ProductBoardS.content
+    }
       }
 }
 </script>

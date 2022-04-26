@@ -13,6 +13,8 @@ import K2ProductView from '@/views/K2ProductView/K2ProductView'
 import K1QuestionModifyPage from '@/views/K1QuestionVeiw/K1QuestionModifyPage.vue'
 import MyPage from '@/views/member/MyPage'
 import K2ProductRegisterPage from '@/views/K2ProductView/K2ProductRegisterPage.vue'
+import K2ProductReadPage from '@/views/K2ProductView/K2ProductReadPage.vue'
+import K2ProductModifyPage from '@/views/K2ProductView/K2ProductModifyPage.vue'
 
 Vue.use(VueRouter)
 
@@ -102,6 +104,27 @@ props:{
   name: 'K2ProductRegisterPage',
   component: K2ProductRegisterPage
 },
+{
+  path:'/K2ProductReadPage/:boardNo',
+  name:'K2ProductReadPage',
+  components: {
+    default: K2ProductReadPage
+},
+props: {
+  default: true
+}
+},
+{
+  path: '/K2ProductModifyPage/:boardNo',
+    name: 'K2ProductModifyPage',
+    components:{
+      default:K2ProductModifyPage
+  },
+  props:{
+    default: true
+  }
+  },
+
 
 ]
 
