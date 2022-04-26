@@ -46,4 +46,9 @@ public class LikesServiceImpl implements LikesService {
     public List<Likes> list(Long boardNo, Long memberNo) {
         return repository.findByBoardNoAndMemberNo(Long.valueOf(boardNo), Long.valueOf(memberNo));
     }
+
+    @Override
+    public List<Likes> list(Long boardNo) {
+        return repository.findByBoardNo(Long.valueOf(boardNo));
+    }
 }

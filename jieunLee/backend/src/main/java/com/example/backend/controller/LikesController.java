@@ -33,12 +33,12 @@ public class LikesController {
         return likesService.list(boardNo, memberNo);
     }
 
-//    @GetMapping("/list/{memberNo}")
-//    public List<Likes> likesList(@PathVariable("memberNo") Long memberNo) {
-//        log.info("likesList()");
-//
-//        return likesService.list(memberNo);
-//    }
+    @GetMapping("/list/{boardNo}")
+    public List<Likes> likesList(@PathVariable("boardNo") Long boardNo) {
+        log.info("likesList()");
+
+        return likesService.list(boardNo);
+    }
 
 //    @DeleteMapping("/{likesNo}")
 //    public void unLikes(@PathVariable("likesNo") Integer likesNo) {

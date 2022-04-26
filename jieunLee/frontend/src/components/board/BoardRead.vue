@@ -122,39 +122,39 @@
                         </td>
                     </tr> -->
                     <tr align="left">
-                            <td style="padding: 6px 9px" colspan="3" v-if="loginLikes.length>0" >
-                                <v-btn icon @click="onLikes(board.boardNo)" >
-                                    <v-icon  color="black">
-                                        mdi-cards-heart
+                        <td style="padding: 6px 9px" colspan="3" v-if="loginLikes.length>0" >
+                            <v-btn icon @click="onLikes(board.boardNo)" >
+                                <v-icon  color="black">
+                                    mdi-cards-heart
+                                </v-icon>
+                            </v-btn>
+                            <router-link style="text-decoration: none; color: grey" :to="{
+                                name: 'BoardReadPage',
+                                params: {boardNo: board.boardNo.toString()}}">
+                                <v-btn icon>
+                                    <v-icon color="black">
+                                        mdi-chat-outline
                                     </v-icon>
                                 </v-btn>
-                                <router-link style="text-decoration: none; color: grey" :to="{
-                                    name: 'BoardReadPage',
-                                    params: {boardNo: board.boardNo.toString()}}">
-                                    <v-btn icon>
-                                        <v-icon color="black">
-                                            mdi-chat-outline
-                                        </v-icon>
-                                    </v-btn>
-                                </router-link>
-                            </td>
-                            <td style="padding: 6px 9px" colspan="3" v-else>
-                                <v-btn icon @click="onLikes(board.boardNo)" >
-                                    <v-icon  color="black">
-                                        mdi-cards-heart-outline
+                            </router-link>
+                        </td>
+                        <td style="padding: 6px 9px" colspan="3" v-else>
+                            <v-btn icon @click="onLikes(board.boardNo)" >
+                                <v-icon  color="black">
+                                    mdi-cards-heart-outline
+                                </v-icon>
+                            </v-btn>
+                            <router-link style="text-decoration: none; color: grey" :to="{
+                                name: 'BoardReadPage',
+                                params: {boardNo: board.boardNo.toString()}}">
+                                <v-btn icon>
+                                    <v-icon color="black">
+                                        mdi-chat-outline
                                     </v-icon>
                                 </v-btn>
-                                <router-link style="text-decoration: none; color: grey" :to="{
-                                    name: 'BoardReadPage',
-                                    params: {boardNo: board.boardNo.toString()}}">
-                                    <v-btn icon>
-                                        <v-icon color="black">
-                                            mdi-chat-outline
-                                        </v-icon>
-                                    </v-btn>
-                                </router-link>
-                            </td>
-                        </tr>
+                            </router-link>
+                        </td>
+                    </tr>
                     <tr v-if="board.likes.length" align="left">
                         <td colspan="3" style="padding: 0px 0px 8px 16px">
                             좋아요 {{ board.likes.length }}개
@@ -224,7 +224,6 @@ export default {
     computed: {
     ...mapState(['board']),
     ...mapState(['loginLikes']),
-    
     },
     mounted () {
         this.fetchLoginLikes({boardNo: this.boardNo, memberNo: this.loginInfo.memberNo})

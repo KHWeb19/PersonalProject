@@ -15,7 +15,7 @@
                         <router-link style="text-decoration: none;" :to="{
                             name: 'AccountsEditPage',
                             params: {memberNo: member.memberNo.toString()}}">
-                            <v-btn v-if="member.memberNo==loginInfo.memberNo" style="margin-top: 5px;" color="white">프로필 편집</v-btn>
+                            <v-btn v-if="member.memberNo==loginInfo.memberNo" style="margin: 4px 0px 0px 10px;" color="white">프로필 편집</v-btn>
                         </router-link>
                     </div>
                     <br/>

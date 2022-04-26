@@ -54,6 +54,13 @@ public class Member {
     @OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
     private List<Board> boards = new ArrayList<>();
 
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+//    @JsonManagedReference(value="board-likes")
+    @JsonIgnoreProperties({"member", "board"})
+    @OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
+    private Set<Likes> likes = new HashSet<>();
+
     //이거는 필요없긴함 없애보자
 //    @EqualsAndHashCode.Exclude
 //    @ToString.Exclude

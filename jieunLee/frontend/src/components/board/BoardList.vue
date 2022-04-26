@@ -45,8 +45,25 @@
                                 <v-img width="615px" :src="require(`@/assets/mImage/${board.boardImage}`)"/>
                             </td>
                         </tr >
-                        <tr align="left"  >
-                            <td style="padding: 6px 9px" colspan="2">
+                        <!-- <like-button :board="board"/> -->
+                        <tr align="left">
+                            <td style="padding: 6px 9px" colspan="3" v-if="loginLikes.length>0" >
+                                <v-btn icon @click="onLikes(board.boardNo)" >
+                                    <v-icon  color="black">
+                                        mdi-cards-heart
+                                    </v-icon>
+                                </v-btn>
+                                <router-link style="text-decoration: none; color: grey" :to="{
+                                    name: 'BoardReadPage',
+                                    params: {boardNo: board.boardNo.toString()}}">
+                                    <v-btn icon>
+                                        <v-icon color="black">
+                                            mdi-chat-outline
+                                        </v-icon>
+                                    </v-btn>
+                                </router-link>
+                            </td>
+                            <td style="padding: 6px 9px" colspan="3" v-else>
                                 <v-btn icon @click="onLikes(board.boardNo)" >
                                     <v-icon  color="black">
                                         mdi-cards-heart-outline
@@ -125,10 +142,14 @@
 </template>
 
 <script>
+// import LikeButton from '@/components/likes/LikeButton'
 import { mapState, mapActions } from 'vuex'
 import axios from 'axios'
 export default {
     name: 'BoardList',
+    components : {
+        // LikeButton
+    },
     props: {
         boards: {
             type: Array
@@ -148,6 +169,7 @@ export default {
     },
     mounted () {
         this.fetchLoginLikes(this.loginInfo.memberNo)
+        // this.fetchLoginLikes({boardNo: this.boardNo, memberNo: this.loginInfo.memberNo})
     },
     methods: {
         ...mapActions(['fetchLoginLikes']),
@@ -159,9 +181,6 @@ export default {
             const { content } = this
             this.$emit('submit', { boardNo, memberNo: this.loginInfo.memberNo, content })
         },
-        // onLikes(boardNo) {
-        //     this.$emit('click', {boardNo, memberNo: this.loginInfo.memberNo})
-        // },
         onLikes(boardNo) {
             axios.post(`http://localhost:7777/likes/${boardNo}/${this.loginInfo.memberNo}`, {boardNo, memberNo: this.loginInfo.memberNo})
                 .then(() => {

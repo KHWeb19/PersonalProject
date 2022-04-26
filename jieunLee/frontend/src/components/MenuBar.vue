@@ -2,7 +2,7 @@
   <v-app-bar flat color="white">
     <v-spacer></v-spacer>
     <v-spacer></v-spacer>
-    
+    <v-spacer></v-spacer>
     <v-app-bar-title>
       <router-link style="text-decoration: none;" :to="{name: 'HomeView'}">
         <v-img
@@ -12,7 +12,7 @@
         />
       </router-link>
     </v-app-bar-title>
-
+    <v-spacer></v-spacer>
     <v-spacer></v-spacer>
     <input style="background-color: #efefef; 
                               margin: 3px;
@@ -23,19 +23,24 @@
                           type="text" placeholder="검색" v-model="keyWord" />
     <v-btn icon @click="onSearch"><v-icon>mdi-arrow-right</v-icon></v-btn>
     <v-spacer></v-spacer>
-    
-    <v-btn icon>
+    <v-btn icon large>
       <router-link style="text-decoration: none;" :to="{name: 'HomeView'}">
         <v-icon color="black">
           mdi-home
         </v-icon>
       </router-link>
     </v-btn>
-
-    <v-btn icon>
+    <v-btn icon large>
       <router-link style="text-decoration: none;" :to="{name: 'BoardRegisterPage'}">
         <v-icon color="black">
           mdi-plus-box-outline
+        </v-icon>
+      </router-link>
+    </v-btn>
+    <v-btn icon large>
+      <router-link style="text-decoration: none;" :to="{name: 'BoardRegisterPage'}">
+        <v-icon color="black">
+          mdi-cards-heart-outline
         </v-icon>
       </router-link>
     </v-btn>
@@ -43,9 +48,9 @@
       <template v-slot:activator="{ on }">
         <v-btn icon v-on="on">
           <div style="border-radius: 70%; overflow: hidden;">
-            <v-img v-if="imageChange" max-width="24" height="24" :src="require(`@/assets/mImage/${imageChange}`)"/>
-            <v-img v-else-if="loginInfo.imageName" max-width="24" height="24" :src="require(`@/assets/mImage/${loginInfo.imageName}`)"/>
-            <v-img v-else max-width="24" height="24"  src="@/assets/profile.jpg"/>
+            <v-img v-if="imageChange" max-width="26" height="26" :src="require(`@/assets/mImage/${imageChange}`)"/>
+            <v-img v-else-if="loginInfo.imageName" max-width="26" height="26" :src="require(`@/assets/mImage/${loginInfo.imageName}`)"/>
+            <v-img v-else max-width="26" height="26"  src="@/assets/profile.jpg"/>
           </div>
         </v-btn> 
       </template>
@@ -71,6 +76,7 @@
           </v-list-item-title>
         </v-list>
       </v-menu>
+    <v-spacer></v-spacer>
     <v-spacer></v-spacer>
     <v-spacer></v-spacer>
   </v-app-bar>
