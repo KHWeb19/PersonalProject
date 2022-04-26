@@ -1,8 +1,6 @@
 package com.example.demo.repository.jpa.order63;
 
 import com.example.demo.entity.jpa.JpaMemberBoth;
-import com.example.demo.entity.jpa.VueJpaMember;
-import com.example.demo.entity.jpa.VueJpaMemberWithAuth;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;

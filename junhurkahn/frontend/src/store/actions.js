@@ -6,7 +6,17 @@ import {
     FETCH_JPA_BOARD_LIST,
     FETCH_JPA_BOARD,
     FETCH_BUSINESS_MEMBER,
-    CRAWL_START
+    CRAWL_START,
+    FETCH_JPA_BOARD_LIST1,
+    FETCH_JPA_BOARD1,
+    FETCH_JPA_BOARD_LIST2,
+    FETCH_JPA_BOARD2,
+    FETCH_JPA_BOARD_LIST3,
+    FETCH_JPA_BOARD3,
+    FETCH_JPA_BOARD_LIST4,
+    FETCH_JPA_BOARD4
+
+
 } from './mutation-types'
 
 import axios from 'axios'
@@ -38,18 +48,116 @@ export default {
                     commit(FETCH_PRODUCT_BOARD, res.data)
                 })
     },
-    fetchJpaBoardList ({ commit }) {
-        return axios.get('http://localhost:7777/62th/board/list')
+   
+    fetchJpaBoardList ({ commit }, keyword) {
+        let url = 'http://localhost:7777/62th/board/list';
+        if (keyword != undefined) {
+            url += '?keyword='+encodeURIComponent(keyword);
+        }
+        return axios.get(url)
             .then((res) => {
                 commit(FETCH_JPA_BOARD_LIST, res.data)
             })
     },
+
+    fetchJpaBoardList1 ({ commit }, keyword) {
+        let url = 'http://localhost:7777/62th/board1/list1';
+        if (keyword != undefined) {
+            url += '?keyword='+encodeURIComponent(keyword);
+        }
+        return axios.get(url)
+            .then((res) => {
+                commit(FETCH_JPA_BOARD_LIST1, res.data)
+            })
+    },
+
+          
+    fetchJpaBoardList2 ({ commit }, keyword) {
+        let url = 'http://localhost:7777/62th/board2/list2';
+        if (keyword != undefined) {
+            url += '?keyword='+encodeURIComponent(keyword);
+        }
+        return axios.get(url)
+            .then((res) => {
+                commit(FETCH_JPA_BOARD_LIST2, res.data)
+            })
+    },
+
+    fetchJpaBoardList3 ({ commit }, keyword) {
+        let url = 'http://localhost:7777/62th/board3/list3';
+        if (keyword != undefined) {
+            url += '?keyword='+encodeURIComponent(keyword);
+        }
+        return axios.get(url)
+            .then((res) => {
+                commit(FETCH_JPA_BOARD_LIST3, res.data)
+            })
+    },
+
+    fetchJpaBoardList4 ({ commit }, keyword) {
+        let url = 'http://localhost:7777/62th/board4/list4';
+        if (keyword != undefined) {
+            url += '?keyword='+encodeURIComponent(keyword);
+        }
+        return axios.get(url)
+            .then((res) => {
+                commit(FETCH_JPA_BOARD_LIST4, res.data)
+            })
+    },
+
+
+
+
+
+
+
+
+
     fetchJpaBoard ({ commit }, boardNo) {
         return axios.get(`http://localhost:7777/62th/board/${boardNo}`)
             .then((res) => {
                 commit(FETCH_JPA_BOARD, res.data)
             })
-    },
+        },
+
+
+            fetchJpaBoard1 ({ commit }, boardNo) {
+                return axios.get(`http://localhost:7777/62th/board1/${boardNo}`)
+                    .then((res) => {
+                        commit(FETCH_JPA_BOARD1, res.data)
+                    })
+            },
+
+              
+            fetchJpaBoard2 ({ commit }, boardNo) {
+                return axios.get(`http://localhost:7777/62th/board2/${boardNo}`)
+                    .then((res) => {
+                        commit(FETCH_JPA_BOARD2, res.data)
+                    })
+            },
+
+            fetchJpaBoard3 ({ commit }, boardNo) {
+                return axios.get(`http://localhost:7777/62th/board3/${boardNo}`)
+                    .then((res) => {
+                        commit(FETCH_JPA_BOARD3, res.data)
+                    })
+            },
+
+            fetchJpaBoard4 ({ commit }, boardNo) {
+                return axios.get(`http://localhost:7777/62th/board4/${boardNo}`)
+                    .then((res) => {
+                        commit(FETCH_JPA_BOARD4, res.data)
+                    })
+            },
+
+
+
+
+
+
+
+
+
     fetchBusinessMember ({ commit }) {
         return axios.get('http://localhost:7777/63th/jpaMember/checkBusiness')
             .then((res) => {
@@ -67,3 +175,4 @@ export default {
             })
     }
 }
+

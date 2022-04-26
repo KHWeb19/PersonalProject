@@ -1,16 +1,23 @@
 <template>
     <form @submit.prevent="onSubmit">
-        <table>
+               <table border="1">
             <tr>
-                <td>제목</td>
+                <td>은행이름</td>
                 <td>
                     <input type="text" v-model="title"/>
                 </td>
             </tr>
             <tr>
-                <td>작성자</td>
+                <td>계좌번호</td>
                 <td>
                     <input type="text" v-model="writer"/>
+                </td>
+            </tr>
+
+             <tr>
+                <td>소유자이름</td>
+                <td>
+                    <input type="text" v-model="writer1"/>
                 </td>
             </tr>
             <tr>
@@ -24,7 +31,7 @@
 
         <div>
             <button type="submit">등록</button>
-            <router-link :to="{ name: 'JpaBoardListPage' }">
+            <router-link :to="{ name: 'JpaBoardListPage1' }">
                 취소
             </router-link>
         </div>
@@ -32,20 +39,20 @@
 </template>
 
 <script>
-
 export default {
     name: 'JpaBoardRegisterForm1',
     data () {
         return {
-            title: '제목을 작성하세요.',
-            writer: '너님',
+            title: '은행이름을 작성하세요.',
+            writer: '계좌 번호작성하시오',
+            writer1: '소유자 이름을 작성하시오',
             content: '본문을 작성하세요.'
         }
     },
     methods: {
         onSubmit () {
-            const { title, writer, content } = this
-            this.$emit('submit', { title, writer, content })
+            const { title, writer, content, writer1 } = this
+            this.$emit('submit', { title, writer, content, writer1 })
         }
     }
 }

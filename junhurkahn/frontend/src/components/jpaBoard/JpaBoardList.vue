@@ -1,12 +1,30 @@
 <template>
-    <div>
-        <h3>게시물 목록</h3>
-        <table border="1">
-            <tr>
-                <th align="center" width="100">번호</th>
-                <th align="center" width="640">제목</th>
-                <th align="center" width="150">작성자</th>
-                <th align="center" width="240">등록일자</th>
+ 
+  <div class="b">
+        <br>
+    <div class="input-group mb-3" >
+    
+  
+  <span class="input-group-text"  id="inputGroup-sizing-default" @click="findSearch">Find</span>
+        
+
+  <input type="text" 
+        
+        class="form-control" 
+        ref="keyword"
+        aria-label="Sizing example input" 
+        aria-describedby="inputGroup-sizing-default"
+        >
+
+    </div>
+
+  <table class="table table-success table-striped">
+
+            <tr align="center"  >
+                <th scope="col" >번호</th>
+               <th scope="col">제목</th>
+               <th scope="col">작성자</th>
+               <th scope="col">등록일자</th>
             </tr>
             <tr v-if="!jpaBoards || (Array.isArray(jpaBoards) && jpaBoards.length === 0)">
                 <td colspan="4">
@@ -15,34 +33,95 @@
             </tr>
             <tr v-else v-for="board in jpaBoards" :key="board.boardNo">
                 <td align="center">
-                    {{ board.boardNo }}
+                    {{ board.boardNo }} 
                 </td>
-                <td align="left">
+                <td align="center">
                     <router-link :to="{ name: 'JpaBoardReadPage',
                                         params: { boardNo: board.boardNo.toString() } }">
                         {{ board.title }}
                     </router-link>
                 </td>
-                <td align="right">
+                <td align="center">
                     {{ board.writer }}
                 </td>
                 <td align="center">
                     {{ board.regDate }}
+                     
+                     <button type="button" class="btn btn-outline-danger" @click="onDelete(board)">Delete</button>
                 </td>
             </tr>
-        </table>
+            
+   </table>
     </div>
+
+  
+  
 </template>
 
 <script>
 
+import axios from 'axios'
+import { mapActions,mapState} from 'vuex'
+
+
 export default {
+  
     name: 'JpaBoardList',
     props: {
       jpaBoards: {
-            type: Array
+            type: Array,
+             required: true
+        }
+    },
+
+      computed: {
+        ...mapState(['jpaBoard'])
+       },
+
+         methods: {
+        ...mapActions([
+            'fetchJpaBoard',
+            'fetchJpaBoardList']),
+        onDelete (board) {
+            const { boardNo } = board;
+            //alert('지우는 게시물 번호: ' + boardNo)
+            axios.delete(`http://localhost:7777/62th/board/${boardNo}`)
+            .then(() => {
+               
+                this.fetchJpaBoardList();
+                this.$refs.keyword.value = '';
+            })
+            .catch(() => {
+                alert('삭제 실패! 문제 발생!')
+            })
+        },
+
+        findSearch() {
+            const keyword = this.$refs.keyword.value;
+            this.fetchJpaBoardList(keyword);
         }
     }
+   
 }
 
+
+
+
+    
+
+
 </script>
+
+<style scoped>
+
+.basil {
+  background-color: #FFFBE6 !important;
+}
+
+.box {
+    background: #FFFBE6;
+}
+
+ 
+        
+</style>
