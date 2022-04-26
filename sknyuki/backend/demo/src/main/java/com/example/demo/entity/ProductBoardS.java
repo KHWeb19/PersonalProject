@@ -30,10 +30,10 @@ public class ProductBoardS {
     private int price;
 
     @Column(length = 32, nullable = false)
-    private String rank;
-
-    @Column(length = 128, nullable = false)
     private String accessories;
+
+    @Column(length = 32, nullable = false)
+    private String brandrank;
 
     @Lob
     private String status;

@@ -9,19 +9,19 @@ public class ProductBoardSDto {
     private String name;
     private String size;
     private int price;
-    private String rank;
+    private String brandrank;
     private String accessories;
     private String status;
 
 
 
-    public ProductBoardSDto(String type, String id, String name, String rank, String accessories, String status, int price, String size ) {
+    public ProductBoardSDto(String type, String id, String name, String size, int price, String brandrank, String accessories, String status) {
         this.type= type;
         this.id = id;
         this.name = name;
         this.size = size;
         this.price = price;
-        this.rank = rank;
+        this.brandrank = brandrank;
         this.accessories = accessories;
         this.status = status;
     }
