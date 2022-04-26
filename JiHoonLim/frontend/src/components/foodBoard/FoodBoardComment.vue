@@ -40,7 +40,8 @@
                         text
                         v-if="
                           commentList.commentWriter == nickName ||
-                          auth == '관리자'
+                          auth == '관리자' ||
+                          auth == '매니저'
                         "
                         @click="onDelete(commentList.commentNo)"
                         color="red"

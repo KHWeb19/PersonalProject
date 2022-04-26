@@ -146,7 +146,7 @@
                               solo
                               readonly
                               style="width: 50px"
-                              :value="foodBoard.likeCnt"
+                              :value="foodBoard.likeCount"
                             />
                           </div>
 
@@ -280,7 +280,11 @@ export default {
       this.userId = this.userInfo.id;
       this.auth = this.userInfo.auth;
     }
-    if (this.nickName == this.foodBoard.writer || this.auth == "관리자") {
+    if (
+      this.nickName == this.foodBoard.writer ||
+      this.auth == "관리자" ||
+      this.auth == "매니저"
+    ) {
       this.checkWriteUser = true;
     } else {
       this.checkWriteUser = false;

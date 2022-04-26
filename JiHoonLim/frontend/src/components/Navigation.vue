@@ -67,7 +67,10 @@
             >
           </v-btn>
           -->
-          <span class="text-center" v-if="auth != '관리자'">
+          <span
+            class="text-center"
+            v-if="this.$store.state.userInfo.auth == '개인'"
+          >
             <v-menu open-on-hover offset-y>
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
@@ -99,7 +102,10 @@
             </v-menu>
           </span>
 
-          <span class="text-center" v-if="(auth = '관리자')">
+          <span
+            class="text-center"
+            v-else-if="this.$store.state.userInfo.auth == '관리자'"
+          >
             <v-menu open-on-hover offset-y>
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
@@ -172,12 +178,10 @@ export default {
     };
   },
 
-  mounted() {
+  created() {
     this.$store.state.userInfo = this.$cookies.get("user");
     if (this.$store.state.userInfo != null) {
       this.isLogin = true;
-    }
-    if (this.$store.state.userInfo != null) {
       this.userInfo = this.$store.state.userInfo;
       this.auth = this.userInfo.auth;
     }

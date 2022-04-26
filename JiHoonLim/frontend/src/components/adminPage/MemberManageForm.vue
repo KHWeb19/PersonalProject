@@ -66,6 +66,7 @@
                 <td>
                   <v-btn
                     text
+                    style="font-size: 25px"
                     :to="{
                       name: 'MemberManageModifyPage',
                       params: { memberNo: member.memberNo.toString() },
