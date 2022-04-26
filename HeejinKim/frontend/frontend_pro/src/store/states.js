@@ -13,6 +13,9 @@ auths: [],
 board: null,
 boards: [],
 
+seatdata:[],
+
+
 
 boardComments:[],
 

@@ -1,5 +1,6 @@
 package com.example.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -32,6 +33,7 @@ public class Member {
     @Column(length = 64, nullable = false)
     private String email;
 
+    private String auth;
 
     @CreationTimestamp
     private Date regDate;
@@ -39,21 +41,19 @@ public class Member {
     @UpdateTimestamp
     private Date updDate;
 
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL,fetch = FetchType.LAZY,orphanRemoval = true)
     private List<MemberAuth> authList = new ArrayList();
 
-    @OneToOne(mappedBy = "member", cascade = CascadeType.ALL)
-    private Reservation reservation;
-
-
+    @JsonManagedReference
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL,fetch = FetchType.LAZY,orphanRemoval = true)
+    private List<Reservation> reservation = new ArrayList<>();
 
     public Member (String userId, String password, String passwordCheck, String email) {
         this.userId = userId;
         this.password = password;
         this.passwordCheck = passwordCheck;
         this.email = email;
-
-
     }
 
     public Member (String userId, String password, String passwordCheck, String email, MemberAuth auth) {
@@ -62,12 +62,10 @@ public class Member {
         this.passwordCheck = passwordCheck;
         this.email = email;
 
-
         if (auth != null) {
             changeAuth(auth);
         }
     }
-
 
     public void changeAuth (MemberAuth auth) {}
 

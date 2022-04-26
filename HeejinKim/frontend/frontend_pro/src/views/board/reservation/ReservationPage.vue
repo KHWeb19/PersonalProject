@@ -1,7 +1,7 @@
-<template>
+<!--<template>
 
        <div>
-            <reservation-form/>   
+            <reservation-seat-form/>   
         </div>
   
     
@@ -9,18 +9,18 @@
 
 <script>
 
-import ReservationForm from '@/components/board/reservation/ReservationForm.vue'
+import ReservationSeatForm from '@/components/board/reservation/ReservationSeatForm.vue'
 
 
 export default {
     name:'ReservationPage',
 
     components:{
-        ReservationForm
+        ReservationSeatForm
     }
       
  
     
 }
-</script>
+</script>-->
      

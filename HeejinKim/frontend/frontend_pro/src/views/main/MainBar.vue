@@ -27,8 +27,9 @@
 
         <!-- 관리자 페이지 만들때 
         <div :session="session" v-if="this.$store.state.isAuth" >-->
-
-        <div v-if="isLogin">    
+            <!--
+        <div v-if="isLogin">-->
+            <div>    
             <v-navigation-drawer app v-model="nav_drawer" temporary>
                 <v-list nav dense>
                     <v-list-item-group v-model="group" active-class="grey--text  ">

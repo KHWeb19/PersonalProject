@@ -10,8 +10,8 @@ import BoardList from '@/views/board/community/BoardList.vue'
 import  BoardRegister from '@/views/board/community/BoardRegister.vue'
 import  BoardRead from '@/views/board/community/BoardRead.vue'
 import  BoardModify from '@/views/board/community/BoardModify.vue'
-import  ReservationPage from '@/views/board/reservation/ReservationPage.vue'
-//import ReservationForm from '@/components/board/reservation/ReservationForm.vue'
+//import  ReservationPage from '@/views/board/reservation/ReservationPage.vue'
+import ReservationSeatForm from '@/components/board/reservation/ReservationSeatForm.vue'
 
 Vue.use(VueRouter)
 
@@ -78,12 +78,23 @@ const routes = [
     default: true
   }
 },
+/*
 {
   path: '/reservation',
   name: 'ReservationPage',
   components:{
     
     default:ReservationPage
+  } 
+    
+  
+},*/
+{
+  path: '/reservation',
+  name: 'ReservationSeatForm',
+  components:{
+    
+    default:ReservationSeatForm
   } 
     
   

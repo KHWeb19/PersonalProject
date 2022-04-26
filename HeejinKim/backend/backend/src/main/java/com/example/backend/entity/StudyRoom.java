@@ -1,4 +1,4 @@
-package com.example.backend.entity;
+/*package com.example.backend.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,7 +22,7 @@ public class StudyRoom {
     @Column
     private Long cols;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "reservation_no")
     private Reservation reservation;
 
@@ -32,4 +32,4 @@ public class StudyRoom {
 
     }
 
-}
+}*/

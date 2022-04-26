@@ -42,7 +42,7 @@ public class Board {
     private Date updDate;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "board", fetch = FetchType.EAGER,orphanRemoval = true)
+    @OneToMany(mappedBy = "board", fetch = FetchType.LAZY,orphanRemoval = true)
     private List<BoardComments> comments = new ArrayList<>();
 
     public Board(String fileName) {

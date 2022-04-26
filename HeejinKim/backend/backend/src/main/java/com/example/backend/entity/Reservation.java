@@ -1,36 +1,49 @@
 package com.example.backend.entity;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
+@Getter
+@Setter
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name ="reservation")
+@Builder
+@AllArgsConstructor
+@Table(name = "reservation")
 public class Reservation {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long reservationNo;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private String seatNumber;
 
-    @Column(length = 32, nullable = false)
-    private String writer;
+    @Column
+    private Integer seatRows;
+
+    @Column
+    private Integer seatCols;
+
+    @Column
+    private Integer restSeats;
 
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_no")
     private Member member;
 
-    @OneToOne(mappedBy = "reservation", cascade = CascadeType.ALL)
-    private StudyRoom studyRoom;
 
-    public Reservation(String writer,Member tableMember){
-        this.writer = writer;
-        member = tableMember;
+    //@OneToMany(mappedBy = "reservation", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    //private List<StudyRoom> studyRoom=new ArrayList<>();
+
+    public Reservation(Integer seatRows,Integer seatCols,String seatNumber){
+
+        this.seatRows = seatRows;
+        this.seatCols = seatCols;
+        this.seatNumber = seatNumber;
 
     }
 

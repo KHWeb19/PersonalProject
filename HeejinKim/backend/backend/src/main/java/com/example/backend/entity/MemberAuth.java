@@ -25,7 +25,6 @@ public class MemberAuth {
     @Column(length = 64, nullable = false)
     private String auth;
 
-
     @CreationTimestamp
     private Date regDate;
 

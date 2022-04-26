@@ -1,4 +1,4 @@
-package com.example.backend.repository.reservation;
+/*package com.example.backend.repository.reservation;
 
 import com.example.backend.entity.Reservation;
 import com.example.backend.entity.StudyRoom;
@@ -15,3 +15,4 @@ public interface StudyRoomRepository extends JpaRepository<StudyRoom, Long>   {
     @Query(value = "select * from study_room where reservation_no = :reservationNo" , nativeQuery = true)
     Optional<StudyRoom> findByReservationNo(Long reservationNo);
 }
+*/
