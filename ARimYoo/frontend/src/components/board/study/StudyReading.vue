@@ -90,6 +90,7 @@ export default {
     },
     created () {
         this.who = this.$store.state.userInfo.name
+        this.memberNo = this.$store.state.userInfo.memberNo
     },
     methods: {
         goPage (){
@@ -111,9 +112,20 @@ export default {
             var result = confirm(this.study.studyName + '에 가입하시겠습니까?')
             if (result) {
                 const { studyNo } = this.study
-                const { memberNo } = this.$store.state.userInfo.memberNo
+                const { memberNo } = this
 
-                axios.post(`http://localhost:7777/study/${studyNo}`, {memberNo})
+                axios.post(`http://localhost:7777/study/join/${memberNo}`, {studyNo})
+                .then((res) => {
+                    if (res.data == true){
+                        alert('가입되셨습니다.')}
+                    else {
+                        alert('정원이 모두 찼습니다.')
+                    }
+                })
+                .catch(() => {
+                    console.log(studyNo,memberNo)
+                    alert('문제 발생')
+                })
            
              }
             
