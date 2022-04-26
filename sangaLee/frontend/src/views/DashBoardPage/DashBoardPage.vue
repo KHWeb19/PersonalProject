@@ -1,21 +1,29 @@
 <template>
-<div>
-  <dash-board-page/>
-  <dash-board-side-bar/>
-</div>
+  <div class="mainbg">
+    <v-navigation-drawer app fixed permanent :width="300">
+      <side-bar/>
+    </v-navigation-drawer>
+      <dash-board/>
+  </div>
+  
 </template>
 <script>
 
 import DashBoard from '@/components/DashBoard/DashBoard.vue'
-import DashBoardSideBar from '@/components/DashBoard/DashBoardSideBar.vue'
-
-
+import SideBar from '@/components/Layout/SideBar.vue'
 
 export default {
   components: { 
     DashBoard,
-    DashBoardSideBar
+    SideBar
      },
     name : 'DashBoardPage.vue'
 }
 </script>
+
+<style scoped>
+.mainbg {
+  background-color: #EBECF0;
+  height: 100vh;
+}
+</style>
