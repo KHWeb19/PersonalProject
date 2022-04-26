@@ -9,26 +9,31 @@
         <v-row>
             <my-with-info :memberStudies="memberStudies" />
         </v-row>
+        <v-row>
+            <my-project-info :memberProjects="memberProjects"/>
+        </v-row>
     </v-container>
 </template>
 
 <script>
-import MyWithInfo from '@/components/form/MyWithInfo.vue'
+import MyWithInfo from '@/components/my/MyStudyInfo.vue'
 import { mapActions, mapState } from 'vuex'
+import MyProjectInfo from '@/components/my/MyProjectInfo.vue'
 export default {
-  components: { MyWithInfo },
+  components: { MyWithInfo, MyProjectInfo },
     name:'MyWith',
     computed: {
-        ...mapState(['memberStudies'])
+        ...mapState(['memberStudies', 'memberProjects'])
     },
     created () {
         this.memberNo = this.$store.state.userInfo.memberNo
     },
     mounted () {
         this.fetchMemberStudyList(this.memberNo)
+        this.fetchMemberProjectList(this.memberNo)
     },
     methods: {
-        ...mapActions(['fetchMemberStudyList'])
+        ...mapActions(['fetchMemberStudyList', 'fetchMemberProjectList'])
     }
   }
 </script>

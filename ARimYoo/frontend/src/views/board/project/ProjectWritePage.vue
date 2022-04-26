@@ -21,7 +21,7 @@ export default {
     name: 'ProjectWritePage',
     methods: {
        onProjectSubmit (payload) {
-           const { projectName, content, writer, people,openLink, file} = payload
+           const { projectName, content, writer, people,openLink, file, memberNo} = payload
 
             let formData = new FormData()
 
@@ -31,6 +31,7 @@ export default {
             formData.append('projectName', projectName)
             formData.append('people', people)
             formData.append('openLink', openLink)
+            formData.append('memberNo', memberNo)
 
 
             console.log(formData)

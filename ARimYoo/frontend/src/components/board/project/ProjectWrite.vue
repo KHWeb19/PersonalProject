@@ -81,6 +81,7 @@ export default {
     },
     created () {
         this.writer = this.$store.state.userInfo.name
+        this.memberNo = this.$store.state.userInfo.memberNo
     },
     methods: {
         handleFileUpload () {
@@ -95,12 +96,12 @@ export default {
 
         onProjectSubmit () {
 
-            const { projectName, writer, content, people, openLink} = this
+            const { projectName, writer, content, people, openLink, memberNo} = this
             const file =  this.$refs.files.files[0]
              var result = confirm('한번 프로젝트 그룹을 만드시면 모집글 외 수정 불가능합니다.')
              if (result) {
-            this.$emit('submit', { projectName, content,writer, people, file, openLink })
-            console.log(projectName,content,writer,file,people,openLink)
+            this.$emit('submit', { projectName, content,writer, people, file, openLink, memberNo })
+            console.log(projectName,content,writer,file,people,openLink, memberNo)
              }
 
         },

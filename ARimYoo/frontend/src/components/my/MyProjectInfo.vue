@@ -1,17 +1,17 @@
 <template>
-    <v-container>
+     <v-container>
         <v-row justify="center">
             <v-col cols="11">
-                <div class="studyHeadLine"> <v-icon color="black">mdi-application-edit</v-icon> &nbsp; My Study List </div>
+                <div class="studyHeadLine"> <v-icon color="black">mdi-application-edit</v-icon> &nbsp; My Project List </div>
             </v-col>
         </v-row>
         <v-row justify="center" class="mt-10 mb-10"
-            v-if="Array.isArray(memberStudies) && memberStudies.length === 0">
+            v-if="Array.isArray(memberProjects) && memberProjects.length === 0">
                     <v-col cols="1" class="mr-5">
                       <img src="@/assets/noContentGhost.png" class="mr-3" style="width:100px">
                     </v-col>
                     <v-col cols="8" class="mt-3">
-                      You have not joined the study.
+                      You have not joined the project.
                        <p/>
                         Go search &nbsp;
                         <v-btn small color="red darken-3" dark @click="goSearch()"><v-icon>mdi-magnify</v-icon></v-btn>
@@ -27,89 +27,63 @@
                     >
                 
                 <template v-slot:activator="{ on, attrs }">
-                    <v-col v-for="study in memberStudies" :key="study.studyNo">
+                    <v-col v-for="project in memberProjects" :key="project.projectNo">
                     <button class="studyBtn"
                             v-bind="attrs"
                             v-on="on" 
-                            @click="bindStudyNo(study.studyNo)"
+                            @click="bindProjectNo(project.projectNo)"
                             >
                         <v-icon x-small >mdi-circle</v-icon>
                                         &nbsp;&nbsp;&nbsp;
-                                    {{study.studyName}}
+                                    {{project.projectName}}
                         <v-divider/>
                     </button>
                     <p/>
                     </v-col>
                 </template>
-                    <my-study :memberStudy="memberStudy" @close="returnFalse"/>
+                    <my-project :memberProject="memberProject" @close="returnFalse"/>
                 </v-dialog>
             </v-col>
         </v-row>
-        <v-row justify="center">
-            <v-col cols="11">
-                <div class="studyHeadLine"> <v-icon color="black">mdi-application-edit</v-icon> &nbsp; My Project List </div>
-            </v-col>
-        </v-row>
-         <v-row justify="center" class="mt-10 mb-10"
-            v-if="Array.isArray(memberStudies) && memberStudies.length === 0">
-                    <v-col cols="1" class="mr-5">
-                      <img src="@/assets/noContentGhost.png" class="mr-3" style="width:100px">
-                    </v-col>
-                    <v-col cols="8" class="mt-3">
-                      You have not joined the project.
-                       <p/>
-                        Go search &nbsp;
-                        <v-btn small color="red darken-3" dark @click="goSearc2()"><v-icon>mdi-magnify</v-icon></v-btn>
-                    </v-col>
-        </v-row>
-    </v-container>
+     </v-container>
 </template>
 
 <script>
 import { mapActions, mapState } from 'vuex'
-import MyStudy from './MyStudy.vue'
+import MyProject from './MyProject.vue'
 export default {
-  components: { MyStudy },
-    name:'MyWithInfo',
-    props : {
-        memberStudies : {
+  components: { MyProject },
+    name:'MyProjectInfo',
+     props : {
+        memberProjects : {
             type: Array
         }
     },
-    data () {
+    data() {
         return {
             dialog: false,
-            studyNo:''
+            projectNo:''
         }
     },
     computed: {
-        ...mapState(['memberStudy']),
+        ...mapState(['memberProject'])
     },
-
-    methods : {
-         ...mapActions(['fetchMemberStudy']),
-        check () {
-            console.log(this.memberStudies)
-        },
-        goSearch2 () {
+    methods: {
+        ...mapActions(['fetchMemberProject']),
+        goSearch () {
             this.$router.push("/project")
         },
-        goSearch () {
-            this.$router.push("/study")
-        },
-        bindStudyNo (studyNo) {
-            this.fetchMemberStudy(studyNo)
+        bindProjectNo (projectNo) {
+            this.fetchMemberProject(projectNo)
              .catch(() => {
                     alert('게시물 요청 실패!')
-                    console.log(studyNo)
+                    console.log(projectNo)
                     this.$router.push()
                 })     
         },
         returnFalse () {
-
             this.dialog = false
-            console.log(this.memberStudies)
-            this.studyNo = false
+            console.log(this.memberProjects)
         }
     }
 }
