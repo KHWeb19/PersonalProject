@@ -7,15 +7,9 @@ public class MemberRequest {
     // 요청 들어온것만 따로 처리하기 위해서
     private String id;
     private String pw;
-    private String name;
-    private Integer birth;
-    private String sessionKey;
 
-    public MemberRequest(String id, String pw, String name, Integer birth, String sessionKey) {
+    public MemberRequest(String id, String pw) {
         this.id = id;
         this.pw = pw;
-        this.name = name;
-        this.birth = birth;
-        this.sessionKey = sessionKey;
     }
 }

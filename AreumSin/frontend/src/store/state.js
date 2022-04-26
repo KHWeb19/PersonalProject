@@ -4,4 +4,9 @@ export default {
     inviteMember: [],
     dayContent: [],
     voteContents: [],
+    userInfo: [],
+    boardList: [],
+    boardRead: null,
+    boardReadImg: [],
+    boardListComment: [],
 }

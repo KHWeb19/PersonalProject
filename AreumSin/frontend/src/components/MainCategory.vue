@@ -6,13 +6,13 @@
       </v-col>
       <v-spacer></v-spacer>
       <v-col>
-        <v-btn class="ca red lighten-2" @click="planLink" x-large outlined> PLAN </v-btn>
+        <v-btn class="ca red lighten-2" style="font-size: 30px" @click="planLink" x-large outlined> PLAN </v-btn>
       </v-col>
       <v-col>
-        <v-btn class="ca blue lighten-2" @click="searchLink" x-large outlined> SEARCH </v-btn>
+        <v-btn class="ca blue lighten-2" style="font-size: 30px" @click="searchLink" x-large outlined> SEARCH </v-btn>
       </v-col>
       <v-col>
-        <v-btn class="ca green lighten-2" @click="boardLink" x-large outlined> BOARD </v-btn>
+        <v-btn class="ca green lighten-2" style="font-size: 30px" @click="boardLink" x-large outlined> BOARD </v-btn>
       </v-col>
     </v-row>
     <hr size="20px" style="margin-top: 10px;">
