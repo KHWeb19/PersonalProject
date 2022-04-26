@@ -29,7 +29,8 @@
                   no-title
                   @input="menu1 = false"
                   :min="new Date().toISOString().substr(0, 10)"
-                  :disabled="dateDisabled"
+                  :allowed-dates="allowedDates"
+                  @update:picker-date="pickerUpdate($event)"
                 ></v-date-picker>
               </v-menu>
               
@@ -54,8 +55,10 @@
 </template>
 
 <script>
+import moment from 'moment' 
 
   export default {
+    
     data: vm => ({
       date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
       dateFormatted: vm.formatDate((new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)),
@@ -103,11 +106,46 @@
         this.$emit('submit', { date, time })
         this.isShow = !this.isShow
       },
-      dateDisabled() {
-        for( let idx = 0; idx < this.date.length ; idx ++) {
-          this.blockDate[idx] = this.bookingLists[idx].date
-          if(this.blockDate) return true
+      allowedDates(a) {
+        return this.blockDate.includes(a);
+        
+        // for( let idx = this.selectDay; idx <= this.totalDay ; idx ++) {
+        //   let bookingDay = moment(bookingLists[idx].date, "YYYY-MM").daysInMonth()
+        //   console.log('bookingDay:'+bookingDay)
+        //   if()
+
+        //   this.blockDate[idx] = this.bookingLists[idx].date
+        //   if(this.blockDate) return true
           
+        //}
+      },
+      pickerUpdate(val) {
+        let totalDay = moment(val, "YYYY-MM").daysInMonth()
+
+        let monthNow = moment().format('M')
+        let monthSelected = moment(val).format('M')
+        let selectDay
+
+        if(monthNow == monthSelected)
+          selectDay = moment().format('D')
+        else
+          selectDay = 1
+
+        console.log('totalDay:'+totalDay)
+        console.log('monthNow:'+monthNow)
+        console.log('monthSelected:'+monthSelected)
+        console.log('selectDay:'+selectDay)
+
+        for (let i = selectDay; i <= totalDay ; i++) {
+          let date = moment().month(val.split('-')[1]-1).date(i).format("YYYY-MM-DD")
+          if (moment(date).day() !== 1){
+            if(moment(date).day() !== 0){
+              this.blockDate.push(date)
+              console.log('date:'+date)
+            }
+            
+          }
+            
         }
       }
     }
