@@ -17,16 +17,7 @@
     
  
 
-   <v-card-title>
-        <v-text-field
-          v-model="search"
-          append-icon="mdi-magnify"
-          label="Search"
-          single-line
-          hide-details
-           class="shrink"
-        ></v-text-field>
-      </v-card-title>
+ 
     
 
  <v-tabs v-model="tab" background-color="transparent" color="secondary" show-arrows grow>
@@ -57,7 +48,6 @@ export default {
      },
   data () {
     return {
-      search: '',
       tab: null,
       tabs: [ 
           { name: "Home", route: `/` }, 
