@@ -35,7 +35,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public boolean join (Long memberNo, Project project) {
+    public int join (Long memberNo, Project project) {
         Optional<Member> findMember = memberRepository.findById(Long.valueOf(memberNo));
         Member getMember = findMember.get();
         log.info("member" + findMember.get());
@@ -47,9 +47,12 @@ public class ProjectServiceImpl implements ProjectService {
         if (getProject.getPeople() == getProject.getJoinCnt()) {
             log.info("정원을 모두 초과 !" + getProject.getPeople() + getProject.getJoinCnt());
 
-            return false;
+            return 1;
 
-        } else {
+        } else if (getMember.getProject().contains(getProject)) {
+            log.info("이미 가입하셨습니다");
+            return 2;
+        }else {
             getProject.increaseJoinCnt();
             repository.save(getProject);
             getMember.addProject(getProject);
@@ -57,7 +60,7 @@ public class ProjectServiceImpl implements ProjectService {
 
             log.info("project" + getMember.getProject());
 
-            return true;
+            return 3;
         }
 
     }

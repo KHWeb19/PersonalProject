@@ -116,9 +116,11 @@ export default {
 
                 axios.post(`http://localhost:7777/study/join/${memberNo}`, {studyNo})
                 .then((res) => {
-                    if (res.data == true){
+                    if (res.data == 3){
                         alert('가입되셨습니다.')}
-                    else {
+                    else if(res.data == 2){
+                        alert('이미 가입하셨습니다.')
+                    }else {
                         alert('정원이 모두 찼습니다.')
                     }
                 })

@@ -36,7 +36,7 @@ public class StudyServiceImpl implements StudyService{
     }
 
     @Override
-    public boolean join (Long memberNo, Study study) {
+    public int join (Long memberNo, Study study) {
         Optional<Member> findMember = memberRepository.findById(Long.valueOf(memberNo));
         Member getMember = findMember.get();
         log.info("member" + findMember.get());
@@ -48,9 +48,13 @@ public class StudyServiceImpl implements StudyService{
         if (getStudy.getPeople() == getStudy.getJoinCnt()) {
             log.info("정원을 모두 초과 !" + getStudy.getPeople() + getStudy.getJoinCnt());
 
-            return false;
+            return 1;
 
-        } else {
+        } else if (getMember.getStudy().contains(getStudy)) {
+            log.info("이미 가입하셨습니다");
+            return 2;
+        }
+        else {
             getStudy.increaseJoinCnt();
             repository.save(getStudy);
             getMember.addStudy(getStudy);
@@ -58,7 +62,7 @@ public class StudyServiceImpl implements StudyService{
 
             log.info("study" + getMember.getStudy());
 
-            return true;
+            return 3;
         }
 
     }

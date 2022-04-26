@@ -1,5 +1,4 @@
 <template>
-<v-container>
     <v-card>
         <v-toolbar
         dark
@@ -23,10 +22,10 @@
         <v-form @submit="button2_saveTodo">
         <v-row class="mt-10" justify="center">
             <v-col cols="3" v-if="this.memberStudy.firstMember == this.name">
-                <v-textarea label="toDo" color="red darken-3" outlined rows="8" v-model="toDo"> </v-textarea>
+                <v-textarea label="Notice" color="red darken-3" outlined rows="8" v-model="toDo"> </v-textarea>
             </v-col>
             <v-col cols="3" v-else>
-                <v-textarea label="toDo" color="red darken-3" readonly outlined :value="memberStudy.toDo" rows="8">{{this.memberStudy.toDo}}</v-textarea>
+                <v-textarea label="Notice" color="red darken-3" readonly outlined :value="memberStudy.toDo" rows="8">{{this.memberStudy.toDo}}</v-textarea>
             </v-col>
             <v-col cols="5">
                 <v-sheet>
@@ -47,7 +46,6 @@
             </v-col>
         </v-row>
     </v-card>
-</v-container>
 </template>
 
 <script>

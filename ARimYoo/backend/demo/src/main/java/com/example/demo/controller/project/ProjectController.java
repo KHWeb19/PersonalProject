@@ -27,7 +27,7 @@ public class ProjectController {
     }
 
     @PostMapping("/join/{memberNo}")
-    public boolean join (@PathVariable("memberNo") Long memberNo, @RequestBody Project project) {
+    public int join (@PathVariable("memberNo") Long memberNo, @RequestBody Project project) {
         log.info("join study !" + memberNo);
         return service.join(memberNo, project);
     }

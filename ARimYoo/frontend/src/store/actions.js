@@ -126,7 +126,7 @@ export default {
             })
     },
     fetchProjectCommentsList({ commit }, projectNo) {
-        return axios.get(`http://localhost:7777/board/review/${projectNo}/comment/list`)
+        return axios.get(`http://localhost:7777/board/project/${projectNo}/comment/list`)
             .then((res) => {
                 commit(FETCH_PROJECT_COMMENTS_LIST, res.data)
             })
