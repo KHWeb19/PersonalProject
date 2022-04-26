@@ -14,13 +14,16 @@
                 <div>
                     <strong class="writer"> {{ comments.writer }} </strong>
                     <span class="date"> 
-                       {{ comments.regDate.substring(0, 19) }} 
+                       {{ comments.regDate.substring(0, 10) }}
+                       {{new Date(comments.regDate).toLocaleString("ko-KR", {timeZone: "Asia/Seoul"}).toString().substr(13, 8)}} 
                      </span>
                 </div>
-                    <!-- 수정 버튼 누르기 전-->
-                <div class="content1" v-if ="edit[index] == null && comments.writer == writer">
-                     <input  v-model="comments.comment" disabled/>
+                   
+                    <!-- 수정 버튼 누르기 전-->  
+                <div class="content1" v-if ="edit[index] == null">
                     <!-- 수정 버튼 -->
+                    <input v-model="comments.comment" disabled/>
+                    <div v-if="comments.writer == writer" class="comment">
                     <v-btn class="modify-btn" depressed small 
                            @click="onEdit(index)" color="amber lighten-2">
                        <strong>수정</strong> 
@@ -32,6 +35,7 @@
                         mdi-delete    
                         </v-icon> 
                     </v-btn> 
+                    </div>
                 </div>  
                  
                     <!-- 수정 버튼 누른 후 -->
@@ -182,18 +186,21 @@ export default {
     margin-left: 50%;
     margin-top: 5px;
 }
-.content1, 
+
+.content1,
 .content2{
     width: 600px;
     border-top: 1px solid;
     color: black;  
-    
+}
+.comment{
+    margin-left: 180px;
 }
 .modify-btn{
     margin-left: 315px;
 }
 .check-btn{
-    margin-left: 490px;
+    margin-left: 495px;
 }
 .date {
     color: black;

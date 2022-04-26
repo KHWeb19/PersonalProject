@@ -23,6 +23,8 @@ import java.util.Optional;
 @Service
 public class PhotoBoardServiceImpl extends BaseBoardService {
 
+    String path = "uploadImg";
+
     @Autowired
     private PhotoBoardRepository repository;
 
@@ -31,7 +33,7 @@ public class PhotoBoardServiceImpl extends BaseBoardService {
 
     @Override
     public void register(BoardRequest board,
-                         MultipartFile files, String path) throws Exception {
+                         MultipartFile files) throws Exception {
 
         fileUpload(board, files, path);
 
@@ -48,20 +50,20 @@ public class PhotoBoardServiceImpl extends BaseBoardService {
 
 
     @Override
-    public  List<BoardResponse> list() {
+    public  Object list() {
                 List<PhotoBoard> photo = repository.findAll(Sort.by(Sort.Direction.DESC, "boardNo"));
-                List<BoardResponse> response = new ArrayList<>();
+                /*List<BoardResponse> response = new ArrayList<>();
                  for(PhotoBoard board : photo){
                      response.add(new BoardResponse(board.getTitle(), board.getContent(), board.getWriter(),
                              board.getFileName(), board.getBoardNo(), board.getRegDate(), board.getReadCnt(),
                              board.getLikeCnt(), board.getLikeCheck(), board.getCommentCnt()));
-                 }
+                 }*/
 
-                 return response;
+                 return photo;
     }
 
    @Override
-    public BoardResponse read(Integer boardNo) {
+    public Object read(Integer boardNo) {
         Optional<PhotoBoard> maybeReadBoard = repository.findById(Long.valueOf(boardNo));
 
         if (maybeReadBoard.equals(Optional.empty())) {
@@ -71,17 +73,17 @@ public class PhotoBoardServiceImpl extends BaseBoardService {
 
         PhotoBoard readBoard = maybeReadBoard.get();
         readBoard.readCnt();
-        repository.save(readBoard);
+        return repository.save(readBoard);
 
-        BoardResponse response = new BoardResponse(readBoard.getTitle(), readBoard.getContent(), readBoard.getWriter(),
+       /* BoardResponse response = new BoardResponse(readBoard.getTitle(), readBoard.getContent(), readBoard.getWriter(),
                 readBoard.getFileName(), readBoard.getBoardNo(), readBoard.getRegDate(), readBoard.getReadCnt(),
                                         readBoard.getLikeCnt(), readBoard.getLikeCheck(), readBoard.getCommentCnt());
 
-        return response;
+        return response;*/
     }
 
     @Override
-    public void modify(Integer boardNo, BoardRequest board, MultipartFile files, String path) throws Exception {
+    public void modify(Integer boardNo, BoardRequest board, MultipartFile files) throws Exception {
 
         //참조 할 수 있도록 boardNo으로 가져오는데 likee에는 boardNo이 중복가능 그럼 결국 writer랑 boardNo으로 가져와야하나?
         //아닌가 애초에 PhotoBoard에 like는 boardNo을 외래키로두고 참조하는것인가 이 게시판에 참조하는걸 다 가져오는게 맞는건가!
@@ -108,7 +110,7 @@ public class PhotoBoardServiceImpl extends BaseBoardService {
     }
 
     @Override
-    public void remove(Integer boardNo, String path) {
+    public void remove(Integer boardNo) {
         //파일삭제
         Optional<PhotoBoard> findFileName = repository.findFileName(Long.valueOf(boardNo));
 

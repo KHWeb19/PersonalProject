@@ -4,6 +4,7 @@ import com.example.demo.dto.response.BoardResponse;
 import com.example.demo.dto.request.BoardRequest;
 import com.example.demo.dto.request.CommentRequest;
 import com.example.demo.dto.request.LikeRequest;
+import com.example.demo.service.board.BaseBoardService;
 import com.example.demo.service.board.photoBoard.PhotoBoardServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +21,8 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:8080", allowedHeaders = "*")
 public class PhotoBoardController {
 
-    String path = "uploadImg";
-
     @Autowired
-    private PhotoBoardServiceImpl service;
+    private BaseBoardService photoBoardServiceImpl;
 
     //등록
     @PostMapping(value = "/register",
@@ -32,26 +31,26 @@ public class PhotoBoardController {
                                      @RequestPart(value="files") MultipartFile files) throws Exception {
         log.info("PhotoBoardRegister()" + board + "file" + files);
 
-       service.register(board, files, path);
+        photoBoardServiceImpl.register(board, files);
     }
     //목록
    @PostMapping("/list")
-    public  List<BoardResponse> PhotoBoardList (@RequestBody CommentRequest commentRequest) {
+    public Object PhotoBoardList (@RequestBody CommentRequest commentRequest) {
         log.info("PhotoBoardList()" + commentRequest);
 
         String writer = commentRequest.getWriter();
 
-        service.likeCheck(writer);
+       photoBoardServiceImpl.likeCheck(writer);
 
-        return service.list();
+        return photoBoardServiceImpl.list();
     }
     //읽기
    @GetMapping("/{boardNo}")
-    public BoardResponse photoBoardRead (
+    public Object photoBoardRead (
             @PathVariable("boardNo") Integer boardNo) {
         log.info("photoBoardRead()");
 
-        return service.read(boardNo);
+        return photoBoardServiceImpl.read(boardNo);
     }
 
     //수정
@@ -64,7 +63,7 @@ public class PhotoBoardController {
         log.info("photoBoardModify(): " + board + "boardNo" + boardNo);
 
             board.setBoardNo(Long.valueOf(boardNo));
-            service.modify(boardNo, board, files , path);
+        photoBoardServiceImpl.modify(boardNo, board, files);
 
         return board;
     }
@@ -75,14 +74,14 @@ public class PhotoBoardController {
         log.info("photoBoardRemove()");
 
         //service.removeFile(boardNo);
-        service.remove(boardNo, path);
+        photoBoardServiceImpl.remove(boardNo);
     }
 
     @PostMapping("/like")
     public void photoBoardLike(@RequestBody LikeRequest like){
         log.info("xxlikeRequest" + like);
 
-          service.doLike(like);
+        photoBoardServiceImpl.doLike(like);
 
     }
 
@@ -93,6 +92,6 @@ public class PhotoBoardController {
     //만약에 writer로 보드값 쫙 가져왔는데 거기서 boardNo 가져 온거랑 똑같으면 삭제 하도록??
     // 아이다 아이디가 있어야 삭제를 하지
         log.info("liek" + like);
-        service.unDoLike(like);
+        photoBoardServiceImpl.unDoLike(like);
     }
 }

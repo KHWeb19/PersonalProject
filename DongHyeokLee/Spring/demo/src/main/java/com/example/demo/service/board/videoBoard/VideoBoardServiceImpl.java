@@ -15,6 +15,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -25,6 +26,8 @@ import java.util.Optional;
 @Service
 public class VideoBoardServiceImpl extends BaseBoardService {
 
+    String path = "uploadVideo";
+
     @Autowired
     private VideoBoardRepository repository;
 
@@ -32,8 +35,7 @@ public class VideoBoardServiceImpl extends BaseBoardService {
     private VideoBoardLikeRepository likeRepository;
 
     @Override
-    public void register(BoardRequest board,
-                         MultipartFile files, String path) throws Exception {
+    public void register(BoardRequest board, MultipartFile files) throws Exception {
         fileUpload(board,files,path);
 
         VideoBoard videoBoard = VideoBoard.builder()
@@ -46,21 +48,22 @@ public class VideoBoardServiceImpl extends BaseBoardService {
         repository.save(videoBoard);
     }
 
+    @Transactional
     @Override
-    public List<BoardResponse> list() {
-        List<VideoBoard> photo = repository.findAll(Sort.by(Sort.Direction.DESC, "boardNo"));
-        List<BoardResponse> response = new ArrayList<>();
+    public Object list() {
+        List<VideoBoard> video = repository.findAll(Sort.by(Sort.Direction.DESC, "boardNo"));
+        /*List<BoardResponse> response = new ArrayList<>();
         for(VideoBoard board : photo){
             response.add(new BoardResponse(board.getTitle(), board.getContent(), board.getWriter(),
                     board.getFileName(), board.getBoardNo(), board.getRegDate(), board.getReadCnt(),
                     board.getLikeCnt(), board.getLikeCheck(), board.getCommentCnt()));
-        }
+        }*/
 
-        return response;
+        return video;
     }
 
     @Override
-    public BoardResponse read(Integer boardNo) {
+    public Object read(Integer boardNo) {
         Optional<VideoBoard> maybeReadBoard = repository.findById(Long.valueOf(boardNo));
 
         if (maybeReadBoard.equals(Optional.empty())) {
@@ -70,17 +73,17 @@ public class VideoBoardServiceImpl extends BaseBoardService {
 
         VideoBoard readBoard = maybeReadBoard.get();
         readBoard.readCnt();
-        repository.save(readBoard);
+        return repository.save(readBoard);
 
-        BoardResponse response = new BoardResponse(readBoard.getTitle(), readBoard.getContent(),
+        /*BoardResponse response = new BoardResponse(readBoard.getTitle(), readBoard.getContent(),
                 readBoard.getWriter(), readBoard.getFileName(), readBoard.getBoardNo(), readBoard.getRegDate(),
                 readBoard.getReadCnt(), readBoard.getLikeCnt(), readBoard.getLikeCheck(), readBoard.getCommentCnt());
 
-        return response;
+        return response;*/
     }
 
     @Override
-    public void modify(Integer boardNo, BoardRequest board, MultipartFile files,  String path) throws Exception {
+    public void modify(Integer boardNo, BoardRequest board, MultipartFile files) throws Exception {
 
         List<VideoBoardLike> likes= likeRepository.findByBoardNo(Long.valueOf(boardNo));
 
@@ -105,7 +108,7 @@ public class VideoBoardServiceImpl extends BaseBoardService {
     }
 
     @Override
-    public void remove(Integer boardNo,String path) {
+    public void remove(Integer boardNo) {
         Optional<VideoBoard> findFileName = repository.findFileName(Long.valueOf(boardNo));
         String fileName = String.valueOf(findFileName.get());
 
@@ -141,7 +144,7 @@ public class VideoBoardServiceImpl extends BaseBoardService {
         likeRepository.deleteById(likeRemove.getLikeNo());
     }
 
-
+    @Transactional
     @Override
     public void likeCheck(String writer) {
 

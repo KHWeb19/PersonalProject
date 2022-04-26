@@ -4,9 +4,11 @@ import com.example.demo.dto.request.BoardRequest;
 import com.example.demo.dto.request.CommentRequest;
 import com.example.demo.dto.request.LikeRequest;
 import com.example.demo.dto.response.BoardResponse;
+import com.example.demo.service.board.BaseBoardService;
 import com.example.demo.service.board.videoBoard.VideoBoardServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,10 +22,8 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:8080", allowedHeaders = "*")
 public class VideoBoardController {
 
-    String path = "uploadVideo";
-
     @Autowired
-    private VideoBoardServiceImpl service;
+    private BaseBoardService videoBoardServiceImpl;
 
     //등록
     @PostMapping(value = "/register",
@@ -32,26 +32,26 @@ public class VideoBoardController {
                                      @RequestPart(value="files") MultipartFile files) throws Exception {
         log.info("VideoBoardRegister()" + board + "file" + files);
 
-        service.register(board, files, path);
+        videoBoardServiceImpl.register(board, files);
     }
     //목록
     @PostMapping("/list")
-    public List<BoardResponse> VideoBoardList (@RequestBody CommentRequest commentRequest) {
+    public Object VideoBoardList (@RequestBody CommentRequest commentRequest) {
         log.info("VideoBoardList()");
 
         String writer = commentRequest.getWriter();
 
-        service.likeCheck(writer);
+        videoBoardServiceImpl.likeCheck(writer);
 
-        return service.list();
+        return videoBoardServiceImpl.list();
     }
     //읽기
     @GetMapping("/{boardNo}")
-    public BoardResponse VideoBoardRead (
+    public Object VideoBoardRead (
             @PathVariable("boardNo") Integer boardNo) {
         log.info("videoBoardRead()");
 
-        return service.read(boardNo);
+        return videoBoardServiceImpl.read(boardNo);
     }
     //파일 업로드
 
@@ -65,7 +65,7 @@ public class VideoBoardController {
         log.info("videoBoardModify(): " + board + "boardNo" + boardNo);
 
         board.setBoardNo(Long.valueOf(boardNo));
-        service.modify(boardNo, board, files, path);
+        videoBoardServiceImpl.modify(boardNo, board, files);
 
         return board;
     }
@@ -75,14 +75,14 @@ public class VideoBoardController {
             @PathVariable("boardNo") Integer boardNo) {
         log.info("videoBoardRemove()");
 
-        service.remove(boardNo, path);
+        videoBoardServiceImpl.remove(boardNo);
     }
 
     @PostMapping("/like")
     public void VideoBoardLike(@RequestBody LikeRequest like){
         log.info("xxlikeRequest" + like);
 
-        service.doLike(like);
+        videoBoardServiceImpl.doLike(like);
 
     }
 
@@ -93,7 +93,7 @@ public class VideoBoardController {
         //만약에 writer로 보드값 쫙 가져왔는데 거기서 boardNo 가져 온거랑 똑같으면 삭제 하도록??
         // 아이다 아이디가 있어야 삭제를 하지
         log.info("liek" + like);
-        service.unDoLike(like);
+        videoBoardServiceImpl.unDoLike(like);
     }
 
 }

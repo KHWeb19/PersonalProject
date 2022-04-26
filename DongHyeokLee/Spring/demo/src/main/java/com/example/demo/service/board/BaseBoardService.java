@@ -12,15 +12,16 @@ import java.util.UUID;
 
 public abstract class BaseBoardService {
 
-    public abstract void register(BoardRequest board, MultipartFile file, String path) throws Exception;
+    public abstract void register(BoardRequest board, MultipartFile file) throws Exception;
 
-    public abstract List<BoardResponse> list();
+    //public abstract List<BoardResponse> list();
+    public abstract Object list();
+    //public abstract BoardResponse read(Integer boardNo);
+    public abstract Object read(Integer boardNo);
 
-    public abstract BoardResponse read(Integer boardNo);
+    public abstract void modify (Integer boardNo, BoardRequest board, MultipartFile files) throws Exception;
 
-    public abstract void modify (Integer boardNo, BoardRequest board, MultipartFile files,  String path) throws Exception;
-
-    public abstract void remove (Integer boardNo, String path);
+    public abstract void remove (Integer boardNo);
 
     public abstract void doLike(LikeRequest like);
 
@@ -28,6 +29,7 @@ public abstract class BaseBoardService {
 
     public abstract void likeCheck(String writer);
 
+    //이런게 구현이 완료 됐다는건가??
     public void fileUpload(BoardRequest board, MultipartFile files, String path) throws Exception{
 
         if (files != null) {
@@ -36,7 +38,6 @@ public abstract class BaseBoardService {
             String fileName = uuid + "_" + files.getOriginalFilename();
             FileOutputStream saveFile = new FileOutputStream(
                     "../../frontend/src/assets/" + path +"/" + fileName);
-
             saveFile.write(files.getBytes());
             saveFile.close();
 
