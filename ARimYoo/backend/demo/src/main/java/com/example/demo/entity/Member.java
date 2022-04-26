@@ -49,9 +49,7 @@ public class Member {
     @UpdateTimestamp
     private Date lastModifiedDate;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name= "memberNo")
-    @JsonIgnore
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Study> study = new ArrayList<>();
 
     // 스터디 추가

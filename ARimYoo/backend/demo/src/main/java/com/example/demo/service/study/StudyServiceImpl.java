@@ -51,9 +51,10 @@ public class StudyServiceImpl implements StudyService{
             return false;
 
         } else {
+            getStudy.increaseJoinCnt();
+            repository.save(getStudy);
             getMember.addStudy(getStudy);
             memberRepository.save(getMember);
-            getStudy.increaseJoinCnt();
 
             log.info("study" + getMember.getStudy());
 
@@ -70,8 +71,14 @@ public class StudyServiceImpl implements StudyService{
             return null;
         } else {
             Study study = maybeReadStudy.get();
+            log.info("Study" + study);
             return maybeReadStudy.get();
         }
+    }
+
+    @Override
+    public void toDoRegister (Study study){
+        repository.save(study);
     }
 
 

@@ -21,7 +21,8 @@ export default {
     marketComments:[],
 
     member: null,
-    memberStudies:[],
+    memberStudies: [],
+    memberStudy: null,
     
     token: localStorage.getItem('token'),
     userInfo: JSON.parse(localStorage.getItem('userInfo'))

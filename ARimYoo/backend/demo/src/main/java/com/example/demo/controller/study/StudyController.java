@@ -36,4 +36,15 @@ public class StudyController {
         log.info("read()");
         return service.read(studyNo);
     }
+
+    // toDo설정
+
+    @PutMapping("/{studyNo}/toDo")
+    public Study toDoRegister (@PathVariable("studyNo") Long studyNo, @RequestBody Study study) {
+        log.info("register=====" + studyNo);
+
+        study.setStudyNo(Long.valueOf(studyNo));
+        service.toDoRegister(study);
+        return study;
+    }
 }

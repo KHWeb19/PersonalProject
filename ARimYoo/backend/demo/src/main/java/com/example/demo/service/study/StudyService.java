@@ -12,4 +12,5 @@ public interface StudyService {
     public List<Study> list (Long memberNo);
     public boolean join (Long memberNo, Study study);
     public Study read (Long studyNo);
+    public void toDoRegister (Study study);
 }
