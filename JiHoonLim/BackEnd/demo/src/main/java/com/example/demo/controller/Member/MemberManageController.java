@@ -47,4 +47,14 @@ public class MemberManageController {
 
         return service.memberAuthRead(memberNo);
     }
+
+    @PutMapping("/{memberNo}")
+    public MemberAuth memberAuthModify(@PathVariable("memberNo") Long memberNo,@RequestBody MemberAuth memberAuth){
+        log.info("memberAuthModify() " +memberAuth);
+
+        memberAuth.setMemberNo(memberNo);
+        service.modify(memberAuth);
+
+        return memberAuth;
+    }
 }

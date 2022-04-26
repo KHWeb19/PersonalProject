@@ -55,4 +55,9 @@ public class MemberManageServiceImpl implements MemberManageService{
         }
         return maybeMemberAuth.get();
     }
+
+    @Override
+    public void modify(MemberAuth memberAuth) {
+        memberAuthRepository.save(memberAuth);
+    }
 }

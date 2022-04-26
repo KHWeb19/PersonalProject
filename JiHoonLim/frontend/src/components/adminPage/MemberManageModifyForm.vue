@@ -12,7 +12,7 @@
           </router-link>
           <v-card width="460">
             <v-card-text class="text-center px-12 py-16">
-              <v-form>
+              <v-form @submit.prevent="onSubmit">
                 <div class="text-h4 font-weight-black mb-10">
                   회원 정보 수정
                 </div>
@@ -62,7 +62,28 @@
                   prepend-icon="mdi-calendar-range"
                   disabled
                 />
+                <v-radio-group v-model="radioGroup" row>
+                  <v-radio
+                    color="orange"
+                    v-for="kinds in kindsAuth"
+                    :key="kinds"
+                    :label="`${kinds}`"
+                    :value="kinds"
+                  >
+                  </v-radio>
+                </v-radio-group>
 
+                <v-btn
+                  type="submit"
+                  rounded
+                  large
+                  width="150px"
+                  style="font-size: 13px"
+                  class="mt-3"
+                  color="orange lighten-1"
+                >
+                  수정
+                </v-btn>
                 <template>
                   <div class="text-center">
                     <v-dialog v-model="dialogDeleteMember" width="460">
@@ -148,9 +169,17 @@ export default {
     return {
       dialogDeleteMember: false,
       checkbox: false,
+      radioGroup: "",
+      kindsAuth: ["개인", "매니저", "관리자"],
     };
   },
   methods: {
+    onSubmit() {
+      const { radioGroup } = this;
+      const auth = radioGroup;
+
+      this.$emit("submit", { auth });
+    },
     deleteMember() {},
     resetCheckbox() {
       this.checkbox = false;

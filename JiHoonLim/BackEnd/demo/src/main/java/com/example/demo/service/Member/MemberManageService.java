@@ -9,4 +9,5 @@ public interface MemberManageService {
     public List<MemberAuth> authList();
     public Member memberRead(Long memberNo);
     public MemberAuth memberAuthRead(Long memberNo);
+    public void modify (MemberAuth memberAuth);
 }
