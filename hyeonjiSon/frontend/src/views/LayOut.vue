@@ -52,8 +52,8 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-container>
-      <v-main id="content">
+    <v-container id="content">
+      <v-main >
         <router-view/>
       </v-main>
     </v-container>
@@ -82,7 +82,9 @@ data () {
         loginInfo: JSON.parse(localStorage.getItem('userInfo')),
         drawer: false,
         left: false,
-
+        images: [
+          
+        ],
         navrouters: [
           { icon: 'mdi-leaf-circle-outline', text: '프로젝트 소개', name: 'home', route: '/projectIntroducePage' },
           { icon: 'mdi-recycle-variant', text: '분리수거 안내', name: 'home', route: '/recycleGuideMainPage' },
@@ -123,12 +125,11 @@ data () {
 </script>
 
 <style scoped>
-.main{
-  background-color: #f1f5eb;
-  background-size : cover;
-}
+  .content{
+    background-color: black;
+    background-size : cover;
+  }
   a { text-decoration: none; }
- 
   .button{
     background-color: transparent !important;
     background-image: none !important;
