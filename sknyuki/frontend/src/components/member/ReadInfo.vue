@@ -1,4 +1,6 @@
 <template>
+<v-container>
+   <v-row justify="center" >
   <v-card flat>
     <v-card v-if="!isLogin" flat>
       <v-card-text>
@@ -52,6 +54,8 @@
       </v-card-actions>
     </v-card>
   </v-card>
+   </v-row>
+</v-container>
 </template>
 
 
