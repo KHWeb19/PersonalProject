@@ -99,7 +99,7 @@
             </v-menu>
           </span>
 
-          <span class="text-center" v-if="auth == '관리자'">
+          <span class="text-center" v-if="(auth = '관리자')">
             <v-menu open-on-hover offset-y>
               <template v-slot:activator="{ on, attrs }">
                 <v-btn

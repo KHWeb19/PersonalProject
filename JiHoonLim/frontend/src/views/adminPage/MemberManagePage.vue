@@ -1,6 +1,9 @@
 <template>
   <div>
-    <member-manage-form :registerMembers="registerMembers" />
+    <member-manage-form
+      :registerMembers="registerMembers"
+      :registerMemberAuths="registerMemberAuths"
+    />
   </div>
 </template>
 
@@ -14,13 +17,14 @@ export default {
     MemberManageForm,
   },
   computed: {
-    ...mapState(["registerMembers"]),
+    ...mapState(["registerMembers", "registerMemberAuths"]),
   },
   methods: {
-    ...mapActions(["fetchRegisterMember"]),
+    ...mapActions(["fetchRegisterMembers", "fetchRegisterMemberAuths"]),
   },
   mounted() {
-    this.fetchRegisterMember();
+    this.fetchRegisterMembers();
+    this.fetchRegisterMemberAuths();
   },
 };
 </script>

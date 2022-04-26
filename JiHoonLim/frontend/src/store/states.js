@@ -13,5 +13,8 @@ export default {
     noticeBoard: null,
 
     registerMembers:[],
+    registerMember: null,
+    registerMemberAuths: [],
+    registerMemberAuth: null,
   
 }
