@@ -1,6 +1,7 @@
 <template>
-  <v-app id="inspire">
-    <v-app-bar app clipped-right color="blue" dark>
+<div id="main">
+  <v-app>
+    <v-app-bar app clipped-right color="#7a9e68" dark class="elevation-0">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>
         <div @click="home">로고 들어갈 자리</div>
@@ -8,24 +9,24 @@
       <v-spacer></v-spacer>
 
       <v-toolbar-items v-if="this.$store.state.userInfo == null">
-              <v-btn onclick="location.href='http://localhost:8080/memberLoginPage'">
+              <v-btn class="button" onclick="location.href='http://localhost:8080/memberLoginPage'">
                 <v-icon>
                     mdi-login
                 </v-icon>
             </v-btn>
-            <v-btn onclick="location.href='http://localhost:8080/memberRegisterPage'">
+            <v-btn class="button" onclick="location.href='http://localhost:8080/memberRegisterPage'">
                     <v-icon>
                         mdi-account-multiple-plus-outline
                     </v-icon>
             </v-btn>            
       </v-toolbar-items>
       <v-toolbar-items v-if="this.$store.state.userInfo != null">
-            <v-btn @click="logout">
+            <v-btn class="button" @click="logout">
                 <v-icon>
                     mdi-logout
                 </v-icon>
             </v-btn>
-            <v-btn @click="mypage">
+            <v-btn class="button" @click="mypage">
                 <v-icon>
                     mdi-clipboard-account-outline
                 </v-icon>
@@ -38,7 +39,8 @@
 <!-- navigation 메뉴들을 v-for 배열 활용하여 깔끔하게 정리  -->
     <v-navigation-drawer v-model="drawer" app>
       <v-list dense>
-        <v-list-item v-for="navrouter in navrouters" :key="navrouter.name" router :to="navrouter.route">
+        <v-list-item active-class="green--text accent-4"
+         v-for="navrouter in navrouters" :key="navrouter.name" router :to="navrouter.route">
           <v-list-item-action>
             <v-icon left> {{ navrouter.icon }} </v-icon>
           </v-list-item-action>
@@ -56,12 +58,13 @@
       </v-main>
     </v-container>
   </v-app>
+</div>
 </template>
 
 <script>
 import router from '@/router'
 
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import Vue from 'vue'
 import cookies from 'vue-cookies'
 Vue.use(cookies)
@@ -76,7 +79,7 @@ export default {
     },
 data () {
     return {
-        loginInfo: JSON.parse(localStorage.getItem('loginInfo')),
+        loginInfo: JSON.parse(localStorage.getItem('userInfo')),
         drawer: false,
         left: false,
 
@@ -99,10 +102,10 @@ data () {
         }
   },
   computed: {
-        ...mapState(['isLogin']),
-        ...mapState(['session'])      
+        ...mapState(['userInfo'])    
   },
   methods: {
+    ...mapActions(['fetchMember']),
     home () {
       (window.location.pathname !== '/') ? router.push('/') : router.go(0)
     },
@@ -120,5 +123,15 @@ data () {
 </script>
 
 <style scoped>
-  a { text-decoration: none; } 
+.main{
+  background-color: #f1f5eb;
+  background-size : cover;
+}
+  a { text-decoration: none; }
+ 
+  .button{
+    background-color: transparent !important;
+    background-image: none !important;
+    box-shadow: none;
+  }
 </style>

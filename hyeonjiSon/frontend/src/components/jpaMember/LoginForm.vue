@@ -4,7 +4,7 @@
     <form name="loginForm" @submit.prevent="onSubmit">
       
       <br>
-      <p> 프로젝트 이름에 오신 것을 환영합니다. <br> 회원 정보를 입력해주세요. </p>
+      <p> Three Guide에 오신 것을 환영합니다. <br> 회원 정보를 입력해주세요. </p>
 
       <br>
 
@@ -59,6 +59,13 @@ export default {
 </script>
 
 <style scoped>
+.v-text-field >>> .v-input__slot::before  { 
+  border-color: #ccbce3 !important;
+  }
+.v-text-field >>> .v-input__slot::after {
+    border-color: #ccbce3 !important;
+    }
+
     #loginInput {
       margin: 15px;
       outline: none;
@@ -69,11 +76,12 @@ export default {
       margin: 15px;
       height: 50px;
       width: 350px;
-      background-color: lightblue;
+      background-color: #ccbce3;
 
       font-size: 120%;
       color: white;
     }
+
     a {
       -webkit-text-stroke: 1px;
       text-decoration: none;
