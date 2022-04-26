@@ -28,6 +28,8 @@
                   v-model="date"
                   no-title
                   @input="menu1 = false"
+                  :min="new Date().toISOString().substr(0, 10)"
+                  :disabled="dateDisabled"
                 ></v-date-picker>
               </v-menu>
               
@@ -61,7 +63,14 @@
       menu2: false,
       time: '',
       isShow: false,
+      blockDate :[]
     }),
+    props: {
+        bookingLists: {
+            type: Array,
+            required: true
+        }
+    },
 
     computed: {
       computedDateFormatted () {
@@ -93,6 +102,13 @@
         const { date, time } =this
         this.$emit('submit', { date, time })
         this.isShow = !this.isShow
+      },
+      dateDisabled() {
+        for( let idx = 0; idx < this.date.length ; idx ++) {
+          this.blockDate[idx] = this.bookingLists[idx].date
+          if(this.blockDate) return true
+          
+        }
       }
     }
 

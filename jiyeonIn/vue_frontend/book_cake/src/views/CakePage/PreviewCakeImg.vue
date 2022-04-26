@@ -116,6 +116,7 @@ import { mapState, mapActions} from 'vuex'
                 axios.post('http://localhost:7777/upload/register', formData) 
                     .then (res => {
                         alert('처리 결과: ' + res.data)
+                        this.$router.go()
                     })
                     .catch (() => {
                         alert('파일을 추가해주세요!')
