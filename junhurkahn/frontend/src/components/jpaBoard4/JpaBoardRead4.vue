@@ -1,46 +1,49 @@
 <template>
     <div>
-         <table border="1">
+          <table >
+             <div class="box">
+
             <tr>
-                <td>사이트아이디 읽기</td>
+              
                 <td>
-                    <input type="text" :value="jpaBoard4.boardNo" readonly/>
+                  <input type="text" class="form-control" :value="jpaBoard4.boardNo" readonly/>
                 </td>
             </tr>
             <tr>
-                <td>사이트아이디</td>
+               
                 <td>
-                    <input type="text" :value="jpaBoard4.title" readonly/>
+                    <input type="text" class="form-control" :value="jpaBoard4.title" readonly/>
                 </td>
             </tr>
 
                <tr>
-                <td>사이트이름</td>
+              
                 <td>
-                    <input type="text" v-model="writer1"/>
+                  <input type="text" class="form-control" :value="jpaBoard4.writer1" readonly/>
                 </td>
             </tr>
 
 
             <tr>
-                <td>사이트주소</td>
+              
                 <td>
-                    <input type="text" :value="jpaBoard4.writer" readonly/>
+                     <input type="text" class="form-control" :value="jpaBoard4.writer" readonly/>
                 </td>
             </tr>
             <tr>
-                <td>등록일자</td>
+              
                 <td>
-                    <input type="text" :value="jpaBoard4.regDate" readonly/>
+                    <input type="text" class="form-control" :value="jpaBoard4.regDate" readonly/>
                 </td>
             </tr>
             <tr>
-                <td>본문</td>
+            
                 <td>
-                    <textarea cols="50" rows="20" :value="jpaBoard4.content" readonly>
+                     <textarea cols="100" rows="30"  class="form-control" :value="jpaBoard4.content" readonly>
                     </textarea>
                 </td>
             </tr>
+             </div>
         </table>
     </div>
 </template>
@@ -56,3 +59,13 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+
+ .box{
+          background:white;
+          
+          border: #356859 4px solid;
+        }
+
+</style>

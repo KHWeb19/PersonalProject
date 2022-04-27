@@ -17,7 +17,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("/63th/jpaMember")
-@CrossOrigin(origins = "http://localhost:8080", allowedHeaders = "*")
+@CrossOrigin(origins = "http://localhost:8081", allowedHeaders = "*")
 public class JpaBusinessMemberCheckController {
 
     @Autowired

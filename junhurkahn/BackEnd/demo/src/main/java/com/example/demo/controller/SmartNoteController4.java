@@ -15,7 +15,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("/62th/board4")
-@CrossOrigin(origins = "http://localhost:8080", allowedHeaders = "*")
+@CrossOrigin(origins = "http://localhost:8081", allowedHeaders = "*")
 public class SmartNoteController4 {
 
     @Autowired

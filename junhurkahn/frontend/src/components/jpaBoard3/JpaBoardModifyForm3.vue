@@ -1,47 +1,49 @@
 <template>
     <div>
         <form @submit.prevent="onSubmit">
-           <table border="1">
+             <table>
+           <div class="box">
                 <tr>
-                    <td>생일관리 수정하기</td>
+                   
                     <td>
-                        <input type="text" :value="jpaBoard3.boardNo" disabled/>
+                         <input type="text" class="form-control" :value="jpaBoard3.boardNo" disabled/>
                     </td>
                 </tr>
                 <tr>
-                    <td>이름</td>
+                  
                     <td>
-                        <input type="text" v-model="title"/>
+                         <input type="text"  v-model="title" class="form-control">
                     </td>
                 </tr>
                 <tr>
-                    <td>생년월일</td>
+                  
                     <td>
-                        <input type="text" :value="jpaBoard3.writer"/>
+                       <input type="text"  v-model="writer" class="form-control">
                     </td>
                 </tr>
 
                     <tr>
-                    <td>D-day</td>
+                   
                     <td>
-                        <input type="text" :value="jpaBoard3.writer"/>
+                          <input type="text"  v-model="writer1" class="form-control">
                     </td>
                 </tr>
 
 
                 <tr>
-                    <td>등록일자</td>
+                   
                     <td>
-                        <input type="text" :value="jpaBoard3.regDate" disabled/>
+                        <input type="text" class="form-control" :value="jpaBoard3.regDate" disabled/>
                     </td>
                 </tr>
                 <tr>
-                    <td>메모</td>
+                   
                     <td>
-                        <textarea cols="50" rows="20" v-model="content">
-                        </textarea>
+                       <textarea cols="100" rows="30" v-model="content" class="form-control">
+                    </textarea>
                     </td>
                 </tr>
+           </div>
             </table>
 
             <div>
@@ -87,3 +89,13 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+
+ .box{
+          background:white;
+          
+         border: #356859 4px solid;
+        }
+
+</style>

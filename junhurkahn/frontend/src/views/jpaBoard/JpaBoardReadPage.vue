@@ -1,6 +1,33 @@
 <template>
+
+<div class="p-3 mb-2 bg-light text-dark">
+<div>
+  <v-card color="basil">
+    <v-card-title class="text-center justify-center py-6">
+      <h1 class="font-weight-bold text-h2 basil--text"  >
+       Note
+      </h1>
+    </v-card-title>
+
+    <v-tabs
+      v-model="tab"
+      background-color="transparent"
+      color="basil"
+      grow
+    >
+      <v-tab
+      >
+      </v-tab>
+    </v-tabs>
+  </v-card>
+
+
     <div align="center">
-        <h2>텍스트 메모 읽기</h2>
+        <br>
+           <h1 class="font-weight-bold text-h4 basil--text"  >
+       텍스트 메모 읽기
+      </h1>
+      <br>
         <jpa-board-read v-if="jpaBoard" :jpaBoard="jpaBoard"/>
         <p v-else>로딩중 ....... </p>
         <router-link :to="{ name: 'JpaBoardModifyPage', params: { boardNo } }">
@@ -11,6 +38,15 @@
             게시물 보기
         </router-link>
     </div>
+
+    
+   <v-footer app color="#FFFBE6" class="white--text">
+      <v-spacer></v-spacer>
+      <span>&copy; EDDI</span>
+    </v-footer>
+
+</div>
+</div>
 </template>
 
 <script>

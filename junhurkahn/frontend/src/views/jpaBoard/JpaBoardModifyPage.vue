@@ -1,9 +1,46 @@
 <template>
+
+
+<div class="p-3 mb-2 bg-light text-dark">
+<div>
+  <v-card color="basil">
+    <v-card-title class="text-center justify-center py-6">
+      <h1 class="font-weight-bold text-h2 basil--text"  >
+       Note
+      </h1>
+    </v-card-title>
+
+    <v-tabs
+      v-model="tab"
+      background-color="transparent"
+      color="basil"
+      grow
+    >
+      <v-tab
+      >
+      </v-tab>
+    </v-tabs>
+  </v-card>
+
+  <br>
     <div align="center">
-        <h2>텍스트메모 게시물 수정</h2>
+        <h1 class="font-weight-bold text-h4 basil--text"  >
+       텍스트 메모 계시글 수정
+      </h1>
+      <br>
         <jpa-board-modify-form v-if="jpaBoard" :jpaBoard="jpaBoard" @submit="onSubmit"/>
         <p v-else>로딩중 .......</p>
     </div>
+</div>
+
+
+
+   <v-footer app color="#FFFBE6" class="white--text">
+      <v-spacer></v-spacer>
+      <span>&copy; EDDI</span>
+    </v-footer>
+</div>
+    
 </template>
 
 <script>
@@ -28,10 +65,10 @@ export default {
     methods: {
         ...mapActions(['fetchJpaBoard']),
         onSubmit (payload) {
-            const { title, content } = payload
+            const { title, content, writer } = payload
 
             axios.put(`http://localhost:7777/62th/board/${this.boardNo}`,
-                { title, writer: this.jpaBoard.writer, content, regDate: this.jpaBoard.regDate })
+                { title, content, writer, regDate: this.jpaBoard.regDate })
                     .then(res => {
                         alert('게시물 수정 성공!')
                         this.$router.push({
