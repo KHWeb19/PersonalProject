@@ -1,8 +1,8 @@
 <template>
-  <v-container>
-    <v-app-bar flat color="white">
+  <v-container style="border-bottom: 1px solid; border-color: rgba(0,0,0,0.2)">
+    <v-app-bar flat class="white">
         <v-toolbar-title>
-            <router-link to="/" style="text-decoration: none; color: inherit">Home</router-link>
+            <router-link to="/" style="text-decoration: none; color: inherit">Basic Website</router-link>
         </v-toolbar-title>
 
         <v-spacer></v-spacer>
@@ -11,17 +11,17 @@
             <v-btn text to="/dummy">
                 Dummy
             </v-btn>
-            <v-btn text>
-                Test2
+            <v-btn text to="/duptest">
+                DupTest
             </v-btn>
-            <v-btn text>
-                Test3
+            <v-btn text to="/listpost">
+                Posts
             </v-btn>
         </v-toolbar-items>
 
         <v-spacer></v-spacer>
         <v-toolbar-items>
-            <v-btn text v-if="isLoggedIn" to="/mypage">
+            <v-btn text v-if="isLoggedIn" to="/mypage" class="white">
                 My Page
             </v-btn>
             <v-btn text to="/login" v-else>

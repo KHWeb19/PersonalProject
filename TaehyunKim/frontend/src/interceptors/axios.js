@@ -20,12 +20,12 @@ axios.interceptors.request.use((config) =>
 
 axios.interceptors.response.use((response)=>{return response}, async (error) => 
     {
-        let refresh = false
 
         const originalRequest = error.config
 
-        if (error.response.status === 401 && !refresh && localStorage.getItem("access_token")){
-            refresh = true
+        if (error.response.status === 401 && !originalRequest._retry && localStorage.getItem("access_token")){
+            
+            originalRequest._retry = true
             const {status,data} = await axios.post('refreshtoken', {}, {withCredentials: true})
 
             if (status === 200){
@@ -38,7 +38,6 @@ axios.interceptors.response.use((response)=>{return response}, async (error) =>
             alert("해당 요청에 대한 권한이 없습니다")
             router.push({name:"home"})
         }    
-    refresh = false
     return error    
     }
     

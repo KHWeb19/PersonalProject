@@ -6,6 +6,7 @@ module.exports={
   transpileDependencies: [
     'vuetify'
   ]
+
 }
 
 /*const { defineConfig } = require('@vue/cli-service')

@@ -17,7 +17,7 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/SignUpPage.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/UserPage/SignUp.vue')
   },
   {
     path: '/dummy',
@@ -27,17 +27,38 @@ const routes = [
   {
     path: '/login',
     name: 'login',
-    component: () => import('../views/LogInPage')
-  },
-  {
-    path: '/signout',
-    name: 'signout',
-    component: () => import('../views/SignOutPage')
+    component: () => import('../views/UserPage/LogInPage')
   },
   {
     path: '/mypage',
     name: 'mypage',
-    component: () => import('../views/MyPage')
+    component: () => import('../views/UserPage/MyPage')
+  },
+  {
+    path: '/duptest',
+    name: 'test',
+    component: () => import('../views/DupTest')
+  },
+  {
+    path: '/listpost',
+    name: 'listpost',
+    component: () => import('../views/PostPage/ListPost')
+  },
+  {
+    path: '/createpost',
+    name: 'createpost',
+    component: () => import('../views/PostPage/CreatePost')
+  },
+  {
+    path: '/readpost/:no',
+    name: 'readpost',
+    component: () => import('../views/PostPage/ReadPost'),
+    props: true
+  },
+  {
+    path: '/modifypost/:no',
+    name: 'modifypost',
+    component: () => import('../views/PostPage/ModifyPost')
   },
   {
     path: '*',

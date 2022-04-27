@@ -1,27 +1,28 @@
 package com.example.backend.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collection;
 
 @Entity
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Role {
+@Getter
+@Setter
+public class Attachment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
 
-    @JsonIgnore
-    @ManyToMany (mappedBy = "roles")
-    private Collection<User> users = new ArrayList<>();
+    private String filename;
+
+    private String originalfilename;
+
+    @JsonBackReference
+    @ManyToOne
+    private Post post;
 
     @Override
     public boolean equals(Object o){
@@ -34,6 +35,4 @@ public class Role {
     public int hashCode() {
         return getClass().hashCode();
     }
-
-
 }

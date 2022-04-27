@@ -22,7 +22,7 @@
                                 <input type="password" v-model="password" class="inputs">
                             </v-col>
                             <v-col cols="10" class="my-2">
-                                <v-btn width="100%" @click="attempt_login({username, password})">Login</v-btn>
+                                <v-btn class="primary" width="100%" @click="attempt_login({username, password})">Login</v-btn>
                             </v-col>
                             <v-col cols="10" style="font-size:14px">
                                 <span>Not registerd yet? <a href="/signup">Create an account</a></span>
@@ -33,7 +33,7 @@
                 </v-form>
             </v-col>
 
-            <v-col cols="6">
+            <v-col cols="6" align-self="center">
                 <img src="https://cdn.dribbble.com/users/788099/screenshots/10905791/media/a68e61df6a99b1813cf5010c79d51eee.png?compress=1&resize=800x600&vertical=top" width="100%">
             </v-col>
         
@@ -56,28 +56,11 @@ export default{
         ...mapState(['isLoggedIn'])
     },
     methods:{
-        ...mapActions(['attempt_login']),
-
-
-        /*
-        loginSubmit(){
-            const params = new URLSearchParams();
-            params.append('username', this.username)
-            params.append('password', this.password)
-
-            axios.post("login", params, {withCredentials: true})
-            .then((res) => {
-                localStorage.setItem("access_token", res.data.access_token)
-                this.login_successful()
-                this.$router.push("/")
-            })
-            .catch(()=>alert('실패'))
-        }
-        */
+        ...mapActions(['attempt_login'])
     }
 }
 </script>
 
-<style scoped src="../assets/css/inputs.css">
+<style scoped src="../../assets/css/inputs.css">
 
 </style>

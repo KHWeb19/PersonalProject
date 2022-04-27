@@ -7,7 +7,6 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.backend.entity.Role;
 import com.example.backend.entity.User;
 import com.example.backend.service.UserService;
-import com.example.backend.utility.UserRoleForm;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +25,6 @@ import java.util.stream.Collectors;
 
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.HttpStatus.FORBIDDEN;
-import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
@@ -45,23 +43,6 @@ public class UserController {
     @PostMapping("/users/save")
     public ResponseEntity<User> saveUser(@Valid @RequestBody User user){
         return new ResponseEntity<>(userService.saveUser(user), HttpStatus.CREATED);
-    }
-
-    @GetMapping("/roles")
-    public ResponseEntity<List<Role>> getRoles(){
-        log.info("Roles page");
-        return new ResponseEntity<>(userService.getRoles(), HttpStatus.OK);
-    }
-
-    @PostMapping("/roles/save")
-    public ResponseEntity<Role> saveRole(@RequestBody Role role){
-        return new ResponseEntity<>(userService.saveRole(role), HttpStatus.CREATED);
-    }
-
-    @PostMapping("/role/addRoleToUser")
-    public ResponseEntity<?> addRoleToUser(@RequestBody UserRoleForm userRoleForm){
-        userService.addRoleToUser(userRoleForm.getUsername(), userRoleForm.getRolename());
-        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/admins")

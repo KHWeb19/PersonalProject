@@ -34,14 +34,16 @@
                             </v-col>
                             <v-col cols="12">
                               <input type="text" placeholder="Email" @blur="v$.email.$touch" v-model.lazy="email">
-                              <p v-if="v$.email.$error">{{v$.email.$errors[0].$message}}</p>
+                              <p v-if="v$.email.$errors.length">{{v$.email.$errors[0].$message}}</p>
                             </v-col>
                             <v-col cols="12">
                                 <label>Username</label>
                             </v-col>
                             <v-col cols="12">
                                 <input type="text" v-model.lazy="username" placeholder="Username" @blur="v$.username.$touch">
-                                <p v-if="v$.username.$error">{{v$.username.$errors[0].$message}}</p>
+                                
+                                <p v-if="v$.username.$errors.length">{{v$.username.$errors[0].$message}}</p>
+                                
                             </v-col>
                             <v-col cols="12">
                                 <label>Password</label>
@@ -51,7 +53,7 @@
                                 <p v-if="v$.password.$error">{{v$.password.$errors[0].$message}}</p>
                             </v-col>
                             <v-col cols="12">
-                            <v-btn @click="registerUser">Register</v-btn>
+                            <v-btn @click="registerUser" class="primary">Register</v-btn>
                             </v-col>
 
                           </v-row>
@@ -132,7 +134,7 @@ import router from '@/router'
             console.log("form correct")
             const {first_name, last_name, email, username, password} = this
             const payload = {first_name, last_name, email, username, password}
-            axios.post('http://localhost:1234/api/users/save', payload)
+            axios.post('users/save', payload)
             .then(()=>{
               alert("Register Successful")
               router.push("/login")
@@ -145,6 +147,6 @@ import router from '@/router'
   }
 </script>
 
-<style scoped src="../assets/css/signup.css">
+<style scoped src="../../assets/css/signup.css">
 
 </style>

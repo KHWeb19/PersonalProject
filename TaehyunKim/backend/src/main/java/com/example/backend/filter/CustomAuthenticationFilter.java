@@ -58,7 +58,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
 
         String refresh_token = JWT.create()
                 .withSubject(user.getUsername())
-                .withExpiresAt(new Date(System.currentTimeMillis() + 1000 * 60 * 30))
+                .withExpiresAt(new Date(System.currentTimeMillis() + 1000 * 60 * 300))
                 .withIssuer(request.getRequestURL().toString())
                 .sign(algorithm);
 

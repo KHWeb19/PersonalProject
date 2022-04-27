@@ -9,6 +9,8 @@ export default new Vuex.Store({
   state: {
     user: null,
     users: [],
+    post: null,
+    posts: [],
     isLoggedIn: false,
     errorLoggingIn: false
   },
@@ -26,6 +28,12 @@ export default new Vuex.Store({
     },
     UPDATE_USER(state, payload){
       state.user = payload
+    },
+    LIST_POSTS(state, payload){
+      state.posts = payload
+    },
+    READ_POST(state, payload){
+      state.post = payload
     }
   },
   actions: {
@@ -63,9 +71,20 @@ export default new Vuex.Store({
         commit('UPDATE_USER', res.data)})
       .catch(() => alert("유저정보를 가져오는데 실패했습니다"))
       
+    },
+
+    list_posts({commit}){
+      axios.get("freepost/list")
+      .then((res) => commit('LIST_POSTS', res.data))
+      .catch(() => "FAILED TO GET POST LISTS")
+    },
+    
+    read_post({commit},no){
+      axios.get(`freepost/${no}`)
+      .then((res) => commit('READ_POST', res.data))
+      .catch(() => alert("Error loading a page"))
     }
 
   }
-
   
 })

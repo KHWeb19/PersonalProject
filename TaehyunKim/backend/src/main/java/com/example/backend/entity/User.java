@@ -1,8 +1,8 @@
 package com.example.backend.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -14,9 +14,10 @@ import java.util.Collection;
 import java.util.Date;
 
 @Entity
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 public class User {
 
     @Id
@@ -45,9 +46,11 @@ public class User {
     @Size(min = 2, max = 30, message = "MIN LASTNAME SIZE IS 2, MAX IS 30")
     private String last_name;
 
+    @CreationTimestamp
     private Date register_date;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
             name="USER_ROLE",
             joinColumns =  @JoinColumn(name = "user_id"),
@@ -55,6 +58,39 @@ public class User {
     )
     private Collection<Role> roles = new ArrayList<>();
 
+    @JsonManagedReference
+    @OneToMany(mappedBy = "user")
+    private Collection<Post> posts = new ArrayList<>();
 
+    public void addRole(Role role){
+        roles.add(role);
+        role.getUsers().add(this);
+    }
 
+    public void removeRole(Role role){
+        roles.remove(role);
+        role.getUsers().remove(this);
+    }
+
+    public void addPost(Post post){
+        posts.add(post);
+        post.setUser(this);
+    }
+
+    public void removePost(Post post){
+        posts.add(post);
+        post.setUser(null);
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+        return id != null && id.equals(((User) o).getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

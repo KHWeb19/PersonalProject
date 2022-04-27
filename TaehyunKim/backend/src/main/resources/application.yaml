@@ -10,7 +10,6 @@ spring:
     dialect: org.hibernate.dialect.MySQL8Dialect
   jpa:
     database: mysql
-    open-in-view: false
     generate-ddl: true
     hibernate:
       ddl-auto: create
@@ -18,5 +17,10 @@ spring:
       hibernate:
         show_sql: true
         format_sql: true
+
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB
 
 

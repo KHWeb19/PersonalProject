@@ -1,12 +1,12 @@
 <template>
   <v-app>
-    
-    <the-header/>
-    
-    <router-view/>
+    <v-container class="main">
+      <the-header class="header"/>
 
-    <the-footer/>
+      <router-view :key="$route.path"/>
 
+      <the-footer/>
+    </v-container>
   </v-app>
 </template>
 
@@ -29,5 +29,4 @@ export default {
 </script>
 
 <style src="./assets/css/style.css">
-
 </style>

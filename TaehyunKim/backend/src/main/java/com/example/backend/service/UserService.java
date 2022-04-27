@@ -3,7 +3,6 @@ package com.example.backend.service;
 import com.example.backend.entity.Role;
 import com.example.backend.entity.User;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Optional;
 
