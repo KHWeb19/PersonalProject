@@ -11,6 +11,11 @@ import {
 
     FETCH_NOTICE_BOARD_LIST,
     FETCH_NOTICE_BOARD,
+
+    FETCH_REGISTER_MEMBERS,
+    FETCH_REGISTER_MEMBER,
+    FETCH_REGISTER_MEMBER_AUTHS,
+    FETCH_REGISTER_MEMBER_AUTH,
     
 } from './mutation-types'
 
@@ -64,6 +69,30 @@ export default {
         return axios.get(`http://localhost:7777/noticeBoard/${boardNo}`)
         .then((res)=>{
             commit(FETCH_NOTICE_BOARD,res.data)
+        })
+    },
+    fetchRegisterMembers({commit}) {
+        return axios.get("http://localhost:7777/memberManage/list")
+        .then((res)=>{
+            commit(FETCH_REGISTER_MEMBERS, res.data)
+        })
+    },
+    fetchRegisterMember({commit},memberNo) {
+        return axios.get(`http://localhost:7777/memberManage/member/${memberNo}`)
+        .then((res)=>{
+            commit(FETCH_REGISTER_MEMBER,res.data)
+        })
+    },
+    fetchRegisterMemberAuths({commit}) {
+        return axios.get("http://localhost:7777/memberManage/authList")
+        .then((res)=>{
+            commit(FETCH_REGISTER_MEMBER_AUTHS, res.data)
+        })
+    },
+    fetchRegisterMemberAuth({commit},memberNo) {
+        return axios.get(`http://localhost:7777/memberManage/memberAuth/${memberNo}`)
+        .then((res)=>{
+            commit(FETCH_REGISTER_MEMBER_AUTH,res.data)
         })
     },
 }

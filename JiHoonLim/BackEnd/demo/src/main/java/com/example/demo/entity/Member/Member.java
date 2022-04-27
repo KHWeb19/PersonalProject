@@ -1,5 +1,6 @@
 package com.example.demo.entity.Member;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -35,6 +36,7 @@ public class Member {
     @Column(length = 64,nullable = false)
     private String email;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm", timezone = "Asia/Seoul")
     @CreationTimestamp
     private Date regDate;
 

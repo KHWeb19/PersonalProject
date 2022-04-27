@@ -54,7 +54,13 @@
                     :value="noticeBoard.viewCount"
                   />
                 </div>
-                <div v-if="noticeBoard.writer == this.nickName">
+                <div
+                  v-if="
+                    (noticeBoard.writer == this.nickName &&
+                      this.$store.state.userInfo.auth == '관리자') ||
+                    this.$store.state.userInfo.auth == '매니저'
+                  "
+                >
                   <v-btn
                     text
                     :to="{

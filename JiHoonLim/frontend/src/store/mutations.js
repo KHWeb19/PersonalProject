@@ -10,6 +10,11 @@ import {
 
     FETCH_NOTICE_BOARD_LIST,
     FETCH_NOTICE_BOARD,
+
+    FETCH_REGISTER_MEMBERS,
+    FETCH_REGISTER_MEMBER,
+    FETCH_REGISTER_MEMBER_AUTHS,
+    FETCH_REGISTER_MEMBER_AUTH,
     
 } from './mutation-types'
 
@@ -38,7 +43,17 @@ export default {
     [FETCH_NOTICE_BOARD](state, noticeBoard){
         state.noticeBoard = noticeBoard
     },
-
-
+    [FETCH_REGISTER_MEMBERS](state, registerMembers){
+        state.registerMembers = registerMembers
+    },
+    [FETCH_REGISTER_MEMBER_AUTHS](state, registerMemberAuths){
+        state.registerMemberAuths = registerMemberAuths
+    },
+    [FETCH_REGISTER_MEMBER](state, registerMember){
+        state.registerMember = registerMember
+    },
+    [FETCH_REGISTER_MEMBER_AUTH](state, registerMemberAuth){
+        state.registerMemberAuth = registerMemberAuth
+    },
 
 }

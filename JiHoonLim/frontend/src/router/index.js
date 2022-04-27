@@ -21,6 +21,9 @@ import NoticeRegisterPage from '@/views/noticeBoard/NoticeRegisterPage.vue'
 import NoticeReadPage from '@/views/noticeBoard/NoticeReadPage.vue'
 import NoticeModifyPage from '@/views/noticeBoard/NoticeModifyPage.vue'
 
+import MemberManagePage from '@/views/adminPage/MemberManagePage.vue'
+import MemberManageModifyPage from '@/views/adminPage/MemberManageModifyPage.vue'
+
 import test from '@/views/test.vue'
 Vue.use(VueRouter)
 
@@ -136,6 +139,21 @@ const routes = [
     name: 'NoticeModifyPage',
     components: {
       default: NoticeModifyPage
+    },
+    props: {
+      default: true
+    }
+  },
+  {
+    path: '/memberManage',
+    name: 'MemberManagePage',
+    component: MemberManagePage
+  },
+  {
+    path: '/memberManage/:memberNo',
+    name: 'MemberManageModifyPage',
+    components: {
+      default: MemberManageModifyPage
     },
     props: {
       default: true

@@ -91,7 +91,7 @@
             <v-card-actions>
               <v-card-text class="food_sub_icon"
                 ><v-icon color="orange" class="pr-1"> mdi-thumb-up</v-icon>
-                {{ food.likeCnt }}</v-card-text
+                {{ food.likeCount }}</v-card-text
               >
               <v-card-text class="food_sub_icon"
                 ><v-icon color="orange" class="pr-1">mdi-eye</v-icon
@@ -128,7 +128,7 @@
           <v-btn
             x-large
             rounded
-            color="orange lighten-1"
+            color="orange lighten-3"
             class="mx-auto"
             style="float: right"
             @click="write"

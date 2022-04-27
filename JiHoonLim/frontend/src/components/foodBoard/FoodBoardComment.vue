@@ -38,7 +38,11 @@
                       <v-btn
                         class="ml-5 mr-5"
                         text
-                        v-if="commentList.commentWriter == nickName"
+                        v-if="
+                          commentList.commentWriter == nickName ||
+                          auth == '관리자' ||
+                          auth == '매니저'
+                        "
                         @click="onDelete(commentList.commentNo)"
                         color="red"
                         >삭제</v-btn
@@ -103,12 +107,14 @@ export default {
       commentWriter: "",
       userInfo: this.$store.state.userInfo,
       nickName: "",
+      auth: "",
     };
   },
 
   created() {
     if (this.$store.state.userInfo != null) {
       this.nickName = this.$store.state.userInfo.nickName;
+      this.auth = this.userInfo.auth;
     }
   },
   methods: {
