@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Slf4j
@@ -20,7 +21,7 @@ public class MemberServiceImpl implements MemberService{
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-
+    @Transactional
     @Override
     public void register(Member member) {
         String encodedPassword = passwordEncoder.encode(member.getPw());
@@ -29,6 +30,7 @@ public class MemberServiceImpl implements MemberService{
         repository.save(member);
     }
 
+    @Transactional
     @Override
     public MemberRequest login(MemberRequest memberRequest) {
         Optional<Member> maybeMember = repository.findByUserId(memberRequest.getId());
@@ -57,6 +59,7 @@ public class MemberServiceImpl implements MemberService{
         return response;
     }
 
+    @Transactional
     @Override
     public void modify(Member member) {
 

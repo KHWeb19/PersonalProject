@@ -1,6 +1,5 @@
 package com.example.demo.entity;
 
-import com.sun.istack.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -24,7 +23,7 @@ public class Member {
     @Column(length = 64, nullable = false)
     private String pw;
 
-    @Column(length = 50, nullable = false)
+    @Column(length = 64, nullable = false)
     private String email;
 
     @CreationTimestamp

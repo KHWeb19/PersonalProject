@@ -17,6 +17,7 @@ public class MemberController {
     @Autowired
     private MemberService service;
 
+    // 회원가입
     @PostMapping("/register")
     public Member register (@Validated @RequestBody Member member) {
         log.info ("member register request from vue" + member);
@@ -26,6 +27,7 @@ public class MemberController {
         return member;
     }
 
+    // 로그인
     @PostMapping ("/login")
     public MemberRequest login (@RequestBody MemberRequest memberRequest){
         log.info ("login(): " + memberRequest);
@@ -41,6 +43,7 @@ public class MemberController {
         return memberResponse;
     }
 
+    // 프로필 변경
     @PutMapping("/{memberNo}")
     public Member modify (
             @PathVariable("memberNo") Long memberNo,
