@@ -19,4 +19,6 @@ public interface BookingService {
     public BookingInfo read(Integer checkBookingNo, String checkId);
 
     public List<BookingInfo> checkIdlist(String checkId);
+
+    public List<BookingInfo> listDate();
 }

@@ -84,6 +84,13 @@ public class BookingServiceImpl implements BookingService{
 
     @Transactional
     @Override
+    public List<BookingInfo> listDate() {
+        return repository.findAll(Sort.by(Sort.Direction.ASC,"date"));
+    }
+
+
+    @Transactional
+    @Override
     public BookingInfo read(Integer checkBookingNo, String checkId) {
         Optional<BookingInfo> maybeReadBoard = repository.findById(Long.valueOf(checkBookingNo));
 

@@ -7,7 +7,8 @@ import {
     FETCH_MEMBER_INFO,
     BOOKING_ID_LISTS,
     FETCH_REVIEWS_LISTS,
-    FETCH_MEMBER_LISTS
+    FETCH_MEMBER_LISTS,
+    FETCH_BOOKING_LISTS_DATE
 } from './mutation-types'
 
 import axios from 'axios'
@@ -66,6 +67,12 @@ export default {
                 .then((res) => {
                     commit(FETCH_MEMBER_LISTS, res.data)
                 })
+    },
+    fetchBookingListsDate ({ commit }) {
+        return axios.get('http://localhost:7777/booking/list/date')
+            .then(res => {
+                commit(FETCH_BOOKING_LISTS_DATE, res.data)
+            })
     },
     
 }

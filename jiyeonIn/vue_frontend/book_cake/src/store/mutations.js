@@ -7,7 +7,8 @@ import {
     FETCH_MEMBER_INFO,
     BOOKING_ID_LISTS,
     FETCH_REVIEWS_LISTS,
-    FETCH_MEMBER_LISTS
+    FETCH_MEMBER_LISTS,
+    FETCH_BOOKING_LISTS_DATE
 }from './mutation-types'
 
 export default {
@@ -40,5 +41,8 @@ export default {
     },
     [FETCH_MEMBER_LISTS] (state, memberLists) {
         state.memberLists = memberLists
+    },
+    [FETCH_BOOKING_LISTS_DATE] (state, bookingListsDate) {
+        state.bookingListsDate = bookingListsDate
     },
 }

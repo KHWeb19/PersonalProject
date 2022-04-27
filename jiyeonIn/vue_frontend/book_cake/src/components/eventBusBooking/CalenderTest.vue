@@ -70,7 +70,7 @@ import moment from 'moment'
       findLeastDate:[]
     }),
     props: {
-        bookingLists: {
+        bookingListsDate: {
             type: Array,
             required: true
         }
@@ -124,45 +124,57 @@ import moment from 'moment'
 
         let sDayList = new Array();
 
-        for(let j = 0; j <this.bookingLists.length; j++) {
-          let bookingMonthSelected = moment(this.bookingLists[j].date).format('M')
-          if(monthSelected == bookingMonthSelected)
-            sDayList[j] = this.bookingLists[j].date
+        let count1 = 0
+        let selectDay1 = moment().month(val.split('-')[1]-1).date(selectDay).format("YYYY-MM-DD")
 
+        for(let j = 0; j <this.bookingListsDate.length; j++) {
+          let bookingMonthSelected = moment(this.bookingListsDate[j].date).format('M')
+          if(monthSelected == bookingMonthSelected){
+            if(this.bookingListsDate[j].date < selectDay1 ){
+              continue
+            }else if(this.bookingListsDate[j].date >= selectDay1) {
+              sDayList[count1] = this.bookingListsDate[j].date
+              count1 +=1
+            }
+          }
           
         }
-
-        console.log(sDayList.sort(date_ascending)); 
-        function date_ascending(a, b) {
-        let dateA = new Date(a.sDayList).getTime();
-        let dateB = new Date(b.sDayList).getTime();
-        return dateA > dateB ? 1 : -1;
-        }
+        
         let count = 0
 
-        for (let i = selectDay; i <= totalDay ; i++) {
-          let thisDate = moment().month(val.split('-')[1]-1).date(i).format("YYYY-MM-DD")
-          let z = 0
-          if (moment(thisDate).day() !== 1){
-            if(moment(thisDate).day() !== 0){
-              for( z = 0+count; z <sDayList.length; z++) {
-                if(thisDate == sDayList[z]) {
-                  console.log('bookingLists:'+sDayList[z])
-                  if(sDayList.length >1) count += 1
-                  else count = 0
+        if(sDayList.length > 0){
+          for (let i = selectDay; i <= totalDay ; i++) {
+            let thisDate = moment().month(val.split('-')[1]-1).date(i).format("YYYY-MM-DD")
+            if (moment(thisDate).day() !== 1){
+              if(moment(thisDate).day() !== 0){
+                for(let z = 0+count; z <=sDayList.length; z++) {
+                  if(thisDate == sDayList[z]) {
+                    console.log('bookingListsDate:'+sDayList[z])
+                    if(sDayList.length >1) count += 1
+                    else count = 0
+                    break
+                  }
+                  else 
+                  this.blockDate.push(thisDate)
+                  console.log('date:'+thisDate)
                   break
                 }
-                else 
+              }
+            }
+          }
+        }else{
+          for (let i = selectDay; i <= totalDay ; i++) {
+            let thisDate = moment().month(val.split('-')[1]-1).date(i).format("YYYY-MM-DD")
+            if (moment(thisDate).day() !== 1){
+              if(moment(thisDate).day() !== 0){
                 this.blockDate.push(thisDate)
-                console.log('date:'+thisDate)
-                break
+                  console.log('date:'+thisDate)
               }
             }
           }
         }
       }
     }
-
   }
 </script>
 

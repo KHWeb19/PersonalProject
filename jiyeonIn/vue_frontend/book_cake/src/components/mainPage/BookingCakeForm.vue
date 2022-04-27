@@ -2,7 +2,7 @@
     <form @submit.prevent="submitBooking">
         <div class="calenderPage">
             <h4>픽업일자 & 시간</h4>
-            <calender-test @submit="calendarInform" :bookingLists="bookingLists"></calender-test>
+            <calender-test @submit="calendarInform" :bookingListsDate="bookingListsDate"></calender-test>
             <p style="font-size: 13px; padding: 5px;">
                 *날짜, 시간 선택 후 확정 버튼 눌러주세요! <br>
                 *예약 확정 후 최소 3일 이상 소요되니, 이에 맞추어 픽업일 입력 부탁 드립니다. 
@@ -159,7 +159,7 @@ export default {
             type: Array,
             required: true
         },
-        bookingLists: {
+        bookingListsDate: {
             type: Array,
             required: true
         },

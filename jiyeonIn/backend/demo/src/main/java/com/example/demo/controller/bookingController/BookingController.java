@@ -65,6 +65,14 @@ public class BookingController {
         return service.list();
     }
 
+    @GetMapping("/list/date")
+    public List<BookingInfo> bookingListDate() {
+        log.info("bookingListDate()");
+
+
+        return service.listDate();
+    }
+
     @GetMapping("/list/{checkId}")
     public List<BookingInfo> bookingList(@PathVariable("checkId") String checkId) {
         log.info("bookingList()");
