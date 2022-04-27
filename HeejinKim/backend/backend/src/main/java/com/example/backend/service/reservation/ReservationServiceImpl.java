@@ -1,16 +1,13 @@
 package com.example.backend.service.reservation;
 
-import com.example.backend.controller.board.request.SeatNowRequest;
 import com.example.backend.controller.board.request.SeatRequest;
 import com.example.backend.entity.Board;
 import com.example.backend.entity.Reservation;
 import com.example.backend.repository.reservation.ReservationRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +17,45 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Autowired
     private ReservationRepository rsvRepository;
+
+    @Override
+    public List<Reservation> getPickedSeats(SeatRequest seatRequest) {
+
+
+        return rsvRepository.findAll();
+
+        }
+
+
+
+    @Override
+    public List<Reservation> getSeat(Reservation reservation) {
+        Optional<Reservation> seatOptional = rsvRepository.findBySeatNum(reservation.getSeatNum());
+
+        if (seatOptional.isEmpty()) {
+            return null;
+        }
+        else {
+            reservation = seatOptional.get();
+            rsvRepository.save(reservation);
+
+            return (List<Reservation>) seatOptional.get();
+        }
+
+        //return rsvRepository.getSeat(reservation);
+
+
+    }
+
+    @Override
+    public void makeReservation(Reservation reservation) {
+
+        Optional<Reservation> maybeReservation = rsvRepository.findBySeatNum(reservation.getSeatNum());
+
+        rsvRepository.save(reservation);
+
+    }
+    /*----------일단 이부분 보류
 
     @Transactional
     @Override
@@ -81,6 +117,13 @@ public class ReservationServiceImpl implements ReservationService {
     public List<Reservation> getBooking(Reservation reservation) {
         return rsvRepository.findAll();
     }
+    @Override
+    @Transactional
+    public void makeReservation(Reservation reservation) {
+
+        rsvRepository.save(reservation);
+    }----------------------*/
+
 /*
 
     @Override
@@ -100,12 +143,6 @@ public class ReservationServiceImpl implements ReservationService {
     }*/
 
 
-    @Override
-    @Transactional
-    public void makeReservation(Reservation reservation) {
-
-        rsvRepository.save(reservation);
-    }
 
 
 

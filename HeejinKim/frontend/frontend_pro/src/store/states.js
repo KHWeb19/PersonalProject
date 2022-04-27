@@ -14,6 +14,9 @@ board: null,
 boards: [],
 
 seatdata:[],
+seatRows:null,
+seatCols:null,
+seatNum:[],
 
 
 

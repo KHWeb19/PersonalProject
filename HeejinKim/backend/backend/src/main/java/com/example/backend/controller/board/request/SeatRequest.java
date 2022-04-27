@@ -9,16 +9,15 @@ import lombok.extern.slf4j.Slf4j;
 @NoArgsConstructor
 public class SeatRequest {
 
-    private Integer restSeats;
-    private Integer seatNumber;
+    //자리가 string (reservation)
+    private String  seatNum;
     private Integer seatRows;
     private Integer seatCols;
 
-    public SeatRequest(Integer restSeats,Integer rows, Integer cols,Integer seatNumber) {
+    public SeatRequest(Integer rows, Integer cols,String seatNum) {
         this.seatRows = rows;
         this.seatCols = cols;
-        this.restSeats = restSeats;
-        this.seatNumber = seatNumber;
+        this.seatNum = seatNum;
 
     }
 }

@@ -17,17 +17,13 @@ public class Reservation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String seatNumber;
+    private Integer seatNum;
 
     @Column
     private Integer seatRows;
 
     @Column
     private Integer seatCols;
-
-    @Column
-    private Integer restSeats;
-
 
 
     @JsonBackReference
@@ -39,11 +35,11 @@ public class Reservation {
     //@OneToMany(mappedBy = "reservation", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     //private List<StudyRoom> studyRoom=new ArrayList<>();
 
-    public Reservation(Integer seatRows,Integer seatCols,String seatNumber){
+    public Reservation(Integer seatRows,Integer seatCols,Integer seatNum){
 
         this.seatRows = seatRows;
         this.seatCols = seatCols;
-        this.seatNumber = seatNumber;
+        this.seatNum = seatNum;
 
     }
 
