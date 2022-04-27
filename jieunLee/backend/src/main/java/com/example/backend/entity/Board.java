@@ -1,11 +1,8 @@
 package com.example.backend.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 
@@ -50,7 +47,7 @@ public class Board {
 
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    @JsonManagedReference(value="board-likes")
+    @JsonIgnoreProperties({"boards"})
 //    @JsonIgnoreProperties({"boards", "member"})
     @OneToMany(mappedBy = "board", fetch = FetchType.EAGER)
     private Set<Likes> likes = new HashSet<>();

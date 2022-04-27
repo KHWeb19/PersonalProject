@@ -4,7 +4,6 @@
       <menu-bar/>
       <hr style="border: 0; height: 1px; background: #d8d8d8; "/>
     </div>
-    <!-- <my-likes-list :loginLikes="loginLikes"/> -->
     <board-list :boards="boards" :loginLikes="loginLikes" @click="onDelete" @submit="onSubmit"/>
   </div>
 </template>
@@ -12,7 +11,6 @@
 <script>
 import MenuBar from '@/components/MenuBar.vue'
 import BoardList from '@/components/board/BoardList.vue'
-// import MyLikesList from '@/components/member/MyLikesList.vue'
 import { mapState, mapActions } from 'vuex'
 import axios from 'axios'
 
@@ -21,7 +19,6 @@ export default {
   components: {
     MenuBar,
     BoardList,
-    // MyLikesList
     },
     data() {
         return {
@@ -30,7 +27,7 @@ export default {
     },
     computed: {
         ...mapState(['boards']),
-            // ...mapState(['loginLikes']),
+        // ...mapState(['loginLikes']),
         // ...mapState(['twoComments']),
     },
     // created() {
@@ -38,12 +35,12 @@ export default {
     // },
     mounted () {
         this.fetchBoardList()
-            this.fetchLoginLikes(this.loginInfo.memberNo)
+        this.fetchLoginLikes(this.loginInfo.memberNo)
         // this.fetchTwoCommentList(this.boardNo)
     },
     methods: {
         ...mapActions(['fetchBoardList']),
-              ...mapActions(['fetchLoginLikes']),
+        ...mapActions(['fetchLoginLikes']),
         // ...mapActions(['fetchTwoCommentList']),
         onDelete(payload) {
             const {boardNo} = payload

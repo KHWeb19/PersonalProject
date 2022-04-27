@@ -18,7 +18,7 @@
                             </div>
                         </td>
                         <td style="font-weight: bold;">
-                            {{ board.member.memberId }}
+                            {{ board.member.memberId }} 
                         </td>
                         <td v-if="board.member.memberId==this.loginInfo.memberId" align="right" style="padding-right: 12px;"> 
                             <v-menu offset-y min-width="100">
@@ -78,11 +78,12 @@
                                                 <div style="font-size: 12px; color: grey">{{ comment.regDate }}
                                                     <v-menu offset-y min-width="100">
                                                         <template v-slot:activator="{ on }">
-                                                            <!-- <v-btn v-if="comment.member.memberId==this.loginInfo.memberId" icon v-on="on"> -->
-                                                            <v-btn icon v-on="on">
+                                                            <v-btn v-if="comment.member.memberId==loginInfo.memberId" icon v-on="on">
                                                                 <v-icon>
                                                                     mdi-dots-horizontal
                                                                 </v-icon>
+                                                            </v-btn> 
+                                                            <v-btn v-else icon >
                                                             </v-btn> 
                                                         </template>
                                                         <v-list>

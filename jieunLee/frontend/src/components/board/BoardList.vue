@@ -17,8 +17,8 @@
                             <td style="font-weight: bold;">
                                 {{ board.member.memberId }}
                             </td>
-                            <!-- <td v-if="this.loginInfo.memberId==board.member.memberId" align="right" style="padding-right: 12px;">  -->
-                            <td align="right" style="padding-right: 12px;"> 
+                            <td v-if="loginInfo.memberId==board.member.memberId" align="right" style="padding-right: 12px;"> 
+                            <!-- <td align="right" style="padding-right: 12px;">  -->
                                 <v-menu offset-y min-width="100">
                                     <template v-slot:activator="{ on }">
                                         <v-btn icon v-on="on">

@@ -38,7 +38,8 @@
       </router-link>
     </v-btn>
     <v-btn icon large>
-      <router-link style="text-decoration: none;" :to="{name: 'BoardRegisterPage'}">
+      <router-link style="text-decoration: none;" :to="{name: 'MyLikesList',
+              params: {memberNo: loginInfo.memberNo.toString()}}">
         <v-icon color="black">
           mdi-cards-heart-outline
         </v-icon>

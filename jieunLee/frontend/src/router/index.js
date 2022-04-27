@@ -16,6 +16,8 @@ import BoardRegisterPage from '@/views/board/BoardRegisterPage'
 import BoardReadPage from '@/views/board/BoardReadPage'
 import BoardModifyPage from '@/views/board/BoardModifyPage'
 
+import MyLikesList from '@/components/likes/MyLikesList'
+
 
 Vue.use(VueRouter)
 
@@ -113,6 +115,16 @@ const routes = [
     name: 'BoardModifyPage',
     components: {
       default: BoardModifyPage
+    },
+    props: {
+      default: true
+    }
+  },
+  {
+    path: '/MyLikesList/:memberNo',
+    name: 'MyLikesList',
+    components: {
+      default: MyLikesList
     },
     props: {
       default: true
