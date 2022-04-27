@@ -44,7 +44,7 @@ export default {
                 this.$cookies.set("user", res.data, 30)
                 this.isLogin = true
                 // 로그인 성공시 DashBoardPage로 이동
-                window.location.href = "DashBoardPage";
+                this.$router.push({ name: 'DashBoardPage' })
               }
             })
             .catch(res => {

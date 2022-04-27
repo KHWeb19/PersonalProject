@@ -7,27 +7,27 @@
             <br>
             <!-- 아이디 입력 -->
             <div class="inputBox">
-              <input type="text" v-model="id" placeholder="아이디">
+              <input type="text" v-model="id" placeholder="아이디" required autofocus oninvalid="this.setCustomValidity('아이디를 입력해 주세요.')" oninput="setCustomValidity('')">
             </div>
             <br>
             <!-- 비밀번호 입력 -->
             <div class="inputBox">
-              <input type="password" v-model="pw" placeholder="비밀번호">
+              <input type="password" v-model="pw" id="pw" placeholder="비밀번호" required autofocus oninvalid="this.setCustomValidity('비밀번호를 입력해 주세요.')" oninput="setCustomValidity('')">
             </div>
             <br>
             <!-- 비밀번호 확인 -->
             <div class="inputBox">
-              <input type="pwcheck" placeholder="비밀번호 확인">
+              <input type="pwcheck" placeholder="비밀번호 확인" id="pwcheck">
             </div>
             <br>
             <!-- 이메일 -->
             <div class="inputBox">
-              <input type="email" v-model="email" placeholder="이메일">
+              <input type="email" v-model="email" placeholder="이메일" required autofocus oninvalid="this.setCustomValidity('이메일을 입력해 주세요.')" oninput="setCustomValidity('')">
             </div>
 
             <!-- 가입하기 버튼 -->
             <div class="buttonA">
-            <button type="submit" value="가입하기">가입하기</button>
+            <button type="submit" onclick="passwordcheck()" value="가입하기">가입하기</button>
             </div>
 
 
@@ -55,14 +55,14 @@ export default {
     onSubmit () {
       const { id, pw, email } = this
       this.$emit('submit', { id, pw, email })
-
-    }
+    },
   }
 }
 
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
 .background {
   background-color: #EBECF0;
   height: 100vh;

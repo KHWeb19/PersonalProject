@@ -21,7 +21,7 @@ export default {
       axios.post('http://localhost:7777/member/register', { id, pw, email })
         .then(res => {
           alert('등록 성공! - ' + res)
-
+            this.$router.push({ name: 'LoginPage' })
         })
         .catch(res => {
           alert(res.response.data.message)

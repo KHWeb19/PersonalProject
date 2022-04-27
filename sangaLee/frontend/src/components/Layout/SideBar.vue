@@ -9,43 +9,43 @@
 
     <!-- 대시보드 -->
     <div class="buttonA">
-    <router-link :to="{name: 'LoginPage'}">
+    <router-link :to="{name: 'DashBoardPage'}">
         <button><div class="fontA"><i class="fas fa-home"></i>　Home</div></button>
     </router-link>
     </div>
 
     <!-- 프로필 -->
     <div class="buttonB">
-    <router-link :to="{name: 'LoginPage'}">
+    <router-link :to="{name: ''}">
         <button><div class="fontA"><i class="fa-regular fa-user"></i>　Profile</div></button>
     </router-link>
     </div>
 
     <!-- 캘린더 -->
     <div class="buttonC">
-    <router-link :to="{name: 'LoginPage'}">
+    <router-link :to="{name: ''}">
         <button><div class="fontA"><i class="fa-regular fa-calendar"></i>　Calendar</div></button>
     </router-link>
     </div>
 
     <!-- 질문 게시판 -->
     <div class="buttonD">
-    <router-link :to="{name: 'LoginPage'}">
+    <router-link :to="{name: 'QuestionBoardListPage'}">
         <button><div class="fontA"><i class="fa-solid fa-comments"></i>　QnA</div></button>
     </router-link>
     </div>
 
     <!-- 자료게시판 -->
     <div class="buttonE">
-    <router-link :to="{name: 'LoginPage'}">
+    <router-link :to="{name: 'DataBoardListPage'}">
         <button><div class="fontA"><i class="fa-solid fa-download"></i>　Data</div></button>
     </router-link>
     </div>
 
     <!-- 로그아웃 -->
     <div class="buttonF">
-    <router-link :to="{name: 'LoginPage'}">
-        <button><div class="fontA"><i class="fa-solid fa-arrow-right-from-bracket"></i>　Logout</div></button>
+    <router-link :to="{name: 'MainPage'}">
+        <button v-on:click="logout"><div class="fontA"><i class="fa-solid fa-arrow-right-from-bracket"></i>　Logout</div></button>
     </router-link>
     </div>
 
@@ -54,7 +54,28 @@
 </template>
 
 <script>
+import Vue from 'vue'
+import cookies from 'vue-cookies'
+
+Vue.use(cookies)
 export default {
+  name : 'SideBar',
+  components : {
+
+  },
+  data () {
+    return {
+      isLogin: false
+    }
+  },
+  methods: {
+    logout () {
+      this.$cookies.remove("user")
+      this.isLogin = false
+      this.$store.state.userInfo = null
+      alert('로그아웃 성공!')
+    }
+  }
 }
 </script>
 
@@ -70,7 +91,7 @@ export default {
 .title {
   transition: box-shadow 0.3s ease, color 0.3s ease;
   color: #6768ab;
-  margin-top: 40px;
+  margin-top: 30px;
   margin-bottom: 10px;
   padding: 0 25px;
 }
