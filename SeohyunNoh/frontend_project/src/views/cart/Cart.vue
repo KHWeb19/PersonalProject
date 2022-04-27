@@ -8,8 +8,7 @@
       </div>
     </div>
 
-    <!-- loop over the cart items and display -->
-
+    <!-- 받아온 cartItems를 루프돌며 분배 --> 
     <div v-for="cartItem in cartItems" :key="cartItem.id" class="row mt-2 pt-3 justify-content-around">
       <div class="col-2"></div>
       <div class="col-md-3 embed-responsive embed-responsive-16by9">
@@ -18,7 +17,7 @@
           style="object-fit: cover"/>
       </div>
 
-      <!-- display product name, quantity -->
+      <!-- 상품명, 상품가격, 상품수량 -->
       <div class="col-md-5 px-3">
         <div class="card-block px-3">
           <h6 class="card-title">
@@ -28,7 +27,7 @@
           </h6>
 
           <p class="mb-0 font-weight-bold" id="item-price">
-            $ {{ cartItem.product.price }} per unit
+            ₩ {{ cartItem.product.price }}
           </p>
 
           <p class="mb-0" style="float:left">
@@ -39,22 +38,23 @@
         <p class="mb-0" style="float:right">
           Total:
           <span class="font-weight-bold">
-            $ {{ cartItem.product.price * cartItem.quantity }}
+            ₩ {{ cartItem.product.price * cartItem.quantity }}
           </span>
         </p>
         <br />
-        <a href="#" class="text-right" @click="deleteItem(cartItem.id)">Remove from cart
-        </a>
+        <v-btn plain @click="deleteItem(cartItem.id)">
+            <v-icon x-small>mdi-close</v-icon>
+        </v-btn>
       </div>
       <div class="col-2"></div>
       <div class="col-12"><hr /></div>
     </div>
 
-    <!-- display the price -->
+    <!-- 총합계 , 결제버튼 -->
     <div class="total-cost pt-2 text-right">
-      <h5>Total : ${{ totalCost.toFixed(2) }}</h5>
+      <h5>Total : ₩ {{ totalCost }}</h5>
       <button type="button" class="btn btn-primary confirm" @click="checkout">
-        Confirm order
+        Order
       </button>
     </div>
   </div>
@@ -72,12 +72,10 @@ export default {
     }
   },
   methods: {
-    // fetch All items in cart
     listCartItems() {
-
-        axios.get('http://localhost:7777/cart/list')
+        axios.get(`http://localhost:7777/cart/list/${this.id}`)
         .then((res) =>{
-            console.log(res)
+            console.log('list()')
             const result = res.data
             this.cartItems = result.cartItems
             this.totalCost = result.totalCost
@@ -86,22 +84,19 @@ export default {
             console.log('err' + err);
         })
     },
-    // deleteItem(itemId) {
-    //   axios
-    //     .delete(`${this.baseURL}cart/delete/${itemId}/?token=${this.token}`)
-    //     .then((res) => {
-    //       if (res.status == 200) {
-    //         this.$router.go(0);
-    //       }
-    //     })
-    //     .catch((err) => console.log('err', err));
-    // },
-    // checkout() {
-    //   this.$router.push({ name: 'Checkout' });
-    // },
+    deleteItem(itemId) {
+        // @RequestParam으로 보낼 것이기 때문에 & 사용하기 cart/delete/${itemId}/?token=${this.token}
+      axios.delete(`http://localhost:7777/cart/delete/${itemId}`)
+        .then((res) => {
+          if (res.status == 200) {
+            this.$router.go(0);
+          }
+        })
+        .catch((err) => console.log('err', err));
+    },
     checkout() {
-
-    }
+      this.$router.push({ name: 'Checkout' });
+    },
   },
   mounted() {
     this.id = this.$store.state.userInfo.id
