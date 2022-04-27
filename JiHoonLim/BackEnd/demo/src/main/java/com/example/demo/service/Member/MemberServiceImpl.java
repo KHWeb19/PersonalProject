@@ -225,61 +225,7 @@ public class MemberServiceImpl implements MemberService {
         memberRepository.deleteById(memberNo);
     }
 
-    @Override
-    public boolean addMyFood(MemberCartRequest memberCartRequest) {
 
-        if (memberCartRepository.findBoardNoByMemberNoAndBoardNo(memberCartRequest.getMemberNo(),memberCartRequest.getBoardNo()).isEmpty()){
-            MemberCart memberCart = new MemberCart(memberCartRequest.getCartNo(), memberCartRequest.getMemberNo(),memberCartRequest.getBoardNo(),memberCartRequest.getName(),memberCartRequest.getWriter(),memberCartRequest.getDes(),memberCartRequest.getKind(),memberCartRequest.getMat(),memberCartRequest.getWay(),memberCartRequest.getFilename(),memberCartRequest.getFilepath());
-
-            memberCartRepository.save(memberCart);
-
-            return true;
-        }
-        return false;
-
-        /*
-        Optional<FoodBoard> maybeFood = foodBoardRepository.findById(boardNo);
-
-        FoodBoard cartFood = maybeFood.get();
-
-
-        if (!memberCartRepository.findBoardNoByMemberNoAndBoardNo(memberNo,boardNo).isEmpty()){
-
-        }
-
-
-        log.info(""+cartFood);
-
-        MemberCart memberCart = new MemberCart();
-        memberCart.setBoardNo(cartFood.getBoardNo());
-        memberCart.setMemberNo(memberNo);
-        memberCart.setName(cartFood.getName());
-        memberCart.setWriter(cartFood.getWriter());
-        memberCart.setDes(cartFood.getDes());
-        memberCart.setKind(cartFood.getKind());
-        memberCart.setWay(cartFood.getWay());
-        memberCart.setMat(cartFood.getMat());
-        memberCart.setFilename(cartFood.getFilename());
-        memberCart.setFilepath(cartFood.getFilepath());
-        memberCart.setRegDate(cartFood.getRegDate());
-        memberCart.setCommentCnt(cartFood.getCommentCnt());
-        memberCart.setLikeCnt(cartFood.getLikeCnt());
-
-        memberCartRepository.save(memberCart);
-    */
-
-
-    }
-
-    @Override
-    public List<MemberCart> myCartList(Long memberNo) {
-        return memberCartRepository.findCartList(memberNo);
-    }
-
-    @Override
-    public void remove(Long cartNo) {
-        memberCartRepository.deleteById(cartNo);
-    }
 
 
 }

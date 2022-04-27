@@ -16,4 +16,6 @@ public interface MemberCartRepository extends JpaRepository<MemberCart, Long> {
     @Transactional
     @Query("select cl from MemberCart cl where cl.memberNo = :memberNo")
     List<MemberCart> findCartList(@Param("memberNo")Long memberNo);
+
+
 }

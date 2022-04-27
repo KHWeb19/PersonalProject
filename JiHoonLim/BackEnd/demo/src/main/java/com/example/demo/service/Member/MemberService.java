@@ -23,7 +23,8 @@ public interface MemberService {
     public MemberRequest modifyEmail(Long memberNo, String email, MemberRequest memberRequest);
     public void deleteMember(Long memberNo);
 
-    public boolean addMyFood(MemberCartRequest memberCartRequest);
-    public List<MemberCart> myCartList(Long memberNo);
-    public void remove(Long carNo);
+
+
+
+
 }

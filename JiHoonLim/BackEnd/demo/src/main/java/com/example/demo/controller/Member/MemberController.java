@@ -156,26 +156,7 @@ public class MemberController {
 
 
 
-    @PostMapping("/myCart/register/{memberNo}")
-    public boolean addMyCart(@PathVariable("memberNo") Long memberNo, @Validated @RequestBody MemberCartRequest memberCartRequest){
-        log.info("addCart" +memberCartRequest);
 
-        memberCartRequest.setMemberNo(memberNo);
 
-        return service.addMyFood(memberCartRequest);
-    }
 
-    @GetMapping("/myCart/list/{memberNo}")
-    public List<MemberCart> memberCartList(@PathVariable("memberNo")Long memberNo){
-        log.info("memberCartList()");
-
-        return service.myCartList(memberNo);
-    }
-
-    @DeleteMapping("/myCart/delete/{cartNo}")
-    public void myCartRemove(@PathVariable("cartNo")Long cartNo){
-        log.info("myCartRemove()");
-
-        service.remove(cartNo);
-    }
 }
