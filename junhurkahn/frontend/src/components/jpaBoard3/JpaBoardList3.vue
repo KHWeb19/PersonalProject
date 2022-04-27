@@ -1,23 +1,24 @@
 <template>
  <div class="bx">
   <div>
-        <br>
+       
     <div class="input-group mb-3">
   
   <span class="input-group-text"  id="inputGroup-sizing-default" @click="findSearch">Find</span>
 
+<div class="box">
   <input type="text" 
         class="form-control" 
         ref="keyword"
         aria-label="Sizing example input" 
         aria-describedby="inputGroup-sizing-default">
-
+</div>
 </div>
 
 
-  <table class="table table-success table-striped">
-
-            <tr align="center"  >
+  <table class="table table-succes table-striped">
+ 
+ <tr align="center" table class="table-success"  >
                 <th scope="col" >번호</th>
                <th scope="col">아름</th>
                <th scope="col">생년월일</th>
@@ -122,8 +123,9 @@ export default {
   background-color: #FFFBE6 !important;
 }
 
-.box {
-    background: #FFFBE6;
-}
-
+.box{
+          background:white;
+          width: 50%
+        
+        }
 </style>

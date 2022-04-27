@@ -1,13 +1,13 @@
 <template>
  
   <div class="b">
-        <br>
+        
     <div class="input-group mb-3" >
     
   
   <span class="input-group-text"  id="inputGroup-sizing-default" @click="findSearch">Find</span>
         
-
+   <div class="box">
   <input type="text" 
         
         class="form-control" 
@@ -17,10 +17,12 @@
         >
 
     </div>
+    </div>
 
-  <table class="table table-success table-striped">
 
-            <tr align="center"  >
+  <table class="table table-succes table-striped">
+
+            <tr align="center" table class="table-success"  >
                 <th scope="col" >번호</th>
                <th scope="col">제목</th>
                <th scope="col">작성자</th>
@@ -31,6 +33,7 @@
                     현재 등록된 게시물이 없습니다!
                 </td>
             </tr>
+
             <tr v-else v-for="board in jpaBoards" :key="board.boardNo">
                 <td align="center">
                     {{ board.boardNo }} 
@@ -50,8 +53,12 @@
                      <button type="button" class="btn btn-outline-danger" @click="onDelete(board)">Delete</button>
                 </td>
             </tr>
+
+            
             
    </table>
+
+   
     </div>
 
   
@@ -121,6 +128,15 @@ export default {
 .box {
     background: #FFFBE6;
 }
+
+.color {
+    color: green;
+}
+ .box{
+          background:white;
+          width: 50%
+        
+        }
 
  
         

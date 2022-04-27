@@ -3,12 +3,73 @@
 <div class="p-3 mb-2 bg-light text-dark">
 <div>
   <v-card color="basil">
+
+    <div class=" big ">
+   &emsp;&emsp; <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+    </div>
+
+       <v-navigation-drawer
+      v-model="drawer"
+      absolute
+      bottom
+      temporary
+    >
+      <v-list
+        nav
+        dense
+      >
+        <v-list-item-group
+          v-model="group"
+          active-class="deep-purple--text text--accent-4"
+        >
+          <v-list-item>
+
+          <router-link style="text-decoration: none;" :to="{ name: 'IntentionPlan' }">
+      <h5>기획의도</h5>
+    </router-link>
+
+          </v-list-item>
+
+          <v-list-item>
+
+         <router-link style="text-decoration: none;" :to="{ name: 'PlanningStage' }">
+      <h5>기획단계</h5>
+    </router-link>
+
+          </v-list-item>
+
+          <v-list-item>
+
+                <router-link style="text-decoration: none;" :to="{ name: 'LoginTestPage' }">
+      <h5>로그인</h5>
+    </router-link>
+
+          </v-list-item>
+
+          <v-list-item>
+
+            <router-link style="text-decoration: none;" :to="{ name: 'VuetifyMemberJoinColumnTestPage' }">
+      <h5>회원가입</h5>
+    </router-link>
+    
+          </v-list-item>
+        </v-list-item-group>
+      </v-list>
+    </v-navigation-drawer>
+
+
+
     <v-card-title class="text-center justify-center py-6">
       <h1 class="font-weight-bold text-h2 basil--text"  >
       Note
       </h1>
     </v-card-title>
+  
 
+
+     
+    
+  
     <v-tabs
       v-model="tab"
       background-color="transparent"
@@ -18,57 +79,24 @@
 
     
     
-      <v-tab
-      >
-           <router-link style="text-decoration: none;" :to="{ name: 'LoginTestPage' }">
-      <h3>&nbsp;&nbsp;&nbsp;&nbsp;기획의도&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</h3>
-    </router-link>
-
-      <router-link style="text-decoration: none;" :to="{ name: 'LoginTestPage' }">
-      <h3>&nbsp;&nbsp;&nbsp;&nbsp;애자일보드 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</h3>
-    </router-link>
-
-          <router-link style="text-decoration: none;" :to="{ name: 'LoginTestPage' }">
-      <h3>&nbsp;&nbsp;&nbsp;&emsp;로그인&nbsp;&nbsp;&nbsp;&nbsp;</h3>
-    </router-link>
-
-     <router-link style="text-decoration: none;" :to="{ name: 'VuetifyMemberJoinColumnTestPage' }">
-      <h3>&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;회원가입&nbsp;</h3>
-    </router-link>
-    
-
-
-     
-      </v-tab>
+   
     </v-tabs>
-
-    <v-tabs-items v-model="tab">
-      <v-tab-item
-        v-for="item in items"
-        :key="item"
-      >
-        <v-card
-          color="basil"
-          flat
-        >
-          <v-card-text>{{ text }}</v-card-text>
-        </v-card>
-      </v-tab-item>
-      
-    </v-tabs-items>
-
-    
-
   </v-card>
 
-  
+
+
+    
+
    
-   <v-img
-  lazy-src="https://picsum.photos/id/11/10/6"
-  max-height="500"
-  max-width="3000"
-  src="https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F584%2F2021%2F08%2F28%2F0000015734_001_20210828101023352.jpg&type=sc960_832"
-></v-img>
+     <v-carousel>
+    <v-carousel-item
+      v-for="(item,i) in items"
+      :key="i"
+      :src="item.src"
+      reverse-transition="fade-transition"
+      transition="fade-transition"
+    ></v-carousel-item>
+  </v-carousel>
 
  <v-row>
 
@@ -138,22 +166,40 @@
 
 <script>
   export default {
-    data () {
-      return {
-        tab: null,
-        items: [
-          '기획의도','기획단계', '로그인', '회원가입',
+    data: () => ({
+      drawer: false,
+      group: null,
+       items: [
+          {
+            src: 'https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F584%2F2021%2F08%2F28%2F0000015734_001_20210828101023352.jpg&type=sc960_832',
+          },
+          {
+            src: 'https://search.pstatic.net/common/?src=http%3A%2F%2Fcafefiles.naver.net%2FMjAxNzA5MTdfODUg%2FMDAxNTA1NjAzMTQzMTYw.AYaWuWvqDossv-68BKOtChp-_A9AaEKsYUiOXXWpzQcg.GnW8lbFJWhu-w7TgNBSskLpjcj29I1F7IneE6jHG6EYg.JPEG.shlope%2Fp1020650.jpg&type=sc960_832',
+          },
+          {
+            src: 'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTAxMTJfMTM2%2FMDAxNjEwNDYwMDc4MjE5.V2-GSUEHUgaKvc1E-o2PJP3TeoZSngciHbwdDYsViNkg.w7KPtqVZfoOvPHyicvzXHIZCFatXajaD0EDkWxlnzegg.PNG.bbpinkaa%2Fimage.png&type=sc960_832',
+          },
+          {
+            src: 'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA5MTRfMTc0%2FMDAxNjMxNTk5NzY1MDE3.GSWSL29AIvanl9I6Wx698qJslAqk4V-MLp0bqasmBXcg.Q3ceVsfIbqe0mY_r6d5dkG4k4zS2alE9mEA55qJrNv4g.JPEG.hohohopoison%2F%25C4%25F7%25B8%25AE%25C6%25BC.jpg&type=sc960_832',
+          },
         ],
+    }),
        
-      }
+      
+    watch: {
+      group () {
+        this.drawer = false
+      },
     },
   }
+    
+  
 </script>
 
 <style>
 /* Helper classes */
 
-h3{color: green;}
+h5{color: green;}
 
 .basil {
   background-color: #FFFBE6 !important;
@@ -161,4 +207,11 @@ h3{color: green;}
 .basil--text {
   color: #356859 !important;
 }
+
+.big {
+ width: 300;
+ height: 500;
+}
+
+
 </style>

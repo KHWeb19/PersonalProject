@@ -21,6 +21,9 @@ public class JpaBoards {
     private String writer;
 
     @Lob
+    private String files;
+
+    @Lob
     private String content;
 
     @CreationTimestamp

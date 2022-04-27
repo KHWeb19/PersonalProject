@@ -3,6 +3,61 @@
 <div class="p-3 mb-2 bg-light text-dark">
 <div>
   <v-card color="basil">
+
+       <div class=" big ">
+   &emsp;&emsp; <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+    </div>
+
+       <v-navigation-drawer
+      v-model="drawer"
+      absolute
+      bottom
+      temporary
+    >
+      <v-list
+        nav
+        dense
+      >
+        <v-list-item-group
+          v-model="group"
+          active-class="deep-purple--text text--accent-4"
+        >
+          <v-list-item>
+
+          <router-link style="text-decoration: none;" :to="{ name: 'IntentionPlan' }">
+      <h5>기획의도</h5>
+    </router-link>
+
+          </v-list-item>
+
+          <v-list-item>
+
+         <router-link style="text-decoration: none;" :to="{ name: 'PlanningStage' }">
+      <h5>기획단계</h5>
+    </router-link>
+
+          </v-list-item>
+
+          <v-list-item>
+
+                <router-link style="text-decoration: none;" :to="{ name: 'LoginTestPage' }">
+      <h5>로그인</h5>
+    </router-link>
+
+          </v-list-item>
+
+          <v-list-item>
+
+            <router-link style="text-decoration: none;" :to="{ name: 'VuetifyMemberJoinColumnTestPage' }">
+      <h5>회원가입</h5>
+    </router-link>
+    
+          </v-list-item>
+        </v-list-item-group>
+      </v-list>
+    </v-navigation-drawer>
+
+
     <v-card-title class="text-center justify-center py-6">
       <h1 class="font-weight-bold text-h2 basil--text"  >
        Note
@@ -72,7 +127,9 @@ export default {
   },
   data () {
     return {
-      isLogin: false
+      isLogin: false,
+        drawer: false,
+      group: null,
     }
   },
   mounted() {
@@ -92,11 +149,11 @@ export default {
             .then(res => {
               if (res.data) {
                 alert('로그인 성공!')
-                router.push({name : 'JpaBoardListPage'})
+                router.push({name :'MainPage'})
                 this.$store.state.userInfo = res.data
                 this.$cookies.set("user", res.data, 30)
                 this.isLogin = true
-                 router.push({name : 'JpaBoardListPage'})
+                  router.push({name :'MainPage'})
 
               }
             })
