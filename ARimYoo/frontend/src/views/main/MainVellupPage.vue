@@ -1,9 +1,6 @@
 <template>
     <div>
-        <v-container>
             <main-vellup/>
-        </v-container>
-        
     </div>
 </template>
 

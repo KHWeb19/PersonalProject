@@ -53,13 +53,13 @@
     </div>
 
     <v-main>
-      <v-container fluid justify-center class="py-0 px-0 mt-5 mb-10">
+      <v-container justify-center class="py-0 px-0 mt-5">
         <router-view></router-view>
       </v-container>
     </v-main>
 
     <div v-if="$route.name !=='EnterVellup' && $route.name !== 'JoinPage' && $route.name !== 'JoinPage2'">
-        <v-footer dark padless style="width:76.5%; margin-left:auto; margin-right:auto">
+        <v-footer dark padless style="width:78%; margin-left:auto; margin-right:auto">
         <v-card
         flat
         tile
