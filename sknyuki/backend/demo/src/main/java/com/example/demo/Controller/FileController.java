@@ -61,10 +61,10 @@ public class FileController {
     @PostMapping("/ProductBoardS")
     @ResponseBody
     public String ProductBoardSFileUpload(@RequestParam(value = "fileList", required = false) List<MultipartFile> fileList,
-                                     @RequestParam("boardNo") Long boardNo, @RequestParam("id") String id) {
+                                     @RequestParam("boardNo") Long boardNo) {
         try {
             for (MultipartFile multipartFile : fileList) {
-                FileOutputStream writer = new FileOutputStream("./images/ProductBoardS/" + boardNo + "_" + id + ".jpg");
+                FileOutputStream writer = new FileOutputStream("./images/ProductBoardS/" + boardNo +".jpg");
                 writer.write(multipartFile.getBytes());
                 writer.close();
             }
