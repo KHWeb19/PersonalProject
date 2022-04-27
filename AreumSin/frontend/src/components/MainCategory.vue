@@ -2,7 +2,7 @@
   <v-container>
     <v-row align="center">
       <v-col cols="3"  sm="3" md="3" lg="3">
-        <v-btn style="margin-left: 20px" fab @click="checkLogin" x-large> 사용자 </v-btn>
+        <v-btn style="margin-left: 20px" fab @click="checkLogin" x-large> {{ user }} </v-btn>
       </v-col>
       <v-spacer></v-spacer>
       <v-col>
@@ -23,6 +23,11 @@
 <script>
 export default {
   name: "MainCategory",
+  data(){
+    return{
+      user: "없다"
+    }
+  },
   methods: {
     planLink(){
       if(localStorage.getItem("session") === null) {
@@ -44,6 +49,11 @@ export default {
         this.$router.push({name: 'MyPage'})
       }
 
+    }
+  },
+  created() {
+    if(localStorage.getItem("session") !== null){
+      this.user = localStorage.getItem("session");
     }
   }
 }

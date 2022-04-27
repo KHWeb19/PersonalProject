@@ -1,9 +1,7 @@
 <template>
   <div>
     <MainCategory></MainCategory>
-    <div>
-      {{id}}
-    </div>
+    <div style="margin-bottom: 10px"></div>
 
     <PlanPageForm v-bind:userPlans="userPlans"></PlanPageForm>
 
