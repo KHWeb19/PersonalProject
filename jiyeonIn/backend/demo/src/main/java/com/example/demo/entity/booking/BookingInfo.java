@@ -8,6 +8,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Formula;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
@@ -75,6 +76,7 @@ public class BookingInfo {
     @JsonIgnore
     @JoinColumn(name = "member_no")
     private Member memberInfo;
+
 
     public BookingInfo(String id, String date, String time, String process, String contents, String linkInfo) {
         this.id = id;

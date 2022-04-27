@@ -31,7 +31,6 @@ import { mapState, mapActions } from 'vuex'
         },
         data () {
             return {
-                
                 checkId:''
             }
         }

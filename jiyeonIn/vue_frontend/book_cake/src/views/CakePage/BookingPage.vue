@@ -6,7 +6,7 @@
         <div class="wrap">
             <h3>예약하기</h3>
             <br>
-            <booking-cake-form :cakeLists="cakeLists" @submit="submitBooking"/>
+            <booking-cake-form :cakeLists="cakeLists" :bookingListsDate="bookingListsDate" @submit="submitBooking"/>
         </div>
         
         <footer-form></footer-form>
@@ -37,13 +37,13 @@ import axios from 'axios'
                 }
         },
         computed: {
-            ...mapState(['cakeLists'])
+            ...mapState(['cakeLists', 'bookingListsDate'])
         },
          mounted () {
-            this.fetchCakeLists()
+            this.fetchCakeLists(), this.fetchBookingListsDate()
         },
         methods: {
-            ...mapActions(['fetchCakeLists']),
+            ...mapActions(['fetchCakeLists','fetchBookingListsDate']),
             submitBooking (payload) {
                 const { id, date, time, contents, cakeArrNo, files1 } = payload
 

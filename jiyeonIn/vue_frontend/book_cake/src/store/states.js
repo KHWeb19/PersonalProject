@@ -8,4 +8,5 @@ export default {
     bookingIdLists:[],
     reviewsIdLists:[],
     memberLists:[],
+    bookingListsDate:[]
 }

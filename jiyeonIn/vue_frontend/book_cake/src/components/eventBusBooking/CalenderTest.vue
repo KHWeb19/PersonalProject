@@ -28,6 +28,9 @@
                   v-model="date"
                   no-title
                   @input="menu1 = false"
+                  :min="new Date().toISOString().substr(0, 10)"
+                  :allowed-dates="allowedDates"
+                  @update:picker-date="pickerUpdate($event)"
                 ></v-date-picker>
               </v-menu>
               
@@ -52,8 +55,10 @@
 </template>
 
 <script>
+import moment from 'moment' 
 
   export default {
+    
     data: vm => ({
       date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
       dateFormatted: vm.formatDate((new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)),
@@ -61,7 +66,15 @@
       menu2: false,
       time: '',
       isShow: false,
+      blockDate :[],
+      findLeastDate:[]
     }),
+    props: {
+        bookingListsDate: {
+            type: Array,
+            required: true
+        }
+    },
 
     computed: {
       computedDateFormatted () {
@@ -93,9 +106,72 @@
         const { date, time } =this
         this.$emit('submit', { date, time })
         this.isShow = !this.isShow
+      },
+      allowedDates(a) {
+        return this.blockDate.includes(a);
+      },
+      pickerUpdate(val) {
+        let totalDay = moment(val, "YYYY-MM").daysInMonth()
+
+        let monthNow = moment().format('M')
+        let monthSelected = moment(val).format('M')
+        let selectDay
+
+        if(monthNow == monthSelected)
+          selectDay = moment().format('D')
+        else
+          selectDay = 1
+
+        let sDayList = new Array();
+
+        let count1 = 0
+        let selectDay1 = moment().month(val.split('-')[1]-1).date(selectDay).format("YYYY-MM-DD")
+
+        for(let j = 0; j <this.bookingListsDate.length; j++) {
+          let bookingMonthSelected = moment(this.bookingListsDate[j].date).format('M')
+          if(monthSelected == bookingMonthSelected){
+            if(this.bookingListsDate[j].date < selectDay1 ){
+              continue
+            }else if(this.bookingListsDate[j].date >= selectDay1) {
+              sDayList[count1] = this.bookingListsDate[j].date
+              count1 +=1
+            }
+          }
+          
+        }
+        
+        let count = 0
+
+        if(sDayList.length > 0){
+          for (let i = selectDay; i <= totalDay ; i++) {
+            let thisDate = moment().month(val.split('-')[1]-1).date(i).format("YYYY-MM-DD")
+            if (moment(thisDate).day() !== 1){
+              if(moment(thisDate).day() !== 0){
+                for(let z = 0+count; z <=sDayList.length; z++) {
+                  if(thisDate == sDayList[z]) {
+                    if(sDayList.length >1) count += 1
+                    else count = 0
+                    break
+                  }
+                  else 
+                  this.blockDate.push(thisDate)
+                  break
+                }
+              }
+            }
+          }
+        }else{
+          for (let i = selectDay; i <= totalDay ; i++) {
+            let thisDate = moment().month(val.split('-')[1]-1).date(i).format("YYYY-MM-DD")
+            if (moment(thisDate).day() !== 1){
+              if(moment(thisDate).day() !== 0){
+                this.blockDate.push(thisDate)
+              }
+            }
+          }
+        }
       }
     }
-
   }
 </script>
 

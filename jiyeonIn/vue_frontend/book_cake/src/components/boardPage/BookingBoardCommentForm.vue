@@ -1,7 +1,7 @@
 <template>
     <div >
         <div class="textbox" v-for="(comment, index) in boardComments" :key="index">
-            <div v-if="(comment.id == id) || (comment.id == 'manager')">
+            <div>
                 <strong> {{ comment.id }} </strong> <br>
                 <span class="comments"> 
                     {{ comment.comments}} 
@@ -17,13 +17,29 @@
 
         <div>
             <form @submit.prevent="onSubmit">
-                <br><br><h4>댓글 : <strong>{{this.id}}</strong></h4>
-                <textarea type="text" v-model="comments" placeholder="댓글을 입력해주세요" class="commentcheck"/><br>
-                <input type="file" id="files1" ref="files1" 
-                    multiple v-on:change="handleFileUpload()"/>
-                <v-btn class="commentRegister" type="submit" color="white">
-                    <strong>등록</strong>
-                </v-btn>  
+                <v-container>
+                    <v-row>
+                        <v-col>
+                            <br><br><h4>댓글 : <strong>{{this.id}}</strong></h4>
+                        </v-col>
+                    </v-row>
+                    <v-row>
+                        <v-col class="col-12 col-sm-7">
+                            <textarea type="text" v-model="comments" placeholder="댓글을 입력해주세요" class="commentcheck"/><br>
+                        </v-col>
+                        <v-col class="col-12 col-sm-1">
+                            <v-btn class="commentRegister" type="submit" color="white">
+                                <strong>등록</strong>
+                            </v-btn>  
+                        </v-col>
+                    </v-row>
+                    <v-row>
+                        <v-col>
+                            <input type="file" id="files1" ref="files1" 
+                                multiple v-on:change="handleFileUpload()"/>
+                        </v-col>
+                    </v-row>
+                </v-container>
             </form>
         </div>
         
@@ -65,7 +81,7 @@
 <style scoped>
 .commentcheck {
     border: 2px solid rgb(37, 26, 26);
-    width:800px;
+    width: 750px;
     height: 100px;
     color:black;
 }

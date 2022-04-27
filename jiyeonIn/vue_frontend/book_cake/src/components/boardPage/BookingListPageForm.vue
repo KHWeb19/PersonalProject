@@ -53,7 +53,7 @@
                     {{ board.process }}
                 </td>
                 <td align="center">
-                    <a @click="checkRightId(board)">{{ board.id }} 님의 주문서입니다.</a>
+                    <a @click="checkRightId(board)">{{ board.id }} 님의 주문서입니다. [{{board.commentList.length}}]</a>
                 </td>
                 <td align="center">
                     {{ board.regDate}}
