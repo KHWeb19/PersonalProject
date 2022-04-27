@@ -42,6 +42,8 @@ import JpaBoardModifyPage4 from '@/views/jpaBoard4/JpaBoardModifyPage4.vue'
 import JpaMemberAuthTestPage from '@/views/jpaMember/JpaMemberAuthTestPage.vue'
 import VuetifyMemberJoinColumnTestPage from '@/views/jpaMember/VuetifyMemberJoinColumnTestPage.vue'
 import DaumNewsCrawlerPage from '@/views/crawl/DaumNewsCrawlerPage.vue'
+import IntentionPlan from '@/views/jpaMember/IntentionPlan.vue'
+import PlanningStage from '@/views/jpaMember/PlanningStage.vue'
 
 
 
@@ -71,6 +73,24 @@ const routes = [
       default: LoginTestPage
     }
   },
+
+
+  {
+    path: '/IntentionPlan',
+    name: 'IntentionPlan',
+    components: {
+      default: IntentionPlan
+    }
+  },
+
+  {
+    path: '/PlanningStage',
+    name: 'PlanningStage',
+    components: {
+      default: PlanningStage
+    }
+  },
+
 
   {
     path: '/jpaBoardList',
