@@ -119,6 +119,11 @@ public class BookingServiceImpl implements BookingService{
     @Transactional
     @Override
     public void modify(BookingInfo bookingInfo) {
+        Optional<Member> findMemberNo = memberRepository.findByUserId(bookingInfo.getId());
+        Member member = findMemberNo.get();
+
+        bookingInfo.setMemberInfo(member);
+
         repository.save(bookingInfo);
     }
 

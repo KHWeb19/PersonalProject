@@ -149,14 +149,12 @@ import moment from 'moment'
               if(moment(thisDate).day() !== 0){
                 for(let z = 0+count; z <=sDayList.length; z++) {
                   if(thisDate == sDayList[z]) {
-                    console.log('bookingListsDate:'+sDayList[z])
                     if(sDayList.length >1) count += 1
                     else count = 0
                     break
                   }
                   else 
                   this.blockDate.push(thisDate)
-                  console.log('date:'+thisDate)
                   break
                 }
               }
@@ -168,7 +166,6 @@ import moment from 'moment'
             if (moment(thisDate).day() !== 1){
               if(moment(thisDate).day() !== 0){
                 this.blockDate.push(thisDate)
-                  console.log('date:'+thisDate)
               }
             }
           }
