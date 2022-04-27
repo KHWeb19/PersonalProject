@@ -1,11 +1,12 @@
 <template>
 <div id="main">
   <v-app>
-    <v-app-bar app clipped-right color="#7a9e68" dark class="elevation-0">
+    <v-app-bar app clipped-right color="#7a9e68" dark class="elevation-0" style="height: 9%">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title>
-        <div @click="home">로고 들어갈 자리</div>
-      </v-toolbar-title>
+        <v-toolbar-items style="bottom: 0;">
+          &emsp;
+          <div @click="home"> <img src ="@/assets/3reguide_logo.png"/> </div>
+        </v-toolbar-items>
       <v-spacer></v-spacer>
 
       <v-toolbar-items v-if="this.$store.state.userInfo == null">
