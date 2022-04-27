@@ -1,7 +1,7 @@
 <template>
     <div >
         <div class="textbox" v-for="(comment, index) in boardComments" :key="index">
-            <div v-if="(comment.id == id) || (comment.id == 'manager')">
+            <div>
                 <strong> {{ comment.id }} </strong> <br>
                 <span class="comments"> 
                     {{ comment.comments}} 

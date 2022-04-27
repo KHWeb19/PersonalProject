@@ -53,49 +53,49 @@
                         mdi-delete
                     </v-icon>
                     </template>
-                </v-data-table>
-                </v-card>
+            </v-data-table>
+            </v-card>
 
-                <form @submit.prevent="modifySubmit">
-                    <v-dialog v-model="dialog" >
-                        <v-card >
-                            <v-card-title >수정하기</v-card-title>
-                            <v-card-text>
-                                <v-container>
-                                    <v-row>
-                                        <v-col>
-                                            <p>파일 다시 올리기</p>
-                                            <input type="file" id="files2" ref="files2"
-                                                multiple v-on:change="handleFileUpload2()"/>
-                                        </v-col>
-                                        <v-col>
-                                            <v-select class="selectCake" v-model="design" :items="selectCake" label="디자인 선택"/>
-                                            <v-select class="selectSize" v-model="size" :items="selectSize" label="사이즈 선택"/>
-                                            <v-text-field label="가격 작성" v-model="price"></v-text-field>
-                                        </v-col>
-                                    </v-row>
-                                </v-container>
-                            </v-card-text>
-                            <v-card-actions>
-                            <v-spacer></v-spacer>
-                            <v-btn color="white" @click="dialog = false">돌아가기</v-btn>
-                            <v-btn color="white" @click="modifySubmit">수정하기</v-btn>
-                            </v-card-actions>
-                        </v-card>   
-                    </v-dialog>
-                </form>
+            <form @submit.prevent="modifySubmit">
+                <v-dialog v-model="dialog" >
+                    <v-card >
+                        <v-card-title >수정하기</v-card-title>
+                        <v-card-text>
+                            <v-container>
+                                <v-row>
+                                    <v-col>
+                                        <p>파일 다시 올리기</p>
+                                        <input type="file" id="files2" ref="files2"
+                                            multiple v-on:change="handleFileUpload2()"/>
+                                    </v-col>
+                                    <v-col>
+                                        <v-select class="selectCake" v-model="design" :items="selectCake" label="디자인 선택"/>
+                                        <v-select class="selectSize" v-model="size" :items="selectSize" label="사이즈 선택"/>
+                                        <v-text-field label="가격 작성" v-model="price"></v-text-field>
+                                    </v-col>
+                                </v-row>
+                            </v-container>
+                        </v-card-text>
+                        <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn color="white" @click="dialog = false">돌아가기</v-btn>
+                        <v-btn color="white" @click="modifySubmit">수정하기</v-btn>
+                        </v-card-actions>
+                    </v-card>   
+                </v-dialog>
+            </form>
                 
-                    <v-dialog v-model="deleteDialog">
-                        <v-card>
-                            <v-card-title class="headline">정말 삭제하시겠습니까?</v-card-title>
-                            <v-card-text>삭제하게 되면 내용은 다시 볼 수 없게 됩니다.</v-card-text>
-                            <v-card-actions>
-                            <v-spacer></v-spacer>
-                            <v-btn color="white" @click="deleteDialog = false">돌아가기</v-btn>
-                            <v-btn color="white" type="button" @click="deleteReview">삭제합니다</v-btn>
-                            </v-card-actions>
-                        </v-card>   
-                    </v-dialog>
+            <v-dialog v-model="deleteDialog">
+                <v-card>
+                    <v-card-title class="headline">정말 삭제하시겠습니까?</v-card-title>
+                    <v-card-text>삭제하게 되면 내용은 다시 볼 수 없게 됩니다.</v-card-text>
+                    <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="white" @click="deleteDialog = false">돌아가기</v-btn>
+                    <v-btn color="white" type="button" @click="deleteReview">삭제합니다</v-btn>
+                    </v-card-actions>
+                </v-card>   
+            </v-dialog>
         </div>
         
     </div>
