@@ -44,7 +44,7 @@
         </v-icon>
       </router-link>
     </v-btn>
-    <v-menu offset-y min-width="230px">
+    <v-menu offset-y min-width="130px">
       <template v-slot:activator="{ on }">
         <v-btn icon v-on="on">
           <div style="border-radius: 70%; overflow: hidden;">
@@ -59,18 +59,18 @@
             <router-link style="text-decoration: none;" :to="{
               name: 'MyProfilePage',
               params: {memberNo: loginInfo.memberNo.toString()}}">
-              <v-btn>프로필</v-btn>
+              <v-btn text block>프로필</v-btn>
             </router-link>
           </v-list-item-title>
           <v-list-item-title> 
             <router-link style="text-decoration: none;" :to="{
               name: 'AccountsEditPage',
               params: {memberNo: loginInfo.memberNo.toString()}}">
-              <v-btn>설정</v-btn>
+              <v-btn text block>설정</v-btn>
             </router-link>
           </v-list-item-title>
           <v-list-item-title>        
-              <v-btn @click="logout">
+              <v-btn text block @click="logout">
                 로그아웃
               </v-btn>
           </v-list-item-title>

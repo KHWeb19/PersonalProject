@@ -57,7 +57,7 @@ public class Member {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
 //    @JsonManagedReference(value="board-likes")
-    @JsonIgnoreProperties({"member", "board"})
+    @JsonIgnoreProperties({"member"})
     @OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
     private Set<Likes> likes = new HashSet<>();
 

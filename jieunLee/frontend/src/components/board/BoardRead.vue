@@ -10,7 +10,7 @@
                             <v-img width="740" max-height="740"  :src="require(`@/assets/mImage/${board.boardImage}`)"/>
                         </td>
                     </tr>
-                    <tr>
+                    <tr height="60px">
                         <td style="width: 32px; padding: 10px 14px 10px 16px; ">
                             <div style="border-radius: 70%; overflow: hidden; width: 32px ">
                                 <v-img v-if="board.member.imageName" width="32" :src="require(`@/assets/mImage/${board.member.imageName}`)"/>
@@ -31,11 +31,11 @@
                                 </template>
                                 <v-list>
                                     <v-list-item-title> 
-                                        <v-btn @click="onDelete">삭제</v-btn>
+                                        <v-btn text block color="red" @click="onDelete">삭제</v-btn>
                                     </v-list-item-title>
                                     <v-list-item-title> 
-                                        <router-link :to="{ name: 'BoardModifyPage', params: { boardNo: board.boardNo } }">
-                                            게시물 수정
+                                        <router-link style="text-decoration: none;" :to="{ name: 'BoardModifyPage', params: { boardNo: board.boardNo } }">
+                                            <v-btn text block>수정</v-btn>
                                         </router-link>
                                     </v-list-item-title>
                                 </v-list>
@@ -54,17 +54,14 @@
                                 <v-img v-else width="32" src="@/assets/profile.jpg"/>
                             </div>
                         </td>
-                        <td colspan="3" style="height: 50px;  padding: 14px 0px 16px 0px">
-                            <div style="display: flex;">
-                                <div style="font-weight: bold; padding-bottom: 6px" >
-                                    {{ board.member.memberId }}&nbsp;
+                        <td colspan="3" style="height: 50px;  padding: 14px 0px 16px 0px; max-width: 30px">
+                                <div style="padding-bottom: 6px" >
+                                    <b>{{ board.member.memberId }}</b>&nbsp;{{ board.content }}
                                 </div>
-                                {{ board.content }}
-                            </div>
                             <span style="font-size: 12px; color: grey">{{ board.regDate }}</span>
                         </td>
                     </tr>
-                    <tr align="left" >
+                    <tr align="left">
                         <td colspan="4" style=" padding-left: 16px"  > 
                             <div style="overflow-y:auto; overflow-x:hidden; width:100%; height:435px;">
                                 <div v-for="comment in comments" :key="comment.commentNo">
@@ -78,22 +75,25 @@
                                         <div style="padding-bottom: 10px">
                                             <b>{{ comment.member.memberId }}&nbsp;</b>{{ comment.content }}  
                                             <div   style="display: flex">
-                                                <div style="font-size: 12px; color: grey">{{ comment.regDate }}</div>
-                                                <v-menu offset-y min-width="100">
-                                                    <template v-slot:activator="{ on }">
-                                                        <!-- <v-btn v-if="comment.member.memberId==this.loginInfo.memberId" icon v-on="on"> -->
-                                                        <v-btn icon v-on="on">
-                                                            <v-icon>
-                                                                mdi-dots-horizontal
-                                                            </v-icon>
-                                                        </v-btn> 
-                                                    </template>
-                                                    <v-list>
-                                                        <v-list-item-title > 
-                                                            <v-btn @click="onCommentDelete(comment.commentNo)">삭제</v-btn>
-                                                        </v-list-item-title>
-                                                    </v-list>
-                                                </v-menu>  
+                                                <div style="font-size: 12px; color: grey">{{ comment.regDate }}
+                                                    <v-menu offset-y min-width="100">
+                                                        <template v-slot:activator="{ on }">
+                                                            <!-- <v-btn v-if="comment.member.memberId==this.loginInfo.memberId" icon v-on="on"> -->
+                                                            <v-btn icon v-on="on">
+                                                                <v-icon>
+                                                                    mdi-dots-horizontal
+                                                                </v-icon>
+                                                            </v-btn> 
+                                                        </template>
+                                                        <v-list>
+                                                            <v-list-item-title > 
+                                                                <v-btn text block color="red" @click="onCommentDelete(comment.commentNo)">삭제</v-btn>
+                                                            </v-list-item-title>
+                                                        </v-list>
+                                                    </v-menu> 
+                                                    
+                                                </div>
+                                                 
                                             </div>
                                         </div>
                                     </div>
@@ -231,7 +231,6 @@ export default {
     methods: {
         ...mapActions(['fetchComment']),
         ...mapActions(['fetchLoginLikes']),
-
         getItemControl() {
             return `item.actions`;
         },

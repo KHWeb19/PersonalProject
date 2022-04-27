@@ -8,7 +8,8 @@ import {
     FETCH_COMMENT,
     FETCH_COMMENT_LIST,
     FETCH_TWO_COMMENT_LIST,
-    FETCH_LOGIN_LIKES
+    FETCH_LOGIN_LIKES,
+    FETCH_LIKES_LIST
 } from './mutation-types'
 
 export default {
@@ -41,5 +42,8 @@ export default {
     },
     [FETCH_LOGIN_LIKES] (state, loginLikes) {
         state.loginLikes = loginLikes
+    },
+    [FETCH_LIKES_LIST] (state, likes) {
+        state.likes = likes
     },
 }

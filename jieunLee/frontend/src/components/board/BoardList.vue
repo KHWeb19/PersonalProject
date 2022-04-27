@@ -29,11 +29,11 @@
                                     </template>
                                     <v-list>
                                         <v-list-item-title> 
-                                            <v-btn @click="onDelete(board.boardNo)">삭제</v-btn>
+                                            <v-btn text block color="red" @click="onDelete(board.boardNo)">삭제</v-btn>
                                         </v-list-item-title>
                                         <v-list-item-title> 
-                                            <router-link :to="{ name: 'BoardModifyPage', params: { boardNo: board.boardNo } }">
-                                                게시물 수정
+                                            <router-link style="text-decoration: none;" :to="{ name: 'BoardModifyPage', params: { boardNo: board.boardNo } }">
+                                                <v-btn text block>수정</v-btn>
                                             </router-link>
                                         </v-list-item-title>
                                     </v-list>
@@ -47,7 +47,7 @@
                         </tr >
                         <!-- <like-button :board="board"/> -->
                         <tr align="left">
-                            <td style="padding: 6px 9px" colspan="3" v-if="loginLikes.length>0" >
+                            <!-- <td style="padding: 6px 9px" colspan="3" v-if="loginLikes.length>0" >
                                 <v-btn icon @click="onLikes(board.boardNo)" >
                                     <v-icon  color="black">
                                         mdi-cards-heart
@@ -62,8 +62,8 @@
                                         </v-icon>
                                     </v-btn>
                                 </router-link>
-                            </td>
-                            <td style="padding: 6px 9px" colspan="3" v-else>
+                            </td> -->
+                            <td style="padding: 6px 9px" colspan="3">
                                 <v-btn icon @click="onLikes(board.boardNo)" >
                                     <v-icon  color="black">
                                         mdi-cards-heart-outline
