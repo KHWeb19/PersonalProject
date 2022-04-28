@@ -27,6 +27,12 @@ export default {
     memberStudy: null,
     memberProjects: [],
     memberProject: null,
+
+    mainCommunityList: [],
+    mainMarketList: [],
+    mainReviewList: [],
+    mainStudyList: [],
+    mainProjectList: [],
     
     token: localStorage.getItem('token'),
     userInfo: JSON.parse(localStorage.getItem('userInfo'))

@@ -81,12 +81,6 @@ export default {
      user: {
          message: decodeURIComponent(this.$store.state.userInfo.id),
      },
-     icons: [
-        'mdi-facebook',
-        'mdi-twitter',
-        'mdi-linkedin',
-        'mdi-instagram',
-      ],
      items: [
          {title: 'My Page', route:'/myPage'},
          {title: 'My With', route:'/myWith'}

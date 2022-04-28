@@ -1,14 +1,5 @@
 <template>
-    <v-container class="mt-10">
-        <v-row justify="center">
-            <input type="text" class="mainSearch">
-            <v-btn class="searchBtn" @click=goSearch color="red darken-3" dark>
-                    <v-icon>
-                        mdi-magnify
-                    </v-icon>
-            </v-btn>
-        </v-row>
-        <br/>
+    <v-container >
         <v-row class="imgGallery fill-height" align="center" justify="center" >
             <template  v-for="(item, i) in items">
                 <v-col :key="i"  class="container">
@@ -109,7 +100,7 @@ export default {
                 {explain:'Our ideas about develop are always smart and interesting', content:'smart', img: require('@/assets/main/main3.png')},
                 {explain:'We are the people who lead the future', content:'future', img: require('@/assets/main/main2.png')},
                 {explain:'Do action of working with someone to produce or create idea', content:'collaboration', img: require('@/assets/main/main1.png')}
-            ]
+            ],
         }
     },
     props: {
@@ -119,7 +110,7 @@ export default {
         reviewBest: {
             type:Array
         }
-    }
+    },
 }
 </script>
 <style scoped>

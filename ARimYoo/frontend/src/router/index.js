@@ -66,8 +66,7 @@ const routes = [
     path: '/main',
     name: 'MainVellupPage',
     component: MainVellupPage
-  },
-
+    },
   {
     path: '/join',
     name: 'JoinPage',
