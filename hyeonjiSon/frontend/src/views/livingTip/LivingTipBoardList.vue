@@ -2,7 +2,12 @@
 <div class="board_wrap">
 
    <v-container  v-if="this.$store.state.userInfo == null">
-      <h1> 로그인 후 이용 가능한 페이지 입니다. </h1>
+      <br>
+      <v-row>
+         &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+         <img src="@/assets/join.jpg"/>
+      </v-row>
+
    </v-container>
 <v-container v-if="this.$store.state.userInfo != null">
    <br>

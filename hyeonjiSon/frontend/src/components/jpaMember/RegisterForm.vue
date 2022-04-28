@@ -1,10 +1,9 @@
 <template>
-<div align="center">
   <v-container>
     <form @submit.prevent="onSubmit">
       
-      <br>
-      <div class="row">
+      <br> 
+      <div class="box change" style="width: 20%">
         <v-radio-group v-model="radioGroup" row>
           <!-- 기존에 사용하던 형식의 문법이 마겨서 아래와 같이 작업해야함
                다소 번거로움이 추가됨 -->
@@ -15,35 +14,35 @@
       <br>
 
       <div class="input_area">
-        <v-text-field v-model="id" style="width:350px" placeholder=" *ID를 입력해주세요." :rules="rulesId">
+        <v-text-field v-model="id" label="아이디" style="width:350px" placeholder=" *ID를 입력해주세요." :rules="rulesId">
         </v-text-field></div>
 
       <div class="input_area">
-        <v-text-field v-model="sn" style="width:350px"
+        <v-text-field v-model="sn" label="닉네임/상호명" style="width:350px"
         placeholder=" *닉네임 혹은 (사업자)상호명을 입력해주세요." :rules="rulesSn">
         </v-text-field></div>
 
       <div class="input_area">
-        <v-text-field v-model="city" style="width:350px"
+        <v-text-field v-model="city" label="거주 시" style="width:350px"
         placeholder=" *거주 시 입력(예: 서울시, 광주시, 울산시)" :rules="rulesBuis">
         </v-text-field></div>
 
       <div class="input_area">
-        <v-text-field v-model="dong" style="width:350px"
+        <v-text-field v-model="dong" label="거주 동" style="width:350px"
         placeholder=" *거주 동 입력(예: 대방동, 청당동)" :rules="rulesBuis">
         </v-text-field></div>
 
       <div class="input_area">
-        <v-text-field v-model="address" style="width:350px"
+        <v-text-field v-model="address" label="나머지 주소" style="width:350px"
         placeholder=" *시, 동을 제외한 나머지 주소 입력" :rules="rulesBuis">
         </v-text-field></div>
 
       <div class="input_area">
-        <v-text-field type="password" style="width:350px" v-model="pw" placeholder=" *8~14자리로 작성하세요." :rules="rulesPw">
+        <v-text-field type="password" label="비밀번호" style="width:350px" v-model="pw" placeholder=" *8~14자리로 작성하세요." :rules="rulesPw">
         </v-text-field></div>
 
       <div class="input_area">
-        <v-text-field v-model="pwConfirm" style="width:350px" placeholder=" *가장 좋아하는 과일은?" :rules="rulesPwc">
+        <v-text-field v-model="pwConfirm" label="비밀번호 질문" style="width:350px" placeholder=" *가장 좋아하는 과일은?" :rules="rulesPwc">
         </v-text-field></div>
 
       <br>
@@ -54,7 +53,7 @@
 
       <div>
         <p>이미 계정이 있습니까? &nbsp;
-            <router-link :to="{ name: 'memberLoginPage' }">
+            <router-link style="color: darkKhaki " id="router" :to="{ name: 'memberLoginPage' }">
               로그인 하기
             </router-link>
         </p>
@@ -63,7 +62,6 @@
 
     </form>
   </v-container>
-</div>
 </template>
 
 <script>
@@ -116,16 +114,28 @@ export default {
 </script>
 
 <style scoped>
+.v-text-field >>> .v-input__slot::before  { 
+  border-color: #ccbce3 !important;
+  }
+.v-text-field >>> .v-input__slot::after {
+    border-color: #ccbce3 !important;
+    }
+
+
+  .change input, .change progress {
+    accent-color: red;
+  }
+
     button {
       margin: 15px;
       height: 50px;
       width: 350px;
-      background-color: lightblue;
+      background-color: #ccbce3;
 
       font-size: 120%;
       color: white;
     }
-    a {
+    a { 
       -webkit-text-stroke: 1px;
       text-decoration: none; } 
 </style>

@@ -19,3 +19,7 @@ export default {
 //해당 로직은 모두 App.vue에 구성합니다.
 
 </script>
+
+<style scoped>
+
+</style>

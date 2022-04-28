@@ -1,6 +1,7 @@
 <template>
 <div align="center">
-       <h1> Register Page </h1>
+       <br>
+       <h1> 게시글 작성 </h1>
        <br>
        <tip-register-form @submit="onSubmit"/>
     </div>
@@ -34,5 +35,7 @@ export default {
 </script>
 
 <style scoped>
-
+h1{
+  color: #907bb0;
+}
 </style>

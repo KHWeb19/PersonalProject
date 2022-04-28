@@ -86,14 +86,13 @@ public class MemberController {
 
     }
 
-/*
-       @GetMapping("/{memberNo}")
-    public Member jpaMemberRead(
-            @PathVariable("memberNo") Long memberNo) {
+
+    @GetMapping("/{memberNo}")
+    public Member jpaMemberRead(@PathVariable("memberNo") Long memberNo) {
         log.info("Member information Read()" + memberNo);
 
         return memberservice.read(memberNo);
     }
-*/
+
 }
 

@@ -3,37 +3,17 @@
         <form @submit.prevent="onSubmit">
             <table>
                 <tr>
-                    <td>게시물 번호</td>
+                    <td class="guide">제목</td>
+                </tr>
+                <tr>
                     <td>
-                        <input type="text" :value="tipBoard.boardNo" disabled/>
+                        <textarea type="text" v-model="title"/>
                     </td>
                 </tr>
                 <tr>
-                    <td>제목</td>
-                    <td>
-                        <input type="text" v-model="title"/>
-                    </td>
-                </tr>
+                    <td class="guide">본문</td>
+                </tr>               
                 <tr>
-                    <td>작성자</td>
-                    <td>
-                        <input type="text" :value="tipBoard.writer" disabled/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>비밀번호</td>
-                    <td>
-                        <input type="text" :value="tipBoard.password" disabled/>
-                    </td>
-                </tr>                
-                <tr>
-                    <td>등록일자</td>
-                    <td>
-                        <input type="text" :value="tipBoard.regDate" disabled/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>본문</td>
                     <td>
                         <textarea cols="50" rows="20" v-model="content">
                         </textarea>
@@ -41,12 +21,15 @@
                 </tr>
             </table>
 
-            <div>
-                <button type="submit">수정 완료</button>
+            <div style="width: 500px; margin: 30px;">
+                <v-row>
                 <router-link :to="{ name: 'TipReadPage',
                                     params: { boardNo: tipBoard.boardNo.toString() } }">
-                    취소
+                    <v-btn id="btn">돌아가기</v-btn>
                 </router-link>
+                <v-spacer></v-spacer>
+                <v-btn id="btn" type="submit">수정 완료</v-btn>
+                </v-row>
             </div>
         </form>
     </div>
@@ -79,3 +62,34 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.guide{
+    font-weight: bold;
+    color: #907bb0;
+}
+able {
+    border: collapse;
+    border-radius: 10px;
+    width: 500px;
+}
+tr {
+    height: 30px;
+}
+textarea {
+    width: 100%;
+    margin: 0px;
+    outline-color: #ccbce3;
+    resize: none; /* 크기 조절 없앰 */
+}
+a {
+    text-decoration: none;
+    } 
+
+#btn{
+    color: white;
+    background-color: darkkhaki;
+    width: 100px;
+    box-shadow: none;  
+}
+</style>

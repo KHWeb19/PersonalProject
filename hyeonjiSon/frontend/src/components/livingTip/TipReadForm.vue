@@ -2,28 +2,27 @@
     <div>
 
             <v-container>
-                <v-card style="width: 55%" height="500px">
-                    <v-toolbar dark>
+                <v-card style="width: 54%" height="500px">
+                    <v-toolbar style="background-color: #193821; color: #d5e0d8" dark>
                     <v-toolbar-title>{{ tipBoard.title }}</v-toolbar-title>
                             <v-spacer></v-spacer>
-                            <v-btn @click="like" style="box-shadow:none"> 
-                                <v-icon color="green"> mdi-cards-heart </v-icon>
+                            <v-btn id="likeBtn" @click="like" style="box-shadow:none"> 
+                                <v-icon color="#ccbce3"> mdi-cards-heart </v-icon>
                             </v-btn>
                             <span> {{ tipBoard.likeCnt }} </span>
                     </v-toolbar>
-                    <v-card-text style="font-size: 15px">
+                    <v-card-text style="font-size: 15px;">
                         {{ tipBoard.content}}
                     </v-card-text>
 
 
-                        <v-card-text class="card-text-id" style="color: green">
+                        <v-card-text class="card-text-id caption" style="color: darkKhaki">
                             <v-divider style="margin-bottom:10px"></v-divider>
-                            {{ tipBoard.writer }}
+                            {{ tipBoard.writer.substr(0,6) }}
                         </v-card-text>
-                        <v-card-text class="card-text-date">
+                        <v-card-text class="card-text-date caption">
                             {{new Date(tipBoard.regDate).toLocaleString("ko-KR", {timeZone: "Asia/Seoul"}).toString().substr(0, 11)}}
                         </v-card-text>
-
                 </v-card>
             </v-container>
 
@@ -74,13 +73,22 @@ export default {
 </script>
 
 <style scoped>
+.tipTitle {
+      font-size: 12px;
+}
 .card-text-id {
   position: absolute;
   bottom: 0;
+  text-align: left;
 }
 .card-text-date {
   position: absolute;
   bottom: 0;
   text-align: right;
 }
+#likeBtn{
+    background-color: transparent !important;
+    background-image: none !important;
+    box-shadow: none;
+  }
 </style>

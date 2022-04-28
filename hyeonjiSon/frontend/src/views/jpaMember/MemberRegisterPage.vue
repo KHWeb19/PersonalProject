@@ -1,10 +1,8 @@
 <template>
-  <div>
-    <div align="center">
+  <div align="center">
     <br><br>
       <h1>회원 가입</h1>
       <!--v-icon대신할 이미지 필요함 -->
-    </div>
 
     <register-form @submit="onSubmit"/>
     <!--VuetifyMemberRegisterForm 이 작동, submit버튼을 누르면 onSubmit이 실행 -->
@@ -43,5 +41,7 @@ export default {
 </script>
 
 <style scoped>
-
+h1{
+  color: #907bb0;
+}
 </style>

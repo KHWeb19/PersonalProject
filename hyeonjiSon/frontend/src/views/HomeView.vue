@@ -1,27 +1,15 @@
 <template>
     <div class="slide-3d">
         <v-app id="inspire">
-            <v-container>
-                <swiper class="swiper" :options="swiperOption">
-                    <swiper-slide>Slide 1</swiper-slide>
-                    <swiper-slide>Slide 2</swiper-slide>
-                    <swiper-slide>Slide 3</swiper-slide>
-                    <swiper-slide>Slide 4</swiper-slide>
-                    <swiper-slide>Slide 5</swiper-slide>
-                    <swiper-slide>Slide 6</swiper-slide>
-                    <swiper-slide>Slide 7</swiper-slide>
-                    <swiper-slide>Slide 8</swiper-slide>
-                    <swiper-slide>Slide 9</swiper-slide>
-                    <swiper-slide>Slide 10</swiper-slide>
-                    <swiper-slide>Slide 11</swiper-slide>
-                    <swiper-slide>Slide 12</swiper-slide>
-                    <swiper-slide>Slide 13</swiper-slide>
-                    <swiper-slide>Slide 14</swiper-slide>
-                    <swiper-slide>Slide 15</swiper-slide>
-                    <swiper-slide>Slide 16</swiper-slide>
-                    <div class="swiper-pagination" slot="pagination">
-                    </div>
-                </swiper>
+            <v-container class="slide">
+              <swiper class="swiper" :options="swiperOption">
+                <swiper-slide v-for="image in images" :key="image">
+                  <v-img :src="image"></v-img>
+                </swiper-slide>
+                <div class="swiper-pagination" slot="pagination"></div>
+                <div class="swiper-button-prev" slot="button-prev"></div>
+                <div class="swiper-button-next" slot="button-next"></div>
+              </swiper>
             </v-container>
         </v-app>
     </div>
@@ -39,52 +27,49 @@ import 'swiper/css/swiper.css'
       Swiper,
       SwiperSlide
     },
-		methods: {
-			slideChangeTransitionStart() {
-				console.log(this.swiper.activeIndex); //현재 index값 얻기
-			}
-		},
+    methods: {
+        slideChangeTransitionStart() {
+            console.log(this.swiper.activeIndex); //현재 index값 얻기
+        }
+    },
     data () {
     return {
+        images: [
+                require("@/assets/homeSwiper/greeting.jpg"),
+                require("@/assets/homeSwiper/recycle.jpg"),
+                require("@/assets/homeSwiper/tipBoard.jpg"),
+                require("@/assets/homeSwiper/store.jpg"),
+                require("@/assets/homeSwiper/dog.jpg"),
+                require("@/assets/homeSwiper/update.jpg")
+],
         swiperOption: {
             loop: true,
-            effect: 'coverflow',
+            loopAdditionalSlides : 1, // 슬라이드 반복 시 마지막 슬라이드에서 다음 슬라이드가 보여지지 않는 현상 수정 ...안되는데?
             grabCursor: true,
             centeredSlides: true,
             slidesPerView: 'auto',
             coverflowEffect: {
-                rotation: 50,
-                stretch: 0,
-                depth: 100,
                 // 회전을 많이 먹이고 싶은 경우 높이도록 한다.
-                modifier: 1,
                 slideShadows: true
             },
             pagination: {
                 el: '.swiper-pagination',
-                dynamicBullets: true
+                dynamicBullets: true,
+                clickable : true,  // 버튼 클릭 여부
+                type : 'bullets', // 버튼 모양 결정 "bullets", "fraction"
             },
             autoplay: {
-                delay: 1000
-            }
+                delay: 2500
+            },
+            navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+            },
         }
       }
     }
 }
-  /*
-  export default {
-name: 'Discount-a'
-}
 
-이런식으로 '-' 이용해서 여러단어로 구성해주거나
-
-export default {
-//eslint-disable-next-line
-name: 'Discount'
-}
-
-이렇게 위해 주석 추가해주면 됩니다.
-  */
 </script>
 
 <style lang="scss" scoped>
@@ -101,14 +86,11 @@ name: 'Discount'
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 800px;
+        width: 100%;
         height: 600px;
         text-align: center;
         font-weight: bold;
         font-size: 1.7rem;
-        background-color: darkorange;
-        background-position: center;
-        background-size: cover;
     }
 }
 </style>

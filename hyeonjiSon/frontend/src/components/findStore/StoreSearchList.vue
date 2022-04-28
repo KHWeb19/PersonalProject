@@ -1,5 +1,5 @@
 <template>
-    <v-container>
+    <v-container style="width:800px">
         <v-row justify="center" style="margin-top:50px">
             <v-spacer></v-spacer>
             <v-text-field
@@ -11,7 +11,7 @@
                hide-details
             ></v-text-field>
             <v-col cols="2" md="1">
-                <v-btn class="searchBtn" @click="search" dark small>
+                <v-btn id="searchBtn" @click="search" dark small>
                     <v-icon>
                         mdi-magnify
                     </v-icon>
@@ -27,7 +27,7 @@
                         :items="searchList"
                         :key="searchList.memberNo"
                         :items-per-page="10"
-                        class="elevation-1" 
+                        class="elevation-0" 
                         >
             </v-data-table>
         </v-row>
@@ -76,6 +76,12 @@ export default {
 </script>
 
 <style scoped>
+.v-text-field >>> .v-input__slot::before  { 
+  border-color: #ccbce3 !important;
+  }
+.v-text-field >>> .v-input__slot::after {
+    border-color: #ccbce3 !important;
+    }
 .td {
   margin: 20px;
 }
@@ -91,4 +97,10 @@ export default {
 .btn-cover .page-count {
   padding: 0 1rem;
 }
+
+#searchBtn {
+    background-color: darkkhaki;
+    box-shadow: none;
+}
+
 </style>
