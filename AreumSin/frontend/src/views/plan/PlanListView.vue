@@ -5,13 +5,14 @@
 
     <PlanPageForm v-bind:userPlans="userPlans"></PlanPageForm>
 
-    <PencilIcon @submit="onSubmit" :id="id"/>
+    <PencilIcon :id="id"/>
+<!--    <PencilIcon @submit="onSubmit" :id="id"/>-->
   </v-container>
 </template>
 
 <script>
 import PencilIcon from "@/components/Item/PencilIcon";
-import axios from "axios";
+//import axios from "axios";
 import {mapActions, mapState} from "vuex";
 import PlanPageForm from "@/components/plan/PlanPageForm";
 import MainCategory from "@/components/MainCategory";
@@ -29,7 +30,7 @@ export default {
   },
   methods: {
     ...mapActions(['fetchUserPlans']),
-    onSubmit(payload){
+    /*onSubmit(payload){
       console.log(payload + this.userId)
       let id = this.id;
       const {planName, planDate, placeName} = payload;
@@ -42,7 +43,7 @@ export default {
           .catch((res) => {
             console.log(res.response.data.message);
           })
-    }
+    }*/
   },
   computed: {
     ...mapState(['userPlans'])

@@ -7,8 +7,6 @@
             <img src="../../../assets/location.png"> {{planPlace}}
           </p>
         </v-col>
-
-
       </v-row>
     </v-card>
   </v-container>

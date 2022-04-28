@@ -14,7 +14,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -32,12 +34,36 @@ public class MakePlanController {
     private JoinMemberService memberService;
 
     @PostMapping("/makePlan")
-    public MemberPlanRequest makePlan(@Validated @RequestBody MemberPlanRequest memberPlanRequest){
+    public String makePlan(@RequestParam("fileList") List<MultipartFile> fileList,
+                                      @RequestParam("planName") String planName,
+                                      @RequestParam("planDate") String planDate,
+                                      @RequestParam("placeName") String placeName,
+                                      @RequestParam("id") String id){
         log.info("makePlan()");
 
-        planService.make(memberPlanRequest);
+        List<String> fileName = new ArrayList<>();
+        log.info("fileList() "+fileList);
 
-        return memberPlanRequest;
+        try{
+            for(MultipartFile multipartFile : fileList){
+                log.info("requestUploadFile() - Make file: " + multipartFile.getOriginalFilename());
+
+                FileOutputStream file = new FileOutputStream("../../frontend/src/assets/uploadImg/" + planName + "_" + multipartFile.getOriginalFilename());
+
+                String fileSrc = planName + "_" + multipartFile.getOriginalFilename();
+                fileName.add(fileSrc);
+
+                file.write(multipartFile.getBytes());
+                file.close();
+            }
+        } catch (Exception e){
+            log.info("fail");
+            return "Upload Fail!!!";
+        }
+
+        planService.make(fileName, planName, planDate, placeName, id);
+
+        return "Upload Success!!!";
     }
 
     @PostMapping("/list/{id}")

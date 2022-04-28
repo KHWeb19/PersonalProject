@@ -13,7 +13,7 @@ import java.util.List;
 
 
 public interface MakePlanService {
-    void make(MemberPlanRequest memberPlanRequest);
+    void make(List<String> fileName, String planName, String planDate, String placeName, String id);
     List<MemberPlan> listPlan(Integer id);
     FriendMemberResponse searchMember(String friendId);
     void addFriend(PlanFriend planFriend);
@@ -26,4 +26,6 @@ public interface MakePlanService {
     void voteGood(DecisionMakingRequest decisionMakingRequest);
 
     void voteBad(DecisionMakingRequest decisionMakingRequest);
+
+
 }
