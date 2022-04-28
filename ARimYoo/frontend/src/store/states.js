@@ -1,10 +1,12 @@
 export default {
 
     communityBoards: [],
+    communityBest: [],
     communityBoard: null,
     communityComments: [],
 
     reviews: [],
+    reviewBest: [],
     review: null,
     reviewComments: [],
 
@@ -21,6 +23,10 @@ export default {
     marketComments:[],
 
     member: null,
+    memberStudies: [],
+    memberStudy: null,
+    memberProjects: [],
+    memberProject: null,
     
     token: localStorage.getItem('token'),
     userInfo: JSON.parse(localStorage.getItem('userInfo'))

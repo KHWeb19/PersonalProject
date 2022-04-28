@@ -1,11 +1,14 @@
 package com.example.demo.service.study;
 
 import com.example.demo.entity.study.Study;
-import com.example.demo.entity.study.StudyBoard;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
+
+import javax.persistence.Id;
+import java.util.List;
 
 public interface StudyService {
 
-    public void register (Study study, @RequestParam(required = false) MultipartFile file) throws Exception;
+    public List<Study> list (Long memberNo);
+    public int join (Long memberNo, Study study);
+    public Study read (Long studyNo);
+    public void toDoRegister (Study study);
 }

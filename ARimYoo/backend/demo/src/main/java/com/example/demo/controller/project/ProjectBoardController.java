@@ -1,6 +1,7 @@
 package com.example.demo.controller.project;
 
 import com.example.demo.controller.Request.keywordRequest;
+import com.example.demo.entity.Member;
 import com.example.demo.entity.project.Project;
 import com.example.demo.entity.project.ProjectBoard;
 import com.example.demo.service.project.ProjectBoardService;
@@ -23,9 +24,9 @@ public class ProjectBoardController {
 
 
     @PostMapping("/register")
-    public void ProjectRegister (@Validated ProjectBoard projectBoard, Project project, @RequestParam(required = false) MultipartFile file) throws Exception {
+    public void ProjectRegister (@Validated ProjectBoard projectBoard, Project project, Member member, @RequestParam(required = false) MultipartFile file) throws Exception {
         log.info ("StudyRegister();" + file);
-        service.register(projectBoard, project, file);
+        service.register(projectBoard, project, member, file);
     }
 
     @GetMapping("/list")

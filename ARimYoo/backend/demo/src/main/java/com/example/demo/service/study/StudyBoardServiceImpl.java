@@ -1,9 +1,9 @@
 package com.example.demo.service.study;
 
-import com.example.demo.entity.communityBoard.CommunityBoard;
-import com.example.demo.entity.review.Review;
+import com.example.demo.entity.Member;
 import com.example.demo.entity.study.Study;
 import com.example.demo.entity.study.StudyBoard;
+import com.example.demo.repository.MemberRepository;
 import com.example.demo.repository.study.StudyBoardRepository;
 import com.example.demo.repository.study.StudyRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -29,9 +29,11 @@ public class StudyBoardServiceImpl implements StudyBoardService {
     private StudyBoardRepository repository;
     @Autowired
     private StudyRepository repository2;
+    @Autowired
+    private MemberRepository memberRepository;
 
     @Override
-    public void register (StudyBoard study, Study studyGroup, @RequestParam(required = false) MultipartFile file) throws Exception {
+    public void register (StudyBoard study, Study studyGroup, Member member, @RequestParam(required = false) MultipartFile file) throws Exception {
 
         if (file != null) {
             UUID uuid = UUID.randomUUID();
@@ -53,6 +55,14 @@ public class StudyBoardServiceImpl implements StudyBoardService {
         studyGroup.setOpenLink(study.getOpenLink());
 
         repository2.save(studyGroup);
+
+        Optional<Member> makeStudy = memberRepository.findById(Long.valueOf(member.getMemberNo()));
+        Member getMember = makeStudy.get();
+        getMember.addStudy(studyGroup);
+        memberRepository.save(getMember);
+
+        log.info("study" + member.getStudy());
+
     }
 
     @Override
@@ -77,15 +87,6 @@ public class StudyBoardServiceImpl implements StudyBoardService {
 
     @Override
     public void remove(Integer studyNo) throws Exception {
-        Optional<StudyBoard> selectFile = repository.findById(Long.valueOf(studyNo));
-        StudyBoard deleteFile = selectFile.get();
-        System.out.println(deleteFile.getFileName());
-
-        if (deleteFile.getFileName() != null) {
-            Path filePath = Paths.get("c:\\khweb19\\PersonalProject\\ARimYoo\\frontend\\src\\assets\\back\\studyBoard\\" + deleteFile.getFileName());
-            Files.delete(filePath);
-        }
-
         repository.deleteById(Long.valueOf(studyNo));
     }
 

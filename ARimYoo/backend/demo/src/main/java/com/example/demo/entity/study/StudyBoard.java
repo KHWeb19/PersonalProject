@@ -1,9 +1,12 @@
 package com.example.demo.entity.study;
 
+import com.example.demo.entity.communityBoard.CommunityCommentBox;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -14,23 +17,26 @@ public class StudyBoard {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long studyNo;
 
-    @Column
+    @Column (nullable = false)
     private String studyName;
 
-    @Column
+    @Column (nullable = false)
     private String writer;
 
-    @Column
+    @Column (nullable = false)
     private int people;
 
-    @Column
+    @Column (nullable = false)
     private String fileName;
 
-    @Column
+    @Column (nullable = false)
     private String content;
 
-    @Column
+    @Column (nullable = false)
     private String openLink;
+
+    @Formula("(SELECT count(1) FROM study_comment c WHERE c.study_board_study_no = study_no)")
+    private int commentCnt;
 
     @Column
     private int viewCnt = 0;

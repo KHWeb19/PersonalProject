@@ -118,5 +118,10 @@ public class ReviewServiceImpl implements ReviewService {
         return findList;
     }
 
+    @Override
+    public List<Review> popularList () {
+        return repository.findTop5ByOrderByLikeCntDesc();
+    }
+
 }
 

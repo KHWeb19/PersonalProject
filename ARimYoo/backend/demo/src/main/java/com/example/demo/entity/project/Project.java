@@ -24,6 +24,9 @@ public class Project {
     private int people;
 
     @Column
+    private int joinCnt = 1;
+
+    @Column
     private String fileName;
 
     @Column
@@ -31,6 +34,10 @@ public class Project {
 
     @Column
     private String toDo;
+
+    public void increaseJoinCnt () {
+        this.joinCnt++ ;
+    }
 
     public Project(String projectName, String firstMember, int people, Long projectNo, String fileName, String openLink) {
         this.projectNo = projectNo;

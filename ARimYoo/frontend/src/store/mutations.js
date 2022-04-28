@@ -1,9 +1,15 @@
  import {
     FETCH_MEMBER,
+    FETCH_MEMBER_STUDY_LIST,
+    FETCH_MEMBER_STUDY,
+    FETCH_MEMBER_PROJECT_LIST,
+    FETCH_MEMBER_PROJECT,
     FETCH_COMMUNITY_BOARD_LIST,
+    FETCH_COMMUNITY_BOARD_BEST_LIST,
     FETCH_COMMUNITY_BOARD,
     FETCH_COMMUNITY_COMMENTS_LIST,
     FETCH_REVIEW_LIST,
+    FETCH_REVIEW_BEST_LIST,
     FETCH_REVIEW,
     FETCH_REVIEW_COMMENTS_LIST,
     FETCH_STUDY_LIST,
@@ -23,8 +29,23 @@ export default {
     [FETCH_MEMBER](state, userInfo) {
         state.userInfo = userInfo
     },
+    [FETCH_MEMBER_STUDY_LIST](state, memberStudies) {
+        state.memberStudies = memberStudies
+    },
+    [FETCH_MEMBER_STUDY](state, memberStudy) {
+        state.memberStudy = memberStudy
+    },
+    [FETCH_MEMBER_PROJECT_LIST](state, memberProjects) {
+        state.memberProjects = memberProjects
+    },
+    [FETCH_MEMBER_PROJECT](state, memberProject) {
+        state.memberProject = memberProject
+    },
     [FETCH_COMMUNITY_BOARD_LIST](state, communityBoards) {
         state.communityBoards = communityBoards 
+    },
+    [FETCH_COMMUNITY_BOARD_BEST_LIST](state, communityBest) {
+        state.communityBest = communityBest
     },
     [FETCH_COMMUNITY_BOARD](state, communityBoard) {
         state.communityBoard = communityBoard
@@ -34,6 +55,9 @@ export default {
     },
     [FETCH_REVIEW_LIST](state, reviews) {
         state.reviews = reviews
+    },
+    [FETCH_REVIEW_BEST_LIST](state, reviewBest) {
+        state.reviewBest = reviewBest
     },
     [FETCH_REVIEW](state, review) {
         state.review = review

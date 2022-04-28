@@ -1,10 +1,13 @@
 package com.example.demo.service.project;
 
 import com.example.demo.entity.project.Project;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 public interface ProjectService {
 
-    public void register (Project project, @RequestParam(required = false) MultipartFile file) throws Exception;
+    public List<Project> list (Long memberNo);
+    public int join (Long memberNo, Project project);
+    public Project read (Long projectNo);
+    public void toDoRegister (Project project);
 }

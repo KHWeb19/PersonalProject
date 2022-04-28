@@ -1,27 +1,31 @@
 <template>
     <div>
-        <v-container>
-        <v-layout class="mx-auto">
-            <v-img contain class="responsive-img" src="@/assets/main/test.jpg"/>
-            <v-img contain class="deco responsive-img" src="@/assets/main/mainTitle.png"/>
-        </v-layout>
-        </v-container>
-        
+            <main-vellup :communityBest="communityBest" :reviewBest="reviewBest"/>
     </div>
 </template>
 
 
 
 <script>
-
+import MainVellup from '@/components/MainVellup.vue'
+import { mapActions, mapState } from 'vuex'
 
 export default {
     name: 'MainVellupPage',
     components: {
+        MainVellup
 
     },
-
-
+    computed: {
+        ...mapState(['communityBest' ,'reviewBest'])
+    },
+    mounted () {
+        this.fetchCommunityBoardBestList()
+        this.fetchReviewBestList()
+    },
+    methods: {
+        ...mapActions(['fetchCommunityBoardBestList', 'fetchReviewBestList'])
+    }
 }
 </script>
 

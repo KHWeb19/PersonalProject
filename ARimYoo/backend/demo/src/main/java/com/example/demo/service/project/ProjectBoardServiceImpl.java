@@ -1,7 +1,9 @@
 package com.example.demo.service.project;
 
+import com.example.demo.entity.Member;
 import com.example.demo.entity.project.Project;
 import com.example.demo.entity.project.ProjectBoard;
+import com.example.demo.repository.MemberRepository;
 import com.example.demo.repository.project.ProjectBoardRepository;
 import com.example.demo.repository.project.ProjectRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -27,9 +29,11 @@ public class ProjectBoardServiceImpl implements ProjectBoardService {
     private ProjectBoardRepository repository;
     @Autowired
     private ProjectRepository repository2;
+    @Autowired
+    private MemberRepository memberRepository;
 
     @Override
-    public void register (ProjectBoard projectBoard, Project project, @RequestParam(required = false) MultipartFile file) throws Exception {
+    public void register (ProjectBoard projectBoard, Project project, Member member, @RequestParam(required = false) MultipartFile file) throws Exception {
 
         if (file != null) {
             UUID uuid = UUID.randomUUID();
@@ -50,6 +54,13 @@ public class ProjectBoardServiceImpl implements ProjectBoardService {
         project.setOpenLink(projectBoard.getOpenLink());
 
         repository2.save(project);
+
+        Optional<Member> makeProject = memberRepository.findById(Long.valueOf(member.getMemberNo()));
+        Member getMember = makeProject.get();
+        getMember.addProject(project);
+        memberRepository.save(getMember);
+
+        log.info("project" + member.getProject());
     }
 
     @Override
@@ -74,15 +85,6 @@ public class ProjectBoardServiceImpl implements ProjectBoardService {
 
     @Override
     public void remove(Integer projectNo) throws Exception {
-        Optional<ProjectBoard> selectFile = repository.findById(Long.valueOf(projectNo));
-        ProjectBoard deleteFile = selectFile.get();
-        System.out.println(deleteFile.getFileName());
-
-        if (deleteFile.getFileName() != null) {
-            Path filePath = Paths.get("c:\\khweb19\\PersonalProject\\ARimYoo\\frontend\\src\\assets\\back\\projectBoard\\" + deleteFile.getFileName());
-            Files.delete(filePath);
-        }
-
         repository.deleteById(Long.valueOf(projectNo));
     }
 

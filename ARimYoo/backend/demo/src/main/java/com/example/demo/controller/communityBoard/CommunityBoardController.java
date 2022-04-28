@@ -67,5 +67,10 @@ public class CommunityBoardController {
          return service.searchList(key);
     }
 
-
+    // 인기 게시글 조회
+    @GetMapping("/popular")
+    public List<CommunityBoard> getPopularList() {
+        log.info("CommunityBoard PopularList");
+        return service.popularList();
+    }
 }

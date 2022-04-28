@@ -64,7 +64,7 @@
                             <v-btn @click=goPage() class="backBtn" color="black" dark>Back</v-btn>
                         </v-col>
                         <v-col cols="1">
-                            <v-btn type="submit" class="joinBtn" color="red darken-3" dark>Join</v-btn>
+                            <v-btn @click=join() class="joinBtn" color="red darken-3" dark>Join</v-btn>
                         </v-col>
                     </v-row>
                 </table>
@@ -90,6 +90,7 @@ export default {
     },
     created () {
         this.who = this.$store.state.userInfo.name
+        this.memberNo = this.$store.state.userInfo.memberNo
     },
     methods: {
         goPage (){
@@ -107,6 +108,29 @@ export default {
                         alert('삭제 실패! 문제 발생!')
                     })
         },
+        join () {
+            var result = confirm(this.project.projectName + '에 가입하시겠습니까?')
+            if (result) {
+                const { projectNo } = this.project
+                const { memberNo } = this
+
+                axios.post(`http://localhost:7777/project/join/${memberNo}`, {projectNo})
+                .then((res) => {
+                    if (res.data == 3){
+                        alert('가입되셨습니다.')}
+                    else if(res.data == 2){
+                        alert('이미 가입하셨습니다.')
+                    }else {
+                        alert('정원이 모두 찼습니다.')
+                    }
+                })
+                .catch(() => {
+                    console.log(projectNo,memberNo)
+                    alert('문제 발생.')
+                })
+           
+             }
+        }
     }
 
 }

@@ -53,42 +53,14 @@
     </div>
 
     <v-main>
-      <v-container fluid justify-center class="py-0 px-0 mt-5 mb-10">
+      <v-container fluid justify-center class="py-0 px-0">
         <router-view></router-view>
       </v-container>
     </v-main>
 
-    <v-footer dark padless style="width:75%; margin-left:auto; margin-right:auto">
-    <v-card
-      flat
-      tile
-      class="white--text text-center flex"
-    >
-      <v-card-text  class="white--text">
-          <strong>Vellup!</strong>&nbsp; —  &nbsp; Level up Your Develop Skill
-      </v-card-text>
-      <v-card-text>
-       <v-btn
-          v-for="icon in icons"
-          :key="icon"
-          class="mx-4"
-          dark
-          small
-          icon
-        >
-          <v-icon size="24px">
-            {{ icon }}
-          </v-icon>
-        </v-btn>
-      </v-card-text>
-
-      <v-divider></v-divider>
-
-      <v-card-text class="white--text" style="font-size:10pt">
-        Copyright © {{ new Date().getFullYear() }}  Yoo A Rim All Right Reserved
-      </v-card-text>
-    </v-card>
-  </v-footer>
+    <div v-if="$route.name !=='EnterVellup' && $route.name !== 'JoinPage' && $route.name !== 'JoinPage2'">
+        <footer-vellup/>
+    </div>
   </v-app>
 </template>
 
@@ -97,10 +69,11 @@ import { mapState } from 'vuex';
 import JoinButton from './components/button/JoinButton.vue';
 import LoginButton from './components/button/LoginButton.vue';
 import LogoutButton from './components/button/LogoutButton.vue';
+import FooterVellup from './components/FooterVellup.vue';
 import MainToolbar from './components/MainToolbar.vue';
 
 export default {
-  components: { MainToolbar, LoginButton, JoinButton, LogoutButton },
+  components: { MainToolbar, LoginButton, JoinButton, LogoutButton, FooterVellup },
   name: 'App',
 
   data () {

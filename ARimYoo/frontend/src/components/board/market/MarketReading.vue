@@ -35,7 +35,7 @@
                         <v-carousel hide-delimiters  height="auto">
                             <v-carousel-item 
                             v-for="(file, index) in checkFile()" :key="index" style="text-align:center">
-                            <img  v-if="file != null"
+                            <img 
                             :src="require(`@/assets/back/market/${file}`)" class="preview"/>
                             </v-carousel-item>
                         </v-carousel>

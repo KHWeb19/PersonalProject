@@ -105,5 +105,10 @@ public class CommunityBoardServiceImpl implements CommunityBoardService {
         return findList;
     }
 
+    @Override
+    public List<CommunityBoard> popularList () {
+        return repository.findTop5ByOrderByLikeCntDesc();
+    }
+
 
 }
