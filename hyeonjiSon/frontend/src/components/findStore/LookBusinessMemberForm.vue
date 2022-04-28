@@ -1,6 +1,6 @@
 <template>
     <v-container style="width:800px">
-        <v-row justify="center" style="margin-top:50px">
+        <v-row justify="center" style="margin-top:20px">
             <v-spacer></v-spacer>
             <v-text-field
                class="search"
