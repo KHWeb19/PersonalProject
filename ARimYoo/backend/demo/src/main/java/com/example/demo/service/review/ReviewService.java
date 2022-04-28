@@ -1,5 +1,6 @@
 package com.example.demo.service.review;
 
+import com.example.demo.entity.communityBoard.CommunityBoard;
 import com.example.demo.entity.review.Review;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,4 +15,5 @@ public interface ReviewService {
     public void modify ( Review review, @RequestParam(required = false) List<MultipartFile> file) throws Exception;
     public void remove (Integer reviewNo) throws Exception ;
     public List<Review> searchList (String keyword);
+    public List<Review> popularList ();
 }

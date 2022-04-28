@@ -1,6 +1,7 @@
 package com.example.demo.controller.review;
 
 import com.example.demo.controller.Request.keywordRequest;
+import com.example.demo.entity.communityBoard.CommunityBoard;
 import com.example.demo.entity.review.Review;
 import com.example.demo.repository.review.ReviewRepository;
 import com.example.demo.service.review.ReviewService;
@@ -125,5 +126,10 @@ public class ReviewController {
         return service.searchList(key);
     }
 
+    @GetMapping("/popular")
+    public List<Review> getPopularList() {
+        log.info("Review PopularList");
+        return service.popularList();
+    }
 
 }
