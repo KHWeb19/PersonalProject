@@ -1,9 +1,10 @@
 <template>
 <!-- BoardRead페이지를 참고하여 작성 -->
-  <div>
-      <h2>나의 정보 확인하기</h2>
+  <div align="center">
+    <br>
+      <h1>나의 정보 확인하기</h1>
       <my-page-form v-if="member" :member="member"/>
-        <p v-else>로딩중 ....... </p>
+        <p v-else><img src="@/assets/loadRing.gif"/></p> <!-- 로딩 gif -->
       <my-pop-up/>
   </div>
 </template>
@@ -51,3 +52,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+h1{
+  color: #907bb0;
+}
+</style>

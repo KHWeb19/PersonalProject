@@ -54,11 +54,12 @@
     </v-navigation-drawer>
 
     <v-container id="content">
-      <v-main >
+      <v-main style="back">
         <router-view/>
       </v-main>
     </v-container>
   </v-app>
+
 </div>
 </template>
 
@@ -117,6 +118,7 @@ data () {
       this.isLogin = false
       this.$store.state.userInfo = null
       alert('로그아웃 성공!')
+      this.$router.push({ name: 'home' })              
     },
     mypage(){
       this.$router.push({ name: 'memberMyPage', params: {memberNo: this.$store.state.userInfo.memberNo.toString()} }) 
@@ -126,10 +128,10 @@ data () {
 </script>
 
 <style scoped>
-  .content{
+ /* #content{
     background-color: black;
     background-size : cover;
-  }
+  } */
   a { text-decoration: none; }
   .button{
     background-color: transparent !important;
