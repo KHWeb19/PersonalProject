@@ -1,8 +1,10 @@
 <template>
     <div align="center">
-        <h2>Vue + Spring 게시물 수정</h2>
+        <br>
+        <h1>게시글 수정</h1>
+        <br>        
         <tip-modify-form v-if="tipBoard" :tipBoard="tipBoard" @submit="onSubmit"/>
-        <p v-else>로딩중 .......</p>
+        <p v-else><img src="@/assets/loadRing.gif"/></p> <!-- 로딩 gif -->
     </div>
 </template>
 
@@ -53,3 +55,9 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+h1{
+  color: #907bb0;
+}
+</style>

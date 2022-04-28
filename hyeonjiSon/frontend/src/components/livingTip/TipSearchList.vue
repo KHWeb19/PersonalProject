@@ -1,12 +1,15 @@
 <template>
-    <v-container>
+    <v-container style="width:1000px">
 
         <template>
-            <v-row justify="center" style="margin-top:50px">
-
-                <v-btn @click="register">
-                <v-icon>add</v-icon>
-                </v-btn>
+            <v-row justify="center" style="margin-top:0px">
+                <v-col cols="2" md="1">
+                    <v-btn id="registerBtn" @click="register" dark>
+                    <v-icon id="icon">mdi-clipboard-edit-outline</v-icon>
+                    &ensp;
+                    <v-icon id="icon">ADD</v-icon>
+                    </v-btn>
+                </v-col>
 
                 <v-spacer></v-spacer>
                 <v-text-field
@@ -18,7 +21,7 @@
                 hide-details
                 ></v-text-field>
                 <v-col cols="2" md="1">
-                    <v-btn class="searchBtn" @click="search" dark small>
+                    <v-btn id="searchBtn" @click="search" dark small>
                         <v-icon>
                             mdi-magnify
                         </v-icon>
@@ -47,17 +50,19 @@
                             :elevation="hover ? 16:2" class="{ 'on-hover': hover }" 
                             @click="readTip(tipBoard.boardNo, tipBoard.id)"
                             style="margin:10px; width: 320px; height: 300px;">              
-                    <v-toolbar dark class="tipTitle">     
+                    <v-toolbar style="background-color: #193821; color: #d5e0d8" dark class="tipTitle">     
                                 <v-toolbar-title>{{ tipBoard.title.substr(0,10) }}</v-toolbar-title>
                             <v-spacer></v-spacer>
-                                <v-icon color="green"> mdi-cards-heart </v-icon>
+                                <v-icon color="#ccbce3"> mdi-cards-heart </v-icon>
                                 &ensp;
-                                <span> 15 </span>
+                                <span> {{ tipBoard.likeCnt }} </span>
                     </v-toolbar>
 
-                        <v-card-text cols="12">{{ tipBoard.content.substr(0,203) }} </v-card-text>
+                        <v-card-text style="color: #6f7a72" 
+                                    cols="12">
+                                {{ tipBoard.content.substr(0,203) }} </v-card-text>
 
-                        <v-card-text class="card-text-id caption" style="color: green">
+                        <v-card-text class="card-text-id caption" style="color: darkKhaki; font-weight: bold">
                             <v-divider style="margin-bottom:10px"></v-divider>
                             {{ tipBoard.writer.substr(0,6) }}
                         </v-card-text>
@@ -115,6 +120,25 @@ export default {
 </script>
 
 <style scoped>
+
+.v-text-field >>> .v-input__slot::before  { 
+  border-color: #ccbce3 !important;
+  }
+.v-text-field >>> .v-input__slot::after {
+    border-color: #ccbce3 !important;
+    }
+#searchBtn {
+    background-color: darkkhaki;
+    box-shadow: none;
+}
+#registerBtn {
+    background-color: darkkhaki;
+    box-shadow: none;
+}
+#icon{
+    color: white;
+}
+
 .tipTitle {
       font-size: 12px;
 }
@@ -126,5 +150,9 @@ export default {
   position: absolute;
   bottom: 0;
   text-align: right;
+}
+#page-btn{
+    background-color: darkkhaki;
+    box-shadow: none;    
 }
 </style>

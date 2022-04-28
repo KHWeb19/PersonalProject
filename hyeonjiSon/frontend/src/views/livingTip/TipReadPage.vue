@@ -1,21 +1,23 @@
 <template>
-    <div>
-
-        <v-container style="width: 800px;">
+    <div align="center">
+        <br>
+        <v-container style="width: 53%;">
                 <v-row>
-                    <v-btn @click="goList">게시판으로</v-btn>
+                    <v-btn id="btn2" @click="goList">게시판으로</v-btn>
                 </v-row>
         </v-container>
 
         <tip-read-form v-if="tipBoard" :tipBoard="tipBoard"/>
-        <p v-else>로딩중 ....... </p>
+        <p v-else><img src="@/assets/loadRing.gif"/></p> <!-- 로딩 gif -->
 
 
-        <v-container v-if="this.$store.state.userInfo.sn == tipBoard.writer">
-            <v-spacer></v-spacer>
-                <v-btn @click="modify(tipBoard.boardNo)">수정</v-btn>
+        <v-container style="width: 53%;" v-if="this.$store.state.userInfo.sn == tipBoard.writer">
+            <v-row>
+                <v-spacer></v-spacer>
+                <v-btn id="btn" @click="modify(tipBoard.boardNo)">수정</v-btn>
                 &ensp;
-                <v-btn @click="onDelete">삭제</v-btn>
+                <v-btn id="btn" @click="onDelete">삭제</v-btn>
+            </v-row>
         </v-container>
 
     </div>
@@ -69,3 +71,18 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+#btn{
+    color: white;
+    background-color: darkkhaki;
+    width: 100px;
+    box-shadow: none;  
+}
+#btn2{
+    color: white;
+    background-color: darkkhaki;
+    width: 120px;
+    box-shadow: none;  
+}
+</style>
