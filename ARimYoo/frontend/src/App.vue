@@ -53,7 +53,7 @@
     </div>
 
     <v-main>
-      <v-container justify-center class="py-0 px-0 mt-5">
+      <v-container fluid justify-center class="py-0 px-0">
         <router-view></router-view>
       </v-container>
     </v-main>

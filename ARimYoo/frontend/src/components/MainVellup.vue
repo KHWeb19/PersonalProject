@@ -1,5 +1,5 @@
 <template>
-    <v-container>
+    <v-container class="mt-10">
         <v-row justify="center">
             <input type="text" class="mainSearch">
             <v-btn class="searchBtn" @click=goSearch color="red darken-3" dark>
@@ -25,22 +25,53 @@
                 </v-col>
             </template>
         </v-row>
-        <v-row justify="center">
+        <v-row justify="center" class="bestBoard" >
             <v-col cols="5">
-            여기는 Best 게시물 쓸거에요
+                <v-list>
+                    <v-list-item-title class="listTitle pt-2 pb-2">
+                        <v-icon small dark>mdi-circle</v-icon>&nbsp;
+                        <strong>Best community post</strong>
+                    </v-list-item-title>
+                    <v-list-item>
+                        여기는 Best 게시물 쓸거에요
+                    </v-list-item>
+                </v-list>
+            </v-col>
+            <v-divider vertical class="mr-10"/>
+            <v-col cols="5">
+                <v-list>
+                    <v-list-item-title class="listTitle pt-2 pb-2">
+                        <v-icon small dark>mdi-circle</v-icon>&nbsp;
+                        <strong>Best Review post</strong>
+                    </v-list-item-title>
+                    <v-list-item>
+                        여기도 Best 게시물 쓸거에요
+                    </v-list-item>
+                </v-list>
             </v-col>
         </v-row>
-        <v-row class="halfMain" justify="center">
-            dd
-            <p/>
-            <p/>
-            <br/>
-            ddddd
+        <v-row class="halfMain" justify="start">
+            <div class="content1 mt-15">
+                <img src="@/assets/Levelup.png" class="Phrases1">
+                <p/>
+                <img src="@/assets/your.png" class="Phrases2">
+                <p/>
+                <img src="@/assets/ds.png" class="Phrases3">
+            </div>
+        <div class="content2">
+            <img src="@/assets/main/homebanner_ghost.png" style="width:100px">
+            <img src="@/assets/main/homebanner_ghost.png" style="width:200px">
+            <img src="@/assets/main/homebanner_ghost.png" style="width:300px">
+        </div>
+        <div class="content3">
+            <img src="@/assets/arrow.png" style="width:550px; height:200px;">
+        </div>
         </v-row>
     </v-container>
 </template>
 
 <script>
+
 export default {
     name:'MainVellup',
     data () {
@@ -62,7 +93,7 @@ export default {
     width:400px;
     height:38px;
     background-color: rgb(240, 238, 238);
-    outline-color: rgb(211, 32, 32);
+    outline-color: rgb(204, 32, 32);
     padding-left:10px;
     font-family: 'Noto Sans KR', sans-serif;
     float:left;
@@ -71,6 +102,18 @@ export default {
     margin-top:3%;
     margin-left:auto;
     margin-right:auto;
+}
+.bestBoard{
+    font-family: 'Noto Sans KR', sans-serif;
+    margin-top:5%;
+}
+.listTitle {
+    background-color:rgb(206, 24, 24);
+    border-radius: 20px;
+    box-shadow: 7px 7px 5px rgb(206, 205, 205);
+    color:white;
+    padding-left:3%;
+    width:70%;
 }
 .container{
     position: relative;
@@ -102,6 +145,38 @@ export default {
     margin-top:5%;
     background: linear-gradient(0deg, rgb(214, 214, 214), white);
     background-color: rgb(226, 222, 222);
-    padding:10%;
+    padding-top:10%;
+    padding-right:10%;
+    padding-left:10%;
+}
+.Phrases1 {
+    position: relative;
+    zoom:0.45;
+    left: 250px;
+    transform:rotate(-20deg);
+}
+.Phrases2 {
+    position: relative;
+    zoom:0.45;
+    transform:rotate(-20deg);
+    left: 450px;
+}
+.Phrases3 {
+    position: relative;
+    zoom:0.5;
+    transform:rotate(-20deg);
+    left: 50px;
+    margin-bottom:60%;
+}
+.content2 {
+    position: absolute;
+    left:45%;
+    top:70%;
+}
+.content3 {
+    position:absolute;
+    top:62%;
+    left:40%;
+    transform:rotate(-15deg);
 }
 </style>
