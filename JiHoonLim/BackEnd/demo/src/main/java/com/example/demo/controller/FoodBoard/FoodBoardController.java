@@ -3,7 +3,9 @@ package com.example.demo.controller.FoodBoard;
 import com.example.demo.controller.FoodBoard.request.FoodBoardRequest;
 import com.example.demo.controller.FoodBoard.request.FoodSearchRequest;
 import com.example.demo.entity.FoodBoard.FoodBoard;
+import com.example.demo.entity.Member.MemberCart;
 import com.example.demo.service.FoodBoard.FoodBoardService;
+import com.example.demo.service.Member.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -24,6 +26,10 @@ public class FoodBoardController {
     @Autowired
     private FoodBoardService service;
 
+
+    @Autowired
+    private MemberService memberService;
+
     @PostMapping("/register")
     public void foodBoardRegister(@Validated FoodBoard foodBoard, @RequestParam(required = false)MultipartFile file) throws Exception {
         log.info("foodBoardRegister()" + file);
@@ -38,12 +44,7 @@ public class FoodBoardController {
         return service.list();
     }
 
-    @GetMapping("/getFoodList")
-    public List<FoodBoard> getFoodList(){
-        log.info("getFoodList()");
 
-        return service.getFoodList();
-    }
 
     @GetMapping("/bestFood")
     public List<FoodBoard> bestFoodList(){
@@ -72,6 +73,7 @@ public class FoodBoardController {
         service.modify(foodBoard,file);
 
 
+
         return foodBoard;
     }
 
@@ -80,7 +82,9 @@ public class FoodBoardController {
             @PathVariable("boardNo") Integer boardNo,FoodBoard foodBoard) throws Exception {
         log.info("foodBoardRemove()" +boardNo);
 
+
         service.remove(boardNo);
+
     }
 
     @PostMapping("/search")

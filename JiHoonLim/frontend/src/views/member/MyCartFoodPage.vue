@@ -36,7 +36,7 @@ export default {
       this.memberNo = this.$store.state.userInfo.memberNo;
 
       axios
-        .get(`http://localhost:7777/member/myCart/list/${this.memberNo}`)
+        .get(`http://localhost:7777/myCart/list/${this.memberNo}`)
         .then((res) => {
           this.pageArray = res.data;
         })

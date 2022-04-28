@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface MemberCartRepository extends JpaRepository<MemberCart, Long> {
-    Optional<MemberCart> findBoardNoByMemberNoAndBoardNo(Long memberNo,Long boardNo);
+    Optional<MemberCart> findBoardNoByMemberNoAndFoodBoardBoardNo(Long memberNo,Long boardNo);
 
     @Transactional
     @Query("select cl from MemberCart cl where cl.memberNo = :memberNo")

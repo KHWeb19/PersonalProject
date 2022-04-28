@@ -26,6 +26,8 @@ public class FoodBoardLikeServiceImpl implements FoodBoardLikeService{
 
         if (likeRepository.findByMemberAndFoodBoard(member,foodBoard).isEmpty()) {
             likeRepository.save(new FoodBoardLike(foodBoard, member));
+            foodRepository.updateLikeCount(boardNo);
+            foodRepository.setRankScore(boardNo);
             return true;
         }
         return false;

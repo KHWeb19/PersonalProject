@@ -32,7 +32,7 @@ export default {
   },
   created() {
     axios
-      .get("http://localhost:7777/foodBoard/getFoodList")
+      .get("http://localhost:7777/foodBoard/list")
       .then((res) => {
         this.pageArray = res.data;
       })

@@ -333,12 +333,11 @@ export default {
     },
     myCart() {
       if (this.userInfo != null) {
-        const { foodBoard } = this;
+        const { boardNo } = this;
         axios
-          .post(
-            `http://localhost:7777/member/myCart/register/${this.userInfo.memberNo}`,
-            foodBoard
-          )
+          .post(`http://localhost:7777/myCart/register/${boardNo}`, {
+            memberNo: this.userInfo.memberNo,
+          })
           .then((res) => {
             if (res.data) {
               alert("보관함 등록 성공");

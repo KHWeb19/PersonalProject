@@ -24,8 +24,13 @@
           <div class="cate_box">
             <div class="cate_subBox">
               <div class="cate_main">재료별</div>
+
               <v-chip-group mandatory active-class="orange--text cate_sub">
-                <v-chip v-for="(catMat, idx) in catMats" :key="idx">
+                <v-chip
+                  v-for="(catMat, idx) in catMats"
+                  :key="idx"
+                  @click="selectMat(catMat.value)"
+                >
                   {{ catMat.value }}
                 </v-chip>
               </v-chip-group>
@@ -60,6 +65,7 @@
           </div>
         </v-col>
       </v-row>
+
       <v-row class="mt-5 mb-5s">
         <v-col v-for="food in paginatedData" :key="food.boardNo" lg="3" sm="6">
           <v-card width="500" height="380" class="mx-auto">
@@ -140,8 +146,10 @@
     </v-container>
   </div>
 </template>
+
 <script>
 import axios from "axios";
+
 export default {
   name: "FoodList",
   props: {
@@ -163,6 +171,8 @@ export default {
       pageNum: 0,
       sortReset: true,
       keyWord: "",
+
+      chooseMat: "",
 
       catKinds: [
         { value: "전체" },
@@ -198,6 +208,7 @@ export default {
         { value: "무침 / 비빔" },
         { value: "기타" },
       ],
+      selectCate: false,
     };
   },
 
@@ -236,6 +247,10 @@ export default {
       } else {
         alert("검색어를 입력해주세요.");
       }
+    },
+    selectMat(value) {
+      console.log(value);
+      this.chooseMat = value;
     },
   },
 

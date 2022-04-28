@@ -19,8 +19,14 @@ public class MemberCartController {
     @Autowired
     private MemberCartService service;
 
+    @PostMapping("/register/{boardNo}")
+    public boolean register(@Validated @RequestBody MemberCart memberCart, @PathVariable("boardNo") Long boardNo){
+        log.info("register() " +memberCart);
 
+        return service.register(memberCart, boardNo);
+    }
 
+    /*
     @PostMapping("/register/{memberNo}")
     public boolean addMyCart(@PathVariable("memberNo") Long memberNo, @Validated @RequestBody MemberCartRequest memberCartRequest){
         log.info("addCart" +memberCartRequest);
@@ -44,4 +50,6 @@ public class MemberCartController {
 
         service.remove(cartNo);
     }
+
+     */
 }

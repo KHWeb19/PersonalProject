@@ -14,11 +14,32 @@ import java.util.Optional;
 
 @Service
 @Slf4j
-public class MemberCartServiceImpl implements MemberCartService{
+public class MemberCartServiceImpl implements MemberCartService {
 
     @Autowired
     MemberCartRepository memberCartRepository;
 
+    @Autowired
+    FoodBoardRepository foodBoardRepository;
+
+    @Override
+    public boolean register(MemberCart memberCart, Long boardNo) {
+        Optional<FoodBoard> findBoard = foodBoardRepository.findById(boardNo);
+        log.info("getBoardNo: " + memberCart);
+
+        memberCart.setFoodBoard(findBoard.get());
+
+        if (memberCartRepository.findBoardNoByMemberNoAndFoodBoardBoardNo(memberCart.getMemberNo(), boardNo).isEmpty()){
+            memberCartRepository.save(memberCart);
+            return true;
+        }
+        return false;
+
+
+    }
+
+
+    /*
 
     @Override
     public boolean addMyFood(MemberCartRequest memberCartRequest) {
@@ -47,4 +68,6 @@ public class MemberCartServiceImpl implements MemberCartService{
     public void remove(Long cartNo) {
         memberCartRepository.deleteById(cartNo);
     }
+
+     */
 }

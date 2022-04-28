@@ -114,7 +114,7 @@ export default {
     },
     deleteFood(cartNo) {
       axios
-        .delete(`http://localhost:7777/member/myCart/delete/${cartNo}`)
+        .delete(`http://localhost:7777/myCart/delete/${cartNo}`)
         .then(() => {
           alert("삭제되었습니다.");
           this.$router.go();

@@ -1,7 +1,10 @@
 package com.example.demo.entity.Member;
 
+import com.example.demo.entity.FoodBoard.FoodBoard;
 import com.example.demo.entity.FoodBoard.FoodBoardComment;
 import com.example.demo.entity.FoodBoard.FoodBoardLike;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sun.istack.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -23,6 +26,23 @@ import java.util.Set;
 @NoArgsConstructor
 public class MemberCart {
 
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long cartNo;
+
+    @NotNull
+    @Column
+    private Long memberNo;
+
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "foodBoard_boardNo")
+    private FoodBoard foodBoard;
+
+
+
+    /*
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long cartNo;
@@ -59,6 +79,8 @@ public class MemberCart {
     @Column
     private String filepath;
 
+
+
     public MemberCart(Long cartNo, Long memberNo, Long boardNo, String name, String writer, String des, String kind, String mat, String way, String filename, String filepath){
         this.cartNo = cartNo;
         this.memberNo = memberNo;
@@ -72,6 +94,8 @@ public class MemberCart {
         this.filename = filename;
         this.filepath = filepath;
     }
+
+     */
 
 
 }
