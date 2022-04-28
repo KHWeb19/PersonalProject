@@ -49,7 +49,7 @@ public class  JoinMemberController {
 
     @PostMapping("/login")
     public MemberRequest memberLogin(@RequestBody MemberRequest memberRequest){
-        log.info("memberLogin" + memberRequest);
+        log.info("memberLogin!!!!!!!!!!!!!!!" + memberRequest.getId());
 
         MemberRequest memberResponse = service.login(memberRequest);
 

@@ -37,17 +37,17 @@ export default {
   methods: {
     async onSubmit(payload) {
       console.log("payload.id" + payload.id);
-        if(localStorage.getItem("session") == null) {
+        if(localStorage.getItem("session") == null || localStorage.getItem("session") === undefined) {
         //if(this.checkLoginUser(payload.id)) {
         //if(!this.isLogin) {
         //if(this.checkLoginUser(payload.id)) {
         const {id, pw} = payload;
         await axios.post('http://localhost:7777/join/login', {id, pw})
             .then(res => {
-              console.log(res.data)
-              localStorage.setItem("session", res.data.id);
+              if(res.data) {
+                localStorage.setItem("session", res.data.id);
 
-              /*console.log(this.userInfo);
+                /*console.log(this.userInfo);
 
               if(this.userInfo !== null) {
                 for (let i = 0; i < this.userInfo.length; i++) {
@@ -58,16 +58,20 @@ export default {
               console.log(this.user);
 
               this.$store.commit("addUser", this.user);*/
-              //this.$cookies.set("user", res.data, 30);
-              this.$router.push({name: 'PlanListView', params: {id: res.data.id}});
-
+                this.$cookies.set("user", res.data, 30);
+                this.$router.push({name: 'PlanListView', params: {id: res.data.id}});
+              }else {
+                alert('로그인 실패')
+                this.$router.push({name: 'LoginPage'});
+                this.$router.go();
+              }
             })
-            .catch(() => {
-              alert("로그인 실패")
+            .catch((res) => {
+              alert(res + "로그인 실패")
             })
-      } else {
+      }/* else {
         alert('이미 로그인 되어 있습니다.')
-      }
+      }*/
     },
 /*     checkLoginUser(payloadId){
       console.log(this.userData)

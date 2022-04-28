@@ -7,11 +7,11 @@
         </v-col>
 
         <v-col cols="3" v-else v-for="(plans, index) in paginatedData" :key="index">
-          <v-card style="width: 100%">
+          <v-card style="width: 500px">
             <table align="center" @click="plansClick(plans)">
               <tr>
-                <td colspan="2" align="center">
-                  <img id="bgimg" class="pa-3" src="@/assets/281acb1b7f6147bfa55caa09410caa71.jpg" alt=""/>
+                <td>
+                  <v-img :src="require(`../../assets/plan/${plans.planImgSrc}`)" id="bgimg"></v-img>
                 </td>
               </tr>
               <tr>
@@ -228,6 +228,10 @@ td{
   font-size: 20px;
 }
 #bgimg{
-  width: 400px;
+  width: 395px;
+  height: 315px;
+  display: block;
+  margin-bottom: 15px;
+  margin-top: 15px;
 }
 </style>
