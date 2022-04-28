@@ -210,7 +210,11 @@
               </dd>
             </dl>
             <div class="button-group">
-              <button class="btn-outlined btn-55" type="button">
+              <button
+                @click="addToCart(product.productId)"
+                class="btn-outlined btn-55"
+                type="button"
+              >
                 장바구니
               </button>
               <button class="btn-primary btn-55" type="submit">바로구매</button>
@@ -222,6 +226,7 @@
   </body>
 </template>
 <script>
+import axios from "axios"
 export default {
   name: "ProductDetail",
   props: {
@@ -235,9 +240,36 @@ export default {
       productName: this.product.productName,
       productPrice: this.product.productPrice,
       productId: this.product.productId,
+      discount: this.product.discount,
+      fileName: this.product.fileName,
+      userInfo: this.$store.state.userInfo,
+      comment: "",
     }
   },
-  methods: {},
+  methods: {
+    addToCart(memberNo) {
+      if (this.userInfo != null) {
+        const { product } = this
+        axios
+          .post(
+            `http://localhost:8888/Member/addToCart/register/${memberNo}`,
+            product
+          )
+          .then((res) => {
+            if (res.data) {
+              alert("장바구니 등록 성공")
+              this.$router.go()
+            }
+          })
+          .catch(() => {
+            alert("등록 실패")
+          })
+      } else {
+        alert("로그인 후 이용해주세요.")
+      }
+    },
+  },
+
   filters: {
     pricePoint: function (value) {
       return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")

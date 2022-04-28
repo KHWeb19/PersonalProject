@@ -2,50 +2,63 @@
   <div>
     <Header-Layout></Header-Layout>
     <product-detail v-if="product" :product="product"></product-detail>
-    <p v-else>로딩중 ......</p>
+    <product-comment
+      @submit="onSubmit"
+      :productComments="productComments"
+    ></product-comment>
     <Footer-layout></Footer-layout>
   </div>
 </template>
 <script>
 import HeaderLayout from "@/components/Header/HeaderLayout.vue"
 import ProductDetail from "@/components/Product/ProductDetail.vue"
+import ProductComment from "@/components/Product/ProductComment.vue"
 import FooterLayout from "@/components/Footer/FooterLayout.vue"
 import { mapState, mapActions } from "vuex"
 import axios from "axios"
 
 export default {
   name: "ProductDetailPage",
-  components: { HeaderLayout, FooterLayout, ProductDetail },
+  components: { HeaderLayout, FooterLayout, ProductDetail, ProductComment },
   props: {
     productId: {
       type: String,
-      required: true,
     },
   },
-
   computed: {
-    ...mapState(["product"]),
+    ...mapState(["product", "productComments"]),
   },
   created() {
     this.fetchProduct(this.productId).catch(() => {
       alert("게시물 요청 실패")
     })
+    this.fetchProductCommentList(this.productId).catch(() => {
+      alert("리뷰 요청 실패")
+    })
   },
   methods: {
-    ...mapActions(["fetchProduct"]),
-    onDelete() {
-      const { productId } = this.product
+    ...mapActions(["fetchProduct", "fetchProductCommentList"]),
+    onSubmit(payload) {
+      const { comment, writer } = payload
       axios
-        .delete(`http://localhost:8888/product/${productId}`)
+        .post(
+          `http://localhost:8888/product/comment/register/${this.productId}`,
+          {
+            comment,
+            writer,
+          }
+        )
         .then(() => {
-          alert("삭제 성공!")
-          this.$router.push({ name: "ProductPage" })
+          alert("리뷰 등록 성공!")
+          this.$router.push({
+            name: "ProductDetailPage",
+          })
         })
         .catch(() => {
-          alert("삭제 실패! 문제 발생!")
+          alert("리뷰 등록 실패!")
         })
     },
   },
 }
 </script>
-<style></style>
+<style scoped></style>
