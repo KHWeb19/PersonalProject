@@ -23,19 +23,20 @@ import java.util.Optional;
 public class MemberServiceImpl implements MemberService{
 
     @Autowired
+    private PasswordEncoder passwordEncoder;
+
+
+    @Autowired
     private MemberRepository memberRepository;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private BoardRepository boardRepository;
 
     @Autowired
-    BoardRepository boardRepository;
+    private LikesRepository likesRepository;
 
     @Autowired
-    LikesRepository likesRepository;
-
-    @Autowired
-    CommentRepository commentRepository;
+    private CommentRepository commentRepository;
 
     @Override
     public List<Member> list() {
@@ -174,18 +175,36 @@ public class MemberServiceImpl implements MemberService{
 
     @Override
     public void remove(Long memberNo) {
-        Member member = memberRepository.findById(memberNo).orElseThrow();
-        Optional<Board> maybeBoard = boardRepository.findByMember(member);
+        List<Comment> memberComment = commentRepository.findAllCommentsMemberNo(memberNo);
+        if(!memberComment.isEmpty()) {
+            for (Comment comment : memberComment) {
+                commentRepository.delete(comment);
+            }
+        }
+        List<Likes> memberLikes = likesRepository.findAllLikesMemberNo(memberNo);
+        if(!memberLikes.isEmpty()) {
+            for (Likes likes : memberLikes) {
+                likesRepository.delete(likes);
+            }
+        }
+
+        List<Board> maybeBoard = boardRepository.findAllBoardsMemberNo(memberNo);
         if(!maybeBoard.isEmpty()) {
-            Optional<Comment> maybeComment = commentRepository.findByBoard(maybeBoard.get());
-            if(!maybeComment.isEmpty()) {
-                commentRepository.deleteById(maybeComment.get().getCommentNo());
+            for (Board board : maybeBoard) {
+                List<Comment> maybeComment = commentRepository.findAllCommentsBoardNo(board.getBoardNo());
+                if(!maybeComment.isEmpty()) {
+                    for (Comment comment : maybeComment) {
+                        commentRepository.delete(comment);
+                    }
+                }
+                List<Likes> maybeLikes = likesRepository.findAllLikesBoardNo(board.getBoardNo());
+                if(!maybeLikes.isEmpty()) {
+                    for (Likes likes : maybeLikes) {
+                        likesRepository.delete(likes);
+                    }
+                }
+                boardRepository.delete(board);
             }
-            Optional<Likes> maybeLikes = likesRepository.findByBoard(maybeBoard.get());
-            if(!maybeLikes.isEmpty()) {
-                likesRepository.deleteById(maybeLikes.get().getLikedNo());
-            }
-            boardRepository.deleteById(maybeBoard.get().getBoardNo());
         }
         memberRepository.deleteById(Long.valueOf(memberNo));
     }

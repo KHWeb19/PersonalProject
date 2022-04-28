@@ -21,12 +21,11 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
             nativeQuery = true)
     List<Comment> findTop2ByBoardNo(@Param("boardNo") Long boardNo);
 
-    Optional<Comment> findByBoard (Board board);
-
-//    Optional<Comment> findByBoard (Board board);
-
     @Query("select c from Comment c join c.board cb where cb.boardNo = :boardNo")
     List<Comment> findAllCommentsBoardNo(@Param("boardNo") Long boardNo);
+
+    @Query("select c from Comment c join c.member cm where cm.memberNo = :memberNo")
+    List<Comment> findAllCommentsMemberNo(@Param("memberNo") Long memberNo);
 
 
 }
