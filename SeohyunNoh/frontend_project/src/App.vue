@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <Header/>
+    <Header :cartCount="cartCount" @resetCartCount="resetCartCount"/>
 
     <!--
     <v-app-bar
@@ -88,16 +88,19 @@ export default {
         console.log('err: ' + err)
       })
 
-      // if(this.token) {
-      //   axios.get(`http://localhost:7777/cart/list?id=${this.id}`)
-      //   .then ((res) => {
-      //     const result = res.data
-      //     this.cartCount = result.cartItems.length
-      //   })
-      //   .catch((err) => {
-      //     console.log('cart err' + err)
-      //   })
-      // }
+      if(this.$store.state.isLogin === true) {
+        axios.get(`http://localhost:7777/cart/list/${this.id}`)
+        .then ((res) => {
+          const result = res.data
+          this.cartCount = result.cartItems.length
+        })
+        .catch((err) => {
+          console.log('cart err' + err)
+        })
+      }
+    },
+    resetCartCount() {
+      this.cartCount = 0;
     }
   },
   mounted() {

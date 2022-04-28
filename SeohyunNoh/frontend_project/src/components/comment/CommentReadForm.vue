@@ -11,7 +11,7 @@
     <v-card v-else v-for="item in comments" :key="item.commentNo" class="mx-4"  flat>
       <v-list>
         <v-list-item>
-          <v-list-item-avatar>
+          <v-list-item-avatar width="50px">
             {{ item.id }}
           </v-list-item-avatar>
       

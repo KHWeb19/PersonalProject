@@ -30,9 +30,12 @@
 
             <!-- 로그인, 장바구니, 마이페이지, 게시판--> 
 
+            <div id="cart" style="position:relative">
             <v-btn v-if="isLogin === true" router :to="{path: '/cart'}" icon>
+              <span id="nav-cart-count">{{ cartCount }}</span>
               <v-icon>mdi-cart</v-icon>
             </v-btn>
+            </div>
 
             <v-btn v-if="isLogin === false" router :to="{path: '/loginPage'}" plain background-color="transparent" color="basil"> 
               LOGIN 
@@ -119,6 +122,11 @@
 import { mapState, mapActions } from 'vuex'
 
 export default {
+  props: {
+    cartCount: {
+
+    }
+  },
    data () {
         return {
             tab: null,
@@ -164,12 +172,27 @@ export default {
             this.$store.commit('USER_LOGIN', !this.isLogin)
             this.fetchSession(this.$cookies.remove('session'))
             this.$store.commit('FETCH_USER_INFO', [])
+            this.$emit('resetCartCount')
             alert("로그아웃 되었습니다.")
+            
         }
     }
 }
 </script>
 
 <style scoped>
-  
+#nav-cart-count {
+  background-color: rgba(249, 11, 11);
+  color: white;
+  border-radius: 50%;
+  height: 15px;
+  width: 15px;
+  font-size: 14px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  margin-left: 15px;
+  margin-bottom: 25px;
+}
 </style>

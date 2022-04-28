@@ -36,7 +36,7 @@ export default {
     name: 'QnAReadPage',
     data() {
         return{
-            // qnaNo: ''
+            myqnaNo: '',
             id: ''
         }
     },
@@ -52,6 +52,8 @@ export default {
 
     },
     created () {
+        this.myqnaNo = this.$route.params.qnaNo
+
         this.fetchQnA(this.qnaNo)
                 .catch(() => {
                     alert('게시물 요청 실패!')

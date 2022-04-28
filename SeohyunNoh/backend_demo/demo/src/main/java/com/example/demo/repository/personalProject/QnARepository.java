@@ -9,6 +9,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface QnARepository extends JpaRepository<QnABoard, Long> {
-    @Query("select q from QnABoard q where q.id like :id")
+    @Query("select q from QnABoard q where q.writer like :id")
     List<QnABoard> userRead(@Param("id") String id);
 }

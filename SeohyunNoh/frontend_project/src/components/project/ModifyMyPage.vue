@@ -2,7 +2,7 @@
     <v-dialog v-model="dialog" max-width="450">
       
         <template v-slot:activator="{ on }">
-            <v-btn absolute right class="pa-6" color="secondary" v-on="on" icon>
+            <v-btn absolute right class="pa-6" color="basil--text" v-on="on" icon>
                 수정하기
             </v-btn>
         </template>

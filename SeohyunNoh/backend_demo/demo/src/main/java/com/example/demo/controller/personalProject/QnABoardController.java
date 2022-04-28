@@ -1,7 +1,9 @@
 package com.example.demo.controller.personalProject;
 
+import com.example.demo.entity.personalProject.Member;
 import com.example.demo.entity.personalProject.NoticeBoard;
 import com.example.demo.entity.personalProject.QnABoard;
+import com.example.demo.service.personalProject.MemberService;
 import com.example.demo.service.personalProject.QnAService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,9 @@ public class QnABoardController {
 
     @Autowired
     private QnAService qnaService;
+
+    @Autowired
+    private MemberService memberService;
 
     @PostMapping("/register")
     public void qnaBoardRegister (@Validated @RequestBody QnABoard qnABoard) {
@@ -63,9 +68,10 @@ public class QnABoardController {
         qnaService.remove(qnaNo);
     }
 
+    // 내가 쓴 문의내역 읽기
     @GetMapping("/userRead/{id}")
     public ResponseEntity userRead(@PathVariable("id") String id) throws Exception {
-        log.info("QnA UserRead");
+        log.info("Read My QnA()");
 
         List<QnABoard> qnABoards = qnaService.userRead(id);
 

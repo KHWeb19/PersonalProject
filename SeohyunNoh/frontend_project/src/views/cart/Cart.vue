@@ -85,7 +85,6 @@ export default {
         })
     },
     deleteItem(itemId) {
-        // @RequestParam으로 보낼 것이기 때문에 & 사용하기 cart/delete/${itemId}/?token=${this.token}
       axios.delete(`http://localhost:7777/cart/delete/${itemId}`)
         .then((res) => {
           if (res.status == 200) {
