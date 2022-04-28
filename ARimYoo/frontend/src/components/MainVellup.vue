@@ -62,7 +62,7 @@
                                 mdi-circle
                             </v-icon>
                             {{item.brackets}} &nbsp;
-                            <router-link :to="`/community/${item.reviewNo}`"
+                            <router-link :to="`/review/${item.reviewNo}`"
                             class="bestTitle">{{item.title}}
                             </router-link>
                             <v-spacer />
@@ -74,23 +74,27 @@
                 </v-list>
             </v-col>
         </v-row>
-        <v-row class="halfMain" justify="start">
-            <div class="content1 mt-15">
-                <img src="@/assets/Levelup.png" class="Phrases1">
-                <p/>
-                <img src="@/assets/your.png" class="Phrases2">
-                <p/>
-                <img src="@/assets/ds.png" class="Phrases3">
-            </div>
-        <div class="content2">
-            <img src="@/assets/main/homebanner_ghost.png" style="width:100px">
-            <img src="@/assets/main/homebanner_ghost.png" style="width:200px">
-            <img src="@/assets/main/homebanner_ghost.png" style="width:300px">
+        <div class="halfMain">
+            <v-row justify="start">
+                <div class="content1 mt-15">
+                    <img src="@/assets/Levelup.png" class="Phrases1">
+                    <p/>
+                    <img src="@/assets/your.png" class="Phrases2">
+                    <p/>
+                    <img src="@/assets/ds.png" class="Phrases3">
+                </div>
+            </v-row>
+            <v-row>
+                <div class="content3">
+                    <img src="@/assets/arrow.png" style="width:550px; height:200px;">
+                </div>
+                <div class="content2">
+                    <img src="@/assets/main/homebanner_ghost.png" style="width:100px">
+                    <img src="@/assets/main/homebanner_ghost.png" style="width:200px">
+                    <img src="@/assets/main/homebanner_ghost.png" style="width:300px">
+                </div>
+            </v-row>
         </div>
-        <div class="content3">
-            <img src="@/assets/arrow.png" style="width:550px; height:200px;">
-        </div>
-        </v-row>
     </v-container>
 </template>
 
@@ -198,17 +202,16 @@ export default {
     zoom:0.5;
     transform:rotate(-20deg);
     left: 50px;
-    margin-bottom:60%;
 }
 .content2 {
-    position: absolute;
+    position: relative;
     left:45%;
-    top:70%;
+    margin-bottom:5%;
 }
 .content3 {
     position:absolute;
-    top:62%;
     left:40%;
+    top:70%;
     transform:rotate(-15deg);
 }
 .bestTitle {
