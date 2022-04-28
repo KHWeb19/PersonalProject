@@ -2,12 +2,8 @@
 
 <v-container>
     <div>
-        <router-link style="text-decoration: none;" :to="{ name: 'homeView' }">
-        &nbsp;회원가입/
-    </router-link>
-    <router-link style="text-decoration: none;" :to="{ name: 'homeView' }">
-        로그인
-    </router-link>
+   <login-page v-if="!isLogin"></login-page>
+   <login-info v-else></login-info>
     
 
     </div>
@@ -19,18 +15,9 @@
     max-width="120"
     ></v-img></router-link></v-row>
     
- 
+ <br><br><br><br>
 
-   <v-card-title>
-        <v-text-field
-          v-model="search"
-          append-icon="mdi-magnify"
-          label="Search"
-          single-line
-          hide-details
-           class="shrink"
-        ></v-text-field>
-      </v-card-title>
+ 
     
 
  <v-tabs v-model="tab" background-color="transparent" color="secondary" show-arrows grow>
@@ -45,9 +32,20 @@
 
 
 <script>
-//import axios from 'axios'
+
+import LoginInfo from '@/components/member/LoginInfo'
+import LoginPage from '@/views/member/LoginPage.vue'
+
+import { mapState } from 'vuex'
+
+
 export default {
      name: 'HeaderView',
+     components:{
+       LoginPage,
+       LoginInfo,
+          
+     },
   data () {
     return {
       tab: null,
@@ -55,12 +53,16 @@ export default {
           { name: "Home", route: `/` }, 
           { name: "명품 판별", route: `/K1CheckBrandView` }, 
           { name: "질문 게시판", route: `/K1QuestionView` }, 
-          { name: "판매 중", route: `/` }, 
-          { name: "판매 완료", route: `/` }, 
-          { name: "마이 페이지", route: `/` }, 
+          { name: "판매 중", route: `/K2ProductView` }, 
+          { name: "판매 완료", route: `/K2SoldView` }, 
+          { name: "마이 페이지", route: `/MyPage` }, 
+
         ]
       }
-  }
+  },
+  computed: {
+      ...mapState([ 'isLogin' ])
+    }
 }
 </script>
 <style>

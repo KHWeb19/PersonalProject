@@ -1,58 +1,66 @@
 <template>
-<!--
- <p>proto type</p>
+<div>
+     <v-container fluid>
+      <v-divider></v-divider>
+      <br>
+      <v-row align="center">
+    
+        <v-col
+          cols="12"
+          sm="6"
+        >
+          <v-subheader v-text="'select the Brand What you want to check'"></v-subheader>
+        </v-col>
+  
+        <v-col
+          cols="12"
+          sm="6"
+        >
+          <v-select
+            v-model="e7"
+            :items="states"
+            label="Select"
+            chips
+            hint="What is the target Brand"
+            persistent-hint
+          ></v-select>
+        </v-col>
+      </v-row>
+    <v-row align="center" justify="center" >
+       <v-btn width="400"
+    class="blue lighten-5" 
+    @click="datasubmit">검색</v-btn>
+    </v-row>
+    </v-container>
+    <br>
+    <v-divider></v-divider>
 
-        <h3 text align="center">게시물 목록</h3>
-          <table id="BrandCheckBoard">
-            <tr>
-                <th align="center" width="100">번호</th>
-                <th align="center" width="1000">제목</th>
-                <th align="center" width="150">작성자</th>
-                <th align="center" width="240">등록일자</th>
-            </tr>
-            <tr v-if="!BrandCheckBoards || (Array.isArray(BrandCheckBoards) && BrandCheckBoards.length === 0)">
-                <td colspan="4">
-                    현재 등록된 게시물이 없습니다!
-                </td>
-            </tr>
-            <tr v-else v-for="board in BrandCheckBoards" :key="board.boardNo">
-                <td align="center">
-                    {{ board.boardNo }}
-                </td>
-                <td align="left">
-                    <router-link :to="{ name: 'K1CheckBrandReadPage',
-                                        params: { boardNo: board.boardNo.toString() } }">
-                        {{ board.title }}
-                    </router-link>
-                </td>
-                <td align="right">
-                    {{ board.writer }}
-                </td>
-                <td align="center">
-                    {{ board.regDate }}
-                </td>
-            </tr>
-        </table>
-        <br>-->
-         
-              <div>
-                 
-           
+    <v-card>
+        <v-card-title>
+          <v-spacer></v-spacer>
+          <v-text-field 
+            v-model="search"
+            append-icon="mdi-magnify"
+            label="Search"
+            single-line
+            hide-details></v-text-field>
+        </v-card-title>
+
              <v-data-table
                 :headers="headerTitle"
                 :items="BrandCheckBoards"
+                :search="search"
                 :key="BrandCheckBoards.boardNo"
-                :items-per-page="10"
                 class="elevation-1" >
                 <template v-slot:[`item.title`]="{ item }">
                    <router-link :to="{ name: 'K1CheckBrandReadPage',
-                                        params: { boardNo: item.boardNo.toString() } }">
+                                        params: { boardNo: item.boardNo.toString(),
+                                        } }">
                     {{ item.title }}
                    </router-link>
                 </template>
-                
             ></v-data-table>
-         
+    </v-card>
                  <br>
   <v-row  justify="end">
        <!--name:homeview-> register로 변경예정-->
@@ -61,7 +69,7 @@
       <v-icon small>mdi-pencil</v-icon> 글쓰기</v-btn>
     </router-link></v-row>
     <br>
-  
+                
               </div>
 
               
@@ -72,22 +80,34 @@
 export default {
     name:'K1CheckBrandList',
     props:{
-      BrandCheckBoards: []
+      BrandCheckBoards: [],
+      brand:String
     },
   data () {
     return {
+            search:this.brand,
            headerTitle: [
                             { text: '번호', value: 'boardNo', width: "70px" },
+                            { text: '종류', value: 'type', width: "70px" },
                             { text: '제목', value: 'title', width: "200px" },
                             { text: '작성자', value: 'writer', width: "50px" },
                             { text: '등록일자', value: 'regDate', width: "60px" }
-                        ]
+                        ],
+                        e7:[],
+      states: [
+        'HERMES', 'VITTON', 'CHANEL', 'GUCCI',
+        'FENDI', 'PRADA', 'Dior', 'VANCLEE',
+        'Tiffany', 'Cartier', 'bottega',
+        'YSL', 'Supreme', 'BURBERRY', 'THOM', 'BALENCIAGA',
+        'ROLEX', 'IWC', 'PIAGET', 'OMEGA', 'TAG','Others'
+      ],
     }
   },
     methods: {
-      
-    },
-
+        datasubmit () {
+            this.search=this.e7      
+      }
+    }
 }
 </script> 
 

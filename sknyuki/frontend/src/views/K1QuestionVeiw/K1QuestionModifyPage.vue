@@ -2,7 +2,6 @@
     <v-container>
         <header-view></header-view>
         <br>
-        <drop-down></drop-down>
            <div align="center">
       
       <question-board-modify v-if="QuestionBoard" :QuestionBoard="QuestionBoard" 
@@ -14,7 +13,6 @@
 </template>
 <script>
 import HeaderView from '@/components/home/headerView.vue'
-import DropDown from '@/components/KategoriePage1/DropDown.vue'
 import QuestionBoardModify from '@/components/QuestionBoard/QuestionBoardModify.vue'
 import axios from 'axios'
 import { mapActions, mapState } from 'vuex'
@@ -24,7 +22,6 @@ export default {
     name:'K1QuestionModifyPage',
     components:{ 
     HeaderView,
-    DropDown,
     QuestionBoardModify,
     },
     props:{
@@ -39,7 +36,7 @@ export default {
         }
     },
          computed: {
-      ...mapState(['QuestionBoard'])
+      ...mapState(['QuestionBoard','userInfo'])
     },
           created () {
             console.log(this.boardNo)
@@ -55,10 +52,10 @@ export default {
     methods:{
         ...mapActions(['fetchQuestionBoard']),
         modifyContentsSubmit (payload) {
-            const { title, content } = payload
+            const { type, title, content } = payload
 
             axios.put(`http://localhost:7777/QuestionBoard/${this.boardNo}`,
-                { title, writer: this.QuestionBoard.writer, content, regDate: this.BrandCheckBoard.regDate })
+                { title, type, writer: this.QuestionBoard.writer, id: this.BrandCheckBoard.id,content, regDate: this.BrandCheckBoard.regDate })
                     .then(() => {
                         alert('게시물 수정 성공!')
                     })
@@ -78,6 +75,7 @@ export default {
                     }
 
                     formData.append('boardNo',this.boardNo)
+                    formData.append('id', this.userInfo.id)
                     //formData.append('id', this.id)
                     console.log(this.boardNo)
                     

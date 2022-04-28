@@ -2,7 +2,7 @@
     <v-container>
         <header-view></header-view>
         <br>
-        <drop-down></drop-down>
+       
            <div align="center">
         <k-1-check-brand-register @submitContents="contentsSubmit"
          @submitFiles="filesSubmit"/>
@@ -13,14 +13,12 @@
 <script>
 import K1CheckBrandRegister from '@/components/BrandCheckBoard/K1CheckBrandRegister.vue'
 import HeaderView from '@/components/home/headerView.vue'
-import DropDown from '@/components/KategoriePage1/DropDown.vue'
 import axios from 'axios'
-//import { mapState } from 'vuex'
+import { mapState } from 'vuex'
 export default {
     name:'K1CheckBrandRegisterPage',
     components:{ 
     HeaderView,
-    DropDown,
     K1CheckBrandRegister
     },
 data () {
@@ -29,19 +27,21 @@ data () {
       files:[],
     }
 },
-//computed: {
-  //  ...mapState([ 'userInfo' ])
-  //},
+computed: {
+    ...mapState([ 'userInfo' ])
+},
      methods: {
         contentsSubmit (payload) {
-           // const id=this.userInfo.id
-            const { title,content,writer} = payload
+            const id=this.userInfo.id
+           const { title, writer, type, content} = payload
             console.log('contents의 값이 넘어왔습니다.'+content)
+            console.log('id의 값은?'+id)
             console.log(typeof(title))
-            axios.post('http://localhost:7777/BrandCheckBoard/register', {title, content,writer })
+            axios.post('http://localhost:7777/BrandCheckBoard/register', { id, title, writer, type,content})
                     .then(res => {
-                        alert('등록 성공! - ' + res)
+                        //alert('등록 성공! - ' + res)
                         this.boardNo=res.data.boardNo
+                        
 //console.log(res)
                         
                     
@@ -58,7 +58,8 @@ data () {
 
                     formData.append('boardNo',this.boardNo)
                     console.log(this.boardNo)
-                   // formData.append('id', this.userInfo.id)
+                   formData.append('id', this.userInfo.id)
+                   console.log(this.id)
                     
 
                     axios.post('http://localhost:7777/fileUpload/BrandCheckBoard',formData,{

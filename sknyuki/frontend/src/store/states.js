@@ -40,4 +40,15 @@ export default {
     QuestionBoards: [],
     QuestionBoard: null,
 
+    checkbrandComments: [],
+    checkbrandComment: [],
+
+    QuestionComments:[],
+    QuestionComment:[],
+
+    ProductBoardSs:[],
+    ProductBoardS:[],
+
+    ProductBoardBs:[],
+    ProductBoardB:[],
 }

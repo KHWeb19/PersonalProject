@@ -2,7 +2,6 @@
     <v-container>
         <header-view></header-view>
         <br>
-        <drop-down></drop-down>
            <div align="center">
       
       <k-1-check-brand-modify v-if="BrandCheckBoard" :BrandCheckBoard="BrandCheckBoard" 
@@ -14,7 +13,6 @@
 </template>
 <script>
 import HeaderView from '@/components/home/headerView.vue'
-import DropDown from '@/components/KategoriePage1/DropDown.vue'
 import K1CheckBrandModify from '@/components/BrandCheckBoard/K1CheckBrandModify.vue'
 import axios from 'axios'
 import { mapActions, mapState } from 'vuex'
@@ -24,7 +22,6 @@ export default {
     name:'K1CheckBrandModifyPage',
     components:{ 
     HeaderView,
-    DropDown,
     K1CheckBrandModify,
     },
     props:{
@@ -39,7 +36,7 @@ export default {
         }
     },
          computed: {
-      ...mapState(['BrandCheckBoard'])
+      ...mapState(['BrandCheckBoard','userInfo'])
     },
           created () {
             console.log(this.boardNo)
@@ -55,10 +52,10 @@ export default {
     methods:{
         ...mapActions(['fetchBrandCheckBoard']),
         modifyContentsSubmit (payload) {
-            const { title, content } = payload
+            const {type, title, content } = payload
 
             axios.put(`http://localhost:7777/BrandCheckBoard/${this.boardNo}`,
-                { title, writer: this.BrandCheckBoard.writer, content, regDate: this.BrandCheckBoard.regDate })
+                { title, type ,writer: this.BrandCheckBoard.writer, id: this.BrandCheckBoard.id, content, regDate: this.BrandCheckBoard.regDate })
                     .then(() => {
                         alert('게시물 수정 성공!')
                     })
@@ -78,8 +75,9 @@ export default {
                     }
 
                     formData.append('boardNo',this.boardNo)
-                    //formData.append('id', this.id)
+                    formData.append('id', this.userInfo.id)
                     console.log(this.boardNo)
+                    console.log(this.userInfo.id)
                     
 
                     axios.post('http://localhost:7777/fileUpload/BrandCheckBoard',formData,{

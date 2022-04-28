@@ -94,9 +94,10 @@ export default {
         if (res.data) {
           
           this.$store.commit('USER_LOGIN', res.data)
+         
           
           this.fetchUserInfo(id)
-
+         // this.$cookies.set("session", {id , pw}, 30)
           this.dialog = false
           alert('로그인이 완료되었습니다!')
           

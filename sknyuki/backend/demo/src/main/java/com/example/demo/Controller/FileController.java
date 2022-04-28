@@ -16,10 +16,10 @@ public class FileController {
     @PostMapping("/BrandCheckBoard")
     @ResponseBody
     public String checkBrandFileUpload(@RequestParam(value = "fileList", required = false) List<MultipartFile> fileList,
-                                       @RequestParam("boardNo") Long boardNo){
+                                       @RequestParam("boardNo") Long boardNo, @RequestParam("id") String id){
         try {
             for (MultipartFile multipartFile : fileList) {
-                FileOutputStream writer = new FileOutputStream("./images/BrandCheck/" + boardNo + ".jpg");
+                FileOutputStream writer = new FileOutputStream("./images/BrandCheck/" + boardNo + "_" + id + ".jpg");
                 writer.write(multipartFile.getBytes());
                 writer.close();
             }
@@ -45,10 +45,26 @@ public class FileController {
     @PostMapping("/QuestionBoard")
     @ResponseBody
     public String QuestionFileUpload(@RequestParam(value = "fileList", required = false) List<MultipartFile> fileList,
+                                     @RequestParam("boardNo") Long boardNo, @RequestParam("id") String id) {
+        try {
+            for (MultipartFile multipartFile : fileList) {
+                FileOutputStream writer = new FileOutputStream("./images/Question/" + boardNo + "_" + id + ".jpg");
+                writer.write(multipartFile.getBytes());
+                writer.close();
+            }
+        } catch (Exception e) {
+            return "Recommend File Upload Fail";
+        }
+        return "Recommend File Upload Success";
+    }
+
+    @PostMapping("/ProductBoardS")
+    @ResponseBody
+    public String ProductBoardSFileUpload(@RequestParam(value = "fileList", required = false) List<MultipartFile> fileList,
                                      @RequestParam("boardNo") Long boardNo) {
         try {
             for (MultipartFile multipartFile : fileList) {
-                FileOutputStream writer = new FileOutputStream("./images/Question/" + boardNo + ".jpg");
+                FileOutputStream writer = new FileOutputStream("./images/ProductBoardS/" + boardNo +".jpg");
                 writer.write(multipartFile.getBytes());
                 writer.close();
             }

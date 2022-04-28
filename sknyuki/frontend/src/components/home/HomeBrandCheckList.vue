@@ -3,21 +3,20 @@
     <v-container>
      <p>proto type</p>
     <v-row align="center" justify="center">
-        <!--name:homeview변경예정-->
     <router-link style="text-decoration: none;" :to="{name:'K1CheckBrandView'}">
     <v-btn class="blue lighten-5">상품 판별 보러가기 </v-btn>
     </router-link></v-row>
 <br>
  <div class="brand-img">
-     <!-- 가변링크 달아줄 예정-->
+   
                 
-                    <div onclick ="location.href='http://localhost:8080/K1CheckBrandView'" class="item hover item1"></div>
-                    <div class="item hover item2"></div>
-                    <div class="item hover item3"></div>
-                    <div class="item hover item4"></div>
-                    <div class="item hover item5"></div>
-                    <div class="item hover item6"></div>
-                    <div class="item hover item7"></div>
+                  <router-link :to="{name:'K1CheckBrandView',params: { brand: 'HERMES' } }" class="item hover item1"></router-link>
+                  <router-link :to="{name:'K1CheckBrandView',params: { brand: 'VITTON' }}" class="item hover item2"></router-link>
+                  <router-link :to="{name:'K1CheckBrandView',params: { brand: 'CHANEL' }}" class="item hover item3"></router-link>
+                  <router-link :to="{name:'K1CheckBrandView',params: { brand: 'GUCCI' }}" class="item hover item4"></router-link>
+                  <router-link :to="{name:'K1CheckBrandView',params: { brand: 'PRADA' }}" class="item hover item5"></router-link>
+                  <router-link :to="{name:'K1CheckBrandView',params: { brand: 'ROLEX' }}" class="item hover item6"></router-link>
+                  <router-link :to="{name:'K1CheckBrandView',params: { brand: 'Others' }}" class="item hover item7"></router-link>
                 </div>
                 
     </v-container>

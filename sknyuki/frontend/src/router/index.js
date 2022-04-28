@@ -12,6 +12,11 @@ import K1QuestionRegisterPage from '@/views/K1QuestionVeiw/K1QuestionRegisterPag
 import K2ProductView from '@/views/K2ProductView/K2ProductView'
 import K1QuestionModifyPage from '@/views/K1QuestionVeiw/K1QuestionModifyPage.vue'
 import MyPage from '@/views/member/MyPage'
+import K2ProductRegisterPage from '@/views/K2ProductView/K2ProductRegisterPage.vue'
+import K2ProductReadPage from '@/views/K2ProductView/K2ProductReadPage.vue'
+import K2ProductModifyPage from '@/views/K2ProductView/K2ProductModifyPage.vue'
+import K2SoldReadPage from '@/views/K2SoldView/K2SoldReadPage.vue'
+import K2SoldView from '@/views/K2SoldView/K2SoldView.vue'
 
 Vue.use(VueRouter)
 
@@ -29,8 +34,10 @@ const routes = [
   {
     path: '/K1CheckBrandView',
     name: 'K1CheckBrandView',
-    component: K1CheckBrandView
+    component: K1CheckBrandView,
+    props:true
   },
+  
   {
     path:'/K1CheckBrandReadPage/:boardNo',
     name:'K1CheckBrandReadPage',
@@ -96,6 +103,48 @@ props:{
   default: true
 }
 },
+{
+  path: '/K2ProductRegisterPage',
+  name: 'K2ProductRegisterPage',
+  component: K2ProductRegisterPage
+},
+{
+  path:'/K2ProductReadPage/:boardNo',
+  name:'K2ProductReadPage',
+  components: {
+    default: K2ProductReadPage
+},
+props: {
+  default: true
+}
+},
+{
+  path: '/K2ProductModifyPage/:boardNo',
+    name: 'K2ProductModifyPage',
+    components:{
+      default:K2ProductModifyPage
+  },
+  props:{
+    default: true
+  }
+  },
+  {
+    path:'/K2SoldReadPage/:boardNo',
+    name:'K2SoldReadPage',
+    components: {
+      default: K2SoldReadPage
+  },
+  props: {
+    default: true
+  }
+  },
+  {
+    path:'/K2SoldView',
+    name:'K2SoldView',
+    component:K2SoldView
+  },
+
+
 ]
 
 const router = new VueRouter({

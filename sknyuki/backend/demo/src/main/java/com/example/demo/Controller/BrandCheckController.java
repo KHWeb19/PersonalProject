@@ -21,6 +21,7 @@ public class BrandCheckController {
     @Autowired
     private BrandCheckBoardService service;
 
+
     @PostMapping("/register")
     public ResponseEntity BrandCheckBoardRegister(@Validated @RequestBody BrandCheckBoard checkboard) {
         log.info("BrandCheckBoardRegister()");
@@ -66,6 +67,23 @@ public class BrandCheckController {
 
             service.remove(boardNo);
         }
+
+      /*  @GetMapping("/userRead/{id}")
+        public List<BrandCheckBoard> CheckBrandBoardList (
+                @PathVariable("id") String id) {
+            log.info("MyPageCheckBrandList()");
+
+            return service.userRead(id);
+        }*/
+      @GetMapping("/userRead/{id}")
+      public ResponseEntity userRead(@PathVariable("id") String id) throws Exception {
+          log.info("Recommend UserRead");
+
+          List<BrandCheckBoard> CheckBrandBoards = service.userRead(id);
+
+          return new ResponseEntity(CheckBrandBoards, HttpStatus.OK);
+      }
+
     }
 
 

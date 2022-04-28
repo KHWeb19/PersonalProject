@@ -20,7 +20,7 @@ import HomeBanner from '../../components/home/HomeBanner.vue'
 import HomeSellList from '../../components/home/HomeSellList.vue'
 import HomeBrandCheckList from '../../components/home/HomeBrandCheckList.vue'
 import HomeQuestionBoard from '../../components/home/HomeQuestionboard.vue'
-//import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
   export default {
     name: 'HomeView',
@@ -32,15 +32,15 @@ import HomeQuestionBoard from '../../components/home/HomeQuestionboard.vue'
         HomeBrandCheckList,
         HomeQuestionBoard,
     },
-  /*   computed: {
+ computed: {
         ...mapState(['QuestionBoards'])
     },
     mounted () {
-        this.fetchQuestionBoards()
+        this.fetchQuestionBoardList()
     },
     methods: {
-        ...mapActions(['fetchQuestionBoards'])
-    }*/
+        ...mapActions(['fetchQuestionBoardList'])
+    }
 
   }
 </script>

@@ -1,5 +1,25 @@
 <template>
-    <div>
+ <div>
+ <v-btn
+   추천버튼
+          class="ma-2"
+          text
+          icon
+          color="blue lighten-2"
+        >
+          <v-icon>mdi-thumb-up</v-icon>
+        </v-btn>
+  
+        <v-btn 비추저튼
+          class="ma-2"
+          text
+          icon
+          color="red lighten-2"
+        >
+          <v-icon>mdi-thumb-down</v-icon>
+        </v-btn>
+
+   
         찜 버튼 아이콘
           <v-btn
         class="mx-2"

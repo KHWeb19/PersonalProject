@@ -2,7 +2,7 @@
     <v-container>
         <header-view></header-view>
         <br>
-        <drop-down></drop-down>
+        
            <div align="center">
         <question-board-regester @submitContents="contentsSubmit"
          @submitFiles="filesSubmit"/>
@@ -13,14 +13,12 @@
 <script>
 import QuestionBoardRegester from '@/components/QuestionBoard/QuestionBoardRegister.vue'
 import HeaderView from '@/components/home/headerView.vue'
-import DropDown from '@/components/KategoriePage1/DropDown.vue'
 import axios from 'axios'
-//import { mapState } from 'vuex'
+import { mapState } from 'vuex'
 export default {
     name:'K1QuestionRegisterPage',
     components:{ 
     HeaderView,
-    DropDown,
     QuestionBoardRegester
     },
 data () {
@@ -35,9 +33,9 @@ computed: {
      methods: {
         contentsSubmit (payload) {
             const id=this.userInfo.id
-            const { title, content, writer} = payload
+            const { title, content, type, writer} = payload
             console.log('contents의 값이 넘어왔습니다.'+content)
-            axios.post('http://localhost:7777/CheckBrandBoard/register', { id, title, writer, content })
+            axios.post('http://localhost:7777/QuestionBoard/register', { id, type, title, writer, content })
                     .then(res => {
                         // alert('등록 성공! - ' + res)
                         this.boardNo=res.data.boardNo
@@ -66,6 +64,10 @@ computed: {
                         })
                         .then(res=>{
                              console.log(res.data)
+                             alert('등록 성공! - ' + res)
+                                 this.$router.push({
+                                     name:'K1QuestionView'
+                                 })
                         }).catch(err=>{
                              console.log(err)
                         })

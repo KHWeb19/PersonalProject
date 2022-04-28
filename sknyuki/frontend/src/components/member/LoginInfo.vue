@@ -2,11 +2,11 @@
     <v-dialog v-model="dialog" max-width="350">
       <template v-slot:activator="{ on }">
         <v-btn icon v-on="on" class="float-right">
-          <v-icon color="secondary">lock_outline</v-icon>
+          <v-icon color="secondary">Profile</v-icon>
         </v-btn>
       </template>
 
-      <v-card class="primary rounded-xl pa-4">
+      <v-card class=" rounded-xl pa-4">
         <v-card-title>
           <p class="headline secondary--text font-weight-bold">
             {{ userInfo.name }}님 환영합니다!
@@ -53,7 +53,7 @@ export default {
       })
     },
     btnMypage () {
-      this.$router.push({ name: 'Mypage' })
+      this.$router.push({ name: `MyPage` })
     }
   }
 }

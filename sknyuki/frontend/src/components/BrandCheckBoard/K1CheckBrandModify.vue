@@ -70,6 +70,16 @@
                 <upload-file-1 @selectFile="selectFile"></upload-file-1>
 
                 <h3 align="left">내용 : </h3>
+
+                 <v-select
+            :items="states"
+            label="Brand Type"
+            dense
+            outlined
+            style="width:600px; font-size:20px;"
+             v-model="type"
+          ></v-select>  
+
                 <v-textarea
                     counter
                     outlined
@@ -103,7 +113,7 @@
 
                 <br>
 
-                <router-link style="text-decoration: none; color:black" :to="{ name: 'K1CheckBrandView', params: { boardNo: BrandCheckBoard.boardNo.toString() }}">
+                <router-link style="text-decoration: none; color:black" :to="{ name: 'K1CheckBrandReadPage', params: { boardNo: BrandCheckBoard.boardNo.toString() }}">
                     <v-btn text color="black" rounded x-large
                         style="padding: 10px; width: 90px;">수정 취소
                     </v-btn>
@@ -116,7 +126,7 @@
 <script>
 import UploadFile1 from '@/components/uploadfile1.vue'
 export default {
-    name:'K1CheckBrandRead',
+    name:'K1CheckBrandModify',
       components:{
         UploadFile1
     },
@@ -130,7 +140,15 @@ export default {
         return {
             title: '',
             content: '',
+            type:'',
             files:[],
+            states: [
+        'HERMES', 'VITTON', 'CHANEL', 'GUCCI',
+        'FENDI', 'PRADA', 'Dior', 'VANCLEE',
+        'Tiffany', 'Cartier', 'bottega',
+        'YSL', 'Supreme', 'BURBERRY', 'THOM', 'BALENCIAGA',
+        'ROLEX', 'IWC', 'PIAGET', 'OMEGA', 'TAG','Others'
+      ],
         }
 },
 methods: {
@@ -141,8 +159,8 @@ methods: {
             onSubmit () {
             var result = confirm('수정 내용을 등록 하시겠습니까?')
             if(result) {
-                const { title, content} = this
-                this.$emit('submitContents', { title, content})
+                const { type ,title, content} = this
+                this.$emit('submitContents', {type, title, content})
                 //console.log(this.title,this.content)
 
                 this.$emit("submitFiles",this.files)
@@ -151,6 +169,7 @@ methods: {
             },
                created () {
         //this.id = this.BrandCheckboard.id
+        this.type=this.BrandCheckboard.type
         this.boardNo =this.BrandCheckboard.boardNo
         this.title = this.BrandCheckboard.title
         this.content = this.BrandCheckboard.content

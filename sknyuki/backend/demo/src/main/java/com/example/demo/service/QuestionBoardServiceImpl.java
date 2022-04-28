@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.entity.BrandCheckBoard;
 import com.example.demo.entity.QuestionBoard;
 import com.example.demo.repository.QuestionBoardRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -47,5 +48,12 @@ public class QuestionBoardServiceImpl implements QuestionBoardService {
     @Override
     public void remove(Integer boardNo) {
         repository.deleteById(Long.valueOf(boardNo));
+    }
+
+    @Override
+    public List<QuestionBoard> userRead(String id) throws Exception {
+        List<QuestionBoard> QuestionBoardList = repository.userRead(id);
+
+        return QuestionBoardList;
     }
 }

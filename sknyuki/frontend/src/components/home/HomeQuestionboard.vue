@@ -12,12 +12,15 @@
             <v-data-table
                 :headers="headerTitle"
                 :items="QuestionBoards"
-                :page.sync="page"
+                :key="QuestionBoards.boardNo"
                 :items-per-page="5"
-                hide-default-footer
-                class="elevation-1" 
-                @click:row="handleClick"
-                @page-count="pageCount = $event"
+                class="elevation-1" >
+                <template v-slot:[`item.title`]="{ item }">
+                   <router-link :to="{ name: 'K1QuestionReadPage',
+                                        params: { boardNo: item.boardNo.toString() } }">
+                    {{ item.title }}
+                   </router-link>
+                </template>  
             ></v-data-table>
             </v-simple-table>
                  
@@ -43,32 +46,22 @@ export default {
     },
      data () {
     return {
-            page: 1,
-            pageCount: 0,
-            itemsPerPage: 10,
             headerTitle: [
-                            { text: '번호', value: 'boardNo', width: "70px" },
                             { text: '제목', value: 'title', width: "200px" },
                             { text: '작성자', value: 'writer', width: "50px" },
-                            { text: '등록일자', value: 'regDate', width: "60px" }
                         ]
     }
   },
 function: {
     },
     methods: {
-        handleClick(event, idx) {
-            this.$router.push({
-                            name: 'QuestionBoardReadPage',
-                            params: { boardNo: String(idx.item.boardNo) }
-                         })
         }
-    },
-      mounted () {
-        console.log(this.QuestionBoards.regDate)
-        console.log(this.QuestionBoards.boardNo)
-  }
 }
+      //mounted () {
+     //   console.log(this.QuestionBoards.regDate)
+       // console.log(this.QuestionBoards.boardNo)
+ //}
+ 
 </script>
 <style scoped>
  

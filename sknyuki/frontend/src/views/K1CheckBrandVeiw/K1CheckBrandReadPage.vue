@@ -2,19 +2,16 @@
     <v-container>
         <header-view></header-view>
         <br>
-        <drop-down></drop-down>
      <div align="center">
-
-
        
-         
-        <!-- <k-1-check-brand-read v-if="BrandCheckBoard" :BrandCheckBoard="BrandCheckBoard"
-         boardNo="boardNo" />
-        <p v-else>로딩중 ...... </p>-->
-        <k-1-check-brand-read v-if="BrandCheckBoard" :BrandCheckBoard="BrandCheckBoard" :boardNo="boardNo"/>
 
-      
-        <div class="버튼" style="padding:20px;">
+        <k-1-check-brand-read v-if="BrandCheckBoard" :BrandCheckBoard="BrandCheckBoard" :boardNo="boardNo"/>
+        <p v-else>로딩중 ...... </p>
+
+
+        <read-check-brand-comment :boardNo="boardNo"/>
+
+       <div v-if="userInfo.id == BrandCheckBoard.id" style="padding:20px;">
             <router-link style="text-decoration: none; color:black" 
             :to="{ name: 'K1CheckBrandModifyPage', params: { boardNo } }">
                 <v-btn text color="black" rounded x-large
@@ -29,6 +26,7 @@
                 @click="onDelete">
                     삭제하기
             </v-btn>
+       </div>
 
             <br>
 
@@ -40,7 +38,7 @@
                 </v-btn>
             </router-link>
         </div>
-    </div>
+    
 
     </v-container>
 </template>
@@ -48,14 +46,14 @@
 import { mapState, mapActions } from 'vuex'
 import axios from 'axios'
 import HeaderView from '@/components/home/headerView.vue'
-import DropDown from '@/components/KategoriePage1/DropDown.vue'
 import K1CheckBrandRead from '@/components/BrandCheckBoard/K1CheckBrandRead.vue'
+import ReadCheckBrandComment from '@/components/comment/ReadCheckBrandComment'
 export default {
     name:'K1CheckBrandReadPage',
     components:{ 
     HeaderView,
-    DropDown,
     K1CheckBrandRead,
+    ReadCheckBrandComment,
     },
    
     props: {
@@ -66,7 +64,7 @@ export default {
     },
    
     computed: {
-        ...mapState(['BrandCheckBoard'])
+        ...mapState(['BrandCheckBoard','userInfo'])
     },
     created () {
         this.fetchBrandCheckBoard(this.boardNo)
@@ -76,9 +74,8 @@ export default {
                 })
     },
     methods: {
-       
-        
-        ...mapActions(['fetchBrandCheckBoard']),
+      ...mapActions(['fetchBrandCheckBoard']),
+
         onDelete () {
             var result = confirm('삭제 하시겠습니까?')
             if(result) {

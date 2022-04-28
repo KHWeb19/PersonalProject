@@ -1,6 +1,7 @@
 package com.example.demo.Controller;
 
 
+import com.example.demo.entity.BrandCheckBoard;
 import com.example.demo.entity.QuestionBoard;
 import com.example.demo.service.QuestionBoardService;
 import lombok.extern.slf4j.Slf4j;
@@ -68,6 +69,15 @@ public class QuestionBoardController {
 
             service.remove(boardNo);
         }
+
+    @GetMapping("/userRead/{id}")
+    public ResponseEntity userRead(@PathVariable("id") String id) throws Exception {
+        log.info("Recommend UserRead");
+
+        List<QuestionBoard> QuestionBoardList = service.userRead(id);
+
+        return new ResponseEntity(QuestionBoardList, HttpStatus.OK);
+    }
     }
 
 
