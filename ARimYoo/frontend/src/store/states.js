@@ -1,10 +1,12 @@
 export default {
 
     communityBoards: [],
+    communityBest: [],
     communityBoard: null,
     communityComments: [],
 
     reviews: [],
+    reviewBest: [],
     review: null,
     reviewComments: [],
 

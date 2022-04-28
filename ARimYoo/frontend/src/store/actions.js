@@ -5,9 +5,11 @@
     FETCH_MEMBER_PROJECT_LIST,
     FETCH_MEMBER_PROJECT,
     FETCH_COMMUNITY_BOARD_LIST,
+    FETCH_COMMUNITY_BOARD_BEST_LIST,
     FETCH_COMMUNITY_BOARD,
     FETCH_COMMUNITY_COMMENTS_LIST,
     FETCH_REVIEW_LIST,
+    FETCH_REVIEW_BEST_LIST,
     FETCH_REVIEW,
     FETCH_REVIEW_COMMENTS_LIST,
     FETCH_STUDY_LIST,
@@ -61,6 +63,12 @@ export default {
                 commit(FETCH_COMMUNITY_BOARD_LIST, res.data)
         })
     },
+    fetchCommunityBoardBestList({ commit }) {
+        return axios.get('http://localhost:7777/board/community/popular')
+            .then((res) => {
+                commit(FETCH_COMMUNITY_BOARD_BEST_LIST, res.data)
+        })
+    },
     fetchCommunityBoard({ commit }, boardNo) {
         return axios.get(`http://localhost:7777/board/community/${boardNo}`)
             .then((res) => {
@@ -80,6 +88,12 @@ export default {
             .then((res) => {
             commit(FETCH_REVIEW_LIST, res.data)
         })
+    },
+    fetchReviewBestList({ commit }) {
+        return axios.get('http://localhost:7777/board/review/popular')
+            .then((res) => {
+                commit(FETCH_REVIEW_BEST_LIST, res.data)
+        } )
     },
     fetchReview({ commit }, reviewNo) {
         return axios.get(`http://localhost:7777/board/review/${reviewNo}`)

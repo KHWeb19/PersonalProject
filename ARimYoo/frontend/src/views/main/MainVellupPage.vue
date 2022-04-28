@@ -1,6 +1,6 @@
 <template>
     <div>
-            <main-vellup/>
+            <main-vellup :communityBest="communityBest" :reviewBest="reviewBest"/>
     </div>
 </template>
 
@@ -8,6 +8,7 @@
 
 <script>
 import MainVellup from '@/components/MainVellup.vue'
+import { mapActions, mapState } from 'vuex'
 
 export default {
     name: 'MainVellupPage',
@@ -15,8 +16,16 @@ export default {
         MainVellup
 
     },
-
-
+    computed: {
+        ...mapState(['communityBest' ,'reviewBest'])
+    },
+    mounted () {
+        this.fetchCommunityBoardBestList()
+        this.fetchReviewBestList()
+    },
+    methods: {
+        ...mapActions(['fetchCommunityBoardBestList', 'fetchReviewBestList'])
+    }
 }
 </script>
 

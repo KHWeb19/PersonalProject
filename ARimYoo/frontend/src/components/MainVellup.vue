@@ -32,21 +32,45 @@
                         <v-icon small dark>mdi-circle</v-icon>&nbsp;
                         <strong>Best community post</strong>
                     </v-list-item-title>
-                    <v-list-item>
-                        여기는 Best 게시물 쓸거에요
-                    </v-list-item>
+                    <div v-for ="(item, index) in communityBest" :key="index">
+                        <v-list-item class="mt-3" style="font-size:11pt">
+                            <v-icon x-small class="ml-5 mr-4 " color="black">
+                                mdi-circle
+                            </v-icon>
+                            {{item.brackets}} &nbsp;
+                            <router-link :to="`/community/${item.boardNo}`"
+                            class="bestTitle">{{item.title}}
+                            </router-link>
+                            <v-spacer />
+                            💛
+                            {{item.likeCnt}}
+                        </v-list-item>
+                    <v-divider class="ml-5"/>
+                    </div>
                 </v-list>
             </v-col>
-            <v-divider vertical class="mr-10"/>
+            <v-divider vertical class="mr-10 ml-10"/>
             <v-col cols="5">
-                <v-list>
+                 <v-list>
                     <v-list-item-title class="listTitle pt-2 pb-2">
                         <v-icon small dark>mdi-circle</v-icon>&nbsp;
                         <strong>Best Review post</strong>
                     </v-list-item-title>
-                    <v-list-item>
-                        여기도 Best 게시물 쓸거에요
-                    </v-list-item>
+                    <div v-for ="(item, index) in reviewBest" :key="index">
+                        <v-list-item class="mt-3" style="font-size:11pt">
+                            <v-icon x-small class="ml-5 mr-4 " color="black">
+                                mdi-circle
+                            </v-icon>
+                            {{item.brackets}} &nbsp;
+                            <router-link :to="`/community/${item.reviewNo}`"
+                            class="bestTitle">{{item.title}}
+                            </router-link>
+                            <v-spacer />
+                            💛
+                            {{item.likeCnt}}
+                        </v-list-item>
+                    <v-divider class="ml-5"/>
+                    </div>
                 </v-list>
             </v-col>
         </v-row>
@@ -82,6 +106,14 @@ export default {
                 {explain:'We are the people who lead the future', content:'future', img: require('@/assets/main/main2.png')},
                 {explain:'Do action of working with someone to produce or create idea', content:'collaboration', img: require('@/assets/main/main1.png')}
             ]
+        }
+    },
+    props: {
+        communityBest: {
+            type:Array
+        },
+        reviewBest: {
+            type:Array
         }
     }
 }
@@ -178,5 +210,11 @@ export default {
     top:62%;
     left:40%;
     transform:rotate(-15deg);
+}
+.bestTitle {
+    color:black;
+}
+.bestTitle:hover{
+    color:rgb(206, 24, 24);
 }
 </style>
