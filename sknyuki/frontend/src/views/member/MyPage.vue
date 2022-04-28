@@ -1,13 +1,15 @@
 <template>
-  <v-card class="mt-8 mb-10">
-   
+<v-container>
+  
+     <header-view></header-view>
+   <v-card>
     <v-row>
-      <v-col cols="12" md="6">
+      <v-col >
         <read-info></read-info>
       </v-col>
     </v-row>
     <v-row>
-      <v-col cols="12" md="6">
+      <v-col>
         <recent-board></recent-board>
 
       </v-col>
@@ -15,11 +17,12 @@
       
     
   </v-card>
-
+</v-container>
 </template>
 
 
 <script>
+import HeaderView from '@/components/home/headerView.vue'
 import ReadInfo from '@/components/member/ReadInfo'
 import RecentBoard from '@/components/member/RecentBoard'
 
@@ -27,6 +30,7 @@ import RecentBoard from '@/components/member/RecentBoard'
 export default {
   name:'MyPage',
   components: {
+    HeaderView,
     ReadInfo,
     RecentBoard
   }

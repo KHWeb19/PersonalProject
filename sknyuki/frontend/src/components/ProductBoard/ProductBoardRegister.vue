@@ -117,9 +117,10 @@ export default {
             brandrank: '',
             accessories: '',
             status: '',
+            soldCheck: true,
             files:[],
             states: [
-        'HEMES', 'VITTON', 'CHANEL', 'GUCCI',
+        'HERMES', 'VITTON', 'CHANEL', 'GUCCI',
         'FENDI', 'PRADA', 'Dior', 'VANCLEE',
         'Tiffany', 'Cartier', 'bottega',
         'YSL', 'Supreme', 'BURBERRY', 'THOM', 'BALENCIAGA',
@@ -137,9 +138,9 @@ export default {
          onSubmit () {
             var result = confirm('등록 하시겠습니까?')
             if(result) {
-                const { type, name, size, price, brandrank, accessories, status} = this
-                this.$emit('submitContents', { type, name, size, price, brandrank, accessories, status})
-                console.log(this.type,this.name,this.size ,this.price)
+                const { type, name, size, price, brandrank, accessories, status, soldCheck} = this
+                this.$emit('submitContents', { type, name, size, price, brandrank, accessories, status, soldCheck})
+                console.log(this.type,this.name,this.size ,this.price ,this.soldCheck)
 
                 this.$emit("submitFiles",this.files)
                 console.log(this.files)

@@ -80,11 +80,12 @@
 export default {
     name:'K1CheckBrandList',
     props:{
-      BrandCheckBoards: []
+      BrandCheckBoards: [],
+      brand:String
     },
   data () {
     return {
-            search:'',
+            search:this.brand,
            headerTitle: [
                             { text: '번호', value: 'boardNo', width: "70px" },
                             { text: '종류', value: 'type', width: "70px" },
@@ -94,7 +95,7 @@ export default {
                         ],
                         e7:[],
       states: [
-        'HEMES', 'VITTON', 'CHANEL', 'GUCCI',
+        'HERMES', 'VITTON', 'CHANEL', 'GUCCI',
         'FENDI', 'PRADA', 'Dior', 'VANCLEE',
         'Tiffany', 'Cartier', 'bottega',
         'YSL', 'Supreme', 'BURBERRY', 'THOM', 'BALENCIAGA',

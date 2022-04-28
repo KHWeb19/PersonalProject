@@ -12,10 +12,10 @@ public class ProductBoardSDto {
     private String brandrank;
     private String accessories;
     private String status;
+    private boolean soldCheck;
 
 
-
-    public ProductBoardSDto(String type, String id, String name, String size, int price, String brandrank, String accessories, String status) {
+    public ProductBoardSDto(String type, String id, String name, String size, int price, String brandrank, String accessories, String status, boolean soldCheck) {
         this.type= type;
         this.id = id;
         this.name = name;
@@ -24,5 +24,6 @@ public class ProductBoardSDto {
         this.brandrank = brandrank;
         this.accessories = accessories;
         this.status = status;
+        this.soldCheck = soldCheck;
     }
 }

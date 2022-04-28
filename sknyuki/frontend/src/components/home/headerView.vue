@@ -15,7 +15,7 @@
     max-width="120"
     ></v-img></router-link></v-row>
     
- 
+ <br><br><br><br>
 
  
     
@@ -54,7 +54,7 @@ export default {
           { name: "명품 판별", route: `/K1CheckBrandView` }, 
           { name: "질문 게시판", route: `/K1QuestionView` }, 
           { name: "판매 중", route: `/K2ProductView` }, 
-          { name: "판매 완료", route: `/K2ProductView` }, 
+          { name: "판매 완료", route: `/K2SoldView` }, 
           { name: "마이 페이지", route: `/MyPage` }, 
 
         ]

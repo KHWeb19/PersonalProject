@@ -48,4 +48,7 @@ export default {
 
     ProductBoardSs:[],
     ProductBoardS:[],
+
+    ProductBoardBs:[],
+    ProductBoardB:[],
 }

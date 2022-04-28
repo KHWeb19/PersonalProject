@@ -125,7 +125,7 @@ export default {
             status: '',
             files:[],
             states: [
-        'HEMES', 'VITTON', 'CHANEL', 'GUCCI',
+        'HERMES', 'VITTON', 'CHANEL', 'GUCCI',
         'FENDI', 'PRADA', 'Dior', 'VANCLEE',
         'Tiffany', 'Cartier', 'bottega',
         'YSL', 'Supreme', 'BURBERRY', 'THOM', 'BALENCIAGA',
@@ -155,8 +155,11 @@ export default {
         //this.id = this.ProductBoardS.id
         this.type=this.ProductBoardS.type
         this.boardNo =this.ProductBoardS.boardNo
-        this.title = this.ProductBoardS.title
-        this.content = this.ProductBoardS.content
+        this.name = this.ProductBoardS.name
+        this.price = this.ProductBoardS.price
+        this.brandrank = this.ProductBoardS.brandrank
+        this.accessories = this.ProductBoardS.accessories
+        this.status = this.ProductBoardS.status
     }
       }
 }

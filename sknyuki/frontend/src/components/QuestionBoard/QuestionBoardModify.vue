@@ -143,7 +143,7 @@ export default {
             type:'',
             files:[],
             states: [
-        'HEMES', 'VITTON', 'CHANEL', 'GUCCI',
+        'HERMES', 'VITTON', 'CHANEL', 'GUCCI',
         'FENDI', 'PRADA', 'Dior', 'VANCLEE',
         'Tiffany', 'Cartier', 'bottega',
         'YSL', 'Supreme', 'BURBERRY', 'THOM', 'BALENCIAGA',
@@ -169,7 +169,7 @@ methods: {
             },
                created () {
         //this.id = this.QuestionBoard.id
-        this.type=this.BrandCheckboard.type
+        this.type=this.QuestionBoard.type
         this.boardNo =this.QuestionBoard.boardNo
         this.title = this.QuestionBoard.title
         this.content = this.QuestionBoard.content

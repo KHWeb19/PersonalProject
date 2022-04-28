@@ -8,7 +8,7 @@
      
 
     <div class="app">
-        <k-1-check-brand-list v-if="isLogin" :BrandCheckBoards="BrandCheckBoards"/>
+        <k-1-check-brand-list v-if="isLogin" :BrandCheckBoards="BrandCheckBoards" :brand="brand"/>
         <!--<h2 v-else> 로그인 해주세요</h2>-->
         
          <v-snackbar v-else v-model="login" :timeout="timeout" color="secondary" outlined
@@ -36,6 +36,10 @@ export default {
     HeaderView,
     K1CheckBrandList,
     LoginPage,
+    },
+    props:{
+      brand: {
+        type: String}
     },
      data() {
     return {

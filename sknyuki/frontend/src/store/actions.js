@@ -17,6 +17,9 @@ import {
     FETCH_PRODUCT_BOARDS_LIST,
     FETCH_PRODUCT_BOARDS,
 
+    FETCH_PRODUCT_BOARDB_LIST,
+    FETCH_PRODUCT_BOARDB,
+
 } from './mutation-types'
 
 import axios from 'axios'
@@ -101,4 +104,22 @@ export default {
                 commit(FETCH_PRODUCT_BOARDS, res.data)
             })
     },
+
+
+    fetchProductBoardbList ({ commit }) {
+      return axios.get('http://localhost:7777/ProductBoardB/list')
+          .then((res) => {
+              commit(FETCH_PRODUCT_BOARDB_LIST, res.data)
+             // console.log("액션 보드비")
+              //console.log(res)
+          })
+  },
+  fetchProductBoardb ({ commit }, boardNo) {
+      return axios.get(`http://localhost:7777/ProductBoardB/${boardNo}`)
+          .then((res) => {
+              commit(FETCH_PRODUCT_BOARDB, res.data)
+              //console.log("액션 보드비")
+              //console.log(res)
+          })
+  },
 }

@@ -35,6 +35,9 @@ public class ProductBoardS {
     @Column(length = 32, nullable = false)
     private String brandrank;
 
+    @Column(length = 32, nullable = false)
+    private boolean soldCheck;
+
     @Lob
     private String status;
 

@@ -7,7 +7,7 @@
       <v-col cols="12" md="8">
           <v-card class="mx-10" flat>
       <v-img position="relative" class="ml-10" :src="showFile()" width="100%">
-      <v-img  v-if="!ProductBoardS.soldCheck" :src="showsoldout()" width="100%" 
+      <v-img :src="showsoldout()" width="100%" 
       style=" top: 20%;
               position: absolute" />
       </v-img>
@@ -19,52 +19,52 @@
           <h3>상세 목록</h3>
            <table class="table">
              <tr>
-                <td><h4>게시자:</h4></td>
+                <td><h4>구매자:</h4></td>
                 <td>
-                     <input type="text" :value="ProductBoardS.id" readonly/>
+                     <input type="text" :value="ProductBoardB.id" readonly/>
                 </td>
             </tr>
             <tr>
                 <td><h4>브랜드:</h4></td>
                 <td>
-                     <input type="text" :value="ProductBoardS.type" readonly/>
+                     <input type="text" :value="ProductBoardB.type" readonly/>
                 </td>
             </tr>
              <tr>
                 <td><h4>등급:</h4></td>
                 <td>
-                     <input type="text" :value="ProductBoardS.brandrank" readonly/>
+                     <input type="text" :value="ProductBoardB.brandrank" readonly/>
                 </td>
             </tr>
             <tr>
                 <td><h4>제품명:</h4></td>
                 <td>
-                    <input type="text" :value="ProductBoardS.name" readonly/>
+                    <input type="text" :value="ProductBoardB.name" readonly/>
                 </td>
             </tr>
             <tr>
                 <td><h4>사이즈:</h4></td>
                 <td>
-                     <input type="text" :value="ProductBoardS.size" readonly/>
+                     <input type="text" :value="ProductBoardB.size" readonly/>
                 </td>
             </tr>
             <tr>
                 <td><h4>가격:</h4></td>
                 <td>
-                     <input type="text" :value="ProductBoardS.price" readonly/>
+                     <input type="text" :value="ProductBoardB.price" readonly/>
                 </td>
             </tr>
             <tr>
                 <td><h4>부속품:</h4></td>
                 <td>
-                     <input type="text" :value="ProductBoardS.accessories" readonly/>
+                     <input type="text" :value="ProductBoardB.accessories" readonly/>
                 </td>
             </tr>
            
              <tr>
                 <td><h4>세부상태:</h4></td>
                 <td>
-                    <textarea cols="50" rows="10" :value="ProductBoardS.status" readonly>
+                    <textarea cols="50" rows="10" :value="ProductBoardB.status" readonly>
                     </textarea>
                 </td>
             </tr>
@@ -83,9 +83,9 @@
 import RankDescription from '@/components/RankDescription.vue'
 
 export default {
-    name:'ProductBoardRead',
+    name:'SoldBoardRead',
          props: {
-        ProductBoardS: {
+        ProductBoardB: {
             type: Object,
         },
         boardNo: String,  

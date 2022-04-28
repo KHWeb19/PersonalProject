@@ -92,7 +92,7 @@ export default {
                         ],
                         e7:[],
                          states: [
-        'HEMES', 'VITTON', 'CHANEL', 'GUCCI',
+        'HERMES', 'VITTON', 'CHANEL', 'GUCCI',
         'FENDI', 'PRADA', 'Dior', 'VANCLEE',
         'Tiffany', 'Cartier', 'bottega',
         'YSL', 'Supreme', 'BURBERRY', 'THOM', 'BALENCIAGA',

@@ -55,7 +55,7 @@ export default {
             const {  type, name, size, price, brandrank, accessories, status } = payload
 
             axios.put(`http://localhost:7777/ProductBoardS/${this.boardNo}`,
-                {  type, name, size, price, brandrank, accessories, status, id: this.BrandCheckBoard.id, regDate: this.BrandCheckBoard.regDate })
+                {  type, name, size, price, brandrank, accessories, status, id: this.ProductBoardS.id, soldCheck: this.ProductBoardS.soldCheck, regDate: this.ProductBoardS.regDate })
                     .then(() => {
                         alert('게시물 수정 성공!')
                     })
@@ -68,14 +68,14 @@ export default {
          modifyFilesSubmit(files){
            this.files=files
              console.log('수정한 사진이 넘어왔습니다'+files)
-     setTimeout(()=>{
+             setTimeout(()=>{
                     const formData=new FormData()
                     for (let i=0; i<this.files.length; i++){
                         formData.append('fileList',this.files[i])
                     }
 
                     formData.append('boardNo',this.boardNo)
-                    formData.append('id', this.userInfo.id)
+                   // formData.append('id', this.userInfo.id)
                     //formData.append('id', this.id)
                     console.log(this.boardNo)
                     

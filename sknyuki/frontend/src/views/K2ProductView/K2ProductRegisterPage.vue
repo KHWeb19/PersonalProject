@@ -30,9 +30,9 @@ computed: {
      methods: {
         contentsSubmit (payload) {
             const id=this.userInfo.id
-            const { type, name, size, price, brandrank, accessories, status} = payload
+            const { type, name, size, price, brandrank, accessories, status ,soldCheck} = payload
             console.log('contents의 값이 넘어왔습니다.'+payload)
-            axios.post('http://localhost:7777/ProductBoardS/register', { id, type, name, size, price, brandrank, accessories, status})
+            axios.post('http://localhost:7777/ProductBoardS/register', { id, type, name, size, price, brandrank, accessories, status, soldCheck})
                     .then(res => {
                         // alert('등록 성공! - ' + res)
                         this.boardNo=res.data.boardNo
@@ -53,7 +53,7 @@ computed: {
                     }
 
                     formData.append('boardNo',this.boardNo)
-                    formData.append('id', this.userInfo.id)
+                   // formData.append('id', this.userInfo.id)
                     
 
                     axios.post('http://localhost:7777/fileUpload/ProductBoardS',formData,{

@@ -98,6 +98,7 @@ export default {
             type: Object,
         },
         boardNo: String,  
+        
 },
 
     methods:{

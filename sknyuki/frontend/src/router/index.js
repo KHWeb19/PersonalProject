@@ -15,6 +15,8 @@ import MyPage from '@/views/member/MyPage'
 import K2ProductRegisterPage from '@/views/K2ProductView/K2ProductRegisterPage.vue'
 import K2ProductReadPage from '@/views/K2ProductView/K2ProductReadPage.vue'
 import K2ProductModifyPage from '@/views/K2ProductView/K2ProductModifyPage.vue'
+import K2SoldReadPage from '@/views/K2SoldView/K2SoldReadPage.vue'
+import K2SoldView from '@/views/K2SoldView/K2SoldView.vue'
 
 Vue.use(VueRouter)
 
@@ -32,8 +34,10 @@ const routes = [
   {
     path: '/K1CheckBrandView',
     name: 'K1CheckBrandView',
-    component: K1CheckBrandView
+    component: K1CheckBrandView,
+    props:true
   },
+  
   {
     path:'/K1CheckBrandReadPage/:boardNo',
     name:'K1CheckBrandReadPage',
@@ -123,6 +127,21 @@ props: {
   props:{
     default: true
   }
+  },
+  {
+    path:'/K2SoldReadPage/:boardNo',
+    name:'K2SoldReadPage',
+    components: {
+      default: K2SoldReadPage
+  },
+  props: {
+    default: true
+  }
+  },
+  {
+    path:'/K2SoldView',
+    name:'K2SoldView',
+    component:K2SoldView
   },
 
 
