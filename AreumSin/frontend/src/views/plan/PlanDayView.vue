@@ -53,6 +53,7 @@ export default {
       axios.post('http://localhost:7777/planDay/day', {id, planNo, day, content})
       .then((res) => {
         alert('성공' + res)
+        this.$router.go();
       })
     },
     clickLike(payload){

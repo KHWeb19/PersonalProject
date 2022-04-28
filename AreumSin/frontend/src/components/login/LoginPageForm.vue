@@ -1,5 +1,5 @@
 <template>
-  <v-card class="spacing-playground pa-6">
+  <v-card class="spacing-playground pa-16">
     <v-row justify="center">
       <v-card-title style="font-size: 30px; margin-bottom: 15px">로그인<br/></v-card-title>
     </v-row>

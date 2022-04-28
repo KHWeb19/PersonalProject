@@ -114,7 +114,8 @@ export default {
         n = div +1;
       }
 
-      this.n = n
+      this.n = Math.floor(n)
+      n = Math.floor(n)
 
       console.log('n: '+n);
 

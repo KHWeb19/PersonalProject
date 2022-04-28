@@ -1,12 +1,12 @@
 <template>
-  <div>
+  <v-container>
     <MainCategory></MainCategory>
     <div style="margin-bottom: 10px"></div>
 
     <PlanPageForm v-bind:userPlans="userPlans"></PlanPageForm>
 
     <PencilIcon @submit="onSubmit" :id="id"/>
-  </div>
+  </v-container>
 </template>
 
 <script>
@@ -37,6 +37,7 @@ export default {
       axios.post('http://localhost:7777/plan/makePlan', {planName, planDate, placeName, id})
           .then((res) => {
             console.log(res);
+            this.$router.go();
           })
           .catch((res) => {
             console.log(res.response.data.message);
