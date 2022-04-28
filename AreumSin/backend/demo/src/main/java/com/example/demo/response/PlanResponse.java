@@ -8,12 +8,14 @@ public class PlanResponse {
     private String planName;
     private String planDate;
     private String placeName;
+    private String planImgSrc;
 
-    public PlanResponse(Integer planNo, String planName, String planDate, String placeName) {
+    public PlanResponse(Integer planNo, String planName, String planDate, String placeName, String planImgSrc) {
         this.planNo = planNo;
         this.planName = planName;
         this.planDate = planDate;
         this.placeName = placeName;
+        this.planImgSrc = planImgSrc;
     }
 
 }

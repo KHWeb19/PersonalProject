@@ -48,7 +48,7 @@ public class MakePlanController {
             for(MultipartFile multipartFile : fileList){
                 log.info("requestUploadFile() - Make file: " + multipartFile.getOriginalFilename());
 
-                FileOutputStream file = new FileOutputStream("../../frontend/src/assets/uploadImg/" + planName + "_" + multipartFile.getOriginalFilename());
+                FileOutputStream file = new FileOutputStream("../../frontend/src/assets/plan/" + planName + "_" + multipartFile.getOriginalFilename());
 
                 String fileSrc = planName + "_" + multipartFile.getOriginalFilename();
                 fileName.add(fileSrc);
@@ -77,7 +77,7 @@ public class MakePlanController {
 
         for(MemberPlan memberPlan : userPlans){
             log.info("test" + memberPlan.getPlan().getPlanName() + " ," +  memberPlan.getPlan().getPlanDate()+ " ," + memberPlan.getPlan().getPlaceName());
-            responses.add(new PlanResponse(memberPlan.getPlan().getPlanNo(), memberPlan.getPlan().getPlanName(), memberPlan.getPlan().getPlanDate(), memberPlan.getPlan().getPlaceName()));
+            responses.add(new PlanResponse(memberPlan.getPlan().getPlanNo(), memberPlan.getPlan().getPlanName(), memberPlan.getPlan().getPlanDate(), memberPlan.getPlan().getPlaceName(), memberPlan.getPlan().getPlanImgSrc()));
         }
 
         //planService.listPlan(id);
