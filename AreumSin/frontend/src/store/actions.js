@@ -1,7 +1,7 @@
 import {
     FETCH_BOARD_COMMENT,
     FETCH_BOARD_LIST, FETCH_BOARD_READ, FETCH_BOARD_READ_IMG,
-    FETCH_INVITE_MEMBER,
+    FETCH_INVITE_MEMBER, FETCH_SEARCH_LIKE_PLACE_LIST,
     FETCH_USER_PLANS, FETCH_VOTE_CONTENT
 
 } from './mutation-types'
@@ -49,6 +49,12 @@ export default {
         return axios.get(`http://localhost:7777/board/read/comment/${boardNo}`)
             .then((res) => {
                 commit(FETCH_BOARD_COMMENT, res.data)
+            })
+    },
+    fetchSearchLikePlaceList({commit}, id){
+        return axios.get(`http://localhost:7777/map/searchList/${id}`)
+            .then((res) => {
+                commit(FETCH_SEARCH_LIKE_PLACE_LIST, res.data)
             })
     }
 }

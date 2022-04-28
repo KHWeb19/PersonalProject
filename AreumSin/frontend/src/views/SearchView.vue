@@ -127,12 +127,12 @@ export default {
         }
       },
       radioGroup: 1,
-      indexCheck: ['제주국제공항', '21', '인천국제공항', '대구국제공항', '12', '12', 'true', 'true', 'false', 'true', 'false', 'true'],// 여기에 장소 이름이 저장되어 있어야함.
+      //indexCheck: ['제주국제공항', '21', '인천국제공항', '대구국제공항', '12', '12', 'true', 'true', 'false', 'true', 'false', 'true'],// 여기에 장소 이름이 저장되어 있어야함.
       indexTitle: [],
     }
   },
   methods:{
-    ...mapActions(['fetchUserPlans']),
+    ...mapActions(['fetchUserPlans', 'fetchSearchLikePlaceList']),
     searchPlace(e) {
       console.log(e.target.value);
       const keyword = e.target.value.trim();
@@ -166,25 +166,25 @@ export default {
         // indexCheck: ['제주국제공항', true, '인천국제공항', '대구국제공항', false, false, true, true, false, true, false, true],
 
         for(let i = 0; i < this.searchTitle.length; i++){
-          for(let j = 0; j < this.indexCheck.length; j++) {
-            //console.log(this.indexCheck[i])
-            //console.log(this.searchTitle[j])
+          for(let j = 0; j < this.searchLikePlaceList.length; j++) {
+            console.log(this.searchLikePlaceList[i])
+            console.log(this.searchTitle[j])
 
-            if (this.searchTitle[i] === this.indexCheck[j]) {
+            if (this.searchTitle[i] === this.searchLikePlaceList[j].title) {
               this.indexTitle[i] = true;
-              //console.log(this.indexTitle[i])
+              console.log(this.indexTitle[i])
               break;
             }
           }
 
           if(this.indexTitle[i] !== true) {
             this.indexTitle[i] = false;
-            //console.log(this.indexTitle[i])
+            console.log(this.indexTitle[i])
           }
         }
-        //console.log(this.indexCheck)
-        //console.log(this.searchTitle)
-        //console.log(this.indexTitle)
+        console.log(this.searchLikePlaceList)
+        console.log(this.searchTitle)
+        console.log(this.indexTitle)
       })
     },
     showPlace(place){
@@ -196,7 +196,7 @@ export default {
     },
     savePlace(index, result){
       console.log("x: " + result.x + ", y: " + result.y);
-      alert(this.indexCheck[index] === result.place_name)
+      alert(this.searchLikePlaceList[index] === result.place_name)
 
       this.showSaveDialog.place.title = result.place_name;
       this.showSaveDialog.place.x = result.x;
@@ -204,8 +204,8 @@ export default {
 
       this.showSaveDialog.dialog = true;
 
-      this.$set(this.indexCheck, index, !this.indexCheck[index])
-      alert(this.indexCheck[index])
+      this.$set(this.searchLikePlaceList, index, !this.searchLikePlaceList[index])
+      alert(this.searchLikePlaceList[index])
     },
     deleteSavePlace(index, result){
       alert(result);
@@ -214,6 +214,7 @@ export default {
     onSubmit(){
       this.showSaveDialog.dialog = false;
       let planNo = this.radioGroup.planNo;
+      let id = this.id;
       let placeTitle = this.showSaveDialog.place.title;
       let placeX = this.showSaveDialog.place.x;
       let placeY = this.showSaveDialog.place.y;
@@ -221,17 +222,18 @@ export default {
       alert("planName: " + this.radioGroup.planNo + ", " + this.showSaveDialog.place.title + ", x: " + placeX + ", y : " + placeY)
       console.log("planName: " + this.radioGroup.planNo + ", " + this.showSaveDialog.place.title + ", x: " + placeX + ", y : " + placeY)
 
-      axios.post('http://localhost:7777/map/savePlace', {planNo, placeTitle, placeX, placeY} )
+      axios.post('http://localhost:7777/map/savePlace', {planNo, id, placeTitle, placeX, placeY} )
         .then((res) => {
           alert(res + '성공!')
         })
     }
   },
   computed: {
-    ...mapState(['userPlans'])
+    ...mapState(['userPlans', 'searchLikePlaceList'])
   },
   mounted() {
-    this.fetchUserPlans(this.id);
+    this.fetchUserPlans(this.id)
+    this.fetchSearchLikePlaceList(this.id)
   }
 }
 </script>

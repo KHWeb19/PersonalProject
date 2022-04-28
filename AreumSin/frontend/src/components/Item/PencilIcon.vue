@@ -57,6 +57,12 @@
                 </table>
               </form>
 
+              <div style="margin-top: 10px">
+                <label>
+                  <input style="font-size: 30px" type="file" id="files" ref="files" multiple v-on:change="fileUpload()">
+                </label>
+              </div>
+
               <v-dialog max-width="400" v-model="pickDate" light>
                 <v-date-picker v-model="dates" range></v-date-picker>
               </v-dialog>
@@ -77,6 +83,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "BeforePencilIcon",
   data() {
@@ -90,7 +98,8 @@ export default {
       pickDate: false,
       dates: ['', ''],
       planName: '',
-      placeName: ''
+      placeName: '',
+      files: '',
     }
   },
   props:{
@@ -99,13 +108,6 @@ export default {
     }
   },
   methods: {
-    testOne(item) {
-      if(item === '일정생성'){
-        alert('일정생성');
-      }else if(item === '친구초대'){
-        alert('친구초대')
-      }
-    },
     showDialog() {
       this.makePlan = true
     },
@@ -113,12 +115,46 @@ export default {
       this.pickDate = true
     },
     onSubmit(){
-      const {planName, planDate, placeName} = this;
+      /*const {planName, planDate, placeName} = this;
 
       console.log({planName, planDate, placeName});
       this.makePlan = false;
-      this.$emit('submit',{planName, planDate, placeName});
-    }
+      this.$emit('submit',{planName, planDate, placeName});*/
+
+      let formData = new FormData;
+
+      if (this.files.length === 0) {
+        alert("사직을 하나 이상 입력해주세요!!!")
+      } else {
+        for (let i = 0; i < this.files.length; i++) {
+          console.log(this.files[i])
+          formData.append('fileList', this.files[i])
+        }
+
+        formData.append('planName', this.planName)
+        formData.append('planDate', this.planDate)
+        formData.append('placeName', this.placeName)
+        formData.append('id', this.id)
+
+        this.$emit('submit', formData);
+
+        axios.post('http://localhost:7777/plan/makePlan', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        })
+            .then((res) => {
+              console.log(res);
+              this.$router.go();
+            })
+            .catch((res) => {
+              console.log(res.response.data.message);
+            })
+      }
+    },
+    fileUpload(){
+      this.files = this.$refs.files.files
+    },
   },
   computed: {
     planDate () {

@@ -1,16 +1,13 @@
 package com.example.demo.controller;
 
 import com.example.demo.request.SaveFavoritePlaceRequest;
+import com.example.demo.response.map.SearchMapLikeListResponse;
 import com.example.demo.service.map.SaveFavoritePlaceService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 
 @Slf4j
@@ -31,6 +28,13 @@ public class MapSearchController {
         + "planNo : " + placeRequest.getPlanNo());
 
         saveFavoritePlaceService.savePlace(placeRequest);
+    }
 
+    @GetMapping("/searchList/{id}")
+    public List<SearchMapLikeListResponse> searchMapLikeList(@PathVariable("id") String id){
+        log.info("searchMapLikeList() " + id);
+
+       return saveFavoritePlaceService.searchLikeList(id);
+       //return null;
     }
 }

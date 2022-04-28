@@ -30,10 +30,15 @@ public class SaveFavoritePlace {
     @JoinColumn(name = "PLAN_NO")
     private Plan plan;
 
-    public SaveFavoritePlace(String title, String x, String y, Plan plan) {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "USER_NO")
+    private Member member;
+
+    public SaveFavoritePlace(String title, String x, String y, Plan plan, Member member) {
         this.title = title;
         this.x = x;
         this.y = y;
         this.plan = plan;
+        this.member = member;
     }
 }

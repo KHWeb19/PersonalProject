@@ -9,4 +9,5 @@ export default {
     boardRead: null,
     boardReadImg: [],
     boardListComment: [],
+    searchLikePlaceList: [],
 }
