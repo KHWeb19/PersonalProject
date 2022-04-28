@@ -69,6 +69,7 @@ export default {
     name: 'BoardRegisterForm',
     data() {
         return {
+            imageChange: JSON.parse(localStorage.getItem('imageChange')),
             loginInfo: JSON.parse(localStorage.getItem('loginInfo')),
             boardImage: '',
             content: '',

@@ -40,7 +40,7 @@ public class Comment {
     @JoinColumn(name= "board_no")
     private Board board;
 
-    @JsonIgnoreProperties({"boards"})
+    @JsonIgnoreProperties({"boards", "comments", "likes"})
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name= "member_no")
     private Member member;

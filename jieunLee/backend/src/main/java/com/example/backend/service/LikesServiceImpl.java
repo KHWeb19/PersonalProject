@@ -7,6 +7,7 @@ import com.example.backend.repository.BoardRepository;
 import com.example.backend.repository.LikesRepository;
 import com.example.backend.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

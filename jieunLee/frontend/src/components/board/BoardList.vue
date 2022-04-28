@@ -17,7 +17,7 @@
                             <td style="font-weight: bold;">
                                 {{ board.member.memberId }}
                             </td>
-                            <td v-if="loginInfo.memberId==board.member.memberId" align="right" style="padding-right: 12px;"> 
+                            <td v-if="loginInfo.memberNo==board.member.memberNo" align="right" style="padding-right: 12px;"> 
                             <!-- <td align="right" style="padding-right: 12px;">  -->
                                 <v-menu offset-y min-width="100">
                                     <template v-slot:activator="{ on }">
@@ -87,21 +87,18 @@
                         </tr>
                         <tr align="left">
                             <td colspan="3" style="padding-left: 16px">
-                                <div style="display: flex;">
-                                    <div style="font-weight: bold;" >
-                                        {{ board.member.memberId }}&nbsp;
-                                    </div>
-                                    {{ board.content }}
-                                </div>
+                                <b>{{ board.member.memberId }}</b>&nbsp;{{ board.content }}
                             </td>
                         </tr>
+                        
                         <tr v-if="board.comments.length"> 
                             <td colspan="3" style="padding-left: 16px;">
                                 <router-link style="text-decoration: none; color: grey" :to="{
                                     name: 'BoardReadPage',
                                     params: {boardNo: board.boardNo.toString()}}">
-                                    댓글 {{ board.comments.length}}개 모두 보기
+                                    댓글 모두 보기
                                 </router-link>
+                                <!-- {{ board.comments.length}}개 -->
                             </td>
                         </tr>
                         <tr>

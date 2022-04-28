@@ -25,7 +25,7 @@
                                 width: 268px; 
                                 height: 38px;
                                 padding-left: 5px;" 
-                            type="text" placeholder="좋아하는 색깔은?" v-model="passwordHint"/>
+                            type="text" placeholder="비밀번호 힌트" v-model="passwordHint"/>
                         </div>
                         <div>
                             <v-btn style="margin: 10px; width: 268px; height: 30px;" color="blue" class="white--text" type="submit">비밀번호 변경</v-btn>

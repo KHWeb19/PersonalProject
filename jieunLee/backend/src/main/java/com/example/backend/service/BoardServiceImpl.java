@@ -71,18 +71,18 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public void remove(Long boardNo) {
-        Board board = repository.findById(boardNo).orElseThrow();
-
-        Optional<Comment> maybeComment = commentRepository.findByBoard(board);
+        List<Comment> maybeComment = commentRepository.findAllCommentsBoardNo(boardNo);
         if(!maybeComment.isEmpty()) {
-            commentRepository.deleteById(maybeComment.get().getCommentNo());
+            for (Comment comment : maybeComment) {
+                commentRepository.delete(comment);
+            }
         }
-
-        Optional<Likes> maybeLikes = likesRepository.findByBoard(board);
+        List<Likes> maybeLikes = likesRepository.findAllLikesBoardNo(boardNo);
         if(!maybeLikes.isEmpty()) {
-            likesRepository.deleteById(maybeLikes.get().getLikedNo());
+            for (Likes likes : maybeLikes) {
+                likesRepository.delete(likes);
+            }
         }
-
         repository.deleteById(Long.valueOf(boardNo));
     }
 }

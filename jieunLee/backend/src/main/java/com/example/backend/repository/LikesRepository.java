@@ -1,6 +1,7 @@
 package com.example.backend.repository;
 
 import com.example.backend.entity.Board;
+import com.example.backend.entity.Comment;
 import com.example.backend.entity.Likes;
 import com.example.backend.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -23,4 +24,7 @@ public interface LikesRepository extends JpaRepository<Likes, Long> {
     List<Likes> findByMemberNo(@Param("memberNo") Long memberNo);
 
     Optional<Likes> findByBoard (Board board);
+
+    @Query("select l from Likes l join l.board cb where cb.boardNo = :boardNo")
+    List<Likes> findAllLikesBoardNo(@Param("boardNo") Long boardNo);
 }
