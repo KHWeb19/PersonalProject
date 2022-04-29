@@ -1,7 +1,9 @@
 package com.example.demo.service.FoodBoard;
 
 import com.example.demo.entity.FoodBoard.FoodBoard;
+import com.example.demo.entity.Member.MemberCart;
 import com.example.demo.repository.FoodBoard.FoodBoardRepository;
+import com.example.demo.repository.Member.MemberCartRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -29,6 +31,8 @@ public class FoodBoardServiceImpl implements FoodBoardService{
     FoodBoardRepository repository;
 
 
+
+
     @Override
     public void register(FoodBoard foodBoard, MultipartFile file) throws Exception {
 
@@ -54,15 +58,12 @@ public class FoodBoardServiceImpl implements FoodBoardService{
         return repository.findAll(Sort.by(Sort.Direction.DESC, "boardNo"));
     }
 
-    @Override
-    public List<FoodBoard> getFoodList() {
 
-        return repository.findAll(Sort.by(Sort.Direction.DESC,"boardNo"));
-    }
 
     @Override
     public List<FoodBoard> bestFoodList() {
-        return repository.findTop10ByOrderByViewCountDesc();
+
+        return repository.findTop10ByOrderByRankScoreDesc();
     }
 
 
@@ -81,8 +82,8 @@ public class FoodBoardServiceImpl implements FoodBoardService{
 
     @Override
     public void updateViewCount(Integer boardNo) {
-
         repository.updateViewCount(Long.valueOf(boardNo));
+        repository.setRankScore(Long.valueOf(boardNo));
     }
 
     @Override
@@ -106,6 +107,10 @@ public class FoodBoardServiceImpl implements FoodBoardService{
 
             foodBoard.setFilename(fileName);
             foodBoard.setFilepath("/files/" + fileName);
+
+            /*MemberCart memberCart = new MemberCart();
+            memberCart.setFilename(fileName);
+            memberCart.setFilepath("/files/" +fileName);*/
         }
 
         repository.save(foodBoard);
@@ -121,6 +126,7 @@ public class FoodBoardServiceImpl implements FoodBoardService{
             Files.delete(filePath);
         }
         repository.deleteById(Long.valueOf(boardNo));
+
     }
 
     @Override

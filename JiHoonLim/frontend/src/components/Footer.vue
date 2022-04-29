@@ -12,8 +12,8 @@
                 <div class="mx-auto" style="display: flex">
                   <v-img
                     :src="require('@/assets/img/memberCount.png')"
-                    max-width="150px"
-                    max-height="150px"
+                    max-width="100px"
+                    max-height="100px"
                   />
                   <div class="countWrap">
                     <div class="titText">총 회원수</div>
@@ -23,8 +23,8 @@
                 <div class="mx-auto" style="display: flex">
                   <v-img
                     :src="require('@/assets/img/foodCount.png')"
-                    max-width="150px"
-                    max-height="150px"
+                    max-width="100px"
+                    max-height="100px"
                   />
                   <div class="countWrap">
                     <div class="titText">총 레시피수</div>
@@ -78,7 +78,7 @@ export default {
 
 .countWrap {
   text-align: center;
-  margin-top: 30px;
+  margin-top: 10px;
   margin-left: 40px;
 }
 </style>

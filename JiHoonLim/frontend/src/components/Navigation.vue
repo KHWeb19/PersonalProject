@@ -69,10 +69,7 @@
           -->
           <span
             class="text-center"
-            v-if="
-              this.$store.state.userInfo.auth == '개인' ||
-              this.$store.state.userInfo.auth == '매니저'
-            "
+            v-if="this.$store.state.userInfo.auth != '관리자'"
           >
             <v-menu open-on-hover offset-y>
               <template v-slot:activator="{ on, attrs }">
@@ -105,10 +102,7 @@
             </v-menu>
           </span>
 
-          <span
-            class="text-center"
-            v-else-if="this.$store.state.userInfo.auth == '관리자'"
-          >
+          <span class="text-center" v-else>
             <v-menu open-on-hover offset-y>
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
@@ -162,11 +156,7 @@ export default {
     return {
       userInfo: "",
       auth: "",
-      authItems: [
-        { title: "내 보관함", link: "/myCartFood" },
-        { title: "회원 정보 수정", link: "/memberInfo" },
-        { title: "회원 관리", link: "/memberManage" },
-      ],
+      authItems: [{ title: "회원 관리", link: "/memberManage" }],
 
       links: [
         { text: "공지사항", route: "/noticeList" },

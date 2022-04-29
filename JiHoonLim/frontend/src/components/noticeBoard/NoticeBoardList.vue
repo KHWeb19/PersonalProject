@@ -22,7 +22,6 @@
             :items="noticeBoards"
             :items-per-page="10"
             :key="noticeBoards.boardNo"
-            class="elevation-3"
           >
             <template v-slot:[`item.title`]="{ item }">
               <router-link

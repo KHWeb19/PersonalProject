@@ -1,27 +1,26 @@
 package com.example.demo.entity.FoodBoard;
 
+import com.example.demo.entity.Member.MemberCart;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.hibernate.annotations.Comment;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.Formula;
-import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.*;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Data
 @Entity
 @NoArgsConstructor
+
 public class FoodBoard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -71,6 +70,7 @@ public class FoodBoard {
     private LocalDateTime upDate;
 
     @OneToMany(mappedBy = "foodBoard",fetch = FetchType.EAGER,cascade = CascadeType.REMOVE)
+    @Fetch(FetchMode.SUBSELECT)
     private List<FoodBoardComment> comments;
 
 
@@ -82,7 +82,15 @@ public class FoodBoard {
     @OneToMany(mappedBy = "foodBoard",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<FoodBoardLike> likes = new HashSet<>();
 
-    @Formula("(SELECT count(1) FROM food_board_like c WHERE c.food_board_board_no = board_no)")
-    private int likeCnt;
+    @Column
+    private Integer likeCount = 0;
+
+    @Column
+    private Integer rankScore = 0;
+
+
+    @OneToMany(mappedBy = "foodBoard",fetch = FetchType.EAGER,cascade = CascadeType.REMOVE)
+    @Fetch(FetchMode.SUBSELECT)
+    private List<MemberCart> myCarts ;
 
 }

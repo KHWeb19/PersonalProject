@@ -29,7 +29,6 @@
                 height="200px"
               ></v-img>
             </router-link>
-
             <v-card-subtitle class="pt-3 pb-0"
               ><v-chip class="ma-1" small>
                 {{ food.mat }}
@@ -48,7 +47,7 @@
                   text
                   class="deleteBtn"
                   color="red"
-                  @click="deleteFood(food.cartNo)"
+                  @click="deleteFood(food.myCarts[0].cartNo)"
                 >
                   삭제
                 </v-btn></v-card-text
@@ -114,7 +113,7 @@ export default {
     },
     deleteFood(cartNo) {
       axios
-        .delete(`http://localhost:7777/member/myCart/delete/${cartNo}`)
+        .delete(`http://localhost:7777/myCart/delete/${cartNo}`)
         .then(() => {
           alert("삭제되었습니다.");
           this.$router.go();
