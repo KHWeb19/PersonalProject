@@ -9,7 +9,8 @@ import MemberMyPage from '@/views/jpaMember/MemberMyPage.vue'
 import ProjectIntroducePage from '@/views/introduce/ProjectIntroducePage.vue'
 
 import RecycleGuideMainPage from '@/views/recycleGuide/RecycleGuideMainPage.vue'
-import GuideBoxPage from '@/views/recycleGuide/GuideBoxPage.vue'
+import GuideBoxMainPage from '@/views/recycleGuide/GuideBoxMainPage.vue'
+import BoxClothPage from '@/views/recycleGuide/BoxClothPage.vue'
 import GuideSearchPage from '@/views/recycleGuide/GuideSearchPage.vue'
 
 import LivingTipBoardList from '@/views/livingTip/LivingTipBoardList.vue'
@@ -75,9 +76,14 @@ const routes = [
     component: RecycleGuideMainPage
   },
   {
-    path: '/guideBoxPage',
-    name: 'guideBoxPage',
-    component: GuideBoxPage
+    path: '/guideBoxMainPage',
+    name: 'guideBoxMainPage',
+    component: GuideBoxMainPage
+  },
+  {
+    path: '/boxClothPage',
+    name: 'boxClothPage',
+    component: BoxClothPage
   },
   {
     path: '/guideSearchPage',

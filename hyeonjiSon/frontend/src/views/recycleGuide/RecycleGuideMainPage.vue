@@ -66,7 +66,7 @@ export default {
          this.$router.push({ name: 'guideSearchPage'}) 
       },
       goBox(){
-         this.$router.push({ name: 'guideBoxPage'}) 
+         this.$router.push({ name: 'guideBoxMainPage'}) 
       }
 
 }
