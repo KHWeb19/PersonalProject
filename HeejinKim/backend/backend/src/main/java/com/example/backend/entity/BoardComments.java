@@ -28,7 +28,7 @@ public class BoardComments {
     private String comment;
 
     @JsonBackReference
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name="board_no")
     private Board board;
 

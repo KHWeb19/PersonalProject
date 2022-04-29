@@ -10,9 +10,13 @@ import lombok.extern.slf4j.Slf4j;
 public class SeatNowRequest {
 
     private Integer restSeats;
+    private String seatNumber;
+    private String seatTime;
 
-    public SeatNowRequest(Integer restSeats) {
+    public SeatNowRequest(Integer restSeats,String seatNumber, String seatTime) {
         this.restSeats = restSeats;
+        this.seatNumber = seatNumber;
+        this.seatTime = seatTime;
 
     }
 }

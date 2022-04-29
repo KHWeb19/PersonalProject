@@ -1,9 +1,15 @@
 package com.example.backend.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -16,30 +22,41 @@ import javax.persistence.*;
 public class Reservation {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer seatNum;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long reservationNo;
+
+    //@Column
+    //private String seatTime;
 
     @Column
-    private Integer seatRows;
+    private String seatNumber;
 
     @Column
-    private Integer seatCols;
+    private Integer restSeats;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm", timezone = "Asia/Seoul")
+    @CreationTimestamp
+    private Date regDate;
 
     @JsonBackReference
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "member_no")
     private Member member;
 
+    /*
+    @JsonManagedReference
+    @OneToMany(mappedBy = "reservation", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private List<StudyRoom> studyRoom = new ArrayList<>();
 
-    //@OneToMany(mappedBy = "reservation", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    //private List<StudyRoom> studyRoom=new ArrayList<>();
+     */
 
-    public Reservation(Integer seatRows,Integer seatCols,Integer seatNum){
+    public Reservation( Date regDate,String seatNumber,Integer restSeats){
 
-        this.seatRows = seatRows;
-        this.seatCols = seatCols;
-        this.seatNum = seatNum;
+        this.regDate = regDate;
+        this.seatNumber = seatNumber;
+        this.restSeats = restSeats;
+
+
 
     }
 

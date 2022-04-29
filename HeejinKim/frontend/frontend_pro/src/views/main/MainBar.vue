@@ -1,6 +1,6 @@
 <template>
     <div class="main_bar">
-        <v-toolbar white height="120px">
+        <v-toolbar white height="150px">
 
             <v-app-bar-nav-icon @click="nav_drawer = !nav_drawer">
             </v-app-bar-nav-icon>
@@ -35,7 +35,7 @@
                     <v-list-item-group v-model="group" active-class="grey--text  ">
                         <v-list-item v-for="link in category" :key="link.name" router :to="link.route">
                             <v-list-item-action>
-                                <v-icon left>
+                                <v-icon right>
                                     {{ link.icon }}
                                 </v-icon>
                             </v-list-item-action>
@@ -132,10 +132,15 @@ export default {
                     route:'/communityBoard'
                     
                 },
-
+                /*
                 {
                     text: 'Reservation',
                     name: 'ReservationPage',
+                    route:'/reservation',
+                },*/
+                {
+                    text: 'Reservation',
+                    name: 'Reservation',
                     route:'/reservation',
                 },
                 {
@@ -250,10 +255,16 @@ export default {
 <style scoped>
  
  @import url('https://fonts.googleapis.com/css2?family=Poiret+One&display=swap');
+ @import url("https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Poiret+One&family=Sunflower:wght@300&family=Ubuntu:wght@300&display=swap");
 
 *{  margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+.main_bar{
+   font-family: 'Ubuntu', sans-serif; 
+   font-weight: bold;
+      
 }
 
 #logo {

@@ -11,6 +11,9 @@ import {
 
     FETCH_BOARD_COMMENTS_LIST,
 
+    FETCH_RESERVATION,
+    FETCH_RESERVATION_LIST,
+
 
 /*
     COOKIE_SESSION,
@@ -50,6 +53,13 @@ export default {
     },
     [FETCH_AUTH_LIST] (state, auths) {
         state.auths = auths;
+    },
+
+    [FETCH_RESERVATION] (state, reservation) {
+        state.reservation = reservation
+    },
+    [FETCH_RESERVATION_LIST] (state, reservations) {
+        state.reservations = reservations
     },
   
 

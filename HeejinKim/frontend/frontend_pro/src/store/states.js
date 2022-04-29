@@ -13,12 +13,19 @@ auths: [],
 board: null,
 boards: [],
 
-seatdata:[],
-seatRows:null,
-seatCols:null,
-seatNum:[],
+reservation:null,
+reservations:[],
 
 
+
+seatNumber:[],
+seatTime:[],
+restSeats:[],
+
+
+bookInfo:[],
+
+//seatsInfo:"",
 
 boardComments:[],
 

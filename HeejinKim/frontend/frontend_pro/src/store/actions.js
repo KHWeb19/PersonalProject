@@ -3,6 +3,9 @@ import{
     FETCH_BOARD_LIST,
     FETCH_BOARD_COMMENTS_LIST,
 
+    FETCH_RESERVATION,
+    FETCH_RESERVATION_LIST
+
 
 
     //FETCH_MEMBER_LIST,
@@ -45,6 +48,18 @@ export default {
                 .then((res) => {
                     commit(FETCH_BOARD_COMMENTS_LIST, res.data)
                 })
+    },
+    fetchReservation ({ commit }, reservationNo) {
+        return axios.get(`http://localhost:7777/reservation/checkBooking/${reservationNo}`)
+            .then((res) => {
+                commit(FETCH_RESERVATION, res.data)
+            })
+    },
+    fetchReservationList ({ commit }) {
+        return axios.get(`http://localhost:7777/reservation/reservationList`)
+            .then((res) => {
+                commit(FETCH_RESERVATION_LIST, res.data)
+            })
     },
 
 
