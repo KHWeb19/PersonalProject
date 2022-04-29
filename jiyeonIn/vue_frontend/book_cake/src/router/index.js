@@ -17,6 +17,7 @@ import MyPageReview from '@/views/myPage/MyPageReview.vue'
 import MyPageBooking from '@/views/myPage/MyPageBooking.vue'
 import ManagerPageMember from '@/views/managerPage/ManagerPageMember.vue'
 import ManagerPageCake from '@/views/managerPage/ManagerPageCake.vue'
+import ManagerPageBooking from '@/views/managerPage/ManagerPageBooking.vue'
 
 
 Vue.use(VueRouter)
@@ -142,6 +143,17 @@ const routes = [
     name: 'ManagerPageMember',
     components: {
       default: ManagerPageMember
+    },
+    props: {
+      default: true
+    }
+  }
+  ,
+  {
+    path: '/managerPageBooking/:id',
+    name: 'ManagerPageBooking',
+    components: {
+      default: ManagerPageBooking
     },
     props: {
       default: true
