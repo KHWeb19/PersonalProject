@@ -37,7 +37,7 @@ public class MemberCart {
 
     @ManyToOne
     @JsonIgnore
-    @JoinColumn(name = "foodBoard_boardNo")
+    @JoinColumn(name = "food_board_board_no")
     private FoodBoard foodBoard;
 
 

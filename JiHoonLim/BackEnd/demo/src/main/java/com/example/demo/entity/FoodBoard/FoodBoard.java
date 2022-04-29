@@ -15,10 +15,7 @@ import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Data
 @Entity
@@ -73,7 +70,7 @@ public class FoodBoard {
     private LocalDateTime upDate;
 
     @OneToMany(mappedBy = "foodBoard",fetch = FetchType.EAGER,cascade = CascadeType.REMOVE)
-    @Fetch(value = FetchMode.SUBSELECT)
+    @Fetch(FetchMode.SUBSELECT)
     private List<FoodBoardComment> comments;
 
 
@@ -93,7 +90,7 @@ public class FoodBoard {
 
 
     @OneToMany(mappedBy = "foodBoard",fetch = FetchType.EAGER,cascade = CascadeType.REMOVE)
-    @Fetch(value = FetchMode.SUBSELECT)
-    private List<MemberCart> myCarts;
+    @Fetch(FetchMode.SUBSELECT)
+    private List<MemberCart> myCarts ;
 
 }

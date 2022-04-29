@@ -1,6 +1,6 @@
 package com.example.demo.controller.Member;
 
-import com.example.demo.controller.Member.request.MemberCartRequest;
+import com.example.demo.entity.FoodBoard.FoodBoard;
 import com.example.demo.entity.Member.MemberCart;
 import com.example.demo.service.Member.MemberCartService;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +26,15 @@ public class MemberCartController {
         return service.register(memberCart, boardNo);
     }
 
+    @GetMapping("/list/{memberNo}")
+    public List<FoodBoard> list(@PathVariable("memberNo")Long memberNo){
+        log.info("memberCartList()");
+
+        List<FoodBoard> findFood =service.findFood(memberNo);
+
+
+        return findFood;
+    }
     /*
     @PostMapping("/register/{memberNo}")
     public boolean addMyCart(@PathVariable("memberNo") Long memberNo, @Validated @RequestBody MemberCartRequest memberCartRequest){

@@ -1,5 +1,6 @@
 package com.example.demo.repository.Member;
 
+import com.example.demo.entity.FoodBoard.FoodBoard;
 import com.example.demo.entity.Member.MemberCart;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

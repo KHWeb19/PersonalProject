@@ -29,7 +29,7 @@ public class MemberCartServiceImpl implements MemberCartService {
 
         memberCart.setFoodBoard(findBoard.get());
 
-        if (memberCartRepository.findBoardNoByMemberNoAndFoodBoardBoardNo(memberCart.getMemberNo(), boardNo).isEmpty()){
+        if (memberCartRepository.findBoardNoByMemberNoAndFoodBoardBoardNo(memberCart.getMemberNo(), boardNo).isEmpty()) {
             memberCartRepository.save(memberCart);
             return true;
         }
@@ -38,7 +38,17 @@ public class MemberCartServiceImpl implements MemberCartService {
 
     }
 
+    @Override
+    public List<FoodBoard> findFood(Long memberNo) {
+        log.info("before foodObj");
+        List<FoodBoard> foodList = foodBoardRepository.findFoodBoardListByMemberCart(memberNo);
 
+
+        return foodList;
+    }
+
+
+}
     /*
 
     @Override
@@ -70,4 +80,4 @@ public class MemberCartServiceImpl implements MemberCartService {
     }
 
      */
-}
+
