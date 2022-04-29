@@ -1,8 +1,9 @@
 <template>
     <div>
-        <h1>분리수거 백과사전</h1>
-
-        <guide-search-form/>
+        <br>
+        <v-container>
+            <guide-search-form/>
+        </v-container>
     </div>
 </template>
 

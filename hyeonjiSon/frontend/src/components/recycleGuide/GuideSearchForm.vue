@@ -2,9 +2,8 @@
 <div id="app">
   <v-app id="inspire">
     <v-container style="width:800px" justify="center">
-    <v-card>
+    <v-card class="elevation-0" >
       <v-card-title>
-        Nutrition
         <v-spacer></v-spacer>
         <v-text-field
           v-model="search"
@@ -35,7 +34,7 @@
         </template>
         <template v-slot:no-results>
           <v-alert :value="true" color="error" icon="warning">
-            Your search for "{{ search }}" found no results.
+            찾으시는 제품 "{{ search }}" 의 정보를 찾을 수 없습니다.
           </v-alert>
         </template>
       </v-data-table>
@@ -67,84 +66,132 @@ export default {
       ],
       desserts: [
         {
-          name: 'Frozen Yogurt',
-          calories: 159,
-          fat: 6.0,
-          carbs: 24,
-          protein: 4.0,
-          iron: '1%'
+          name: '제주 삼다수',
+          plastic: '√',
+          glass: '　',
+          vinyl: '√',
+          paper: '　',
+          can: '　'
         },
         {
-          name: '감자튀김',
-          calories: 237,
-          fat: 9.0,
-          carbs: 37,
-          protein: 4.3,
-          iron: '1%'
+          name: '오뚜기 진라면매운컵',
+          plastic: '　',
+          glass: '　',
+          vinyl: '√',
+          paper: '√',
+          can: '　'
         },
         {
-          name: 'Eclair',
-          calories: 262,
-          fat: 16.0,
-          carbs: 23,
-          protein: 6.0,
-          iron: '7%'
+          name: '오뚜기 사골곰탕국물',
+          plastic: '　',
+          glass: '　',
+          vinyl: '√',
+          paper: '　',
+          can: '　'
         },
         {
-          name: 'Cupcake',
-          calories: 305,
-          fat: 3.7,
-          carbs: 67,
-          protein: 4.3,
-          iron: '8%'
+          name: '팔도한끼 간편부대찌개',
+          plastic: '√',
+          glass: '　',
+          vinyl: '√',
+          paper: '　',
+          can: '√'
         },
         {
-          name: 'Gingerbread',
-          calories: 356,
-          fat: 16.0,
-          carbs: 49,
-          protein: 3.9,
-          iron: '16%'
+          name: '코카콜라캔',
+          plastic: '　',
+          glass: '　',
+          vinyl: '　',
+          paper: '　',
+          can: '√'
         },
         {
-          name: 'Jelly bean',
-          calories: 375,
-          fat: 0.0,
-          carbs: 94,
-          protein: 0.0,
-          iron: '0%'
+          name: '페리에 라임탄산병',
+          plastic: '　',
+          glass: '√',
+          vinyl: '　',
+          paper: '　',
+          can: '√'
         },
         {
-          name: 'Lollipop',
-          calories: 392,
-          fat: 0.2,
-          carbs: 98,
-          protein: 0,
-          iron: '2%'
+          name: '서울우유 살롱밀크티',
+          plastic: '　',
+          glass: '　',
+          vinyl: '　',
+          paper: '√',
+          can: '　'
         },
         {
-          name: 'Honeycomb',
-          calories: 408,
-          fat: 3.2,
-          carbs: 87,
-          protein: 6.5,
-          iron: '45%'
+          name: '성창 투명비닐우산',
+          plastic: '√',
+          glass: '　',
+          vinyl: '√',
+          paper: '　',
+          can: '√'
         },
         {
-          name: 'Donut',
-          calories: 452,
-          fat: 25.0,
-          carbs: 51,
-          protein: 4.9,
-          iron: '22%'
+          name: '에프킬라 더블노즐',
+          plastic: '√',
+          glass: '　',
+          vinyl: '　',
+          paper: '　',
+          can: '√'
         },
         {
-          name: 'KitKat',
-          calories: 518,
-          fat: 26.0,
-          carbs: 65,
-          protein: 7,
-          iron: '6%'
+          name: '깨끗한나라 물티슈30매',
+          plastic: '　',
+          glass: '　',
+          vinyl: '√',
+          paper: '　',
+          can: '　'
+        },
+        {
+          name: '성창 투명비닐우산',
+          plastic: '√',
+          glass: '　',
+          vinyl: '√',
+          paper: '　',
+          can: '√'
+        },
+        {
+          name: '페리오 듀얼클린칫솔2입',
+          plastic: '√',
+          glass: '　',
+          vinyl: '　',
+          paper: '√',
+          can: '　'
+        },
+        {
+          name: '미쟝센 퍼펙트 오리지널 헤어세럼',
+          plastic: '√',
+          glass: '　',
+          vinyl: '　',
+          paper: '　',
+          can: '　'
+        },
+        {
+          name: '삼립 피자호빵',
+          plastic: '√',
+          glass: '　',
+          vinyl: '√',
+          paper: '　',
+          can: '　'
+        },
+        {
+          name: '세양 미니언즈구운란 2구',
+          plastic: '√',
+          glass: '　',
+          vinyl: '　',
+          paper: '√',
+          can: '　'
+        },
+        {
+          name: '오뚜기 맛있는흑미밥210g',
+          plastic: '√',
+          glass: '　',
+          vinyl: '√',
+          paper: '　',
+          can: '　'
         }
       ]
     }
