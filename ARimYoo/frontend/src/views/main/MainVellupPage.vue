@@ -20,7 +20,7 @@
 <script>
 import MainVellup from '@/components/MainVellup.vue'
 import { mapActions, mapState } from 'vuex'
-import MainSearch from '@/components/button/MainSearch.vue'
+import MainSearch from '@/components/button/Search.vue'
 import SearchResult from '@/components/SearchResult.vue'
 export default {
     name: 'MainVellupPage',

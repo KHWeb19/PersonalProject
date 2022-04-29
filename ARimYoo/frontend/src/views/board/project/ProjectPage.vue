@@ -8,9 +8,6 @@
         <v-row justify="center">
             <project-list :projects="projects" :list-array="pageArray"/>
         </v-row>
-        <br/>
-        <br/>
-        <br/>
     </v-container>
 </template>
 

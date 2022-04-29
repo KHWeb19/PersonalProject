@@ -1,7 +1,7 @@
 <template>
     <v-container>
         <v-row column wrap justify="center">
-            <v-data-table 
+            <v-data-table v-if="keyword =='' "
                         :headers="headerTitle" 
                         :items="reviews"
                         :key="reviews.reviewNo"
@@ -24,26 +24,44 @@
                    </div>
                 </template>
             </v-data-table>
+            <v-data-table v-else
+                        :headers="headerTitle" 
+                        :items="mainReviewList"
+                        :key="mainReviewList.reviewNo"
+                        :items-per-page="10"
+                        class="elevation-1 grey lighten-4" 
+                        >
+                <template v-slot:[`item.title`]="{ item }">
+                   <router-link :to="{ name: 'ReviewReadPage',
+                                        params: { reviewNo: item.reviewNo.toString() } }"
+                                        style="color:black; float:left">
+                    {{ item.title }} &nbsp;&nbsp;&nbsp;&nbsp;
+                   </router-link>
+                   <div style="color:#D50000; float:left" >
+                       [{{ item.commentCnt }}] &nbsp;
+                   </div>
+                   <div v-if="item.fileName1">
+                       <v-icon style="zoom:0.9">
+                           mdi-image
+                       </v-icon>
+                   </div>
+                </template>
+            </v-data-table>
         </v-row>
-        <v-row justify="center" style="margin-top:50px">
-            <v-col  cols="7" md="3">
-            <input type="text" class="search" v-model="keyword"/>
-            </v-col>
-            <v-col cols="2" md="1">
-                <v-btn class="searchBtn" @click=goSearch color="red darken-3" dark small>
-                    <v-icon>
-                        mdi-magnify
-                    </v-icon>
-                </v-btn>
+        <v-row justify="center" class="mt-15 mb-5">
+            <v-col cols="12" >
+                <search @search="doSearch" />
             </v-col>
         </v-row>
         </v-container>
 </template>
 
 <script>
-import axios from 'axios'
+import Search from '@/components/button/Search.vue'
+import { mapActions, mapState } from 'vuex'
 
 export default {
+  components: { Search },
     name:'ReviewList',
     props: {
         reviews: {
@@ -65,21 +83,18 @@ export default {
             searchList: []
         }
     },
+    computed: {
+        ...mapState(['mainReviewList'])
+    },
     methods: {
-        goSearch(){
-                const {keyword} = this
-                console.log(keyword)
-                axios.post('http://localhost:7777/board/review/search', {keyword})
-                .then((res) => {
-                    console.log(res.data)
-                    this.$router.push({name: 'ReviewSearchPage', params: { searchList: res.data }})
-                })
-                .catch (() => {
-                    alert('문제 발생!')
-                })
+       ...mapActions(['fetchMainReviewList']),
+        doSearch(keyword){
+            this.keyword = keyword
+            console.log(keyword)
+            this.fetchMainReviewList(keyword)
             }
         }
-    } 
+}
 </script>
 
 <style scoped>
