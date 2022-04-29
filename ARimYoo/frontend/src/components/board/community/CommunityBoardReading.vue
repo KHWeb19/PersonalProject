@@ -103,7 +103,6 @@ export default {
         }
     },
     created () {
-        this.boardNo = this.communityBoard.boardNo
         this.who = this.$store.state.userInfo.id
     },
     methods: {
@@ -124,7 +123,8 @@ export default {
                     })
         },
         like () {
-            const { boardNo, who } = this
+            const { boardNo } = this.communityBoard
+            const {who } = this
             console.log(boardNo, who)
             if (this.iLike == true ){
                 alert("이미 좋아요 하셨습니다 !")
