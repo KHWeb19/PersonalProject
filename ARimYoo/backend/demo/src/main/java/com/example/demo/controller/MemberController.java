@@ -7,6 +7,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Optional;
 
 @Slf4j
 @RestController
@@ -33,6 +39,7 @@ public class MemberController {
         log.info ("login(): " + memberRequest);
 
         MemberRequest memberResponse = service.login(memberRequest);
+        log.info("check!!!!" + memberResponse);
 
         if (memberResponse != null) {
             log.info ("로그인 성공!");
@@ -55,11 +62,12 @@ public class MemberController {
     @PutMapping("/{memberNo}")
     public Member modify (
             @PathVariable("memberNo") Long memberNo,
-            @RequestBody Member member) {
+            Member member, @RequestParam(required = false) MultipartFile file) throws Exception {
         log.info("modify(): " + member);
 
         member.setMemberNo(Long.valueOf(memberNo));
-        service.modify(member);
+
+        service.modify(member, file);
 
         return member;
     }

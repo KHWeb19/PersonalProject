@@ -71,7 +71,7 @@
             </v-col>
         </v-row>
         <v-data-table 
-                            :headers="headerTitle" 
+                            :headers="headerTitle3" 
                             :items="mainReviewList"
                             :key="mainReviewList.reviewNo"
                             :items-per-page="5"

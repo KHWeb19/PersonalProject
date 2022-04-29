@@ -17,13 +17,14 @@ public class MemberRequest {
 
     public MemberRequest(Long memberNo, String userId, String password,
                          String userName, String userBirth,
-                         String userIntro) {
+                         String userIntro, String profilePic) {
         this.memberNo = memberNo;
         this.id = userId;
         this.pw = password;
         this.name = userName;
         this.birth = userBirth;
         this.intro = userIntro;
+        this.profilePic = profilePic;
 
     }
 }

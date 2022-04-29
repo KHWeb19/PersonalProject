@@ -29,6 +29,9 @@ public class MarketComment {
     @Column
     private String commentWriter;
 
+    @Column
+    private String commentProfile;
+
     @CreatedDate
     private String date = LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT));
 
