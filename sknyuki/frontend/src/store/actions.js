@@ -20,6 +20,9 @@ import {
     FETCH_PRODUCT_BOARDB_LIST,
     FETCH_PRODUCT_BOARDB,
 
+    FETCH_BASKET_BOARD_LIST,
+    FETCH_BASKET_BOARD,
+
 } from './mutation-types'
 
 import axios from 'axios'
@@ -122,4 +125,18 @@ export default {
               //console.log(res)
           })
   },
+
+
+  fetchBasketBoardList ({ commit }) {
+    return axios.get('http://localhost:7777/BasketBoard/list')
+        .then((res) => {
+            commit(FETCH_BASKET_BOARD_LIST, res.data)
+        })
+},
+fetchBasketBoard ({ commit }, boardNo) {
+    return axios.get(`http://localhost:7777/BasketBoard/${boardNo}`)
+        .then((res) => {
+            commit(FETCH_BASKET_BOARD, res.data)
+        })
+},
 }
