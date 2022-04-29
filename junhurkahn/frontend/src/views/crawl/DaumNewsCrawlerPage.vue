@@ -88,15 +88,12 @@
     
 
    
-     <v-carousel>
-    <v-carousel-item
-      v-for="(item,i) in items"
-      :key="i"
-      :src="item.src"
-      reverse-transition="fade-transition"
-      transition="fade-transition"
-    ></v-carousel-item>
-  </v-carousel>
+   <v-img
+  lazy-src="https://picsum.photos/id/11/10/6"
+  max-height="500"
+  max-width="3000"
+  src="https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F584%2F2021%2F08%2F28%2F0000015734_001_20210828101023352.jpg&type=sc960_832"
+></v-img>
 
  <v-row>
 
@@ -169,20 +166,6 @@
     data: () => ({
       drawer: false,
       group: null,
-       items: [
-          {
-            src: 'https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F584%2F2021%2F08%2F28%2F0000015734_001_20210828101023352.jpg&type=sc960_832',
-          },
-          {
-            src: 'https://search.pstatic.net/common/?src=http%3A%2F%2Fcafefiles.naver.net%2FMjAxNzA5MTdfODUg%2FMDAxNTA1NjAzMTQzMTYw.AYaWuWvqDossv-68BKOtChp-_A9AaEKsYUiOXXWpzQcg.GnW8lbFJWhu-w7TgNBSskLpjcj29I1F7IneE6jHG6EYg.JPEG.shlope%2Fp1020650.jpg&type=sc960_832',
-          },
-          {
-            src: 'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTAxMTJfMTM2%2FMDAxNjEwNDYwMDc4MjE5.V2-GSUEHUgaKvc1E-o2PJP3TeoZSngciHbwdDYsViNkg.w7KPtqVZfoOvPHyicvzXHIZCFatXajaD0EDkWxlnzegg.PNG.bbpinkaa%2Fimage.png&type=sc960_832',
-          },
-          {
-            src: 'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA5MTRfMTc0%2FMDAxNjMxNTk5NzY1MDE3.GSWSL29AIvanl9I6Wx698qJslAqk4V-MLp0bqasmBXcg.Q3ceVsfIbqe0mY_r6d5dkG4k4zS2alE9mEA55qJrNv4g.JPEG.hohohopoison%2F%25C4%25F7%25B8%25AE%25C6%25BC.jpg&type=sc960_832',
-          },
-        ],
     }),
        
       

@@ -44,7 +44,7 @@ import VuetifyMemberJoinColumnTestPage from '@/views/jpaMember/VuetifyMemberJoin
 import DaumNewsCrawlerPage from '@/views/crawl/DaumNewsCrawlerPage.vue'
 import IntentionPlan from '@/views/jpaMember/IntentionPlan.vue'
 import PlanningStage from '@/views/jpaMember/PlanningStage.vue'
-import MainPage from '@/views/jpaMember/MainPage.vue'
+
 
 
 
@@ -82,18 +82,6 @@ const routes = [
       default: IntentionPlan
     }
   },
-
-
-
-  {
-    path: '/MainPage',
-    name: 'MainPage',
-    components: {
-      default: MainPage
-    }
-  },
-
-
 
   {
     path: '/PlanningStage',
