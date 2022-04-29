@@ -19,7 +19,6 @@ import ManagerPageMember from '@/views/managerPage/ManagerPageMember.vue'
 import ManagerPageCake from '@/views/managerPage/ManagerPageCake.vue'
 import ManagerPageBooking from '@/views/managerPage/ManagerPageBooking.vue'
 
-
 Vue.use(VueRouter)
 
 const routes = [
