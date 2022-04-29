@@ -8,9 +8,9 @@ import {
     FETCH_COMMENT,
     FETCH_COMMENT_LIST,
     FETCH_TWO_COMMENT_LIST,
-    FETCH_LOGIN_LIKES,
     FETCH_LIKES_LIST,
     FETCH_MY_LIKES_LIST,
+    FETCH_LIKE,
 } from './mutation-types'
 
 import axios from 'axios'
@@ -70,12 +70,6 @@ export default {
                     commit(FETCH_TWO_COMMENT_LIST, res.data)
                 })
     },
-    fetchLoginLikes({ commit }, {boardNo, memberNo}) {
-        return axios.get(`http://localhost:7777/likes/list/${boardNo}/${memberNo}`)
-                .then((res) => {
-                    commit(FETCH_LOGIN_LIKES, res.data)
-                })
-    },
     fetchLikesList({ commit }, boardNo) {
         return axios.get(`http://localhost:7777/likes/list/${boardNo}`)
                 .then((res) => {
@@ -86,6 +80,12 @@ export default {
         return axios.get(`http://localhost:7777/likes/list/my/${memberNo}`)
                 .then((res) => {
                     commit(FETCH_MY_LIKES_LIST, res.data)
+                })
+    },
+    fetchLike ({ commit }, {boardNo, memberNo}) {
+        return axios.get(`http://localhost:7777/likes/${boardNo}/${memberNo}`)
+                .then((res) => {
+                    commit(FETCH_LIKE, res.data)
                 })
     },
 }

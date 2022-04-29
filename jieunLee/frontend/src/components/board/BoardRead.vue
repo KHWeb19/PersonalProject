@@ -4,7 +4,6 @@
             <v-card style="margin-bottom: 30px;">
                 <form @submit.prevent="onSubmit">
                 <table style="width: 100%">
-
                     <tr >
                         <td rowspan="20" width="700">
                             <v-img width="700" max-height="700"  :src="require(`@/assets/mImage/${board.boardImage}`)"/>
@@ -123,7 +122,7 @@
                         </td>
                     </tr> -->
                     <tr align="left">
-                        <td style="padding: 6px 9px" colspan="3" v-if="loginLikes.length>0" >
+                        <td style="padding: 6px 9px" colspan="3" v-if="like" >
                             <v-btn icon @click="onLikes(board.boardNo)" >
                                 <v-icon  color="black">
                                     mdi-cards-heart
@@ -224,14 +223,14 @@ export default {
     },
     computed: {
     ...mapState(['board']),
-    ...mapState(['loginLikes']),
+    ...mapState(['like']),
     },
     mounted () {
-        this.fetchLoginLikes({boardNo: this.boardNo, memberNo: this.loginInfo.memberNo})
+        this.fetchLike({boardNo: this.boardNo, memberNo: this.loginInfo.memberNo})
     },
     methods: {
         ...mapActions(['fetchComment']),
-        ...mapActions(['fetchLoginLikes']),
+        ...mapActions(['fetchLike']),
         getItemControl() {
             return `item.actions`;
         },

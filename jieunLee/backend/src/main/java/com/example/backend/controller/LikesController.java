@@ -1,5 +1,6 @@
 package com.example.backend.controller;
 
+import com.example.backend.entity.Board;
 import com.example.backend.entity.Likes;
 import com.example.backend.service.LikesService;
 import lombok.extern.slf4j.Slf4j;
@@ -24,11 +25,11 @@ public class LikesController {
         return likesService.register(boardNo, memberNo, likes);
     }
 
-    @GetMapping("/list/{boardNo}/{memberNo}")
-    public List<Likes> likesList(@PathVariable("boardNo") Long boardNo, @PathVariable("memberNo") Long memberNo) {
-        log.info("likesList()");
+    @GetMapping("/{boardNo}/{memberNo}")
+    public Likes likesRead(@PathVariable("boardNo") Long boardNo, @PathVariable("memberNo") Long memberNo) {
+        log.info("likesRead()");
 
-        return likesService.list(boardNo, memberNo);
+        return likesService.likes(boardNo, memberNo);
     }
 
     @GetMapping("/list/{boardNo}")

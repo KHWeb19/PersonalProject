@@ -45,9 +45,16 @@
                                 <v-img width="615px" :src="require(`@/assets/mImage/${board.boardImage}`)"/>
                             </td>
                         </tr >
-                        <!-- <like-button :board="board"/> -->
-                        <tr align="left">
-                            <!-- <td style="padding: 6px 9px" colspan="3" v-if="loginLikes.length>0" >
+                        <!-- <tr v-for="myLike in myLikes" :key="myLike.LikedNo"> -->
+                        
+                                    <!--                                     
+                                    for (myLike in myLikes) {
+                                        if (myLike.board.boardNo.boardNo==board.boardNo) {
+                                        likeButton = true;
+                                    } 
+                                    -->
+                        <tr>
+                            <td style="padding: 6px 9px" colspan="3" v-if="button.onLike" >
                                 <v-btn icon @click="onLikes(board.boardNo)" >
                                     <v-icon  color="black">
                                         mdi-cards-heart
@@ -62,8 +69,8 @@
                                         </v-icon>
                                     </v-btn>
                                 </router-link>
-                            </td> -->
-                            <td style="padding: 6px 9px" colspan="3">
+                            </td>
+                            <td style="padding: 6px 9px" colspan="3" v-else>
                                 <v-btn icon @click="onLikes(board.boardNo)" >
                                     <v-icon  color="black">
                                         mdi-cards-heart-outline
@@ -151,25 +158,28 @@ export default {
         boards: {
             type: Array
         },
-        // loginLikes: {
-        //     type: Array
-        // }
     },
     data() {
         return {
             loginInfo: JSON.parse(localStorage.getItem('loginInfo')),
             content: '',
+            button: {
+                // for (myLike in myLikes) {
+                //     if (myLike.board.boardNo.boardNo==board.boardNo) {
+                //     onLike :true
+                // } 
+                onLike :false
+            }
         }
     },
     computed: {
-        ...mapState(['loginLikes']),
+        ...mapState(['myLikes']),
     },
     mounted () {
-        this.fetchLoginLikes(this.loginInfo.memberNo)
-        // this.fetchLoginLikes({boardNo: this.boardNo, memberNo: this.loginInfo.memberNo})
+        this.fetchMyLikes(this.loginInfo.memberNo)
     },
     methods: {
-        ...mapActions(['fetchLoginLikes']),
+        ...mapActions(['fetchMyLikes']),
         onDelete(boardNo) {
             console.log(boardNo)
             this.$emit('click', {boardNo})

@@ -8,7 +8,7 @@ export default {
     comment: null,
     comments: [],
     twoComments: [],
-    loginLikes: [],
+    like: null,
     likes: [],
     myLikes: [],
     loginInfo: JSON.parse(localStorage.getItem('loginInfo')),

@@ -5,7 +5,7 @@
                     <form @submit.prevent="onSubmit"  >
                         <img style="margin: 40px 0px 18px 0px;" src="@/assets/vuelogo.png"/>
                         <h4>로그인에 문제가 있나요?</h4>
-                        <div style="color: grey; font-size: 14px">아이디와 좋아하는 색깔을 입력하시면<br/>계정의 비밀번호를 변경 할 수 있습니다.</div>
+                        <div style="color: grey; font-size: 14px">아이디와 회원가입 시 입력한 비밀번호 힌트로<br/>계정의 비밀번호를 변경 할 수 있습니다.</div>
                         <br/>
                         <div>
                             <input style="background-color: #fafafa; 

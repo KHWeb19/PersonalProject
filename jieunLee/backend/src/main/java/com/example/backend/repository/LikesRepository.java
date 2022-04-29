@@ -15,7 +15,7 @@ public interface LikesRepository extends JpaRepository<Likes, Long> {
     Optional<Likes> findByMemberAndBoard (Member member, Board board);
 
     @Query(value = "select * from likes where board_no in(select board_no from board where board_no = :boardNo) and member_no in(select member_no from member where member_no = :memberNo)", nativeQuery = true)
-    List<Likes> findByBoardNoAndMemberNo(@Param("boardNo") Long boardNo, @Param("memberNo") Long memberNo);
+    Optional<Likes> findLikesBoardNoAndMemberNo(@Param("boardNo") Long boardNo, @Param("memberNo") Long memberNo);
 
     @Query(value = "select * from likes where board_no in(select board_no from board where board_no = :boardNo)", nativeQuery = true)
     List<Likes> findByBoardNo(@Param("boardNo") Long boardNo);

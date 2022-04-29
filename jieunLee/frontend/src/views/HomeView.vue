@@ -27,12 +27,8 @@ export default {
     },
     computed: {
         ...mapState(['boards']),
-        // ...mapState(['loginLikes']),
         // ...mapState(['twoComments']),
     },
-    // created() {
-    //       this.fetchLoginLikes(this.loginInfo.memberNo)
-    // },
     mounted () {
         this.fetchBoardList()
         this.fetchLoginLikes(this.loginInfo.memberNo)
