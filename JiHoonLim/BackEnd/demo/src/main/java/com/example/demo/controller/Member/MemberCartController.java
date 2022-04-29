@@ -35,6 +35,13 @@ public class MemberCartController {
 
         return findFood;
     }
+    @DeleteMapping("/delete/{cartNo}")
+    public void myCartRemove(@PathVariable("cartNo")Long cartNo){
+        log.info("myCartRemove()" +cartNo);
+
+        service.remove(cartNo);
+    }
+
     /*
     @PostMapping("/register/{memberNo}")
     public boolean addMyCart(@PathVariable("memberNo") Long memberNo, @Validated @RequestBody MemberCartRequest memberCartRequest){

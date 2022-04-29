@@ -40,13 +40,15 @@ public class MemberCartServiceImpl implements MemberCartService {
 
     @Override
     public List<FoodBoard> findFood(Long memberNo) {
-        log.info("before foodObj");
         List<FoodBoard> foodList = foodBoardRepository.findFoodBoardListByMemberCart(memberNo);
-
 
         return foodList;
     }
 
+    @Override
+    public void remove(Long cartNo) {
+        memberCartRepository.deleteById(cartNo);
+    }
 
 }
     /*
