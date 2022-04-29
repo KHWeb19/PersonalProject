@@ -39,13 +39,20 @@ export default {
   methods: {
     ...mapActions(["fetchProduct", "fetchProductCommentList"]),
     onSubmit(payload) {
-      const { comment, writer } = payload
+      const { comment, writer, file } = payload
+      let formData = new FormData()
+      formData.append("comment", comment)
+      formData.append("writer", writer)
+      formData.append("file", file)
+      console.log(formData)
       axios
         .post(
           `http://localhost:8888/product/comment/register/${this.productId}`,
+          formData,
           {
-            comment,
-            writer,
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
           }
         )
         .then(() => {

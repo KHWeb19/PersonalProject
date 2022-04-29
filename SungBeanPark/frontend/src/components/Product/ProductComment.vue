@@ -3,6 +3,7 @@
     <div class="row">
       <div class="col-sm-4 col-md-6 col-lg-7">
         <section
+          enctype="multipart/form-data"
           @submit.prevent="onSubmit"
           class="product-section product-review"
           id="product-review"
@@ -27,6 +28,16 @@
                       <h3 class="visually-hidden">
                         {{ commenList.writer }}님이 작성한 리뷰
                       </h3>
+
+                      <a class="avatar-24" href="/">
+                        <img
+                          v-if="commenList.fileName != null"
+                          :src="
+                            require(`@/assets/image/${commenList.fileName}`)
+                          "
+                          alt="고영희님이좋아합니다"
+                        />
+                      </a>
 
                       <div class="info">
                         <a class="username" href="/">
@@ -104,6 +115,56 @@
               </button>
             </div>
           </form>
+          <div class="review-modal">
+            <div class="review-modal-title">별점 평가</div>
+            <div class="review-modal-star">
+              <div class="review-modal-star-label">만족도</div>
+              <ul class="rating-input">
+                <li>
+                  <label class="rating-input-star" for="">
+                    <input type="radio" value="1" />
+                    <i class="ic-star is-active"></i>
+                  </label>
+                </li>
+                <li>
+                  <label class="rating-input-star" for="">
+                    <input type="radio" value="2" />
+                    <i class="ic-star is-active"></i>
+                  </label>
+                </li>
+                <li>
+                  <label class="rating-input-star" for="">
+                    <input type="radio" value="3" />
+                    <i class="ic-star is-active"></i>
+                  </label>
+                </li>
+                <li>
+                  <label class="rating-input-star" for="">
+                    <input type="radio" value="4" />
+                    <i class="ic-star is-active"></i>
+                  </label>
+                </li>
+                <li>
+                  <label class="rating-input-star" for="">
+                    <input type="radio" value="5" />
+                    <i class="ic-star is-active"></i>
+                  </label>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="review-file">
+            <input
+              type="file"
+              id="files"
+              ref="files"
+              dense
+              style="width: 300px"
+              multiple
+              v-on:change="handleFileUpload()"
+            />
+            <img :src="image" class="preview" alt="" />
+          </div>
           <form class="review-form">
             <div class="review-card-content">
               <div class="review-card-content header">리뷰 작성</div>
@@ -142,11 +203,14 @@ export default {
       regDate: "",
       writer: "",
       userInfo: this.$store.state.userInfo,
-      userId: "",
+      id: "",
+      fileName: "",
+      files: "",
+      image: "",
     }
   },
   created() {
-    this.writer = this.$store.state.userInfo.userId
+    this.writer = this.$store.state.userInfo.id
   },
   methods: {
     onDelete(commentNo) {
@@ -166,24 +230,37 @@ export default {
     },
     onSubmit() {
       const { comment, writer } = this
-      this.$emit("submit", { comment, writer })
-      console.log(comment, writer)
+      const file = this.$refs.files.files[0]
+      this.$emit("submit", { comment, writer, file })
+      console.log(comment, writer, file)
     },
     onLike() {
-      const { productId, userId } = this
-      axios
-        .post(`http://localhost:8888/product/like/${productId}`, userId)
-        .then((res) => {
-          if (res.data) {
-            alert("좋아요 성공")
-            this.$router.go()
-          } else {
-            alert("이미 좋아요를 누르셨습니다.")
-          }
-        })
-        .catch(() => {
-          alert("오류 발생")
-        })
+      if (this.userInfo != null) {
+        const { commentNo, id } = this
+        axios
+          .post(`http://localhost:8888/product/like/${commentNo}`, { id })
+          .then((res) => {
+            if (res.data) {
+              alert("좋아요 성공")
+              this.$router.go()
+            } else {
+              alert("이미 좋아요를 누르셨습니다.")
+            }
+          })
+          .catch(() => {
+            alert("오류 발생")
+          })
+      } else {
+        alert("로그인 후 이용해주세요.")
+      }
+    },
+    handleFileUpload() {
+      console.log("이미지 첨부")
+
+      var image = this.$refs["files"].files[0]
+      const url = URL.createObjectURL(image)
+      this.image = url
+      this.files = this.$refs.files.files[0]
     },
   },
 }
