@@ -2,7 +2,7 @@
     <div>
       <v-card outlined>
         <div align = center class="mt-3">
-          <v-toolbar-title> {{ userInfo.id }} 님 환영합니다!</v-toolbar-title>
+          <v-toolbar-title class="font-weight-bold"> {{ userInfo.id }} 님 환영합니다!</v-toolbar-title>
         
           <v-divider></v-divider>
 

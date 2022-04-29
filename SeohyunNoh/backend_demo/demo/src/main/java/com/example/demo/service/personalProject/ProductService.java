@@ -19,4 +19,6 @@ public interface ProductService {
     public void updateProduct(ProductDto productDto, Integer productId) throws Exception;
 
     public Product findById(Integer productId) throws ProductNotExistsException;
+
+    public void remove(Integer productId);
 }

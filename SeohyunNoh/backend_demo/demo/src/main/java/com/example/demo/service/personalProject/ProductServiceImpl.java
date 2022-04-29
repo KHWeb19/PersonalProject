@@ -82,4 +82,9 @@ public class ProductServiceImpl implements ProductService{
         }
         return optionalProduct.get();
     }
+
+    @Override
+    public void remove(Integer productId) {
+        productRepository.deleteById(productId);
+    }
 }

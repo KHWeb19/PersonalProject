@@ -1,39 +1,44 @@
 <template>
     <div>
         <form @submit.prevent="onSubmit">
-            <table border="1">
-                <tr>
-                    <td>게시물 번호</td>
-                    <td>
-                        <input type="text" :value="qnaBoard.qnaNo" disabled/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>제목</td>
-                    <td>
-                        <input type="text" v-model="title"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>작성자</td>
-                    <td>
-                        <input type="text" :value="qnaBoard.writer" disabled/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>등록일자</td>
-                    <td>
-                        <input type="text" :value="qnaBoard.regDate.split('T')[0]" disabled/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>본문</td>
-                    <td>
-                        <textarea cols="50" rows="20" v-model="content">
-                        </textarea>
-                    </td>
-                </tr>
-            </table>
+           <b-container fluid>
+            <b-row hidden >
+                <b-col sm="3"><label>게시물 번호</label></b-col>
+                <b-col sm="6">
+                    <b-form-input type="text" :value="qnaBoard.qnaNo"></b-form-input>
+                </b-col>
+            </b-row>
+
+            <b-row >
+                <b-col sm="3"><label>제목</label></b-col>
+                <b-col sm="6">
+                    <b-form-input type="text" v-model="title" />
+                </b-col>
+            </b-row>
+
+            <b-row >
+                <b-col sm="3"><label>작성자</label></b-col>
+                <b-col sm="6">
+                    <b-form-input type="text" :value="qnaBoard.writer" disabled/>
+                </b-col>
+            </b-row>
+            
+            <b-row >
+                <b-col sm="3"><label>등록일자</label></b-col>
+                <b-col sm="6">
+                    <b-form-input type="text" :value="qnaBoard.regDate.split('T')[0]" disabled/>
+                </b-col>
+            </b-row>
+            
+            <b-row >
+                <b-col sm="3"><label>본문</label></b-col>
+                <b-col sm="6">
+                <b-form-textarea cols="50" rows="20" v-model="content">
+                </b-form-textarea>
+                </b-col>
+            </b-row>
+    
+        </b-container>
 
             <div>
                 <v-btn plain class="basil--text" type="submit">수정 완료</v-btn>

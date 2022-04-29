@@ -56,4 +56,11 @@ public class ProductController {
         productService.updateProduct(productDto, productId);
         return new ResponseEntity<ApiResponse>(new ApiResponse(true, "product has been updated"), HttpStatus.OK);
     }
+
+    @DeleteMapping("/{productId}")
+    public void productRemove(@PathVariable("productId") Integer productId) {
+        log.info("remove the product()");
+
+        productService.remove(productId);
+    }
 }

@@ -22,6 +22,7 @@ import ShowDetails from '@/views/product/ShowDetails.vue'
 import TopProducts from '@/views/product/TopProducts.vue'
 
 import Cart from '@/views/cart/Cart.vue'
+import Checkout from '@/views/cart/Checkout.vue'
 
 
 import LookBookPage from '@/views/project/LookBookPage.vue'
@@ -179,6 +180,11 @@ const routes = [
     path: '/cart',
     name: 'Cart',
     component: Cart
+  },
+  {
+    path: '/checkout',
+    name: 'Checkout',
+    component: Checkout
   },
   {
     path: '/noticeListPage',

@@ -15,12 +15,16 @@
 
         <router-link :to="{ name: 'EditProduct', params: { id: product.id } }" v-show="$route.name == 'Product'">
             <button class="btn btn-primary">Edit</button>   
-        </router-link>    
+        </router-link> 
+        
+        <button class="btn btn-primary" v-show="$route.name == 'Product'" @click="deleteProduct">Delete</button>     
     </div>
   </div>
 </template>
 
 <script>
+
+import axios from 'axios'
 
 export default {
   name: 'ProductBox',
@@ -36,6 +40,16 @@ export default {
         params: { id: this.product.id },
       })
     },
+    deleteProduct() {
+            axios.delete(`http://localhost:7777/product/${this.product.id}`)
+                    .then(() => {
+                        alert('삭제 성공!')
+                        this.$router.push({ name: 'Product' })
+                    })
+                    .catch(() => {
+                        alert('삭제 실패! 문제 발생!')
+                    })
+    }
   },
 }
 </script>

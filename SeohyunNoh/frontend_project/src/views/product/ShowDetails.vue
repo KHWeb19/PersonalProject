@@ -30,7 +30,7 @@
             </button>
           </div>
         </div>
-        <div class="features pt-3">
+        <!-- <div class="features pt-3">
           <h5><strong>Features</strong></h5>
           <ul>
             <li></li>
@@ -39,7 +39,7 @@
             <li></li>
             <li></li>
           </ul>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>

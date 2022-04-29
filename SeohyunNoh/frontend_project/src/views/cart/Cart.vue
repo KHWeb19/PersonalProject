@@ -1,69 +1,93 @@
 <template>
-  <div class="container">
-    <div class="row">
-      <div class="col-12 text-center">
-        <h3 class="pt-3">
-          Shopping cart
-        </h3>
-      </div>
-    </div>
+  <div>
+    <v-container>
+      <p class="display-3 font-weight-light text-center pa-4">MY CART</p>
+      
+      <v-row>
+        <v-col :cols="12" md="9" sm="12">
+          <v-simple-table>
+            <template v-slot:default>
+              <thead>
+                <tr>
+                  <th class="text-center">ITEM</th>
+                  <th class="text-center">PRICE</th>
+                  <th class="text-center">QUANTITY</th>
+                  <th class="text-center">TOTAL</th>
+                  <th class="text-center"></th>
+                </tr>
+              </thead>
+              <tbody align="center">
+                <tr v-for="cartItem in cartItems" :key="cartItem.id">
+                  <td>
+                    <v-list-item>
+                      <v-list-item-avatar>
+                        <v-img :src="cartItem.product.imageURL" alt="">
+                        </v-img>
+                      </v-list-item-avatar>
 
-    <!-- 받아온 cartItems를 루프돌며 분배 --> 
-    <div v-for="cartItem in cartItems" :key="cartItem.id" class="row mt-2 pt-3 justify-content-around">
-      <div class="col-2"></div>
-      <div class="col-md-3 embed-responsive embed-responsive-16by9">
-        <img :src="cartItem.product.imageURL" alt=""
-          class="w-100 card-image-top embed-responsive-item"
-          style="object-fit: cover"/>
-      </div>
-
-      <!-- 상품명, 상품가격, 상품수량 -->
-      <div class="col-md-5 px-3">
-        <div class="card-block px-3">
-          <h6 class="card-title">
-            <router-link :to="{ name: 'ShowDetails', params: { id: cartItem.product.id } }">
-              {{ cartItem.product.name }}
-            </router-link>
-          </h6>
-
-          <p class="mb-0 font-weight-bold" id="item-price">
-            ₩ {{ cartItem.product.price }}
-          </p>
-
-          <p class="mb-0" style="float:left">
-            Quantity:{{ cartItem.quantity }}
-          </p>
+                      <v-list-item-content>
+                        <v-list-item-title>
+                          <router-link :to="{ name: 'ShowDetails', params: { id: cartItem.product.id } }">
+                            {{ cartItem.product.name }}
+                          </router-link>
+                        </v-list-item-title>
+                      </v-list-item-content>
+                    </v-list-item>
+                  </td>
+                  <td>₩ {{ cartItem.product.price }}</td>
+                  <td>
+                    <p>{{ cartItem.quantity }}</p>
+                  </td>
+                  <td> ₩ {{ cartItem.product.price * cartItem.quantity }} </td>
+                  <td>
+                     <v-btn plain @click="deleteItem(cartItem.id)">
+                        <v-icon x-small>mdi-close</v-icon>
+                      </v-btn>
+                  </td>
+                </tr>
+              </tbody>
+            </template>
+          </v-simple-table>
+        </v-col>
+  
+      <v-col :cols="12" md="3" sm="12" style="background-color: lightgray">
+        <p class="headline">Order Summary</p>
+        <v-simple-table>
+          <template v-slot:default>
+            <tbody>
+              <tr>
+                <td>주문합계</td>
+                <td class="text-right" style="width: 100px;">₩ {{ totalCost }}</td>
+              </tr>
+              <tr>
+                <td>배송비</td>
+                <td class="text-right" style="width: 100px;">₩ 3000 </td>
+              </tr>
+              <tr>
+                <td class="font-weight-bold">TOTAL</td>
+                <td class="font-weight-bold text-right" style="width: 100px;">₩ {{ totalCost + 3000 }}</td>
+              </tr>
+            </tbody>
+          </template>
+        </v-simple-table>
+        <div class="text-center">
+          <checkout-form/>
         </div>
-
-        <p class="mb-0" style="float:right">
-          Total:
-          <span class="font-weight-bold">
-            ₩ {{ cartItem.product.price * cartItem.quantity }}
-          </span>
-        </p>
-        <br />
-        <v-btn plain @click="deleteItem(cartItem.id)">
-            <v-icon x-small>mdi-close</v-icon>
-        </v-btn>
-      </div>
-      <div class="col-2"></div>
-      <div class="col-12"><hr /></div>
-    </div>
-
-    <!-- 총합계 , 결제버튼 -->
-    <div class="total-cost pt-2 text-right">
-      <h5>Total : ₩ {{ totalCost }}</h5>
-      <button type="button" class="btn btn-primary confirm" @click="checkout">
-        Order
-      </button>
-    </div>
+      </v-col>
+    </v-row>
+    
+    </v-container>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import CheckoutForm from '../../components/cart/CheckoutForm.vue';
 
 export default {
+  components: { 
+    CheckoutForm 
+  },
   data() {
     return {
       cartItems: [],
@@ -103,10 +127,8 @@ export default {
   },
 };
 </script>
+
 <style scoped>
-h4,
-h5 {
-  color: #484848;
-  font-size: 700;
-}
+
+
 </style>
