@@ -1,10 +1,11 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.PlanDay;
-import com.example.demo.request.CountRequest;
-import com.example.demo.request.PlanDayListRequest;
-import com.example.demo.request.PlanDayRequest;
+import com.example.demo.request.*;
 import com.example.demo.response.PlanDayResponse;
+import com.example.demo.response.map.MapLikeListResponse;
+import com.example.demo.response.map.MapLikeMarkListResponse;
+import com.example.demo.response.map.SearchMapLikeListResponse;
 import com.example.demo.service.plan.PlanDayService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 @Slf4j
@@ -70,5 +70,35 @@ public class PlanDayController {
         log.info("planDayNo : "+ countRequest);
 
         return planDayService.remove(countRequest);
+    }
+
+    @GetMapping("/mapLikeList/{planNo}")
+    public List<MapLikeListResponse> likeMapList(@PathVariable("planNo") Integer planNo){
+
+        log.info("likeMapList planNo: "+planNo);
+
+        return planDayService.likePlaceList(planNo);
+    }
+
+    @GetMapping("/mapLikeMarkList/{planNo}")
+    public List<MapLikeMarkListResponse> likeMarkList(@PathVariable("planNo") Integer planNo){
+
+        log.info("likeMarkList planNo: "+planNo);
+
+        return planDayService.likePlaceMarkList(planNo);
+    }
+
+    @PostMapping("/savePlaceDay")
+    public void savePlaceDay (@RequestBody SaveFavoritePlaceDay saveFavoritePlaceDay){
+        log.info("savePlaceDay: " + saveFavoritePlaceDay.getFavoritePlaceNo() + ", "+saveFavoritePlaceDay.getDay());
+
+        planDayService.savePlaceDay(saveFavoritePlaceDay);
+    }
+
+    @PostMapping("/mapPlaceListDay")
+    public List<MapLikeListResponse> mapPlaceListDay(@RequestBody SaveFavoritePlaceDayList saveFavoritePlaceDayList){
+        log.info("savePlaceDay: " + saveFavoritePlaceDayList.getPlanNo() + ", "+saveFavoritePlaceDayList.getDay());
+
+        return planDayService.listPlaceDay(saveFavoritePlaceDayList);
     }
 }

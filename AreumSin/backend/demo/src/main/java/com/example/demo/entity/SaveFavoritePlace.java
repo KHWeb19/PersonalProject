@@ -26,6 +26,9 @@ public class SaveFavoritePlace {
     @Column
     private String y;
 
+    @Column
+    private Integer day;
+
     @ManyToOne
     @JoinColumn(name = "PLAN_NO")
     private Plan plan;

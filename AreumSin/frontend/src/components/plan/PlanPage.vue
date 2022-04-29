@@ -16,7 +16,6 @@ export default {
       type: Number,
       required: true
     },
-
   },
   data(){
     return{
@@ -30,10 +29,12 @@ export default {
       lastMonthDay: localStorage.getItem('lastMonthDay'), // 30
       monthDay: localStorage.getItem('monthDay'), // 0
       dates: [],
+      sendDate: [],
     }
   },
   created() {
     this.calendarData();
+    this.$emit('dates', this.sendDate);
   },
   methods:{
     test(index1, index2) {
@@ -74,6 +75,7 @@ export default {
       let startDay = monthFirstDay; // 20
 
       const dates = [];
+      //const sendDate = [];
 
       if(this.month > 0) {
         //console.log("아직 안들어옴")
@@ -133,6 +135,9 @@ export default {
         }
         console.log(date[i])
       }
+
+      this.sendDate = dates;
+      console.log('123123'+this.sendDate)
 
 /*      if(dates.length % 4 === 0){
         console.log(dates.length % 4);

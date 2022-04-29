@@ -2,7 +2,7 @@ import {
     FETCH_BOARD_COMMENT,
     FETCH_BOARD_LIST, FETCH_BOARD_READ, FETCH_BOARD_READ_IMG,
     FETCH_DAY_CONTENT,
-    FETCH_INVITE_MEMBER, FETCH_SEARCH_LIKE_PLACE_LIST,
+    FETCH_INVITE_MEMBER, FETCH_LIKE_PLACE_LIST, FETCH_MAP_MARK_LIST, FETCH_PLACE_LIST_DAY, FETCH_SEARCH_LIKE_PLACE_LIST,
     FETCH_USER_PLANS, FETCH_VOTE_CONTENT
 } from './mutation-types'
 
@@ -18,7 +18,6 @@ export default {
         }
     },
     [FETCH_DAY_CONTENT] (state, dayContent) {
-
         state.dayContent = dayContent;
     },
     [FETCH_VOTE_CONTENT] (state, voteContent) {
@@ -52,6 +51,15 @@ export default {
     },
     [FETCH_SEARCH_LIKE_PLACE_LIST](state, likePlaceList){
         state.searchLikePlaceList = likePlaceList;
+    },
+    [FETCH_LIKE_PLACE_LIST](state, likePlaceList){
+        state.mapLikePlaceList = likePlaceList;
+    },
+    [FETCH_MAP_MARK_LIST](state, likePlaceMarkList){
+        state.markLikePlaceList = likePlaceMarkList;
+    },
+    [FETCH_PLACE_LIST_DAY](state, placeLikeDayList) {
+        state.placeLikeDayList = placeLikeDayList;
     }
 
 }

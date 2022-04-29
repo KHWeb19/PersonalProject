@@ -10,4 +10,7 @@ export default {
     boardReadImg: [],
     boardListComment: [],
     searchLikePlaceList: [],
+    mapLikePlaceList: [],
+    markLikePlaceList: [],
+    placeLikeDayList: [],
 }

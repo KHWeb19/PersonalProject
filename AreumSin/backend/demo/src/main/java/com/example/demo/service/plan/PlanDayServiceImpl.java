@@ -1,21 +1,17 @@
 package com.example.demo.service.plan;
 
-import com.example.demo.entity.Hate;
-import com.example.demo.entity.Like;
-import com.example.demo.entity.Plan;
-import com.example.demo.entity.PlanDay;
-import com.example.demo.repository.HateRepository;
-import com.example.demo.repository.LikeRepository;
-import com.example.demo.repository.MakePlanRepository;
-import com.example.demo.repository.PlanDayRepository;
-import com.example.demo.request.CountRequest;
-import com.example.demo.request.PlanDayListRequest;
-import com.example.demo.request.PlanDayRequest;
+import com.example.demo.entity.*;
+import com.example.demo.repository.*;
+import com.example.demo.request.*;
+import com.example.demo.response.map.MapLikeListResponse;
+import com.example.demo.response.map.MapLikeMarkListResponse;
+import com.example.demo.response.map.SearchMapLikeListResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -35,6 +31,9 @@ public class PlanDayServiceImpl implements PlanDayService{
 
     @Autowired
     private HateRepository hateRepository;
+
+    @Autowired
+    private SaveFavoritePlaceRepository saveFavoritePlaceRepository;
 
     @Transactional
     @Override
@@ -88,6 +87,57 @@ public class PlanDayServiceImpl implements PlanDayService{
         }else{
             return false;
         }
+    }
+
+    @Override
+    public List<MapLikeListResponse> likePlaceList(Integer planNo) {
+
+        List<SaveFavoritePlace> saveFavoritePlaceList = saveFavoritePlaceRepository.findMemberPlaceByPlanNo(planNo);
+
+        List<MapLikeListResponse> likePlaceList = new ArrayList<>();
+
+        for(SaveFavoritePlace saveFavoritePlace : saveFavoritePlaceList){
+            likePlaceList.add(new MapLikeListResponse(saveFavoritePlace.getTitle(), saveFavoritePlace.getFavoritePlace()));
+        }
+
+        return likePlaceList;
+    }
+
+    @Override
+    public List<MapLikeMarkListResponse> likePlaceMarkList(Integer planNo) {
+
+        List<SaveFavoritePlace> saveFavoritePlaceList = saveFavoritePlaceRepository.findMemberPlaceByPlanNo(planNo);
+
+        List<MapLikeMarkListResponse> likePlaceList = new ArrayList<>();
+
+        for(SaveFavoritePlace saveFavoritePlace : saveFavoritePlaceList){
+            likePlaceList.add(new MapLikeMarkListResponse(saveFavoritePlace.getX(), saveFavoritePlace.getY(), saveFavoritePlace.getTitle()));
+        }
+
+        return likePlaceList;
+    }
+
+    @Override
+    public void savePlaceDay(SaveFavoritePlaceDay saveFavoritePlaceDay) {
+
+        SaveFavoritePlace SFPD = saveFavoritePlaceRepository.findPlaceByNo(saveFavoritePlaceDay.getFavoritePlaceNo());
+        SFPD.setDay(saveFavoritePlaceDay.getDay());
+
+        saveFavoritePlaceRepository.save(SFPD);
+    }
+
+    @Override
+    public List<MapLikeListResponse> listPlaceDay(SaveFavoritePlaceDayList saveFavoritePlaceDayList) {
+
+        List<SaveFavoritePlace> likePlaceList = saveFavoritePlaceRepository.findPlaceByDay(saveFavoritePlaceDayList.getDay(), saveFavoritePlaceDayList.getPlanNo());
+
+        List<MapLikeListResponse> likeListResponses = new ArrayList<>();
+
+        for(SaveFavoritePlace saveFavoritePlace : likePlaceList){
+            likeListResponses.add(new MapLikeListResponse(saveFavoritePlace.getTitle(), saveFavoritePlace.getFavoritePlace()));
+        }
+
+        return likeListResponses;
     }
 
     @Override
