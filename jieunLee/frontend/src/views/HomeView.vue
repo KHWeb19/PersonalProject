@@ -4,7 +4,7 @@
       <menu-bar/>
       <hr style="border: 0; height: 1px; background: #d8d8d8; "/>
     </div>
-    <board-list :boards="boards" :loginLikes="loginLikes" @click="onDelete" @submit="onSubmit"/>
+    <board-list :boards="boards" @click="onDelete" @submit="onSubmit"/>
   </div>
 </template>
 
@@ -31,12 +31,10 @@ export default {
     },
     mounted () {
         this.fetchBoardList()
-        this.fetchLoginLikes(this.loginInfo.memberNo)
         // this.fetchTwoCommentList(this.boardNo)
     },
     methods: {
         ...mapActions(['fetchBoardList']),
-        ...mapActions(['fetchLoginLikes']),
         // ...mapActions(['fetchTwoCommentList']),
         onDelete(payload) {
             const {boardNo} = payload

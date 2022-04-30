@@ -8,7 +8,7 @@
         <v-flex>
             <v-row>
                 <v-col style="height: 320px; text-align: center;" v-if="!myLikes || (Array.isArray(myLikes) && myLikes.length === 0)">
-                좋아요한 게시물이 없습니다!
+                현재 좋아요한 게시물이 없습니다!
                 </v-col>
                 <v-col v-else v-for="myLike in myLikes" :key="myLike.board.boardNo"  cols="4">
                     <router-link style="text-decoration: none; color: grey" :to="{
@@ -29,11 +29,6 @@ import { mapActions, mapState } from 'vuex'
 export default {
     name: 'MyLikesList',
     components: {MenuBar},
-    props: {
-        myLikes: {
-            type: Array
-        }
-    },
     data() {
         return {
             loginInfo: JSON.parse(localStorage.getItem('loginInfo'))

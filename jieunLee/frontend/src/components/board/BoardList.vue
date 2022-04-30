@@ -53,7 +53,7 @@
                                         likeButton = true;
                                     } 
                                     -->
-                        <like-button :board="board"/>
+                        <like-button :board="board" :myLikes="myLikes"/>
                         <!-- <tr>
                             <td style="padding: 6px 9px" colspan="3" v-if="button.onLike" >
                                 <v-btn icon @click="onLikes(board.boardNo)" >
@@ -164,23 +164,16 @@ export default {
         return {
             loginInfo: JSON.parse(localStorage.getItem('loginInfo')),
             content: '',
-            button: {
-                // for (myLike in myLikes) {
-                //     if (myLike.board.boardNo.boardNo==board.boardNo) {
-                //     onLike :true
-                // } 
-                onLike :false
-            }
         }
     },
     computed: {
         ...mapState(['myLikes']),
     },
     mounted () {
-        this.fetchMyLikes(this.loginInfo.memberNo)
+        this.fetchMyLikesList(this.loginInfo.memberNo)
     },
     methods: {
-        ...mapActions(['fetchMyLikes']),
+        ...mapActions(['fetchMyLikesList']),
         onDelete(boardNo) {
             console.log(boardNo)
             this.$emit('click', {boardNo})

@@ -1,5 +1,9 @@
 <template>
-        <td style="padding: 6px 9px" colspan="3"  >
+<!-- <div>
+    {{myLikes[0].board.boardNo}}
+    {{board.boardNo}}
+</div> -->
+        <td style="padding: 6px 9px" colspan="3" v-if="onLike" >
             <v-btn icon @click="onLikes(board.boardNo)" >
                 <v-icon  color="black">
                     mdi-cards-heart
@@ -16,7 +20,7 @@
             </router-link>
         </td>
 
-        <!-- <td style="padding: 6px 9px" colspan="3" v-else >
+        <td style="padding: 6px 9px" colspan="3" v-else >
             <v-btn icon @click="onLikes(board.boardNo)" >
                 <v-icon  color="black">
                     mdi-cards-heart-outline
@@ -31,13 +35,11 @@
                     </v-icon>
                 </v-btn>
             </router-link>
-        </td> -->
-
+        </td>
     
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
 import axios from 'axios'
 export default {
     name: 'LikeButton',
@@ -46,31 +48,26 @@ export default {
             type: Object,
             require:true
         },
+        myLikes: {
+            type: Array
+        },
     },
     data() {
         return {
             loginInfo: JSON.parse(localStorage.getItem('loginInfo')),
+            onLike: ''
         }
     },
-    computed: {
-        ...mapState(['like']),
-        ...mapState(['myLikes']),
-    },
     mounted () {
-        this.fetchLike({boardNo: this.board.boardNo, memberNo: this.loginInfo.memberNo})
-        this.fetchMyLikes(this.loginInfo.memberNo)
-        onLike = false
-            for (myLike in myLikes) {
-                if (myLike.board.boardNo.boardNo==this.board.boardNo) {
-                onLike = true
+        this.onLike = false
+        for(let i=0; i<this.myLikes.length; i++) {
+            if (this.myLikes[i].board.boardNo==this.board.boardNo) {
+                this.onLike = true
             } 
         }
     },
     methods: {
-        ...mapActions(['fetchLike']),
-        ...mapActions(['fetchMyLikes']),
         onLikes() {
-            console.log(this.like)
             axios.post(`http://localhost:7777/likes/${this.board.boardNo}/${this.loginInfo.memberNo}`, {boardNo: this.board.boardNo, memberNo: this.loginInfo.memberNo})
                 .then(() => {
                     history.go(0);
