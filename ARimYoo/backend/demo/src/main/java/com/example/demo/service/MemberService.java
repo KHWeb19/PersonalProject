@@ -8,7 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface MemberService {
     public void register(Member member);
-
+    public Boolean checkId(String id);
     public MemberRequest login (MemberRequest memberRequest);
 
     public Member read (Long memberNo);

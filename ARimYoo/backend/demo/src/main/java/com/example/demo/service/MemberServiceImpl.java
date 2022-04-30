@@ -38,6 +38,17 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    public Boolean checkId(String id) {
+        Optional<Member> checkId = repository.findByUserId(id);
+
+        if (checkId.isPresent()){
+            return false;
+        }else {
+            return true;
+        }
+    }
+
+    @Override
     public MemberRequest login(MemberRequest memberRequest) {
         Optional<Member> maybeMember = repository.findByUserId(memberRequest.getId());
 

@@ -19,8 +19,8 @@ export default {
         onSubmit (payload) {
             const { id, pw, name, birth } = payload
             axios.post('http://localhost:7777/Member/register', { id, pw, name, birth })
-            .then(res => {
-                alert ('환영합니다 !' + res)
+            .then(()=> {
+                alert ('환영합니다 !')
                 location.href="/main"
             })
             .catch(res => {

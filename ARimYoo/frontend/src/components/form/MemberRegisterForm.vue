@@ -1,46 +1,55 @@
 <template>
     <v-container>
         <form name ="loginForm" @submit.prevent="onSubmit">
-            <v-row class="formD">
-                <v-col class="label" cols="6" >
+            <v-row class="formD" justify="end">
+                <v-col class="label" cols="3" aria-rowspan="2">
                     <v-img src="@/assets/form/formId.png" width="100"/> 
                 </v-col>
-                <v-col wrap cols="12" sm="4">
-                <v-text-field name="id" @change="check_id()" solo dense placeholder="6~12 사이의 영문or숫자" v-model="id"/>
-                <div class="error_next_box" id="pwMsg1" aria-live="assertive"></div>
+                <v-col cols="5">
+                    <v-text-field name="id" @change="check_id()" solo dense placeholder="6~12 사이의 영문or숫자" v-model="id"/>
+                    <v-row>
+                        <p class="error_next_box" id="pwMsg1" aria-live="assertive"></p>
+                    </v-row>
+                </v-col>
+                <v-col cols="2">
+                    <v-btn class="mt-1" rounded small  :color="this.checkCondition == true ? 'red darken-3' : 'black'"  dark @click="checkId">
+                    check
+                </v-btn>
                 </v-col>
             </v-row>
-            <v-row class="formD">
-                <v-col class="label" cols="6">
+            <v-row class="formD" justify="center">
+                <v-col class="label" cols="3">
                     <v-img src="@/assets/form/formPw.png" width="130"/>
                 </v-col>
-                <v-col  cols="12" sm="4">
-                <v-text-field type="password" name="pw"  @change="check_pw()" solo dense placeholder="6~20 사이의 영문+숫자" v-model="pw"/>
-                <div class="error_next_box" id="pwMsg2" aria-live="assertive"></div>
+                <v-col  cols="5">
+                    <v-text-field type="password" name="pw"  @change="check_pw()" solo dense placeholder="6~20 사이의 영문+숫자" v-model="pw"/>
+                    <v-row>
+                        <p class="error_next_box" id="pwMsg2" aria-live="assertive"></p>
+                    </v-row>
                 </v-col>
             </v-row>
-            <v-row class="formD">
-                <v-col class="label" cols="6">
+            <v-row class="formD" justify="center">
+                <v-col class="label" cols="3">
                     <img src="@/assets/form/formPw2.png" width="130"/>
                 </v-col>
-                <v-col cols="12" sm="4">
+                <v-col cols="12" sm="5">
                 <v-text-field type="password" name="pwConfirm" @change="check_pw()" solo dense />
                 <div class="error_next_box" id="pwMsg3" aria-live="assertive"></div> <p/>
                 </v-col>
             </v-row>
-            <v-row class="formD">
-                <v-col class="label" cols="6">
+            <v-row class="formD" justify="center">
+                <v-col class="label" cols="3">
                     <img src="@/assets/form/formName.png" width="100"/>
                 </v-col>
-                <v-col cols="12" sm="4">
+                <v-col cols="4">
                 <v-text-field name="name" solo dense v-model="name"/>
                 </v-col>
             </v-row>
-             <v-row class="formD">
-                <v-col class="label" cols="6">
+             <v-row class="formD" justify="center">
+                <v-col class="label" cols="3">
                     <img src="@/assets/form/formBirth.png" width="90"/>
                 </v-col>
-                <v-col cols="12" sm="4">
+                <v-col cols="4">
                 <v-text-field name="birth" solo type="date" v-model="birth"/>
                 </v-col>
             </v-row>
@@ -57,6 +66,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
     name: 'MemberRegisterForm',
     data () {
@@ -64,7 +74,9 @@ export default {
             id: '',
             pw: '',
             name: '',
-            birth: ''
+            birth: '',
+            idPass: false,
+            checkCondition:false
         }
     },
     methods: {
@@ -116,6 +128,21 @@ export default {
             }
             
         },
+        checkId() {
+            const { id } = this;
+            axios.get(`http://localhost:7777/Member/checkId/${id}`)
+            .then((res) => {
+                this.temp = res.data;
+                if (res.data) {
+                alert("사용 가능한 아이디 입니다.");
+                this.idPass = true;
+                this.checkCondition =true
+                } else {
+                alert("중복된 아이디 입니다.");
+                this.idPass = false;
+        }
+      });
+    },
         isCorrect() {
         
             var loginForm = document.loginForm
@@ -126,18 +153,18 @@ export default {
             var name = loginForm.name.value
             var birth = loginForm.birth.value
 
-            if (pw != pw2) {
+            if(this.idPass ==false) {
+                alert('아이디 중복체크를 해주세요.')
+            } else if (pw != pw2) {
                 alert ("비밀번호가 일치하지 않습니다.")
                 pw2.value=''
                 pw2.focus()
-                
             } else if (id == ""  || pw == "" || name == "" || birth == ""){
                 alert ("모든 항목을 입력해주세요.")
             } else if (id.length <6 || id.length > 12) {
                 alert ("아이디값을 확인해주세요")
                 id.focus()
             } else if (pw.length < 6 || pw.length > 20) {
-
                 alert ("비밀번호 값을 확인해주세요")
                 pw.focus()
             } else {
@@ -153,7 +180,6 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap');
 .label {
     position: relative;
-    left:20%;
 }
 .formD {
     margin-top: 5%;
@@ -175,7 +201,7 @@ input {
     font-size: 14px;
     font-family: 'Noto Sans KR', sans-serif;
 }
-.v-text-field {
+.v-text-field , .v-btn{
      font-family: 'Noto Sans KR', sans-serif;
 }
 </style>>

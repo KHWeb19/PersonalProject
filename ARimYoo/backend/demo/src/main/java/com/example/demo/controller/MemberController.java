@@ -33,6 +33,15 @@ public class MemberController {
         return member;
     }
 
+    @GetMapping("/checkId/{id}")
+    public Boolean checkId (@PathVariable("id") String id){
+        log.info("checkId(): " + id);
+
+        Boolean checkId = service.checkId(id);
+
+        return checkId;
+    }
+
     // 로그인
     @PostMapping ("/login")
     public MemberRequest login (@RequestBody MemberRequest memberRequest){
