@@ -32,7 +32,7 @@ export default {
             formData.append('writer', writer)
            
 
-            axios.post('http://localhost:7777/board/community/register',formData, { headers: {
+            axios.post(`http://localhost:7777/board/community/register`,formData, { headers: {
                     'Content-Type': 'multipart/form-data'
                 }})
                     .then(() => {

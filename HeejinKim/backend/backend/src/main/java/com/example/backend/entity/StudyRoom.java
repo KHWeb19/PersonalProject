@@ -11,24 +11,26 @@ import javax.persistence.*;
 @Table(name = "study_room")
 public class StudyRoom {
 
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long seatNo;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long seatRsvNo;
 
     @Column
-    private Long rows;
+    private String seatRows;
 
     @Column
-    private Long cols;
+    private String seatCols;
+
+    @Column
+    private int restSeats;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "reservation_no")
     private Reservation reservation;
 
-    public StudyRoom(Long rows,Long cols){
-        this.rows = rows;
-        this.cols = cols;
+    public StudyRoom(String seatRows,String seatCols){
+        this.seatRows = seatRows;
+        this.seatCols = seatCols;
 
     }
 

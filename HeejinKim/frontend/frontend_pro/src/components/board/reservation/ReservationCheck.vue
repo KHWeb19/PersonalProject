@@ -6,25 +6,49 @@
           <v-col cols="12" class="label mt-5 ml-4" >{{this.userId}} 님 reservation </v-col>
         </v-row>
         
-        <v-row>
-          <v-text-field rounded style="width:100px" readonly v-model="seatTime">today</v-text-field>
-        </v-row>
+         <v-row>
+                <v-col cols="1" class="label"> Date</v-col>
+                <v-col>
+                    <v-text-field class="date" rounded readonly :value="reservation.regDate"/>
+                </v-col>
+            </v-row>
+
+            <v-row>
+        <v-col cols="1" class="label"> Reservation No</v-col>
+        <v-col v-for="reservation in reservation" :key="reservation.reservationNo">
+            {{ reservation.reservationNo }}
+        </v-col>
+      </v-row>
+
 
         <v-row>
           <v-col cols="6" class="label"> Seat Number </v-col>
           <v-col>
-            {{$route.params.seatNumber}}
-            <!--<v-text-field rounded  readonly :value="reservation.seatNumber"/>  -->
+            <v-text-field rounded style="width:150px" readonly :value="reservation.seatNumber"/>
           </v-col>
         </v-row>
+         <v-row>
+           <v-col cols="6" class="label"> 남은좌석수 </v-col>
+          <v-col>
+              <v-text-field rounded style="width:150px" readonly :value="reservation.restSeats"/>
+          </v-col>
+
+          </v-row>
+                <!--
+          <v-col>
+            {{$route.params.seatNumber}}
+            <v-text-field rounded  readonly :value="reservation.seatNumber"/> 
+          </v-col> 
+        
 
         <v-row>
           <v-col cols="6" class="label"> 남은좌석수 </v-col>
           <v-col>
             {{$route.params.restSeats}}
-            <!--<v-text-field rounded  readonly :value="reservation.seatNumber"/>  -->
+            -------<v-text-field rounded  readonly :value="reservation.seatNumber"/> ----
           </v-col>
-        </v-row>
+        </v-row>-->
+
 
         <v-row justify="center">
           <v-btn  type="submit" class="updateBtn" dark> submit </v-btn>
@@ -55,26 +79,25 @@
 
 <script>
 
-
+import { mapActions } from 'vuex'
 //import axios from 'axios'
 export default {
 
     name:'ReservationCheck',
-    /*
+    
     props: {
         reservation: {
             type: Object,
             required: true
         }
-    },*/
+    },
 
 
   data() {
     return {
-      //bookingInfo: [],
-      seatTime: "",
-      seatNumber: "",
-      restSeats:""
+
+      //seatNumber: "",
+      //restSeats:""
     }
   },
   /*
@@ -84,9 +107,10 @@ export default {
     },*/
   created  () {   
     this.userId = this.$store.state.session.userId
-    this.seatTime = this.$route.params.seatTime
-    this.seatNumber = this.$route.params.seatNumber
-    this.restSeats = this.$route.params.restSeats
+    this.reservationNo = this.reservation.reservationNo
+    //this.seatTime = this.$route.params.seatTime
+    //this.seatNumber = this.$route.params.seatNumber 파라메터로 날라온것들 
+    //this.restSeats = this.$route.params.restSeats
     },
     /*
   mounted() {
@@ -99,12 +123,14 @@ export default {
       });
   },*/
   methods: {
-    onUpdate () {
-      const { seatTime, seatNumber,restSeats} = this
-                
-      this.$emit('submit', { seatTime, seatNumber,restSeats})
 
-      console.log(seatTime,seatNumber,restSeats)
+    ...mapActions(['fetchReservation']),
+
+    onUpdate () {
+      const { seatNumber,restSeats} = this.reservation
+                
+      this.$emit('submit', {  seatNumber,restSeats})
+
       },
   }
 }

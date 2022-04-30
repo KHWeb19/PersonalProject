@@ -29,10 +29,10 @@ public class Reservation {
     //private String seatTime;
 
     @Column
-    private String seatNumber;
+    private Long seatNumber;
 
     @Column
-    private Integer restSeats;
+    private Long restSeats;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm", timezone = "Asia/Seoul")
     @CreationTimestamp
@@ -50,7 +50,7 @@ public class Reservation {
 
      */
 
-    public Reservation( Date regDate,String seatNumber,Integer restSeats){
+    public Reservation( Date regDate,Long seatNumber,Long restSeats){
 
         this.regDate = regDate;
         this.seatNumber = seatNumber;

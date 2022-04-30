@@ -25,7 +25,7 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     //좌석번호로 예약 다 가져오기 ---이건 좌석번호 하나만 가능한거니까--- 시간은 다가져올 수 있음
     @Transactional
     @Query(value = "select * from reservation where seat_number = :seatNumber", nativeQuery = true)
-    Optional<Reservation> findBySeatNumber(String seatNumber);
+    Optional<Reservation> findBySeatNumber(Long seatNumber);
 
     //시간으로 예약 다 가져오기
     @Transactional

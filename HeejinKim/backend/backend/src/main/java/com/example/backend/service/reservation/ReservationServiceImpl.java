@@ -44,7 +44,7 @@ public class ReservationServiceImpl implements ReservationService {
     @Transactional
     @Override
     public Reservation getBookingRead(Long reservationNo) {//원래 userId넣어야 되는데 생각중
-        Optional<Reservation> maybeGetBookingRead = rsvRepository.findByUserId(String.valueOf(reservationNo));
+        Optional<Reservation> maybeGetBookingRead = rsvRepository.findById(Long.valueOf(reservationNo));
 
         if (maybeGetBookingRead.equals(Optional.empty())) {
             log.info("Can't get BookingRead!");

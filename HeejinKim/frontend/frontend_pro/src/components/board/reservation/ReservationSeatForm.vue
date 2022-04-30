@@ -20,13 +20,6 @@
       </v-col>
     </v-row>-->
 
-     <v-row>
-        <v-col cols="1" class="label"> Date</v-col>
-        <v-col>
-            <v-text-field class="date" rounded readonly :value="reservation.regDate"/>
-        </v-col>
-      </v-row>
-
     <v-row>
       <v-col>
        <div class="llabel ml-5"> available seats </div>
@@ -122,16 +115,7 @@ import { mapActions } from 'vuex'
 
 export default {
 
-  
-
   name:'ReservationSeatForm',
-
-  props: {
-        reservation: {
-            type: Object,
-            required: true
-        }
-    },
 
   data() {
     return {
@@ -140,14 +124,15 @@ export default {
       seatRows: 3,
       seatCols: 5,
       restSeats: 15, 
-      bookInfo:[] ,
+      //reservation:'',
+     // bookInfo:[] ,
       //seatTime:[],
        //(new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),  
     }
   }, 
   created(){
 
-      this.reservationNo = this.reservation.reservationNo
+      //this.reservationNo = this.reservation.reservationNo
       this.userId = this.$store.state.session.userId
       //this.regdate = this.$store.state.board.regdate
       //this.seatTime = this.$store.state.seatTime
@@ -170,12 +155,12 @@ export default {
 
       if (event.currentTarget.style.background == "goldenrod") {
         event.currentTarget.style = "background:"
-        this.bookInfo.pop()
+        this.reservation.pop()
 
       }else if(event.currentTarget.style.background != "black"){
 
         event.currentTarget.style = "background:goldenrod"
-        this.bookInfo.push(seatNum) 
+        this.reservation.push(seatNum) 
         //this.seatNumber = seatNum
       } 
 
@@ -188,17 +173,20 @@ export default {
         }
       }
       if(seatflag == 1 ){
-        this.bookInfo.pop()
+        this.reservation.pop()
       }         
     },
     
+    
     //디비로 확정 정보 넣는 것(reservation 쪽에)--날리기
     onSubmit  () {
-      const { seatTime, seatNumber,restSeats} = this
+      const { seatNumber,restSeats} = this
                 
-      this.$emit('submit', { seatTime, seatNumber,restSeats})
+      this.$emit('submit', {  seatNumber,restSeats})
 
-      console.log(seatTime,seatNumber,restSeats)
+      console.log(seatNumber,restSeats)
+      this.$router.push({name: 'ReservationCheckPage'})
+      //this.$router.push({name: 'ReservationCheckPage', params: { reservationNo: String( reservation.reservationNo)}})
     },
     
 

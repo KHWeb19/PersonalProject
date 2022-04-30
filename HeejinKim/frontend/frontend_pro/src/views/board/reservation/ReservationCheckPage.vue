@@ -2,8 +2,8 @@
 <v-container class="writeForm">
 
         <v-row>
-            <!--<reservation-check  @submit="onUpdate" v-if="reservation" :reservation="reservation"/>-->
-            <reservation-check  @submit="onUpdate"/>               
+            <reservation-check  @submit="onUpdate" :reservation="reservation"/>
+          <!--  <reservation-check  @submit="onUpdate"/> -->              
         </v-row>
         
     </v-container>
@@ -15,19 +15,19 @@
 
 import ReservationCheck from '@/components/board/reservation/ReservationCheck.vue'
 import axios from 'axios'
-import { mapState} from "vuex"; 
+import { mapState,mapActions} from "vuex"; 
 
 
 export default {
     name:'ReservationCheckPage',
-    /*
+    
     props: {
         reservationNo: {
-            type: String,
+            type: Object,
             required: true
         },
          
-    },*/
+    },
     data () {
         return {
        
@@ -35,11 +35,19 @@ export default {
     },
     computed:
     {
-      ...mapState(['seatTime','seatNumber','restSeats']),    
+      ...mapState(['reservation']),    
     },
 
     components:{
           ReservationCheck
+    },
+    created () {
+        this.fetchReservation(this.reservationNo)
+          .catch(() => {
+              alert('게시물 요청 실패!')
+              console.log(this.reservationNo)
+              this.$router.push()
+          })
     },
 
     //created(){
@@ -48,26 +56,28 @@ export default {
    // },
      methods: {
 
-      //...mapActions(['fetchReservation']),
+      ...mapActions(['fetchReservation']),
 
 
     onUpdate(payload) { 
       
-      const{seatTime,seatNumber,restSeats} = payload
+      const{seatNumber,restSeats} = payload
 
-      axios.post(`http://localhost:7777/reservation/update`,{seatTime, seatNumber,restSeats})
+      const reservationNo = this.reservationNo
+
+      axios.post(`http://localhost:7777/reservation/checkBooking/${reservationNo}`,{ seatNumber,restSeats})
         .then(res => {
-          
-          this.$store.state.bookInfo = res.data
-          this.$store.state.seatTime =  res.data[0].seatTime
-          this.$store.state.seatNumber =  res.data[0].seatNumber
-          this.$store.state.restSeats =  res.data[0].restSeats
+
+          this.$store.state.reservation = res.data
+          //this.$store.state.seatTime =  res.data[0].seatTime
+          this.$store.state.reservation.seatNumber =  res.data[0].seatNumber
+          this.$store.state.reservation.restSeats =  res.data[0].restSeats
           
           this.restSeats = res.data.restSeats
           this.seatNumber = res.data.seatNumber
-          this.seatTime = res.data.seatTime
+          //this.seatTime = res.data.seatTime
 
-          alert('업데이트 완료')
+          alert('확인 용으로 업데이트 완료')
           this.$router.push({ name: 'Home' })
           
          
