@@ -3,7 +3,7 @@
   <div align="center">
     <br>
       <h1>나의 정보 확인하기</h1>
-      <my-page-form v-if="member" :member="member"/>
+      <my-page-form v-if="userInfo" :userInfo="userInfo"/>
         <p v-else><img src="@/assets/loadRing.gif"/></p> <!-- 로딩 gif -->
       <my-pop-up/>
   </div>
@@ -11,7 +11,7 @@
 
 <script>
 import { mapActions, mapState } from 'vuex'
-import axios from 'axios'
+//import axios from 'axios'
 
 import MyPageForm from '@/components/jpaMember/MyPageForm.vue'
 import MyPopUp from '@/components/jpaMember/MyPopUp.vue'
@@ -29,7 +29,7 @@ export default {
      MyPopUp
   },
   computed: {
-     ...mapState(['member'])
+     ...mapState(['userInfo'])
   },
   created() {
         this.fetchMember(this.$store.state.userInfo.memberNo)
@@ -43,12 +43,7 @@ export default {
             })
   },
   methods: {
-      ...mapActions(['fetchMember']),
-     onSubmit (payload) {
-           const { sn, pw, pwConfirm } = payload
-           axios.put(`http://localhost:7777/jpaMember/${this.memberNo}`,
-            { id: this.$store.state.userInfo.id, sn, pw, pwConfirm})
-      }
+      ...mapActions(['fetchMember'])
   }
 }
 </script>

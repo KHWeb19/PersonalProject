@@ -20,16 +20,22 @@
                 </td>
             </tr>
             <tr>
-                <td id="left">비밀번호</td>
+                <td id="left">시</td>
                 <td>
-                    {{ userInfo.password }}
+                    {{ userInfo.city }}
                 </td>
             </tr>
             <tr>
-                <td id="left">비밀번호 질문 답</td>
+                <td id="left">동</td>
                 <td>
-                    {{ userInfo.passwordqanswer }}
+                    {{ userInfo.dong }}
                 </td>
+            </tr>
+                <tr>
+                    <td id="left">주소</td>
+                    <td>
+                        {{ userInfo.address }}
+                    </td>
             </tr>
         </table>
     </div>
@@ -39,10 +45,13 @@
 export default {
     name: 'MyPageForm',
     props: {
+        userInfo: {
+            type: Object,
+            required: true
+        }
     },
     data() {
         return {
-            userInfo: JSON.parse(localStorage.getItem('userInfo'))
         }
     }
 }
