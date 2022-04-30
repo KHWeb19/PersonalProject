@@ -3,7 +3,7 @@
         <main-page-form></main-page-form>
 
         <div class="myPage">
-            <manager-page-booking-form></manager-page-booking-form>
+            <manager-page-booking-form :bookingLists="bookingLists"></manager-page-booking-form>
         </div>
 
         <footer-form></footer-form>
@@ -14,13 +14,23 @@
 import MainPageForm from '@/components/layout/MainPageForm.vue'
 import FooterForm from '@/components/layout/FooterForm.vue'
 import ManagerPageBookingForm from '../../components/manager/ManagerPageBookingForm.vue'
-   
+import { mapState, mapActions } from 'vuex'
+
    export default {
         name : 'ManagerPageBooking',
         components: { 
             MainPageForm,
             FooterForm,
             ManagerPageBookingForm 
+        },
+        computed: {
+            ...mapState(['bookingLists'])
+        },
+        mounted () {
+            this.fetchBookingLists()
+        },
+        methods: {
+            ...mapActions(['fetchBookingLists'])
         },
 
     }
