@@ -1,9 +1,5 @@
 <template>
-<div>
-<div>
-    <tr v-for="myLike in myLikes" :key="myLike.LikedNo">
-        {{myLike.board.boardNo}}
-        <td style="padding: 6px 9px" colspan="3" v-if="myLike.board.boardNo==board.boardNo" >
+        <td style="padding: 6px 9px" colspan="3"  >
             <v-btn icon @click="onLikes(board.boardNo)" >
                 <v-icon  color="black">
                     mdi-cards-heart
@@ -19,11 +15,8 @@
                 </v-btn>
             </router-link>
         </td>
-    </tr>
-</div>
-<!-- <div>
-        <tr v-for="myLike in myLikes" :key="myLike.LikedNo">
-        <td style="padding: 6px 9px" colspan="3" v-if="myLike.board.boardNo!=board.boardNo" >
+
+        <!-- <td style="padding: 6px 9px" colspan="3" v-else >
             <v-btn icon @click="onLikes(board.boardNo)" >
                 <v-icon  color="black">
                     mdi-cards-heart-outline
@@ -38,11 +31,9 @@
                     </v-icon>
                 </v-btn>
             </router-link>
-        </td>
-        </tr>
-</div> -->
-</div>
-        
+        </td> -->
+
+    
 </template>
 
 <script>
@@ -68,6 +59,12 @@ export default {
     mounted () {
         this.fetchLike({boardNo: this.board.boardNo, memberNo: this.loginInfo.memberNo})
         this.fetchMyLikes(this.loginInfo.memberNo)
+        onLike = false
+            for (myLike in myLikes) {
+                if (myLike.board.boardNo.boardNo==this.board.boardNo) {
+                onLike = true
+            } 
+        }
     },
     methods: {
         ...mapActions(['fetchLike']),

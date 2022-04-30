@@ -53,7 +53,8 @@
                                         likeButton = true;
                                     } 
                                     -->
-                        <tr>
+                        <like-button :board="board"/>
+                        <!-- <tr>
                             <td style="padding: 6px 9px" colspan="3" v-if="button.onLike" >
                                 <v-btn icon @click="onLikes(board.boardNo)" >
                                     <v-icon  color="black">
@@ -86,7 +87,7 @@
                                     </v-btn>
                                 </router-link>
                             </td>
-                        </tr>
+                        </tr> -->
                         <tr v-if="board.likes.length" align="left">
                             <td colspan="3" style="padding: 0px 0px 8px 16px">
                                 {{ board.likes.length }}명이 좋아합니다
@@ -146,13 +147,13 @@
 </template>
 
 <script>
-// import LikeButton from '@/components/likes/LikeButton'
+import LikeButton from '@/components/likes/LikeButton'
 import { mapState, mapActions } from 'vuex'
 import axios from 'axios'
 export default {
     name: 'BoardList',
     components : {
-        // LikeButton
+        LikeButton
     },
     props: {
         boards: {
