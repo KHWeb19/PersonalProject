@@ -55,7 +55,7 @@ export default {
             this.fetchMainProjectList(keyword)
         },
         returnMain() {
-             this.keyword = ''      
+             this.keyword = ''   
         }
     }
 }

@@ -20,7 +20,7 @@
                                     dark
                                     v-for="(item,idx) in items"
                                     :key="idx"
-                                    :to ="item.route"
+                                    :to="item.route"
                                     >
                                     {{ item.title }}
                                 </v-list-item>
@@ -82,7 +82,7 @@ export default {
     return {
      user: {
          message: decodeURIComponent(this.$store.state.userInfo.name),
-         profile: this.$store.state.userInfo.profilePic
+         profile: this.$store.state.userInfo.profilePic,
      },
      items: [
          {title: 'My Page', route:'/myPage'},
