@@ -8,14 +8,22 @@
                 <form @submit.prevent="onSubmit(board.boardNo)">
                     <table >
                         <tr >
-                            <td style="width: 32px; padding: 14px 14px 14px 16px; ">
+                            <td style="width: 32px; padding: 14px 14px 14px 16px; color: black">
                                 <div style="border-radius: 70%; overflow: hidden; width: 32px ">
-                                    <v-img v-if="board.member.imageName" width="32" :src="require(`@/assets/mImage/${board.member.imageName}`)"/>
-                                    <v-img v-else width="32" src="@/assets/profile.jpg"/>
+                                    <router-link style="text-decoration: none;" :to="{
+                                        name: 'MyProfilePage',
+                                        params: {memberNo: board.member.memberNo.toString()}}">
+                                        <v-img v-if="board.member.imageName" width="32" :src="require(`@/assets/mImage/${board.member.imageName}`)"/>
+                                        <v-img v-else width="32" src="@/assets/profile.jpg"/>
+                                    </router-link>
                                 </div>
                             </td>
                             <td style="font-weight: bold;">
-                                {{ board.member.memberId }}
+                                <router-link style="text-decoration: none; color: black" :to="{
+                                        name: 'MyProfilePage',
+                                        params: {memberNo: board.member.memberNo.toString()}}">
+                                        {{ board.member.memberId }}
+                                </router-link>
                             </td>
                             <td v-if="loginInfo.memberNo==board.member.memberNo" align="right" style="padding-right: 12px;"> 
                             <!-- <td align="right" style="padding-right: 12px;">  -->

@@ -8,7 +8,7 @@
         <v-flex>
             <v-card style="padding: 8px">
                 <tr v-for="member in searchMembers" :key="member.memberNo">
-                    <router-link style="text-decoration: none;" :to="{
+                    <router-link style="text-decoration: none; color: black" :to="{
                             name: 'MyProfilePage',
                             params: {memberNo: member.memberNo.toString()}}">
                         <td align="left" style="width: 400px; padding: 8px">

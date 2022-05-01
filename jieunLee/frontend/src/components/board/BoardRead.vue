@@ -12,13 +12,23 @@
                     <tr height="60px">
                         <td style="width: 32px; padding: 10px 14px 10px 16px; ">
                             <div style="border-radius: 70%; overflow: hidden; width: 32px ">
-                                <v-img v-if="board.member.imageName" width="32" :src="require(`@/assets/mImage/${board.member.imageName}`)"/>
-                                <v-img v-else width="32" src="@/assets/profile.jpg"/>
+                                <router-link style="text-decoration: none; color: black" :to="{
+                                    name: 'MyProfilePage',
+                                    params: {memberNo: board.member.memberNo.toString()}}">
+                                    <v-img v-if="board.member.imageName" width="32" :src="require(`@/assets/mImage/${board.member.imageName}`)"/>
+                                    <v-img v-else width="32" src="@/assets/profile.jpg"/>
+                                </router-link>
+                                
                             </div>
                         </td>
                         <td style="font-weight: bold;">
-                            {{ board.member.memberId }} 
+                            <router-link style="text-decoration: none; color: black" :to="{
+                                name: 'MyProfilePage',
+                                params: {memberNo: board.member.memberNo.toString()}}">
+                                {{ board.member.memberId }}
+                            </router-link>
                         </td>
+
                         <td v-if="board.member.memberId==this.loginInfo.memberId" align="right" style="padding-right: 12px;"> 
                             <v-menu offset-y min-width="100">
                                 <template v-slot:activator="{ on }">
@@ -49,13 +59,22 @@
                     <tr align="left">
                         <td style="width: 32px; padding: 5px 14px 16px 16px; ">
                             <div style="border-radius: 70%; overflow: hidden; width: 32px ">
-                                <v-img v-if="board.member.imageName" width="32" :src="require(`@/assets/mImage/${board.member.imageName}`)"/>
-                                <v-img v-else width="32" src="@/assets/profile.jpg"/>
+                                <router-link style="text-decoration: none; color: black" :to="{
+                                    name: 'MyProfilePage',
+                                    params: {memberNo: board.member.memberNo.toString()}}">
+                                    <v-img v-if="board.member.imageName" width="32" :src="require(`@/assets/mImage/${board.member.imageName}`)"/>
+                                    <v-img v-else width="32" src="@/assets/profile.jpg"/>
+                                </router-link>
                             </div>
                         </td>
                         <td colspan="3" style="height: 50px;  padding: 14px 0px 16px 0px; max-width: 30px">
                                 <div style="padding-bottom: 6px" >
-                                    <b>{{ board.member.memberId }}</b>&nbsp;{{ board.content }}
+                                    <router-link style="text-decoration: none; color: black" :to="{
+                                        name: 'MyProfilePage',
+                                        params: {memberNo: board.member.memberNo.toString()}}">
+                                        <b>{{ board.member.memberId }}</b>
+                                    </router-link>
+                                    &nbsp;{{ board.content }}
                                 </div>
                             <span style="font-size: 12px; color: grey">{{ board.regDate }}</span>
                         </td>
@@ -67,12 +86,21 @@
                                     <div style="display: flex; min-width: 32px; min-height: 32px">
                                         <div style="padding: 3px 15px 0px 0px">
                                             <div style="border-radius: 70%; overflow: hidden; min-width: 32px; min-height: 32px">
-                                                <v-img v-if="comment.member.imageName" width="32" :src="require(`@/assets/mImage/${comment.member.imageName}`)"/>
-                                                <v-img v-else width="32" src="@/assets/profile.jpg"/>
+                                                <router-link style="text-decoration: none; color: black" :to="{
+                                                    name: 'MyProfilePage',
+                                                    params: {memberNo: comment.member.memberNo.toString()}}">
+                                                    <v-img v-if="comment.member.imageName" width="32" :src="require(`@/assets/mImage/${comment.member.imageName}`)"/>
+                                                    <v-img v-else width="32" src="@/assets/profile.jpg"/>
+                                                </router-link>
                                             </div>
                                         </div>
                                         <div style="padding-bottom: 10px">
-                                            <b>{{ comment.member.memberId }}&nbsp;</b>{{ comment.content }}  
+                                            <router-link style="text-decoration: none; color: black" :to="{
+                                                name: 'MyProfilePage',
+                                                params: {memberNo: comment.member.memberNo.toString()}}">
+                                                <b>{{ comment.member.memberId }}&nbsp;</b>
+                                            </router-link>
+                                            {{ comment.content }}  
                                             <div   style="display: flex">
                                                 <div style="font-size: 12px; color: grey">{{ comment.regDate }}
                                                     <v-menu offset-y min-width="100">
@@ -231,9 +259,9 @@ export default {
     methods: {
         ...mapActions(['fetchComment']),
         ...mapActions(['fetchLike']),
-        getItemControl() {
-            return `item.actions`;
-        },
+        // getItemControl() {
+        //     return `item.actions`;
+        // },
         onDelete() {
             const { boardNo } = this
             this.$emit('click', {boardNo})
