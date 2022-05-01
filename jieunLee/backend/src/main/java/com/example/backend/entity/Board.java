@@ -41,9 +41,11 @@ public class Board {
     @JoinColumn(name= "member_no")
     private Member member;
 
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     @JsonManagedReference(value="board-comment")
     @OneToMany(mappedBy = "board", fetch = FetchType.EAGER)
-    private List<Comment> comments = new ArrayList<>();
+    private Set<Comment> comments = new HashSet<>();
 
     @EqualsAndHashCode.Exclude
     @ToString.Exclude

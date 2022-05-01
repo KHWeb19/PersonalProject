@@ -108,17 +108,17 @@ Vue.use(cookies)
     onSearch() {
             const keyWord = this.keyWord
             axios.post('http://localhost:7777/member/search',  { keyWord })
-                    .then((res) => {
-                      
-                        this.$router.push({name: 'MemberList',
-                                    params: { keyWord:keyWord, searchMembers: res.data} })
-                    })
+              .then((res) => {
+                  this.$router.push({name: 'MemberList',
+                  params: { keyWord:keyWord, searchMembers: res.data} })
+              })
         },
       logout() {
         localStorage.removeItem("loginInfo")
         localStorage.removeItem("imageChange")
         this.$cookies.remove("user")
         this.$router.push({name: 'LoginPage'})
+        history.go(0);
       }
     }
   }

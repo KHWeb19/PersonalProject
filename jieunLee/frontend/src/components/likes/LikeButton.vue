@@ -1,41 +1,41 @@
 <template>
-<!-- <div>
-    {{myLikes[0].board.boardNo}}
-    {{board.boardNo}}
-</div> -->
-        <td style="padding: 6px 9px" colspan="3" v-if="onLike" >
-            <v-btn icon @click="onLikes(board.boardNo)" >
-                <v-icon  color="black">
-                    mdi-cards-heart
+    <!-- <div>
+        {{loginInfo.memberNo}}
+        {{myLikes}}
+    </div> -->
+    <td style="padding: 6px 9px" colspan="3" v-if="onLike" >
+        <v-btn icon @click="onLikes(board.boardNo)" >
+            <v-icon  color="black">
+                mdi-cards-heart
+            </v-icon>
+        </v-btn>
+        <router-link style="text-decoration: none; color: grey" :to="{
+            name: 'BoardReadPage',
+            params: {boardNo: board.boardNo.toString()}}">
+            <v-btn icon>
+                <v-icon color="black">
+                    mdi-chat-outline
                 </v-icon>
             </v-btn>
-            <router-link style="text-decoration: none; color: grey" :to="{
-                name: 'BoardReadPage',
-                params: {boardNo: board.boardNo.toString()}}">
-                <v-btn icon>
-                    <v-icon color="black">
-                        mdi-chat-outline
-                    </v-icon>
-                </v-btn>
-            </router-link>
-        </td>
+        </router-link>
+    </td>
 
-        <td style="padding: 6px 9px" colspan="3" v-else >
-            <v-btn icon @click="onLikes(board.boardNo)" >
-                <v-icon  color="black">
-                    mdi-cards-heart-outline
+    <td style="padding: 6px 9px" colspan="3" v-else >
+        <v-btn icon @click="onLikes(board.boardNo)" >
+            <v-icon  color="black">
+                mdi-cards-heart-outline
+            </v-icon>
+        </v-btn>
+        <router-link style="text-decoration: none; color: grey" :to="{
+            name: 'BoardReadPage',
+            params: {boardNo: board.boardNo.toString()}}">
+            <v-btn icon>
+                <v-icon color="black">
+                    mdi-chat-outline
                 </v-icon>
             </v-btn>
-            <router-link style="text-decoration: none; color: grey" :to="{
-                name: 'BoardReadPage',
-                params: {boardNo: board.boardNo.toString()}}">
-                <v-btn icon>
-                    <v-icon color="black">
-                        mdi-chat-outline
-                    </v-icon>
-                </v-btn>
-            </router-link>
-        </td>
+        </router-link>
+    </td>
     
 </template>
 

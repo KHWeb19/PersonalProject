@@ -1,8 +1,8 @@
 <template>
     <v-container style="width: 643px; margin-top: 85px; font-size: 14px">
       <v-flex>
-            <v-card style="height: 320px" v-if="!boards || (Array.isArray(boards) && boards.length === 0)">
-                    현재 등록된 게시물이 없습니다!
+            <v-card style="height: 320px; text-align: center" v-if="!boards || (Array.isArray(boards) && boards.length === 0)">
+                    사진을 업로드 하세요
             </v-card>
             <v-card style="margin-bottom: 30px;" v-else v-for="board in boards" :key="board.boardNo">
                 <form @submit.prevent="onSubmit(board.boardNo)">
@@ -24,6 +24,9 @@
                                         params: {memberNo: board.member.memberNo.toString()}}">
                                         {{ board.member.memberId }}
                                 </router-link>
+                                <v-btn icon @click="onFollow(board.member.memberNo)" >
+                                    팔로우
+                                </v-btn>
                             </td>
                             <td v-if="loginInfo.memberNo==board.member.memberNo" align="right" style="padding-right: 12px;"> 
                             <!-- <td align="right" style="padding-right: 12px;">  -->
@@ -112,7 +115,7 @@
                                 <router-link style="text-decoration: none; color: grey" :to="{
                                     name: 'BoardReadPage',
                                     params: {boardNo: board.boardNo.toString()}}">
-                                    댓글 모두 보기
+                                    댓글 {{ board.comments.length}}개 모두 보기
                                 </router-link>
                                 <!-- {{ board.comments.length}}개 -->
                             </td>
@@ -189,6 +192,15 @@ export default {
         onSubmit(boardNo) {
             const { content } = this
             this.$emit('submit', { boardNo, memberNo: this.loginInfo.memberNo, content })
+        },
+        onFollow(memberNo) {
+            axios.post(`http://localhost:7777/follow/${this.loginInfo.memberNo}/${memberNo}`, {loginNo: this.loginInfo.memberNo, memberNo})
+                .then(() => {
+                    history.go(0);
+                })
+                .catch(() => {
+                    alert('문제 발생!')
+                })
         },
         onLikes(boardNo) {
             axios.post(`http://localhost:7777/likes/${boardNo}/${this.loginInfo.memberNo}`, {boardNo, memberNo: this.loginInfo.memberNo})
