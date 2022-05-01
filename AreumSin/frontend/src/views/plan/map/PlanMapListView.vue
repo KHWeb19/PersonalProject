@@ -48,7 +48,7 @@
             </v-card-title>
 
             <v-card-text style="margin-top: 3px">
-              <v-row v-for="test in savePaginatedData" :key="test.favoritePlaceNo" style="font-size: 25px">
+              <v-row v-for="test in savePaginatedData" :key="test.favoritePlaceNo" style="font-size: 25px; margin-bottom: 5px">
                 &nbsp;&nbsp;{{test.title}}
               </v-row>
             </v-card-text>
@@ -143,7 +143,7 @@ export default {
         dialog: false,
         savePlaceNo: 0
       },
-      radioGroup: this.dates[0],
+      radioGroup: '',
     }
   },
   methods: {
@@ -173,7 +173,6 @@ export default {
           .then((res) => {
             console.log(res + '성공')
           })
-
     }
   },
   computed: {

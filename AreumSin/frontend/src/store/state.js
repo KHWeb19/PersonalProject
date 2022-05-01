@@ -13,4 +13,6 @@ export default {
     mapLikePlaceList: [],
     markLikePlaceList: [],
     placeLikeDayList: [],
+    placeList: [],
+    dayContentImg: [],
 }

@@ -1,17 +1,17 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.PlanDay;
 import com.example.demo.request.*;
 import com.example.demo.response.PlanDayResponse;
 import com.example.demo.response.map.MapLikeListResponse;
 import com.example.demo.response.map.MapLikeMarkListResponse;
-import com.example.demo.response.map.SearchMapLikeListResponse;
 import com.example.demo.service.plan.PlanDayService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,12 +24,46 @@ public class PlanDayController {
     @Autowired
     private PlanDayService planDayService;
 
-    @PostMapping("/day")
+    @PostMapping("/dayNoImg")
     public void saveContent(@Validated @RequestBody PlanDayRequest planDayRequest){
-
         log.info("planDayRequest() : " + planDayRequest);
+        planDayService.saveContentNoImg(planDayRequest);
+    }
 
-        planDayService.saveContent(planDayRequest);
+    @PostMapping("/day")
+    public String saveContent(@RequestParam("fileList") List<MultipartFile> fileList,
+                            @RequestParam("id") String id,
+                            @RequestParam("planNo") Integer planNo,
+                            @RequestParam("day") Integer day,
+                            @RequestParam("content") String content){
+
+        log.info("planDayRequest() : " + id + "planDay : "+day);
+
+        List<String> fileName = new ArrayList<>();
+
+        log.info("fileList() "+fileList);
+
+        try{
+            for(MultipartFile multipartFile : fileList){
+                log.info("requestUploadFile() - Make file: " + multipartFile.getOriginalFilename());
+
+                FileOutputStream file = new FileOutputStream("../../frontend/src/assets/content/" + id + "_" + multipartFile.getOriginalFilename());
+
+                String fileSrc = id + "_" + multipartFile.getOriginalFilename();
+                fileName.add(fileSrc);
+
+                file.write(multipartFile.getBytes());
+                file.close();
+            }
+        } catch (Exception e){
+            log.info("fail");
+            return "Upload Fail!!!";
+        }
+
+        planDayService.saveContent(fileName, id, planNo, day, content);
+
+        return "Upload Success!!!";
+
     }
 
     @PostMapping("/list")
@@ -37,14 +71,14 @@ public class PlanDayController {
 
         log.info("planDayList() " + planDayListRequest.getPlanNo());
 
-        List<PlanDay> planDay = planDayService.list(planDayListRequest);
+        /*List<PlanDay> planDay = planDayService.list(planDayListRequest);
         List<PlanDayResponse> planDayResponseList = new ArrayList<>();
         for(PlanDay planDays : planDay){
             log.info("planDayList : "+ planDays.getId());
             planDayResponseList.add(new PlanDayResponse(planDays.getId(), planDays.getPlanDayNo(), planDays.getContent(), planDays.getLikeCount(), planDays.getHateCount()));
-        }
+        }*/
 
-        return planDayResponseList;
+        return planDayService.list(planDayListRequest);
     }
 
     @PostMapping("/like")

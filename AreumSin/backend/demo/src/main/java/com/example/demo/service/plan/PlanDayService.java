@@ -1,17 +1,18 @@
 package com.example.demo.service.plan;
 
-import com.example.demo.entity.PlanDay;
 import com.example.demo.request.*;
+import com.example.demo.response.PlanDayResponse;
 import com.example.demo.response.map.MapLikeListResponse;
 import com.example.demo.response.map.MapLikeMarkListResponse;
-import com.example.demo.response.map.SearchMapLikeListResponse;
 
 import java.util.List;
 
 public interface PlanDayService {
-    void saveContent(PlanDayRequest planDayRequest);
+    void saveContent(List<String> fileList, String id, Integer planNo, Integer day, String content);
 
-    List<PlanDay> list(PlanDayListRequest planDayListRequest);
+    void saveContentNoImg(PlanDayRequest planDayRequest);
+
+    List<PlanDayResponse> list(PlanDayListRequest planDayListRequest);
 
     void like(CountRequest countRequest);
 
@@ -26,4 +27,6 @@ public interface PlanDayService {
     void savePlaceDay(SaveFavoritePlaceDay saveFavoritePlaceDay);
 
     List<MapLikeListResponse> listPlaceDay(SaveFavoritePlaceDayList saveFavoritePlaceDayList);
+
+
 }
