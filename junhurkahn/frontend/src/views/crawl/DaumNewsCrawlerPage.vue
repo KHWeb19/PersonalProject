@@ -84,16 +84,15 @@
   </v-card>
 
 
-
-    
-
-   
-   <v-img
-  lazy-src="https://picsum.photos/id/11/10/6"
-  max-height="500"
-  max-width="3000"
-  src="https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F584%2F2021%2F08%2F28%2F0000015734_001_20210828101023352.jpg&type=sc960_832"
-></v-img>
+ <v-carousel>
+    <v-carousel-item
+      v-for="(item,i) in items"
+      :key="i"
+      :src="item.src"
+      reverse-transition="fade-transition"
+      transition="fade-transition"
+    ></v-carousel-item>
+  </v-carousel>
 
  <v-row>
 
@@ -166,6 +165,20 @@
     data: () => ({
       drawer: false,
       group: null,
+       items: [
+          {
+            src: 'https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F584%2F2021%2F08%2F28%2F0000015734_001_20210828101023352.jpg&type=sc960_832',
+          },
+          {
+            src: 'https://search.pstatic.net/common/?src=http%3A%2F%2Fcafefiles.naver.net%2FMjAxNzA5MTdfODUg%2FMDAxNTA1NjAzMTQzMTYw.AYaWuWvqDossv-68BKOtChp-_A9AaEKsYUiOXXWpzQcg.GnW8lbFJWhu-w7TgNBSskLpjcj29I1F7IneE6jHG6EYg.JPEG.shlope%2Fp1020650.jpg&type=sc960_832',
+          },
+          {
+            src: 'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMDAxMDVfMTgx%2FMDAxNTc4MTg0NTc0OTYy.VQk-pMUR_AqOyVRiGvqaeBHpuOH94GuFd0jgz5aO1PYg.KzhkGMas0KN1SzZ608tTYRXpwvvVpPr51SnuU77ekHQg.JPEG.musicalian%2Fbook-730479_1920.jpg&type=sc960_832',
+          },
+          {
+            src: 'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20120120_262%2Fsusemi_9_1327031445583vMlxz_JPEG%2F%25C7%25CF%25B4%25C311.jpg&type=sc960_832',
+          },
+        ],
     }),
        
       

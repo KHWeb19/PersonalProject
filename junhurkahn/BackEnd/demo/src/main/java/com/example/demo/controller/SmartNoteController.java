@@ -33,6 +33,7 @@ public class SmartNoteController {
 
         if (keyword == null) {
             return service.list();
+
         } else {
             return service.search(keyword);
         }

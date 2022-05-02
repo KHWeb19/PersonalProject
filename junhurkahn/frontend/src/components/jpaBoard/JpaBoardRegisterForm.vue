@@ -27,11 +27,11 @@
 
             <tr>
                 <td>
-               <v-file-input class="mx-10" v-model="files" @change="select" label="사진 찾기"
+               <v-file-input class="mx-10"   v-model="files"  @change="select" label="사진 찾기"
       color="secondary"  chips multiple ></v-file-input>
 
     <v-card class="mx-5" flat>
-      <v-img class="ml-5" :src="url" width="50%"/>
+      <v-img class="ml-5"  v-model="files" :src="url" width="50%"/>
     </v-card>
                 </td>
             </tr>
@@ -86,7 +86,6 @@ export default {
             title: '제목을 작성하세요.',
             writer: '작성자를 작성하세요',
             content: '본문을 작성하세요.',
-            image: '사진을 올려주세요',
              previewImage: null,
               files: [],
       url: null
