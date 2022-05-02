@@ -56,7 +56,7 @@ export default {
   name: "MemberManage",
   props: {
     myPage: {
-      type: Array
+      type: Object
     }
   },
   methods: {

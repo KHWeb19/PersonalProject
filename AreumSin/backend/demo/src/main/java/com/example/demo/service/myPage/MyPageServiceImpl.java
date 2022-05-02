@@ -1,14 +1,10 @@
 package com.example.demo.service.myPage;
 
-import com.example.demo.entity.Member;
-import com.example.demo.entity.Plan;
-import com.example.demo.entity.SaveFavoritePlace;
-import com.example.demo.repository.JoinMemberRepository;
-import com.example.demo.repository.MakePlanRepository;
-import com.example.demo.repository.SaveFavoritePlaceRepository;
+import com.example.demo.entity.*;
+import com.example.demo.repository.*;
+import com.example.demo.request.DiaryModifyRequest;
 import com.example.demo.request.MemberInfoModifyRequest;
-import com.example.demo.response.myPage.MemberInfoResponse;
-import com.example.demo.response.myPage.SavePlaceResponse;
+import com.example.demo.response.myPage.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -30,6 +26,12 @@ public class MyPageServiceImpl implements MyPageService {
 
     @Autowired
     private MakePlanRepository planRepository;
+
+    @Autowired
+    private DiaryRepository diaryRepository;
+
+    @Autowired
+    private DiaryImgRepository diaryImgRepository;
 
     @Override
     public MemberInfoResponse memberInfo(String id) {
@@ -74,6 +76,85 @@ public class MyPageServiceImpl implements MyPageService {
         }
 
         return savePlaceResponses;
+    }
+
+    @Override
+    public void saveDiary(List<String> fileList, String id, String title, String content, String planName) {
+         Member member = memberRepository.findByMemberNo(id);
+         Diary diary = new Diary(planName, title, content, fileList.get(0), member);
+
+        diaryRepository.save(diary);
+
+        for(String fileName : fileList) {
+             DiaryImg diaryImg = new DiaryImg(fileName, diary);
+
+             diaryImgRepository.save(diaryImg);
+         }
+
+    }
+
+    @Override
+    public List<DiaryListResponse> diaryList(String id) {
+
+        List<Diary> diaryList = diaryRepository.findDiaryByMemberId(id);
+
+        List<DiaryListResponse> diaryListResponseArrayList = new ArrayList<>();
+
+        for(Diary diary : diaryList){
+            diaryListResponseArrayList.add(new DiaryListResponse(diary.getTitle(), diary.getPlanName(), diary.getDiaryNo(), diary.getDiarySrc()));
+        }
+
+        return diaryListResponseArrayList;
+    }
+
+    @Override
+    public DiaryReadResponse diaryRead(Integer diaryNo) {
+
+        Diary diary = diaryRepository.findByDiaryNo(diaryNo);
+
+        return new DiaryReadResponse(diary.getTitle(), diary.getPlanName(), diary.getContent());
+    }
+
+    @Override
+    public List<DiaryReadImgResponse> diaryReadImg(Integer diaryNo) {
+
+        List<DiaryImg> diaryImg = diaryImgRepository.getByDiaryNo(diaryNo);
+
+        List<DiaryReadImgResponse> diaryReadImgResponses = new ArrayList<>();
+
+        for(DiaryImg diary : diaryImg){
+            diaryReadImgResponses.add(new DiaryReadImgResponse(diary.getImgSrc(), diary.getDiaryImgNo()));
+        }
+
+        return diaryReadImgResponses;
+    }
+
+    @Override
+    public void delete(Integer diaryNo) {
+
+        List<DiaryImg> diaryImgs = diaryImgRepository.getByDiaryNo(diaryNo);
+
+        diaryImgRepository.deleteAll(diaryImgs);
+
+        diaryRepository.deleteById(diaryNo);
+    }
+
+    @Override
+    public void modify(Integer diaryNo, DiaryModifyRequest diaryModifyRequest) {
+        Diary diary = diaryRepository.findByDiaryNo(diaryNo);
+
+        diary.setTitle(diaryModifyRequest.getTitle());
+        diary.setContent(diaryModifyRequest.getContent());
+
+        diaryRepository.save(diary);
+    }
+
+    @Override
+    public void modifyImg(Integer diaryNo, List<Integer> diaryImgNo) {
+
+        for(Integer num : diaryImgNo){
+            diaryImgRepository.deleteById(num);
+        }
     }
 
 }

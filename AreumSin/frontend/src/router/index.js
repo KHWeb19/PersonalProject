@@ -9,6 +9,8 @@ import MyPage from "@/views/myPage/MyPage";
 import MyPageModify from "@/views/myPage/MyPageModify";
 import MyPagePlaceList from "@/views/myPage/MyPagePlaceList";
 import MyPageDiary from "@/views/myPage/MyPageDiary";
+import MyPageDiaryRead from "@/views/myPage/MyPageDiaryRead";
+import MyPageDiaryModify from "@/views/myPage/MyPageDiaryModify";
 import MyPageKeepADiary from "@/views/myPage/MyPageKeepADiary";
 import LoginPage from "@/views/login/LoginPage";
 import RegisterPage from "@/views/login/RegisterPage";
@@ -118,7 +120,19 @@ const routes = [
     path: '/keepADiary',
     name: 'MyPageKeepADiary',
     component: MyPageKeepADiary
-  }
+  },
+  {
+    path: '/diaryRead/:diaryNo',
+    name: 'MyPageDiaryRead',
+    component: MyPageDiaryRead,
+    props: true
+  },
+  {
+    path: '/myPageDiaryModify/:diaryNo',
+    name: 'MyPageDiaryModify',
+    component: MyPageDiaryModify,
+    props: true
+  },
 ]
 
 const router = new VueRouter({

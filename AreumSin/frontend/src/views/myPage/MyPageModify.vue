@@ -42,11 +42,11 @@ export default {
       const {pw, name, birth, color} = payload
       let id = this.myPage.id
 
-      alert(id+", "+ name)
+      //alert(id+", "+ name)
 
       axios.put(`http://localhost:7777/myPage/${this.user}`, {id, pw, name, birth, color})
-        .then((res) => {
-          alert('수정 성공' + res)
+        .then(() => {
+          //alert('수정 성공' + res)
           this.$router.push({name: 'MyPage'});
         })
     }
