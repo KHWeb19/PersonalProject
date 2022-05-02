@@ -1,25 +1,6 @@
 <template>
    <div >
       <v-layout justify-center>
-            <v-dialog  v-model="findPw" resisten max-width="500px">
-               <template v-slot:activator="{ on }">
-               <v-btn id="findPw" v-on="on">
-                  정보 수정
-               </v-btn>
-               </template>
-               <v-card >
-                  <v-card-title>
-                     정보 수정은 본인 확인이 필요합니다.
-                  </v-card-title>
-               <br>
-                  <input id="Pw" v-model="password" type="text" placeholder="  *비밀번호를 입력하세요">
-                  <v-card-actions>
-                     <v-btn color="blue" text @click="goMyModify">
-                           확인
-                     </v-btn>
-                  </v-card-actions>
-               </v-card>
-            </v-dialog>
 
             <v-dialog  v-model="findPw" resisten max-width="500px">
                <template v-slot:activator="{ on }">
