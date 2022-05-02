@@ -55,4 +55,30 @@ public class BoardCommentServiceImpl implements BoardCommentService {
     public List<BoardComment> list(Integer bookingNo) {
         return repository.findBookingNoLost(Long.valueOf(bookingNo));
     }
+
+    @Override
+    public void includeCoCommentRegister(BoardCommentRequest info, String originalFilename) {
+        String putLink = info.getBookingNo()+"."+info.getId()+"."+originalFilename;
+
+        Optional<BookingInfo> bookingInfo = bookingRepository.findById(info.getBookingNo());
+        BookingInfo bookingInfo1 = bookingInfo.get();
+
+        BoardComment boardComment = new BoardComment(info.getId(),info.getComments(),putLink,bookingInfo1 );
+        repository.save(boardComment);
+    }
+
+    @Override
+    public void exceptFileCoCommentRegister(BoardCommentRequest info) {
+        Optional<BookingInfo> bookingInfo = bookingRepository.findById(info.getBookingNo());
+        BookingInfo bookingInfo2 = bookingInfo.get();
+        log.info("bookingInfo2 :"+bookingInfo2);
+
+        Optional<BoardComment> boardComment = repository.findById(info.getCommentNo());
+        BoardComment boardComment1 = boardComment.get();
+
+        BoardComment boardComment2 = new BoardComment(info.getId(),info.getComments(), bookingInfo2);
+        boardComment1.setParent(boardComment2);
+
+        repository.save(boardComment1);
+    }
 }

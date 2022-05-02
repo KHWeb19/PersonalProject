@@ -2,6 +2,8 @@ package com.example.demo.entity.boardComment;
 
 import com.example.demo.entity.booking.BookingInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
@@ -10,10 +12,12 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
+@AllArgsConstructor
 @Entity
-@NoArgsConstructor
 @Table(name = "board_comment")
 public class BoardComment {
     @Id
@@ -33,6 +37,15 @@ public class BoardComment {
 
     @Column(length = 128, nullable = true)
     private String commentLinkInfo;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "parent_id")
+    private BoardComment parent;
+
+    @Builder.Default
+    @OneToMany(mappedBy = "parent", orphanRemoval = true)
+    private List<BoardComment> children = new ArrayList<>();
+
 
     @CreatedDate
     @Column(length = 128, nullable = true)
@@ -65,6 +78,21 @@ public class BoardComment {
         this.id = id;
         this.comments = comments;
         bookingInfo = info;
+    }
+
+    public BoardComment(String id, String comments, String commentLinkInfo, BookingInfo info, BoardComment parent){
+        this.id = id;
+        this.comments = comments;
+        this.commentLinkInfo = commentLinkInfo;
+        bookingInfo = info;
+        this.parent = parent;
+    }
+
+    public BoardComment(String id, String comments, BookingInfo info, BoardComment parent){
+        this.id = id;
+        this.comments = comments;
+        bookingInfo = info;
+        this.parent = parent;
     }
 
 }
