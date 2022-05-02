@@ -22,6 +22,7 @@
             :items="noticeBoards"
             :items-per-page="10"
             :key="noticeBoards.boardNo"
+            class="vTable"
           >
             <template v-slot:[`item.title`]="{ item }">
               <router-link
@@ -69,11 +70,41 @@ export default {
       userInfo: "",
       loginAuth: "",
       headers: [
-        { text: "글번호", value: "boardNo", width: "100px", align: "center" },
-        { text: "제목", value: "title", width: "500px", align: "left" },
-        { text: "작성자", value: "writer", width: "150px", align: "center" },
-        { text: "조회수", value: "viewCount", width: "100px", align: "center" },
-        { text: "작성일자", value: "regDate", width: "300px", align: "center" },
+        {
+          text: "글번호",
+          value: "boardNo",
+          width: "100px",
+          align: "center",
+          class: "orange lighten-5",
+        },
+        {
+          text: "제목",
+          value: "title",
+          width: "500px",
+          align: "left",
+          class: "orange lighten-5",
+        },
+        {
+          text: "작성자",
+          value: "writer",
+          width: "150px",
+          align: "center",
+          class: "orange lighten-5",
+        },
+        {
+          text: "조회수",
+          value: "viewCount",
+          width: "100px",
+          align: "center",
+          class: "orange lighten-5",
+        },
+        {
+          text: "작성일자",
+          value: "regDate",
+          width: "300px",
+          align: "center",
+          class: "orange lighten-5",
+        },
       ],
     };
   },
@@ -98,11 +129,11 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400&display=swap");
 
 .main_tit_box {
-  text-align: left;
+  text-align: center;
   font-size: 35px;
+  font-weight: bold;
   color: #333;
   padding: 8px 0 8px 0;
-  font-style: italic;
   position: relative;
 }
 .count {
@@ -113,6 +144,10 @@ export default {
   font-size: 16px;
   color: #333;
   padding: 5px 0 20px 8px;
+  font-weight: bold;
+}
+.vTable {
+  line-height: 85px;
 }
 </style>
 
@@ -121,6 +156,6 @@ export default {
   font-size: 18px !important;
 }
 .v-data-table::v-deep td {
-  font-size: 16px !important;
+  font-size: 18px !important;
 }
 </style>

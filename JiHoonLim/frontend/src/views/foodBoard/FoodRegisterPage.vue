@@ -64,10 +64,11 @@ export default {
         })
         .then(() => {
           alert("게시물 등록 성공");
-
-          this.$router.push({
-            name: "FoodListPage",
-          });
+          setTimeout(() => {
+            this.$router.push({
+              name: "FoodListPage",
+            });
+          }, 300);
         })
         .catch(() => {
           alert("문제 발생");

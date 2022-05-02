@@ -17,66 +17,68 @@
       </v-row>
       <v-row>
         <v-col>
-          <div class="tableWrap">
-            <table class="authTable">
-              <tr style="height: 50px">
-                <th class="orange lighten-3" width="100">권한</th>
-              </tr>
-              <tr
-                v-if="
-                  !registerMemberAuths ||
-                  (Array.isArray(registerMemberAuths) &&
-                    registerMemberAuths.length == 0)
-                "
-              ></tr>
-              <tr
-                v-else
-                v-for="memberAuth in registerMemberAuths"
-                :key="memberAuth.memberNo"
-              >
-                <td>{{ memberAuth.auth }}</td>
-              </tr>
-            </table>
+          <v-card>
+            <div class="tableWrap">
+              <table class="authTable">
+                <tr style="height: 50px">
+                  <th class="orange lighten-5" width="100">권한</th>
+                </tr>
+                <tr
+                  v-if="
+                    !registerMemberAuths ||
+                    (Array.isArray(registerMemberAuths) &&
+                      registerMemberAuths.length == 0)
+                  "
+                ></tr>
+                <tr
+                  v-else
+                  v-for="memberAuth in registerMemberAuths"
+                  :key="memberAuth.memberNo"
+                >
+                  <td>{{ memberAuth.auth }}</td>
+                </tr>
+              </table>
 
-            <table class="memberTable">
-              <tr style="height: 50px">
-                <th class="orange lighten-3" width="80">회원 번호</th>
-                <th class="orange lighten-3" width="150">아이디</th>
-                <th class="orange lighten-3" width="150">닉네임</th>
-                <th class="orange lighten-3" width="200">가입일자</th>
-                <th class="orange lighten-3" width="80">수정</th>
-              </tr>
+              <table class="memberTable">
+                <tr style="height: 50px">
+                  <th class="orange lighten-5" width="80">회원 번호</th>
+                  <th class="orange lighten-5" width="150">아이디</th>
+                  <th class="orange lighten-5" width="150">닉네임</th>
+                  <th class="orange lighten-5" width="200">가입일자</th>
+                  <th class="orange lighten-5" width="80">수정</th>
+                </tr>
 
-              <tr
-                v-if="
-                  !registerMembers ||
-                  (Array.isArray(registerMembers) &&
-                    registerMembers.length == 0)
-                "
-              ></tr>
-              <tr
-                v-else
-                v-for="member in registerMembers"
-                :key="member.memberNo"
-              >
-                <td>{{ member.memberNo }}</td>
-                <td>{{ member.id }}</td>
-                <td>{{ member.nickName }}</td>
-                <td>{{ member.regDate }}</td>
-                <td>
-                  <v-btn
-                    text
-                    style="font-size: 25px"
-                    :to="{
-                      name: 'MemberManageModifyPage',
-                      params: { memberNo: member.memberNo.toString() },
-                    }"
-                    >수정</v-btn
-                  >
-                </td>
-              </tr>
-            </table>
-          </div>
+                <tr
+                  v-if="
+                    !registerMembers ||
+                    (Array.isArray(registerMembers) &&
+                      registerMembers.length == 0)
+                  "
+                ></tr>
+                <tr
+                  v-else
+                  v-for="member in registerMembers"
+                  :key="member.memberNo"
+                >
+                  <td>{{ member.memberNo }}</td>
+                  <td>{{ member.id }}</td>
+                  <td>{{ member.nickName }}</td>
+                  <td>{{ member.regDate }}</td>
+                  <td>
+                    <v-btn
+                      text
+                      style="font-size: 25px"
+                      :to="{
+                        name: 'MemberManageModifyPage',
+                        params: { memberNo: member.memberNo.toString() },
+                      }"
+                      >수정</v-btn
+                    >
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </v-card>
         </v-col>
       </v-row>
     </v-container>
@@ -100,11 +102,11 @@ export default {
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400&display=swap");
 .main_tit_box {
-  text-align: left;
+  text-align: center;
   font-size: 35px;
+  font-weight: bold;
   color: #333;
   padding: 8px 0 8px 0;
-  font-style: italic;
   position: relative;
 }
 .count {
@@ -119,10 +121,12 @@ export default {
 .tableWrap {
   display: flex;
   justify-content: center;
+  margin-top: 30px;
+  margin-bottom: 50px;
 }
 .authTable {
   font-size: 25px;
-  width: 15%;
+  width: 20%;
   text-align: center;
   border-collapse: collapse;
   border: 1px solid grey;
@@ -130,7 +134,7 @@ export default {
 }
 .memberTable {
   font-size: 25px;
-  width: 75%;
+  width: 80%;
   text-align: center;
   border-collapse: collapse;
   border: 1px solid grey;
@@ -142,6 +146,6 @@ export default {
 th,
 td {
   border-bottom: 1px solid grey;
-  height: 50px;
+  height: 70px;
 }
 </style>

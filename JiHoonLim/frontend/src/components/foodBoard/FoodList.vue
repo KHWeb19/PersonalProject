@@ -1,5 +1,9 @@
 <template>
-  <div class="grey lighten-3" style="font-family: 'Noto Sans KR', sans-serif">
+  <div
+    class="grey lighten-3"
+    style="font-family: 'Noto Sans KR', sans-serif"
+    id="app"
+  >
     <v-container class="white" style="width: 1240px">
       <v-row justify="center">
         <v-col class="pb-0">
@@ -58,10 +62,12 @@
       </v-row>
       <v-row>
         <v-col>
-          <div class="countFoodWrap">
-            총
-            <b class="countFood">{{ foodBoards.length }}</b
-            >개의 레시피가 있습니다.
+          <div style="display: flex; justify-content: space-between">
+            <div class="countFoodWrap">
+              총
+              <b class="countFood">{{ paginatedData.length }}</b
+              >개의 레시피가 있습니다.
+            </div>
           </div>
         </v-col>
       </v-row>
@@ -153,9 +159,9 @@ import axios from "axios";
 export default {
   name: "FoodList",
   props: {
-    foodBoards: {
+    /*foodBoards: {
       type: Array,
-    },
+    },*/
     listArray: {
       type: Array,
       required: true,
@@ -166,6 +172,7 @@ export default {
       default: 10,
     },
   },
+
   data() {
     return {
       pageNum: 0,
@@ -209,9 +216,14 @@ export default {
         { value: "기타" },
       ],
       selectCate: false,
+
+      //filterData: this.paginatedData,
+      copyData: [...this.listArray],
     };
   },
-
+  created() {
+    this.selectMat("전체");
+  },
   methods: {
     write() {
       if (this.$store.state.userInfo == null) {
@@ -249,12 +261,50 @@ export default {
       }
     },
     selectMat(value) {
-      console.log(value);
+      console.log("재료 선택 실행 시작");
       this.chooseMat = value;
+      console.log("사용자가 선택한 카테고리" + this.chooseMat);
+
+      this.copyData = [];
+
+      if (this.chooseMat == "전체") {
+        this.copyData = [...this.listArray];
+        return this.copyData;
+      }
+
+      let i;
+      for (i = 0; i < this.listArray.length; i++) {
+        console.log("반복문 재료 " + this.listArray[i].mat);
+
+        if (this.listArray[i].mat == this.chooseMat) {
+          console.log("카테고리 일치 확인");
+          this.copyData.push(this.listArray[i]);
+          //this.filterData.push(this.paginatedData[i]);
+        } else {
+          console.log("카테고리 해당 없는 사항 ");
+          //this.copyData.splice(i, 1);
+        }
+      }
+      //return this.filterData;
+      return this.copyData;
     },
   },
 
   computed: {
+    pageCount() {
+      let listLeng = this.copyData.length,
+        listSize = this.pageSize,
+        page = Math.floor(listLeng / listSize);
+
+      if (listLeng % listSize > 0) page += 1;
+      return page;
+    },
+    paginatedData() {
+      const start = this.pageNum * this.pageSize,
+        end = start + this.pageSize;
+      return this.copyData.slice(start, end);
+    },
+    /*
     pageCount() {
       let listLeng = this.listArray.length,
         listSize = this.pageSize,
@@ -267,8 +317,20 @@ export default {
       const start = this.pageNum * this.pageSize,
         end = start + this.pageSize;
       return this.listArray.slice(start, end);
-    },
+    },*/
   },
+
+  /*beforeUpdate() {
+    console.log("beforeUpdate");
+
+    let i;
+    for (i = 0; i < this.listArray.length; i++) {
+      if (this.listArray[i].mat != this.chooseMat) {
+        this.listArray.splice(i, 1);
+      }
+    }
+    return this.listArray;
+  },*/
 };
 </script>
 

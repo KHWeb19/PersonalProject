@@ -75,11 +75,12 @@ export default {
         })
         .then((res) => {
           alert("게시물 수정 성공");
-
-          this.$router.push({
-            name: "FoodDetailPage",
-            params: { boardNo: res.data.boardNo.toString() },
-          });
+          setTimeout(() => {
+            this.$router.push({
+              name: "FoodDetailPage",
+              params: { boardNo: res.data.boardNo.toString() },
+            });
+          }, 300);
         })
         .catch(() => {
           alert("게시물 수정 실패");

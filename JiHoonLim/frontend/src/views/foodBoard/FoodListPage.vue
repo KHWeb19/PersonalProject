@@ -1,6 +1,9 @@
 <template>
   <div>
-    <food-list :foodBoards="foodBoards" :list-array="pageArray" />
+    <food-list :list-array="pageArray" />
+    <!-- 
+      <food-list :foodBoards="foodBoards" :list-array="pageArray" />
+      -->
   </div>
 </template>
 

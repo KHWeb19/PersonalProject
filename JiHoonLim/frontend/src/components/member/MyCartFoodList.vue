@@ -191,11 +191,11 @@ export default {
   padding: 5px 0 20px 8px;
 }
 .main_tit_box {
-  text-align: left;
+  text-align: center;
   font-size: 35px;
   color: #333;
   padding: 8px 0 8px 0;
-  font-style: italic;
+  font-weight: bold;
   position: relative;
 }
 .deleteBtn {
