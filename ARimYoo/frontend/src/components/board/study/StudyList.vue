@@ -70,20 +70,20 @@
         </v-row>
         <v-row justify="end" style="margin-top:50px">
             <div class="pageBtn">
-                <v-btn :disabled="pageNum === 0" small @click="prevPage" color="red darken-3" dark>
+                <v-btn :disabled="pageNum === 0" small @click="prevPage()" color="red darken-3" dark>
                     <v-icon>mdi-arrow-left-bold</v-icon>
                 </v-btn>&nbsp;
                 <span class="page-count">
                     {{ pageNum + 1 }} / {{ pageCount }}
                 </span>&nbsp;
-                <v-btn :disabled="pageNum >= pageCount - 1" @click="nextPage" small color="red darken-3">
+                <v-btn :disabled="pageNum >= pageCount - 1" @click="nextPage()" small color="red darken-3">
                     <v-icon>mdi-arrow-right-bold</v-icon>
                 </v-btn>
           </div>
         </v-row>
        <v-row justify="center" class="mt-15 mb-5">
             <v-col cols="12" >
-                <search @search="doSearch" />
+                <search @search="doSearch()" />
             </v-col>
         </v-row>
         </v-container>

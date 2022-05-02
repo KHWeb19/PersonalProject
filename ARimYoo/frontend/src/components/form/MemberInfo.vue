@@ -175,8 +175,8 @@ td {
     position: relative;
     margin-left: auto;
     margin-right:auto;
-    max-width: 220px;
-    max-height: 600px;
+    width: 220px;
+    max-height: 220px;
 }
 .error_next_box {
     font-size: 10pt;

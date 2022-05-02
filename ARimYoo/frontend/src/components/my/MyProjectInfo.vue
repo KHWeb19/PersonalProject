@@ -17,34 +17,26 @@
                         <v-btn small color="red darken-3" dark @click="goSearch()"><v-icon>mdi-magnify</v-icon></v-btn>
                     </v-col>
         </v-row>
-        <v-row justify="center" v-else>
+        <v-row justify="center" v-else v-for="project in memberProjects" :key="project.projectNo">
             <v-col cols="10">
-                <v-dialog 
-                    v-model="dialog"
-                    fullscreen
-                    hide-overlay
-                    transition="dialog-bottom-transition"
-                    >
-                
-                <template v-slot:activator="{ on, attrs }">
-                    <v-col v-for="project in memberProjects" :key="project.projectNo">
                     <button class="studyBtn"
-                            v-bind="attrs"
-                            v-on="on" 
                             @click="bindProjectNo(project.projectNo)"
                             >
                         <v-icon x-small >mdi-circle</v-icon>
                                         &nbsp;&nbsp;&nbsp;
                                     {{project.projectName}}
-                        <v-divider/>
                     </button>
-                    <p/>
-                    </v-col>
-                </template>
-                    <my-project :memberProject="memberProject" @close="returnFalse"/>
-                </v-dialog>
+                    <v-divider/>
             </v-col>
         </v-row>
+        <v-dialog 
+                    v-model="dialog"
+                    fullscreen
+                    hide-overlay
+                    transition="dialog-bottom-transition"
+                    >
+                    <my-project :memberProject="memberProject" @close="returnFalse"/>
+        </v-dialog>
      </v-container>
 </template>
 
@@ -80,6 +72,7 @@ export default {
                     console.log(projectNo)
                     this.$router.push()
                 })     
+             this.dialog = true
         },
         returnFalse () {
             this.dialog = false
@@ -103,9 +96,6 @@ export default {
 .studyBtn{
     font-family: 'Noto Sans KR', sans-serif;
     margin-left:2%;
-    margin-bottom:4%;
-}
-.v-divider{
-    margin-top:5%;
+    margin-bottom:2%;
 }
 </style>

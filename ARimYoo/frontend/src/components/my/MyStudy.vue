@@ -11,21 +11,21 @@
         >
             <v-icon>mdi-close</v-icon>
         </v-btn>
-        <v-toolbar-title>{{this.memberStudy.studyName}}</v-toolbar-title>
+        <v-toolbar-title >{{memberStudy.studyName}}</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-icon>mdi-account-multiple</v-icon>&nbsp;
-        {{memberStudy.joinCnt}} / {{memberStudy.people}}
+            {{memberStudy.joinCnt}} / {{memberStudy.people}}
         </v-toolbar>
         <v-row class="mt-10" justify="center">
-             <img class="studyImg" :src="require(`@/assets/back/studyBoard/${this.memberStudy.fileName}`)"/>
+             <img class="studyImg" :src="require(`@/assets/back/studyBoard/${memberStudy.fileName}`)"/>
         </v-row>
-        <v-form @submit="button2_saveTodo">
         <v-row class="mt-10" justify="center">
-            <v-col cols="3" v-if="this.memberStudy.firstMember == this.name">
-                <v-textarea label="Notice" color="red darken-3" outlined rows="8" v-model="toDo"> </v-textarea>
+            <v-col cols="3" v-if="memberStudy.firstMember == this.name">
+                <v-textarea label="Notice" color="red darken-3" outlined rows="7" v-model="toDo"></v-textarea>
+                <v-btn x-small @click="button2_saveTodo()">save</v-btn>
             </v-col>
             <v-col cols="3" v-else>
-                <v-textarea label="Notice" color="red darken-3" readonly outlined :value="memberStudy.toDo" rows="8">{{this.memberStudy.toDo}}</v-textarea>
+                <v-textarea label="Notice" color="red darken-3" readonly outlined :value="memberStudy.toDo" rows="8">{{memberStudy.toDo}}</v-textarea>
             </v-col>
             <v-col cols="5">
                 <v-sheet>
@@ -34,15 +34,9 @@
                 </v-sheet>
             </v-col>
         </v-row>
-        <v-row class="mt-0" justify="center" v-if="this.memberStudy.firstMember == this.name">
-            <v-col cols="8">
-            <v-btn id="button2" x-small type="submit">save</v-btn>
-            </v-col>
-        </v-row>
-        </v-form>
         <v-row justify="center" class="mt-3">
             <v-col  cols="8" class="openLink mb-10">
-            Open Link : {{memberStudy.openLink}}
+            Open Link : <a @click="goLink()"> {{memberStudy.openLink}}</a>
             </v-col>
         </v-row>
     </v-card>
@@ -54,19 +48,17 @@ export default {
     name:'MyStudy',
     props: {
         memberStudy: {
-            type: Object,
-            required: true
+            type:Object
         }
     },
     data () {
         return {
             dialog:false,
-            toDo:''
+            toDo: ''
         }
     },
     created () {
         this.name = this.$store.state.userInfo.name
-        this.toDo = this.memberStudy.toDo
     },
     methods: {
         button1_returnFalse () {
@@ -76,14 +68,20 @@ export default {
           button2_saveTodo () {
             const {toDo} = this
             const { studyName, openLink, people, joinCnt, fileName, firstMember } = this.memberStudy
-            console.log(studyName)
+            console.log(toDo)
             axios.put(`http://localhost:7777/study/${this.memberStudy.studyNo}/toDo`, {toDo, studyName, openLink, people, joinCnt, fileName, firstMember})
                 .then(() => {
                     alert('수정되셨습니다.')
+                    this.dialog = true
                 })
                     .catch(() => {
                         alert('문제 발생!')
                     })
+
+        },
+        goLink() {
+            var newWindow = window.open("about:blank");
+            newWindow.location.href = this.memberStudy.openLink
 
         },
         check(){

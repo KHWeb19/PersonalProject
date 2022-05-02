@@ -81,7 +81,13 @@ const routes = [
     {
         path: '/myWith',
         name: 'MyWith',
-        component: MyWith,
+        components: {
+            default:
+                MyWith
+        },
+        props: {
+            default: true
+        },
         beforeEnter: requireLogin()
     },
     
