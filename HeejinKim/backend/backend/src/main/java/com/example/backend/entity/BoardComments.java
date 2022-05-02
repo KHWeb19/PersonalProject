@@ -2,6 +2,7 @@ package com.example.backend.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -12,6 +13,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
+@Data
 @NoArgsConstructor
 @Builder
 @AllArgsConstructor
@@ -27,8 +29,8 @@ public class BoardComments {
     @Column(length = 128, nullable = false)
     private String comment;
 
-    @JsonBackReference
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name="board_no")
     private Board board;
 
@@ -45,7 +47,7 @@ public class BoardComments {
 
         this.comment = comment;
         this.commentNo = commentNo;
-        this.regDate = regDate;
+
     }
 
 }

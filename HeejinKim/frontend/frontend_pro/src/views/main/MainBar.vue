@@ -140,8 +140,8 @@ export default {
                 },*/
                 {
                     text: 'Reservation',
-                    name: 'Reservation',
-                    route:'/reservation',
+                    name: 'SeatForm',
+                    route:'/seat',
                 },
                 {
                     text: 'Notice',

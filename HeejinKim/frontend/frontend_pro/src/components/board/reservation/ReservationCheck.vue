@@ -1,4 +1,153 @@
 <template>
+  <v-container>    
+    <table>
+      <v-row justify="center">
+        <v-col cols="12" class="title" > Reservation </v-col>
+      </v-row>
+      
+      <v-row>
+        <v-col cols="3" class="label"> Date</v-col>
+        <v-col cols="7" >
+            <v-text-field class="date pt-8  ml-7" rounded readonly :value="reservation.regDate"/>
+        </v-col>
+      </v-row>
+
+      <v-row>
+        <v-col cols="5" class="label"> Reservation No</v-col>
+        <v-col>
+          <v-text-field class="date pt-8" rounded readonly :value="reservation.reservationNo"/>
+        </v-col>
+      </v-row>
+
+
+      <v-row>
+        <v-col cols="5" class="label"> Seat Number </v-col>
+        <v-col>
+          <v-text-field class="date pt-8" rounded style="width:150px" readonly :value="reservation.seatNumber"/>
+        </v-col>
+      </v-row>
+
+
+      <v-row justify="center">
+        <router-link :to="{ name: 'SeatForm' }"  style=" text-decoration:none">
+          <v-btn class="updateBtn" dark> confirm </v-btn>
+        </router-link>
+        <v-btn @click=onDelete class="deleteBtn" dark>Delete</v-btn>
+      </v-row>  
+
+      
+
+    </table>
+   </v-container>
+</template>
+
+<script>
+
+//import { mapActions } from 'vuex'
+import axios from 'axios'
+export default {
+
+  name:'ReservationCheck',
+    
+  props: {
+    reservation: {
+      type: Object,
+      required: true
+    }
+  },
+
+  data() {
+    return {
+
+    }
+  },
+  created () {
+        //this.reservationNo =  this.$store.state.reservations[0].reservationNo
+        this.reservation = this.$store.state.reservation
+        this.userId = this.$store.state.session.userId
+    },   
+  
+  /*
+  mounted () {   
+
+    //가져오는 reservation
+    this.userId = this.$store.state.session.userId
+    this.reservationNo = this.$store.state.reservations[0].reservationNo
+    this.reservation = this.$store.state.reservations[0]
+
+    },
+ */
+  methods: {
+
+    //...mapActions(['fetchReservation']),
+
+    onDelete () {
+      const { reservationNo } = this.reservation
+      
+      axios.delete(`http://localhost:7777/reservation/${reservationNo}`, )
+        .then(() => {
+          alert('게시글 삭제')
+          this.$router.push({ name: 'Home'})
+        })
+        .catch(() => {
+          alert('삭제 실패')
+        })
+        },
+
+    
+  }
+}
+</script>
+
+<style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Poiret+One&family=Sunflower:wght@300&family=Ubuntu:wght@300&display=swap");
+
+.title{  
+
+   font-family: 'Sunflower', sans-serif;
+    font-size: 30pt;
+    margin-right:5%;
+    text-align: center;
+    padding-top: 50px; 
+
+}
+.label{
+   font-family: 'Ubuntu', sans-serif; 
+    font-size: 17pt;
+    margin-right:5%;
+    text-align: center;
+    padding-top: 50px; 
+}
+
+table{
+  background-color: #f8f2f2;
+  padding: 5% 10% 5% 10%;
+  margin-left:auto;
+  margin-right:auto;
+  width:800px;
+  height: 500px;
+}
+.updateBtn{
+  color:rgba(214, 190, 86, 0.822);  
+  margin-top: 60px;
+  margin-right: 20px;
+
+}
+.v-text-field, .v-textarea{
+    font-family: 'Sunflower', sans-serif;
+}
+.addImg {
+    position: relative;
+    max-height: 400px;
+    max-width: 500px;
+}
+.deleteBtn{
+  margin-top: 60px;
+
+}
+</style>
+<!--
+<template>
   <v-container>
     <v-form @submit.prevent="onUpdate">
       <table>
@@ -15,8 +164,8 @@
 
             <v-row>
         <v-col cols="1" class="label"> Reservation No</v-col>
-        <v-col v-for="reservation in reservation" :key="reservation.reservationNo">
-            {{ reservation.reservationNo }}
+            <v-col>
+             <v-text-field class="date" rounded readonly :value="reservation.reservationNo"/>
         </v-col>
       </v-row>
 
@@ -34,7 +183,7 @@
           </v-col>
 
           </v-row>
-                <!--
+                -----------------------------------------------------------
           <v-col>
             {{$route.params.seatNumber}}
             <v-text-field rounded  readonly :value="reservation.seatNumber"/> 
@@ -47,7 +196,7 @@
             {{$route.params.restSeats}}
             -------<v-text-field rounded  readonly :value="reservation.seatNumber"/> ----
           </v-col>
-        </v-row>-->
+        </v-row>--------------------------------------------------------------------------
 
 
         <v-row justify="center">
@@ -56,7 +205,7 @@
       </table>
     </v-form>
    
-    <!--
+    ------------------------------------------------------------------------
     <div class="input">
         <hr>
       <table class = "tableStyle">
@@ -72,7 +221,7 @@
           </tr>
         </tbody>
       </table>
-    </div>-->
+    </div>------------------------------------------------------------------------
   
    </v-container>
 </template>
@@ -96,8 +245,6 @@ export default {
   data() {
     return {
 
-      //seatNumber: "",
-      //restSeats:""
     }
   },
   /*
@@ -107,21 +254,12 @@ export default {
     },*/
   created  () {   
     this.userId = this.$store.state.session.userId
-    this.reservationNo = this.reservation.reservationNo
+    this.reservationNo = this.$store.state.reservations[0].reservationNo
+    this.reservation = this.$store.state.reservations[0]
     //this.seatTime = this.$route.params.seatTime
-    //this.seatNumber = this.$route.params.seatNumber 파라메터로 날라온것들 
-    //this.restSeats = this.$route.params.restSeats
+   
     },
-    /*
-  mounted() {
-    this.phoneNumber = this.$route.query.phoneNumber;
-    console.log(this.phoneNumber);
-    axios
-      .get("/movie/check/" + encodeURI(this.phoneNumber))
-      .then(response => {
-        this.bookingInfo = response.data;
-      });
-  },*/
+  
   methods: {
 
     ...mapActions(['fetchReservation']),
@@ -129,7 +267,7 @@ export default {
     onUpdate () {
       const { seatNumber,restSeats} = this.reservation
                 
-      this.$emit('submit', {  seatNumber,restSeats})
+      this.$emit('submit', { seatNumber,restSeats})
 
       },
   }
@@ -169,4 +307,4 @@ table{
     max-height: 400px;
     max-width: 500px;
 }
-</style>
+</style>-->

@@ -2,14 +2,14 @@
 <template>
   <v-container class="writeForm">
     <v-row>
-      <reservation-seat-form @submit="onSubmit" v-if="reservations" :reservations="reservations"/>
+      <reservation-form @submit="onSubmit" :reservations="reservations"/>
     </v-row>
   </v-container>    
 </template>
 
 <script>
 
-import ReservationSeatForm from '@/components/board/reservation/ReservationSeatForm.vue'
+import ReservationForm from '@/components/board/reservation/ReservationForm.vue'
 
 import axios from 'axios'
 import { mapState,mapActions } from "vuex"; 
@@ -18,37 +18,23 @@ import { mapState,mapActions } from "vuex";
 
 export default {
     name:'ReservationPage',
-    
-    
+       
     data () {
-        return {
-                         
-        }
-    },/*
-  props: {
-    reservations: {
-      type: Array,
-      required: true
-    }
-    },*/
-
-    created(){
-      this.fetchReservationList()
-      this.loading = setTimeout(this.getSeatNumber, 10000)
-    
-    },  
+      return {                  
+      }
+    },
     computed:
     {
       ...mapState(['reservation','reservations']),    
     },
 
     components:{
-        ReservationSeatForm,
-      
+      ReservationForm,    
     },
+
     mounted() {
 
-       this.fetchReservationList()
+      this.fetchReservationList()
     
   },
      methods: {
@@ -57,50 +43,54 @@ export default {
 
     onSubmit(payload) { 
       
-      const{seatNumber,restSeats} = payload
+      const{seatNumber} = payload
 
-      axios.post(`http://localhost:7777/reservation/finish`,{ seatNumber,restSeats})
+      axios.post(`http://localhost:7777/reservation/finish`,{seatNumber})
         .then(() => {
 
-          
-          this.seatNumber =''
-          this.restSeats =''
+          this.seatNumber ='' 
+          //this.$router.push({name: 'ReservationCheckPage', params:{ seatNumber}})
+
+          //window.location.reload();   
         
-          alert('예약 완료')
-           
-          //this.$router.push({name: "ReservationCheckPage", params: { seatNumber, restSeats}})     
+          alert('Reservation complete')
+          this.$router.push({name: 'Home'})
+         
         })
         .catch(() => {
           alert('예약 남은자리, 번호, 타임 넣는데 문제!')
         })
     },
+     
   
-    
+    /*
     getSeatNumber() {
 
-      const {seatNumber,restSeats } = this
+      const {seatNumber } = this
       
-      axios.get(`http://localhost:7777/reservation/reservationList`,{ seatNumber,restSeats })
+      axios.get(`http://localhost:7777/reservation/reservationList`,{ seatNumber })
         .then( res => {
 
-          this.$store.state.reservation = res.data
+          this.$store.state.reservations = res.data
+          this.$store.state.reservations[0].reservationNo = res.data[0].reservationNo
+       
+      
+          //this.$store.state.reservations.seatNumber =  res.data.seatNumber 이렇게는 넣어지지 않음 
+          //this.$store.state.reservations.restSeats =  res.data.restSeats
 
-          this.$store.state.reservation.seatNumber[0] =  res.data[0].seatNumber
-          this.$store.state.reservation.restSeats[0] =  res.data[0].restSeats
 
-          this.restSeats[0] = res.data[0].restSeats
-          this.seatNumber = res.data[0].seatNumber
+
+          this.seatNumber[0] = res.data[0].seatNumber
           
 
-          alert('업데이트 완료됨')
+         
 
          // this.$router.push({ name: 'Home' })
         })
         .catch(() => {
-          alert('예약 남은자리, 번호, 타임 넣는데 문제!')
         })
                 
-    }
+    }*/
 
       
     }

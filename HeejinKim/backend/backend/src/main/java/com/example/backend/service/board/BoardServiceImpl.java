@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.transaction.Transactional;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.nio.file.Files;
@@ -26,6 +27,8 @@ public class BoardServiceImpl implements BoardService{
     @Autowired
     BoardRepository repository;
 
+
+    @Transactional
     @Override
     public void register(Board board, @RequestParam(required = false) MultipartFile file) throws Exception {
 
@@ -46,6 +49,7 @@ public class BoardServiceImpl implements BoardService{
         repository.save(board);
     }
 
+    @Transactional
     @Override
     public void modify(Board board,  @RequestParam(required = false) MultipartFile file) throws Exception {
 
@@ -72,8 +76,7 @@ public class BoardServiceImpl implements BoardService{
     }
 
 
-
-
+    @Transactional
     @Override
     public List<Board> list() {
 
@@ -81,6 +84,7 @@ public class BoardServiceImpl implements BoardService{
 
     }
 
+    @Transactional
     @Override
     public Board read(Long boardNo) {
 
@@ -96,6 +100,8 @@ public class BoardServiceImpl implements BoardService{
         }
     }
 
+
+    @Transactional
     @Override
     public void remove(Integer boardNo) {
 

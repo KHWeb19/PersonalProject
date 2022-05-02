@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,6 +23,8 @@ public class BoardCommentsServiceImpl implements BoardCommentsService {
     @Autowired
     private BoardCommentsRepository commentRepository;
 
+
+    @Transactional
     @Override
     public void register(Integer boardNo, CommentRequest commentRequest) {
         Optional<Board> maybeBoard = boardRepository.findById(Long.valueOf(boardNo));
@@ -37,6 +40,8 @@ public class BoardCommentsServiceImpl implements BoardCommentsService {
         commentRepository.save(comment);
     }
 
+
+    @Transactional
     @Override
     public List<BoardComments> list(Integer boardNo) {
         List<BoardComments> commentLists = commentRepository.findAllBoardCommentByBoardId(Long.valueOf(boardNo));
@@ -44,6 +49,8 @@ public class BoardCommentsServiceImpl implements BoardCommentsService {
         return commentLists;
     }
 
+
+    @Transactional
     @Override
     public BoardComments modify(Integer commentNo, CommentRequest commentRequest) {
         Optional<Board> maybeBoard = boardRepository.findById(Long.valueOf(commentRequest.getBoardNo()));
@@ -62,6 +69,8 @@ public class BoardCommentsServiceImpl implements BoardCommentsService {
 
     }
 
+
+    @Transactional
     @Override
     public void remove(Integer commentNo) {
         commentRepository.deleteById(Long.valueOf(commentNo));

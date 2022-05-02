@@ -4,6 +4,113 @@
     <v-form @submit.prevent="onSubmit">
       
     <v-row justify="center">
+      <v-col cols="8" class="label" style="font-size:20pt"> Seat checking</v-col>            
+    </v-row>
+
+    <v-row>
+      <v-col>
+        <div class="llabel">selected seat : {{$route.params.seatNumber}} </div>
+      </v-col>
+    </v-row>
+
+    <v-row>
+      
+        <v-btn class="selectSeatBtn" type="submit" dark>
+       select</v-btn>
+     
+      
+      
+    </v-row>
+      
+
+    </v-form>
+    
+ </v-container>
+</template>
+
+<script>
+
+import { mapActions } from 'vuex'
+
+export default {
+
+  name:'ReservationForm',
+
+  data() {
+    return {
+      seatNumber:'',
+
+    }
+  }, 
+  mounted() {
+    this.seatNumber=this.$route.params.seatNumber
+    
+  },
+ 
+  methods: {
+
+     ...mapActions(['fetchReservation']),
+   
+    
+    //디비로 확정 정보 넣는 것(reservation 쪽에)--날리기
+
+    onSubmit  () {
+      const { seatNumber} = this                
+      this.$emit('submit', {  seatNumber })
+      
+    },
+    
+  }
+}
+</script>
+
+<style scoped>
+
+.llabel{
+  font-family: 'Ubuntu', sans-serif; 
+  font-size: 17px;
+}
+.label{
+  font-family: 'Ubuntu', sans-serif; 
+  font-size: 15pt;
+  margin-right:5%;
+  text-align: center;
+  padding-top: 25px; 
+}
+.place{
+    background-color: #f8f8f8;
+    padding: 5% 10% 5% 10%;
+    margin-top:30px;
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom:30px;
+    width: 700px;
+}
+.container {
+  perspective: 700px;
+  padding: 5% 10% 5% 10%;
+  border-collapse: separate;
+  
+}
+.v-text-field, .v-textarea{
+    font-family: 'Sunflower', sans-serif;
+}
+
+.selectSeatBtn{
+  margin-top: 5%;
+  margin-left: 170px;  
+}
+
+
+</style>
+<!--
+
+<template>
+
+  <v-container class="place" justify="center">
+    <v-form @submit.prevent="onSubmit">
+      
+    <v-row justify="center">
       <v-col cols="8" class="label" style="font-size:20pt">Libarary Seat Booking</v-col>            
     </v-row>
     
@@ -13,23 +120,23 @@
         <v-text-field rounded style="width:80px" readonly :value="this.userId"/>
       </v-col>
     </v-row>
-<!--
+-----------------------
     <v-row>
       <v-col>
         <v-date-picker v-model="seatTime"></v-date-picker>      
       </v-col>
-    </v-row>-->
+    </v-row
 
     <v-row>
       <v-col>
        <div class="llabel ml-5"> available seats </div>
       </v-col>
-    <v-col v-model="restSeats"> 
-      <div class="llabel mr-5"> {{this.restSeats}} </div>
+    <v-col > 
+      <div class="llabel mr-5"> {{restSeats}} </div>
         
-    </v-col>     
+    </v-col> >  
 
-    </v-row>
+    </v-row>---------------------------
 
     <v-row justify="center">
       <v-col>
@@ -57,19 +164,19 @@
         <div class="llabel">selected seat : {{seatNumber}} </div>
       </v-col>
     </v-row>
-    
-    
+       
       
-    <!--
-      <v-col v-model="seatTime">
-        <div class="llabel" >Today {{this.regDate}}</div>
+   <v-row>
+      <v-col>
+        <div class="llabel" > Date </div>
+        <v-text-field rounded style="width:200px" readonly :value="this.regDate"/>
       </v-col>
     </v-row>
-      
+     ------------------------------
       <v-col cols="1">
         <v-btn @click="restBtn()" v-model="restSeats"> Available seats </v-btn>
       </v-col>
-      <v-spacer></v-spacer>-->
+      <v-spacer></v-spacer>--------------------------------
      
     <v-row>
       <v-col>
@@ -96,17 +203,18 @@
        select</v-btn>
       
     </v-row>
-      
-    <!--<button @click="check(apblist[i]+j, $event)"
+      --------------------------------
+    <button @click="check(apblist[i]+j, $event)"
       v-bind:id="apblist[i]+j"
       v-bind:ref= "i + j" 
       class="seat">
       {{ apblist[i] }}{{ j }}
       +'-'+
-    </button>-->
+    </button>-------------------------------
     </v-form>
     
  </v-container>
+
 </template>
 
 <script>
@@ -115,26 +223,32 @@ import { mapActions } from 'vuex'
 
 export default {
 
-  name:'ReservationSeatForm',
+  name:'ReservationForm',
 
   data() {
     return {
       seatNumber:[],
-      //seatTime: [],
+      current:null,
+      blackseat:[],
+      
       seatRows: 3,
       seatCols: 5,
-      restSeats: 15, 
+      //restSeats: 15, 
+      reservation:'',
+      reservations:[]
+      //seatTime: [],
       //reservation:'',
-     // bookInfo:[] ,
+      //bookInfo:[] ,
       //seatTime:[],
        //(new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),  
     }
   }, 
   created(){
 
-      //this.reservationNo = this.reservation.reservationNo
+      this.regDate = this.$store.state.reservations[0].regDate
       this.userId = this.$store.state.session.userId
-      //this.regdate = this.$store.state.board.regdate
+      //this.reservation = this.$store.state.reservations[0]
+    
       //this.seatTime = this.$store.state.seatTime
       //this.seatNumber = this.$store.state.seatNumber
       //this.restSeats = this.$store.state.restSeats
@@ -146,22 +260,21 @@ export default {
 
      ...mapActions(['fetchReservationList','fetchReservation']),
 
-    test(seatNum,event) {
-      console.log(seatNum)
-      this.seatNumber = seatNum 
-      this.$store.state.seatNumber = this.seatNumber      
-      this.$store.state.restSeats = this.restSeats--
+     test(seatNum,event) {
 
+      this.seatNumber = seatNum 
+
+      //this.$store.state.reservations.seatNumber = this.seatNumber      
+      //this.$store.state.reservaions.restSeats = this.restSeats--
 
       if (event.currentTarget.style.background == "goldenrod") {
-        event.currentTarget.style = "background:"
-        this.reservation.pop()
-
+          event.currentTarget.style = "background:"
+          this.reservation.pop()
       }else if(event.currentTarget.style.background != "black"){
 
         event.currentTarget.style = "background:goldenrod"
-        this.reservation.push(seatNum) 
-        //this.seatNumber = seatNum
+        this.$store.state.reservations.seatNumber = seatNum
+
       } 
 
       let seatflag=0
@@ -177,15 +290,47 @@ export default {
       }         
     },
     
+     /*
+
+    test(seatNumber,event) {
+
+      //this.$store.state.reservation.seatNumber = this.seatNumber      
+      //this.$store.state.reservaion.restSeats = this.restSeats--
+
+
+      if (event.currentTarget.style.background == "goldenrod") {
+        event.currentTarget.style = "background:"
+        event.$store.state.reservations.pop(seatNumber)
+
+      }else if(event.currentTarget.style.background != "black"){
+
+        event.currentTarget.style = "background:goldenrod"
+        this.$store.state.reservations.push(seatNumber) 
+        //this.seatNumber = seatNum
+      } 
+
+      let seatflag=0
+
+      for(var i=0;i<this.blackseat.length;++i){
+        if(seatNumber == this.blackseat[i]){
+          alert('이미 선택된 좌석입니다.다른 자리 선택하세요')  
+          seatflag=1;
+        }
+      }
+      if(seatflag == 1 ){
+        this.$store.state.reservations.pop()
+      }         
+    },*/
+    
     
     //디비로 확정 정보 넣는 것(reservation 쪽에)--날리기
     onSubmit  () {
-      const { seatNumber,restSeats} = this
+      const { seatNumber} = this
                 
-      this.$emit('submit', {  seatNumber,restSeats})
-
-      console.log(seatNumber,restSeats)
-      this.$router.push({name: 'ReservationCheckPage'})
+      this.$emit('submit', {  seatNumber})
+      
+      //console.log(seatNumber,restSeats)
+      
       //this.$router.push({name: 'ReservationCheckPage', params: { reservationNo: String( reservation.reservationNo)}})
     },
     
@@ -225,7 +370,6 @@ export default {
                 
     },*/
       
-
       /*
       //selectTime(){
       //console.log('select time')
@@ -251,75 +395,6 @@ export default {
       .catch(() => {
         alert('자리 배열 업데이트 문제발생')
       })*/
-        
-    
-         /*----이건 파라메터로 날리는 거(원래)
-         axios
-      .post("http://localhost:7777/reservation/finish/seat", null, {
-        params: {
-          seatTime: this.seatTime,
-          seatNumber: this.seatsInfo
-        }
-      })
-      .then(response => {
-        console.log(response)
-      })
-
-
-        const {seatTime, seatNumber} = payload
-      axios.post(`http://localhost:7777/reservation/finish/seat`,{seatTime, seatNumber})
-          params: {
-            this.time = ''
-            this.password = ''
-            time: this.time,
-            //seatNumber: this.seatsInfo, 여기서 변환 과정에서 막힘 
-
-            //movieName: this.movieName,
-            //phoneNumber: this.phoneNumber,                     
-            //prices: this.prices,
-            //hallNumber: this.hallNumber
-          }
-        })
-    },*/
-    /*
-    //update rest seats
-    finish(payload){   
-      const { seatTime, seatNumber} = payload
-     
-
-      axios.put(`http://localhost:7777/reservation/finish/${reservationNo}`,{seatTime, seatNumber})
-      .then(res => {
-        console.log(res)
-        this.seatTime = res.data.seatTime
-        this.seatNumber = res.data.seatNumber
-        this.$router.push('/finish')
-
-      })
-      .catch(() => {
-        alert('자리 배열 업데이트 문제발생')
-      })
-    },*/
-
-
-
-  //<router-link :to="{name: 'finish', query: {phoneNumber : phoneNumber, movieName: movieName, time: time, people: people, seatNumber: seatNumber, prices: prices, hallNumber: hallNumber}}">확인</router-link>
-  //이거는 푸시해서 예매내역 조회쪽으로 옮기는 과정 
-/*
-    this.$router.push({
-    name: "ReservationFinish",
-    query: {
-
-      seatTime: this.seatTime,
-      seatNumber: this.seatsInfo,
-      
-      //phoneNumber: this.phoneNumber,
-      //movieName: this.movieName,          
-      //people: this.people,          
-      //prices: this.prices,
-      //hallNumber: this.hallNumber,
-    },
-  })
-    },*/
 
    
   }
@@ -435,4 +510,4 @@ export default {
   color: blueviolet;
 }
 
-</style>
+</style>-->

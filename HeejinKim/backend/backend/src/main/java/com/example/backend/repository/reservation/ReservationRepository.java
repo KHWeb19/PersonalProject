@@ -3,6 +3,7 @@ package com.example.backend.repository.reservation;
 import com.example.backend.controller.board.request.SeatNowRequest;
 import com.example.backend.controller.board.request.SeatRequest;
 
+import com.example.backend.entity.MemberAuth;
 import com.example.backend.entity.Reservation;
 import org.hibernate.annotations.SQLInsert;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -19,6 +20,10 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     @Transactional
     @Query(value = "select * from reservation where user_id = :userId", nativeQuery = true)
     Optional <Reservation> findByUserId(String userId);
+
+    @Transactional
+    @Query(value = "select * from member_auth where member_no = :memberNo" , nativeQuery = true)
+    Optional<Reservation> findByMemberNo(Long memberNo);
 
     //여기서 memberNo를 userId로 고쳤음
 

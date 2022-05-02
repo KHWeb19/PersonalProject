@@ -1,9 +1,94 @@
 <template>
+  <v-container class="writeForm">
+
+    <v-row>
+      <reservation-check :reservation="reservation"/>             
+    </v-row>
+    
+  </v-container>
+      
+</template>
+
+<script>
+
+
+import ReservationCheck from '@/components/board/reservation/ReservationCheck.vue'
+//import axios from 'axios'
+import { mapState} from "vuex"; 
+
+
+export default {
+    name:'ReservationCheckPage',
+    /*
+    
+    props: {
+        reservationNo: {
+            type: String,
+            required: true
+        }
+    },*/
+    
+    data () {
+      return {
+      }
+    },
+      mounted() {
+       this.reservationNo=this.$store.state.reservations[0].reservationNo
+       this.fetchReservation(this.reservationNo)
+        .catch(() => {
+          alert('예약 조회 실패')
+        })
+    },
+    computed:
+    {
+      ...mapState(['reservation']),    
+    },
+
+    components:{
+      ReservationCheck
+    },
+  
+
+
+/*
+    onSubmit(payload) {
+
+      const {seatNum}=payload
+
+    //for(var s=0; s<this.$route.params.seatdata.length;++s){
+    //seatNum = this.$route.params.seatdata[s]
+        
+        axios.post(`http://localhost:7777/reservation/makeReservation`, { seatNum })
+        .then(() => {
+          alert('자리 정보 날아감')
+          //console.log(res);
+          //this.seatRow = ''
+          //this.seatCol = ''
+          //this.seatNum=''
+        })
+        .catch(() => {
+         alert('자리 정보 문제 발생!')
+        });
+    }
+        
+    },
+    */
+
+
+      
+    
+}
+    
+
+</script>
+<!--
+
+<template>
 <v-container class="writeForm">
 
         <v-row>
             <reservation-check  @submit="onUpdate" :reservation="reservation"/>
-          <!--  <reservation-check  @submit="onUpdate"/> -->              
+          ------------  <reservation-check  @submit="onUpdate"/> -----------------           
         </v-row>
         
     </v-container>
@@ -48,6 +133,7 @@ export default {
               console.log(this.reservationNo)
               this.$router.push()
           })
+      this.reservationNo = this.$store.state.reservations[0].reservationNo    
     },
 
     //created(){
@@ -68,13 +154,13 @@ export default {
       axios.post(`http://localhost:7777/reservation/checkBooking/${reservationNo}`,{ seatNumber,restSeats})
         .then(res => {
 
-          this.$store.state.reservation = res.data
+          this.$store.state.reservations = res.data
           //this.$store.state.seatTime =  res.data[0].seatTime
-          this.$store.state.reservation.seatNumber =  res.data[0].seatNumber
-          this.$store.state.reservation.restSeats =  res.data[0].restSeats
+          this.$store.state.reservations[0].seatNumber =  res.data[0].seatNumber
+          this.$store.state.reservation[0].restSeats =  res.data[0].restSeats
           
-          this.restSeats = res.data.restSeats
-          this.seatNumber = res.data.seatNumber
+          this.restSeats[0] = res.data[0].restSeats
+          this.seatNumber = res.data[0].seatNumber
           //this.seatTime = res.data.seatTime
 
           alert('확인 용으로 업데이트 완료')
@@ -121,5 +207,6 @@ export default {
 }
     
 
-</script>
+</script>-->
+     
      

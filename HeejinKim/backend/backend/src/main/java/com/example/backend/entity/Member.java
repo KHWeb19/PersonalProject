@@ -1,9 +1,12 @@
 package com.example.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
@@ -33,6 +36,7 @@ public class Member {
     @Column(length = 64, nullable = false)
     private String email;
 
+    @Column(length = 64)
     private String auth;
 
     @CreationTimestamp
@@ -41,12 +45,14 @@ public class Member {
     @UpdateTimestamp
     private Date updDate;
 
+    @Fetch(value = FetchMode.SUBSELECT)// 이것을 해야 Json 오류가 안생김
     @JsonManagedReference
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL,fetch = FetchType.LAZY,orphanRemoval = true)
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL,fetch = FetchType.EAGER,orphanRemoval = true)
     private List<MemberAuth> authList = new ArrayList();
 
-    @JsonManagedReference
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL,fetch = FetchType.LAZY,orphanRemoval = true)
+    @Fetch(value = FetchMode.SUBSELECT)
+    //@JsonManagedReference
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL,fetch = FetchType.EAGER,orphanRemoval = true)
     private List<Reservation> reservation = new ArrayList<>();
 
     public Member (String userId, String password, String passwordCheck, String email) {
@@ -68,6 +74,14 @@ public class Member {
     }
 
     public void changeAuth (MemberAuth auth) {}
+
+    public Member (String userId, String password, String passwordCheck, String email, MemberAuth auth,Reservation rsv) {
+        this.userId = userId;
+        this.password = password;
+        this.passwordCheck = passwordCheck;
+        this.email = email;
+
+    }
 
     public void addAuth (MemberAuth auth) {
         if (authList == null) {
