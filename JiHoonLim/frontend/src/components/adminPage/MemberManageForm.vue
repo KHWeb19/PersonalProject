@@ -121,7 +121,8 @@ export default {
 .tableWrap {
   display: flex;
   justify-content: center;
-  margin-bottom: 30px;
+  margin-top: 30px;
+  margin-bottom: 50px;
 }
 .authTable {
   font-size: 25px;
