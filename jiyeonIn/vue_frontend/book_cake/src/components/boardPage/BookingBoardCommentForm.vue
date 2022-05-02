@@ -10,13 +10,45 @@
                     <v-img v-if="comment.commentLinkInfo != null" v-bind:src="require(`@/assets/boardComment/${comment.commentLinkInfo}`)" contain style="height:300px; width:300px position: fixed;" />
                 </span>
                 <span class="date"> <br>
-                    {{ comment.regDate}} <hr>
+                    {{ comment.regDate}} 
+                    <v-btn color="black" text type="button" @click="writeComment(index)">
+                        <strong>댓글쓰기</strong>
+                    </v-btn>  
                 </span>
+                <div v-show="writeCoComent" v-if="index == checkIndex">
+                    <form @submit.prevent="onSubmit">
+                        <v-container>
+                            <v-row >
+                                <v-col>
+                                    <h4>댓글 : <strong>{{id}}</strong></h4>
+                                </v-col>
+                            </v-row>
+                            <v-row>
+                                <v-col class="col-12 col-sm-11">
+                                    <textarea type="text" v-model="comments" placeholder="댓글을 입력해주세요" class="commentcheck" style="width: 730px;"/><br>
+                                </v-col>
+                                <v-col class="col-12 col-sm-1" >
+                                    <v-btn class="commentRegister" type="submit" color="white">
+                                        <strong>등록</strong>
+                                    </v-btn>  
+                                </v-col>
+                            </v-row>
+                            <v-row>
+                                <v-col>
+                                    <input type="file" id="files1" ref="files1" 
+                                        multiple v-on:change="handleFileUpload()"/>
+                                </v-col>
+                            </v-row>
+                        </v-container>
+                        <br>
+                    </form>
+                </div>
+                <hr>
             </div>
         </div>
 
-        <div>
-            <form @submit.prevent="onSubmit">
+        <div style="padding: 0 0 0 13%;" >
+            <form @submit.prevent="onSubmit" >
                 <v-container>
                     <v-row>
                         <v-col>
@@ -28,7 +60,7 @@
                             <textarea type="text" v-model="comments" placeholder="댓글을 입력해주세요" class="commentcheck"/><br>
                         </v-col>
                         <v-col class="col-12 col-sm-1">
-                            <v-btn class="commentRegister" type="submit" color="white">
+                            <v-btn type="submit" color="white">
                                 <strong>등록</strong>
                             </v-btn>  
                         </v-col>
@@ -42,6 +74,8 @@
                 </v-container>
             </form>
         </div>
+
+        
         
     </div>
 </template>
@@ -63,7 +97,11 @@
         data () {
             return {
                 id: (window.localStorage.getItem('id')),
-                comments: ''
+                comments: '',
+                writeCoComent:false,
+                writeCommentArr:[],
+                writeCommentArr2:[],
+                checkIndex:''
             }
         }, 
         methods: {
@@ -73,6 +111,10 @@
             onSubmit () {
                 const { id, comments, files1 } = this
                 this.$emit('submit', { id, comments, files1 })
+            },
+            writeComment (index) {
+                this.checkIndex = index
+                this.writeCoComent = true
             }
         }
     }
@@ -85,15 +127,6 @@
     height: 100px;
     color:black;
 }
-.commentRegister{
-    margin-left: 30%;
-    margin-top: 5px;
-}
-
-form{
-    padding: 0 0 0 13%;
-}
-
 .textbox{
     width: 1000px;
     color:black;
