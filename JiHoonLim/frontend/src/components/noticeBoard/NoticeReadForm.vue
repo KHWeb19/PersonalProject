@@ -37,6 +37,7 @@
                     class="writer_box"
                   />
                 </div>
+
                 <div>
                   <v-text-field
                     flat
@@ -46,6 +47,7 @@
                     class="date_box"
                   />
                 </div>
+                <div class="mt-3">조회 수</div>
                 <div>
                   <v-text-field
                     flat
@@ -55,6 +57,7 @@
                   />
                 </div>
                 <div
+                  class="mt-2"
                   v-if="
                     (noticeBoard.writer == this.nickName &&
                       this.$store.state.userInfo.auth == '관리자') ||
@@ -215,16 +218,17 @@ export default {
   font-size: 18px;
   color: var(--skinText979797);
   zoom: 0.9;
+  margin-top: 2px;
 }
 .wrap {
   margin: 30px;
 }
 .main_tit_box {
-  text-align: left;
+  text-align: center;
   font-size: 35px;
+  font-weight: bold;
   color: #333;
   padding: 8px 0 8px 0;
-  font-style: italic;
   position: relative;
 }
 </style>

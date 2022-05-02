@@ -1,5 +1,9 @@
 <template>
-  <div class="grey lighten-3" style="font-family: 'Noto Sans KR', sans-serif">
+  <div
+    class="grey lighten-3"
+    style="font-family: 'Noto Sans KR', sans-serif"
+    id="app"
+  >
     <v-container class="white" style="width: 1240px">
       <v-row justify="center">
         <v-col class="pb-0">
@@ -58,10 +62,12 @@
       </v-row>
       <v-row>
         <v-col>
-          <div class="countFoodWrap">
-            총
-            <b class="countFood">{{ foodBoards.length }}</b
-            >개의 레시피가 있습니다.
+          <div style="display: flex; justify-content: space-between">
+            <div class="countFoodWrap">
+              총
+              <b class="countFood">{{ paginatedData.length }}</b
+              >개의 레시피가 있습니다.
+            </div>
           </div>
         </v-col>
       </v-row>
@@ -249,8 +255,8 @@ export default {
       }
     },
     selectMat(value) {
-      console.log(value);
       this.chooseMat = value;
+      console.log(this.chooseMat);
     },
   },
 
@@ -269,6 +275,17 @@ export default {
       return this.listArray.slice(start, end);
     },
   },
+
+  /*beforeUpdate() {
+    console.log("beforeUpdate");
+    console.log(this.paginatedData);
+    let i;
+    for (i = 0; i < this.paginatedData.length; i++) {
+      if (this.paginatedData[i].mat != this.chooseMat) {
+        this.paginatedData.splice(i, 1);
+      }
+    }
+  },*/
 };
 </script>
 
