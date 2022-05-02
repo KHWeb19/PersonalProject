@@ -3,6 +3,7 @@
     <Header-Layout></Header-Layout>
     <product-detail v-if="product" :product="product"></product-detail>
     <product-comment
+      :list-array="pageArray"
       @submit="onSubmit"
       :productComments="productComments"
     ></product-comment>
@@ -25,6 +26,11 @@ export default {
       type: String,
     },
   },
+  data() {
+    return {
+      pageArray: [],
+    }
+  },
   computed: {
     ...mapState(["product", "productComments"]),
   },
@@ -35,6 +41,14 @@ export default {
     this.fetchProductCommentList(this.productId).catch(() => {
       alert("리뷰 요청 실패")
     })
+    axios
+      .get(`http://localhost:8888/product/comment/list/${this.productId}`)
+      .then((res) => {
+        this.pageArray = res.data
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   },
   methods: {
     ...mapActions(["fetchProduct", "fetchProductCommentList"]),
