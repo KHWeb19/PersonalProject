@@ -36,14 +36,14 @@ public class MakePlanServiceImpl implements MakePlanService{
 
     @Transactional
     @Override
-    public void make(MemberPlanRequest memberPlanRequest) { // 계획을 db에 저장을함.
-        log.info(String.valueOf(memberPlanRequest));
+    public void make(List<String> fileName, String planName, String planDate, String placeName, String id) { // 계획을 db에 저장을함.
+        //log.info(String.valueOf(memberPlanRequest));
 
-        Member member = memberRepository.findByMemberNo(memberPlanRequest.getId());
+        Member member = memberRepository.findByMemberNo(id);
 
         MemberPlan memberPlan = MemberPlan.createMemberPlan(member);
 
-        Plan planEntity = Plan.createPlan(memberPlanRequest.getPlanName(), memberPlanRequest.getPlanDate(), memberPlanRequest.getPlaceName(), memberPlan);
+        Plan planEntity = Plan.createPlan(planName, planDate, placeName, fileName.get(0), memberPlan);
 
         //Member memberEntity = Member.c(member, memberPlan);
 

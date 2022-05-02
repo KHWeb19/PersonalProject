@@ -119,10 +119,10 @@ export default {
   },
   watch:{
     id: function (){
-      return this.id = this.id.replace(/[^a-z]/g, '');
+      return this.id = this.id.replace(/[^a-z, ^0-9]/g, '');
     },
     pw: function (){
-      return this.pw = this.pw.replace(/[^a-z]/g, '');
+      return this.pw = this.pw.replace(/[^a-z, ^0-9]/g, '');
     },
     birth: function (){
       return this.birth = this.birth.replace(/[^0-9]/g, '');

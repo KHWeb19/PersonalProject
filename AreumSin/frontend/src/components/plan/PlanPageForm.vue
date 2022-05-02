@@ -1,13 +1,48 @@
 <template>
   <div>
-    <v-container>
-      <v-row justify="center">
-        <table align="center" border="1" width="100%">
-          <!-- <tr>
+    <v-container style="margin-top: 100px">
+      <v-row id="wrapper">
+        <v-col v-if="!userPlans || (Array.isArray(userPlans) && userPlans.length === 0)">
+            등룍된 여행지가 없습니다!
+        </v-col>
+
+        <v-col cols="3" v-else v-for="(plans, index) in paginatedData" :key="index">
+          <v-card style="width: 500px">
+            <table align="center" @click="plansClick(plans)">
+              <tr>
+                <td>
+                  <v-img :src="require(`../../assets/plan/${plans.planImgSrc}`)" id="bgimg"></v-img>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  {{plans.planName}}
+                  </td>
+                </tr>
+
+              <tr>
+                <td>
+                  {{plans.planDate}}
+                </td>
+              </tr>
+
+              <tr>
+                <td id="lastTable">
+                  <img src="../../assets/location.png" height="30">&nbsp;&nbsp; {{plans.placeName}}
+                </td>
+              </tr>
+            </table>
+          </v-card>
+        </v-col>
+      </v-row>
+
+<!--      <v-row justify="center" id="wrapper">
+        <table align="center" width="100%">
+          &lt;!&ndash; <tr>
             <td>여행 이름</td>
             <td>여행 날짜</td>
             <td>여행지</td>
-          </tr> -->
+          </tr> &ndash;&gt;
 
           <tr v-if="!userPlans || (Array.isArray(userPlans) && userPlans.length === 0)">
             <td colspan="3">
@@ -36,22 +71,14 @@
             </table>
           </tr>
         </table>
-      </v-row>
+      </v-row>-->
     </v-container>
 
     <v-container>
-      <v-row justify="center">
-        <div class="btn-cover">
-          <button :disabled="pageNum === 0" @click="prevPage" class="page-btn">
-            <v-icon>mdi-chevron-left</v-icon>
-          </button>
-          <span class="page-count">{{ pageNum + 1 }} / {{ pageCount }} 페이지</span>
-          <button :disabled="pageNum >= pageCount - 1" @click="nextPage" class="page-btn">
-            <button :disabled="pageNum === 0" @click="prevPage" class="page-btn">
-              <v-icon>mdi-chevron-right</v-icon>
-            </button>
-          </button>
-        </div>
+      <v-row id="pageNum" justify="center">
+        <v-btn :disabled="pageNum === 0" @click="prevPage">이전</v-btn>
+        <span id="page">&nbsp;&nbsp;{{pageNum +1 }}  /  {{pageCount}}&nbsp;&nbsp;</span>
+        <v-btn :disabled="pageNum >= pageCount -1" @click="nextPage">다음</v-btn>
       </v-row>
     </v-container>
   </div>
@@ -69,7 +96,7 @@ export default {
   data(){
     return{
       pageNum: 0,
-      pageSize: 5
+      pageSize: 4
     }
   },
   methods: {
@@ -158,14 +185,12 @@ export default {
   },
   computed: {
     pageCount() {
-      let listLeng = this.userPlans.length, listSize = this.pageSize, page = Math.floor(listLeng / listSize);
+      let listLeng = this.userPlans.length,
+          listSize = this.pageSize,
+          page = Math.floor(listLeng / listSize);
 
       if (listLeng % listSize > 0) page += 1;
 
-      /*
-      아니면 page = Math.floor((listLeng - 1) / listSize) + 1;
-      이런식으로 if 문 없이 고칠 수도 있다!
-      */
       return page;
     },
     paginatedData() {
@@ -188,5 +213,25 @@ td{
 }
 #lastTable{
   padding-bottom: 30px;
+}
+#wrapper{
+  height: 650px;
+  min-height: 100%;
+  padding-bottom: 30px;
+}
+#pageNum{
+  height: 30px;
+  position : relative;
+  transform : translateY(-100%);
+}
+#page{
+  font-size: 20px;
+}
+#bgimg{
+  width: 395px;
+  height: 315px;
+  display: block;
+  margin-bottom: 15px;
+  margin-top: 15px;
 }
 </style>

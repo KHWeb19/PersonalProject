@@ -30,6 +30,9 @@ public class Plan {
     @Column(nullable = false)
     private String placeName;
 
+    @Column
+    private String planImgSrc;
+
     @OneToMany(mappedBy = "plan", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<MemberPlan> memberPlans = new ArrayList<>();
 
@@ -38,12 +41,13 @@ public class Plan {
         memberPlan.setPlan(this);
     }
 
-    public static Plan createPlan(String planName, String planDate, String placeName, MemberPlan... memberPlans) {
+    public static Plan createPlan(String planName, String planDate, String placeName, String planImgSrc, MemberPlan... memberPlans) {
         Plan plan = new Plan();
 
         plan.setPlanName(planName);
         plan.setPlanDate(planDate);
         plan.setPlaceName(placeName);
+        plan.setPlanImgSrc(planImgSrc);
 
         for(MemberPlan memberPlan : memberPlans) {
             plan.addPlanMember(memberPlan);

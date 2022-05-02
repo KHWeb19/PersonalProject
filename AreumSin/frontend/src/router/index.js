@@ -13,7 +13,7 @@ import PlanListView from "@/views/plan/PlanListView";
 import PlanView from "@/views/plan/PlanView";
 import ChangePw from "@/views/login/ChangePw";
 import PlanDayView from "@/views/plan/PlanDayView"
-import MapView from "@/views/MapView.vue"
+import PlanMapListView from "@/views/plan/map/PlanMapListView"
 
 Vue.use(VueRouter)
 
@@ -78,11 +78,6 @@ const routes = [
     props: true
   },
   {
-    path: '/mapView',
-    name: 'MapView',
-    component: MapView
-  },
-  {
     path: '/boardRead/:boardNo',
     name: 'BoardReadView',
     component: BoardReadView,
@@ -92,6 +87,12 @@ const routes = [
     path: '/boardModify/:boardNo',
     name: 'BoardModifyView',
     component: BoardModifyView,
+    props: true
+  },
+  {
+    path: '/planMapList/:planNo',
+    name: 'PlanMapListView',
+    component: PlanMapListView,
     props: true
   },
 ]

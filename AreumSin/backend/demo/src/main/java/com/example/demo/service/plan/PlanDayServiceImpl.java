@@ -1,21 +1,17 @@
 package com.example.demo.service.plan;
 
-import com.example.demo.entity.Hate;
-import com.example.demo.entity.Like;
-import com.example.demo.entity.Plan;
-import com.example.demo.entity.PlanDay;
-import com.example.demo.repository.HateRepository;
-import com.example.demo.repository.LikeRepository;
-import com.example.demo.repository.MakePlanRepository;
-import com.example.demo.repository.PlanDayRepository;
-import com.example.demo.request.CountRequest;
-import com.example.demo.request.PlanDayListRequest;
-import com.example.demo.request.PlanDayRequest;
+import com.example.demo.entity.*;
+import com.example.demo.repository.*;
+import com.example.demo.request.*;
+import com.example.demo.response.PlanDayResponse;
+import com.example.demo.response.map.MapLikeListResponse;
+import com.example.demo.response.map.MapLikeMarkListResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -36,31 +32,72 @@ public class PlanDayServiceImpl implements PlanDayService{
     @Autowired
     private HateRepository hateRepository;
 
+    @Autowired
+    private SaveFavoritePlaceRepository saveFavoritePlaceRepository;
+
+    @Autowired
+    private PlanDayImgRepository planDayImgRepository;
+
     @Transactional
     @Override
-    public void saveContent(PlanDayRequest planDayRequest) {
+    public void saveContent(List<String> fileList, String id, Integer planNo, Integer day, String content) {
+
+        Plan plan = makePlanRepository.findByPlan(planNo);
+
+        log.info("day!!! 123123123 : "+ day);
+        log.info("planNo!!! 123123123 : "+ planNo);
+
+        PlanDay planDayEntity = PlanDay.createPlanDay(id, content, day, plan);
+        planDayRepository.save(planDayEntity);
+
+        if(fileList.size() > 0) {
+            for(String file : fileList){
+                PlanDayImg planDayImg = new PlanDayImg(file, planDayEntity);
+                planDayImgRepository.save(planDayImg);
+            }
+        }
+    }
+
+    @Override
+    public void saveContentNoImg(PlanDayRequest planDayRequest) {
 
         Plan plan = makePlanRepository.findByPlan(planDayRequest.getPlanNo());
 
         PlanDay planDayEntity = PlanDay.createPlanDay(planDayRequest.getId(), planDayRequest.getContent(), planDayRequest.getDay(), plan);
         planDayRepository.save(planDayEntity);
+
+        PlanDayImg planDayImg = new PlanDayImg(planDayEntity);
+        planDayImgRepository.save(planDayImg);
     }
 
     @Override
-    public List<PlanDay> list(PlanDayListRequest planDayListRequest) {
+    public List<PlanDayResponse> list(PlanDayListRequest planDayListRequest) {
+
+        log.info("day!: "+planDayListRequest.getDay() + ", planNo: "+ planDayListRequest.getPlanNo());
 
         List<PlanDay> planDayList = planDayRepository.findByDayContent(planDayListRequest.getPlanNo(), planDayListRequest.getDay());
 
+        List<PlanDayResponse> planDayResponses = new ArrayList<>();
 
-        log.info("여기까지 와?");
-        for(PlanDay memberPlan : planDayList){
-            log.info("여기!");
-            log.info("PlanDay Content: " + memberPlan.getContent());
-            log.info("PlanDay Id: " + memberPlan.getId());
-            log.info("PlanDay likeContent: " + memberPlan.getLikeCount());
+        log.info("여기까지 와?" + planDayList.size());
+        for(PlanDay planDay : planDayList){
+            planDayResponses.add(new PlanDayResponse(planDay.getId(), planDay.getPlanDayNo(), planDay.getContent(), planDay.getLikeCount(), planDay.getHateCount(), null));
         }
 
-        return planDayList;
+        List<PlanDayImg> planDayImgList = planDayImgRepository.findByPlanDay(planDayListRequest.getDay());
+
+        int i = 0;
+
+        for (PlanDayImg planDayImg : planDayImgList){
+            PlanDayResponse test = planDayResponses.get(i);
+
+            test.setImgSrc(planDayImg.getImgSrc());
+
+            planDayResponses.set(i, test);
+            i++;
+        }
+
+        return planDayResponses;
     }
 
     @Override
@@ -88,6 +125,57 @@ public class PlanDayServiceImpl implements PlanDayService{
         }else{
             return false;
         }
+    }
+
+    @Override
+    public List<MapLikeListResponse> likePlaceList(Integer planNo) {
+
+        List<SaveFavoritePlace> saveFavoritePlaceList = saveFavoritePlaceRepository.findMemberPlaceByPlanNo(planNo);
+
+        List<MapLikeListResponse> likePlaceList = new ArrayList<>();
+
+        for(SaveFavoritePlace saveFavoritePlace : saveFavoritePlaceList){
+            likePlaceList.add(new MapLikeListResponse(saveFavoritePlace.getTitle(), saveFavoritePlace.getFavoritePlace()));
+        }
+
+        return likePlaceList;
+    }
+
+    @Override
+    public List<MapLikeMarkListResponse> likePlaceMarkList(Integer planNo) {
+
+        List<SaveFavoritePlace> saveFavoritePlaceList = saveFavoritePlaceRepository.findMemberPlaceByPlanNo(planNo);
+
+        List<MapLikeMarkListResponse> likePlaceList = new ArrayList<>();
+
+        for(SaveFavoritePlace saveFavoritePlace : saveFavoritePlaceList){
+            likePlaceList.add(new MapLikeMarkListResponse(saveFavoritePlace.getX(), saveFavoritePlace.getY(), saveFavoritePlace.getTitle()));
+        }
+
+        return likePlaceList;
+    }
+
+    @Override
+    public void savePlaceDay(SaveFavoritePlaceDay saveFavoritePlaceDay) {
+
+        SaveFavoritePlace SFPD = saveFavoritePlaceRepository.findPlaceByNo(saveFavoritePlaceDay.getFavoritePlaceNo());
+        SFPD.setDay(saveFavoritePlaceDay.getDay());
+
+        saveFavoritePlaceRepository.save(SFPD);
+    }
+
+    @Override
+    public List<MapLikeListResponse> listPlaceDay(SaveFavoritePlaceDayList saveFavoritePlaceDayList) {
+
+        List<SaveFavoritePlace> likePlaceList = saveFavoritePlaceRepository.findPlaceByDay(saveFavoritePlaceDayList.getDay(), saveFavoritePlaceDayList.getPlanNo());
+
+        List<MapLikeListResponse> likeListResponses = new ArrayList<>();
+
+        for(SaveFavoritePlace saveFavoritePlace : likePlaceList){
+            likeListResponses.add(new MapLikeListResponse(saveFavoritePlace.getTitle(), saveFavoritePlace.getFavoritePlace()));
+        }
+
+        return likeListResponses;
     }
 
     @Override

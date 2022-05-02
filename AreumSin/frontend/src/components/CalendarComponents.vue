@@ -2,27 +2,27 @@
   <v-container>
     <v-row>
       <v-col align="start" align-self="center">
-        <v-btn @click="prev">
+        <v-btn icon @click="prev">
           <v-icon> mdi-chevron-left</v-icon>
         </v-btn>
       </v-col>
       <v-col class="calendar-today" align="center">
         <h3>{{ year }}</h3>
-        <h2>{{ month }}월</h2>
+        <h2 style="color: #f88ea0; font-size: 40px">{{ month }}월</h2>
       </v-col>
       <v-col align="end" align-self="center">
-        <v-btn @click="next">
+        <v-btn icon @click="next">
           <v-icon> mdi-chevron-right</v-icon>
         </v-btn>
       </v-col>
     </v-row>
 
     <v-row class="calendar-title">
-     <v-col align="center" v-for="day in days" :key="day">{{day}}</v-col>
+     <v-col align="center" v-for="day in days" :key="day" style="font-size: 30px">{{day}}</v-col>
     </v-row>
 
     <v-row v-for="(date, idx) in dates" :key="idx">
-      <v-col class="calendar-days" style="height: 100px; width: 100px" v-for="(day, secondIdx) in date" :key="secondIdx" v-on:mouseup.left="doMouseOver">{{day}}</v-col>
+      <v-col class="calendar-days" style="height: 120px; width: 100px" v-for="(day, secondIdx) in date" :key="secondIdx" v-on:mouseup.left="doMouseOver">{{day}}</v-col>
       </v-row>
   </v-container>
 </template>
@@ -60,6 +60,7 @@ export default {
   methods: {
     doMouseOver(){
       alert('로그인 확인 후에 눌렀다!')
+      this.$router.push({name: 'LoginPage'})
     },
     prev() {
       if(this.month !== 1){
@@ -144,10 +145,12 @@ export default {
   height: 50px;
   display: grid;
   border: solid 1px black;
+  border-collapse:collapse;
+  font-size: 20px;
 }
 
 .calendar-days:hover {
-  color: blue;
+  color: pink;
 
 }
 </style>

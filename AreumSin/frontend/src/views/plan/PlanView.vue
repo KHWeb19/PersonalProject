@@ -6,7 +6,7 @@
         <v-btn class="red lighten-1 white--text">cancel</v-btn>
       </v-col>
     </v-row>
-    <PlanPage :days="days"></PlanPage>
+    <PlanPage :days="days" @dates="test"></PlanPage>
 
     <v-row>
       <v-col cols="3">
@@ -27,7 +27,7 @@
         </v-row>
         <v-row>
           <v-col>
-            <PlanPlace/>
+            <PlanPlace :dates="dates" :planNo="planNo"/>
           </v-col>
         </v-row>
 
@@ -59,7 +59,8 @@ export default {
       findName: null,
       data: '',
       planNo: localStorage.getItem('planNo'),
-      id: localStorage.getItem('session')
+      id: localStorage.getItem('session'),
+      dates: [],
     }
   },
   props: {
@@ -74,7 +75,7 @@ export default {
     planPlace: {
       type: String,
       default: ''
-    },
+    }
   },
   methods: {
     onSubmit(payload){
@@ -125,6 +126,9 @@ export default {
           .then((res) => {
             alert(res + '성공');
           })
+    },
+    test(payload){
+      this.dates = payload;
     }
   },
   created() {
