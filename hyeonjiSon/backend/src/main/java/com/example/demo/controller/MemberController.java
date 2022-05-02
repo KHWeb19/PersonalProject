@@ -94,5 +94,13 @@ public class MemberController {
         return memberservice.read(memberNo);
     }
 
+    @DeleteMapping("/{memberNo}")
+    public void remove(
+            @PathVariable("memberNo") Long memberNo) {
+        log.info("remove()");
+
+        memberservice.remove(memberNo);
+    }
+
 }
 

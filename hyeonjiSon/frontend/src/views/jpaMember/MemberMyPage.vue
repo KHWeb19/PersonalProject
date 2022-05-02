@@ -32,11 +32,6 @@ export default {
      ...mapState(['userInfo'])
   },
   created() {
-        this.fetchMember(this.$store.state.userInfo.memberNo)
-      .catch(()=>{
-          alert('로그인 정보 요청 실패')
-          this.$router.push()
-      })
      this.fetchMember(this.$store.state.userInfo.memberNo)
             .catch(() => {
                alert('정보 요청 실패!')
