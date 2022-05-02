@@ -62,9 +62,15 @@ public class Member {
 
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
+    @JsonIgnoreProperties({"my"})
+    @OneToMany(mappedBy = "my", fetch = FetchType.EAGER)
+    private Set<Follow> followings = new HashSet<>();
+
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     @JsonIgnoreProperties({"your"})
     @OneToMany(mappedBy = "your", fetch = FetchType.EAGER)
-    private Set<Follow> followings = new HashSet<>();
+    private Set<Follow> followers = new HashSet<>();
 
     public Member(String memberName, String memberId, String password, String passwordHint) {
         this.memberName = memberName;

@@ -20,12 +20,13 @@ public class Follow {
     @Column(name="no")
     private Long no;
 
-    @JsonBackReference
+    @JsonIgnoreProperties({"boards", "comments", "likes", "followings", "followers"})
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name= "my_no")
     private Member my;
 
-    @JsonIgnoreProperties({"boards", "comments", "likes", "followings"})
+//    @JsonBackReference
+    @JsonIgnoreProperties({"boards", "comments", "likes", "followings", "followers"})
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name= "your_no")
     private Member your;

@@ -24,12 +24,8 @@
                                         params: {memberNo: board.member.memberNo.toString()}}">
                                         {{ board.member.memberId }}
                                 </router-link>
-                                <v-btn icon @click="onFollow(board.member.memberNo)" >
-                                    팔로우
-                                </v-btn>
                             </td>
                             <td v-if="loginInfo.memberNo==board.member.memberNo" align="right" style="padding-right: 12px;"> 
-                            <!-- <td align="right" style="padding-right: 12px;">  -->
                                 <v-menu offset-y min-width="100">
                                     <template v-slot:activator="{ on }">
                                         <v-btn icon v-on="on">
@@ -47,6 +43,32 @@
                                                 <v-btn text block>수정</v-btn>
                                             </router-link>
                                         </v-list-item-title>
+                                        <v-list-item-title> 
+                                            <router-link style="text-decoration: none;" :to="{ name: 'BoardReadPage', params: { boardNo: board.boardNo } }">
+                                                <v-btn text block>게시물로 이동</v-btn>
+                                            </router-link>
+                                        </v-list-item-title>
+                                    </v-list>
+                                </v-menu>
+                            </td>
+                            <td v-else align="right" style="padding-right: 12px;"> 
+                                <v-menu offset-y min-width="100">
+                                    <template v-slot:activator="{ on }">
+                                        <v-btn icon v-on="on">
+                                            <v-icon>
+                                                mdi-dots-horizontal
+                                            </v-icon>
+                                        </v-btn> 
+                                    </template>
+                                    <v-list>
+                                        <v-list-item-title> 
+                                            <v-btn text block color="blue" @click="onFollow(board.member.memberNo)" >팔로우</v-btn>
+                                        </v-list-item-title>
+                                        <v-list-item-title> 
+                                            <router-link style="text-decoration: none;" :to="{ name: 'BoardReadPage', params: { boardNo: board.boardNo } }">
+                                                <v-btn text block>게시물로 이동</v-btn>
+                                            </router-link>
+                                        </v-list-item-title>
                                     </v-list>
                                 </v-menu>
                             </td>
@@ -56,49 +78,7 @@
                                 <v-img width="615px" :src="require(`@/assets/mImage/${board.boardImage}`)"/>
                             </td>
                         </tr >
-                        <!-- <tr v-for="myLike in myLikes" :key="myLike.LikedNo"> -->
-                        
-                                    <!--                                     
-                                    for (myLike in myLikes) {
-                                        if (myLike.board.boardNo.boardNo==board.boardNo) {
-                                        likeButton = true;
-                                    } 
-                                    -->
                         <like-button :board="board" :myLikes="myLikes"/>
-                        <!-- <tr>
-                            <td style="padding: 6px 9px" colspan="3" v-if="button.onLike" >
-                                <v-btn icon @click="onLikes(board.boardNo)" >
-                                    <v-icon  color="black">
-                                        mdi-cards-heart
-                                    </v-icon>
-                                </v-btn>
-                                <router-link style="text-decoration: none; color: grey" :to="{
-                                    name: 'BoardReadPage',
-                                    params: {boardNo: board.boardNo.toString()}}">
-                                    <v-btn icon>
-                                        <v-icon color="black">
-                                            mdi-chat-outline
-                                        </v-icon>
-                                    </v-btn>
-                                </router-link>
-                            </td>
-                            <td style="padding: 6px 9px" colspan="3" v-else>
-                                <v-btn icon @click="onLikes(board.boardNo)" >
-                                    <v-icon  color="black">
-                                        mdi-cards-heart-outline
-                                    </v-icon>
-                                </v-btn>
-                                <router-link style="text-decoration: none; color: grey" :to="{
-                                    name: 'BoardReadPage',
-                                    params: {boardNo: board.boardNo.toString()}}">
-                                    <v-btn icon>
-                                        <v-icon color="black">
-                                            mdi-chat-outline
-                                        </v-icon>
-                                    </v-btn>
-                                </router-link>
-                            </td>
-                        </tr> -->
                         <tr v-if="board.likes.length" align="left">
                             <td colspan="3" style="padding: 0px 0px 8px 16px">
                                 {{ board.likes.length }}명이 좋아합니다
@@ -117,7 +97,6 @@
                                     params: {boardNo: board.boardNo.toString()}}">
                                     댓글 {{ board.comments.length}}개 모두 보기
                                 </router-link>
-                                <!-- {{ board.comments.length}}개 -->
                             </td>
                         </tr>
                         <tr>
