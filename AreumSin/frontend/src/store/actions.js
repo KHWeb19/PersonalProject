@@ -2,7 +2,7 @@ import {
     FETCH_BOARD_COMMENT,
     FETCH_BOARD_LIST,
     FETCH_BOARD_READ,
-    FETCH_BOARD_READ_IMG,
+    FETCH_BOARD_READ_IMG, FETCH_DIARY, FETCH_DIARY_IMG, FETCH_DIARY_LIST,
     FETCH_INVITE_MEMBER,
     FETCH_LIKE_PLACE_LIST,
     FETCH_MAP_MARK_LIST, FETCH_SAVE_PLACE,
@@ -86,5 +86,24 @@ export default {
             .then((res) => {
                 commit(FETCH_SAVE_PLACE, res.data)
             })
+    },
+    fetchDiaryList({commit}, memberId){
+        return axios.post(`http://localhost:7777/myPage/diaryList/${memberId}`)
+            .then((res) => {
+                commit(FETCH_DIARY_LIST, res.data)
+            })
+    },
+    fetchDiary({commit}, diaryNo){
+        return axios.post(`http://localhost:7777/myPage/readDiary/${diaryNo}`)
+            .then((res) => {
+                commit(FETCH_DIARY, res.data)
+            })
+    },
+    fetchDiaryImg({commit}, diaryNo){
+        return axios.post(`http://localhost:7777/myPage/readDiary/img/${diaryNo}`)
+            .then((res) => {
+                commit(FETCH_DIARY_IMG, res.data)
+            })
     }
+
 }

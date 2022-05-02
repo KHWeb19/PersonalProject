@@ -17,5 +17,8 @@ export default {
     dayContentImg: [],
     myPage: null,
     savePlace: [],
+    diaryList: [],
+    diary: null,
+    diaryImg: [],
 
 }
