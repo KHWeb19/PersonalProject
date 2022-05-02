@@ -121,7 +121,7 @@ const routes = [
     }
   },
   {
-    path: '/MyLikesList/:memberNo',
+    path: '/myLikesList/:memberNo',
     name: 'MyLikesList',
     components: {
       default: MyLikesList

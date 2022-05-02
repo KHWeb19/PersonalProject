@@ -57,11 +57,7 @@
       </template>
       <v-list>
           <v-list-item-title> 
-            <router-link style="text-decoration: none;" :to="{
-              name: 'MyProfilePage',
-              params: {memberNo: loginInfo.memberNo.toString()}}">
-              <v-btn text block @click="reload">프로필</v-btn>
-            </router-link>
+              <v-btn text block @click="goProfile(loginInfo.memberNo)">프로필</v-btn>
           </v-list-item-title>
           <v-list-item-title> 
             <router-link style="text-decoration: none;" :to="{
@@ -91,21 +87,21 @@ import { mapActions, mapState } from 'vuex'
 import axios from 'axios';
 
 Vue.use(cookies)
-
-  export default {
-    name: 'MenuBar',
-    data: () => ({
-      loginInfo: JSON.parse(localStorage.getItem('loginInfo')),
-      imageChange: JSON.parse(localStorage.getItem('imageChange')),
-      searchMembers: [],
-      keyWord: ''
-    }),
-    computed: {
-      ...mapState(['member']),
+export default {
+  name: 'MenuBar',
+  data: () => ({
+    loginInfo: JSON.parse(localStorage.getItem('loginInfo')),
+    imageChange: JSON.parse(localStorage.getItem('imageChange')),
+    searchMembers: [],
+    keyWord: ''
+  }),
+  computed: {
+    ...mapState(['member']),
   },
-    methods: {
-      ...mapActions(['fetchMember']),
-    reload() {
+  methods: {
+    ...mapActions(['fetchMember']),
+    goProfile(memberNo) {
+      this.$router.push(`/${memberNo}`)
       history.go(0);
     },
     onSearch() {

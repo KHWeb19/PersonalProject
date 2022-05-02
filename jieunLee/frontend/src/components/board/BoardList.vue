@@ -62,7 +62,7 @@
                                     </template>
                                     <v-list>
                                         <v-list-item-title> 
-                                            <v-btn text block color="blue" @click="onFollow(board.member.memberNo)" >팔로우</v-btn>
+                                            <follow-button :board="board" :myFollows="myFollows"/>
                                         </v-list-item-title>
                                         <v-list-item-title> 
                                             <router-link style="text-decoration: none;" :to="{ name: 'BoardReadPage', params: { boardNo: board.boardNo } }">
@@ -89,7 +89,7 @@
                                 <b>{{ board.member.memberId }}</b>&nbsp;{{ board.content }}
                             </td>
                         </tr>
-                        
+                        <!-- {{myFollows[0].your.memberNo}} {{board.member.memberNo}} -->
                         <tr v-if="board.comments.length"> 
                             <td colspan="3" style="padding-left: 16px;">
                                 <router-link style="text-decoration: none; color: grey" :to="{
@@ -137,12 +137,14 @@
 </template>
 
 <script>
+import FollowButton from '@/components/likes/FollowButton'
 import LikeButton from '@/components/likes/LikeButton'
 import { mapState, mapActions } from 'vuex'
 import axios from 'axios'
 export default {
     name: 'BoardList',
     components : {
+        FollowButton,
         LikeButton
     },
     props: {
@@ -158,12 +160,15 @@ export default {
     },
     computed: {
         ...mapState(['myLikes']),
+        ...mapState(['myFollows']),
     },
     mounted () {
         this.fetchMyLikesList(this.loginInfo.memberNo)
+        this.fetchMyFollowList(this.loginInfo.memberNo)
     },
     methods: {
         ...mapActions(['fetchMyLikesList']),
+        ...mapActions(['fetchMyFollowList']),
         onDelete(boardNo) {
             console.log(boardNo)
             this.$emit('click', {boardNo})

@@ -17,7 +17,7 @@
                             params: {memberNo: member.memberNo.toString()}}">
                             <v-btn v-if="member.memberNo==loginInfo.memberNo" style="margin: 4px 0px 0px 10px;" color="white">프로필 편집</v-btn>
                         </router-link>
-                        <v-btn v-if="member.memberNo!=loginInfo.memberNo" style="margin: 4px 0px 0px 10px;" depressed color="primary" @click="onFollow(member.memberNo)">팔로우</v-btn>
+                        <v-btn v-if="member.memberNo!=loginInfo.memberNo" style="margin-top: 4px" depressed color="primary" @click="onFollow(member.memberNo)"><b>팔로우</b></v-btn>
                     </div>
                     <br/>
                     <div style="padding-bottom: 20px;">
@@ -48,7 +48,7 @@
                                                         </div>
                                                         <div>
                                                             <td align="left" >
-                                                                <v-btn text @click="profile(follow.my.memberNo)">
+                                                                <v-btn text @click="goProfile(follow.my.memberNo)">
                                                                     <div>
                                                                         <b>{{ follow.my.memberId }}</b>
                                                                         <div style="color: gray">{{ follow.my.memberName }}</div>
@@ -97,7 +97,7 @@
                                                         </div>
                                                         <div>
                                                             <td align="left" >
-                                                                <v-btn text @click="profile(follow.your.memberNo)">
+                                                                <v-btn text @click="goProfile(follow.your.memberNo)">
                                                                     <div>
                                                                         <b>{{ follow.your.memberId }}</b>
                                                                         <div style="color: gray">{{ follow.your.memberName }}</div>
@@ -143,11 +143,7 @@
 
 <script>
 import axios from 'axios'
-// import MyFollowList from '@/components/follow/MyFollowList.vue'
-import { mapActions, mapState } from 'vuex'
-
 export default {
-    // components: { MyFollowList },
     name: 'MyProfile',
     props: {
         member: {
@@ -163,24 +159,8 @@ export default {
             loginInfo: JSON.parse(localStorage.getItem('loginInfo'))
         }
     },
-    computed: {
-        ...mapState(['myFollows']),
-    },
-    created() {
-
-        this.fetchMyFollowList(this.member.memberNo)
-            .catch(()=>{
-                alert('팔로우 정보 요청 실패')
-                this.$router.push()
-            })
-    },
-    mounted () {
-        this.fetchMyFollowList(this.member.memberNo)
-        
-    },
     methods: {
-        ...mapActions(['fetchMyFollowList']),
-        profile(memberNo) {
+        goProfile(memberNo) {
             this.$router.push(`/${memberNo}`)
             history.go(0);
         },

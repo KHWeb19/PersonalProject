@@ -4,7 +4,7 @@
         {{myLikes}}
     </div> -->
     <td style="padding: 6px 9px" colspan="3" v-if="onLike" >
-        <v-btn icon @click="onLikes(board.boardNo)" >
+        <v-btn icon @click="onLikes" >
             <v-icon  color="black">
                 mdi-cards-heart
             </v-icon>
@@ -21,7 +21,7 @@
     </td>
 
     <td style="padding: 6px 9px" colspan="3" v-else >
-        <v-btn icon @click="onLikes(board.boardNo)" >
+        <v-btn icon @click="onLikes" >
             <v-icon  color="black">
                 mdi-cards-heart-outline
             </v-icon>

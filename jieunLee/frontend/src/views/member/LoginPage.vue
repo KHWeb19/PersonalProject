@@ -40,6 +40,7 @@ export default {
                             this.$cookies.set("user", res.data, 300)
                             this.isLogin = true
                             this.$router.push({name: 'HomeView'})
+                            history.go(0);
                             localStorage.setItem("loginInfo", JSON.stringify(res.data))
                         } else {
                             alert('로그인 실패!')
