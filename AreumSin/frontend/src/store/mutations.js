@@ -8,8 +8,8 @@ import {
     FETCH_LIKE_PLACE_LIST,
     FETCH_MAP_MARK_LIST,
     FETCH_PLACE_LIST,
-    FETCH_PLACE_LIST_DAY,
-    FETCH_SEARCH_LIKE_PLACE_LIST,
+    FETCH_PLACE_LIST_DAY, FETCH_SAVE_PLACE,
+    FETCH_SEARCH_LIKE_PLACE_LIST, FETCH_USER_INFO,
     FETCH_USER_PLANS,
     FETCH_VOTE_CONTENT
 } from './mutation-types'
@@ -74,6 +74,12 @@ export default {
     },
     [FETCH_DAY_CONTENT_IMG](state, dayContentImg){
         state.dayContentImg = dayContentImg;
+    },
+    [FETCH_USER_INFO](state, myPage) {
+        state.myPage = myPage;
+    },
+    [FETCH_SAVE_PLACE](state, savePlace){
+        state.savePlace = savePlace;
     }
 
 }

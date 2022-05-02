@@ -5,8 +5,8 @@ import {
     FETCH_BOARD_READ_IMG,
     FETCH_INVITE_MEMBER,
     FETCH_LIKE_PLACE_LIST,
-    FETCH_MAP_MARK_LIST,
-    FETCH_SEARCH_LIKE_PLACE_LIST,
+    FETCH_MAP_MARK_LIST, FETCH_SAVE_PLACE,
+    FETCH_SEARCH_LIKE_PLACE_LIST, FETCH_USER_INFO,
     FETCH_USER_PLANS,
     FETCH_VOTE_CONTENT
 
@@ -73,6 +73,18 @@ export default {
         return axios.get(`http://localhost:7777/planDay/mapLikeMarkList/${planNo}`)
             .then((res) => {
                 commit(FETCH_MAP_MARK_LIST, res.data)
+            })
+    },
+    fetchUserInfo({commit}, memberId){
+        return axios.post(`http://localhost:7777/myPage/${memberId}`)
+            .then((res) => {
+                commit(FETCH_USER_INFO, res.data)
+            })
+    },
+    fetchSavePlace({commit}, memberId){
+        return axios.post(`http://localhost:7777/myPage/savePlace/${memberId}`)
+            .then((res) => {
+                commit(FETCH_SAVE_PLACE, res.data)
             })
     }
 }

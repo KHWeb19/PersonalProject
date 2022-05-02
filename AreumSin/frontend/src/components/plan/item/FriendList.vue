@@ -2,7 +2,7 @@
   <v-container>
     <v-row class="ps-2">
       <v-col>
-        <v-card class="pa-8">
+        <v-card class="pa-8" id="friend">
 
           <table width="100%">
             <tr>
@@ -69,5 +69,8 @@ td{
   border-bottom: none;
   padding-left: 10px;
   text-align: center;
+}
+#friend {
+  height: 260px;
 }
 </style>

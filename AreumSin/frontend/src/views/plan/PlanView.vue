@@ -1,12 +1,12 @@
 <template>
   <v-container>
     <MainCategory></MainCategory>
-    <v-row>
+    <v-row style="margin-bottom: 5px;">
       <v-col align="end" style="padding-right: 30px">
         <v-btn class="red lighten-1 white--text">cancel</v-btn>
       </v-col>
     </v-row>
-    <PlanPage :days="days" @dates="test"></PlanPage>
+    <PlanPage style="margin-bottom: 18px" :days="days" @dates="test"></PlanPage>
 
     <v-row>
       <v-col cols="3">
@@ -99,6 +99,7 @@ export default {
         .then((res) => {
           console.log(res);
         })
+      this.$router.go();
     },
     addFriend(payload){
       const{friendId} = payload;
@@ -118,6 +119,7 @@ export default {
         .then((res) => {
           alert(res + '성공');
         })
+      this.$router.go();
     },
     voteBad(payload){
       const {voteNo} = payload;
@@ -126,6 +128,7 @@ export default {
           .then((res) => {
             alert(res + '성공');
           })
+      this.$router.go();
     },
     test(payload){
       this.dates = payload;

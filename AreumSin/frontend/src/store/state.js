@@ -15,4 +15,7 @@ export default {
     placeLikeDayList: [],
     placeList: [],
     dayContentImg: [],
+    myPage: null,
+    savePlace: [],
+
 }

@@ -5,7 +5,11 @@ import SearchView from "@/views/SearchView";
 import BoardView from "@/views/board/BoardView";
 import BoardReadView from "@/views/board/BoardReadView";
 import BoardModifyView from "@/views/board/BoardModifyView";
-import MyPage from "@/views/MyPage";
+import MyPage from "@/views/myPage/MyPage";
+import MyPageModify from "@/views/myPage/MyPageModify";
+import MyPagePlaceList from "@/views/myPage/MyPagePlaceList";
+import MyPageDiary from "@/views/myPage/MyPageDiary";
+import MyPageKeepADiary from "@/views/myPage/MyPageKeepADiary";
 import LoginPage from "@/views/login/LoginPage";
 import RegisterPage from "@/views/login/RegisterPage";
 import IdPwSearchPage from "@/views/login/IdPwSearchPage";
@@ -95,6 +99,26 @@ const routes = [
     component: PlanMapListView,
     props: true
   },
+  {
+    path: '/myPageModify',
+    name: 'MyPageModify',
+    component: MyPageModify
+  },
+  {
+    path: '/myPagePlaceList',
+    name: 'MyPagePlaceList',
+    component: MyPagePlaceList
+  },
+  {
+    path: '/myPageDiary',
+    name: 'MyPageDiary',
+    component: MyPageDiary
+  },
+  {
+    path: '/keepADiary',
+    name: 'MyPageKeepADiary',
+    component: MyPageKeepADiary
+  }
 ]
 
 const router = new VueRouter({

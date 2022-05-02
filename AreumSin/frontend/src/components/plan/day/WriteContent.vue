@@ -34,7 +34,6 @@ export default {
       planNo: localStorage.getItem('planNo'),
       files: '',
       fileLength: 0,
-      uploadImageUrl: [],
     }
   },
   methods:{
