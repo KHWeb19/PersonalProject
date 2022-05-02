@@ -60,7 +60,7 @@
             <router-link style="text-decoration: none;" :to="{
               name: 'MyProfilePage',
               params: {memberNo: loginInfo.memberNo.toString()}}">
-              <v-btn text block>프로필</v-btn>
+              <v-btn text block @click="reload">프로필</v-btn>
             </router-link>
           </v-list-item-title>
           <v-list-item-title> 
@@ -100,26 +100,29 @@ Vue.use(cookies)
       searchMembers: [],
       keyWord: ''
     }),
-      computed: {
-    ...mapState(['member']),
+    computed: {
+      ...mapState(['member']),
   },
     methods: {
-    ...mapActions(['fetchMember']),
+      ...mapActions(['fetchMember']),
+    reload() {
+      history.go(0);
+    },
     onSearch() {
-            const keyWord = this.keyWord
-            axios.post('http://localhost:7777/member/search',  { keyWord })
-              .then((res) => {
-                  this.$router.push({name: 'MemberList',
-                  params: { keyWord:keyWord, searchMembers: res.data} })
-              })
-        },
-      logout() {
-        localStorage.removeItem("loginInfo")
-        localStorage.removeItem("imageChange")
-        this.$cookies.remove("user")
-        this.$router.push({name: 'LoginPage'})
-        history.go(0);
-      }
+      const keyWord = this.keyWord
+      axios.post('http://localhost:7777/member/search',  { keyWord })
+        .then((res) => {
+            this.$router.push({name: 'MemberList',
+            params: { keyWord:keyWord, searchMembers: res.data} })
+        })
+    },
+    logout() {
+      localStorage.removeItem("loginInfo")
+      localStorage.removeItem("imageChange")
+      this.$cookies.remove("user")
+      this.$router.push({name: 'LoginPage'})
+      history.go(0);
     }
   }
+}
 </script>

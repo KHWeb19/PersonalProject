@@ -22,10 +22,58 @@
                     <br/>
                     <div style="padding-bottom: 20px;">
                         게시물 <b style="padding-right: 30px">{{myBoards.length}}</b>
-                        팔로워 <b style="padding-right: 30px">{{myBoards.length}}</b>
-                        <v-dialog persisten max-width="400" min-height="800">
+                        <v-dialog persisten max-width="400">
                             <template v-slot:activator="{ on }">
-                                <span v-on="on" style="cursor:pointer">팔로우 <b>{{myBoards.length}}</b></span>
+                                <span v-on="on" style="cursor:pointer">팔로워 <b style="padding-right: 30px">{{member.followers.length}}</b></span>
+                            </template>
+                            <template v-slot:default="dialog">
+                                <v-card>
+                                    <v-card-title class="headline">
+                                        팔로워
+                                    </v-card-title>
+                                    <v-card-text>
+                                        <v-row>
+                                            <v-col style="height: 320px; text-align: center;" v-if="!member.followers || (Array.isArray(member.followers) && member.followers.length === 0)">
+                                            팔로우한 회원이 없습니다!
+                                            </v-col>
+                                            <v-col style="height: 320px;" v-else v-for="follow in member.followers" :key="follow.no"  cols="4">
+                                                    <div style="display: flex; padding: 3px 0px">
+                                                        <div>
+                                                            <td style="padding-top: 1px">
+                                                                <div style="border-radius: 70%; overflow: hidden; width: 33px ">
+                                                                    <v-img v-if="follow.my.imageName" width="33" :src="require(`@/assets/mImage/${myFollow.my.imageName}`)"/>
+                                                                    <v-img v-else width="33" src="@/assets/profile.jpg"/>
+                                                                </div>
+                                                            </td>
+                                                        </div>
+                                                        <div>
+                                                            <td align="left" >
+                                                                <v-btn text @click="profile(follow.my.memberNo)">
+                                                                    <div>
+                                                                        <b>{{ follow.my.memberId }}</b>
+                                                                        <div style="color: gray">{{ follow.my.memberName }}</div>
+                                                                    </div>
+                                                                </v-btn>
+                                                            </td>
+                                                        </div>
+                                                    </div>
+
+                                                <!-- </router-link> -->
+                                            </v-col>
+                                        </v-row>
+                                    </v-card-text>
+                                    <v-card-actions>
+                                        <v-spacer></v-spacer>
+                                        <v-btn text @click="dialog.value=false">
+                                            닫기
+                                        </v-btn>
+                                    </v-card-actions>
+                                </v-card>
+                            </template>
+                        </v-dialog>
+                        <v-dialog persisten max-width="400">
+                            <template v-slot:activator="{ on }">
+                                <span v-on="on" style="cursor:pointer">팔로우 <b>{{member.followings.length}}</b></span>
                             </template>
                             <template v-slot:default="dialog">
                                 <v-card>
@@ -37,27 +85,29 @@
                                             <v-col style="height: 320px; text-align: center;" v-if="!member.followings || (Array.isArray(member.followings) && member.followings.length === 0)">
                                             팔로우한 회원이 없습니다!
                                             </v-col>
-                                            <v-col v-else v-for="follow in member.followings" :key="follow.no"  cols="4">
-                                                <!-- <router-link style="text-decoration: none; color: black" :to="{
-                                                        name: 'MyProfilePage',
-                                                        params: {memberNo: follow.your.memberNo.toString()}}"> -->
-                                                <v-btn @click="profile(follow.your.memberNo)">
+                                            <v-col style="height: 320px;" v-else v-for="follow in member.followings" :key="follow.no"  cols="4">
                                                     <div style="display: flex; padding: 3px 0px">
                                                         <div>
-                                                            <td style="padding: 10px 5px 0px 15px">
-                                                                <div style="border-radius: 70%; overflow: hidden; width: 44px ">
-                                                                    <v-img v-if="follow.your.imageName" width="44" :src="require(`@/assets/mImage/${myFollow.your.imageName}`)"/>
-                                                                    <v-img v-else width="44" src="@/assets/profile.jpg"/>
+                                                            <td style="padding-top: 1px">
+                                                                <div style="border-radius: 70%; overflow: hidden; width: 33px ">
+                                                                    <v-img v-if="follow.your.imageName" width="33" :src="require(`@/assets/mImage/${myFollow.your.imageName}`)"/>
+                                                                    <v-img v-else width="33" src="@/assets/profile.jpg"/>
                                                                 </div>
                                                             </td>
                                                         </div>
                                                         <div>
-                                                            <td align="left" style="width: 400px; padding: 8px">
-                                                                <b>{{ follow.your.memberId }}</b><br/>{{ follow.your.memberName }}
+                                                            <td align="left" >
+                                                                <v-btn text @click="profile(follow.your.memberNo)">
+                                                                    <div>
+                                                                        <b>{{ follow.your.memberId }}</b>
+                                                                        <div style="color: gray">{{ follow.your.memberName }}</div>
+                                                                    </div>
+                                                                </v-btn>
                                                             </td>
                                                         </div>
                                                     </div>
-                                                </v-btn>
+
+                                                <!-- </router-link> -->
                                             </v-col>
                                         </v-row>
                                     </v-card-text>
@@ -126,11 +176,11 @@ export default {
     },
     mounted () {
         this.fetchMyFollowList(this.member.memberNo)
+        
     },
     methods: {
         ...mapActions(['fetchMyFollowList']),
         profile(memberNo) {
-            console.log(memberNo)
             this.$router.push(`/${memberNo}`)
             history.go(0);
         },
