@@ -2,22 +2,23 @@
    <div >
       <v-layout justify-center>
 
-            <v-dialog  v-model="findPw" resisten max-width="500px">
+            <v-dialog resisten max-width="500px">
                <template v-slot:activator="{ on }">
-               <v-btn id="findPw" v-on="on">
+               <v-btn id="btn" v-on="on">
                   회원 탈퇴
                </v-btn>
                </template>
                <v-card >
-                  <v-card-title>
+                  <v-card-title id="title">
                      정말 탈퇴하시겠습니까?
                   </v-card-title>
                <br>
                   <v-card-actions>
-                     <v-btn color="blue" text @click="onDelete">
+                     <v-spacer></v-spacer>
+                     <v-btn id="btn" text @click="onDelete">
                            예
                      </v-btn>
-                     <v-btn color="blue" text @click="location.href=''">
+                     <v-btn id="btn" text @click="location.href=''">
                            아니오
                      </v-btn>
                   </v-card-actions>
@@ -65,10 +66,20 @@ export default {
 </script>
 
 <style scoped>
+#title{
+   color: #907bb0;
+   font-weight: bold;
+}
     #comparePw {
       width: 300px;
       margin: 10px;
       border: 2px solid;
       font-size: 100%;
     }
+    #btn{
+    color: white;
+    background-color: darkkhaki;
+    width: 100px;
+    box-shadow: none;  
+}
 </style>

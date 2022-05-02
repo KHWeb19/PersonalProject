@@ -124,11 +124,19 @@ public class MemberServiceImpl implements MemberService {
     public void remove(Integer boardNo) {
         repository.deleteById(Long.valueOf(boardNo));
     }
-     */
+
 
     @Override
-    public void modify(Member member){memberRepository.save(member);}
+    public void modify(MemberRequest memberRequest) {
+        Optional<Member> maybeMember =memberRepository.findByUserId(memberRequest.getId());
+        Member member =  maybeMember.get();
 
+        String encodedPassword = passwordEncoder.encode(memberRequest.getPw());
+        member.setPassword(encodedPassword);
+
+        memberRepository.save(member);
+    }
+     */
     @Override
     public void remove(Long memberNo){
         memberRepository.deleteById(Long.valueOf(memberNo));
