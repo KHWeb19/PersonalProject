@@ -50,6 +50,22 @@
                                 </v-list>
                             </v-menu>
                         </td>
+                        <td v-else align="right" style="padding-right: 12px;"> 
+                            <v-menu offset-y min-width="100">
+                                <template v-slot:activator="{ on }">
+                                    <v-btn icon v-on="on">
+                                        <v-icon>
+                                            mdi-dots-horizontal
+                                        </v-icon>
+                                    </v-btn> 
+                                </template>
+                                <v-list>
+                                    <v-list-item-title> 
+                                        <follow-button :board="board" :myFollows="myFollows"/>
+                                    </v-list-item-title>
+                                </v-list>
+                            </v-menu>
+                        </td>
                     </tr>
                     <tr>
                         <td colspan="3">
@@ -222,10 +238,12 @@
 </template>
 
 <script>
+import FollowButton from '@/components/likes/FollowButton'
 import { mapState, mapActions } from 'vuex'
 import axios from 'axios'
 export default {
     name: 'BoardRead',
+    components: {FollowButton},
     props: {
         // board: {
         //     type: Object,
@@ -252,13 +270,16 @@ export default {
     computed: {
     ...mapState(['board']),
     ...mapState(['like']),
+    ...mapState(['myFollows']),
     },
     mounted () {
         this.fetchLike({boardNo: this.boardNo, memberNo: this.loginInfo.memberNo})
+        this.fetchMyFollowList(this.loginInfo.memberNo)
     },
     methods: {
         ...mapActions(['fetchComment']),
         ...mapActions(['fetchLike']),
+        ...mapActions(['fetchMyFollowList']),
         // getItemControl() {
         //     return `item.actions`;
         // },

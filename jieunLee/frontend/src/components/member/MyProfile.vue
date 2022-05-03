@@ -17,7 +17,10 @@
                             params: {memberNo: member.memberNo.toString()}}">
                             <v-btn v-if="member.memberNo==loginInfo.memberNo" style="margin: 4px 0px 0px 10px;" color="white">프로필 편집</v-btn>
                         </router-link>
-                        <v-btn v-if="member.memberNo!=loginInfo.memberNo" style="margin-top: 4px" depressed color="primary" @click="onFollow(member.memberNo)"><b>팔로우</b></v-btn>
+                        <span v-if="member.memberNo!=loginInfo.memberNo">
+                            <v-btn text color="blue" style="margin-top: 4px" @click="onFollow(member.memberNo)" v-if="!follow">팔로우</v-btn>   
+                            <v-btn text color="red" style="margin-top: 4px" @click="onFollow(member.memberNo)" v-else>팔로우 취소</v-btn> 
+                        </span>
                     </div>
                     <br/>
                     <div style="padding-bottom: 20px;">
@@ -142,6 +145,7 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
 import axios from 'axios'
 export default {
     name: 'MyProfile',
@@ -156,10 +160,24 @@ export default {
     },
     data() {
         return {
-            loginInfo: JSON.parse(localStorage.getItem('loginInfo'))
+            loginInfo: JSON.parse(localStorage.getItem('loginInfo')),
+                        follow: ''
+        }
+    },
+    computed: {
+    ...mapState(['myFollows']),
+    },
+    mounted () {
+        this.fetchMyFollowList(this.loginInfo.memberNo)
+        this.follow = false
+        for(let i=0; i<this.member.followers.length; i++) {
+            if (this.member.followers[i].my.memberNo==this.loginInfo.memberNo) {
+                this.follow = true
+            } 
         }
     },
     methods: {
+        ...mapActions(['fetchMyFollowList']),
         goProfile(memberNo) {
             this.$router.push(`/${memberNo}`)
             history.go(0);

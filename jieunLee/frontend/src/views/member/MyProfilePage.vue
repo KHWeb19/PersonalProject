@@ -42,16 +42,16 @@ export default {
   },
   created() {
     this.fetchMember(this.memberNo)
-      .catch(()=>{
-          alert('로그인 정보 요청 실패')
-          this.$router.push()
-      })
+      // .catch(()=>{
+          // alert('로그인 정보 요청 실패')
+          // this.$router.push()
+          
+      // })
     this.fetchBoardMyList(this.memberNo)
       .catch(()=>{
-          alert('게시판 정보 요청 실패')
-          this.$router.push()
+          // alert('게시판 정보 요청 실패')
+          this.$router.push('/')
       })
-
   },
   mounted () {
     this.fetchBoardMyList(this.memberNo)

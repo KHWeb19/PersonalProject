@@ -25,7 +25,7 @@ export default {
     AccountsCategory,
     MenuBar
   },
-        props: {
+      props: {
         memberNo: {
             type: String,
             require: true
@@ -37,7 +37,7 @@ export default {
   },
   methods: {
     ...mapActions(['fetchMember']),
-        onSubmit(payload) {
+    onSubmit(payload) {
       const {password} = payload
       axios.put(`http://localhost:7777/member/pw/${this.memberNo}`, 
       {memberName: this.member.memberName, memberId: this.member.memberId, password, passwordHint: this.member.passwordHint, imageName: this.member.imageName, memberWeb: this.member.memberWeb, memberIntro: this.member.memberIntro, regDate: this.member.regDate})

@@ -30,7 +30,8 @@ export default {
                 })
     },
     fetchSearchMemberList ({ commit }) {
-        return axios.get('http://localhost:7777/member/search')
+        //스프링에서 Post니까 바꿔줬는데 문제안생기나?
+        return axios.post('http://localhost:7777/member/search')
                 .then((res) => {
                     commit(FETCH_SEARCH_MEMBER_LIST, res.data)
                 })

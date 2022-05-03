@@ -4,13 +4,13 @@
       <menu-bar/>
       <hr style="border: 0; height: 1px; background: #d8d8d8; "/>
     </div>
-    <board-list :boards="boards" @click="onDelete" @submit="onSubmit"/>
+    <my-follow-list :boards="boards" @click="onDelete" @submit="onSubmit"/>
   </div>
 </template>
 
 <script>
 import MenuBar from '@/components/MenuBar.vue'
-import BoardList from '@/components/board/BoardList.vue'
+import MyFollowList from '@/components/board/MyFollowList.vue'
 import { mapState, mapActions } from 'vuex'
 import axios from 'axios'
 
@@ -18,7 +18,7 @@ export default {
   name: 'HomeView',
   components: {
     MenuBar,
-    BoardList,
+    MyFollowList,
     },
     data() {
         return {

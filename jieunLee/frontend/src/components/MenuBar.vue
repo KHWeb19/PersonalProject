@@ -38,6 +38,13 @@
       </router-link>
     </v-btn>
     <v-btn icon large>
+      <router-link style="text-decoration: none;" :to="{name: 'BoardListPage'}">
+        <v-icon color="black">
+          mdi-compass-outline
+        </v-icon>
+      </router-link>
+    </v-btn>
+    <v-btn icon large>
       <router-link style="text-decoration: none;" :to="{name: 'MyLikesList',
               params: {memberNo: loginInfo.memberNo.toString()}}">
         <v-icon color="black">
@@ -100,6 +107,7 @@ export default {
   },
   methods: {
     ...mapActions(['fetchMember']),
+    ...mapActions(['fetchMyFollowList']),
     goProfile(memberNo) {
       this.$router.push(`/${memberNo}`)
       history.go(0);

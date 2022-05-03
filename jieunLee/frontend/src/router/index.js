@@ -12,6 +12,7 @@ import MyProfilePage from '@/views/member/MyProfilePage'
 import AccountsEditPage from '@/views/member/AccountsEditPage'
 import PasswordEditPage from '@/views/member/PasswordEditPage'
 
+import BoardListPage from '@/views/board/BoardListPage'
 import BoardRegisterPage from '@/views/board/BoardRegisterPage'
 import BoardReadPage from '@/views/board/BoardReadPage'
 import BoardModifyPage from '@/views/board/BoardModifyPage'
@@ -94,6 +95,11 @@ const routes = [
     props: {
       default: true
     }
+  },
+  {
+    path: '/boardList',
+    name: 'BoardListPage',
+    component: BoardListPage
   },
   {
     path: '/boardRegister',
