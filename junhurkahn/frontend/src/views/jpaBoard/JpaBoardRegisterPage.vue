@@ -59,7 +59,7 @@ export default {
     methods: {
         onSubmit (payload) {
             const { title, content, writer } = payload
-            axios.post('http://localhost:7777/62th/board/register', { title, writer, content })
+            axios.post('http://localhost:7777/62th/board/register?_page=1&_limit=5', { title, writer, content })
                     .then(() => {
                         this.$router.push({
                             name: 'JpaBoardListPage'
