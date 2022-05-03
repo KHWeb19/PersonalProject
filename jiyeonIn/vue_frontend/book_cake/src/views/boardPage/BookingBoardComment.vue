@@ -72,11 +72,12 @@ import BookingBoardCocomentForm from '../../components/boardPage/BookingBoardCoc
                         })
             },
             onSubmit2 (payload) {
-                const { checkCommentNo, id, comments, files1 } = payload
+                const { parentNo, checkCommentNo, id, comments, files1 } = payload
                 
                 let formData = new FormData()
 
                 let fileInfo = {
+                    parentNo: parentNo,
                     commentNo: checkCommentNo,
                     id : id,
                     comments: comments

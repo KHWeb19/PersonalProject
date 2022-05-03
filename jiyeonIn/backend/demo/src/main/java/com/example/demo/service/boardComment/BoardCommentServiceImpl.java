@@ -34,7 +34,16 @@ public class BoardCommentServiceImpl implements BoardCommentService {
         Optional<BookingInfo> bookingInfo = bookingRepository.findById(info.getBookingNo());
         BookingInfo bookingInfo1 = bookingInfo.get();
 
-        BoardComment boardComment = new BoardComment(info.getId(),info.getComments(),putLink,bookingInfo1 );
+        Long findNoParent = repository.findMax(info.getBookingNo());
+        Long findNoChild = 0l;
+
+        if(findNoParent == null) {
+            findNoParent = 1l;
+        }else {
+            findNoParent +=1l;
+        }
+
+        BoardComment boardComment = new BoardComment(info.getId(),info.getComments(),putLink,findNoParent, findNoChild, bookingInfo1 );
         repository.save(boardComment);
     }
 
@@ -45,7 +54,16 @@ public class BoardCommentServiceImpl implements BoardCommentService {
         BookingInfo bookingInfo2 = bookingInfo.get();
         log.info("bookingInfo2 :"+bookingInfo2);
 
-        BoardComment boardComment2 = new BoardComment(info.getId(),info.getComments(), bookingInfo2);
+        Long findNoParent = repository.findMax(info.getBookingNo());
+        Long findNoChild = 0l;
+
+        if(findNoParent == null) {
+            findNoParent = 1l;
+        }else {
+            findNoParent +=1l;
+        }
+
+        BoardComment boardComment2 = new BoardComment(info.getId(),info.getComments(), findNoParent, findNoChild, bookingInfo2);
         repository.save(boardComment2);
 
     }
@@ -63,7 +81,12 @@ public class BoardCommentServiceImpl implements BoardCommentService {
         Optional<BookingInfo> bookingInfo = bookingRepository.findById(info.getBookingNo());
         BookingInfo bookingInfo1 = bookingInfo.get();
 
-        BoardComment boardComment = new BoardComment(info.getId(),info.getComments(),putLink,bookingInfo1 );
+        Long findNoParent = info.getParentNo();
+        Long findNoChild = repository.findMaxParent(findNoParent);
+
+        findNoChild+=1l;
+
+        BoardComment boardComment = new BoardComment(info.getId(),info.getComments(),putLink,findNoParent, findNoChild, bookingInfo1 );
         repository.save(boardComment);
     }
 
@@ -73,12 +96,13 @@ public class BoardCommentServiceImpl implements BoardCommentService {
         BookingInfo bookingInfo2 = bookingInfo.get();
         log.info("bookingInfo2 :"+bookingInfo2);
 
-        Optional<BoardComment> boardComment = repository.findById(info.getCommentNo());
-        BoardComment boardComment1 = boardComment.get();
+        Long findNoParent = info.getParentNo();
+        Long findNoChild = repository.findMaxParent(findNoParent);
 
-        BoardComment boardComment2 = new BoardComment(info.getId(),info.getComments(), bookingInfo2);
-        boardComment1.setParent(boardComment2);
+        findNoChild+=1l;
 
-        repository.save(boardComment1);
+        BoardComment boardComment2 = new BoardComment(info.getId(),info.getComments(), findNoParent, findNoChild, bookingInfo2);
+        repository.save(boardComment2);
+
     }
 }

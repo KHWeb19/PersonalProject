@@ -12,5 +12,6 @@ public class BoardCommentRequest {
     private String id;
     private String comments;
     private Long bookingNo;
+    private Long parentNo;
 
 }

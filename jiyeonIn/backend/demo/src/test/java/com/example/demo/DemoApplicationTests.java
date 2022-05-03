@@ -24,14 +24,17 @@ class DemoApplicationTests {
 		Optional<BookingInfo> bookingInfo = bookingRepository.findById(11L);
 		BookingInfo bookingInfo2 = bookingInfo.get();
 
-		Optional<BoardComment> boardComment = boardCommentRepository.findById(3L);
-		BoardComment boardComment1 = boardComment.get();
+		Long findNoParent = boardCommentRepository.findMax(11l);
+		Long findNoChild = 0l;
 
-		BoardComment boardComment2 = new BoardComment("manager","sdf", bookingInfo2);
+		if(findNoParent == null) {
+			findNoParent = 1l;
+		}else {
+			findNoParent +=1l;
+		}
 
-		BoardComment boardComment3 = new BoardComment(boardComment1.getId(), boardComment1.getComments(),bookingInfo2,boardComment2);
-
-		boardCommentRepository.save(boardComment3);
+		BoardComment boardComment2 = new BoardComment("manager","sdf", findNoParent, 0l, bookingInfo2);
+		boardCommentRepository.save(boardComment2);
 
 	}
 

@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "board_comment")
 public class BoardComment {
@@ -38,13 +38,11 @@ public class BoardComment {
     @Column(length = 128, nullable = true)
     private String commentLinkInfo;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parent_id")
-    private BoardComment parent;
+    @Column(nullable = false)
+    private Long parentNo;
 
-    @Builder.Default
-    @OneToMany(mappedBy = "parent", orphanRemoval = true)
-    private List<BoardComment> children = new ArrayList<>();
+    @Column(nullable = false)
+    private Long childrenNo;
 
 
     @CreatedDate
@@ -62,10 +60,12 @@ public class BoardComment {
         this.commentLinkInfo = commentLinkInfo;
     }
 
-    public BoardComment(String id, String comments, String commentLinkInfo, BookingInfo info){
+    public BoardComment(String id, String comments, String commentLinkInfo, Long parentNo, Long childrenNo, BookingInfo info){
         this.id = id;
         this.comments = comments;
         this.commentLinkInfo = commentLinkInfo;
+        this.parentNo = parentNo;
+        this.childrenNo = childrenNo;
         bookingInfo = info;
     }
 
@@ -74,25 +74,12 @@ public class BoardComment {
         this.comments = comments;
     }
 
-    public BoardComment(String id, String comments, BookingInfo info){
+    public BoardComment(String id, String comments, Long parentNo, Long childrenNo, BookingInfo info){
         this.id = id;
         this.comments = comments;
+        this.parentNo = parentNo;
+        this.childrenNo = childrenNo;
         bookingInfo = info;
-    }
-
-    public BoardComment(String id, String comments, String commentLinkInfo, BookingInfo info, BoardComment parent){
-        this.id = id;
-        this.comments = comments;
-        this.commentLinkInfo = commentLinkInfo;
-        bookingInfo = info;
-        this.parent = parent;
-    }
-
-    public BoardComment(String id, String comments, BookingInfo info, BoardComment parent){
-        this.id = id;
-        this.comments = comments;
-        bookingInfo = info;
-        this.parent = parent;
     }
 
 }
