@@ -20,7 +20,7 @@ import java.util.Optional;
 @Service
 public class VideoBoardCommentsServiceImpl extends BaseCommentService {
 
-    @Autowired
+  /*  @Autowired
     private VideoBoardCommentsRepository repository;
 
     @Autowired
@@ -84,5 +84,5 @@ public class VideoBoardCommentsServiceImpl extends BaseCommentService {
     @Override
     public void remove(Integer commentNo) {
         repository.deleteById(Long.valueOf(commentNo));
-    }
+    }*/
 }

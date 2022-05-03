@@ -1,5 +1,6 @@
 package com.example.demo.dto.response;
 
+import com.example.demo.entity.board.freeBoard.FreeBoardComments;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,14 +14,16 @@ public class FreeBoardCommentResponse {
     private Long boardNo;
     private Date regDate;
     private Long commentNo;
+    private FreeBoardComments freeBoardComments;
 
 
-    public FreeBoardCommentResponse(String writer, String comment, Long boardNo, Date regDate, Long commentNo){
+    public FreeBoardCommentResponse(String writer, String comment, Long boardNo, Date regDate, Long commentNo, FreeBoardComments freeBoardComments){
         this.writer = writer;
         this.comment = comment;
         this.boardNo = boardNo;
         this.regDate = regDate;
         this.commentNo = commentNo;
+        this.freeBoardComments = freeBoardComments;
 
     }
 }

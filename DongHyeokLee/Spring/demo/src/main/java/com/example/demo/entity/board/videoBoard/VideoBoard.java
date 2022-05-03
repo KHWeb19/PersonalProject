@@ -2,6 +2,7 @@ package com.example.demo.entity.board.videoBoard;
 
 import com.example.demo.entity.board.photoBoard.PhotoBoardComments;
 import com.example.demo.entity.board.photoBoard.PhotoBoardLike;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -58,11 +59,11 @@ public class VideoBoard {
     private Date updDate;
 
 
-    @JsonManagedReference
+    @JsonIgnore
     @OneToMany(mappedBy = "videoBoard", fetch = FetchType.LAZY,  cascade = CascadeType.ALL)
     private List<VideoBoardLike> likes = new ArrayList<>();
 
-    @JsonManagedReference
+    @JsonIgnore
     @OneToMany(mappedBy = "videoBoard", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<VideoBoardComments> comments = new ArrayList<>();
 

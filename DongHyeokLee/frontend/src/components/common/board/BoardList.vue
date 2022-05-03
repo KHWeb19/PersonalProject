@@ -33,7 +33,8 @@
                     </v-icon>
                     
                     <v-icon v-else  
-                            @click="board.likeCheck--,board.likeCnt--, unlike(board.boardNo,board.likeCheck)">
+                            @click="board.likeCheck--,board.likeCnt--, unlike(board.boardNo,board.likeCheck)"
+                            class="like">
                             mdi-cards-heart
                     </v-icon>
                     {{ board.likeCnt}}
@@ -218,6 +219,9 @@ strong{
 .register-btn{
   margin-left: 80%;
   margin-bottom: 20px;
+}
+.like {
+  color: rgba(255, 0, 0, 0.73);
 }
 
   

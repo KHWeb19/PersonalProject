@@ -40,7 +40,7 @@ public class PhotoBoardCommentsServiceImpl implements PhotoBoardCommentsService 
         repository.save(comment);
     }
 
-    @Override
+    /*@Override
     public List<CommentResponse> list(Integer boardNo) {
         List<PhotoBoardComments> checkComments = repository.findAllPhotoBoardCommentsByBoardId(Long.valueOf(boardNo));
         List<CommentResponse> response = new ArrayList<>();
@@ -51,9 +51,9 @@ public class PhotoBoardCommentsServiceImpl implements PhotoBoardCommentsService 
         }
 
         return response;
-    }
+    }*/
 
-    @Override
+   /* @Override
     public CommentResponse modify(Integer commentNo, CommentRequest commentRequest) {
 
         Optional<PhotoBoard> maybeBoard = boardRepository.findById(Long.valueOf(commentRequest.getBoardNo()));
@@ -73,7 +73,7 @@ public class PhotoBoardCommentsServiceImpl implements PhotoBoardCommentsService 
 
         return response;
 
-    }
+    }*/
 
     @Override
     public void remove(Integer commentNo) {

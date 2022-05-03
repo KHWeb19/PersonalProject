@@ -1,6 +1,7 @@
 package com.example.demo.entity.board.freeBoard;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -46,7 +47,7 @@ public class FreeBoard {
     @UpdateTimestamp
     private Date updDate;
 
-    @JsonManagedReference
+    @JsonIgnore
     @OneToMany(mappedBy = "freeBoard", fetch = FetchType.EAGER, orphanRemoval = true)
     private List<FreeBoardComments> comments = new ArrayList<>();
 

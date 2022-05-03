@@ -22,7 +22,7 @@ public class PhotoBoardLike {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long likeNo;
 
-    @JsonBackReference
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name= "board_no")
     private PhotoBoard photoBoard;

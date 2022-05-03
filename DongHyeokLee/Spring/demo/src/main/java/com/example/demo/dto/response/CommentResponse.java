@@ -12,15 +12,16 @@ public class CommentResponse {
     private Long boardNo;
     private Date regDate;
     private Long commentNo;
+    private Long parCommentNo;
 
 
-    public CommentResponse(String writer, String comment, Long boardNo, Date regDate, Long commentNo){
+    public CommentResponse(String writer, String comment, Long boardNo, Date regDate, Long commentNo, Long parCommentNo){
         this.writer = writer;
         this.comment = comment;
         this.boardNo = boardNo;
         this.regDate = regDate;
         this.commentNo = commentNo;
-
+        this.parCommentNo = parCommentNo;
     }
 
 

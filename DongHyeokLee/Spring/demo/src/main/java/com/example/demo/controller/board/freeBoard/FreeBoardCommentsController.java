@@ -1,6 +1,7 @@
 package com.example.demo.controller.board.freeBoard;
 
 import com.example.demo.dto.request.CommentRequest;
+import com.example.demo.dto.request.ReplyRequest;
 import com.example.demo.dto.response.FreeBoardCommentResponse;
 import com.example.demo.service.board.freeBoard.FreeBoardCommentsService;
 import lombok.extern.slf4j.Slf4j;
@@ -32,15 +33,15 @@ public class FreeBoardCommentsController {
 
     //댓글 목록
     @GetMapping("/list/{boardNo}")
-    public List<FreeBoardCommentResponse> FreeBoardCommentsList (@PathVariable("boardNo") Integer boardNo) {
+    public Object FreeBoardCommentsList (@PathVariable("boardNo") Integer boardNo) {
         log.info("FreeBoardCommentsList()");
 
         return service.list(boardNo);
     }
 
     //댓글 수정
-    @PutMapping("/{commentNo}")
-    public FreeBoardCommentResponse freeBoardCommentModify (
+   @PutMapping("/{commentNo}")
+    public Object freeBoardCommentModify (
             @PathVariable("commentNo") Integer commentNo,
             @Validated @RequestBody CommentRequest commentRequest) {
         log.info("freeBoardCommentModify(): " + commentRequest);
@@ -58,5 +59,16 @@ public class FreeBoardCommentsController {
         log.info("commentRemove()");
 
         service.remove(commentNo);
+    }
+
+    //대댓글
+    @PostMapping("reply/register/{boardNo}")
+    public void freeBoardReplyRegister (@PathVariable("boardNo") Integer boardNo,
+                                        @Validated @RequestBody ReplyRequest commentRequest) {
+
+        log.info("FreeBoardReplyRegister()" + commentRequest);
+        //commentsRequest.setBoardNo(Long.valueOf(boardNo));
+
+        service.replyRegister(boardNo, commentRequest);
     }
 }

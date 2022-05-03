@@ -1,6 +1,7 @@
 package com.example.demo.entity.board.photoBoard;
 
 import com.example.demo.entity.board.freeBoard.FreeBoardComments;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -58,11 +59,11 @@ public class PhotoBoard  {
     private Date updDate;
 
 
-    @JsonManagedReference
+    @JsonIgnore
     @OneToMany(mappedBy = "photoBoard", fetch = FetchType.LAZY,  cascade = CascadeType.ALL)
     private List<PhotoBoardLike> likes = new ArrayList<>();
 
-    @JsonManagedReference
+    @JsonIgnore
     @OneToMany(mappedBy = "photoBoard", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<PhotoBoardComments> comments = new ArrayList<>();
 

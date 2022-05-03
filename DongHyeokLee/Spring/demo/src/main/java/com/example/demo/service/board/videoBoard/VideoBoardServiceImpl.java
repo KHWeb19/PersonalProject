@@ -147,6 +147,7 @@ public class VideoBoardServiceImpl extends BaseBoardService {
     @Transactional
     @Override
     public void likeCheck(String writer) {
+        //그냥 like 목록 보내서 로그인아디랑 like아이디 같으면 하트 되는쪽으로?!
 
         //로그인 아이디로 좋아요 누른 boardNo 가져오기
         List<VideoBoardLike> checkLike = likeRepository.findByWriter(writer);

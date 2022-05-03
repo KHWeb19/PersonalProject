@@ -31,7 +31,7 @@ public class PhotoBoardCommentsController {
     }
 
     //댓글 목록
-    @GetMapping("/list/{boardNo}")
+   /* @GetMapping("/list/{boardNo}")
     public List<CommentResponse> PhotoBoardCommentsList (@PathVariable("boardNo") Integer boardNo) {
         log.info("PhotoBoardCommentsList()");
 
@@ -48,7 +48,7 @@ public class PhotoBoardCommentsController {
 
         return service.modify(commentNo, commentRequest);
 
-    }
+    }*/
 
 
     //댓글 삭제

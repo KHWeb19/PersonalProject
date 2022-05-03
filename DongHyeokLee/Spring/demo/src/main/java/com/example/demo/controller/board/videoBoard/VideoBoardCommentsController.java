@@ -16,7 +16,7 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:8080", allowedHeaders = "*")
 public class VideoBoardCommentsController {
 
-    @Autowired
+   /* @Autowired
     private VideoBoardCommentsServiceImpl service;
 
     //댓글 등록
@@ -56,5 +56,5 @@ public class VideoBoardCommentsController {
         log.info("commentRemove()");
 
         service.remove(commentNo);
-    }
+    }*/
 }
