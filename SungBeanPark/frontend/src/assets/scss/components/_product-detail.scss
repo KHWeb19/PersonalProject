@@ -1,6 +1,13 @@
 .product-carousel {
   position: relative;
-  margin-top: 80px;
+  margin-top: 20px;
+
+  &-slider {
+    header {
+      margin-bottom: 24px;
+      margin-left: 8px;
+    }
+  }
 
   &-slider {
     margin: 0 -#{$grid-margin};
@@ -9,6 +16,7 @@
   &-thumbnail {
     @include pos-center-x;
     bottom: 16px;
+    margin-top: 52px;
   }
 
   .thumbnail-list {
@@ -48,6 +56,7 @@
 
   @include responsive(T) {
     padding-right: 30px;
+    margin-top: 60px;
 
     &-slider {
       margin: 0 0 8px 0;

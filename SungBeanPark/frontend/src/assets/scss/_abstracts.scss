@@ -1,5 +1,5 @@
 @charset "UTF-8";
 
-@import // Abstracts
-  "~@/assets/scss/abstracts/mixins",
-  "~@/assets/scss/abstracts/variables";
+//Abstract
+@import "~@/assets/scss/abstracts/mixins";
+@import "~@/assets/scss/abstracts/variables";

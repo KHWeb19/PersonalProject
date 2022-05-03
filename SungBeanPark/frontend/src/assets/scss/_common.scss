@@ -1,24 +1,46 @@
 @charset "UTF-8";
 
-@import // Vendors
-  "~@/assets/scss/vendors/normalize",
-  "~@/assets/scss/vendors/reset";
+// Vendors
+@import "~@/assets/scss/vendors/normalize";
+@import "~@/assets/scss/vendors/reset";
 
-@import // Base
-  "~@/assets/scss/base/fonts";
+// Base
+@import "~@/assets/scss/base/fonts";
 
-@import // components
-  "~@/assets/scss/components/gnb-nav",
-  "~@/assets/scss/components/gnb-icon-buttons",
-  "~@/assets/scss/components/home-section", "~@/assets/scss/components/swiper",
-  "~@/assets/scss/components/overlay";
+// Component
+@import "~@/assets/scss/components/review-scoreboard";
+@import "~@/assets/scss/components/gnb-icon-buttons";
+@import "~@/assets/scss/components/gnb-nav";
+@import "~@/assets/scss/components/checkout-card";
+@import "~@/assets/scss/components/home-section";
+@import "~@/assets/scss/components/product-detail";
+@import "~@/assets/scss/components/product-small";
+@import "~@/assets/scss/components/product-info";
+@import "~@/assets/scss/components/member-card";
+@import "~@/assets/scss/components/review-modal";
+@import "~@/assets/scss/components/review-card";
+@import "~@/assets/scss/components/pagination";
+@import "~@/assets/scss/components/my-menu";
+@import "~@/assets/scss/components/swiper";
+@import "~@/assets/scss/components/order-form";
+@import "~@/assets/scss/components/product-size";
 
-@import // layout
-  "~@/assets/scss/layout/header",
-  "~@/assets/scss/layout/sidebar", "~@/assets/scss/layout/overlay",
-  "~@/assets/scss/layout/figcaption", "~@/assets/scss/layout/figure",
-  "~@/assets/scss/layout/footer", "~@/assets/scss/layout/product",
-  "~@/assets/scss/layout/product-section", "~@/assets/scss/layout/global-header";
+// Layout
+@import "~@/assets/scss/layout/product-recommendation";
+@import "~@/assets/scss/layout/product";
+@import "~@/assets/scss/layout/global-header";
+@import "~@/assets/scss/layout/header";
+@import "~@/assets/scss/layout/sidebar";
+@import "~@/assets/scss/layout/overlay";
+@import "~@/assets/scss/layout/footer";
+@import "~@/assets/scss/layout/figcaption";
+@import "~@/assets/scss/layout/figure";
+@import "~@/assets/scss/layout/member-list";
+@import "~@/assets/scss/layout/cart";
+@import "~@/assets/scss/layout/slide";
 
-@import // Modules
-  "~@/assets/scss/modules/buttons";
+// Modules
+@import "~@/assets/scss/modules/buttons";
+@import "~@/assets/scss/modules/rating";
+@import "~@/assets/scss/modules/select-picture";
+@import "~@/assets/scss/modules/prices";

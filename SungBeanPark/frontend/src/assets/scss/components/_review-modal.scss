@@ -1,0 +1,15 @@
+.review-modal {
+  &-title {
+    @include text-style(16);
+    font-weight: 700;
+    margin: 0 0 8px 4px;
+  }
+
+  &-star {
+    @include flexbox(start);
+    @include text-style(16);
+    font-weight: 500;
+    margin-left: 4px;
+    margin-bottom: 48px;
+  }
+}

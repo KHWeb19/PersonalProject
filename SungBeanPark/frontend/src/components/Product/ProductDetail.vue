@@ -8,6 +8,7 @@
               <header class="member-header">
                 <h2>{{ product.productName }}</h2>
               </header>
+
               <ol class="slider-list">
                 <li
                   class="slider-item"
@@ -149,6 +150,11 @@
                   <i class="ic-star is-active"></i>
                   <i class="ic-star is-active"></i>
                 </div>
+
+                <p>
+                  <strong>77</strong>
+                  <span class="sm-hidden">개 리뷰</span>
+                </p>
               </div>
             </header>
 
@@ -156,20 +162,23 @@
             <div class="product-info-price sm-only">
               <div class="info-original-price">
                 <div class="discount-rate">
-                  <span class="rate">34</span>
+                  <span class="rate">{{ product.discount }}</span>
                   <span class="percent">%</span>
                 </div>
 
                 <div class="price-off">
-                  <strong class="amount">49,900</strong>
-                  <span class="currency sm-hidden">원</span>
+                  <strong class="amount">{{
+                    product.productPrice | pricePoint
+                  }}</strong>
+                  <span class="currency">원</span>
                 </div>
               </div>
 
               <div class="info-sale-price">
                 <div class="price-20">
-                  <strong class="amount">32,900</strong>
-                  <span class="currency">원</span>
+                  <strong class="price"
+                    >{{ product.productDiscountPrice | pricePoint }}원</strong
+                  >
                 </div>
               </div>
             </div>
@@ -183,14 +192,18 @@
 
                 <div class="info-price">
                   <div class="price-off">
-                    <strong class="price">{{
-                      product.productDiscountPrice | pricePoint
-                    }}</strong>
+                    <strong class="price">
+                      {{ product.productPrice | pricePoint }}원</strong
+                    >
                   </div>
 
                   <div class="info-sale-price">
                     <div class="price-32">
-                      <strong class="price-off">2</strong>
+                      <strong class="price">
+                        {{
+                          product.productDiscountPrice | pricePoint
+                        }}원</strong
+                      >
                     </div>
                   </div>
                 </div>
@@ -198,26 +211,98 @@
             </div>
           </section>
 
+          <div class="product-size">
+            <div class="product-size-header">
+              <strong>사이즈 선택</strong>
+            </div>
+            <div class="product-size-option">
+              <div class="product-size-list">
+                <span class="input-radio" typename="240">
+                  <label for="">240</label>
+                  <input type="radio" name="SIZE" />
+                </span>
+                <span class="input-radio" typename="245">
+                  <label for="">245</label>
+                  <input type="radio" name="SIZE" />
+                </span>
+                <span class="input-radio" typename="250">
+                  <label for="">250</label>
+                  <input type="radio" name="SIZE" />
+                </span>
+                <span class="input-radio" typename="255">
+                  <label for="">255</label>
+                  <input type="radio" name="SIZE" />
+                </span>
+                <span class="input-radio" typename="260">
+                  <label for="">260</label>
+                  <input type="radio" name="SIZE" />
+                </span>
+                <span class="input-radio" typename="265">
+                  <label for="">265</label>
+                  <input type="radio" name="SIZE" />
+                </span>
+                <span class="input-radio" typename="270">
+                  <label for="">270</label>
+                  <input type="radio" name="SIZE" />
+                </span>
+                <span class="input-radio" typename="275">
+                  <label for="">275</label>
+                  <input type="radio" name="SIZE" />
+                </span>
+                <span class="input-radio" typename="280">
+                  <label for="">280</label>
+                  <input type="radio" name="SIZE" />
+                </span>
+                <span class="input-radio" typename="285">
+                  <label for="">285</label>
+                  <input type="radio" name="SIZE" />
+                </span>
+                <span class="input-radio" typename="290">
+                  <label for="">290</label>
+                  <input type="radio" name="SIZE" />
+                </span>
+                <span class="input-radio" typename="295">
+                  <label for="">295</label>
+                  <input type="radio" name="SIZE" />
+                </span>
+                <span class="input-radio" typename="300">
+                  <label for="">300</label>
+                  <input type="radio" name="SIZE" />
+                </span>
+                <span class="input-radio" typename="305">
+                  <label for="">305</label>
+                  <input type="radio" name="SIZE" />
+                </span>
+                <span class="input-radio" typename="310">
+                  <label for="">310</label>
+                  <input type="radio" name="SIZE" />
+                </span>
+              </div>
+            </div>
+          </div>
+
           <form class="order-form lg-only" action="/" method="POST">
             <dl class="order-summary">
               <dt>주문금액</dt>
               <dd>
                 <output for="select-1 select-2">
                   <div class="price-20">
-                    <strong class="amount">{{ product.productPrice }}원</strong>
+                    <strong class="amount">
+                      {{ product.productDiscountPrice | pricePoint }}원</strong
+                    >
                   </div>
                 </output>
               </dd>
             </dl>
             <div class="button-group">
               <button
-                @click="addToCart(product.productId)"
-                class="btn-outlined btn-55"
+                @click="addToCart()"
+                class="btn-outlined btn-46"
                 type="button"
               >
                 장바구니
               </button>
-              <button class="btn-primary btn-55" type="submit">바로구매</button>
+              <button class="btn-black btn-46" type="submit">바로구매</button>
             </div>
           </form>
         </div>
@@ -235,6 +320,7 @@ export default {
       require: true,
     },
   },
+
   data() {
     return {
       productName: this.product.productName,
@@ -243,18 +329,19 @@ export default {
       discount: this.product.discount,
       fileName: this.product.fileName,
       userInfo: this.$store.state.userInfo,
+
       comment: "",
     }
   },
+
   methods: {
-    addToCart(memberNo) {
+    addToCart() {
       if (this.userInfo != null) {
-        const { product } = this
+        const { productId } = this
         axios
-          .post(
-            `http://localhost:8888/Member/addToCart/register/${memberNo}`,
-            product
-          )
+          .post(`http://localhost:8888/cart/addToCart/${productId}`, {
+            memberNo: this.userInfo.memberNo,
+          })
           .then((res) => {
             if (res.data) {
               alert("장바구니 등록 성공")
@@ -283,4 +370,5 @@ export default {
 <style lang="scss" scoped>
 @import "~@/assets/scss/components/product-detail";
 @import "~@/assets/scss/components/product-info";
+@import "~@/assets/scss/components/order-form";
 </style>
