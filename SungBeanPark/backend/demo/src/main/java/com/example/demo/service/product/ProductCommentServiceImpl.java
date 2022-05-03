@@ -33,7 +33,7 @@ public class ProductCommentServiceImpl implements ProductCommentService {
         if (file != null) {
             UUID uuid = UUID.randomUUID();
             String fileName = uuid + "_" + file.getOriginalFilename();
-            FileOutputStream saveFile = new FileOutputStream("C:\\Project\\PersonalProject\\SungBeanPark\\frontend\\src\\assets\\image" + fileName);
+            FileOutputStream saveFile = new FileOutputStream("C:\\Project\\PersonalProject\\SungBeanPark\\frontend\\src\\assets\\image\\" + fileName);
 
             saveFile.write(file.getBytes());
             saveFile.close();

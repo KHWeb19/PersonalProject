@@ -32,7 +32,7 @@ public class ProductServiceImpl implements ProductService {
 
             String fileName = uuid + "_" + file.getOriginalFilename();
 
-            FileOutputStream saveFile = new FileOutputStream("C:\\Project\\PersonalProject\\SungBeanPark\\frontend\\src\\assets\\image" + fileName);
+            FileOutputStream saveFile = new FileOutputStream("C:\\Project\\PersonalProject\\SungBeanPark\\frontend\\src\\assets\\image\\" + fileName);
 
             saveFile.write(file.getBytes());
             saveFile.close();
@@ -55,12 +55,16 @@ public class ProductServiceImpl implements ProductService {
     public Product read(Long productId) {
         Optional<Product> maybeReadProduct = productRepository.findById(Long.valueOf(productId));
 
-        if (maybeReadProduct.equals(Optional.empty())) {
+        if (maybeReadProduct.equals(Optional.empty())){
+            log.info("No Read");
             return null;
         }
-        log.info("info " + maybeReadProduct);
+
+
         return maybeReadProduct.get();
     }
+
+
 
     @Override
     public void modify(Product product, @RequestParam(required = false) MultipartFile file) throws Exception {
