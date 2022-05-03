@@ -82,7 +82,7 @@ export default {
       this.isCheck = true;
     }
 
-    alert(this.isCheck)
+    //alert(this.isCheck)
   }
 }
 </script>

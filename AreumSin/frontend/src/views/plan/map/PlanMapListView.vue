@@ -1,7 +1,6 @@
 <template>
   <v-container>
     <main-category></main-category>
-    PlanNo: {{planNo}}
 
     <v-row>
       <v-col>
@@ -135,9 +134,9 @@ export default {
   data(){
     return{
       likePlacePageNum: 0,
-      likePlacePageSize: 6,
+      likePlacePageSize: 5,
       saveLikePlacePageNum: 0,
-      saveLikePlacePageSize: 6,
+      saveLikePlacePageSize: 5,
       select: null,
       saveFavoriteDialog: {
         dialog: false,
@@ -168,10 +167,11 @@ export default {
       let favoritePlaceNo = this.saveFavoriteDialog.savePlaceNo;
       let day = this.radioGroup;
 
-      alert(favoritePlaceNo + ", " + day)
+      //alert(favoritePlaceNo + ", " + day)
       axios.post('http://localhost:7777/planDay/savePlaceDay', {favoritePlaceNo, day})
           .then((res) => {
             console.log(res + '성공')
+            this.$router.go();
           })
     }
   },
@@ -213,7 +213,7 @@ export default {
     select: function (test){
       let planNo = this.planNo;
       let day = test;
-      alert(day + ", " +planNo)
+      //alert(day + ", " +planNo)
       axios.post('http://localhost:7777/planDay/mapPlaceListDay', {planNo, day})
             .then((res) => {
               this.$store.commit(FETCH_PLACE_LIST_DAY, res.data)

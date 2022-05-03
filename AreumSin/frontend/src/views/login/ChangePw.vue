@@ -48,8 +48,8 @@ export default {
       console.log(id +', '+pw);
 
       axios.put('http://localhost:7777/search/changePw',{id, pw})
-        .then((res) =>{
-          alert(res.data)
+        .then(() =>{
+          //alert(res.data)
           this.$router.push({name: 'LoginPage'})
         })
     }

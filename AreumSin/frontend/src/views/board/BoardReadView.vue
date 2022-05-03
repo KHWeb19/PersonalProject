@@ -1,9 +1,6 @@
 <template>
   <v-container>
     <MainCategory/>
-    <div style="margin-bottom: 15px">
-      {{isMember}}
-    </div>
 
     <board-read-page v-if="boardRead" :boardRead="boardRead" :boardReadImg="boardReadImg" :isMember="isMember" @onDelete="onDelete" @onModify="onModify"></board-read-page>
 
@@ -44,7 +41,7 @@ export default {
 
       axios.delete(`http://localhost:7777/board/${boardNo}`)
           .then(() => {
-            alert('삭제 성공!')
+            //alert('삭제 성공!')
             this.$router.push({ name: 'BoardView' })
           })
           .catch(() => {

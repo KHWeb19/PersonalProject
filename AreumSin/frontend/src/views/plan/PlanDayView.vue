@@ -72,8 +72,8 @@ export default {
       let id = this.id
       console.log(planDayNo, id);
       axios.post('http://localhost:7777/planDay/like', {planDayNo, id})
-      .then((res) => {
-        alert('성공' + res.data.likeCount);
+      .then(() => {
+        //alert('성공' + res.data.likeCount);
       })
     },
     clickHate(payload){
@@ -81,8 +81,8 @@ export default {
       let id = this.id
       console.log(planDayNo, id);
       axios.post('http://localhost:7777/planDay/hate', {planDayNo, id})
-          .then((res) => {
-            alert('성공' + res);
+          .then(() => {
+            //alert('성공' + res);
           })
     },
     clickRemove(payload){
@@ -92,7 +92,7 @@ export default {
       axios.post('http://localhost:7777/planDay/remove/',{planDayNo, id})
           .then((res) => {
             if(!res.data){
-              alert('지울 수 없습니다. ')
+              //alert('지울 수 없습니다. ')
             }
           })
     }
@@ -110,7 +110,7 @@ export default {
       })
     axios.post('http://localhost:7777/planDay/mapPlaceListDay', {planNo, day})
           .then((res) => {
-            alert('성공')
+            //alert('성공')
             this.$store.commit(FETCH_PLACE_LIST, res.data)
           })
   }

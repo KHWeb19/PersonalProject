@@ -132,7 +132,7 @@ const routes = [
     name: 'MyPageDiaryModify',
     component: MyPageDiaryModify,
     props: true
-  },
+  }
 ]
 
 const router = new VueRouter({

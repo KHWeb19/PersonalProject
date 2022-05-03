@@ -38,7 +38,7 @@ export default {
   },
   methods:{
     test(index1, index2) {
-      alert(this.dates[index1][index2])
+      //alert(this.dates[index1][index2])
       this.day = this.dates[index1][index2];
       this.$router.push({name: 'PlanDayView', params: {day: this.day.toString()}})
     },
@@ -137,7 +137,7 @@ export default {
       }
 
       this.sendDate = dates;
-      console.log('123123'+this.sendDate)
+      //console.log('123123'+this.sendDate)
 
 /*      if(dates.length % 4 === 0){
         console.log(dates.length % 4);

@@ -41,7 +41,7 @@ export default {
   },
   created() {
     this.planNo = localStorage.getItem('planNo')
-    alert(this.planNo)
+    //alert(this.planNo)
   },
   methods: {
     ...mapActions(['fetchVoteContent']),

@@ -1,6 +1,5 @@
 <template>
   <v-container>
-    {{boardNo}}
     <board-modify-page :boardRead="boardRead" :boardReadImg="boardReadImg" @onModify="onModify"></board-modify-page>
   </v-container>
 </template>
@@ -29,8 +28,8 @@ export default {
       console.log(title, place, boardContent)
 
       await axios.put(`http://localhost:7777/board/${this.boardNo}`, {title, place, boardContent})
-        .then((res) => {
-          alert('게시물 수정 성공' + res)
+        .then(() => {
+          //alert('게시물 수정 성공' + res)
         })
 
       let formData = new FormData;
@@ -43,8 +42,8 @@ export default {
       alert(typeof board);
       alert(board.length)*/
       await axios.post(`http://localhost:7777/board/img/${this.boardNo}`, formData)
-        .then((res) => {
-          alert('이미지 게시물 수정 성공' + res)
+        .then(() => {
+          //alert('이미지 게시물 수정 성공' + res)
           this.$router.push({ name: 'BoardView' })
         })
     }

@@ -23,7 +23,6 @@
 
 <script>
 import {mapActions, mapState} from "vuex";
-import EventBus from "@/eventBus";
 
 export default {
   name: "FriendList",
@@ -40,7 +39,7 @@ export default {
   },
   created() {
     this.planNumber = localStorage.getItem('planNo')
-    alert(this.planNumber)
+    //alert(this.planNumber)
   },
   computed:{
     ...mapState(['inviteMember'])
@@ -50,11 +49,6 @@ export default {
   },
   methods: {
     ...mapActions(['fetchInviteMember']),
-    clickEvent(){
-      EventBus.$emit('event', '안녕');
-      alert(this.inviteMember)
-      alert(this.members)
-    }
   }
 }
 </script>

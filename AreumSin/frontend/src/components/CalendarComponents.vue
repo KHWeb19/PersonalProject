@@ -59,7 +59,7 @@ export default {
   },
   methods: {
     doMouseOver(){
-      alert('로그인 확인 후에 눌렀다!')
+      //alert('로그인 확인 후에 눌렀다!')
       this.$router.push({name: 'LoginPage'})
     },
     prev() {

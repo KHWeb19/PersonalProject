@@ -28,4 +28,5 @@ public interface MakePlanService {
     void voteBad(DecisionMakingRequest decisionMakingRequest);
 
 
+    void deletePlan(Integer planNo);
 }

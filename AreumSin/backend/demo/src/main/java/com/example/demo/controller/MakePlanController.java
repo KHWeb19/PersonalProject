@@ -154,4 +154,12 @@ public class MakePlanController {
 
         planService.voteBad(decisionMakingRequest);
     }
+
+    @DeleteMapping("/{planNo}")
+    public void deletePlan(@PathVariable("planNo") Integer planNo){
+
+        log.info("deletePlan() : " + planNo);
+
+        planService.deletePlan(planNo);
+    }
 }

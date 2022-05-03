@@ -11,24 +11,21 @@
 
           <v-list dense>
             <v-list-item-group>
-            <v-list-item>
-              <v-list-item-content>
-                <v-list-item-title @click="showDialog">일정</v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
+              <v-list-item @click="showDialog" style="font-size: 25px">일정</v-list-item>
             </v-list-item-group>
           </v-list>
         </v-menu>
       </v-btn>
 
-      <v-dialog max-width="800" v-model="makePlan">
+      <v-dialog width="800" v-model="makePlan">
         <v-card>
-          <v-card-title>
-            <span style="font-size: 40px; color: darkolivegreen"><br/>여행 계획을 작성해보아요! </span>
-          </v-card-title>
+          <v-row justify="center">
+            <v-card-title>
+              <span style="font-size: 40px; color: darkolivegreen"><br/>여행 계획을 작성해보아요! </span>
+            </v-card-title>
+          </v-row>
 
           <v-card-text>
-            <v-container>
               <form @submit="onSubmit">
                 <table>
                   <tr>
@@ -36,13 +33,13 @@
                   </tr>
 
                   <tr>
-                    <td colspan="2">&nbsp;&nbsp;<input class="inputBox" type="text" placeholder="make trip name!" v-model="planName" required></td>
+                    <td colspan="2">&nbsp;&nbsp;<input class="inputBox" type="text" placeholder="make trip name!"  style="width: 300px" v-model="planName" required></td>
                   </tr>
                   <tr></tr>
                   <tr>
                     <td class="plan"> 여행 일정 </td>
                     <td> <v-btn @click="showDatePicker" fab><v-icon x-large>mdi-calendar-multiselect</v-icon></v-btn> &nbsp;&nbsp;&nbsp;&nbsp;</td>
-                    <td> <input type="text" readonly v-model="planDate" placeholder="range date" required></td>
+                    <td> <input type="text" readonly v-model="planDate" style="width: 300px" placeholder="range date" required></td>
                   </tr>
                   <tr></tr>
                   <tr></tr>
@@ -51,7 +48,7 @@
                   </tr>
 
                   <tr>
-                    <td colspan="2">&nbsp;&nbsp;<input type="text" class="inputBox" placeholder="trip place!" v-model="placeName" required></td>
+                    <td colspan="2">&nbsp;&nbsp;<input type="text" class="inputBox" placeholder="trip place!" style="width: 300px" v-model="placeName" required></td>
                   </tr>
 
                 </table>
@@ -60,14 +57,13 @@
               <div style="margin-top: 10px">
                 <label>
                   <input style="font-size: 30px" type="file" id="files" ref="files" multiple v-on:change="fileUpload()">
+                  <label style="color: red; font-size: 20px">** 배경 사진 한장 선택해주세요!</label>
                 </label>
               </div>
 
               <v-dialog max-width="400" v-model="pickDate" light>
                 <v-date-picker v-model="dates" range></v-date-picker>
               </v-dialog>
-
-            </v-container>
 
           </v-card-text>
 
@@ -89,11 +85,6 @@ export default {
   name: "BeforePencilIcon",
   data() {
     return{
-      dropItems: [
-        {text: '일정생성', icon: 'mdi-clock'},
-        {text: '친구초대', icon: 'mdi-clock'},
-        {text: '투표만들기', icon: 'mdi-clock'}
-      ],
       makePlan: false,
       pickDate: false,
       dates: ['', ''],

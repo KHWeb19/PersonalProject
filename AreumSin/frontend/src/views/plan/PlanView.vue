@@ -3,7 +3,7 @@
     <MainCategory></MainCategory>
     <v-row style="margin-bottom: 5px;">
       <v-col align="end" style="padding-right: 30px">
-        <v-btn class="red lighten-1 white--text">cancel</v-btn>
+        <v-btn class="red lighten-1 white--text" @click="onDelete">cancel</v-btn>
       </v-col>
     </v-row>
     <PlanPage style="margin-bottom: 18px" :days="days" @dates="test"></PlanPage>
@@ -84,7 +84,7 @@ export default {
 
       axios.post('http://localhost:7777/plan/search', {friendId})
           .then((res) => {
-            console.log(res + "성공!")
+            //console.log(res + "성공!")
             //this.$store.commit('fetchFindMember', res.data)
             console.log(res.data)
             this.findId = res.data.memberId;
@@ -93,11 +93,11 @@ export default {
     },
     sendVote(payload){
       const {vote} = payload;
-      console.log({vote});
+      //console.log({vote});
       let planNo = this.planNo
       axios.post('http://localhost:7777/plan/vote', {vote, planNo})
-        .then((res) => {
-          console.log(res);
+        .then(() => {
+          //console.log(res);
         })
       this.$router.go();
     },
@@ -105,19 +105,20 @@ export default {
       const{friendId} = payload;
       let planNo = this.planNo;
 
-      alert(friendId + "얍!" + this.planNo)
+      //alert(friendId + "얍!" + this.planNo)
 
       axios.post('http://localhost:7777/plan/addFriend', {friendId, planNo})
-      .then((res) => {
-        console.log(res.data + "성공!")
+      .then(() => {
+        //console.log(res.data + "성공!")
+        this.$router.go()
       })
     },
     voteGood(payload){
       const {voteNo} = payload;
       let id = this.id;
       axios.post('http://localhost:7777/plan/voteGood', {voteNo, id})
-        .then((res) => {
-          alert(res + '성공');
+        .then(() => {
+          //alert(res + '성공');
         })
       this.$router.go();
     },
@@ -125,13 +126,18 @@ export default {
       const {voteNo} = payload;
       let id = this.id;
       axios.post('http://localhost:7777/plan/voteBad', {voteNo, id})
-          .then((res) => {
-            alert(res + '성공');
+          .then(() => {
+            //alert(res + '성공');
           })
       this.$router.go();
     },
-    test(payload){
-      this.dates = payload;
+    onDelete(){
+      let planNo = this.planNo;
+      axios.delete(`http://localhost:7777/plan/${planNo}`)
+        .then(() => {
+          this.$router.push({name: 'PlanListView'})
+        })
+
     }
   },
   created() {

@@ -52,18 +52,17 @@
                   </tr>
 
                   <tr v-else>
-                    <v-card v-if="isCheck">
+                    <div v-if="isCheck" style="font-size: 25px">
                       <td>
-                        <input type="text" style="width: 50px" :value="findId" readonly>
+                        id&nbsp;:&nbsp;<input type="text" style="width: 50px" :value="findId" readonly> &nbsp;
                       </td>
                       <td>
-                        <input type="text" :value="findName" readonly>
+                        이름&nbsp;:&nbsp;<input type="text" :value="findName" readonly>
                       </td>
                       <td>
-                        <v-btn @click="addFriend">친구 추가</v-btn>
+                        <v-btn @click="addFriend" class="orange white--text">친구 추가</v-btn>
                       </td>
-                    </v-card>
-
+                    </div>
                   </tr>
 
                 </table>
@@ -75,7 +74,6 @@
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn color="green darken-1" text @click="closeDialog()">Close</v-btn>
-            <v-btn color="green darken-1">Save</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -156,6 +154,7 @@ export default {
     },
     addFriend(){
       const {friendId} = this;
+      this.isCheck = false;
       this.$emit('addSubmit', {friendId})
     },
     closeDialog(){
