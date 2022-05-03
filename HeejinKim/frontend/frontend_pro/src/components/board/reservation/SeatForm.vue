@@ -4,8 +4,16 @@
    
       
     <v-row justify="center">
-      <v-col cols="8" class="label" style="font-size:20pt">Seat Confirm</v-col>            
+      <v-col cols="8" class="label" style="font-size:20pt">Libarary seat booking</v-col>            
     </v-row>
+
+     <v-row>
+      <v-col >
+        <div class="llabel"> userId : {{this.id}}  </div>
+       
+      </v-col>
+    </v-row>
+       
     
 
     <v-row justify="center">
@@ -36,18 +44,18 @@
       </v-col>
     </v-row>
        
-    <v-row>
+    <v-row justify="center">
       <v-col>
-        <table class="container" justify="center">
+        <table class="container">
           <tbody>
             <tr v-for="(i, idx) in seatRows" :key="idx">
               <td v-for="(j, idx) in seatCols" :key="idx" >
-                <v-btn @click="test(String(apblist[i])+String(j),$event)"
+                <button @click="test(String(apblist[i])+String(j),$event)"
                   v-bind:id="String(apblist[i]) +String(j)"
                   v-bind:ref= "String(i) +String(j)" 
                   class="seat">
                   {{ apblist[i] }}{{ j }}
-                </v-btn>
+                </button>
               </td>
             </tr>
           </tbody>
@@ -57,7 +65,7 @@
     </v-row> 
 
     <v-row>    
-      <router-link :to="{ name: 'ReservationPage',params: { seatNumber } }"  style=" text-decoration:none">
+      <router-link :to="{ name: 'ReservationPage',params: { seatNumber,id } }"  style=" text-decoration:none">
         <v-btn class="selectSeatBtn" dark> select </v-btn>
       </router-link>  
     </v-row>    
@@ -78,11 +86,13 @@ export default {
       seatNumber:'',
       
       blackseat:[],    
-      seatRows: 2,
+      seatRows: 3,
       seatCols: 7,
       reservation:'',
       //reservations:[],
-      apblist:['','A','B','C','D','E','F','G','H']
+      apblist:['','A','B','C','D','E','F','G','H'],
+      //이거 추가
+      
     }
   }, 
   props: {
@@ -91,8 +101,7 @@ export default {
     }
   },
   created(){
-
-    
+    this.id=this.$store.state.session.userId
      setTimeout(this.getSeatsInfo, 1000)
       //this.reservation = this.$store.state.reservations[0]
 
@@ -192,11 +201,12 @@ export default {
   padding: 5% 10% 5% 10%;
   border-collapse: separate;
   
+  
 }
 .v-text-field, .v-textarea{
     font-family: 'Sunflower', sans-serif;
 }
-.v-btn.seat {
+.seat {
   color: #777;
   background-color:rgba(128, 128, 128, 0.199);
   height:40px;
@@ -207,28 +217,28 @@ export default {
   border-top-right-radius: 10px;
   
 }
-.v-btn.seat.avail{
+.seat.avail{
   height:30px;
   width: 36px;
   background-color:rgba(128, 128, 128, 0.199);
 }
-.v-btn.seat.selected {
+.seat.selected {
   background-color: goldenrod;
   height:30px;
   width: 36px;
 }
-.v-btn.seat.sold {
+.seat.sold {
   background-color: black;
   height:30px;
   width: 36px;
 }
-.v-btn.seat:nth-of-type(2) {
+.seat:nth-of-type(2) {
   margin-right: 18px;
 }
-.v-btn.seat:nth-last-of-type(2) {
+.seat:nth-last-of-type(2) {
   margin-left: 18px;
 }
-.v-btn.seat:not(.sold):hover {
+.seat:not(.sold):hover {
   cursor: pointer;
   transform: scale(1.2);
 }

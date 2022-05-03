@@ -2,35 +2,29 @@
   <v-container>    
     <table>
       <v-row justify="center">
-        <v-col cols="12" class="title" > Reservation </v-col>
-      </v-row>
-      
-      <v-row>
-        <v-col cols="3" class="label"> Date</v-col>
-        <v-col cols="7" >
-            <v-text-field class="date pt-8  ml-7" rounded readonly :value="reservation.regDate"/>
-        </v-col>
+        <v-col cols="12" class="title1"> Reservation states</v-col>
       </v-row>
 
+
       <v-row>
-        <v-col cols="5" class="label"> Reservation No</v-col>
-        <v-col>
+        <v-col cols="6" class="label"> Reservation No</v-col>
+        <v-col cols="5">
           <v-text-field class="date pt-8" rounded readonly :value="reservation.reservationNo"/>
         </v-col>
       </v-row>
 
 
       <v-row>
-        <v-col cols="5" class="label"> Seat Number </v-col>
-        <v-col>
-          <v-text-field class="date pt-8" rounded style="width:150px" readonly :value="reservation.seatNumber"/>
+        <v-col cols="6" class="label"> Seat Number </v-col>
+        <v-col cols="5">
+          <v-text-field class="date pt-8" rounded readonly :value="reservation.seatNumber"/>
         </v-col>
       </v-row>
 
 
       <v-row justify="center">
         <router-link :to="{ name: 'SeatForm' }"  style=" text-decoration:none">
-          <v-btn class="updateBtn" dark> confirm </v-btn>
+          <v-btn class="updateBtn" color="#eddf68" > confirm </v-btn>
         </router-link>
         <v-btn @click=onDelete class="deleteBtn" dark>Delete</v-btn>
       </v-row>  
@@ -43,17 +37,22 @@
 
 <script>
 
-//import { mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 import axios from 'axios'
 export default {
 
   name:'ReservationCheck',
-    
+  
   props: {
     reservation: {
       type: Object,
       required: true
-    }
+    },
+    /*
+    reservationNo: {
+      type: String,
+      required: true
+    }*/
   },
 
   data() {
@@ -63,23 +62,14 @@ export default {
   },
   created () {
         //this.reservationNo =  this.$store.state.reservations[0].reservationNo
-        this.reservation = this.$store.state.reservation
-        this.userId = this.$store.state.session.userId
+        //this.reservation = this.$store.state.reservation
+        this.id = this.$store.state.session.userId
+        this.reservationNo=this.$route.params.reservationNo
     },   
   
-  /*
-  mounted () {   
-
-    //가져오는 reservation
-    this.userId = this.$store.state.session.userId
-    this.reservationNo = this.$store.state.reservations[0].reservationNo
-    this.reservation = this.$store.state.reservations[0]
-
-    },
- */
   methods: {
 
-    //...mapActions(['fetchReservation']),
+    ...mapActions(['fetchReservation']),
 
     onDelete () {
       const { reservationNo } = this.reservation
@@ -102,33 +92,33 @@ export default {
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Poiret+One&family=Sunflower:wght@300&family=Ubuntu:wght@300&display=swap");
 
-.title{  
+.title1{  
 
-   font-family: 'Sunflower', sans-serif;
-    font-size: 30pt;
-    margin-right:5%;
-    text-align: center;
-    padding-top: 50px; 
+  font-family: 'Ubuntu', cursive;
+  font-size: 30pt;
+  margin-right:5%;
+  text-align: center;
+  padding-top: 20px; 
 
 }
 .label{
-   font-family: 'Ubuntu', sans-serif; 
+  font-family: 'Poiret One', cursive;
     font-size: 17pt;
     margin-right:5%;
     text-align: center;
-    padding-top: 50px; 
+    padding-top: 30px; 
 }
 
 table{
-  background-color: #f8f2f2;
+  background-color:#f7f7f7;
   padding: 5% 10% 5% 10%;
   margin-left:auto;
   margin-right:auto;
-  width:800px;
+  width:450px;
   height: 500px;
 }
 .updateBtn{
-  color:rgba(214, 190, 86, 0.822);  
+   color:white;
   margin-top: 60px;
   margin-right: 20px;
 
@@ -136,12 +126,9 @@ table{
 .v-text-field, .v-textarea{
     font-family: 'Sunflower', sans-serif;
 }
-.addImg {
-    position: relative;
-    max-height: 400px;
-    max-width: 500px;
-}
+
 .deleteBtn{
+  color:rgba(214, 190, 86, 0.822); 
   margin-top: 60px;
 
 }

@@ -14,6 +14,8 @@ import {
     FETCH_RESERVATION,
     FETCH_RESERVATION_LIST,
 
+    FETCH_RESERVATION_ID_LISTS 
+
 
 /*
     COOKIE_SESSION,
@@ -60,6 +62,10 @@ export default {
     },
     [FETCH_RESERVATION_LIST] (state, reservations) {
         state.reservations = reservations
+    },
+
+    [FETCH_RESERVATION_ID_LISTS] (state, reservationIdLists) {
+        state.reservationIdLists = reservationIdLists
     },
   
 
