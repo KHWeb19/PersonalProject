@@ -1,12 +1,7 @@
 package com.example.demo.service;
 
-import com.example.demo.controller.request.CartRequest;
 import com.example.demo.controller.request.MemberRequest;
-import com.example.demo.controller.response.MemberResponse;
-import com.example.demo.entity.Cart.Cart;
 import com.example.demo.entity.member.Member;
-import com.example.demo.entity.member.MemberAuth;
-import com.example.demo.entity.product.Product;
 import com.example.demo.repository.MemberAuthRepository;
 import com.example.demo.repository.MemberRepository;
 import com.example.demo.repository.cart.CartRepository;
@@ -19,7 +14,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,30 +29,35 @@ public class MemberServiceImpl implements MemberService {
     @Autowired
     private ProductRepository productRepository;
     @Autowired
-    private PasswordEncoder passwordEncoder;
-    @Autowired
     private CartRepository cartRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
 
     @Override
-    public void register(MemberRequest memberRequest) {
+    public Member register(MemberRequest memberRequest) {
+        Optional<Member> maybeMember = memberRepository.findByUserId(memberRequest.getId());
+        if (!maybeMember.equals(Optional.empty())) {
+            log.info("아이디 중복!");
 
-        String encodedPassword = passwordEncoder.encode(memberRequest.getPw());
-        memberRequest.setPw(encodedPassword);
+            return null;
+        } else {
+            String encodedPassword = passwordEncoder.encode(memberRequest.getPw());
+            memberRequest.setPw(encodedPassword);
 
-
-        MemberAuth authEntity = new MemberAuth(memberRequest.getAuth());
-        Member memberEntity = new Member(
-                memberRequest.getUserId(), memberRequest.getPw(),memberRequest.getName());
-
-        memberEntity.addAuth(authEntity);
-
-        memberRepository.save(memberEntity);
+            Member memberEntity = new Member(
+                    memberRequest.getId(),
+                    memberRequest.getPw(),
+                    memberRequest.getUserName()
+                    );
+            memberRepository.save(memberEntity);
+            return memberEntity;
+        }
     }
 
     @Override
     public MemberRequest login(MemberRequest memberRequest) {
-        Optional<Member> maybeMember = memberRepository.findByUserId(memberRequest.getUserId());
+        Optional<Member> maybeMember = memberRepository.findByUserId(memberRequest.getId());
 
         if(maybeMember.equals(Optional.empty())) {
             log.info("아이디읎당");
@@ -72,27 +71,22 @@ public class MemberServiceImpl implements MemberService {
             return null;
         }
 
-        MemberRequest response = new MemberRequest(
-                memberRequest.getMemberNo(),memberRequest.getUserId(), memberRequest.getName(), memberRequest.getAuth());
-        log.info("info response" + response);
-        return response;
-    }
 
-    @Override
-    public Boolean checkUserIdValidation(String id) {
-        Optional<Member> maybeMember = memberRepository.findByUserId(id);
+        if(loginMember.getId().equals(memberRequest.getId())){
+            memberRequest.setUserName(loginMember.getUserName());
+            memberRequest.setMemberNo(loginMember.getMemberNo());
 
-        if(maybeMember.isPresent()) {
-            return false;
-        }else {
-            return true;
         }
+
+        MemberRequest response = new MemberRequest(
+                memberRequest.getMemberNo(),memberRequest.getId(), memberRequest.getUserName(), memberRequest.getAuth());
+        log.info("info response" + response);
+        return memberRequest;
     }
 
     @Override
     public Member read(Long memberNo) {
         Optional<Member> maybeReadMember = memberRepository.findById(Long.valueOf(memberNo));
-
 
         if (maybeReadMember.equals(Optional.empty())){
 
@@ -129,19 +123,6 @@ public class MemberServiceImpl implements MemberService {
         return searchResults;
     }
 
-
-    @Override
-    public void addToCart(CartRequest cartRequest) throws Exception{
-        Cart cart = new Cart(cartRequest.getCartId(), cartRequest.getMemberNo(), cartRequest.getProductNum(), cartRequest.getProductPrice(), cartRequest.getProductDiscountPrice(), cartRequest.getImageUrl(), cartRequest.getProductName(), cartRequest.getGender(), cartRequest.getRating());
-
-        cartRepository.save(cart);
-    }
-
-
-    @Override
-    public List<Cart> cartList(Long memberNo) throws  Exception {
-        return cartRepository.findCartList(memberNo);
-    }
 
 
 

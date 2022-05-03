@@ -23,20 +23,25 @@ import java.util.List;
 public class MemberController {
 
     @Autowired
-    private MemberService service;
+    private MemberService memberService;
 
     @PostMapping("/register")
-    public void registerMember(@Validated @RequestBody MemberRequest memberRequest) {
-        log.info("MemberRegister()" + memberRequest.getUserId() + ", " + memberRequest.getPw() + ", " + memberRequest.getName() + ", "+ memberRequest.getAuth());
-
-        service.register(memberRequest);
+    public Member registerMember(@Validated @RequestBody MemberRequest memberRequest) {
+        log.info("MemberRegister():" +
+                memberRequest.getId() + ", " +
+                memberRequest.getUserName() + ", " +
+                memberRequest.getPw());
+        return memberService.register(memberRequest);
     }
+
+
+
 
     @PostMapping("/login")
     public MemberRequest memberLogin (@RequestBody MemberRequest memberRequest) {
         log.info("MemberLogin()" + memberRequest);
 
-        MemberRequest memberResponse = service.login(memberRequest);
+        MemberRequest memberResponse = memberService.login(memberRequest);
 
         if(memberResponse != null) {
             log.info("성공좀!");
@@ -46,21 +51,14 @@ public class MemberController {
 
         return memberResponse;
     }
-    @GetMapping("/check/{id}")
-    public Boolean findId (@PathVariable("id") String id) {
-        log.info("findId()" + id);
 
-        Boolean maybeMember = service.checkUserIdValidation(id);
-
-        return maybeMember;
-    }
 
     @GetMapping("/{memberNo}")
     public Member read (
             @PathVariable("memberNo") Long memberNo) {
         log.info("read()" + memberNo);
 
-        return service.read(memberNo);
+        return memberService.read(memberNo);
     }
 
     @PutMapping("/modify/{memberNo}")
@@ -68,7 +66,7 @@ public class MemberController {
                                        @RequestBody Member member) {
         log.info("memberModify :");
 
-        return service.modify(memberNo, member);
+        return memberService.modify(memberNo, member);
     }
 
     @DeleteMapping("/{memberNo}")
@@ -76,38 +74,24 @@ public class MemberController {
             @PathVariable("memberNo") Long memberNo) {
         log.info("memberRemove()");
 
-        service.remove(memberNo);
+        memberService.remove(memberNo);
     }
 
     @GetMapping("/list")
     public List<Member> memberList () {
         log.info("memberList()");
 
-        return service.list();
+        return memberService.list();
     }
 
     @PostMapping("/search")
     public List<Member> search(@RequestBody MemberSearchRequest memberSearchRequest){
         log.info("search()" + memberSearchRequest);
         String keyWord = memberSearchRequest.getKeyWord();
-        return service.searchName(keyWord);
+        return memberService.searchName(keyWord);
 
     }
 
-    @PostMapping("/addToCart/{memberNo}")
-    public ResponseEntity<Void> addToCart(@PathVariable("memberNo")Long memberNo, @Validated @RequestBody CartRequest cartRequest) throws  Exception {
-        System.out.println(memberNo);
-        cartRequest.setMemberNo(memberNo);
-        service.addToCart(cartRequest);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
 
-    @GetMapping("/addToCart/list/{memberNo}")
-    public ResponseEntity<List<Cart>> cartList(@PathVariable("memberNo") Long memberNo) throws  Exception {
-
-        service.cartList(memberNo);
-
-        return new ResponseEntity<>(service.cartList(memberNo),HttpStatus.OK);
-    }
 
 }

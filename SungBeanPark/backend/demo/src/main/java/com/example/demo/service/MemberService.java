@@ -4,17 +4,17 @@ import com.example.demo.controller.request.CartRequest;
 import com.example.demo.controller.request.MemberRequest;
 import com.example.demo.entity.Cart.Cart;
 import com.example.demo.entity.member.Member;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 public interface MemberService {
 
     // Sign & Login
-    public void register(MemberRequest memberRequest);
+    public Member register(MemberRequest memberRequest);
 
     public MemberRequest login(MemberRequest memberRequest);
 
-    public Boolean checkUserIdValidation(String id);
 
     public Member read(Long memberNo) ;
 
@@ -28,10 +28,7 @@ public interface MemberService {
     public List<Member> searchName(String keyWord);
 
 
-    // Cart
-    public void addToCart(CartRequest cartRequest) throws Exception;
 
-    public List<Cart> cartList(Long memberNo) throws  Exception;
 
 }
 

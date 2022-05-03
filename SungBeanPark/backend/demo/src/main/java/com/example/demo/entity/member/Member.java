@@ -22,11 +22,12 @@ public class Member {
     private Long memberNo;
 
     @Column(length = 32)
-    private String userId;
+    private String id;
+
     @Column(length = 64)
     private String password;
 
-    @Column(length = 32)
+    @Column(length = 64)
     private String userName;
 
     @CreationTimestamp
@@ -40,8 +41,8 @@ public class Member {
     private List<MemberAuth> authList = new ArrayList<>();
 
 
-    public Member (String userId, String password, String userName) {
-        this.userId = userId;
+    public Member (String id, String password, String userName) {
+        this.id = id;
         this.password = password;
         this.userName = userName;
     }
