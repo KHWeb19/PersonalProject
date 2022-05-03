@@ -3,10 +3,12 @@ package com.example.backend.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
+import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
+import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -26,6 +28,12 @@ public class Board {
 
     @Column(length = 64, nullable = false)
     private String boardImage;
+
+    @Column(length = 64)
+    private String boardImage2;
+
+    @Column(length = 64)
+    private String boardImage3;
 
     @Lob
     private String content;

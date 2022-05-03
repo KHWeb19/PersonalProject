@@ -2,7 +2,7 @@
     <v-container style="width: 643px; margin-top: 85px; font-size: 14px">
       <v-flex>
             <v-card style="height: 320px; text-align: center" v-if="!boards || (Array.isArray(boards) && boards.length === 0)">
-                    사진을 업로드 하세요
+                    피드를 둘러보고 팔로우하거나 사진을 업로드 하세요
             </v-card>
             <v-card style="margin-bottom: 30px;" v-else v-for="board in boards" :key="board.boardNo">
                 <form @submit.prevent="onSubmit(board.boardNo)">
@@ -76,6 +76,20 @@
                         <tr align="center">
                             <td colspan="3">
                                 <v-img width="615px" :src="require(`@/assets/mImage/${board.boardImage}`)"/>
+                                <div class="slide-3d">
+                                    <v-app id="inspire">
+                                        <v-container>
+                                            <swiper class="swiper" :options="swiperOption">
+                                                <swiper-slide><v-img src="@/assets/profile.jpg"/></swiper-slide>
+                                                <swiper-slide><v-img src="@/assets/profile.jpg"/></swiper-slide>
+                                                <swiper-slide>Slide 3</swiper-slide>
+                                                <div class="swiper-pagination" slot="pagination"></div>
+                                                <div class="swiper-button-prev" slot="button-prev"></div>
+                                                <div class="swiper-button-next" slot="button-next"></div>
+                                            </swiper>
+                                        </v-container>
+                                    </v-app>
+                                </div>
                             </td>
                         </tr >
                         <like-button :board="board" :myLikes="myLikes"/>
@@ -140,11 +154,15 @@ import FollowButton from '@/components/likes/FollowButton'
 import LikeButton from '@/components/likes/LikeButton'
 import { mapState, mapActions } from 'vuex'
 import axios from 'axios'
+import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+import 'swiper/css/swiper.css'
 export default {
     name: 'MyFollowList',
     components : {
         FollowButton,
-        LikeButton
+        LikeButton,
+        Swiper,
+        SwiperSlide
     },
     props: {
         boards: {

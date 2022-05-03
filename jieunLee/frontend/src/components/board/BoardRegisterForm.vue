@@ -72,6 +72,8 @@ export default {
             imageChange: JSON.parse(localStorage.getItem('imageChange')),
             loginInfo: JSON.parse(localStorage.getItem('loginInfo')),
             boardImage: '',
+            boardImage2: null,
+            boardImage3: null,
             content: '',
             priview: ''
         }
@@ -94,12 +96,23 @@ export default {
             })
             .then (res => {
                 alert('처리 결과: ' + res.data)
-                console.log(this.files[0].name)
                 this.boardImage = this.files[0].name
-                //
-                // console.log(this.loginInfo.memberNo)
-                const { boardImage, content } = this
-                this.$emit('submit', { memberNo: this.loginInfo.memberNo, boardImage, content })
+                if(this.files[1]) {
+                    this.boardImage2 = this.files[1].name
+                    if(this.files[2]) {
+                        this.boardImage3 = this.files[2].name
+                        const { boardImage, boardImage2, boardImage3, content } = this
+                        this.$emit('submit', { memberNo: this.loginInfo.memberNo, boardImage, boardImage2, boardImage3, content })
+                    } else {
+                        const { boardImage, boardImage2, content } = this
+                        this.$emit('submit', { memberNo: this.loginInfo.memberNo, boardImage, boardImage2, content })
+                    }
+                } else { 
+                    const { boardImage, content } = this
+                    this.$emit('submit', { memberNo: this.loginInfo.memberNo, boardImage, content })
+                }
+                
+
             })
             .catch (res => {
                 alert('처리 결과: ' + res.message)
