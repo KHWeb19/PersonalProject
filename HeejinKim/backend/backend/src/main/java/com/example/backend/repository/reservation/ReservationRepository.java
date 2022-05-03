@@ -3,6 +3,7 @@ package com.example.backend.repository.reservation;
 import com.example.backend.controller.board.request.SeatNowRequest;
 import com.example.backend.controller.board.request.SeatRequest;
 
+import com.example.backend.entity.Member;
 import com.example.backend.entity.MemberAuth;
 import com.example.backend.entity.Reservation;
 import org.hibernate.annotations.SQLInsert;
@@ -25,7 +26,6 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     @Query(value = "select * from member_auth where member_no = :memberNo" , nativeQuery = true)
     Optional<Reservation> findByMemberNo(Long memberNo);
 
-    //여기서 memberNo를 userId로 고쳤음
 
     //좌석번호로 예약 다 가져오기 ---이건 좌석번호 하나만 가능한거니까--- 시간은 다가져올 수 있음
     @Transactional
@@ -36,6 +36,18 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     @Transactional
     @Query(value = "select * from reservation where seat_time = :seatTime", nativeQuery = true)
     Optional <Reservation> findRestSeatsByTime(String seatTime);
+
+
+    @Transactional
+    @Query(value = "select * from reservation where id = :searchId",nativeQuery = true)
+    public List<Reservation> findIdList(String searchId);
+
+
+
+
+
+
+
 
 
 

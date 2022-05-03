@@ -3,6 +3,9 @@ export default{
 members:[],
 member:null,
 
+userInfo: JSON.parse(localStorage.getItem('userInfo')),
+token: localStorage.getItem('token'),
+
 isAuth: false,
 //isAuth: true,,(일단 작업하려면 이렇게 해놓고)
 
@@ -17,11 +20,7 @@ reservation:null,
 reservations:[],
 
 
-
-seatNumber:[],
-seatTime:[],
-restSeats:[],
-
+reservationIdLists:[],
 
 bookInfo:[],
 

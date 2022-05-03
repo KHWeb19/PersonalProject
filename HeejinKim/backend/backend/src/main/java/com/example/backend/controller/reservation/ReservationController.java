@@ -92,21 +92,21 @@ public class ReservationController {
         return reservation;
     }
     @GetMapping("/list/{searchId}")
-    public List<Reservation> ReservationPerList (@PathVariable("checkId") String searchId) {
+    public List<Reservation> ReservationPerList (@PathVariable("searchId") String searchId) {
         log.info("reservationPerList()");
 
 
-        return service.searchIdlist(searchId);
+        return rsvService.searchIdList(searchId);
     }
 
-    @RequestMapping(value = "/reading",  method = RequestMethod.GET)
-    public Reservation bookingReadBoard (@RequestParam(value = "reservationNo", required = false) Long reservationNo,
+    @RequestMapping(value = "/read",  method = RequestMethod.GET)
+    public Reservation bookingReadBoard (@RequestParam(value = "checkReservationNo", required = false) Long checkReservationNo,
                                          @RequestParam(value = "searchId", required = false) String searchId) {
 
 
-        log.info("checkNo:" +reservationNo + "id:" +searchId);
+        log.info("checkReservationNo:" +checkReservationNo + "id:" +searchId);
 
-        return service.read(reservationNo,searchId);
+        return rsvService.read(checkReservationNo,searchId);
     }
 }
 /* 여기서는 행,열만 업데이트 되기 때문에 필요없을 것 같아서 삭제

@@ -19,6 +19,8 @@ public interface ReservationService {
     public void updateModify (Reservation reservation);         //업데이트 된 내용을 넣기
     public void remove (Long reservationNo) ;                   //삭제기능
     public Reservation getRestSeats (String seatTime);          //시간으로 남은자리 찾기
+    public List<Reservation> searchIdList(String searchId);
+    public Reservation read (Long checkReservationNo,String searchId);
 
 
 

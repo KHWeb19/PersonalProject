@@ -44,7 +44,7 @@ public class ReservationServiceImpl implements ReservationService {
     @Transactional
     @Override
     public Reservation getBookingRead(Long reservationNo) {//원래 userId넣어야 되는데 생각중
-        Optional<Reservation> maybeGetBookingRead = rsvRepository.findById(Long.valueOf(reservationNo));
+        Optional<Reservation> maybeGetBookingRead = rsvRepository.findById(reservationNo);
 
         if (maybeGetBookingRead.equals(Optional.empty())) {
             log.info("Can't get BookingRead!");
@@ -83,6 +83,37 @@ public class ReservationServiceImpl implements ReservationService {
     public void remove(Long reservationNo) {
 
         rsvRepository.deleteById(reservationNo);
+    }
+    @Transactional
+    @Override
+    public List<Reservation> searchIdList(String searchId) {
+        return rsvRepository.findIdList(searchId);
+
+    }
+
+
+
+    @Transactional //아이디 넣고 리스트 불러올때
+    @Override
+    public Reservation read(Long checkReservationNo, String searchId) {
+        Optional<Reservation> maybeReadBoard = rsvRepository.findById(checkReservationNo);
+
+        if(maybeReadBoard.equals(Optional.empty())){
+            log.info("no booking");
+        }
+
+        Reservation rsvId = maybeReadBoard.get();
+
+        if(rsvId.getId().equals(searchId)){
+            log.info("searchId:"+searchId);
+            return rsvId;
+        }else if(searchId.equals("manager")) {
+            log.info("callBookingList");
+            return rsvId;
+        }else
+            return null;
+
+
     }
 }
     /*
