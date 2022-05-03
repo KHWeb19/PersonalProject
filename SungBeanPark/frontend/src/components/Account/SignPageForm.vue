@@ -112,7 +112,7 @@
                           class="sign-input"
                           type="text"
                           placeholder="이름(2~30자)"
-                          v-model="name"
+                          v-model="userName"
                           required
                         />
                         <div class="errmsg" aria-live="polite">
@@ -139,8 +139,6 @@
 <script>
 import { ValidationObserver, ValidationProvider, extend } from "vee-validate"
 
-import axios from "axios"
-
 export default {
   name: "SignPageForm",
   props: {
@@ -148,16 +146,16 @@ export default {
       type: Array,
     },
   },
-
   data() {
     return {
-      kindsOfMember: ["회원", "관리자"],
+      radioGroup: 1,
+      kindsOfMember: ["사용자", "관리자"],
       id: "",
       pw: "",
       checkPassword: "",
-      name: "",
-      checkPw: "",
+      userName: "",
       required: "",
+      checkPw: "",
     }
   },
   component: {
@@ -165,31 +163,11 @@ export default {
     ValidationProvider,
     extend,
   },
-  /* eslint-disable */
   methods: {
     submit() {
-      const { id, pw, name } = this
+      const { id, pw, userName } = this
       const auth = this.radioGroup == "사용자" ? "사용자" : "관리자"
-      this.$emit("submit", { id, pw, name, auth })
-    },
-
-    checkValid() {
-      const { id } = this
-      axios
-        .get(`http://localhost:8888/Member/check/${id}`)
-        .then((res) => {
-          this.temp = res.data
-          if (res.data == true) {
-            alert("사용 가능한 아이디 입니다!")
-            this.valid = res.data
-          } else {
-            alert("중복된 아이디 입니다!")
-            this.valid = false
-          }
-        })
-        .catch(() => {
-          alert("아이디를 입력해주세요!")
-        })
+      this.$emit("submit", { id, pw, userName, auth })
     },
   },
 }

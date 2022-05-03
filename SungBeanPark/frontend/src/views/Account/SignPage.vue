@@ -1,8 +1,9 @@
 <template>
-  <sign-page-form @submit="onSubmit" />
+  <sign-page-form @submit="onSubmit" :members="members" />
 </template>
 <script>
 import SignPageForm from "@/components/Account/SignPageForm"
+import { mapActions, mapState } from "vuex"
 import axios from "axios"
 export default {
   name: "SignPage",
@@ -11,19 +12,35 @@ export default {
   },
   methods: {
     onSubmit(payload) {
-      const { id, pw, name, auth } = payload
+      const { id, pw, userName, auth } = payload
       axios
-        .post("http://localhost:8888/Member/register", { id, pw, name, auth })
-        .then(() => {
-          alert("등록 성공!")
-          this.$router.push({
-            name: "LoginPage",
-          })
+        .post("http://localhost:8888/Member/register", {
+          id,
+          pw,
+          userName,
+          auth,
         })
-        .catch(() => {
-          alert("다시 확인해주세요.")
+        .then((res) => {
+          if (res.data) {
+            alert("가입완료")
+            this.$router.push({
+              name: "LoginPage",
+            })
+          } else {
+            alert("이미 존재하는 아이디입니다.")
+          }
+        })
+        .catch((res) => {
+          alert(res.response.data.message)
         })
     },
+    ...mapActions(["fetchMemberList"]),
+  },
+  computed: {
+    ...mapState(["members"]),
+  },
+  mounted() {
+    this.fetchMemberList()
   },
 }
 </script>
