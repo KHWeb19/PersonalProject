@@ -1,22 +1,7 @@
 <template>
     <div >
-        <div class="textbox" v-for="(comment, index) in boardComments" :key="index">
-            <div>
-                <strong> {{ comment.id }} </strong> <br>
-                <span class="comments"> 
-                    {{ comment.comments}} 
-                </span>
-                <span> <br>
-                    <v-img v-if="comment.commentLinkInfo != null" v-bind:src="require(`@/assets/boardComment/${comment.commentLinkInfo}`)" contain style="height:300px; width:300px position: fixed;" />
-                </span>
-                <span class="date"> <br>
-                    {{ comment.regDate}} <hr>
-                </span>
-            </div>
-        </div>
-
-        <div>
-            <form @submit.prevent="onSubmit">
+        <div style="padding: 0 0 0 15%;" >
+            <form @submit.prevent="onSubmit" >
                 <v-container>
                     <v-row>
                         <v-col>
@@ -28,7 +13,7 @@
                             <textarea type="text" v-model="comments" placeholder="댓글을 입력해주세요" class="commentcheck"/><br>
                         </v-col>
                         <v-col class="col-12 col-sm-1">
-                            <v-btn class="commentRegister" type="submit" color="white">
+                            <v-btn type="submit" color="white">
                                 <strong>등록</strong>
                             </v-btn>  
                         </v-col>
@@ -42,7 +27,6 @@
                 </v-container>
             </form>
         </div>
-        
     </div>
 </template>
 
@@ -63,7 +47,11 @@
         data () {
             return {
                 id: (window.localStorage.getItem('id')),
-                comments: ''
+                comments: '',
+                writeCoComent:false,
+                writeCommentArr:[],
+                writeCommentArr2:[],
+                checkIndex:''
             }
         }, 
         methods: {
@@ -73,6 +61,10 @@
             onSubmit () {
                 const { id, comments, files1 } = this
                 this.$emit('submit', { id, comments, files1 })
+            },
+            writeComment (index) {
+                this.checkIndex = index
+                this.writeCoComent = true
             }
         }
     }
@@ -81,23 +73,15 @@
 <style scoped>
 .commentcheck {
     border: 2px solid rgb(37, 26, 26);
-    width: 750px;
+    width: 730px;
     height: 100px;
     color:black;
 }
-.commentRegister{
-    margin-left: 30%;
-    margin-top: 5px;
-}
-
-form{
-    padding: 0 0 0 13%;
-}
-
 .textbox{
     width: 1000px;
     color:black;
     padding: 0 0 0 13%;
+    
 }
 
 .textbox .date {

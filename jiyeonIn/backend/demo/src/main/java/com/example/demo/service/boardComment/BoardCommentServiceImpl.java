@@ -34,7 +34,16 @@ public class BoardCommentServiceImpl implements BoardCommentService {
         Optional<BookingInfo> bookingInfo = bookingRepository.findById(info.getBookingNo());
         BookingInfo bookingInfo1 = bookingInfo.get();
 
-        BoardComment boardComment = new BoardComment(info.getId(),info.getComments(),putLink,bookingInfo1 );
+        Long findNoParent = repository.findMax(info.getBookingNo());
+        Long findNoChild = 0l;
+
+        if(findNoParent == null) {
+            findNoParent = 1l;
+        }else {
+            findNoParent +=1l;
+        }
+
+        BoardComment boardComment = new BoardComment(info.getId(),info.getComments(),putLink,findNoParent, findNoChild, bookingInfo1 );
         repository.save(boardComment);
     }
 
@@ -45,7 +54,16 @@ public class BoardCommentServiceImpl implements BoardCommentService {
         BookingInfo bookingInfo2 = bookingInfo.get();
         log.info("bookingInfo2 :"+bookingInfo2);
 
-        BoardComment boardComment2 = new BoardComment(info.getId(),info.getComments(), bookingInfo2);
+        Long findNoParent = repository.findMax(info.getBookingNo());
+        Long findNoChild = 0l;
+
+        if(findNoParent == null) {
+            findNoParent = 1l;
+        }else {
+            findNoParent +=1l;
+        }
+
+        BoardComment boardComment2 = new BoardComment(info.getId(),info.getComments(), findNoParent, findNoChild, bookingInfo2);
         repository.save(boardComment2);
 
     }
@@ -54,5 +72,37 @@ public class BoardCommentServiceImpl implements BoardCommentService {
     @Override
     public List<BoardComment> list(Integer bookingNo) {
         return repository.findBookingNoLost(Long.valueOf(bookingNo));
+    }
+
+    @Override
+    public void includeCoCommentRegister(BoardCommentRequest info, String originalFilename) {
+        String putLink = info.getBookingNo()+"."+info.getId()+"."+originalFilename;
+
+        Optional<BookingInfo> bookingInfo = bookingRepository.findById(info.getBookingNo());
+        BookingInfo bookingInfo1 = bookingInfo.get();
+
+        Long findNoParent = info.getParentNo();
+        Long findNoChild = repository.findMaxParent(findNoParent);
+
+        findNoChild+=1l;
+
+        BoardComment boardComment = new BoardComment(info.getId(),info.getComments(),putLink,findNoParent, findNoChild, bookingInfo1 );
+        repository.save(boardComment);
+    }
+
+    @Override
+    public void exceptFileCoCommentRegister(BoardCommentRequest info) {
+        Optional<BookingInfo> bookingInfo = bookingRepository.findById(info.getBookingNo());
+        BookingInfo bookingInfo2 = bookingInfo.get();
+        log.info("bookingInfo2 :"+bookingInfo2);
+
+        Long findNoParent = info.getParentNo();
+        Long findNoChild = repository.findMaxParent(findNoParent);
+
+        findNoChild+=1l;
+
+        BoardComment boardComment2 = new BoardComment(info.getId(),info.getComments(), findNoParent, findNoChild, bookingInfo2);
+        repository.save(boardComment2);
+
     }
 }

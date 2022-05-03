@@ -126,7 +126,7 @@
 
         <br><hr><br>
 
-        <div style="margin:1% 1% 1% 7%;">
+        <div style="margin:1% 1% 1% 15%;">
             <h4>요청사항 입력</h4><br>
             <textarea 
                 placeholder="케이크 위 레터링 글자는 최대 10자 이내 

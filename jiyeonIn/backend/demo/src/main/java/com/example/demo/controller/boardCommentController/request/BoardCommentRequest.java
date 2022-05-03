@@ -8,8 +8,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BoardCommentRequest {
+    private Long commentNo;
     private String id;
     private String comments;
     private Long bookingNo;
+    private Long parentNo;
 
 }

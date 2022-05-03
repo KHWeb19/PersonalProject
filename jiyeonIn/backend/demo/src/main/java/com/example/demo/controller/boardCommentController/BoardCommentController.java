@@ -25,7 +25,7 @@ public class BoardCommentController {
 
     @PostMapping(value = "/register/{bookingNo}", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
     public String boardCommentRegister (@PathVariable ("bookingNo") Integer bookingNo,
-                                        @RequestPart(value = "info", required = true) BoardCommentRequest info,
+                                        @RequestPart(value = "info", required = false) BoardCommentRequest info,
                                         @RequestPart(value = "fileList", required = false) List<MultipartFile> fileList) throws FileNotFoundException {
         log.info("boardCommentRegister : " + info);
         log.info("fileList: " + fileList);
@@ -63,6 +63,41 @@ public class BoardCommentController {
         log.info("boardCommentList()");
 
         return service.list(bookingNo);
+    }
+
+    @PostMapping(value = "/register/Cocoment/{bookingNo}", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
+    public String boardCocommentRegister (@PathVariable ("bookingNo") Integer bookingNo,
+                                        @RequestPart(value = "info", required = false) BoardCommentRequest info,
+                                        @RequestPart(value = "fileList", required = false) List<MultipartFile> fileList) throws FileNotFoundException {
+        log.info("boardCoCommentRegister : " + info);
+        log.info("fileList: " + fileList);
+
+        info.setBookingNo(Long.valueOf(bookingNo));
+
+        log.info("here is: " +info);
+
+        if(fileList != null) {
+            try{
+                for(MultipartFile multipartFile : fileList){
+                    log.info("requestUploadFile() - Make file: " +
+                            multipartFile.getOriginalFilename());
+
+                    FileOutputStream writer = new FileOutputStream(
+                            "../../vue_frontend/book_cake/src/assets/boardComment/"+bookingNo+"."+info.getId()+"."+multipartFile.getOriginalFilename());
+                    log.info("디렉토리에 파일 배치 성공!");
+
+                    writer.write(multipartFile.getBytes());
+                    writer.close();
+                    service.includeCoCommentRegister(info, multipartFile.getOriginalFilename());
+                }
+            }catch (Exception e) {
+                return "comment fail!";
+            }
+        }else if(fileList == null) {
+            service.exceptFileCoCommentRegister(info);
+        }
+        log.info("requestUpload(): Success!!!");
+        return "Upload Success!!";
     }
 
 
