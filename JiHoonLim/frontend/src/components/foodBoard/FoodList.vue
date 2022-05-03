@@ -33,7 +33,7 @@
                 <v-chip
                   v-for="(catMat, idx) in catMats"
                   :key="idx"
-                  @click="selectMat(catMat.value)"
+                  @click="clickMat(catMat.value)"
                 >
                   {{ catMat.value }}
                 </v-chip>
@@ -43,7 +43,11 @@
             <div class="cate_subBox">
               <div class="cate_main">종류별</div>
               <v-chip-group mandatory active-class="orange--text cate_sub">
-                <v-chip v-for="(catKind, idx) in catKinds" :key="idx">
+                <v-chip
+                  v-for="(catKind, idx) in catKinds"
+                  :key="idx"
+                  @click="clickKind(catKind.value)"
+                >
                   {{ catKind.value }}
                 </v-chip>
               </v-chip-group>
@@ -52,7 +56,11 @@
             <div class="cate_subBox">
               <div class="cate_main">방법별</div>
               <v-chip-group mandatory active-class="orange--text cate_sub">
-                <v-chip v-for="(catWay, idx) in catWays" :key="idx">
+                <v-chip
+                  v-for="(catWay, idx) in catWays"
+                  :key="idx"
+                  @click="clickWay(catWay.value)"
+                >
                   {{ catWay.value }}
                 </v-chip>
               </v-chip-group>
@@ -179,7 +187,9 @@ export default {
       sortReset: true,
       keyWord: "",
 
-      chooseMat: "",
+      chooseMat: "전체",
+      chooseKind: "전체",
+      chooseWay: "전체",
 
       catKinds: [
         { value: "전체" },
@@ -215,15 +225,12 @@ export default {
         { value: "무침 / 비빔" },
         { value: "기타" },
       ],
-      selectCate: false,
 
-      //filterData: this.paginatedData,
       copyData: [...this.listArray],
+      //filteringData: [],
     };
   },
-  created() {
-    this.selectMat("전체");
-  },
+
   methods: {
     write() {
       if (this.$store.state.userInfo == null) {
@@ -260,8 +267,141 @@ export default {
         alert("검색어를 입력해주세요.");
       }
     },
+
+    selectCate(mat, kind, way) {
+      this.chooseMat = mat;
+      this.chooseKind = kind;
+      this.chooseWay = way;
+
+      this.copyData = [];
+      let i;
+
+      if (
+        // 카테고리 3항목이 전체인 경우
+        this.chooseMat == "전체" &&
+        this.chooseKind == "전체" &&
+        this.chooseWay == "전체"
+      ) {
+        this.copyData = [...this.listArray];
+        return;
+      } else if (
+        // 재료만  선택
+        this.chooseMat != "전체" &&
+        this.chooseKind == "전체" &&
+        this.chooseWay == "전체"
+      ) {
+        for (i = 0; i < this.listArray.length; i++) {
+          if (this.listArray[i].mat == this.chooseMat) {
+            this.copyData.push(this.listArray[i]);
+          }
+        }
+        return;
+      } else if (
+        //종류만 선택
+        this.chooseMat == "전체" &&
+        this.chooseKind != "전체" &&
+        this.chooseWay == "전체"
+      ) {
+        for (i = 0; i < this.listArray.length; i++) {
+          if (this.listArray[i].kind == this.chooseKind) {
+            this.copyData.push(this.listArray[i]);
+          }
+        }
+        return;
+      } else if (
+        //방법만 선택
+        this.chooseMat == "전체" &&
+        this.chooseKind == "전체" &&
+        this.chooseWay != "전체"
+      ) {
+        for (i = 0; i < this.listArray.length; i++) {
+          if (this.listArray[i].way == this.chooseWay) {
+            this.copyData.push(this.listArray[i]);
+          }
+        }
+        return;
+      } else if (
+        //재료와 종류만 선택
+        this.chooseMat != "전체" &&
+        this.chooseKind != "전체" &&
+        this.chooseWay == "전체"
+      ) {
+        for (i = 0; i < this.listArray.length; i++) {
+          if (
+            this.listArray[i].mat == this.chooseMat &&
+            this.listArray[i].kind == this.chooseKind
+          ) {
+            this.copyData.push(this.listArray[i]);
+          }
+        }
+
+        return;
+      } else if (
+        //종류와 방법만 선택
+        this.chooseMat == "전체" &&
+        this.chooseKind != "전체" &&
+        this.chooseWay != "전체"
+      ) {
+        for (i = 0; i < this.listArray.length; i++) {
+          if (
+            this.listArray[i].kind == this.chooseKind &&
+            this.listArray[i].way == this.chooseWay
+          ) {
+            this.copyData.push(this.listArray[i]);
+          }
+        }
+
+        return;
+      } else if (
+        //재료와 방법만 선택
+        this.chooseMat != "전체" &&
+        this.chooseKind == "전체" &&
+        this.chooseWay != "전체"
+      ) {
+        for (i = 0; i < this.listArray.length; i++) {
+          if (
+            this.listArray[i].mat == this.chooseMat &&
+            this.listArray[i].way == this.chooseWay
+          ) {
+            this.copyData.push(this.listArray[i]);
+          }
+        }
+        return;
+      } else if (
+        // 재료 종류 방법 모두 선택
+        this.chooseMat != "전체" &&
+        this.chooseKind != "전체" &&
+        this.chooseWay != "전체"
+      ) {
+        for (i = 0; i < this.listArray.length; i++) {
+          if (
+            this.listArray[i].mat == this.chooseMat &&
+            this.listArray[i].kind == this.chooseKind &&
+            this.listArray[i].way == this.chooseWay
+          ) {
+            this.copyData.push(this.listArray[i]);
+          }
+        }
+        return;
+      }
+    },
+
+    clickMat(value) {
+      this.chooseMat = value;
+      console.log(this.chooseMat, this.chooseKind, this.chooseWay);
+      this.selectCate(this.chooseMat, this.chooseKind, this.chooseWay);
+    },
+    clickKind(kind) {
+      this.chooseKind = kind;
+      console.log(this.chooseMat, this.chooseKind, this.chooseWay);
+      this.selectCate(this.chooseMat, this.chooseKind, this.chooseWay);
+    },
+    clickWay(way) {
+      this.chooseWay = way;
+    },
+
+    /* 재료 설정 백업
     selectMat(value) {
-      console.log("재료 선택 실행 시작");
       this.chooseMat = value;
       console.log("사용자가 선택한 카테고리" + this.chooseMat);
 
@@ -269,7 +409,7 @@ export default {
 
       if (this.chooseMat == "전체") {
         this.copyData = [...this.listArray];
-        return this.copyData;
+        return;
       }
 
       let i;
@@ -279,19 +419,17 @@ export default {
         if (this.listArray[i].mat == this.chooseMat) {
           console.log("카테고리 일치 확인");
           this.copyData.push(this.listArray[i]);
-          //this.filterData.push(this.paginatedData[i]);
         } else {
           console.log("카테고리 해당 없는 사항 ");
-          //this.copyData.splice(i, 1);
         }
       }
-      //return this.filterData;
-      return this.copyData;
-    },
+    },*/
   },
 
   computed: {
     pageCount() {
+      this.selectCate(this.chooseMat, this.chooseKind, this.chooseWay);
+
       let listLeng = this.copyData.length,
         listSize = this.pageSize,
         page = Math.floor(listLeng / listSize);
@@ -304,6 +442,7 @@ export default {
         end = start + this.pageSize;
       return this.copyData.slice(start, end);
     },
+
     /*
     pageCount() {
       let listLeng = this.listArray.length,
@@ -322,14 +461,18 @@ export default {
 
   /*beforeUpdate() {
     console.log("beforeUpdate");
-
+    if (this.chooseMat == "전체") {
+      this.listArray = this.copyData;
+      return;
+    }
     let i;
     for (i = 0; i < this.listArray.length; i++) {
-      if (this.listArray[i].mat != this.chooseMat) {
+      if (this.listArray[i].mat == this.chooseMat) {
+        console.log("일치");
+      } else {
         this.listArray.splice(i, 1);
       }
     }
-    return this.listArray;
   },*/
 };
 </script>
