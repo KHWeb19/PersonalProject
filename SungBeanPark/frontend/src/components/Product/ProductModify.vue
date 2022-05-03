@@ -60,6 +60,9 @@ export default {
     }
   },
   methods: {
+    handleFileUpload() {
+      this.files = this.$refs.files.files
+    },
     onSubmit() {
       const {
         productName,

@@ -13,12 +13,21 @@
                 <li
                   class="product-item"
                   v-for="product in productList"
-                  :key="product.productName"
+                  :key="product.productId"
                 >
-                  <a>
+                  <router-link
+                    :to="{
+                      name: 'ProductDetailPage',
+                      params: { productId: product.productId.toString() },
+                    }"
+                  >
                     <div class="product-card">
                       <div class="product-card-image">
-                        <img alt="신발" />
+                        <img
+                          alt="신발"
+                          v-if="product.fileName != null"
+                          :src="require(`@/assets/image/${product.fileName}`)"
+                        />
                         <button>
                           <i class="ic-bookmark"></i>
                         </button>
@@ -54,8 +63,7 @@
                         </div>
                       </dl>
                     </div>
-                  </a>
-                  <button @click="addToCart(product)">장바구니</button>
+                  </router-link>
                 </li>
               </ul>
             </div>
@@ -66,42 +74,17 @@
   </div>
 </template>
 <script>
-import axios from "axios"
-import { mapActions, mapState } from "vuex"
 export default {
   name: "ProductCard",
-
   props: {
     productList: {
       type: Array,
     },
-  },
-  mounted() {
-    this.fetchProductList()
-  },
-  methods: {
-    ...mapActions(["fetchProductList"]),
-
-    addToCart(product) {
-      const { productName, productPrice } = product
-      axios
-        .post(
-          `http://localhost:8888/Member/addCart/${this.$store.state.loginMemberNo}`,
-          { productName, productPrice }
-        )
-        .then(() => {
-          alert("장바구니에 추가되었습니다.")
-          this.$router.go()
-        })
-        .catch((err) => {
-          alert(err.response.data.message)
-        })
+    listArray: {
+      type: Array,
+      required: true,
     },
   },
-  computed: {
-    ...mapState(["members", "member", "loginMemberNo"]),
-  },
-
   filters: {
     pricePoint: function (value) {
       return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
@@ -112,7 +95,7 @@ export default {
   },
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 @import "~@/assets/scss/layout/product";
-@import "~@/assets/scss/layout/product-section";
+@import "~@/assets/scss/layout/product-recommendation";
 </style>

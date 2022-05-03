@@ -1,7 +1,10 @@
 <template>
   <body>
     <Header-Layout></Header-Layout>
-    <product-card :productList="productList"></product-card>
+    <product-card
+      :productList="productList"
+      :list-array="pageArray"
+    ></product-card>
     <Footer-layout></Footer-layout>
   </body>
 </template>
@@ -10,7 +13,7 @@ import HeaderLayout from "@/components/Header/HeaderLayout.vue"
 import FooterLayout from "@/components/Footer/FooterLayout.vue"
 import ProductCard from "@/components/Product/ProductCard.vue"
 import { mapState, mapActions } from "vuex"
-
+import axios from "axios"
 export default {
   name: "ProductPage",
 
@@ -25,7 +28,21 @@ export default {
   mounted() {
     this.fetchProductList()
   },
-
+  data() {
+    return {
+      pageArray: [],
+    }
+  },
+  created() {
+    axios
+      .get("http://localhost:8888/product/list")
+      .then((res) => {
+        this.pageArray = res.data
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  },
   filters: {
     pricePoint: function (value) {
       return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
@@ -36,7 +53,4 @@ export default {
   },
 }
 </script>
-<style lang="scss" scoped>
-@import "~@/assets/scss/layout/product";
-@import "~@/assets/scss/layout/product-section";
-</style>
+<style scoped></style>

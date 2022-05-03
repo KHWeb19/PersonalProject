@@ -1,0 +1,44 @@
+.product-size {
+  &-header {
+    margin-bottom: 16px;
+    position: relative;
+  }
+
+  &-option {
+    @include flexbox;
+
+    width: 100%;
+
+    span {
+      display: inline-block;
+      margin-left: 10px;
+      margin-right: 8px;
+      margin-bottom: 18px;
+    }
+
+    label {
+      @include flexbox;
+      cursor: pointer;
+      height: 48px;
+      width: 94px;
+      border: 1px solid $border;
+      border-radius: 4px;
+      &:hover {
+        border: 1px solid $black;
+      }
+      &:active {
+        background-color: $black;
+        color: $white;
+      }
+    }
+    input {
+      display: none;
+    }
+  }
+
+  @include responsive(T) {
+    label {
+      width: 72px;
+    }
+  }
+}
