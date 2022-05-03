@@ -65,7 +65,7 @@ export default {
   fetchCartList({ commit }, memberNo) {
     console.log("memberNo =" + memberNo)
     return axios
-      .get(`http://localhost:8888/Member/addToCart/list/${memberNo}`)
+      .get(`http://localhost:8888/cart/cartList/${memberNo}`)
       .then((res) => {
         commit(FETCH_CART_LIST, res.data)
       })
