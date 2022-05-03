@@ -18,7 +18,7 @@ public class Attachment {
 
     private String filename;
 
-    private String originalfilename;
+    private String filepath;
 
     @JsonBackReference
     @ManyToOne

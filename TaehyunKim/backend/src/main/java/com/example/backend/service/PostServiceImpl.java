@@ -1,15 +1,13 @@
 package com.example.backend.service;
 
 import com.example.backend.entity.Post;
-import com.example.backend.entity.User;
 import com.example.backend.repository.PostRepository;
-import com.example.backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.security.Principal;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -18,7 +16,6 @@ import java.util.Optional;
 public class PostServiceImpl implements PostService{
 
     private final PostRepository postRepository;
-    private final UserRepository userRepository;
 
     @Override
     public void createPost(Post post) {
@@ -36,13 +33,19 @@ public class PostServiceImpl implements PostService{
     }
 
     @Override
-    public List<Post> getPosts() {
-        return postRepository.findAll();
+    public Page<Post> getPosts(Pageable pageable) {
+
+        return postRepository.findAll(pageable);
     }
 
     @Override
     public void modifyPost(Post post) {
 
         postRepository.save(post);
+    }
+
+    @Override
+    public void deletePost(Integer no){
+        postRepository.deleteById(Long.valueOf(no));
     }
 }

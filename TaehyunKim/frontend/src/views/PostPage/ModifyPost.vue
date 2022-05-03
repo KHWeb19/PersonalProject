@@ -1,105 +1,155 @@
 <template>
     <v-container>
-        <post-head :post="post" v-if="post"/>
-        <textarea style="height: 500px" v-if="post" v-model="content">
-        </textarea>
-        <input type="file" @change="addfiles" multiple accept="image/*">
-
-        <div v-for="(file, index) in originalFiles" :key="index">
-                <img :src="require(`../../assets/img/${file}`)" height="100" width="100">
-                <v-btn @click="deleteOriginalFile(index)">delete</v-btn>
+        <div class="main-div" v-if="post">
+            <p>{{post.title}}</p>
+        </div>
+        
+        <div class="btn-container">
+            <button class="btn-container__buttons" @click="btnBold"><font-awesome-icon icon="fa-solid fa-bold"/></button>
+            <button class="btn-container__buttons" @click="btnUnderline"><font-awesome-icon icon="fa-solid fa-underline" /></button>
+            <button class="btn-container__buttons" @click="btnItalic"><font-awesome-icon icon="fa-solid fa-italic" /></button>
+            <button class="btn-container__buttons" @click="btnStrike"><font-awesome-icon icon="fa-solid fa-strikethrough" /></button>
+            <button class="btn-container__buttons" @click="inputImgClicked"><font-awesome-icon icon="fa-solid fa-image" /></button>
         </div>
 
-        <div v-for="(file, idx) in preview" :key="idx + file">
-            <img :src="file" height="100" width="100">
-            <v-btn @click="deletePreview">delete</v-btn>
+        <v-row justify="center">
+            <v-col cols="12">
+                <div contenteditable="true" id="the-content" @input="contentChanged" class="section-one section-one__editor">
+                </div>
+            </v-col>
+        </v-row>
 
+        <input id="inputImg" type="file" multiple ref="files" accept="image/*" style="display: none">
+        <div class="section-one section-one__div-flex">
+            <v-btn class="primary" @click="modifyPost()">Update Post</v-btn>
         </div>
-        <v-btn class="primary" @click="modify_post()">Modify</v-btn>
     </v-container>
 </template>
 
 <script>
 import axios from "axios"
 import {mapActions, mapState} from 'vuex'
-import PostHead from '../../components/PostHead.vue'
-import {PostUtility} from '../../javascript/postutility'
+import {PostUtility} from '@/javascript/postutility'
+import {v4 as uuidv4} from 'uuid'
 
 export default{
 
     data(){
         return {
             content: '',
-            originalFiles: [],
             files: [],
-            preview: []
+            previews: [],
+            strUUID: ''
         }
     },
 
-    components:{
-            PostHead
-        },
     
     computed:{
         ...mapState(['post'])
     },
+
+    watch:{
+        content:{
+            handler(newVal, oldVal){
+                if (newVal.length <= oldVal.length){
+                    this.checkPreviewDeleted()
+                }
+            }
+        }
+    },
     methods:{
         ...mapActions(['read_post']),
+         contentChanged(e){
+            this.content = e.target.innerHTML
+        },
+        checkPreviewDeleted(){
+            this.previews.forEach(item => {
+                if(!this.content.includes(item)){
+                    this.previews.splice(this.previews.indexOf(item))
+                }
+            })
+        },
+        inputImgClicked(){
+            const inputImg = document.getElementById("inputImg")
+            inputImg.click() 
+        },
 
-        modify_post(){
-            
+        btnBold(){
+            document.execCommand('bold')
+        },
+        btnUnderline(){
+            document.execCommand('underline')
+        },
+        btnItalic(){
+            document.execCommand('italic')
+        },
+        btnStrike(){
+            document.execCommand('strikeThrough')
+        },
+
+        replaceImgTags(){
+            this.strUUID = uuidv4()
+            this.previews.forEach(() => {
+                let startIdx = this.content.indexOf("<img src=\"")
+                let endIdx = this.content.indexOf("\">")
+                let strToReplace = this.content.substring(startIdx, endIdx+2)
+                this.content = this.content.replace(strToReplace, this.strUUID)
+            })
+        },
+
+        modifyPost(){
             let formData = new FormData()
 
-            for (let i =0; i<this.files.length; i++){
-                formData.append('fileList', this.files[i])
-            }
+            this.files.forEach((file) => formData.append('fileList', file))
+            this.replaceImgTags()
 
             this.post.content = this.content
 
             formData.append("post", new Blob([JSON.stringify(this.post)], {type: "application/json"}))
+            formData.append("strUUID", this.strUUID)
 
             axios.post(`freepost/modify/${this.$route.params.no}`, formData)
-            .then(() => {
-                this.$router.push("/readpost/" + this.$route.params.no)
-            })
-            .catch(() => console.log("modify failed!"))
+            .then(() => this.$router.push("/readpost/" + this.$route.params.no))
+            .catch(() => console.log("Unable to modify post"))
 
-
-        },
-        readFiles(attachments){
-
-            for (let i = 0; i< attachments.length; i++){
-                   
-                this.originalFiles.push(attachments[i].filename)
-
-                }
-        },
-        deleteOriginalFile(index){
-            this.originalFiles.splice(index, 1)
-            this.post.attachments.splice(index, 1)
-
-            console.log(this.post.attachments)
-        },
-        addfiles: function(e){
-            PostUtility.AddFile(e,this.files, this.preview)
-        },
-        
-        deletePreview(index){
-            
-            this.files.splice(index, 1)
-            this.preview.splice(index, 1)
-
-            console.log(this.files)
         }
-        
+ 
     },
 
     created(){
         this.read_post(this.$route.params.no)
-        this.content = this.post.content
-
-        this.readFiles(this.post.attachments)
     },
+
+    mounted(){
+            document.getElementById("inputImg").addEventListener('change',
+            (e) => {
+                let files = e.target.files
+                let promises = []
+                if (!files.length) return
+
+                for (let i=0; i<files.length; i++){
+                    this.files.push(files[i])
+                    promises.push(PostUtility.readFile(files[i]))
+                }
+
+                Promise.all(promises).then((values) => {
+                    values.forEach((item) => {
+                        document.getElementById('the-content').focus({preventScroll: true})
+
+                        //let imgWithTag = "<img src=\"" + item + "\">"
+                        //document.execCommand('insertHTML', false, imgWithTag)
+                        document.execCommand('insertImage', false, item)
+
+                        this.previews.push(item)})
+                    })
+                })
+    },
+
+    beforeUpdate(){
+        var htmlObj = document.getElementById("the-content")
+        htmlObj.innerHTML = this.post.content
+    },
+
     async beforeRouteEnter(to, from, next){
         const result = await axios(`freepost/validate/${to.params.no}`)
         if (result.data){
@@ -115,3 +165,6 @@ export default{
 }
 
 </script>
+
+<style src="../../assets/css/create.css" scoped>
+</style>

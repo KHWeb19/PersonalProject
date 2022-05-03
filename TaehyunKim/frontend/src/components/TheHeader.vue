@@ -1,5 +1,5 @@
 <template>
-  <v-container style="border-bottom: 1px solid; border-color: rgba(0,0,0,0.2)">
+  <v-container style="border-bottom: 1px solid;">
     <v-app-bar flat class="white">
         <v-toolbar-title>
             <router-link to="/" style="text-decoration: none; color: inherit">Basic Website</router-link>
@@ -8,14 +8,8 @@
         <v-spacer></v-spacer>
 
         <v-toolbar-items>
-            <v-btn text to="/dummy">
-                Dummy
-            </v-btn>
-            <v-btn text to="/duptest">
-                DupTest
-            </v-btn>
             <v-btn text to="/listpost">
-                Posts
+                THE POST
             </v-btn>
         </v-toolbar-items>
 

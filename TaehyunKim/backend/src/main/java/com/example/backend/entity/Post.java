@@ -25,6 +25,8 @@ public class Post {
 
     private String author;
 
+    @Lob
+    @Column
     private String content;
 
     @CreationTimestamp

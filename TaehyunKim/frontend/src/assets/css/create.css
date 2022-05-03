@@ -1,0 +1,60 @@
+.the-container{
+    margin: 20px 0 10px 0;
+    padding: 10px;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+}
+
+.section-one{
+    margin: 4px;
+    padding: 4px;
+}
+
+.section-one__title{
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.section-one__input{
+    width: 70%;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.btn-container{
+    display:flex;
+    justify-content: flex-start;
+}
+
+.btn-container__buttons{
+    margin: 10px;
+    width: 50px;
+    height: 100%;
+}
+
+.section-one__editor{
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 18px;
+    padding: 4px;
+    min-height: 500px;
+    box-shadow: 0 0 5px 0 rgba(0,0,0,0.5);
+}
+
+.section-one__div-flex{
+    display:flex;
+    justify-content: flex-end;
+}
+
+.section-one__editor img{
+    display: block;
+    float: right;
+    width: 100px;
+    height: 100px;
+}
+
+#imgTest{
+    width:100px;
+    height: 100px;
+}

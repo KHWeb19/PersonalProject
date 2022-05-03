@@ -20,11 +20,6 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/UserPage/SignUp.vue')
   },
   {
-    path: '/dummy',
-    name: 'dummy',
-    component: () => import('../views/DummyView.vue')
-  },
-  {
     path: '/login',
     name: 'login',
     component: () => import('../views/UserPage/LogInPage')
@@ -35,9 +30,9 @@ const routes = [
     component: () => import('../views/UserPage/MyPage')
   },
   {
-    path: '/duptest',
-    name: 'test',
-    component: () => import('../views/DupTest')
+    path: '/pagetest',
+    name: 'pagetest',
+    component: () => import('../views/PageTest')
   },
   {
     path: '/listpost',

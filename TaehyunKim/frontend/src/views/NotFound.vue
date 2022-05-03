@@ -1,5 +1,5 @@
 <template>
 <v-container>
-    404 NOT FOUND
+    <v-img src="../assets/img/404.webp"></v-img>
 </v-container>
 </template>

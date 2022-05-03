@@ -1,7 +1,9 @@
 package com.example.backend.service;
 
 import com.example.backend.entity.Post;
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 
 public interface PostService {
 
@@ -9,8 +11,10 @@ public interface PostService {
 
     Post readPost(Integer post_id);
 
-    List<Post> getPosts();
+    Page<Post> getPosts(Pageable pageable);
 
     void modifyPost(Post post);
+
+    void deletePost(Integer no);
 
 }

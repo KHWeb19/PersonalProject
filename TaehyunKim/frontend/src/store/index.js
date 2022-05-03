@@ -10,7 +10,7 @@ export default new Vuex.Store({
     user: null,
     users: [],
     post: null,
-    posts: [],
+    posts: {content: ''},
     isLoggedIn: false,
     errorLoggingIn: false
   },
@@ -73,8 +73,8 @@ export default new Vuex.Store({
       
     },
 
-    list_posts({commit}){
-      axios.get("freepost/list")
+    list_posts({commit}, config){
+      axios.get("freepost/list/", config)
       .then((res) => commit('LIST_POSTS', res.data))
       .catch(() => "FAILED TO GET POST LISTS")
     },
@@ -83,7 +83,7 @@ export default new Vuex.Store({
       axios.get(`freepost/${no}`)
       .then((res) => commit('READ_POST', res.data))
       .catch(() => alert("Error loading a page"))
-    }
+    },
 
   }
   

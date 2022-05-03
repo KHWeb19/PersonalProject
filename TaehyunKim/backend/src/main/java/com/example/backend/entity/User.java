@@ -72,11 +72,6 @@ public class User {
         role.getUsers().remove(this);
     }
 
-    public void addPost(Post post){
-        posts.add(post);
-        post.setUser(this);
-    }
-
     public void removePost(Post post){
         posts.add(post);
         post.setUser(null);

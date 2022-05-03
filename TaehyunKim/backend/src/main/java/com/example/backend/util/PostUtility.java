@@ -20,7 +20,7 @@ public class PostUtility {
     public Post settingAuthor(Post post, Principal principal){
         String username = principal.getName();
         User user = userService.getUser(username);
-        user.addPost(post);
+        user.getPosts().add(post);
         post.setAuthor(username);
 
         return post;
