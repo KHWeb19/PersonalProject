@@ -48,6 +48,7 @@
     }
     &-find {
       @include inline-flexbox(between);
+
       margin-left: 4px;
       .id {
         ::after {

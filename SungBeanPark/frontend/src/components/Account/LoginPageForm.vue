@@ -110,6 +110,11 @@ export default {
       pw: "",
     }
   },
+  props: {
+    members: {
+      type: Array,
+    },
+  },
   methods: {
     onSubmit() {
       const { id, pw } = this

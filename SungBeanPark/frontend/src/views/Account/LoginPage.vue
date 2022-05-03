@@ -6,8 +6,9 @@ import LoginPageForm from "@/components/Account/LoginPageForm.vue"
 import cookies from "vue-cookies"
 import axios from "axios"
 import Vue from "vue"
-
+import { mapState } from "vuex"
 Vue.use(cookies)
+
 export default {
   name: "LoginPage",
   components: {
@@ -27,6 +28,9 @@ export default {
       this.isLogin = false
     }
   },
+  computed: {
+    ...mapState(["isLogin"]),
+  },
   methods: {
     onSubmit(payload) {
       if (!this.isLogin) {
@@ -35,11 +39,12 @@ export default {
           .post("http://localhost:8888/Member/login", { id, pw })
           .then((res) => {
             if (res.data) {
-              localStorage.setItem("member", JSON.stringify(res.data))
-              this.$cookies.set("user", res.data, 300)
               this.$router.push({ name: "MainPage" })
+              this.$cookies.set("user", res.data, 60)
               this.$store.state.userInfo = res.data
               this.isLogin = true
+              window.localStorage.setItem("token", res.data.token)
+              window.localStorage.setItem("userInfo", JSON.stringify(res.data))
             } else {
               alert("아이디나 비밀번호가 틀립니다")
             }
