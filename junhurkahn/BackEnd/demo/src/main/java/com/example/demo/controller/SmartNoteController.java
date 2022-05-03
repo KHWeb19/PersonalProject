@@ -40,6 +40,8 @@ public class SmartNoteController {
 
     }
 
+
+
     @GetMapping("/{boardNo}")
     public JpaBoards jpaBoardRead (
             @PathVariable("boardNo") Integer boardNo) {

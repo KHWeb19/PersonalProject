@@ -22,8 +22,8 @@
             </tr>
 
               <td>
-                     <div class="imagePreviewWrapper" :style="{ 'background-image': `url(${previewImage})` }" > </div>
-                      <input ref="fileInput" type="file" @input="pickFile">
+                     <div class="imagePreviewWrapper"  :style="{ 'background-image': `url(${previewImage})` }" > </div>
+                      <input ref="fileInput" type="file"  @input="pickFile">
                 </td>
 
             <tr>

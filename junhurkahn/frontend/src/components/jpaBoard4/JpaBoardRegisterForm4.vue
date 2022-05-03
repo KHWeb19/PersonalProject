@@ -31,7 +31,8 @@
                      <div class="imagePreviewWrapper" :style="{ 'background-image': `url(${previewImage})` }" > </div>
                       <input ref="fileInput" type="file" @input="pickFile">
                 </td>
-          
+                  </tr>
+          <tr>
                
                 <td>
                      <textarea cols="100" rows="30" v-model="content" class="form-control">

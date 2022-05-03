@@ -14,7 +14,7 @@ export default {
     jpaBoard3: null,
     jpaBoards4: [],
     jpaBoard4: null,
-    
+    files: [],
  
 
     businessMembers: [],

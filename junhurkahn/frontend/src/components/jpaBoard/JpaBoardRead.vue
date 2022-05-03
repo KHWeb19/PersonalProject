@@ -34,9 +34,9 @@
             <tr>
                 <td>
                  
-                  <v-card class="mx-auto mt-2 mb-10" width="400" flat>
-          <v-img :value="jpaBoard.files"> </v-img>
-        </v-card>
+              
+          <v-img  class="form-control" :value="jpaBoard.files" > </v-img>
+    
                   
                  </td>
             </tr>

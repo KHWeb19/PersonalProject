@@ -10,7 +10,11 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 
+
+
 import java.util.List;
+
+
 
 @Slf4j
 @RestController
@@ -38,6 +42,8 @@ public class SmartNoteController4 {
         }
 
     }
+
+
 
     @GetMapping("/{boardNo}")
     public JpaBoards4 jpaBoardRead (

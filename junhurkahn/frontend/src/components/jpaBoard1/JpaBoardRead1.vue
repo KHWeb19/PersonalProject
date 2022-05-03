@@ -36,6 +36,14 @@
                      <input type="text" class="form-control" :value="jpaBoard1.regDate" readonly/>
                 </td>
             </tr>
+
+              <tr>
+                
+                <td>
+                     <input type="text" class="form-control" :value="jpaBoard1.files" readonly/>
+                </td>
+            </tr>
+
             <tr>
                
                 <td>
