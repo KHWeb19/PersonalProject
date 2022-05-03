@@ -4,7 +4,7 @@
 
     <board-read-page v-if="boardRead" :boardRead="boardRead" :boardReadImg="boardReadImg" :isMember="isMember" @onDelete="onDelete" @onModify="onModify"></board-read-page>
 
-    <board-comment :boardNo="boardNo" @sendComment="sendComment" :boardListComment="boardListComment"></board-comment>
+    <board-comment :boardNo="boardNo" @sendComment="sendComment" :boardListComment="boardListComment" @sendReply="sendReply"></board-comment>
   </v-container>
 </template>
 
@@ -61,6 +61,15 @@ export default {
           this.$router.push({name: 'BoardReadView'});
         })
 
+    },
+    sendReply(payload){
+      const {reply, commentNo} = payload;
+      let writer = this.user;
+
+      axios.post('http://localhost:7777/board/reply', {reply, commentNo, writer})
+        .then(() => {
+          alert("성공!")
+        })
     }
   },
   created() {

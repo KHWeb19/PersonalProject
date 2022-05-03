@@ -2,6 +2,7 @@ package com.example.demo.service.board;
 
 import com.example.demo.entity.Board;
 import com.example.demo.request.BoardCommentRequest;
+import com.example.demo.request.BoardReplyRequest;
 import com.example.demo.response.BoardCommentResponse;
 import com.example.demo.response.BoardImgResponse;
 
@@ -20,5 +21,7 @@ public interface BoardService {
 
     void saveComment(BoardCommentRequest boardCommentRequest);
     List<BoardCommentResponse> commentList(Integer boardNo);
+
+    void saveReply(BoardReplyRequest boardReplyRequest);
 }
 

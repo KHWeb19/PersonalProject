@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Board;
 import com.example.demo.request.BoardCommentRequest;
+import com.example.demo.request.BoardReplyRequest;
 import com.example.demo.response.BoardCommentResponse;
 import com.example.demo.response.BoardImgResponse;
 import com.example.demo.service.board.BoardService;
@@ -121,5 +122,12 @@ public class BoardController {
         log.info("boardCommentList() " +  boardNo);
 
         return boardService.commentList(boardNo);
+    }
+
+    @PostMapping("/reply")
+    public void boardReply(@RequestBody BoardReplyRequest boardReplyRequest){
+        log.info("boardReply() : "+ boardReplyRequest.getCommentNo());
+
+        boardService.saveReply(boardReplyRequest);
     }
 }
