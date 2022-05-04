@@ -75,20 +75,19 @@
                         </tr>
                         <tr align="center">
                             <td colspan="3">
-                                <v-img width="615px" :src="require(`@/assets/mImage/${board.boardImage}`)"/>
                                 <div class="slide-3d">
-                                    <v-app id="inspire">
+                                    <!-- <v-app id="inspire"> -->
                                         <v-container>
                                             <swiper class="swiper" :options="swiperOption">
-                                                <swiper-slide><v-img src="@/assets/profile.jpg"/></swiper-slide>
-                                                <swiper-slide><v-img src="@/assets/profile.jpg"/></swiper-slide>
-                                                <swiper-slide>Slide 3</swiper-slide>
+                                                <swiper-slide><v-img width="615px" height="615px" :src="require(`@/assets/mImage/${board.boardImage}`)"/></swiper-slide>
+                                                <swiper-slide v-if="board.boardImage2"><v-img width="615px" height="615px" :src="require(`@/assets/mImage/${board.boardImage2}`)"/></swiper-slide>
+                                                <swiper-slide v-if="board.boardImage3"><v-img width="615px" height="615px" :src="require(`@/assets/mImage/${board.boardImage3}`)"/></swiper-slide>
                                                 <div class="swiper-pagination" slot="pagination"></div>
                                                 <div class="swiper-button-prev" slot="button-prev"></div>
                                                 <div class="swiper-button-next" slot="button-next"></div>
                                             </swiper>
                                         </v-container>
-                                    </v-app>
+                                    <!-- </v-app> -->
                                 </div>
                             </td>
                         </tr >
@@ -173,6 +172,18 @@ export default {
         return {
             loginInfo: JSON.parse(localStorage.getItem('loginInfo')),
             content: '',
+            swiperOption: {
+                effect: 'coverflow',
+                grabCursor: true,
+                pagination: {
+                    el: '.swiper-pagination',
+                    dynamicBullets: false
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                    },
+            }
         }
     },
     computed: {
@@ -215,3 +226,25 @@ export default {
     }
 }
 </script>
+
+<style lang="scss" scoped>
+.slide-3d {
+    width: 615px;
+    // height: 700px;
+}
+.swiper {
+    // height: 100%;
+    // width: 100%;
+    .swiper-slide {
+        width: 615px;
+        height: 650px;
+        background-color: white;
+        background-position: center;
+        background-size: cover;
+    }
+    
+}
+.swiper-button-prev, .swiper-button-next {
+  --swiper-theme-color: #ffffff;
+}
+</style>
