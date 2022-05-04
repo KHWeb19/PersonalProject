@@ -2,14 +2,11 @@ package com.example.demo.controller.board.freeBoard;
 
 import com.example.demo.dto.request.CommentRequest;
 import com.example.demo.dto.request.ReplyRequest;
-import com.example.demo.dto.response.FreeBoardCommentResponse;
-import com.example.demo.service.board.freeBoard.FreeBoardCommentsService;
+import com.example.demo.service.board.BaseCommentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Slf4j
 @RestController
@@ -18,7 +15,7 @@ import java.util.List;
 public class FreeBoardCommentsController {
 
     @Autowired
-    private FreeBoardCommentsService service;
+    private BaseCommentService freeBoardCommentsServiceImpl;
 
     //댓글 등록
     @PostMapping("/register/{boardNo}")
@@ -28,7 +25,7 @@ public class FreeBoardCommentsController {
         log.info("FreeBoardCommentsRegister()" + commentRequest);
         //commentsRequest.setBoardNo(Long.valueOf(boardNo));
 
-        service.register(boardNo, commentRequest);
+        freeBoardCommentsServiceImpl.register(boardNo, commentRequest);
     }
 
     //댓글 목록
@@ -36,7 +33,7 @@ public class FreeBoardCommentsController {
     public Object FreeBoardCommentsList (@PathVariable("boardNo") Integer boardNo) {
         log.info("FreeBoardCommentsList()");
 
-        return service.list(boardNo);
+        return freeBoardCommentsServiceImpl.list(boardNo);
     }
 
     //댓글 수정
@@ -47,7 +44,7 @@ public class FreeBoardCommentsController {
         log.info("freeBoardCommentModify(): " + commentRequest);
 
 
-       return service.modify(commentNo, commentRequest);
+       return freeBoardCommentsServiceImpl.modify(commentNo, commentRequest);
 
     }
 
@@ -58,7 +55,7 @@ public class FreeBoardCommentsController {
             @PathVariable("commentNo") Integer commentNo) {
         log.info("commentRemove()");
 
-        service.remove(commentNo);
+        freeBoardCommentsServiceImpl.remove(commentNo);
     }
 
     //대댓글
@@ -67,8 +64,7 @@ public class FreeBoardCommentsController {
                                         @Validated @RequestBody ReplyRequest commentRequest) {
 
         log.info("FreeBoardReplyRegister()" + commentRequest);
-        //commentsRequest.setBoardNo(Long.valueOf(boardNo));
 
-        service.replyRegister(boardNo, commentRequest);
+        freeBoardCommentsServiceImpl.replyRegister(boardNo, commentRequest);
     }
 }

@@ -13,15 +13,15 @@
         <div class="button" border="1" v-for="(comments, index) in commentList" :key="index" >
             
                 <div>
-                    <v-icon v-if="comments.freeBoardComments != null">
-                mdi-arrow-right-bottom
-            </v-icon>
+                    <v-icon v-if="comments.parCommentNo != null">
+                        mdi-arrow-right-bottom
+                    </v-icon>
                     <strong class="writer"> {{ comments.writer }} </strong>
                     <span class="date"> 
                        {{ comments.regDate.substring(0, 10) }}
                        {{new Date(comments.regDate).toLocaleString("ko-KR", {timeZone: "Asia/Seoul"}).toString().substr(12, 8)}} 
                      </span>
-                     <v-btn v-if="comments.freeBoardComments == null"
+                     <v-btn v-if="comments.parCommentNo == null"
                             class="reply"
                             @click="onReply(index)"
                             depressed small>
@@ -32,7 +32,7 @@
                 
                     <!-- 수정 버튼 누르기 전-->  
                 <div class="content1" v-if ="edit[index] == null">
-                    <input v-model="comments.comment" disabled/>
+                    <input class="commentContent" v-model="comments.comment" disabled/>
                     <!-- 수정 버튼 -->
                     <div v-if="comments.writer == writer" class="comment">
                         <v-btn class="modify-btn" 
@@ -56,7 +56,7 @@
                     <input class="modify" v-model="ediComment"> 
                     <!-- 수정 확인 버튼 -->
                      <v-btn class="check-btn" depressed small 
-                            @click="onModify(comments.commentNo,comments.freeBoardComments,ediComment,index)" 
+                            @click="onModify(comments.commentNo,ediComment,index)" 
                             color="amber lighten-2">
                         <strong>완료</strong>
                     </v-btn>
@@ -135,18 +135,16 @@ export default {
                     alert('삭제 실패! 문제 발생!')
                 })
         },
-        onModify( numOfComment, freeBoardComments, ediComment , index) {
+        onModify( numOfComment, ediComment , index) {
             const commentNo = numOfComment
             const comment = ediComment
-            const freeBoardComment = freeBoardComments
             const boardName = this.boardName
-            console.log(freeBoardComment)
             axios.put(`http://localhost:7777/${boardName}/${commentNo}`,
-                {comment, freeBoardComment, writer: this.writer , boardNo: this.boardNo, regDate: this.commentList[index].regDate})
+                {comment,writer: this.writer , boardNo: this.boardNo, regDate: this.commentList[index].regDate})
                 .then(res => {
                     if(res.data){
                     alert('수정 성공!')
-                    //this.$router.go()
+                    this.$router.go()
                     }    
                 })
                 .catch(() => {
@@ -177,8 +175,8 @@ export default {
         },
         onReplySumit (payload) {
         const { writer, reply } = this
-        const parCommentNo = payload
-        axios.post(`http://localhost:7777/freeBoardComments/reply/register/${this.boardNo}`, { writer, reply, parCommentNo })
+        const commentNo = payload
+        axios.post(`http://localhost:7777/${this.boardName}/reply/register/${this.boardNo}`, { writer, reply, commentNo })
                 .then(() => {
                     alert('댓글 등록')
                     this.$router.go()
@@ -219,6 +217,10 @@ export default {
     width: 600px;
     outline: none;
     color:black
+}
+.commentContent{
+    width: 600px;
+
 }
 .commentsList{
     margin-top: 10px;
@@ -263,7 +265,7 @@ export default {
     margin-top: 20px;
 }
 .reply{
-    margin-left: 340px;
+    margin-left: 300px;
 }
     
     

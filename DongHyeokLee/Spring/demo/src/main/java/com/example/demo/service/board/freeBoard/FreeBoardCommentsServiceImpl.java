@@ -2,11 +2,12 @@ package com.example.demo.service.board.freeBoard;
 
 import com.example.demo.dto.request.CommentRequest;
 import com.example.demo.dto.request.ReplyRequest;
-import com.example.demo.dto.response.FreeBoardCommentResponse;
+import com.example.demo.dto.response.CommentResponse;
 import com.example.demo.entity.board.freeBoard.FreeBoard;
 import com.example.demo.entity.board.freeBoard.FreeBoardComments;
 import com.example.demo.repository.board.freeBoard.FreeBoardCommentsRepository;
 import com.example.demo.repository.board.freeBoard.FreeBoardRepository;
+import com.example.demo.service.board.BaseCommentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,17 +19,17 @@ import java.util.Optional;
 
 @Slf4j
 @Service
-public class FreeBoardCommentsServiceImpl implements FreeBoardCommentsService {
+public class FreeBoardCommentsServiceImpl extends BaseCommentService {
 
     @Autowired
-    private FreeBoardRepository boardRepository;
+    private FreeBoardRepository freeBoardRepository;
 
     @Autowired
-    private FreeBoardCommentsRepository repository;
+    private FreeBoardCommentsRepository freeBoardCommentsRepository;
 
     @Override
     public void register(Integer boardNo, CommentRequest commentRequest) {
-                Optional<FreeBoard> maybeBoard = boardRepository.findById(Long.valueOf(boardNo));
+                Optional<FreeBoard> maybeBoard = freeBoardRepository.findById(Long.valueOf(boardNo));
                 FreeBoard board = maybeBoard.get();
                 /*board.setCommentCnt(board.getCommentCnt()+1);
                 boardRepository.save(board);*/
@@ -39,35 +40,38 @@ public class FreeBoardCommentsServiceImpl implements FreeBoardCommentsService {
                         .writer(commentRequest.getWriter())
                         .build();
 
-        repository.save(comment);
+        freeBoardCommentsRepository.save(comment);
     }
 
     @Override
-    public List<FreeBoardCommentResponse> list(Integer boardNo) {
-
-
+    public Object list(Integer boardNo) {
        List<FreeBoardComments> checkComments =
-                repository.findAllFreeBoardCommentsByBoardId(Long.valueOf(boardNo));
-        List<FreeBoardCommentResponse> response = new ArrayList<>();
+               freeBoardCommentsRepository.findAllFreeBoardCommentsByBoardId(Long.valueOf(boardNo));
+        List<CommentResponse> response = new ArrayList<>();
 
 
         for(FreeBoardComments comment : checkComments){
-            log.info(""+ comment.getReply());
-            response.add(new FreeBoardCommentResponse(comment.getWriter(), comment.getComment(),
-                                                    comment.getFreeBoard().getBoardNo(),
-                                                    comment.getRegDate(),comment.getCommentNo(),comment.getReply())
-            );
-
+            if(comment.getReply() == null) {
+                response.add(new CommentResponse(comment.getWriter(), comment.getComment(),
+                        comment.getFreeBoard().getBoardNo(),
+                        comment.getRegDate(), comment.getCommentNo(),
+                        null));
+            }else{
+                response.add(new CommentResponse(comment.getWriter(), comment.getComment(),
+                                                comment.getFreeBoard().getBoardNo(),
+                                                comment.getRegDate(), comment.getCommentNo(),
+                                                comment.getReply().getCommentNo()));
+            }
         }
 
-        List<FreeBoardCommentResponse> response2 = new ArrayList<>();
+        List<CommentResponse> response2 = new ArrayList<>();
 
         for(int i = 0; i < response.size(); i++){
-            if(response.get(i).getFreeBoardComments() == null){
+            if(response.get(i).getParCommentNo() == null){
                 response2.add(response.get(i));
                 for(int y=0; y< response.size(); y++) {
-                    if (response.get(y).getFreeBoardComments() != null) {
-                        if (response.get(y).getFreeBoardComments().getCommentNo() == response.get(i).getCommentNo()) {
+                    if (response.get(y).getParCommentNo() != null) {
+                        if (response.get(y).getParCommentNo() == response.get(i).getCommentNo()) {
                             response2.add(response.get(y));
                         }
 
@@ -75,42 +79,42 @@ public class FreeBoardCommentsServiceImpl implements FreeBoardCommentsService {
                 }
             }
         }
-        log.info("response***" + response2);
-
         return response2;
     }
 
    @Override
     public Object modify(Integer commentNo, CommentRequest commentRequest) {
 
-        Optional<FreeBoard> maybeBoard = boardRepository.findById(Long.valueOf(commentRequest.getBoardNo()));
+        Optional<FreeBoard> maybeBoard = freeBoardRepository.findById(Long.valueOf(commentRequest.getBoardNo()));
         FreeBoard board = maybeBoard.get();
+
+        FreeBoardComments reply = freeBoardCommentsRepository.findByCommentNo(Long.valueOf(commentNo));
 
         FreeBoardComments commentModify = FreeBoardComments.builder()
                                         .commentNo(Long.valueOf(commentNo))
                                         .freeBoard(board)
-                                        .reply(commentRequest.getFreeBoardComment())
+                                        .reply(reply.getReply())
                                         .comment(commentRequest.getComment())
                                         .writer(commentRequest.getWriter())
                                         .regDate(commentRequest.getRegDate())
                                         .build();
 
-        return repository.save(commentModify);
+        return freeBoardCommentsRepository.save(commentModify);
 
 
     }
 
     @Override
     public void remove(Integer commentNo) {
-        repository.deleteById(Long.valueOf(commentNo));
+        freeBoardCommentsRepository.deleteById(Long.valueOf(commentNo));
     }
 
     @Override
     public void replyRegister(Integer boardNo, ReplyRequest commentRequest) {
-        Optional<FreeBoard> maybeBoard2 = boardRepository.findById(Long.valueOf(boardNo));
+        Optional<FreeBoard> maybeBoard2 = freeBoardRepository.findById(Long.valueOf(boardNo));
         FreeBoard board2 = maybeBoard2.get();
 
-        Optional<FreeBoardComments> maybeBoard = repository.findById(commentRequest.getParCommentNo());
+        Optional<FreeBoardComments> maybeBoard = freeBoardCommentsRepository.findById(commentRequest.getCommentNo());
         FreeBoardComments board = maybeBoard.get();
 
 
@@ -121,6 +125,6 @@ public class FreeBoardCommentsServiceImpl implements FreeBoardCommentsService {
                 .writer(commentRequest.getWriter())
                 .build();
 
-        repository.save(comment);
+        freeBoardCommentsRepository.save(comment);
     }
 }

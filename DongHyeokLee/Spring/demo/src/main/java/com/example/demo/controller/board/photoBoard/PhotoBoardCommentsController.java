@@ -1,14 +1,12 @@
 package com.example.demo.controller.board.photoBoard;
 
 import com.example.demo.dto.request.CommentRequest;
-import com.example.demo.dto.response.CommentResponse;
-import com.example.demo.service.board.photoBoard.PhotoBoardCommentsService;
+import com.example.demo.dto.request.ReplyRequest;
+import com.example.demo.service.board.BaseCommentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Slf4j
 @RestController
@@ -17,46 +15,55 @@ import java.util.List;
 public class PhotoBoardCommentsController {
 
     @Autowired
-    private PhotoBoardCommentsService service;
+    private BaseCommentService photoBoardCommentsServiceImpl;
 
     //댓글 등록
     @PostMapping("/register/{boardNo}")
-    public void PhotoBoardCommentsRegister ( @PathVariable("boardNo") Integer boardNo,
+    public void photoBoardCommentsRegister ( @PathVariable("boardNo") Integer boardNo,
                                             @Validated @RequestBody CommentRequest commentRequest) {
 
         log.info("PhotoBoardCommentsRegister()" + commentRequest);
         //commentRequest.setBoardNo(Long.valueOf(boardNo));
 
-        service.register(boardNo, commentRequest);
+        photoBoardCommentsServiceImpl.register(boardNo, commentRequest);
     }
 
     //댓글 목록
-   /* @GetMapping("/list/{boardNo}")
-    public List<CommentResponse> PhotoBoardCommentsList (@PathVariable("boardNo") Integer boardNo) {
+    @GetMapping("/list/{boardNo}")
+    public Object photoBoardCommentsList (@PathVariable("boardNo") Integer boardNo) {
         log.info("PhotoBoardCommentsList()");
 
-        return service.list(boardNo);
+        return photoBoardCommentsServiceImpl.list(boardNo);
     }
 
     //댓글 수정
     @PutMapping("/{commentNo}")
-    public CommentResponse photoBoardCommentModify (
+    public Object photoBoardCommentModify (
             @PathVariable("commentNo") Integer commentNo,
             @Validated @RequestBody CommentRequest commentRequest) {
         log.info("photoBoardCommentModify(): " + commentRequest);
 
 
-        return service.modify(commentNo, commentRequest);
+        return photoBoardCommentsServiceImpl.modify(commentNo, commentRequest);
 
-    }*/
+    }
 
 
     //댓글 삭제
     @DeleteMapping("/{commentNo}")
-    public void PhotoBoardCommentRemove (
+    public void photoBoardCommentRemove (
             @PathVariable("commentNo") Integer commentNo) {
         log.info("commentRemove()");
 
-        service.remove(commentNo);
+        photoBoardCommentsServiceImpl.remove(commentNo);
+    }
+
+    @PostMapping("reply/register/{boardNo}")
+    public void photoBoardReplyRegister (@PathVariable("boardNo") Integer boardNo,
+                                        @Validated @RequestBody ReplyRequest commentRequest) {
+
+        log.info("FreeBoardReplyRegister()" + commentRequest);
+
+        photoBoardCommentsServiceImpl.replyRegister(boardNo, commentRequest);
     }
 }

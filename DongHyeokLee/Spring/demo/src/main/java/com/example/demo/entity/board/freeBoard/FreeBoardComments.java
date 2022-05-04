@@ -42,7 +42,7 @@ public class FreeBoardComments {
     @UpdateTimestamp
     private Date updDate;
 
-
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name= "par_comment_no")
     private FreeBoardComments reply;
