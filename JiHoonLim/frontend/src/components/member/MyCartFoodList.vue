@@ -1,17 +1,39 @@
 <template>
-  <div class="grey lighten-3" style="font-family: 'Noto Sans KR', sans-serif">
-    <v-container class="white" style="width: 1240px">
-      <v-row class="orange lighten-5">
+  <div style="font-family: 'Noto Sans KR', sans-serif">
+    <v-container class="white" style="width: 1400px">
+      <v-row>
         <v-col>
-          <div class="main_tit_box">내 보관함</div>
+          <div class="mb-10">
+            <div
+              style="
+                font-size: 70px;
+                text-align: center;
+                font-weight: bold;
+                margin-bottom: 10px;
+              "
+            >
+              M Y &nbsp; F A V O R I T E S
+            </div>
+            <div
+              style="
+                font-size: 20px;
+                text-align: center;
+                font-weight: bold;
+                color: grey;
+              "
+            >
+              보관한 레시피들을 한 눈에 볼 수 있습니다.
+            </div>
+          </div>
+          <v-divider></v-divider>
         </v-col>
       </v-row>
-      <v-row>
+      <v-row class="mt-10">
         <v-col>
           <div style="countFoodWrap">
             총
-            <b class="countFood">{{ myCartFoods.length }}</b
-            >개의 레시피가 보관되어 있습니다.
+            <b class="countFood">{{ myCartFoods.length }}</b> 개의 레시피가
+            보관되어 있습니다.
           </div>
         </v-col>
       </v-row>
@@ -96,7 +118,7 @@ export default {
     pageSize: {
       type: Number,
       required: false,
-      default: 10,
+      default: 16,
     },
   },
   data() {
@@ -197,6 +219,7 @@ export default {
   padding: 8px 0 8px 0;
   font-weight: bold;
   position: relative;
+  margin-bottom: 10px;
 }
 .deleteBtn {
   padding: 0;
