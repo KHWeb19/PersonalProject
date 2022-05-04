@@ -1,6 +1,31 @@
 <template>
-  <div class="grey lighten-3" style="font-family: 'Noto Sans KR', sans-serif">
-    <v-container class="white" style="width: 1240px">
+  <div style="font-family: 'Noto Sans KR', sans-serif">
+    <v-container class="white" style="width: 1400px">
+      <v-row>
+        <v-col>
+          <div
+            style="
+              font-size: 70px;
+              text-align: center;
+              font-weight: bold;
+              margin-bottom: 10px;
+            "
+          >
+            S E A R C H
+          </div>
+          <div
+            style="
+              font-size: 20px;
+              text-align: center;
+              font-weight: bold;
+              color: grey;
+            "
+          >
+            총 <b class="countFood">{{ searchResult.length }}</b> 개의 레시피가
+            검색되었습니다.
+          </div>
+        </v-col>
+      </v-row>
       <v-row>
         <v-col>
           <div class="text_field">
@@ -20,13 +45,7 @@
       </v-row>
       <v-divider></v-divider>
       <v-row>
-        <v-col>
-          <div style="countFoodWrap">
-            총
-            <b class="countFood">{{ searchResult.length }}</b
-            >개의 레시피가 검색되었습니다.
-          </div>
-        </v-col>
+        <v-col> </v-col>
       </v-row>
       <v-row>
         <v-col

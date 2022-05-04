@@ -26,6 +26,7 @@
               <b style="color: orange">TOP 12</b> 을 소개합니다.
             </div>
           </div>
+          <v-divider></v-divider>
         </v-col>
       </v-row>
 
