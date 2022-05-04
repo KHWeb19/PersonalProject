@@ -27,12 +27,20 @@
             </v-btn>
         </div>
 
-        <div v-else>
+        <div v-else style="padding:20px;">
              <v-layout justify-center>
             <v-dialog v-model="dialog" persisten max-width="400">
                 <template v-slot:activator="{ on }">
                     <v-btn text color="black" rounded x-large
-                        style="padding: 10px; width: 90px;" v-on="on">결제</v-btn>
+                        style="padding: 10px; width: 90px;" v-on="on">결제하기</v-btn>
+
+                                
+         <v-btn text color="black" rounded x-large
+                style="padding: 10px; width: 90px;" 
+                @click="toBasket">
+                    장바구니
+            </v-btn>
+        
                 </template>
                 <v-card class=" rounded-xl pa-4">
                     <v-card-title class="headline secondary--text font-weight-bold">
@@ -60,6 +68,9 @@
                 </v-card>
             </v-dialog>
         </v-layout>
+            
+              
+           
         </div>
             <br>
 
@@ -162,6 +173,25 @@ export default {
                             name: 'K2ProductView'
                         })
                     },
+        
+        toBasket(){
+            var result = confirm('장바구니에 등록 하시겠습니까?')
+            if(result){
+           const id=this.userInfo.id
+           const type=this.ProductBoardS.type
+           const name=this.ProductBoardS.name
+           const size=this.ProductBoardS.size
+           const price=this.ProductBoardS.price
+           const brandrank=this.ProductBoardS.brandrank
+           const accessories=this.ProductBoardS.accessories
+           const status=this.ProductBoardS.status
+           const boardNo=this.ProductBoardS.boardNo
+            axios.post('http://localhost:7777/BasketBoard/register', { id, type, name, size, price ,brandrank ,accessories ,status ,boardNo})
+                        this.$router.push({
+                            name: 'K2ProductView'
+            }
+                        )}
+        },
         cancel(){
             this.dialog=false
         },
