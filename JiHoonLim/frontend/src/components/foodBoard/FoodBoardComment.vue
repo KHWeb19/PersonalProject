@@ -1,13 +1,9 @@
 <template>
-  <div
-    class="grey lighten-3"
-    align="center"
-    style="font-family: 'Noto Sans KR', sans-serif"
-  >
+  <div align="center" style="font-family: 'Noto Sans KR', sans-serif">
     <v-container class="white" style="width: 1700px">
       <v-row justify="center">
         <v-col>
-          <v-card width="1200px">
+          <v-card width="1475px">
             <form @submit.prevent="onSubmit">
               <v-divider></v-divider>
               <div class="comment_title">
@@ -75,7 +71,7 @@
                     class="ml-5 mt-5"
                   />
                   <v-btn
-                    color="orange lighten-3"
+                    color="orange lighten-1"
                     style="width: 128px; height: 128px"
                     class="mr-5 mt-5"
                     type="submit"

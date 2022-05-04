@@ -1,9 +1,5 @@
 <template>
-  <div
-    class="grey lighten-3"
-    align="center"
-    style="font-family: 'Noto Sans KR', sans-serif"
-  >
+  <div align="center" style="font-family: 'Noto Sans KR', sans-serif">
     <v-container class="white" style="width: 1700px">
       <v-row justify="center">
         <v-col>
@@ -225,7 +221,7 @@
                 </div>
               </div>
               <v-btn
-                class="mt-3 mb-3 orange lighten-2"
+                class="mt-3 mb-3 orange lighten-1"
                 style="float: right"
                 to="/foodList"
                 >목록</v-btn
