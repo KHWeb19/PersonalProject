@@ -25,7 +25,7 @@ public interface FoodBoardRepository extends JpaRepository<FoodBoard, Long> {
     @Query("update FoodBoard lc set lc.likeCount = lc.likeCount + 1 where lc.boardNo = :boardNo")
     void updateLikeCount(@Param("boardNo") Long boardNo);
 
-    List<FoodBoard> findTop10ByOrderByRankScoreDesc();
+    List<FoodBoard> findTop12ByOrderByRankScoreDesc();
 
     List<FoodBoard> findByNameContaining(String keyWord);
 
