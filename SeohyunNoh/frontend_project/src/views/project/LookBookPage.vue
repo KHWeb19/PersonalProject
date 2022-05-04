@@ -1,6 +1,6 @@
 <template>
     <div class="row text-center">
-        <div class="col-md-3 col-sm-6 col-xs-12" v-for="lookbook in lookbooks" :key="lookbook" :to="lookbook.route">
+        <div class="col-md-3 col-sm-6 col-xs-12" v-for="lookbook in lookbooks" :key="lookbook">
             <v-img class="white--text align-end" :aspect-ratio="16/9" height="400px" :src="lookbook.src">
             </v-img>
             <v-card-text class="text--primary">

@@ -49,7 +49,7 @@
             </template>
           </v-simple-table>
         </v-col>
-  
+
       <v-col :cols="12" md="3" sm="12" style="background-color: lightgray">
         <p class="headline">Order Summary</p>
         <v-simple-table>
@@ -57,21 +57,21 @@
             <tbody>
               <tr>
                 <td>주문합계</td>
-                <td class="text-right" style="width: 100px;">₩ {{ totalCost }}</td>
+                <td class="text-right" style="width: 130px;">₩ {{ totalCost }}</td>
               </tr>
               <tr>
                 <td>배송비</td>
-                <td class="text-right" style="width: 100px;">₩ 3000 </td>
+                <td class="text-right" style="width: 130px;">₩ 3000 </td>
               </tr>
               <tr>
                 <td class="font-weight-bold">TOTAL</td>
-                <td class="font-weight-bold text-right" style="width: 100px;">₩ {{ totalCost + 3000 }}</td>
+                <td class="font-weight-bold text-right" style="width: 130px;">₩ {{ totalCost + 3000 }}</td>
               </tr>
             </tbody>
           </template>
         </v-simple-table>
         <div class="text-center">
-          <checkout-form/>
+          <checkout-form :cartItems="cartItems" :totalCost="totalCost + 3000"/>
         </div>
       </v-col>
     </v-row>
@@ -92,7 +92,7 @@ export default {
     return {
       cartItems: [],
       id: '',
-      totalCost: 0,
+      totalCost: '',
     }
   },
   methods: {
@@ -116,16 +116,13 @@ export default {
           }
         })
         .catch((err) => console.log('err', err));
-    },
-    checkout() {
-      this.$router.push({ name: 'Checkout' });
-    },
+     }
   },
   mounted() {
     this.id = this.$store.state.userInfo.id
     this.listCartItems()
   },
-};
+}
 </script>
 
 <style scoped>

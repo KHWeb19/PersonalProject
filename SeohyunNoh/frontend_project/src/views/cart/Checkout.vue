@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import CheckoutForm from '../../components/cart/CheckoutForm.vue'
+import CheckoutForm from '@/components/cart/CheckoutForm.vue'
 export default {
   components: { 
       CheckoutForm 

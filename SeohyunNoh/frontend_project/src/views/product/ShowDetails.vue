@@ -1,55 +1,57 @@
 <template>
-  <div class="container">
-    <div class="row pt-5">
-      <div class="col-md-1"></div>
+  <v-container>
+    <v-row>
+      <v-col>
+        <h4>{{ category.categoryName }}</h4>
+      </v-col>
+    </v-row>
+    <hr>
+    <v-row>
       <!-- 상품 이미지 -->
-      <div class="col-md-4 col-12">
+      <v-col>
         <img :src="product.imageURL" class="img-fluid" />
-      </div>
+      </v-col>
       <!--상품 상세정보-->
-      <div class="col-md-6 col-12 pt-3 pt-md-0">
-        <h4>{{ product.name }}</h4>
-        <h6 class="catgory font-italic">{{ category.categoryName }}</h6>
-        <h6 class="font-weight-bold">₩ {{ product.price }}</h6>
-        <p>
-          {{ product.description }}
-        </p>
-        <div class="d-flex flex-row justify-content-between">
-            <!-- 수량 입력 -->
-          <div class="input-group col-md-3 col-4 p-0">
+      <v-col>
+        <h4 style="text-decoration: underline; text-underline-position:under;">{{ product.description }}</h4>
+        <p>{{ product.name }}</p>
+        <br>
+        <h5 class="font-weight-bold">₩ {{ product.price }}</h5>
+          <div class="input-group col-md-3 col-4 p-0 mt-5">
             <div class="input-group-prepend">
               <span class="input-group-text">Quantity</span>
             </div>
             <input type="number" class="form-control" v-model="quantity" />
-          </div>
-
-            <!-- 장바구니 담기 --> 
-          <div class="input-group col-md-3 col-4 p-0">
-            <button class="btn" type="button" id="add-to-cart-button" @click="addToCart">
-              Add to Cart
-            </button>
-          </div>
         </div>
-        <!-- <div class="features pt-3">
-          <h5><strong>Features</strong></h5>
-          <ul>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-          </ul>
-        </div> -->
-      </div>
+        <hr class="mt-10">
+        <div>
+          <v-col>
+            <v-btn class="grey white--text mt-3 mr-3"  type="button" id="add-to-cart-button" @click="addToCart">
+                  SHOPPING BAG
+            </v-btn>
+        <checkout-form/>
+          </v-col>
+        </div>
+      </v-col>
+    </v-row>
+    <hr class="mt-10">
+    <div>
+      <qn-a-register-form @submit="onSubmit"/>
     </div>
-  </div>
+  </v-container>
 </template>
 
 <script>
 
 import axios from 'axios'
+import CheckoutForm from '@/components/cart/CheckoutForm.vue';
+import QnARegisterForm from '../../components/qna/QnARegisterForm.vue';
 
 export default {
+  components: { 
+    CheckoutForm,
+    QnARegisterForm 
+    },
   data() {
     return {
       product: {},
@@ -84,22 +86,22 @@ export default {
         .catch((err) => {
           console.log(err)
         })
-    //   axios
-    //     .post(`${this.baseURL}/cart/add?token=${this.token}`, {
-    //       productId: this.id,
-    //       quantity: this.quantity,
-    //     })
-    //     .then((res) => {
-    //       if (res.status == 201) {
-    //         swal({
-    //           text: "Product added in cart",
-    //           icon: "success",
-    //         });
-    //         this.$emit("fetchData");
-    //       }
-    //     })
-    //     .catch((err) => console.log("err", err));
     },
+    onSubmit (payload) {
+            const { title, content, writer } = payload
+            axios.post('http://localhost:7777/qna/register', { title, writer, content })
+                    .then(() => {
+                        alert('게시물 등록 성공!')
+
+                        this.$router.push({
+                            name: 'ShowDetails'
+                        })
+                    })
+                    .catch(() => {
+                        alert('문제 발생!')
+                    })
+        }
+  
   },
   mounted() {
     this.id = this.$route.params.id;
@@ -113,7 +115,7 @@ export default {
 .category {
   font-weight: 400;
 }
-#add-to-cart-button {
+/* #add-to-cart-button {
   background-color: #febd69;
-}
+} */
 </style>

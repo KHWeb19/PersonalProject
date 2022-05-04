@@ -184,6 +184,7 @@ const routes = [
   {
     path: '/checkout',
     name: 'Checkout',
+    beforeEnter: onlyAuthUser,
     component: Checkout
   },
   {

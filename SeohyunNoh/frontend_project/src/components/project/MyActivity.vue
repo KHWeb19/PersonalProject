@@ -1,4 +1,5 @@
 <template>
+<div>
   <v-card v-if="isLogin" outlined>
     <v-card-text>
       <v-list-item-title>
@@ -22,17 +23,40 @@
       </v-list>
     </v-card-text>
   </v-card>
+
+  <br>
+
+  <v-card>
+    <v-card-text>
+      <v-list-item-title>
+        주문내역
+      </v-list-item-title>
+      <v-divider></v-divider>
+      <v-list v-for="cartItem in cartItems" :key="cartItem.id">
+        <v-list-item-title>
+        {{ cartItem.product.name }}
+        </v-list-item-title>
+      </v-list>
+      <v-list-item-title v-model="totalCost"></v-list-item-title>
+      <v-list-item-title v-model="address"></v-list-item-title>
+    </v-card-text>
+  </v-card>
+</div>
 </template>
 
 
 <script>
 import axios from 'axios'
 import { mapState } from 'vuex'
+import EventBus from '@/eventBus.js'
 
 export default {
   data () {
     return {
       qnaList: [],
+      cartItems: [],
+      totalCost: '',
+      address:'',
     }
   },
   mounted () {
@@ -52,6 +76,11 @@ export default {
             }
         } 
     })
+  },
+  created() {
+   EventBus.$on('btnConfirm', (payload) => {
+      console.log(payload)
+   })
   },
   methods: {
     readQnAPage(qnaNo) {
