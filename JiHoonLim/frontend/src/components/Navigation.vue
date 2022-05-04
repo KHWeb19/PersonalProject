@@ -7,16 +7,15 @@
           <router-link to="/">
             <v-img
               :src="require('@/assets/img/logo.png')"
-              width="50"
-              class="mx-auto mr-3"
+              width="60"
+              class="mr-5 mt-4"
               style="float: left"
             ></v-img>
-            <div
-              id="logo_text"
-              class="font-weight-light white--text mt-3"
-              style="width: 200px"
-            >
-              EasyCook
+            <div class="white--text mt-3" style="width: 500px; height: 85px">
+              <b style="font-size: 50px; font-weight: bold">E</b>
+              <b style="font-size: 25px; margin-right: 10px"> a s y </b>
+              <b style="font-size: 35px"> C</b>
+              <b style="font-size: 25px"> o o k</b>
             </div>
           </router-link>
         </v-toolbar-title>
@@ -24,11 +23,11 @@
         <v-toolbar-items style="margin: 15px">
           <v-btn
             text
+            class="toolbar_items"
             v-for="link in links"
             :key="link.icon"
             :to="link.route"
-            style="font-family: fantasy; font-size: 20px"
-            class="font-weight-bold"
+            style="font-size: 25px; margin-right: 50px"
           >
             {{ link.text }}
           </v-btn>
@@ -37,19 +36,26 @@
         <div v-if="!this.$store.state.userInfo">
           <v-btn
             text
-            class="orange lighten-2"
-            style="margin-right: 15px; font-family: fantasy; font-size: 20px"
+            class="orange lighten-5 mr-10"
+            style="
+              margin-right: 15px;
+              font-size: 25px;
+              width: 150px;
+              height: 50px;
+            "
           >
-            <router-link to="/login" class="font-weight-light white--text"
-              >로그인</router-link
-            >
+            <router-link to="/login" class="orange--text">Login</router-link>
           </v-btn>
-          <v-btn text class="orange lighten-2">
+          <v-btn
+            text
+            class="orange lighten-5"
+            style="width: 150px; height: 50px"
+          >
             <router-link
               to="/signup"
-              class="font-weight-light white--text"
-              style="font-family: fantasy; font-size: 20px"
-              >회원가입</router-link
+              class="orange--text"
+              style="font-size: 25px"
+              >Sign Up</router-link
             >
           </v-btn>
           <v-spacer></v-spacer>
@@ -75,17 +81,18 @@
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
                   text
-                  class="orange lighten-2"
+                  class="orange lighten-5 mr-10 orange--text"
                   dark
                   v-bind="attrs"
                   v-on="on"
                   style="
                     margin-right: 15px;
-                    font-family: fantasy;
-                    font-size: 20px;
+                    font-size: 25px;
+                    width: 150px;
+                    height: 50px;
                   "
                 >
-                  마이페이지
+                  My Page
                 </v-btn>
               </template>
 
@@ -107,17 +114,18 @@
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
                   text
-                  class="orange lighten-2"
+                  class="orange lighten-5 mr-10"
                   dark
                   v-bind="attrs"
                   v-on="on"
                   style="
                     margin-right: 15px;
-                    font-family: fantasy;
-                    font-size: 20px;
+                    font-size: 25px;
+                    width: 150px;
+                    height: 50px;
                   "
                 >
-                  마이페이지
+                  My Page
                 </v-btn>
               </template>
 
@@ -134,17 +142,19 @@
             </v-menu>
           </span>
 
-          <v-btn text class="orange lighten-2">
-            <span
-              class="font-weight-light white--text"
-              style="font-family: fantasy; font-size: 20px"
-              @click="logout"
-              >로그아웃</span
+          <v-btn
+            text
+            class="orange lighten-5"
+            style="width: 150px; height: 50px"
+          >
+            <span class="orange--text" style="font-size: 25px" @click="logout"
+              >Logout</span
             >
           </v-btn>
         </div>
         <v-spacer></v-spacer>
       </v-toolbar>
+      <div class="orange lighten-5" style="height: 30px"></div>
     </template>
   </div>
 </template>
@@ -159,9 +169,9 @@ export default {
       authItems: [{ title: "회원 관리", link: "/memberManage" }],
 
       links: [
-        { text: "공지사항", route: "/noticeList" },
-        { text: "인기 순위", route: "/bestFoodList" },
-        { text: "레시피", route: "/foodList" },
+        { text: "CS CENTER", route: "/noticeList" },
+        { text: "RANK", route: "/bestFoodList" },
+        { text: "RECIPE", route: "/foodList" },
       ],
       items: [
         { title: "내 보관함", link: "/myCartFood" },
@@ -196,11 +206,5 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400&display=swap");
 a {
   text-decoration: none;
-}
-#logo_text {
-  height: 50px;
-
-  font-size: 25px;
-  font-family: fantasy;
 }
 </style>
