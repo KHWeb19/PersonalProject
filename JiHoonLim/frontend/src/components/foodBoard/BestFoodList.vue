@@ -1,38 +1,29 @@
 <template>
-  <div class="grey lighten-3" style="font-family: 'Noto Sans KR', sans-serif">
-    <v-container class="white" style="width: 1240px">
-      <v-row class="orange lighten-5">
+  <div style="font-family: 'Noto Sans KR', sans-serif">
+    <v-container class="white" style="width: 1400px">
+      <v-row>
         <v-col>
-          <div class="main_tit_box">
-            <div style="display: block">
-              <v-img
-                width="150px"
-                height="100%"
-                src="@/assets/img/bestLeft.png"
-                class="bestImg1"
-              />
-              <v-img
-                width="150px"
-                height="100%"
-                src="@/assets/img/bestCenter.png"
-                class="bestImg2"
-              />
-
-              <b class="main_tit">EASY COOK</b>
-              인기메뉴
-              <b class="main_tit">TOP 10</b>
-              <v-img
-                width="150px"
-                height="100%"
-                src="@/assets/img/bestCenter.png"
-                class="bestImg3"
-              />
-              <v-img
-                width="150px"
-                height="100%"
-                src="@/assets/img/bestLeft.png"
-                class="bestImg4"
-              />
+          <div class="mb-10">
+            <div
+              style="
+                font-size: 70px;
+                text-align: center;
+                font-weight: bold;
+                margin-bottom: 10px;
+              "
+            >
+              R A N K
+            </div>
+            <div
+              style="
+                font-size: 20px;
+                text-align: center;
+                font-weight: bold;
+                color: grey;
+              "
+            >
+              Easy Cook 에서 많은 분들이 찾아본 인기 레시피
+              <b style="color: orange">TOP 12</b> 을 소개합니다.
             </div>
           </div>
         </v-col>
@@ -211,28 +202,7 @@ export default {
   font-style: italic;
   position: relative;
 }
-.bestImg1 {
-  position: absolute;
-  left: 20px;
-  top: 10px;
-}
-.bestImg2 {
-  position: absolute;
-  top: -11px;
-  left: 191px;
-}
-.bestImg3 {
-  position: absolute;
-  right: 191px;
-  top: -11px;
-  transform: scaleX(-1);
-}
-.bestImg4 {
-  position: absolute;
-  right: 20px;
-  top: 10px;
-  transform: scaleX(-1);
-}
+
 .gold {
   right: 18px;
   top: -12px;
