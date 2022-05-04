@@ -4,12 +4,12 @@
     <v-form @submit.prevent="onSubmit">
       
     <v-row justify="center">
-      <v-col cols="8" class="label" style="font-size:20pt"> Seat checking</v-col>            
+      <v-col cols="8" class="label" > Seat checking</v-col>            
     </v-row>
 
     <v-row>
       <v-col>
-        <div class="llabel">selected seat : {{$route.params.seatNumber}} </div>
+        <div class="llabel">selected seat  :  {{$route.params.seatNumber}} </div>
       </v-col>
     </v-row>
 
@@ -39,11 +39,13 @@ export default {
   data() {
     return {
       seatNumber:'',
+      id:''
 
     }
   }, 
   mounted() {
     this.seatNumber=this.$route.params.seatNumber
+    this.id=this.$store.state.session.userId
     
   },
  
@@ -55,8 +57,8 @@ export default {
     //디비로 확정 정보 넣는 것(reservation 쪽에)--날리기
 
     onSubmit  () {
-      const { seatNumber} = this                
-      this.$emit('submit', {  seatNumber })
+      const { id,seatNumber} = this                
+      this.$emit('submit', { id, seatNumber })
       
     },
     
@@ -67,15 +69,17 @@ export default {
 <style scoped>
 
 .llabel{
-  font-family: 'Ubuntu', sans-serif; 
-  font-size: 17px;
+ font-family: 'Poiret One', cursive;
+  font-size: 25px;
+  margin-left:15%;
 }
 .label{
-  font-family: 'Ubuntu', sans-serif; 
-  font-size: 15pt;
+  font-family: 'Poiret One', cursive;
+  font-size:30pt;
   margin-right:5%;
   text-align: center;
   padding-top: 25px; 
+  font-weight:bold;
 }
 .place{
     background-color: #f8f8f8;
@@ -84,7 +88,7 @@ export default {
     margin-left:auto;
     margin-right:auto;
     margin-bottom:30px;
-    width: 700px;
+    width: 600px;
 }
 .container {
   perspective: 700px;
@@ -98,7 +102,7 @@ export default {
 
 .selectSeatBtn{
   margin-top: 5%;
-  margin-left: 170px;  
+  margin-left: 35%;  
 }
 
 
