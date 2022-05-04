@@ -565,7 +565,7 @@ export default {
   color: orange;
 }
 .countFoodWrap {
-  font-size: 25px;
+  font-size: 16px;
   color: #333;
   padding: 5px 0 20px 8px;
 }

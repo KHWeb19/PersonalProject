@@ -21,8 +21,7 @@
               color: grey;
             "
           >
-            총 <b class="countFood">{{ searchResult.length }}</b> 개의 레시피가
-            검색되었습니다.
+            다양한 레시피를 검색해보세요.
           </div>
         </v-col>
       </v-row>
@@ -45,7 +44,13 @@
       </v-row>
       <v-divider></v-divider>
       <v-row>
-        <v-col> </v-col>
+        <v-col>
+          <div style="countFoodWrap">
+            총
+            <b class="countFood">{{ searchResult.length }}</b
+            >개의 레시피가 검색되었습니다.
+          </div>
+        </v-col>
       </v-row>
       <v-row>
         <v-col
@@ -189,7 +194,7 @@ export default {
   color: orange;
 }
 .countFoodWrap {
-  font-size: 16px;
+  font-size: 25px;
   color: #333;
   padding: 5px 0 20px 8px;
 }
