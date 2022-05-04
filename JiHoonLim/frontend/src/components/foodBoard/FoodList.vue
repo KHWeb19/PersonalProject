@@ -1,10 +1,30 @@
 <template>
-  <div
-    class="grey lighten-3"
-    style="font-family: 'Noto Sans KR', sans-serif"
-    id="app"
-  >
-    <v-container class="white" style="width: 1240px">
+  <div style="font-family: 'Noto Sans KR', sans-serif" id="app">
+    <v-container class="white" style="width: 1250px">
+      <v-row>
+        <v-col>
+          <div
+            style="
+              font-size: 70px;
+              text-align: center;
+              font-weight: bold;
+              margin-bottom: 10px;
+            "
+          >
+            R E C I P E
+          </div>
+          <div
+            style="
+              font-size: 20px;
+              text-align: center;
+              font-weight: bold;
+              color: grey;
+            "
+          >
+            Easy Cook 유저들이 제공하는 레시피로 최고의 순간을 만들어 보세요.
+          </div>
+        </v-col>
+      </v-row>
       <v-row justify="center">
         <v-col class="pb-0">
           <div class="text_field mt-3">
@@ -73,8 +93,8 @@
           <div style="display: flex; justify-content: space-between">
             <div class="countFoodWrap">
               총
-              <b class="countFood">{{ paginatedData.length }}</b
-              >개의 레시피가 있습니다.
+              <b class="countFood">{{ paginatedData.length }}</b> 개의 레시피가
+              있습니다.
             </div>
           </div>
         </v-col>
@@ -128,6 +148,7 @@
           </v-card>
         </v-col>
       </v-row>
+
       <v-row>
         <v-col>
           <div class="btn-cover">
@@ -148,7 +169,7 @@
           <v-btn
             x-large
             rounded
-            color="orange lighten-3"
+            color="orange lighten-1"
             class="mx-auto"
             style="float: right"
             @click="write"
@@ -544,7 +565,7 @@ export default {
   color: orange;
 }
 .countFoodWrap {
-  font-size: 16px;
+  font-size: 25px;
   color: #333;
   padding: 5px 0 20px 8px;
 }
