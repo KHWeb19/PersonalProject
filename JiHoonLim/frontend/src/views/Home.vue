@@ -1,6 +1,6 @@
 <template>
-  <div class="grey lighten-3">
-    <v-container class="white" style="width: 1240px">
+  <div>
+    <v-container class="white" style="width: 1840px">
       <v-row>
         <v-col class="col">
           <div class="grey lighten-3">
@@ -100,30 +100,7 @@ export default {
 .img_box {
   width: 33%;
 }
-.text_box {
-  display: flex;
-  flex-direction: column;
-  width: 30%;
-  text-align: center;
 
-  background-size: cover;
-}
-.text_box h2 {
-  font-family: fantasy;
-  font-size: 45px;
-  margin-top: 100px;
-  margin-bottom: 10px;
-}
-.text_box h3 {
-  font-family: fantasy;
-  font-size: 20px;
-  margin-bottom: 90px;
-}
-.text_box p {
-  font-family: fantasy;
-  font-size: 22.5px;
-  font-weight: bold;
-}
 .col {
   padding: 0;
 }
