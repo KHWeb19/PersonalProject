@@ -1,6 +1,6 @@
 <template>
   <div style="font-family: 'Noto Sans KR', sans-serif" id="app">
-    <v-container class="white" style="width: 1250px">
+    <v-container class="white" style="width: 1400px">
       <v-row>
         <v-col>
           <div
