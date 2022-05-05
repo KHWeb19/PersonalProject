@@ -6,7 +6,7 @@
         <v-btn class="red lighten-1 white--text" @click="onDelete">cancel</v-btn>
       </v-col>
     </v-row>
-    <PlanPage style="margin-bottom: 18px" :days="days" @dates="test"></PlanPage>
+    <PlanPage style="margin-bottom: 18px" :days="days" @dates="date"></PlanPage>
 
     <v-row>
       <v-col cols="3">
@@ -130,6 +130,9 @@ export default {
             //alert(res + '성공');
           })
       this.$router.go();
+    },
+    date(payload) {
+      this.dates = payload;
     },
     onDelete(){
       let planNo = this.planNo;

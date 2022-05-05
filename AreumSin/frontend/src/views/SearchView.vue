@@ -134,6 +134,11 @@ export default {
   methods:{
     ...mapActions(['fetchUserPlans', 'fetchSearchLikePlaceList']),
     searchPlace(e) {
+
+      this.searchLikePlaceList.forEach((test) => {
+        console.log(test);
+      })
+
       console.log(e.target.value);
       const keyword = e.target.value.trim();
       if (keyword.length === 0){

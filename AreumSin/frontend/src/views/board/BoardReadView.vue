@@ -58,7 +58,7 @@ export default {
 
       axios.post('http://localhost:7777/board/comment', {comment, writer, boardNo})
         .then(() => {
-          this.$router.push({name: 'BoardReadView'});
+          this.$router.go();
         })
 
     },
@@ -68,7 +68,7 @@ export default {
 
       axios.post('http://localhost:7777/board/reply', {reply, commentNo, writer})
         .then(() => {
-          alert("성공!")
+          this.$router.go();
         })
     }
   },

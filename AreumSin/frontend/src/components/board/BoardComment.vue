@@ -77,7 +77,6 @@ export default {
     },
     sendReply(){
       const {reply, commentNo} = this;
-      alert(commentNo);
       this.$emit("sendReply", {reply, commentNo})
     }
 
