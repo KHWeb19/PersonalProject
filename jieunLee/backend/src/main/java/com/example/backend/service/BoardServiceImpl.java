@@ -3,14 +3,8 @@ package com.example.backend.service;
 import com.example.backend.controller.BoardRequest;
 import com.example.backend.controller.CommentRequest;
 import com.example.backend.controller.MemberRequest;
-import com.example.backend.entity.Board;
-import com.example.backend.entity.Comment;
-import com.example.backend.entity.Likes;
-import com.example.backend.entity.Member;
-import com.example.backend.repository.BoardRepository;
-import com.example.backend.repository.CommentRepository;
-import com.example.backend.repository.LikesRepository;
-import com.example.backend.repository.MemberRepository;
+import com.example.backend.entity.*;
+import com.example.backend.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -33,6 +27,9 @@ public class BoardServiceImpl implements BoardService {
     @Autowired
     CommentRepository commentRepository;
 
+    @Autowired
+    FollowRepository followRepository;
+
     @Override
     public void register(Integer memberNo, Board board) {
         Optional<Member> maybeMember = memberRepository.findById(Long.valueOf(memberNo));
@@ -49,6 +46,20 @@ public class BoardServiceImpl implements BoardService {
     public List<Board> memberBoardList(Long memberNo) {
         List<Board> boards = repository.findAllByMemberNo(Long.valueOf(memberNo));
         return boards;
+    }
+
+    @Override
+    public List<Board> followBoardList(Long memberNo) {
+        List<Follow> followList = followRepository.findByMy(Long.valueOf(memberNo));
+        List<Board> myBoards = repository.findAllByMemberNo(Long.valueOf(memberNo));
+
+        for (Follow f : followList) {
+            List<Board> boards = repository.findAllByMemberNo(Long.valueOf(f.getYour().getMemberNo()));
+            for (Board b : boards) {
+                myBoards.add(b);
+            }
+        }
+        return myBoards;
     }
 
     @Override

@@ -1,12 +1,7 @@
 package com.example.backend;
 
-import com.example.backend.entity.Board;
-import com.example.backend.entity.Comment;
-import com.example.backend.entity.Likes;
-import com.example.backend.repository.BoardRepository;
-import com.example.backend.repository.CommentRepository;
-import com.example.backend.repository.LikesRepository;
-import com.example.backend.repository.MemberRepository;
+import com.example.backend.entity.*;
+import com.example.backend.repository.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -26,6 +21,9 @@ class BackendApplicationTests {
 
 	@Autowired
 	private CommentRepository commentRepository;
+
+	@Autowired
+	FollowRepository followRepository;
 
 	@Test
 	void 회원탈퇴() {
@@ -71,5 +69,11 @@ class BackendApplicationTests {
 			}
 		}
 		memberRepository.deleteById(Long.valueOf(1));
+	}
+
+	@Test
+	public List<Member> 팔로우리스트() {
+		List<Member> followList = memberRepository.findFollowingsByMemberNo(Long.valueOf(2));
+		return followList;
 	}
 }

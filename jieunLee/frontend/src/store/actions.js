@@ -11,7 +11,8 @@ import {
     FETCH_LIKES_LIST,
     FETCH_MY_LIKES_LIST,
     FETCH_LIKE,
-    FETCH_MY_FOLLOW_LIST
+    FETCH_MY_FOLLOW_LIST,
+    FETCH_FOLLOW_BOARD_LIST
 } from './mutation-types'
 
 import axios from 'axios'
@@ -94,6 +95,12 @@ export default {
         return axios.get(`http://localhost:7777/follow/list/my/${memberNo}`)
                 .then((res) => {
                     commit(FETCH_MY_FOLLOW_LIST, res.data)
+                })
+    },
+    fetchFollowBoardList({ commit }, memberNo) {
+        return axios.get(`http://localhost:7777/board/list/follow/${memberNo}`)
+                .then((res) => {
+                    commit(FETCH_FOLLOW_BOARD_LIST, res.data)
                 })
     },
 }

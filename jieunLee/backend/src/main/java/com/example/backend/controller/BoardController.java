@@ -39,6 +39,13 @@ public class BoardController {
         return service.memberBoardList(memberNo);
     }
 
+    @GetMapping("/list/follow/{memberNo}")
+    public List<Board> followBoardList(@PathVariable("memberNo") Long memberNo) {
+        log.info("followBoardList()");
+
+        return service.followBoardList(memberNo);
+    }
+
     @GetMapping("/{boardNo}")
     public Board boardRead(@PathVariable("boardNo") Integer boardNo) {
         log.info("boardRead()");

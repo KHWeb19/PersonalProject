@@ -1,10 +1,10 @@
 <template>
     <v-container style="width: 643px; margin-top: 85px; font-size: 14px">
       <v-flex>
-            <v-card style="height: 320px; text-align: center" v-if="!boards || (Array.isArray(boards) && boards.length === 0)">
+            <v-card style="height: 320px; text-align: center" v-if="!followBoards || (Array.isArray(followBoards) && followBoards.length === 0)">
                     피드를 둘러보고 팔로우하거나 사진을 업로드 하세요
             </v-card>
-            <v-card style="margin-bottom: 30px;" v-else v-for="board in boards" :key="board.boardNo">
+            <v-card style="margin-bottom: 30px;" v-else v-for="board in followBoards" :key="board.boardNo">
                 <form @submit.prevent="onSubmit(board.boardNo)">
                     <table >
                         <tr >
@@ -164,7 +164,7 @@ export default {
         SwiperSlide
     },
     props: {
-        boards: {
+        followBoards: {
             type: Array
         },
     },

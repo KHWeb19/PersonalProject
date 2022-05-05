@@ -4,7 +4,10 @@
       <menu-bar/>
       <hr style="border: 0; height: 1px; background: #d8d8d8; "/>
     </div>
-    <my-follow-list :boards="boards" @click="onDelete" @submit="onSubmit"/>
+    <div style="display: flex;">
+    <my-follow-list :followBoards="followBoards" @click="onDelete" @submit="onSubmit"/>
+    <span style="margin-top: 85px;" >dkdk</span>
+    </div>
   </div>
 </template>
 
@@ -26,15 +29,15 @@ export default {
         }
     },
     computed: {
-        ...mapState(['boards']),
+        ...mapState(['followBoards']),
         // ...mapState(['twoComments']),
     },
     mounted () {
-        this.fetchBoardList()
+        this.fetchFollowBoardList(this.loginInfo.memberNo)
         // this.fetchTwoCommentList(this.boardNo)
     },
     methods: {
-        ...mapActions(['fetchBoardList']),
+        ...mapActions(['fetchFollowBoardList']),
         // ...mapActions(['fetchTwoCommentList']),
         onDelete(payload) {
             const {boardNo} = payload

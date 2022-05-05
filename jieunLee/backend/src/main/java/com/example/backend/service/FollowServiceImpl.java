@@ -38,6 +38,9 @@ public class FollowServiceImpl implements FollowService{
 
     @Override
     public List<Follow> followList(Long memberNo) {
+//        return followRepository.findFollowingsByMemberNo(Long.valueOf(memberNo));
         return followRepository.findByMy(Long.valueOf(memberNo));
     }
+
+
 }

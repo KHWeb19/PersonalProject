@@ -11,7 +11,8 @@ import {
     FETCH_LIKES_LIST,
     FETCH_MY_LIKES_LIST,
     FETCH_LIKE,
-    FETCH_MY_FOLLOW_LIST
+    FETCH_MY_FOLLOW_LIST,
+    FETCH_FOLLOW_BOARD_LIST
 } from './mutation-types'
 
 export default {
@@ -58,5 +59,8 @@ export default {
     //네.. 이방법은 확실히 안되겠네요 
     [FETCH_MY_FOLLOW_LIST] (state, myFollows) {
         state.myFollows = myFollows
+    },
+    [FETCH_FOLLOW_BOARD_LIST] (state, followBoards) {
+        state.followBoards = followBoards
     },
 }

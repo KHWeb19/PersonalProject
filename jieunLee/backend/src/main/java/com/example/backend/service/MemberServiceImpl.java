@@ -1,10 +1,7 @@
 package com.example.backend.service;
 
 import com.example.backend.controller.MemberRequest;
-import com.example.backend.entity.Board;
-import com.example.backend.entity.Comment;
-import com.example.backend.entity.Likes;
-import com.example.backend.entity.Member;
+import com.example.backend.entity.*;
 import com.example.backend.repository.BoardRepository;
 import com.example.backend.repository.CommentRepository;
 import com.example.backend.repository.LikesRepository;
@@ -40,7 +37,8 @@ public class MemberServiceImpl implements MemberService{
 
     @Override
     public List<Member> list() {
-        return memberRepository.findAll(Sort.by(Sort.Direction.DESC, "memberNo"));
+        return memberRepository.findFollowingsByMemberNo(Long.valueOf(2));
+//        return memberRepository.findAll(Sort.by(Sort.Direction.DESC, "memberNo"));
     }
 
     @Override
