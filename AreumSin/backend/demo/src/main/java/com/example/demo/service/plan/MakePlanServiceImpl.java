@@ -215,6 +215,17 @@ public class MakePlanServiceImpl implements MakePlanService{
 
     }
 
+    @Override
+    public void deletePlan(Integer planNo) {
+        List<MemberPlan> member = memberPlanRepository.findAllMember(planNo);
+
+        memberPlanRepository.deleteAll(member);
+
+        Plan plan = planRepository.findByPlan(planNo);
+
+        planRepository.delete(plan);
+    }
+
 
     /*
     @Transactional

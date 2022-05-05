@@ -48,9 +48,9 @@ public class MakePlanController {
             for(MultipartFile multipartFile : fileList){
                 log.info("requestUploadFile() - Make file: " + multipartFile.getOriginalFilename());
 
-                FileOutputStream file = new FileOutputStream("../../frontend/src/assets/plan/" + planName + "_" + multipartFile.getOriginalFilename());
+                FileOutputStream file = new FileOutputStream("../../frontend/src/assets/plan/" + id + "_" + multipartFile.getOriginalFilename());
 
-                String fileSrc = planName + "_" + multipartFile.getOriginalFilename();
+                String fileSrc = id + "_" + multipartFile.getOriginalFilename();
                 fileName.add(fileSrc);
 
                 file.write(multipartFile.getBytes());
@@ -153,5 +153,13 @@ public class MakePlanController {
         log.info("voteBad(): "+decisionMakingRequest.getVoteNo());
 
         planService.voteBad(decisionMakingRequest);
+    }
+
+    @DeleteMapping("/{planNo}")
+    public void deletePlan(@PathVariable("planNo") Integer planNo){
+
+        log.info("deletePlan() : " + planNo);
+
+        planService.deletePlan(planNo);
     }
 }

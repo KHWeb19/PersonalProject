@@ -134,6 +134,11 @@ export default {
   methods:{
     ...mapActions(['fetchUserPlans', 'fetchSearchLikePlaceList']),
     searchPlace(e) {
+
+      this.searchLikePlaceList.forEach((test) => {
+        console.log(test);
+      })
+
       console.log(e.target.value);
       const keyword = e.target.value.trim();
       if (keyword.length === 0){
@@ -196,7 +201,7 @@ export default {
     },
     savePlace(index, result){
       console.log("x: " + result.x + ", y: " + result.y);
-      alert(this.searchLikePlaceList[index] === result.place_name)
+      //alert(this.searchLikePlaceList[index] === result.place_name)
 
       this.showSaveDialog.place.title = result.place_name;
       this.showSaveDialog.place.x = result.x;
@@ -205,10 +210,10 @@ export default {
       this.showSaveDialog.dialog = true;
 
       this.$set(this.searchLikePlaceList, index, !this.searchLikePlaceList[index])
-      alert(this.searchLikePlaceList[index])
+      /*alert(this.searchLikePlaceList[index])*/
     },
-    deleteSavePlace(index, result){
-      alert(result);
+    deleteSavePlace(index){
+      //alert(result);
       this.$set(this.indexTitle, index, !this.indexTitle[index]);
     },
     onSubmit(){
@@ -219,12 +224,12 @@ export default {
       let placeX = this.showSaveDialog.place.x;
       let placeY = this.showSaveDialog.place.y;
 
-      alert("planName: " + this.radioGroup.planNo + ", " + this.showSaveDialog.place.title + ", x: " + placeX + ", y : " + placeY)
-      console.log("planName: " + this.radioGroup.planNo + ", " + this.showSaveDialog.place.title + ", x: " + placeX + ", y : " + placeY)
+     /* alert("planName: " + this.radioGroup.planNo + ", " + this.showSaveDialog.place.title + ", x: " + placeX + ", y : " + placeY)
+      console.log("planName: " + this.radioGroup.planNo + ", " + this.showSaveDialog.place.title + ", x: " + placeX + ", y : " + placeY)*/
 
       axios.post('http://localhost:7777/map/savePlace', {planNo, id, placeTitle, placeX, placeY} )
-        .then((res) => {
-          alert(res + '성공!')
+        .then(() => {
+          //alert(res + '성공!')
         })
     }
   },

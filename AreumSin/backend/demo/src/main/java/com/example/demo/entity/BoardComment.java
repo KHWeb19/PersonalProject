@@ -5,6 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Setter
 @Getter
@@ -22,15 +24,44 @@ public class BoardComment {
     private String boardComment;
 
     @Column
+    private Integer ref;
+
+    @Column
     private String writer;
+
+    @Column
+    private Integer deep; //step
+
+    @Column
+    private Integer deepOrder; // 같은 step내에서 순위
+
+    @Column
+    private Integer commentNum;
+
+    @Column
+    private Integer parent;
 
     @ManyToOne
     @JoinColumn(name = "BOARD_NO")
     private Board board;
 
-    public BoardComment(String boardComment, String writer, Board board) {
+    public BoardComment(String boardComment, Integer ref, String writer, Integer deep, Integer deepOrder, Integer commentNum, Integer parent, Board board) {
         this.boardComment = boardComment;
+        this.ref = ref;
         this.writer = writer;
+        this.deep = deep;
+        this.deepOrder = deepOrder;
+        this.commentNum = commentNum;
+        this.parent = parent;
         this.board = board;
     }
+
+    public void reply(String boardComment, String writer, Board board, Integer parent, Integer deep){
+        this.boardComment = boardComment;
+        this.writer = writer;
+        this.deep = deep;
+        this.parent = parent;
+        this.board = board;
+    }
+
 }

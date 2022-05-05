@@ -34,7 +34,6 @@ export default {
       planNo: localStorage.getItem('planNo'),
       files: '',
       fileLength: 0,
-      uploadImageUrl: [],
     }
   },
   methods:{
@@ -47,8 +46,8 @@ export default {
         let day = this.day;
 
         axios.post('http://localhost:7777/planDay/dayNoImg', {id, planNo, day, content})
-            .then((res) => {
-              alert('성공' + res)
+            .then(() => {
+              //alert('성공' + res)
               this.$router.go();
             })
 
@@ -65,7 +64,7 @@ export default {
         formData.append('day', this.day)
         formData.append('content', this.content)
 
-        alert('day: ' + this.day)
+        //alert('day: ' + this.day)
         console.log(this.day)
 
         axios.post('http://localhost:7777/planDay/day', formData, {
@@ -75,13 +74,14 @@ export default {
         })
             .then((res) => {
               this.response = res.data
+              this.$router.go();
             })
             .catch((res) => {
               this.response = res.message
             })
 
-        alert('처리 완료!')
-        this.$router.go();
+        //alert('처리 완료!')
+
       }
     },
     onClickFile(){

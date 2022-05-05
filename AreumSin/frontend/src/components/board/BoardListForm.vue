@@ -66,7 +66,7 @@
 
                 <tr class="createBoard" style="height: 50px">
                   <td class="createBoard">작성내용</td>
-                  <td class="createBoard"><textarea style="width: 100%; height: 350px; margin-top: 5px" v-model="boardContent">이러쿵 저러쿵!</textarea></td>
+                  <td class="createBoard"><textarea style="width: 100%; height: 350px; margin-top: 5px; line-height: 40px;" v-model="boardContent"></textarea></td>
                 </tr>
               </table>
             </form>
@@ -170,7 +170,7 @@ export default {
               this.response = res.message
             })
 
-        alert('처리 완료')
+        //alert('처리 완료')
 
         this.create = false;
         this.title = '';

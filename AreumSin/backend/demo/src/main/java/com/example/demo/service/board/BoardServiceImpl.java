@@ -7,6 +7,7 @@ import com.example.demo.repository.BoardCommentRepository;
 import com.example.demo.repository.BoardImgRepository;
 import com.example.demo.repository.BoardRepository;
 import com.example.demo.request.BoardCommentRequest;
+import com.example.demo.request.BoardReplyRequest;
 import com.example.demo.response.BoardCommentResponse;
 import com.example.demo.response.BoardImgResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Slf4j
@@ -152,7 +154,12 @@ public class BoardServiceImpl implements BoardService{
 
         Board board = boardRepository.findBoardByBoardNo(boardCommentRequest.getBoardNo());
 
-        BoardComment boardCommentEntity = new BoardComment(boardCommentRequest.getComment(), boardCommentRequest.getWriter(), board);
+        List<BoardComment> boardComments = boardCommentRepository.findByBoardNo(boardCommentRequest.getBoardNo());
+
+        //log.info("board 크기!!!!!!!!! "+boardComments.size());
+        //String boardComment, Integer ref, String writer, Integer deep, Integer deepOrder, Integer commentNum, Integer parent, Board board)
+        BoardComment boardCommentEntity = new BoardComment(boardCommentRequest.getComment(), boardComments.size()+1,
+                boardCommentRequest.getWriter(), 0, 0, 0, 0,  board);
 
         boardCommentRepository.save(boardCommentEntity);
     }
@@ -173,10 +180,35 @@ public class BoardServiceImpl implements BoardService{
         for(BoardComment boardComment : boardCommentList){
             log.info(boardComment.getBoardCommentNo() + "");
 
-            boardCommentResponses.add(new BoardCommentResponse(boardComment.getBoardComment(), boardComment.getWriter(), boardComment.getBoardCommentNo()));
+            boardCommentResponses.add(new BoardCommentResponse(boardComment.getBoardComment(), boardComment.getWriter(), boardComment.getBoardCommentNo(), boardComment.getDeep(), boardComment.getParent()));
         }
 
         return boardCommentResponses;
+    }
+
+    @Override
+    public void saveReply(BoardReplyRequest boardReplyRequest) {
+
+        BoardComment boardComment = boardCommentRepository.findByCommentNo(boardReplyRequest.getCommentNo());
+
+        boardComment.setCommentNum(boardComment.getCommentNum()+1);
+
+        boardCommentRepository.save(boardComment);
+
+        //public void reply(String boardComment, String writer, Board board, Integer parent, Integer deep)
+
+        List<BoardComment> boardComments = boardCommentRepository.findByParentNo(boardComment.getParent());
+
+       /* BoardComment reply = new BoardComment();
+        reply.reply(boardReplyRequest.getReply(), boardReplyRequest.getWriter(), boardComment.getBoard(), boardReplyRequest.getCommentNo(), boardComments.size());*/
+
+        //String boardComment, Integer ref, String writer, Integer deep, Integer deepOrder, Integer commentNum, Integer parent, Board board)
+        log.info("여기까지 안들어와?");
+        BoardComment reply = new BoardComment(boardReplyRequest.getReply(), boardComment.getRef(), boardReplyRequest.getWriter(), boardComment.getDeep()+1,
+                boardComment.getDeepOrder()+1, 0, boardReplyRequest.getCommentNo(), boardComment.getBoard());
+        boardCommentRepository.save(reply);
+
+
     }
 
 

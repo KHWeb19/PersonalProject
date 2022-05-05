@@ -25,4 +25,8 @@ public interface SaveFavoritePlaceRepository extends JpaRepository<SaveFavoriteP
     @Transactional
     @Query("select fp from SaveFavoritePlace fp where fp.plan.planNo = :planNo and fp.day = :day")
     List<SaveFavoritePlace> findPlaceByDay(Integer day, Integer planNo);
+
+    @Transactional
+    @Query("select fp from SaveFavoritePlace fp where fp.member.memberNo = :memberNo")
+    List<SaveFavoritePlace> findPlaceByUserNo(Integer memberNo);
 }

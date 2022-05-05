@@ -35,8 +35,14 @@ export default {
       level: 6,
     }*/
 
+    //alert(this.markLikePlaceList[0].x)
+    let startX = this.markLikePlaceList[0].x;
+    let startY = this.markLikePlaceList[0].y;
+
+    //alert(startX + ", " + startY);
+
     this.mapInstance = new kakao.maps.Map(container, {
-      center : new kakao.maps.LatLng(33.450701, 126.570667),
+      center : new kakao.maps.LatLng(startY, startX),
       level: 10,
     });
 

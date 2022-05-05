@@ -1,13 +1,10 @@
 <template>
   <v-container>
     <MainCategory/>
-    <div style="margin-bottom: 15px">
-      {{isMember}}
-    </div>
 
     <board-read-page v-if="boardRead" :boardRead="boardRead" :boardReadImg="boardReadImg" :isMember="isMember" @onDelete="onDelete" @onModify="onModify"></board-read-page>
 
-    <board-comment :boardNo="boardNo" @sendComment="sendComment" :boardListComment="boardListComment"></board-comment>
+    <board-comment :boardNo="boardNo" @sendComment="sendComment" :boardListComment="boardListComment" @sendReply="sendReply"></board-comment>
   </v-container>
 </template>
 
@@ -44,7 +41,7 @@ export default {
 
       axios.delete(`http://localhost:7777/board/${boardNo}`)
           .then(() => {
-            alert('삭제 성공!')
+            //alert('삭제 성공!')
             this.$router.push({ name: 'BoardView' })
           })
           .catch(() => {
@@ -61,9 +58,18 @@ export default {
 
       axios.post('http://localhost:7777/board/comment', {comment, writer, boardNo})
         .then(() => {
-          this.$router.push({name: 'BoardReadView'});
+          this.$router.go();
         })
 
+    },
+    sendReply(payload){
+      const {reply, commentNo} = payload;
+      let writer = this.user;
+
+      axios.post('http://localhost:7777/board/reply', {reply, commentNo, writer})
+        .then(() => {
+          this.$router.go();
+        })
     }
   },
   created() {

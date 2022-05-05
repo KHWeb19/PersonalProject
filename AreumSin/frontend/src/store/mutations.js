@@ -3,13 +3,13 @@ import {
     FETCH_BOARD_LIST,
     FETCH_BOARD_READ,
     FETCH_BOARD_READ_IMG,
-    FETCH_DAY_CONTENT, FETCH_DAY_CONTENT_IMG,
+    FETCH_DAY_CONTENT, FETCH_DAY_CONTENT_IMG, FETCH_DIARY, FETCH_DIARY_IMG, FETCH_DIARY_LIST,
     FETCH_INVITE_MEMBER,
     FETCH_LIKE_PLACE_LIST,
     FETCH_MAP_MARK_LIST,
     FETCH_PLACE_LIST,
-    FETCH_PLACE_LIST_DAY,
-    FETCH_SEARCH_LIKE_PLACE_LIST,
+    FETCH_PLACE_LIST_DAY, FETCH_SAVE_PLACE,
+    FETCH_SEARCH_LIKE_PLACE_LIST, FETCH_USER_INFO,
     FETCH_USER_PLANS,
     FETCH_VOTE_CONTENT
 } from './mutation-types'
@@ -74,6 +74,21 @@ export default {
     },
     [FETCH_DAY_CONTENT_IMG](state, dayContentImg){
         state.dayContentImg = dayContentImg;
+    },
+    [FETCH_USER_INFO](state, myPage) {
+        state.myPage = myPage;
+    },
+    [FETCH_SAVE_PLACE](state, savePlace){
+        state.savePlace = savePlace;
+    },
+    [FETCH_DIARY_LIST](state, diaryList){
+        state.diaryList = diaryList;
+    },
+    [FETCH_DIARY](state, diary){
+        state.diary = diary;
+    },
+    [FETCH_DIARY_IMG](state, diaryImg){
+        state.diaryImg = diaryImg;
     }
 
 }
