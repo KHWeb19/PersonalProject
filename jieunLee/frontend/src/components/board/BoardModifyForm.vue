@@ -1,7 +1,7 @@
 <template>
     <v-container style="width: 1000px; margin-top: 95px; ">
         <v-flex>
-            <v-card style="height: 100%">
+            <v-card>
                 <form @submit.prevent="onSubmit">
                     <table style="width: 100%;" >
                         <tr >
@@ -20,10 +20,10 @@
                         </tr>
                     </table>
                     <hr style="border: 0; height: 1px; background: #d8d8d8; "/>
-                    <table style="width: 100%; border-collapse : collapse;">
+                    <table style="border-collapse : collapse;">
                         <tr>
-                            <td align="center" rowspan="2" colspan="2" width="700px%" >
-                                <v-img max-height="700px" width="700px" :src="require(`@/assets/mImage/${board.boardImage}`)"/>
+                            <td rowspan="2" colspan="2">
+                                <v-img height="615" width="615" :src="require(`@/assets/mImage/${board.boardImage}`)"/>
                             </td>
                             <td style="font-weight: bold">
                                 <div style="display: flex; margin: 0px 16px; height: 60px">
@@ -40,7 +40,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <textarea style="padding: 0px 16px; outline-style: none;" cols="30" rows="25" v-model="content">
+                                <textarea style="padding-left: 16px; outline-style: none;" cols="28" rows="22" v-model="content">
                                 </textarea>
                             </td>
                         </tr>

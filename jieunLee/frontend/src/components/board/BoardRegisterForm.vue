@@ -1,7 +1,7 @@
 <template>
     <v-container style="width: 1000px; margin-top: 95px; font-size: 16px">
         <v-flex>
-            <v-card style="height: 100%">
+            <v-card>
                 <form @submit.prevent="onSubmit">
                     <table style="width: 100%;" >
                         <tr>
@@ -23,16 +23,28 @@
                         </tr>
                     </table>
                     <hr style="border: 0; height: 1px; background: #d8d8d8; "/>
-                    <table style="border-collapse : collapse;">
-                        <tr >
-                            <td v-if="!priview" rowspan="2" colspan="2" height="700px" width="700px">
+                    <!-- <table style="border-collapse : collapse;"> -->
+                    <table>
+                        <tr>
+                            <td v-if="!priview" rowspan="2" colspan="2" height="648" width="615px">
                                 <label for="files">
-                                    <span style="margin-left: 270px">컴퓨터에서 사진 선택</span>
+                                    <span style="padding-left: 240px">컴퓨터에서 사진 선택</span>
                                 </label>
                                 <input type="file" id="files" ref="files" multiple v-on:change="handleFileUpload()"/>
                             </td>
-                            <td v-else rowspan="2" colspan="2" width="700px" >
-                                <v-img max-height="700px" max-width="700px" :src="priview" />
+                            <td v-else rowspan="2" >
+                                <div class="slide-3d">
+                                    <v-container style="padding: 0px">
+                                        <swiper class="swiper" :options="swiperOption">
+                                            <swiper-slide ><v-img  width="615px" height="615" :src="priview"/></swiper-slide>
+                                            <swiper-slide v-if="priview2"><v-img width="615px" height="615" :src="priview2"/></swiper-slide>
+                                            <swiper-slide v-if="priview3"><v-img width="615px" height="615" :src="priview3"/></swiper-slide>
+                                            <div class="swiper-pagination" slot="pagination"></div>
+                                            <div class="swiper-button-prev" slot="button-prev"></div>
+                                            <div class="swiper-button-next" slot="button-next"></div>
+                                        </swiper>
+                                    </v-container>
+                                </div>
                             </td>
                             
                             <td style="font-weight: bold">
@@ -50,14 +62,14 @@
                         </tr>
                         <tr>
                             <td>
-                                <textarea style="padding: 0px 16px; outline-style: none;" cols="30" rows="25" placeholder="문구 입력..." v-model="content">
+                                <textarea style="padding-left: 16px; outline-style: none;" cols="28" rows="23" placeholder="문구 입력..." v-model="content">
                                 </textarea>
                             </td>
                         </tr>
                     </table>
+                    
                 </form>
             </v-card>
-
         </v-flex>
     </v-container>
 
@@ -65,8 +77,14 @@
 
 <script>
 import axios from 'axios'
+import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+import 'swiper/css/swiper.css'
 export default {
     name: 'BoardRegisterForm',
+    components: {
+        Swiper,
+        SwiperSlide
+    },
     data() {
         return {
             imageChange: JSON.parse(localStorage.getItem('imageChange')),
@@ -75,14 +93,34 @@ export default {
             boardImage2: null,
             boardImage3: null,
             content: '',
-            priview: ''
+            priview: '',
+            priview2: null,
+            priview3: null,
+            swiperOption: {
+                effect: 'coverflow',
+                grabCursor: true,
+                pagination: {
+                    el: '.swiper-pagination',
+                    dynamicBullets: false
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+            }
         }
     },
     methods: {
         handleFileUpload () {
-            
             this.files = this.$refs.files.files
             this.priview = URL.createObjectURL(this.files[0])
+            if(this.files[1]) {
+                this.priview2 = URL.createObjectURL(this.files[1])
+                if(this.files[2]) {
+                    this.priview3 = URL.createObjectURL(this.files[3])
+            }
+            }
+
         },
         onSubmit() {
             let formData = new FormData()
@@ -123,7 +161,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 label {
     color: blue;
 }
@@ -133,4 +171,21 @@ label {
     visibility: hidden;
 }
 
+.slide-3d {
+    width: 615px;
+}
+.swiper {
+
+    .swiper-slide {
+        width: 615px;
+        height: 648px;
+        background-color: white;
+        background-position: center;
+        background-size: cover;
+    }
+    
+}
+.swiper-button-prev, .swiper-button-next {
+  --swiper-theme-color: #ffffff;
+}
 </style>
