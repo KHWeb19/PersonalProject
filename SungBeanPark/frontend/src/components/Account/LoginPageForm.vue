@@ -43,7 +43,11 @@
                     </div>
 
                     <div class="login-button">
-                      <button class="btn-black btn-46" @click="login">
+                      <button
+                        class="btn-black btn-46"
+                        type="submit"
+                        @click="onSubmit"
+                      >
                         로그인
                       </button>
                     </div>
@@ -56,7 +60,9 @@
                       <div>
                         <ul class="login-util-find">
                           <li class="login-util-find id">
-                            <router-link :to="{ name: 'IdPage' }"
+                            <router-link
+                              :to="{ name: 'IdPage' }"
+                              class="routerlink"
                               >아이디 찾기</router-link
                             >
                           </li>
@@ -71,7 +77,12 @@
                   </form>
 
                   <div>
-                    <button class="login-btn-kakao">카카오 로그인</button>
+                    <a
+                      href="https://kauth.kakao.com/oauth/authorize?client_id=${92f347c8d65782843d4cebadfc7ca6d0}&redirect_uri=${	
+https://localhost:8080/auth/kakao/callback}&response_type=code"
+                    >
+                      <button class="login-btn-kakao">카카오 로그인</button>
+                    </a>
                   </div>
                   <div>
                     <button class="login-btn-naver">네이버 로그인</button>
@@ -104,24 +115,10 @@ export default {
       type: Array,
     },
   },
-
   methods: {
     onSubmit() {
-      for (var i = 0; i < this.members.length; i++) {
-        if (this.members[i].userid == this.id) {
-          const { id, pw } = this
-          this.$emit("submit", { id, pw })
-
-          return {
-            SelectedUser: 1,
-          }
-        }
-      }
-      let SelectedUser = null
-      this.members.forEach((user) => {
-        if (user.userid === this.userid) SelectedUser = user
-      })
-      if (SelectedUser === null) alert("등록된 회원 정보가 없습니다.")
+      const { id, pw } = this
+      this.$emit("submit", { id, pw })
     },
   },
 }

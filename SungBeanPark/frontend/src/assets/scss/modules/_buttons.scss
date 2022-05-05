@@ -32,7 +32,24 @@
   }
 }
 
+.btn-outlined {
+  @extend %btn-base;
+  color: $black;
+  background-color: $white;
+  border: 2px solid $black;
+  transition: background-color 200ms ease-in-out;
+
+  &:not(:disabled):hover {
+    background-color: $border;
+  }
+}
+
 .btn-46 {
   @include text-style(16);
   height: 46px;
+}
+
+.btn-42 {
+  @include text-style(14);
+  height: 40px;
 }

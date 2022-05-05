@@ -1,4 +1,5 @@
 .gnb-icon-button {
+  $badge-size: 16px;
   @include flexbox;
   width: 32px;
   height: 32px;
@@ -12,5 +13,24 @@
 
   &.is-menu {
     color: $tertiary;
+  }
+
+  .badge {
+    position: absolute;
+    top: 1;
+    right: 1;
+    margin-left: 16px;
+    margin-bottom: 16px;
+    display: block;
+    height: $badge-size;
+    min-width: $badge-size;
+    padding: 0 4px;
+    font-size: 10px;
+    line-height: 16px;
+    letter-spacing: -0.01em;
+    color: $white;
+    text-align: center;
+    background-color: $red;
+    border-radius: $badge-size / 2;
   }
 }

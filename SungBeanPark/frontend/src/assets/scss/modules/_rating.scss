@@ -1,0 +1,21 @@
+.rating-input {
+  @include flexbox;
+  font-size: 48px;
+  color: $border;
+  margin-left: 16px;
+  direction: rtl;
+
+  label {
+    cursor: pointer;
+  }
+  input {
+    display: none;
+  }
+
+  :hover ~ label {
+    color: #f9f1ae;
+  }
+  :checked ~ label {
+    color: $yellow;
+  }
+}

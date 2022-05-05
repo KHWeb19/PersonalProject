@@ -12,60 +12,114 @@
               <div class="sign-header">
                 <h2>회원가입</h2>
               </div>
-
               <div class="sign-line-top"></div>
+              <div class="radio-group">
+                <input
+                  v-model="radioGroup"
+                  type="radio"
+                  :label="`${kindsOfMember[0]}`"
+                  :value="`${kindsOfMember[0]}`"
+                />
+                <input
+                  v-model="radioGroup"
+                  type="radio"
+                  :label="`${kindsOfMember[1]}`"
+                  :value="`${kindsOfMember[1]}`"
+                />
+              </div>
 
               <section class="sign-section">
                 <div class="sign-member">
                   <form
                     class="sign-form"
-                    @submit.prevent="onSubmit"
+                    @submit.prevent="submit"
                     method="POST"
                   >
-                    <div class="sign-member-form">
-                      <div class="sign-member-id">
+                    <ValidationObserver
+                      class="sign-member-form"
+                      ref="validator"
+                    >
+                      <ValidationProvider
+                        tag="div"
+                        class="sign-member-id"
+                        v-slot="{ errors }"
+                        :rules="{ required }"
+                      >
                         <input
                           class="sign-input"
                           type="text"
-                          name="id"
                           placeholder="아이디"
+                          maxlength="20"
+                          required
                           v-model="id"
-                          required
                         />
-                      </div>
-                      <div class="sign-member-password">
+
+                        <div class="errmsg">
+                          {{ errors[0] }}
+                        </div>
+                      </ValidationProvider>
+
+                      <ValidationProvider
+                        class="sign-member-password"
+                        tag="div"
+                        name="password"
+                        type="password"
+                        v-slot="{ errors }"
+                        :rules="{ checkPw }"
+                      >
+                        <div class="field">
+                          <input
+                            class="sign-input"
+                            type="password"
+                            name="password"
+                            placeholder="비밀번호"
+                            v-model="pw"
+                            required
+                          />
+                        </div>
+                        <div class="errmsg" aria-live="polite">
+                          {{ errors[0] }}
+                        </div>
+                      </ValidationProvider>
+
+                      <ValidationProvider
+                        class="sign-member-password-confirm"
+                        tag="div"
+                        v-slot="{ errors }"
+                        name="checkPassword"
+                        :rules="{ confirmed: 'password' } || { required }"
+                      >
                         <input
                           class="sign-input"
                           type="password"
-                          name="pw"
-                          placeholder="비밀번호"
-                          v-model="pw"
-                          required
-                        />
-                      </div>
-                      <div class="sign-member-password-confirm">
-                        <input
-                          class="sign-input"
-                          type="password"
-                          name="pwCheck"
                           placeholder="비밀번호 확인"
-                          v-model="pwCheck"
+                          v-model="checkPassword"
                           required
                         />
-                      </div>
-                      <div class="sign-member-name">
+                        <div class="errmsg" aria-live="polite">
+                          {{ errors[0] }}
+                        </div>
+                      </ValidationProvider>
+
+                      <ValidationProvider
+                        class="sign-member-name"
+                        tag="div"
+                        name="name"
+                        v-slot="{ errors }"
+                        :rules="{ min: 2, max: 30 } || { required }"
+                      >
                         <input
                           class="sign-input"
                           type="text"
-                          name="name"
                           placeholder="이름(2~30자)"
-                          v-model="name"
+                          v-model="userName"
                           required
-                          minlength="2"
-                          maxlength="30"
                         />
-                      </div>
-                    </div>
+                        <div class="errmsg" aria-live="polite">
+                          {{ errors[0] }}
+                        </div>
+                      </ValidationProvider>
+                    </ValidationObserver>
 
                     <div class="sign-line-bottom"></div>
 
@@ -83,22 +137,37 @@
   </body>
 </template>
 <script>
+import { ValidationObserver, ValidationProvider, extend } from "vee-validate"
+
 export default {
   name: "SignPageForm",
-
+  props: {
+    members: {
+      type: Array,
+    },
+  },
   data() {
     return {
+      radioGroup: 1,
+      kindsOfMember: ["사용자", "관리자"],
       id: "",
       pw: "",
-      pwCheck: "",
-      name: "",
+      checkPassword: "",
+      userName: "",
+      required: "",
+      checkPw: "",
     }
   },
-
+  component: {
+    ValidationObserver,
+    ValidationProvider,
+    extend,
+  },
   methods: {
-    onSubmit() {
-      const { id, pw, pwCheck, name } = this
-      this.$emit("submit", { id, pw, pwCheck, name })
+    submit() {
+      const { id, pw, userName } = this
+      const auth = this.radioGroup == "사용자" ? "사용자" : "관리자"
+      this.$emit("submit", { id, pw, userName, auth })
     },
   },
 }
