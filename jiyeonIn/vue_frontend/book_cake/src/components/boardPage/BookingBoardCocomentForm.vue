@@ -1,7 +1,7 @@
 <template>
     <div >
         <div class="textbox" v-for="(comment, index) in boardComments" :key="index">
-            <div v-if="comment.childrenNo == 0" style="width: 950px; padding: 0 1% 1% 5%;">
+            <div v-if="comment.childrenNo == 0" style="width: 950px; padding: 0 1% 1% 3%;">
                 <strong> {{ comment.id }} </strong> 
                 <span class="date">
                     {{ comment.regDate}} 
@@ -43,10 +43,10 @@
                             </v-col>
                         </v-row>
                         <v-row>
-                            <v-col class="col-12 col-sm-10">
-                                <textarea type="text" v-model="comments" placeholder="댓글을 입력해주세요" class="commentcheck" style="width: 730px;"/><br>
+                            <v-col class="col-12 col-sm-7"  style="width: 700px;">
+                                <textarea type="text" v-model="comments" placeholder="댓글을 입력해주세요" class="commentcheck"/><br>
                             </v-col>
-                            <v-col class="col-12 col-sm-1" >
+                            <v-col class="col-12 col-sm-1" style="padding: 2% 1% 1% 22%;">
                                 <v-btn class="commentRegister" type="submit" color="white">
                                     <strong>등록</strong>
                                 </v-btn>  
@@ -64,6 +64,7 @@
             </div>
             <hr>
         </div>
+        
     </div>
 </template>
 
@@ -118,10 +119,15 @@
 <style scoped>
 .commentcheck {
     border: 2px solid rgb(37, 26, 26);
-    width: 750px;
+    width: 600px;
     height: 100px;
     color:black;
 }
+
+.commentRegister{
+    padding: 0 0 0 20%;
+}
+
 .textbox{
     width: 1000px;
     color:black;
@@ -132,5 +138,10 @@
 .textbox .date {
     font-size: 13px;
     color: rgb(100, 96, 96);
+}
+
+hr {
+    padding: 0 0 0 13%;
+    width: 1000px;
 }
 </style>
