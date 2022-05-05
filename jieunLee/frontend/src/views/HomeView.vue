@@ -1,14 +1,25 @@
 <template>
-  <div>
-    <div style="z-index: 1; position: fixed; top: 0; left: 0; right: 0;">
-      <menu-bar/>
-      <hr style="border: 0; height: 1px; background: #d8d8d8; "/>
-    </div>
-    <div style="display: flex;">
-    <my-follow-list :followBoards="followBoards" @click="onDelete" @submit="onSubmit"/>
-    <span style="margin-top: 85px;" >dkdk</span>
-    </div>
-  </div>
+    <v-container style="width: 930px;">
+        <v-flex>
+            <div>
+                <div style="z-index: 1; position: fixed; top: 0; left: 0; right: 0;">
+                <menu-bar/>
+                <hr style="border: 0; height: 1px; background: #d8d8d8; "/>
+                </div>
+                <div style="display: flex;">
+                    <my-follow-list :followBoards="followBoards" @click="onDelete" @submit="onSubmit"/>
+                    <div style="margin-top: 110px; font-size: 12px; color: gray">
+                        <div style="padding-bottom: 14px;">
+                        소개 도움말 홍보 센터 API 채용 정보
+                        <br/>
+                        개인정보처리방침 약관 눌러도 아무것도 뜨지 않습니다
+                        </div>
+                        @2022 vuestagram from jieun
+                    </div>
+                </div>
+            </div>
+        </v-flex>
+    </v-container>
 </template>
 
 <script>

@@ -2,10 +2,7 @@ package com.example.backend.service;
 
 import com.example.backend.controller.MemberRequest;
 import com.example.backend.entity.*;
-import com.example.backend.repository.BoardRepository;
-import com.example.backend.repository.CommentRepository;
-import com.example.backend.repository.LikesRepository;
-import com.example.backend.repository.MemberRepository;
+import com.example.backend.repository.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -34,6 +31,9 @@ public class MemberServiceImpl implements MemberService{
 
     @Autowired
     private CommentRepository commentRepository;
+
+    @Autowired
+    FollowRepository followRepository;
 
     @Override
     public List<Member> list() {
@@ -183,6 +183,20 @@ public class MemberServiceImpl implements MemberService{
         if(!memberLikes.isEmpty()) {
             for (Likes likes : memberLikes) {
                 likesRepository.delete(likes);
+            }
+        }
+
+        List<Follow> memberFollowings = followRepository.findAllFollowingsMemberNo(memberNo);
+        if(!memberFollowings.isEmpty()) {
+            for (Follow follow : memberFollowings) {
+                followRepository.delete(follow);
+            }
+        }
+
+        List<Follow> memberFollowers = followRepository.findAllFollowersMemberNo(memberNo);
+        if(!memberFollowers.isEmpty()) {
+            for (Follow follow : memberFollowers) {
+                followRepository.delete(follow);
             }
         }
 

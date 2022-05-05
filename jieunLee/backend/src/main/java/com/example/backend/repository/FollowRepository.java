@@ -1,9 +1,6 @@
 package com.example.backend.repository;
 
-import com.example.backend.entity.Board;
-import com.example.backend.entity.Follow;
-import com.example.backend.entity.Likes;
-import com.example.backend.entity.Member;
+import com.example.backend.entity.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -23,8 +20,11 @@ public interface FollowRepository extends JpaRepository<Follow, Long> {
 //    @Query("select f from Follow f where f.your = :memberNo")
 //    List<Follow> findFollowingsByMemberNo(Long memberNo);
 
-    @Query("select f from Follow f join f.your fy where fy.memberNo = :memberNo")
-    List<Follow> findFollowingsByMemberNo(Long memberNo);
+    @Query("select f from Follow f join f.my fm where fm.memberNo = :memberNo")
+    List<Follow> findAllFollowingsMemberNo(@Param("memberNo") Long memberNo);
+
+    @Query("select f from Follow f join f.your fm where fm.memberNo = :memberNo")
+    List<Follow> findAllFollowersMemberNo(@Param("memberNo") Long memberNo);
 
 
 
