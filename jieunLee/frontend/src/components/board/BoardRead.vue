@@ -5,8 +5,20 @@
                 <form @submit.prevent="onSubmit">
                 <table style="width: 100%">
                     <tr >
-                        <td rowspan="20" width="700">
-                            <v-img width="700" max-height="700"  :src="require(`@/assets/mImage/${board.boardImage}`)"/>
+                        <td rowspan="20" width="650px">
+                            <div class="slide-3d">
+                                        <v-container style="padding: 0px">
+                                            <swiper class="swiper position-relative" :options="swiperOption">
+                                                <swiper-slide><v-img  width="650px" height="650px" :src="require(`@/assets/mImage/${board.boardImage}`)"/></swiper-slide>
+                                                <swiper-slide v-if="board.boardImage2"><v-img width="650px" height="650px" :src="require(`@/assets/mImage/${board.boardImage2}`)"/></swiper-slide>
+                                                <swiper-slide v-if="board.boardImage3"><v-img width="650px" height="650px" :src="require(`@/assets/mImage/${board.boardImage3}`)"/></swiper-slide>
+                                                <div class="swiper-pagination" slot="pagination"></div>
+                                                <div class="swiper-button-prev" slot="button-prev"></div>
+                                                <div class="swiper-button-next" slot="button-next"></div>
+                                            </swiper>
+                                        </v-container>
+                                </div>
+                            <!-- <v-img width="700" max-height="700"  :src="require(`@/assets/mImage/${board.boardImage}`)"/> -->
                         </td>
                     </tr>
                     <tr height="60px">
@@ -97,7 +109,7 @@
                     </tr>
                     <tr align="left">
                         <td colspan="4" style=" padding-left: 16px"  > 
-                            <div style="overflow-y:auto; overflow-x:hidden; width:100%; height:390px;">
+                            <div style="overflow-y:auto; overflow-x:hidden; width:100%; height:340px;">
                                 <div v-for="comment in comments" :key="comment.commentNo">
                                     <div style="display: flex; min-width: 32px; min-height: 32px">
                                         <div style="padding: 3px 15px 0px 0px">
@@ -168,7 +180,7 @@
                     <tr align="left">
                         <td style="padding: 6px 9px" colspan="3" v-if="like" >
                             <v-btn icon @click="onLikes(board.boardNo)" >
-                                <v-icon  color="black">
+                                <v-icon  color="red">
                                     mdi-cards-heart
                                 </v-icon>
                             </v-btn>
@@ -241,9 +253,14 @@
 import FollowButton from '@/components/likes/FollowButton'
 import { mapState, mapActions } from 'vuex'
 import axios from 'axios'
+import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+import 'swiper/css/swiper.css'
 export default {
     name: 'BoardRead',
-    components: {FollowButton},
+    components: {
+        FollowButton,
+        Swiper,
+        SwiperSlide},
     props: {
         // board: {
         //     type: Object,
@@ -265,6 +282,14 @@ export default {
         return {
             loginInfo: JSON.parse(localStorage.getItem('loginInfo')),
             content: '',
+            swiperOption: {
+                effect: 'coverflow',
+                grabCursor: true,
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                    },
+            }
         }
     },
     computed: {
@@ -315,3 +340,29 @@ export default {
     }
 }
 </script>
+
+<style lang="scss" scoped>
+.slide-3d {
+    width: 650px;
+}
+.swiper {
+    .swiper-slide {
+
+        width: 650px;
+        height: 650px;
+        background-color: white;
+        background-position: center;
+        background-size: cover;
+    }
+    
+}
+.swiper-button-prev, .swiper-button-next {
+  --swiper-theme-color: #ffffff;
+}
+.swiper-container {
+  z-index: auto !important;
+}
+.swiper-wrapper {
+  z-index: auto !important;
+}
+</style>

@@ -26,7 +26,7 @@
                     <!-- <table style="border-collapse : collapse;"> -->
                     <table>
                         <tr>
-                            <td v-if="!priview" rowspan="2" colspan="2" height="648" width="615px">
+                            <td v-if="!priview" rowspan="2" colspan="2" height="650px" width="650px">
                                 <label for="files">
                                     <span style="padding-left: 240px">컴퓨터에서 사진 선택</span>
                                 </label>
@@ -36,9 +36,9 @@
                                 <div class="slide-3d">
                                     <v-container style="padding: 0px">
                                         <swiper class="swiper" :options="swiperOption">
-                                            <swiper-slide ><v-img  width="615px" height="615" :src="priview"/></swiper-slide>
-                                            <swiper-slide v-if="priview2"><v-img width="615px" height="615" :src="priview2"/></swiper-slide>
-                                            <swiper-slide v-if="priview3"><v-img width="615px" height="615" :src="priview3"/></swiper-slide>
+                                            <swiper-slide ><v-img  width="650px" height="650px" :src="priview"/></swiper-slide>
+                                            <swiper-slide v-if="priview2"><v-img width="650px" height="650px" :src="priview2"/></swiper-slide>
+                                            <swiper-slide v-if="priview3"><v-img width="650px" height="650px" :src="priview3"/></swiper-slide>
                                             <div class="swiper-pagination" slot="pagination"></div>
                                             <div class="swiper-button-prev" slot="button-prev"></div>
                                             <div class="swiper-button-next" slot="button-next"></div>
@@ -99,10 +99,6 @@ export default {
             swiperOption: {
                 effect: 'coverflow',
                 grabCursor: true,
-                pagination: {
-                    el: '.swiper-pagination',
-                    dynamicBullets: false
-                },
                 navigation: {
                     nextEl: '.swiper-button-next',
                     prevEl: '.swiper-button-prev',
@@ -172,13 +168,13 @@ label {
 }
 
 .slide-3d {
-    width: 615px;
+    width: 650px;
 }
 .swiper {
 
     .swiper-slide {
-        width: 615px;
-        height: 648px;
+        width: 650px;
+        height: 650px;
         background-color: white;
         background-position: center;
         background-size: cover;
