@@ -28,6 +28,7 @@
         </div>
 
         <div v-else style="padding:20px;">
+            <div v-if="ProductBoardS.soldCheck">
              <v-layout justify-center>
             <v-dialog v-model="dialog" persisten max-width="400">
                 <template v-slot:activator="{ on }">
@@ -40,6 +41,7 @@
                 @click="toBasket">
                     장바구니
             </v-btn>
+            
         
                 </template>
                 <v-card class=" rounded-xl pa-4">
@@ -68,7 +70,7 @@
                 </v-card>
             </v-dialog>
         </v-layout>
-            
+            </div>
               
            
         </div>
