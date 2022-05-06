@@ -174,6 +174,12 @@ export default {
       memberNo: this.registerMember.memberNo,
     };
   },
+  created() {
+    if (this.$store.state.userInfo.auth != "관리자") {
+      alert("관리자 권한 페이지입니다.");
+      this.$router.push("/");
+    }
+  },
   methods: {
     onSubmit() {
       const { radioGroup } = this;

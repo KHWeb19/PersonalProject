@@ -77,6 +77,7 @@
                                     :error-messages="errors"
                                     :counter="10"
                                     class="mr-5"
+                                    color="orange"
                                   />
                                 </validation-provider>
                                 <v-btn
@@ -158,6 +159,7 @@
                                     prepend-icon="mdi-email"
                                     :error-messages="errors"
                                     class="mr-5"
+                                    color="orange"
                                   />
                                 </validation-provider>
                                 <v-btn
@@ -234,6 +236,7 @@
                                   prepend-icon="mdi-lock-outline"
                                   :error-messages="errors"
                                   :counter="15"
+                                  color="orange"
                                 />
                               </validation-provider>
                               <validation-provider
@@ -253,6 +256,7 @@
                                   prepend-icon="mdi-lock-check-outline"
                                   :error-messages="errors"
                                   :counter="15"
+                                  color="orange"
                                 />
                               </validation-provider>
                             </v-card-text>
@@ -314,6 +318,7 @@
                             <v-checkbox
                               v-model="checkbox"
                               label="동의합니다."
+                              color="orange"
                             ></v-checkbox>
                           </v-container>
                           <v-divider></v-divider>

@@ -27,6 +27,7 @@
                       clearable
                       prepend-icon="mdi-email"
                       :error-messages="errors"
+                      color="orange"
                     />
                   </validation-provider>
                   <v-btn

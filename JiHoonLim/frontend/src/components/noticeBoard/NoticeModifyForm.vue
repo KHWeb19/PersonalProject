@@ -136,6 +136,11 @@ export default {
   created() {
     this.title = this.noticeBoard.title;
     this.content = this.noticeBoard.content;
+
+    if (this.$store.state.userInfo == null) {
+      alert("로그인 후 이용해주세요.");
+      this.$router.push("/login");
+    }
   },
 };
 </script>

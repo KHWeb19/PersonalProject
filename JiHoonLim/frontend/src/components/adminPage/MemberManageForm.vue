@@ -1,14 +1,11 @@
 <template>
   <div class="grey lighten-3" style="font-family: 'Noto Sans KR', sans-serif">
     <v-container class="white" style="width: 1240px">
-      <v-row class="orange lighten-5">
-        <v-col>
-          <div class="main_tit_box">회원 관리</div>
-        </v-col>
-      </v-row>
       <v-row justify="center">
         <v-col>
-          <div style="countWrap">
+          <div class="main_tit_box">회원 관리</div>
+          <v-divider></v-divider>
+          <div style="countWrap" class="mt-10">
             총
             <b class="count">{{ registerMembers.length }}</b
             >명의 회원이 있습니다.
@@ -96,6 +93,12 @@ export default {
       type: Array,
     },
   },
+  created() {
+    if (this.$store.state.userInfo.auth != "관리자") {
+      alert("관리자 권한 페이지입니다.");
+      this.$router.push("/");
+    }
+  },
 };
 </script>
 
@@ -108,6 +111,7 @@ export default {
   color: #333;
   padding: 8px 0 8px 0;
   position: relative;
+  margin-bottom: 10px;
 }
 .count {
   font-size: 36px;
@@ -121,7 +125,7 @@ export default {
 .tableWrap {
   display: flex;
   justify-content: center;
-  margin-top: 30px;
+
   margin-bottom: 50px;
 }
 .authTable {
@@ -129,7 +133,7 @@ export default {
   width: 20%;
   text-align: center;
   border-collapse: collapse;
-  border: 1px solid grey;
+  border: 1px solid lightgrey;
   border-right: none;
 }
 .memberTable {
@@ -137,15 +141,15 @@ export default {
   width: 80%;
   text-align: center;
   border-collapse: collapse;
-  border: 1px solid grey;
+  border: 1px solid lightgrey;
   border-left: none;
 }
 .borderBot {
-  border-bottom: 1px solid grey;
+  border-bottom: 1px solid lightgrey;
 }
 th,
 td {
-  border-bottom: 1px solid grey;
+  border-bottom: 1px solid lightgrey;
   height: 70px;
 }
 </style>

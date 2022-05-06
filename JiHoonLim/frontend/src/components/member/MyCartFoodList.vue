@@ -126,6 +126,12 @@ export default {
       pageNum: 0,
     };
   },
+  created() {
+    if (this.$store.state.userInfo == null) {
+      alert("로그인 후 이용해주세요.");
+      this.$router.push("/login");
+    }
+  },
   methods: {
     nextPage() {
       this.pageNum += 1;

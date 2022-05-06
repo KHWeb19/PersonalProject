@@ -324,6 +324,11 @@ export default {
     this.chooseKind = this.foodBoard.kind;
     this.filename = this.foodBoard.filename;
     this.viewCount = this.foodBoard.viewCount;
+
+    if (this.$store.state.userInfo == null) {
+      alert("로그인 후 이용해주세요.");
+      this.$router.push("/login");
+    }
   },
   methods: {
     onSubmit() {

@@ -196,7 +196,7 @@ export default {
       this.$store.state.userInfo = null;
       localStorage.removeItem("userInfo");
       alert("로그아웃 성공");
-      history.go(0);
+      this.$router.push("/");
     },
   },
 };

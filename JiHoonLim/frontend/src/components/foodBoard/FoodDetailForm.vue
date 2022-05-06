@@ -76,6 +76,7 @@
                                 <v-checkbox
                                   v-model="checkbox"
                                   label="삭제 동의 버튼."
+                                  color="orange"
                                 ></v-checkbox>
                               </v-container>
                               <v-divider></v-divider>

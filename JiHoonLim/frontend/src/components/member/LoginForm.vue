@@ -26,6 +26,7 @@
                       clearable
                       prepend-icon="mdi-account-outline"
                       :error-messages="errors"
+                      color="orange"
                     />
                   </validation-provider>
                   <validation-provider
@@ -40,6 +41,7 @@
                       clearable
                       prepend-icon="mdi-lock-outline"
                       :error-messages="errors"
+                      color="orange"
                     />
                   </validation-provider>
                   <v-btn

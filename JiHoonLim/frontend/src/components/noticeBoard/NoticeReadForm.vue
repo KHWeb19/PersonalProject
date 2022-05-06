@@ -88,6 +88,7 @@
                       </v-card-text>
                       <v-container class="pt-0 pb-0" fluid>
                         <v-checkbox
+                          color="orange"
                           v-model="checkbox"
                           label="삭제 동의 버튼."
                         ></v-checkbox>
@@ -166,6 +167,9 @@ export default {
     if (this.$store.state.userInfo != null) {
       this.userInfo = this.$store.state.userInfo;
       this.nickName = this.userInfo.nickName;
+    } else {
+      alert("로그인 후 이용해주세요.");
+      this.$router.push("/login");
     }
   },
   methods: {

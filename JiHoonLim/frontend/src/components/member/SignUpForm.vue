@@ -34,6 +34,7 @@
                         :error-messages="errors"
                         :counter="12"
                         class="mr-5"
+                        color="orange"
                       />
                     </validation-provider>
                     <v-btn
@@ -60,6 +61,7 @@
                       prepend-icon="mdi-lock-outline"
                       :error-messages="errors"
                       :counter="15"
+                      color="orange"
                     />
                   </validation-provider>
                   <validation-provider
@@ -75,6 +77,7 @@
                       prepend-icon="mdi-lock-check-outline"
                       :error-messages="errors"
                       :counter="15"
+                      color="orange"
                     />
                   </validation-provider>
                   <validation-provider
@@ -88,6 +91,7 @@
                       clearable
                       prepend-icon="mdi-badge-account-horizontal-outline"
                       :error-messages="errors"
+                      color="orange"
                     />
                   </validation-provider>
                   <div class="d-flex">
@@ -104,6 +108,7 @@
                         :error-messages="errors"
                         :counter="10"
                         class="mr-5"
+                        color="orange"
                       />
                     </validation-provider>
                     <v-btn
@@ -129,6 +134,7 @@
                         prepend-icon="mdi-email"
                         :error-messages="errors"
                         class="mr-5"
+                        color="orange"
                       />
                     </validation-provider>
                     <v-btn
