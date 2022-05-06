@@ -96,7 +96,7 @@
           <div style="display: flex; justify-content: space-between">
             <div class="countFoodWrap">
               총
-              <b class="countFood">{{ paginatedData.length }}</b> 개의 레시피가
+              <b class="countFood">{{ copyData.length }}</b> 개의 레시피가
               있습니다.
             </div>
           </div>
@@ -105,7 +105,7 @@
 
       <v-row class="mt-5 mb-5s">
         <v-col v-for="food in paginatedData" :key="food.boardNo" lg="3" sm="6">
-          <v-card width="500" height="380" class="mx-auto">
+          <v-card width="500" height="380" class="mt-3 mb-3">
             <router-link
               :to="{
                 name: 'FoodDetailPage',
@@ -201,7 +201,7 @@ export default {
     pageSize: {
       type: Number,
       required: false,
-      default: 10,
+      default: 12,
     },
   },
 

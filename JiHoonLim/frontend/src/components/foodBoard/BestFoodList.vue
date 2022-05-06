@@ -37,7 +37,7 @@
           lg="3"
           sm="6"
         >
-          <v-card width="500" height="380" class="mx-auto">
+          <v-card width="500" height="380" class="mt-3 mb-3">
             <div v-if="index == 0" style="position: relative">
               <div class="rankNum">
                 <v-img
