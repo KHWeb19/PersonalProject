@@ -1,20 +1,41 @@
 <template>
-  <div class="grey lighten-3" style="font-family: 'Noto Sans KR', sans-serif">
-    <v-container class="white" style="width: 1240px">
+  <div style="font-family: 'Noto Sans KR', sans-serif">
+    <v-container class="white" style="width: 1300px">
       <v-row justify="center">
         <v-col>
-          <div class="main_tit_box">회원 관리</div>
-          <v-divider></v-divider>
-          <div style="countWrap" class="mt-10">
-            총
-            <b class="count">{{ registerMembers.length }}</b
-            >명의 회원이 있습니다.
+          <div class="mb-10">
+            <div
+              style="
+                font-size: 70px;
+                text-align: center;
+                font-weight: bold;
+                margin-bottom: 10px;
+              "
+            >
+              C S &nbsp; M A N A G E
+            </div>
+            <div
+              style="
+                font-size: 20px;
+                text-align: center;
+                font-weight: bold;
+                color: grey;
+              "
+            >
+              관리자님, 환영합니다.
+            </div>
           </div>
+          <v-divider></v-divider>
         </v-col>
       </v-row>
       <v-row>
         <v-col>
-          <v-card>
+          <v-card flat>
+            <div style="countWrap" class="mt-5 mb-5">
+              총
+              <b class="count">{{ registerMembers.length }}</b
+              >명의 회원이 있습니다.
+            </div>
             <div class="tableWrap">
               <table class="authTable">
                 <tr style="height: 50px">
@@ -64,7 +85,7 @@
                   <td>
                     <v-btn
                       text
-                      style="font-size: 25px"
+                      style="font-size: 20px"
                       :to="{
                         name: 'MemberManageModifyPage',
                         params: { memberNo: member.memberNo.toString() },
@@ -125,31 +146,41 @@ export default {
 .tableWrap {
   display: flex;
   justify-content: center;
-
   margin-bottom: 50px;
 }
 .authTable {
-  font-size: 25px;
+  font-size: 18px;
   width: 20%;
   text-align: center;
   border-collapse: collapse;
   border: 1px solid lightgrey;
+  border-top: 3px solid orange;
   border-right: none;
+  border-left: none;
 }
 .memberTable {
-  font-size: 25px;
+  font-size: 18px;
   width: 80%;
   text-align: center;
   border-collapse: collapse;
   border: 1px solid lightgrey;
   border-left: none;
+  border-right: none;
+  border-top: 3px solid orange;
 }
 .borderBot {
   border-bottom: 1px solid lightgrey;
 }
-th,
+th {
+  border-bottom: 1px solid lightgrey;
+  border-top: 1px solid lightgrey;
+  height: 70px;
+  font-size: 22px;
+}
+
 td {
   border-bottom: 1px solid lightgrey;
+  border-top: 1px solid lightgrey;
   height: 70px;
 }
 </style>
