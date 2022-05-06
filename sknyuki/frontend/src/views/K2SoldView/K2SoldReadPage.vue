@@ -1,4 +1,5 @@
 <template>
+<div>
   <v-container>
         <header-view></header-view>
         <br>
@@ -17,11 +18,14 @@
         </div>
     
     </v-container>   
+    <footer-view/>
+</div>
 </template>
 <script>
 import { mapState, mapActions } from 'vuex'
 import HeaderView from '@/components/home/headerView.vue'
 import SoldBoardRead from '@/components/SoldProductBoard/SoldBoardRead.vue'
+import FooterView from '@/components/home/footerView.vue'
 //import ReadQuestionComment from '@/components/comment/ReadQuestionComment'
 
 export default {
@@ -29,6 +33,7 @@ export default {
     components:{ 
     HeaderView,
     SoldBoardRead,
+        FooterView,
     //ReadQuestionComment,
     },
     props: {

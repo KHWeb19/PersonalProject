@@ -1,4 +1,5 @@
 <template>
+<div>
     <v-container>
         <header-view></header-view>
         <br>
@@ -9,17 +10,21 @@
     </div>
 
         </v-container>
+    <footer-view></footer-view>
+</div>
 </template>
 <script>
 import K1CheckBrandRegister from '@/components/BrandCheckBoard/K1CheckBrandRegister.vue'
 import HeaderView from '@/components/home/headerView.vue'
 import axios from 'axios'
 import { mapState } from 'vuex'
+import FooterView from '@/components/home/footerView.vue'
 export default {
     name:'K1CheckBrandRegisterPage',
     components:{ 
     HeaderView,
-    K1CheckBrandRegister
+    K1CheckBrandRegister,
+        FooterView
     },
 data () {
     return {

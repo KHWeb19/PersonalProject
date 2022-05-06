@@ -1,4 +1,5 @@
 <template>
+<div>
     <v-container>
         <header-view></header-view>
         <br>
@@ -19,16 +20,16 @@
 
     </div>
     </div>
-     
-
-
     </v-container>
+    <footer-view></footer-view>
+</div>
 </template>
 <script>
 import { mapActions, mapState } from 'vuex'
 import HeaderView from '@/components/home/headerView.vue'
 import K1CheckBrandList from '@/components/BrandCheckBoard/K1CheckBrandList.vue'
 import LoginPage from '@/views/member/LoginPage.vue'
+import FooterView from '@/components/home/footerView.vue'
 
 export default {
     name:'K1CheckBrandView',
@@ -36,6 +37,7 @@ export default {
     HeaderView,
     K1CheckBrandList,
     LoginPage,
+        FooterView,
     },
     props:{
       brand: {

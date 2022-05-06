@@ -1,4 +1,5 @@
 <template>
+<div>
 <v-container>
   
      <header-view></header-view>
@@ -18,6 +19,8 @@
     
   </v-card>
 </v-container>
+<footer-view/>
+</div>
 </template>
 
 
@@ -25,6 +28,7 @@
 import HeaderView from '@/components/home/headerView.vue'
 import ReadInfo from '@/components/member/ReadInfo'
 import RecentBoard from '@/components/member/RecentBoard'
+import FooterView from '@/components/home/footerView.vue'
 
 
 export default {
@@ -32,7 +36,8 @@ export default {
   components: {
     HeaderView,
     ReadInfo,
-    RecentBoard
+    RecentBoard,
+    FooterView
   }
 }
 </script>

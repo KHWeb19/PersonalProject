@@ -1,4 +1,5 @@
 <template>
+<div>
     <v-container>
         <header-view></header-view>
         <br>
@@ -20,12 +21,15 @@
          </div>
 
     </v-container>
+    <footer-view/>
+</div>
 </template>
 <script>
 import HeaderView from '@/components/home/headerView.vue'
 import QuestionBoardList from '@/components/QuestionBoard/QuestionBoardList.vue'
 import { mapState, mapActions } from 'vuex'
 import LoginPage from '@/views/member/LoginPage.vue'
+import FooterView from '@/components/home/footerView.vue'
 
 export default {
     name:'K1QuestionView',
@@ -33,6 +37,7 @@ export default {
     HeaderView,
     QuestionBoardList,
     LoginPage,
+        FooterView,
         
    },
      data() {

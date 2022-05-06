@@ -22,7 +22,7 @@ import {
     FETCH_PRODUCT_BOARDB,
 
     FETCH_BASKET_BOARD_LIST,
-    FETCH_BASKET_BOARD
+    FETCH_BASKET_BOARD,
 
 } from './mutation-types'
 

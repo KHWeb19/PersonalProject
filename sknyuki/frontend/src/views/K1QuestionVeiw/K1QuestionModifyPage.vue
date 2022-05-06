@@ -1,4 +1,5 @@
 <template>
+<div>
     <v-container>
         <header-view></header-view>
         <br>
@@ -10,12 +11,15 @@
 <p v-else>로딩중 .....</p>
            </div>
         </v-container>
+        <footer-view/>
+</div>
 </template>
 <script>
 import HeaderView from '@/components/home/headerView.vue'
 import QuestionBoardModify from '@/components/QuestionBoard/QuestionBoardModify.vue'
 import axios from 'axios'
 import { mapActions, mapState } from 'vuex'
+import FooterView from '@/components/home/footerView.vue'
 
 
 export default {
@@ -23,6 +27,7 @@ export default {
     components:{ 
     HeaderView,
     QuestionBoardModify,
+        FooterView,
     },
     props:{
          boardNo: {
