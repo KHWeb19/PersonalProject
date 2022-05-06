@@ -114,7 +114,7 @@
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
                   text
-                  class="orange lighten-5 mr-10"
+                  class="orange lighten-5 mr-10 orange--text"
                   dark
                   v-bind="attrs"
                   v-on="on"
@@ -169,7 +169,7 @@ export default {
       authItems: [{ title: "회원 관리", link: "/memberManage" }],
 
       links: [
-        { text: "CS CENTER", route: "/noticeList" },
+        { text: "NOTICE", route: "/noticeList" },
         { text: "RANK", route: "/bestFoodList" },
         { text: "RECIPE", route: "/foodList" },
       ],
