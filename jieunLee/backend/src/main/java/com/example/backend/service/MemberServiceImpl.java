@@ -9,6 +9,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,8 +38,36 @@ public class MemberServiceImpl implements MemberService{
 
     @Override
     public List<Member> list() {
-        return memberRepository.findFollowingsByMemberNo(Long.valueOf(2));
-//        return memberRepository.findAll(Sort.by(Sort.Direction.DESC, "memberNo"));
+        List<Member> randomList = new ArrayList<>();
+        List<Member> memberList = memberRepository.findAll();
+
+        int randIdx;
+        int[] arr = new int[5];
+        boolean isDuplicate = true;
+        arr[0] = (int)(Math.random()* memberList.size()+1);
+        for (int i=1; i<5; i++) {
+            do {
+                randIdx = (int)(Math.random()* memberList.size()+1);
+                for(int j=0; j<i; j++) {
+                    if(arr[j] == randIdx) {
+                        isDuplicate = true;
+                        break;
+                    }
+                    isDuplicate = false;
+                }
+
+            } while (isDuplicate);
+            arr[i] = randIdx;
+        }
+
+        for (int i=0; i<5; i++) {
+            if (memberRepository.findByMemberNo(Long.valueOf(arr[i]))!=null) {
+                Member member = memberRepository.findByMemberNo(Long.valueOf(arr[i]));
+                randomList.add(member);
+            }
+        }
+        return randomList;
+
     }
 
     @Override

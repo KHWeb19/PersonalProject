@@ -8,7 +8,10 @@
                 </div>
                 <div style="display: flex;">
                     <my-follow-list :followBoards="followBoards" @click="onDelete" @submit="onSubmit"/>
-                    <footer-bar style="padding: 100px 0px 0px 10px"/>
+                    <div>
+                        <recommend-list :members="members" style="padding: 100px 0px 0px 10px;"/>
+                        <footer-bar style="padding: 10px 0px 0px 10px"/>
+                    </div>
                 </div>
             </div>
         </v-flex>
@@ -19,6 +22,7 @@
 import MenuBar from '@/components/MenuBar.vue'
 import FooterBar from '@/components/FooterBar'
 import MyFollowList from '@/components/board/MyFollowList.vue'
+import RecommendList from '@/components/member/RecommendList.vue'
 import { mapState, mapActions } from 'vuex'
 import axios from 'axios'
 
@@ -27,7 +31,8 @@ export default {
   components: {
     MenuBar,
     MyFollowList,
-    FooterBar
+    FooterBar,
+    RecommendList
     },
     data() {
         return {
@@ -36,14 +41,17 @@ export default {
     },
     computed: {
         ...mapState(['followBoards']),
+        ...mapState(['members']),
         // ...mapState(['twoComments']),
     },
     mounted () {
         this.fetchFollowBoardList(this.loginInfo.memberNo)
+        this.fetchMemberList()
         // this.fetchTwoCommentList(this.boardNo)
     },
     methods: {
         ...mapActions(['fetchFollowBoardList']),
+        ...mapActions(['fetchMemberList']),
         // ...mapActions(['fetchTwoCommentList']),
         onDelete(payload) {
             const {boardNo} = payload
