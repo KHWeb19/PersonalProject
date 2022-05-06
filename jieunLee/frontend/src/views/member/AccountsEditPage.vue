@@ -9,6 +9,7 @@
       <accounts-edit-form v-if="member" :member="member" @submit="onSubmit"/>
       <p v-else>로딩중......</p>
     </div>
+    <footer-bar style=" text-align: center;"/>
   </div>
 </template>
 
@@ -17,7 +18,8 @@ import AccountsEditForm from '@/components/member/AccountsEditForm.vue'
 import AccountsCategory from '@/components/AccountsCategory.vue'
 import axios from 'axios'
 import { mapActions, mapState } from 'vuex'
-import MenuBar from '../../components/MenuBar.vue'
+import MenuBar from '@/components/MenuBar.vue'
+import FooterBar from '@/components/FooterBar'
 
 export default {
   name: 'AccountsEditPage',
@@ -25,7 +27,8 @@ export default {
   components: {
     AccountsEditForm,
     AccountsCategory,
-    MenuBar
+    MenuBar,
+    FooterBar
   },
       props: {
         memberNo: {
@@ -65,11 +68,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-
-
-
-
-</style>

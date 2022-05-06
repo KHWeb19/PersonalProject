@@ -1,5 +1,5 @@
 <template>
-    <v-container style="text-align: center; width: 350px; height: 382px; margin-top: 150px;">
+    <v-container style="text-align: center; width: 350px; height: 382px; margin-top: 120px;">
             <v-flex>
                 <v-card>
                     <form @submit.prevent="onSubmit"  >

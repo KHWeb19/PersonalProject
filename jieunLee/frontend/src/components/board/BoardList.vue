@@ -28,14 +28,16 @@
             </v-row>
         </v-flex>
     </v-container>
+    <footer-bar style="padding-top: 10px; text-align: center;"/>
   </div>
 </template>
 
 <script>
 import MenuBar from '@/components/MenuBar.vue'
+import FooterBar from '@/components/FooterBar'
 export default {
     name: 'BoardList',
-    components: {MenuBar},
+    components: {MenuBar, FooterBar},
     props: {
         boards: {
             type: Array

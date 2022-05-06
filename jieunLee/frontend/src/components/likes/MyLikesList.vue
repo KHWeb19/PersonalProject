@@ -28,15 +28,17 @@
             </v-row>
         </v-flex>
     </v-container>
+    <footer-bar style="padding-top: 10px; text-align: center;"/>
   </div>
 </template>
 
 <script>
 import MenuBar from '@/components/MenuBar.vue'
+import FooterBar from '@/components/FooterBar'
 import { mapActions, mapState } from 'vuex'
 export default {
     name: 'MyLikesList',
-    components: {MenuBar},
+    components: {MenuBar, FooterBar},
     data() {
         return {
             loginInfo: JSON.parse(localStorage.getItem('loginInfo'))

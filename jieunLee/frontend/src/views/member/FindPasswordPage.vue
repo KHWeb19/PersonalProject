@@ -4,17 +4,20 @@
         <find-password-form v-if="member" :member="member" @submit="onSubmit"/>
         <p v-else>로딩중......</p>
     </div>
+    <footer-bar style="padding-top: 75px; text-align: center;"/>
   </div>
 </template>
 
 <script>
 import FindPasswordForm from '@/components/member/FindPasswordForm.vue'
+import FooterBar from '@/components/FooterBar'
 import { mapActions, mapState } from 'vuex'
 import axios from 'axios'
 export default {
     name: 'FindPasswordPage',
     components: {
         FindPasswordForm,
+        FooterBar
     },
     props: {
         memberNo: {

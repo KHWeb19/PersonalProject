@@ -8,14 +8,7 @@
                 </div>
                 <div style="display: flex;">
                     <my-follow-list :followBoards="followBoards" @click="onDelete" @submit="onSubmit"/>
-                    <div style="margin-top: 110px; font-size: 12px; color: #BDBDBD">
-                        <div style="padding-bottom: 14px;">
-                        소개 도움말 홍보 센터 API 채용 정보
-                        <br/>
-                        개인정보처리방침 약관 눌러도 아무것도 뜨지 않습니다
-                        </div>
-                        @2022 vuestagram from jieun
-                    </div>
+                    <footer-bar style="padding: 100px 0px 0px 10px"/>
                 </div>
             </div>
         </v-flex>
@@ -24,6 +17,7 @@
 
 <script>
 import MenuBar from '@/components/MenuBar.vue'
+import FooterBar from '@/components/FooterBar'
 import MyFollowList from '@/components/board/MyFollowList.vue'
 import { mapState, mapActions } from 'vuex'
 import axios from 'axios'
@@ -33,6 +27,7 @@ export default {
   components: {
     MenuBar,
     MyFollowList,
+    FooterBar
     },
     data() {
         return {

@@ -115,7 +115,7 @@ export default {
     onSearch() {
       const keyWord = this.keyWord
       if (!keyWord) {
-        alert('아이디 혹은 이름을 입력해주세요')
+        alert('아이디 혹은 이름으로 검색해주세요')
       } else {
         axios.post('http://localhost:7777/member/search',  { keyWord })
         .then((res) => {
