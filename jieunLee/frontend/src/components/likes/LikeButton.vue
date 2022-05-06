@@ -3,7 +3,8 @@
         {{loginInfo.memberNo}}
         {{myLikes}}
     </div> -->
-    <td style="padding-left: 9px" colspan="3" v-if="onLike" >
+    <!-- <td style="padding-left: 8px; position: absolute; top: 680px;" colspan="3" v-if="onLike"> -->
+        <td style="padding-left: 8px;" colspan="3" v-if="onLike">
         <v-btn icon @click="onLikes" >
             <v-icon  color="red">
                 mdi-cards-heart
@@ -20,7 +21,7 @@
         </router-link>
     </td>
 
-    <td style="padding-left: 9px" colspan="3" v-else >
+    <td style="padding-left: 8px;" colspan="3" v-else >
         <v-btn icon @click="onLikes" >
             <v-icon  color="black">
                 mdi-cards-heart-outline

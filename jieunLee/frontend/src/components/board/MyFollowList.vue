@@ -73,12 +73,12 @@
                                 </v-menu>
                             </td>
                         </tr>
-                        <tr align="center">
-                            <td colspan="3">
-                                <div class="slide-3d">
+                        <tr align="center" >
+                            <td colspan="3" >
+                                <div class="slide-3d " >
                                     <!-- <v-app id="inspire"> -->
                                         <v-container style="padding: 0px">
-                                            <swiper class="swiper position-relative" :options="swiperOption">
+                                            <swiper class="swiper position-absolute" :options="swiperOption">
                                                 <swiper-slide><v-img  width="615px" height="615px" :src="require(`@/assets/mImage/${board.boardImage}`)"/></swiper-slide>
                                                 <swiper-slide v-if="board.boardImage2"><v-img width="615px" height="615px" :src="require(`@/assets/mImage/${board.boardImage2}`)"/></swiper-slide>
                                                 <swiper-slide v-if="board.boardImage3"><v-img width="615px" height="615px" :src="require(`@/assets/mImage/${board.boardImage3}`)"/></swiper-slide>
@@ -235,7 +235,8 @@ export default {
     .swiper-slide {
 
         width: 615px;
-        height: 648px;
+        // height: 648px;
+        height: 615px;
         background-color: white;
         background-position: center;
         background-size: cover;

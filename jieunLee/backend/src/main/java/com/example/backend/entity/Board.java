@@ -57,7 +57,7 @@ public class Board {
 
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    @JsonIgnoreProperties({"boards"})
+    @JsonIgnoreProperties({"boards", "board"})
 //    @JsonIgnoreProperties({"boards", "member"})
     @OneToMany(mappedBy = "board", fetch = FetchType.EAGER)
     private Set<Likes> likes = new HashSet<>();

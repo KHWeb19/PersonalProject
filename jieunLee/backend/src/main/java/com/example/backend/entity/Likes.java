@@ -19,13 +19,13 @@ public class Likes {
     @Column(name="like_no")
     private Long likedNo;
 
-    @JsonIgnoreProperties({"likes", "boards", "comments"})
+    @JsonIgnoreProperties({"likes", "boards", "comments", "followings", "followers"})
 //    @JsonBackReference
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name= "member_no")
     private Member member;
 
-    @JsonIgnoreProperties({"likes", "member", "comments"})
+    @JsonIgnoreProperties({"member"})
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name= "board_no")
     private Board board;

@@ -12,9 +12,17 @@
                 </v-col>
                 <v-col v-else v-for="myLike in myLikes" :key="myLike.board.boardNo"  cols="4">
                     <router-link style="text-decoration: none; color: grey" :to="{
-                                name: 'BoardReadPage',
-                                params: {boardNo: myLike.board.boardNo.toString()}}">
-                        <v-img :src="require(`@/assets/mImage/${myLike.board.boardImage}`)" aspect-ratio="1" />
+                        name: 'BoardReadPage',
+                        params: {boardNo: myLike.board.boardNo.toString()}}">
+                        <div class="jb-wrap">
+                            <div><v-img :src="require(`@/assets/mImage/${myLike.board.boardImage}`)" aspect-ratio="1" /></div>
+                            <div class="jb-text">
+                                <div style="position: absolute; left: 30%; top: 44%;">
+                                    <v-icon large color="white">mdi-heart</v-icon> {{myLike.board.likes.length}} &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <v-icon large color="white">mdi-chat</v-icon> {{myLike.board.comments.length}} 
+                                </div>
+                            </div>
+                        </div>
                     </router-link>
                 </v-col>
             </v-row>

@@ -8,7 +8,7 @@
                 </div>
                 <div style="display: flex;">
                     <my-follow-list :followBoards="followBoards" @click="onDelete" @submit="onSubmit"/>
-                    <div style="margin-top: 110px; font-size: 12px; color: gray">
+                    <div style="margin-top: 110px; font-size: 12px; color: #BDBDBD">
                         <div style="padding-bottom: 14px;">
                         소개 도움말 홍보 센터 API 채용 정보
                         <br/>

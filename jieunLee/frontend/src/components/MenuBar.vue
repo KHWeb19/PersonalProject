@@ -114,11 +114,15 @@ export default {
     },
     onSearch() {
       const keyWord = this.keyWord
-      axios.post('http://localhost:7777/member/search',  { keyWord })
+      if (!keyWord) {
+        alert('아이디 혹은 이름을 입력해주세요')
+      } else {
+        axios.post('http://localhost:7777/member/search',  { keyWord })
         .then((res) => {
             this.$router.push({name: 'MemberList',
             params: { keyWord:keyWord, searchMembers: res.data} })
         })
+      }
     },
     logout() {
       localStorage.removeItem("loginInfo")

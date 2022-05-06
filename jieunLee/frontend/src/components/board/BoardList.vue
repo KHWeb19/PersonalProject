@@ -11,10 +11,18 @@
                 현재 등록된 게시물이 없습니다!
                 </v-col>
                 <v-col v-else v-for="board in boards" :key="board.boardNo"  cols="4">
-                    <router-link style="text-decoration: none; color: grey" :to="{
-                                name: 'BoardReadPage',
-                                params: {boardNo: board.boardNo.toString()}}">
-                        <v-img :src="require(`@/assets/mImage/${board.boardImage}`)" aspect-ratio="1" />
+                    <router-link style="text-decoration: none;" :to="{
+                        name: 'BoardReadPage',
+                        params: {boardNo: board.boardNo.toString()}}">
+                        <div class="jb-wrap">
+                            <div><v-img :src="require(`@/assets/mImage/${board.boardImage}`)" aspect-ratio="1" /></div>
+                            <div class="jb-text">
+                                <div style="position: absolute; left: 30%; top: 44%;">
+                                    <v-icon large color="white">mdi-heart</v-icon> {{board.likes.length}} &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <v-icon large color="white">mdi-chat</v-icon> {{board.comments.length}} 
+                                </div>
+                            </div>
+                        </div>
                     </router-link>
                 </v-col>
             </v-row>
@@ -25,7 +33,6 @@
 
 <script>
 import MenuBar from '@/components/MenuBar.vue'
-// import { mapActions, mapState } from 'vuex'
 export default {
     name: 'BoardList',
     components: {MenuBar},
@@ -34,15 +41,26 @@ export default {
             type: Array
         }
     },
-    // computed: {
-    //     ...mapState(['boards']),
-    // },
-    // mounted () {
-    //     this.fetchBoardList()
-
-    // },
-    // methods: {
-    //     ...mapActions(['fetchBoardList']),
-    // }
 }
 </script>
+
+<style>
+.jb-wrap {
+    position: relative;
+}
+
+.jb-text {
+    opacity: 0.5;
+    width: 100%;
+    height: 100%;
+	background-color: black;
+    color: white;
+    display: none;
+	position: absolute;
+	bottom: 0px;
+}
+
+.jb-wrap:hover .jb-text {
+    display: block;
+}
+</style>
