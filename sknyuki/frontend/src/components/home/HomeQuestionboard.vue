@@ -25,15 +25,7 @@
             </v-simple-table>
                  
     <br>
-            <div class="text-center pt-2">
-            <v-pagination
-                v-model="page"
-                :length="pageCount"
-                dark
-            ></v-pagination>
-          
- 
-            </div>
+            
  </v-container>
 
 </template>

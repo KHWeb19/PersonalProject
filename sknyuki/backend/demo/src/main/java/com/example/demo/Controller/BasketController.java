@@ -35,17 +35,17 @@ public class BasketController {
     }
 
 
-        @GetMapping("/{boardNo}")
+        @GetMapping("/{basketNo}")
         public BasketBoard BasketBoardRead (
-                @PathVariable("boardNo") Integer boardNo){
+                @PathVariable("basketNo") Integer basketNo){
             log.info("BasketBoardRead()");
 
-            return service.read(boardNo);
+            return service.read(basketNo);
         }
 
-        @PutMapping("/{boardNo}")
+        @PutMapping("/{basketNo}")
         public BasketBoard BasketBoardModify (
-                @PathVariable("boardNo") Integer boardNo,
+                @PathVariable("basketNo") Integer boardNo,
                 @RequestBody BasketBoard basketboard){
             log.info("ProductBoardSModify(): " + basketboard);
 
@@ -55,12 +55,12 @@ public class BasketController {
             return basketboard;
         }
 
-        @DeleteMapping("/{boardNo}")
+        @DeleteMapping("/{basketNo}")
         public void BasketBoardRemove (
-                @PathVariable("boardNo") Integer boardNo){
+                @PathVariable("basketNo") Integer basketNo){
             log.info("BasketBoardRemove()");
 
-            service.remove(boardNo);
+            service.remove(basketNo);
         }
 
       /*  @GetMapping("/userRead/{id}")

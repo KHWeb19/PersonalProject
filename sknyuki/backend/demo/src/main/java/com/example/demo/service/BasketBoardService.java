@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface BasketBoardService {
     public void register (BasketBoard productboard);
-    public BasketBoard read (Integer boardNo);
+    public BasketBoard read (Integer basketNo);
     public void modify (BasketBoard board);
-    public void remove (Integer boardNo);
+    public void remove (Integer basketNo);
     List<BasketBoard> userRead(String id) throws Exception;
 }

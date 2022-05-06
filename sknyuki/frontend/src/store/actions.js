@@ -105,6 +105,7 @@ export default {
         return axios.get(`http://localhost:7777/ProductBoardS/${boardNo}`)
             .then((res) => {
                 commit(FETCH_PRODUCT_BOARDS, res.data)
+                console.log(res)
             })
     },
 
@@ -133,8 +134,8 @@ export default {
             commit(FETCH_BASKET_BOARD_LIST, res.data)
         })
 },
-fetchBasketBoard ({ commit }, boardNo) {
-    return axios.get(`http://localhost:7777/BasketBoard/${boardNo}`)
+fetchBasketBoard ({ commit }, basketNo) {
+    return axios.get(`http://localhost:7777/BasketBoard/${basketNo}`)
         .then((res) => {
             commit(FETCH_BASKET_BOARD, res.data)
         })

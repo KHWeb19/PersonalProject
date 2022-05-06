@@ -26,14 +26,10 @@ public class BasketBoardServiceImpl implements BasketBoardService {
         repository.save(board);
     }
 
-    @Override
-    public List<BasketBoard> list() {
-        return repository.findAll(Sort.by(Sort.Direction.DESC, "boardNo"));
-    }
 
     @Override
-    public BasketBoard read(Integer boardNo) {
-        Optional<BasketBoard> maybeReadBoard = repository.findById(Long.valueOf(boardNo));
+    public BasketBoard read(Integer basketNo) {
+        Optional<BasketBoard> maybeReadBoard = repository.findById(Long.valueOf(basketNo));
 
         if (maybeReadBoard.equals(Optional.empty())) {
             log.info("Can't read board!");
@@ -49,8 +45,8 @@ public class BasketBoardServiceImpl implements BasketBoardService {
     }
 
     @Override
-    public void remove(Integer boardNo) {
-        repository.deleteById(Long.valueOf(boardNo));
+    public void remove(Integer basketNo) {
+        repository.deleteById(Long.valueOf(basketNo));
     }
 
     /*@Override
