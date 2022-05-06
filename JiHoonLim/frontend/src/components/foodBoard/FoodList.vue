@@ -155,7 +155,12 @@
       <v-row>
         <v-col>
           <div class="btn-cover">
-            <v-btn :disabled="pageNum === 0" @click="prevPage" class="page-btn">
+            <v-btn
+              :disabled="pageNum === 0"
+              @click="prevPage"
+              class="page-btn"
+              color="orange"
+            >
               이전
             </v-btn>
             <span class="page-count"
@@ -165,6 +170,7 @@
               :disabled="pageNum >= pageCount - 1"
               @click="nextPage"
               class="page-btn"
+              color="orange"
             >
               다음
             </v-btn>

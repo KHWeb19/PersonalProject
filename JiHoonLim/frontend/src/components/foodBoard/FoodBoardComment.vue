@@ -30,7 +30,7 @@
                         {{ commentList.commentWriter }}
                       </h3>
                       <v-spacer></v-spacer>
-                      <h3 class="pb-2 pr-5 pt-2">{{ commentList.regDate }}</h3>
+                      <h4 class="pb-2 pr-5 pt-2">{{ commentList.regDate }}</h4>
                       <v-btn
                         class="ml-5 mr-5"
                         text
