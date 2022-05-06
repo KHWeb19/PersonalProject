@@ -3,26 +3,29 @@
     <v-container class="white" style="width: 1400px">
       <v-row>
         <v-col>
-          <div
-            style="
-              font-size: 70px;
-              text-align: center;
-              font-weight: bold;
-              margin-bottom: 10px;
-            "
-          >
-            R E C I P E
+          <div class="mb-10">
+            <div
+              style="
+                font-size: 70px;
+                text-align: center;
+                font-weight: bold;
+                margin-bottom: 10px;
+              "
+            >
+              R E C I P E
+            </div>
+            <div
+              style="
+                font-size: 20px;
+                text-align: center;
+                font-weight: bold;
+                color: grey;
+              "
+            >
+              Easy Cook 유저들이 제공하는 레시피로 최고의 순간을 만들어 보세요.
+            </div>
           </div>
-          <div
-            style="
-              font-size: 20px;
-              text-align: center;
-              font-weight: bold;
-              color: grey;
-            "
-          >
-            Easy Cook 유저들이 제공하는 레시피로 최고의 순간을 만들어 보세요.
-          </div>
+          <v-divider></v-divider>
         </v-col>
       </v-row>
       <v-row justify="center">

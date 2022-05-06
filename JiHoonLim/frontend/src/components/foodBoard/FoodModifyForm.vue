@@ -3,7 +3,7 @@
     <v-container class="white">
       <v-row justify="center">
         <v-col cols="auto">
-          <v-card width="1300">
+          <v-card width="1300" style="margin: 30px">
             <v-card-text>
               <validation-observer v-slot="{ invalid }">
                 <form @submit.prevent="onSubmit">
