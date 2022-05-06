@@ -11,6 +11,7 @@
        <!-- <read-question-comment :boardNo="boardNo"/>-->
 
         <div v-if="userInfo.id == ProductBoardS.id" style="padding:20px;">
+            <div v-if="ProductBoardS.soldCheck">
             <router-link style="text-decoration: none; color:black" 
             :to="{ name: 'K2ProductModifyPage', params: { boardNo } }">
                 <v-btn text color="black" rounded x-large
@@ -25,6 +26,7 @@
                 @click="onDelete">
                     삭제하기
             </v-btn>
+            </div>
         </div>
 
         <div v-else style="padding:20px;">

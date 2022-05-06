@@ -113,7 +113,7 @@
       </v-list-item-title>
       <v-list v-else v-for="list in BasketBoardList" :key="list.index">
         <v-list-item-group>
-          <v-list-item @click="readBasketPage(list.boardNo)">
+          <v-list-item @click="readBasketPage(list.basketNo, list.boardNo)">
             <v-list-item-title>
               {{ list.name }}
             </v-list-item-title>
@@ -197,7 +197,7 @@ export default {
 
      
        for (let i = 0; i < list.length; i++) {
-          this.BasketBoardList.push({ boardNo: list[i].boardNo, name: list[i].name })
+          this.BasketBoardList.push({ boardNo: list[i].boardNo ,basketNo: list[i].basketNo, name: list[i].name })
         }      
       
       
@@ -230,9 +230,9 @@ export default {
       )
      },
 
-     readBasketPage(boardNo){
+     readBasketPage(basketNo,boardNo){
         this.$router.push(
-        { name: 'K2ProductReadPage', params: { boardNo: boardNo} }
+        { name: 'K3basketReadPage', params: { basketNo: basketNo, boardNo:boardNo} }
       )
      },
   }
