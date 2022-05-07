@@ -91,6 +91,7 @@ public class ReservationController {
 
         return reservation;
     }
+    // 내 예약 정보 불러올때
     @GetMapping("/list/{searchId}")
     public List<Reservation> ReservationPerList (@PathVariable("searchId") String searchId) {
         log.info("reservationPerList()");

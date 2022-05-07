@@ -1,4 +1,4 @@
-/*package com.example.backend.service.reservation;
+/*package com.example.backend.senter.reservation;
 
 import com.example.backend.entity.Reservation;
 import com.example.backend.entity.StudyRoom;

@@ -101,10 +101,17 @@ export default {
     }
   },
   created(){
-    this.id=this.$store.state.session.userId
-     setTimeout(this.getSeatsInfo, 1000)
+    this.id=this.$store.state.session.userId;
+     setTimeout(this.getSeatsInfo, 1000);
       //this.reservation = this.$store.state.reservations[0]
-
+  },
+  mounted(){
+      if (this.$store.state.session != null) {
+      this.loginAuth = this.$store.state.auth.auth
+    } else {
+      alert("please login.");
+      this.$router.push("/Home");
+    }
   },
 
   methods: {
