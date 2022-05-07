@@ -29,7 +29,7 @@ public class CenterComments {
     private String comment;
 
     @JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="center_no")
     private Center center;
 
@@ -42,10 +42,13 @@ public class CenterComments {
     @UpdateTimestamp
     private Date updDate;
 
+    /*
     public CenterComments(Long comNo, String comment, Date regDate) {
 
         this.comment = comment;
         this.comNo = comNo;
 
     }
+
+     */
 }

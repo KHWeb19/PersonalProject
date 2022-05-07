@@ -53,8 +53,8 @@ public class CenterCommentsController {
 
 
     @DeleteMapping("/{comNo}")
-    public void boardCommentsRemove (
-            @PathVariable("comNo") Integer comNo,CenterComments cc) {
+    public void centerCommentsRemove (
+            @PathVariable("comNo") Integer comNo,CenterComments centerComments) {
         log.info("commentRemove()");
 
         service.remove(comNo);

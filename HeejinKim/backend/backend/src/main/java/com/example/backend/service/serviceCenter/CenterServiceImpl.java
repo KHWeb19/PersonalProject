@@ -2,6 +2,7 @@ package com.example.backend.service.serviceCenter;
 
 import com.example.backend.entity.Board;
 import com.example.backend.entity.Center;
+import com.example.backend.entity.Reservation;
 import com.example.backend.repository.Board.BoardRepository;
 import com.example.backend.repository.centerBoard.CenterRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -117,6 +118,38 @@ public class CenterServiceImpl implements CenterService {
         }
 
         repository.deleteById(Long.valueOf(centerNo));
+    }
+
+    @Transactional
+    @Override
+    public List<Center> searchIdList(String searchId) {
+        return repository.findIdList(searchId);
+
+    }
+
+
+    //비밀글 쓸때
+    @Transactional
+    @Override
+    public Center read(Long checkBoardNo, String searchId) {
+        Optional<Center> maybeReadBoard = repository.findById(checkBoardNo);
+
+        if(maybeReadBoard.equals(Optional.empty())){
+            log.info("don't touch");
+        }
+
+        Center rsvId = maybeReadBoard.get();
+
+        if(rsvId.getWriter().equals(searchId)){
+            log.info("searchId:"+searchId);
+            return rsvId;
+        }else if(searchId.equals("Manager")) {
+            log.info("selectList");
+            return rsvId;
+        }else
+            return null;
+
+
     }
 
 }

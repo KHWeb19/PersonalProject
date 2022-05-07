@@ -23,16 +23,16 @@ import java.util.Optional;
 public class CenterCommentsServiceImpl implements CenterCommentsService {
 
     @Autowired
-    private CenterRepository boardRepository;
+    private CenterRepository cenRepository;
 
     @Autowired
-    private CenterCommentsRepository commentRepository;
+    private CenterCommentsRepository cenCommentRepository;
 
 
     @Transactional
     @Override
     public void register(Integer centerNo, CenterCommentRequest centerCommentRequest) {
-        Optional<Center> maybeBoard = boardRepository.findById(Long.valueOf(centerNo));
+        Optional<Center> maybeBoard = cenRepository.findById(Long.valueOf(centerNo));
 
         Center center = maybeBoard.get();
 
@@ -42,7 +42,7 @@ public class CenterCommentsServiceImpl implements CenterCommentsService {
                 .commentWriter(centerCommentRequest.getCommentWriter())
                 .build();
 
-        commentRepository.save(comment);
+        cenCommentRepository.save(comment);
     }
 
 
@@ -50,16 +50,20 @@ public class CenterCommentsServiceImpl implements CenterCommentsService {
     @Override
     public List<CenterComments> list(Integer centerNo) {
 
-        List<CenterComments> commentLists = commentRepository.findAllBoardCommentByBoardId(Long.valueOf(centerNo));
+        //List<CenterComments> commentLists = commentRepository.findAllBoardCommentByBoardId(Long.valueOf(centerNo));
 
-        return commentLists;
+        //return commentLists;
+
+        Center center = cenRepository.findById(Long.valueOf(centerNo)).get();
+
+        return cenCommentRepository.findCenterCommentsByCenter(center);
     }
 
 
     @Transactional
     @Override
     public CenterComments modify(Integer comNo, CenterCommentRequest centerCommentRequest) {
-        Optional<Center> maybeBoard = boardRepository.findById(Long.valueOf(centerCommentRequest.getCenterNo()));
+        Optional<Center> maybeBoard = cenRepository.findById(Long.valueOf(centerCommentRequest.getCenterNo()));
         Center center = maybeBoard.get();
 
         CenterComments commentModify = CenterComments.builder()
@@ -70,16 +74,16 @@ public class CenterCommentsServiceImpl implements CenterCommentsService {
                 .regDate(centerCommentRequest.getRegDate())
                 .build();
 
-        return commentRepository.save(commentModify);
+        return cenCommentRepository.save(commentModify);
 
 
     }
 
 
-    @Transactional
+
     @Override
     public void remove(Integer comNo) {
-        commentRepository.deleteById(Long.valueOf(comNo));
+        cenCommentRepository.deleteById(Long.valueOf(comNo));
 
     }
 

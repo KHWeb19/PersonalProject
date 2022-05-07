@@ -3,6 +3,7 @@ package com.example.backend.controller.serviceBoard;
 import com.example.backend.controller.board.request.KeyWordRequest;
 import com.example.backend.entity.Board;
 import com.example.backend.entity.Center;
+import com.example.backend.entity.Reservation;
 import com.example.backend.service.board.BoardService;
 import com.example.backend.service.serviceCenter.CenterService;
 import lombok.extern.slf4j.Slf4j;
@@ -64,6 +65,24 @@ public class CenterController {
         log.info("boardRemove()");
 
         service.remove(centerNo);
+    }
+
+    @GetMapping("/list/{searchId}")
+    public List<Center> centerPerList (@PathVariable("searchId") String searchId) {
+        log.info("centerPerList()");
+
+
+        return service.searchIdList(searchId);
+    }
+
+    @RequestMapping(value = "/read",  method = RequestMethod.GET)
+    public Center centerReadBoard (@RequestParam(value = "checkBoardNo", required = false) Long checkBoardNo,
+                                         @RequestParam(value = "searchId", required = false) String searchId) {
+
+
+        log.info("checkReservationNo:" +checkBoardNo + "id:" +searchId);
+
+        return service.read(checkBoardNo,searchId);
     }
 
 }
