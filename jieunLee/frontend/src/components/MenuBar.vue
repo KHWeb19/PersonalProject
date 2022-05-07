@@ -1,5 +1,6 @@
 <template>
   <v-app-bar flat color="white">
+
     <v-spacer></v-spacer>
     <v-spacer></v-spacer>
     <v-spacer></v-spacer>
@@ -22,7 +23,7 @@
                               padding-left: 10px;" 
                           type="text" placeholder="검색" v-model="keyWord" />
     <v-btn icon @click="onSearch"><v-icon>mdi-arrow-right</v-icon></v-btn>
-    <v-spacer></v-spacer>
+      <v-spacer></v-spacer>
     <v-btn icon large>
       <router-link style="text-decoration: none;" :to="{name: 'HomeView'}">
         <v-icon color="black">

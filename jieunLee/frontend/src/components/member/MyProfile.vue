@@ -161,7 +161,7 @@ export default {
     data() {
         return {
             loginInfo: JSON.parse(localStorage.getItem('loginInfo')),
-                        follow: ''
+            follow: ''
         }
     },
     computed: {

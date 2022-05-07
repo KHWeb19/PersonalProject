@@ -9,7 +9,7 @@
                 <div style="display: flex;">
                     <my-follow-list :followBoards="followBoards" @click="onDelete" @submit="onSubmit"/>
                     <div>
-                        <recommend-list :members="members" style="padding: 100px 0px 0px 10px;"/>
+                        <recommend-list :members="members" style="padding: 100px 0px 0px 15px;"/>
                         <footer-bar style="padding: 10px 0px 0px 10px"/>
                     </div>
                 </div>
@@ -91,4 +91,7 @@ export default {
 
 <style>
 #app { background-color: #fafafa; }
+.v-toolbar__content{
+    padding: 4px 170px;
+}
 </style>
