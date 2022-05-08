@@ -332,7 +332,11 @@ export default {
       this.userNick = this.userInfo.nickName;
     }
 
-    if (this.userNick != this.writer) {
+    if (
+      this.userNick != this.writer &&
+      this.userInfo.auth != "관리자" &&
+      this.userInfo.auth != "매니저"
+    ) {
       alert("작성자만 접근 가능합니다.");
       this.$router.push("/");
     }

@@ -135,7 +135,7 @@ export default {
       this.userNick = this.userInfo.nickName;
       this.userAuth = this.userInfo.auth;
     }
-    if (this.userAuth != "관리자" || this.userAuth != "매니저") {
+    if (this.userAuth != "관리자" && this.userAuth != "매니저") {
       alert("권한이 없습니다.");
       this.$router.push("/noticeList");
     }
