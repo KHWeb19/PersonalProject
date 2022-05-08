@@ -1,16 +1,19 @@
 <template>
     <div>
         <register-form @submit="onSubmit"/>
+        <footer-bar style="padding-top: 280px; text-align: center;"/>
     </div>        
 </template>
 
 <script>
 import RegisterForm from '@/components/member/RegisterForm'
+import FooterBar from '@/components/FooterBar'
 import axios from 'axios'
 export default {
     name: 'RegisterPage.',
     components: {
-        RegisterForm
+        RegisterForm,
+        FooterBar
     },
     methods: {
         onSubmit (payload) {

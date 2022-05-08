@@ -1,16 +1,19 @@
 <template>
     <div>
         <forget-password-form @submit="onSubmit"/>
+        <footer-bar style="padding-top: 280px; text-align: center;"/>
     </div>        
 </template>
 
 <script>
 import ForgetPasswordForm from '@/components/member/ForgetPasswordForm'
+import FooterBar from '@/components/FooterBar'
 import axios from 'axios'
 export default {
     name: 'ForgetPasswordPage',
     components: {
         ForgetPasswordForm,
+        FooterBar
     },
     methods: {
         onSubmit(payload) {

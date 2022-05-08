@@ -97,7 +97,7 @@
                       width: 300px; 
                       height: 35px;
                       padding-left: 5px;" 
-                      type="text" placeholder="ex) 좋아하는 색깔은?" v-model="passwordHint"/>
+                      type="text" placeholder="ex) 좋아하는 색깔" v-model="passwordHint"/>
                     </td>
                 </tr>
                 

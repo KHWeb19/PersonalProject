@@ -1,6 +1,6 @@
 package com.example.backend.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,12 +19,13 @@ public class Likes {
     @Column(name="like_no")
     private Long likedNo;
 
-    @JsonBackReference
+    @JsonIgnoreProperties({"likes", "boards", "comments", "followings", "followers"})
+//    @JsonBackReference
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name= "member_no")
     private Member member;
 
-    @JsonBackReference(value="board-likes")
+    @JsonIgnoreProperties({"member"})
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name= "board_no")
     private Board board;

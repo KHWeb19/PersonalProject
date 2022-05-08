@@ -7,6 +7,7 @@ import com.example.backend.repository.BoardRepository;
 import com.example.backend.repository.LikesRepository;
 import com.example.backend.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -43,7 +44,21 @@ public class LikesServiceImpl implements LikesService {
     }
 
     @Override
-    public List<Likes> list(Long boardNo, Long memberNo) {
-        return repository.findByBoardNoAndMemberNo(Long.valueOf(boardNo), Long.valueOf(memberNo));
+    public Likes likes(Long boardNo, Long memberNo) {
+        Optional<Likes> maybeReadLikes = repository.findLikesBoardNoAndMemberNo(Long.valueOf(boardNo), Long.valueOf(memberNo));
+        if (maybeReadLikes.equals(Optional.empty())) {
+            return null;
+        }
+        return maybeReadLikes.get();
+    }
+
+    @Override
+    public List<Likes> list(Long boardNo) {
+        return repository.findByBoardNo(Long.valueOf(boardNo));
+    }
+
+    @Override
+    public List<Likes> myLikes(Long memberNo) {
+        return repository.findByMemberNo(Long.valueOf(memberNo));
     }
 }

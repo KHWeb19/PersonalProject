@@ -1,7 +1,6 @@
 package com.example.backend.controller;
 
 import com.example.backend.entity.Board;
-import com.example.backend.entity.Comment;
 import com.example.backend.entity.Likes;
 import com.example.backend.service.LikesService;
 import lombok.extern.slf4j.Slf4j;
@@ -26,23 +25,24 @@ public class LikesController {
         return likesService.register(boardNo, memberNo, likes);
     }
 
-    @GetMapping("/list/{boardNo}/{memberNo}")
-    public List<Likes> likesList(@PathVariable("boardNo") Long boardNo, @PathVariable("memberNo") Long memberNo) {
-        log.info("likesList()");
+    @GetMapping("/{boardNo}/{memberNo}")
+    public Likes likesRead(@PathVariable("boardNo") Long boardNo, @PathVariable("memberNo") Long memberNo) {
+        log.info("likesRead()");
 
-        return likesService.list(boardNo, memberNo);
+        return likesService.likes(boardNo, memberNo);
     }
 
-//    @GetMapping("/list/{memberNo}")
-//    public List<Likes> likesList(@PathVariable("memberNo") Long memberNo) {
-//        log.info("likesList()");
-//
-//        return likesService.list(memberNo);
-//    }
+    @GetMapping("/list/{boardNo}")
+    public List<Likes> likesList(@PathVariable("boardNo") Long boardNo) {
+        log.info("likesList()");
 
-//    @DeleteMapping("/{likesNo}")
-//    public void unLikes(@PathVariable("likesNo") Integer likesNo) {
-//        log.info("unLikes()");
-//        likesService.remove(likesNo);
-//    }
+        return likesService.list(boardNo);
+    }
+
+    @GetMapping("/list/my/{memberNo}")
+    public List<Likes> myLikesList(@PathVariable("memberNo") Long memberNo) {
+        log.info("likesList()");
+
+        return likesService.myLikes(memberNo);
+    }
 }

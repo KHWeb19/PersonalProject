@@ -1,14 +1,13 @@
 package com.example.backend.service;
 
-
-import com.example.backend.entity.Board;
-import com.example.backend.entity.Comment;
 import com.example.backend.entity.Likes;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface LikesService {
     public boolean register (Long boardNo, Long memberNo, Likes likes);
-    List<Likes> list (Long boardNo, Long memberNo);
-//    public void remove (Integer likesNo);
+    Likes likes (Long boardNo, Long memberNo);
+    List<Likes> list (Long boardNo);
+    List<Likes> myLikes (Long memberNo);
 }

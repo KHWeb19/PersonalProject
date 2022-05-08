@@ -35,8 +35,9 @@ export default {
    methods: {
      ...mapActions(['fetchMember']),
         onSubmit(payload) {
-            const { memberNo, boardImage, content } = payload
-            axios.post(`http://localhost:7777/board/register/${memberNo}`, { boardImage, content})
+            console.log(payload)
+            const { memberNo, boardImage, boardImage2, boardImage3, content } = payload
+            axios.post(`http://localhost:7777/board/register/${memberNo}`, { boardImage, boardImage2, boardImage3, content})
                 .then(() => {
                     alert('게시물 등록 성공!')
                     this.$router.push({

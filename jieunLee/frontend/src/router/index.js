@@ -12,9 +12,12 @@ import MyProfilePage from '@/views/member/MyProfilePage'
 import AccountsEditPage from '@/views/member/AccountsEditPage'
 import PasswordEditPage from '@/views/member/PasswordEditPage'
 
+import BoardListPage from '@/views/board/BoardListPage'
 import BoardRegisterPage from '@/views/board/BoardRegisterPage'
 import BoardReadPage from '@/views/board/BoardReadPage'
 import BoardModifyPage from '@/views/board/BoardModifyPage'
+
+import MyLikesList from '@/components/likes/MyLikesList'
 
 
 Vue.use(VueRouter)
@@ -94,6 +97,11 @@ const routes = [
     }
   },
   {
+    path: '/boardList',
+    name: 'BoardListPage',
+    component: BoardListPage
+  },
+  {
     path: '/boardRegister',
     name: 'BoardRegisterPage',
     component: BoardRegisterPage
@@ -113,6 +121,16 @@ const routes = [
     name: 'BoardModifyPage',
     components: {
       default: BoardModifyPage
+    },
+    props: {
+      default: true
+    }
+  },
+  {
+    path: '/myLikesList/:memberNo',
+    name: 'MyLikesList',
+    components: {
+      default: MyLikesList
     },
     props: {
       default: true

@@ -1,11 +1,14 @@
 <template>
     <div>
         <login-form @submit="onSubmit"/>
+        <footer-bar style="padding-top: 280px; text-align: center;"/>
     </div>        
+    
 </template>
 
 <script>
 import LoginForm from '@/components/member/LoginForm'
+import FooterBar from '@/components/FooterBar'
 import axios from 'axios'
 import Vue from 'vue'
 import cookies from 'vue-cookies'
@@ -16,6 +19,7 @@ export default {
     name: 'LoginPage',
     components: {
         LoginForm,
+        FooterBar
     },
     data() {
         return {
@@ -40,6 +44,7 @@ export default {
                             this.$cookies.set("user", res.data, 300)
                             this.isLogin = true
                             this.$router.push({name: 'HomeView'})
+                            history.go(0);
                             localStorage.setItem("loginInfo", JSON.stringify(res.data))
                         } else {
                             alert('로그인 실패!')

@@ -9,6 +9,7 @@
       <password-edit-form v-if="member" :member="member" @submit="onSubmit"/>
       <p v-else>로딩중......</p>
     </div>
+    <footer-bar style=" text-align: center;"/>
   </div>
 </template>
 
@@ -16,6 +17,7 @@
 import PasswordEditForm from '@/components/member/PasswordEditForm.vue'
 import AccountsCategory from '@/components/AccountsCategory.vue'
 import MenuBar from '@/components/MenuBar.vue'
+import FooterBar from '@/components/FooterBar'
 import { mapActions, mapState } from 'vuex'
 import axios from 'axios'
 export default {
@@ -23,9 +25,10 @@ export default {
   components: {
     PasswordEditForm,
     AccountsCategory,
-    MenuBar
+    MenuBar,
+    FooterBar
   },
-        props: {
+      props: {
         memberNo: {
             type: String,
             require: true
@@ -37,7 +40,7 @@ export default {
   },
   methods: {
     ...mapActions(['fetchMember']),
-        onSubmit(payload) {
+    onSubmit(payload) {
       const {password} = payload
       axios.put(`http://localhost:7777/member/pw/${this.memberNo}`, 
       {memberName: this.member.memberName, memberId: this.member.memberId, password, passwordHint: this.member.passwordHint, imageName: this.member.imageName, memberWeb: this.member.memberWeb, memberIntro: this.member.memberIntro, regDate: this.member.regDate})

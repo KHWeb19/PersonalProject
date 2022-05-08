@@ -1,11 +1,11 @@
 <template>
-    <v-container style="text-align: center; width: 350px; height: 382px; margin-top: 150px;">
+    <v-container style="text-align: center; width: 350px; height: 382px; margin-top: 120px;">
             <v-flex>
                 <v-card>
                     <form @submit.prevent="onSubmit"  >
                         <img style="margin: 40px 0px 18px 0px;" src="@/assets/vuelogo.png"/>
                         <h4>로그인에 문제가 있나요?</h4>
-                        <div style="color: grey; font-size: 14px">아이디와 좋아하는 색깔을 입력하시면<br/>계정의 비밀번호를 변경 할 수 있습니다.</div>
+                        <div style="color: grey; font-size: 14px">아이디와 회원가입 시 입력한 비밀번호 힌트로<br/>계정의 비밀번호를 변경 할 수 있습니다.</div>
                         <br/>
                         <div>
                             <input style="background-color: #fafafa; 
@@ -25,7 +25,7 @@
                                 width: 268px; 
                                 height: 38px;
                                 padding-left: 5px;" 
-                            type="text" placeholder="좋아하는 색깔은?" v-model="passwordHint"/>
+                            type="text" placeholder="비밀번호 힌트" v-model="passwordHint"/>
                         </div>
                         <div>
                             <v-btn style="margin: 10px; width: 268px; height: 30px;" color="blue" class="white--text" type="submit">비밀번호 변경</v-btn>

@@ -8,7 +8,11 @@ import {
     FETCH_COMMENT,
     FETCH_COMMENT_LIST,
     FETCH_TWO_COMMENT_LIST,
-    FETCH_LOGIN_LIKES
+    FETCH_LIKES_LIST,
+    FETCH_MY_LIKES_LIST,
+    FETCH_LIKE,
+    FETCH_MY_FOLLOW_LIST,
+    FETCH_FOLLOW_BOARD_LIST
 } from './mutation-types'
 
 import axios from 'axios'
@@ -27,7 +31,8 @@ export default {
                 })
     },
     fetchSearchMemberList ({ commit }) {
-        return axios.get('http://localhost:7777/member/search')
+        //스프링에서 Post니까 바꿔줬는데 문제안생기나?
+        return axios.post('http://localhost:7777/member/search')
                 .then((res) => {
                     commit(FETCH_SEARCH_MEMBER_LIST, res.data)
                 })
@@ -68,10 +73,34 @@ export default {
                     commit(FETCH_TWO_COMMENT_LIST, res.data)
                 })
     },
-    fetchLoginLikes({ commit }, {boardNo, memberNo}) {
-        return axios.get(`http://localhost:7777/likes/list/${boardNo}/${memberNo}`)
+    fetchLikesList({ commit }, boardNo) {
+        return axios.get(`http://localhost:7777/likes/list/${boardNo}`)
                 .then((res) => {
-                    commit(FETCH_LOGIN_LIKES, res.data)
+                    commit(FETCH_LIKES_LIST, res.data)
+                })
+    },
+    fetchMyLikesList({ commit }, memberNo) {
+        return axios.get(`http://localhost:7777/likes/list/my/${memberNo}`)
+                .then((res) => {
+                    commit(FETCH_MY_LIKES_LIST, res.data)
+                })
+    },
+    fetchLike ({ commit }, {boardNo, memberNo}) {
+        return axios.get(`http://localhost:7777/likes/${boardNo}/${memberNo}`)
+                .then((res) => {
+                    commit(FETCH_LIKE, res.data)
+                })
+    },
+    fetchMyFollowList({ commit }, memberNo) {
+        return axios.get(`http://localhost:7777/follow/list/my/${memberNo}`)
+                .then((res) => {
+                    commit(FETCH_MY_FOLLOW_LIST, res.data)
+                })
+    },
+    fetchFollowBoardList({ commit }, memberNo) {
+        return axios.get(`http://localhost:7777/board/list/follow/${memberNo}`)
+                .then((res) => {
+                    commit(FETCH_FOLLOW_BOARD_LIST, res.data)
                 })
     },
 }

@@ -54,12 +54,23 @@ public class Member {
     @OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
     private List<Board> boards = new ArrayList<>();
 
-    //이거는 필요없긴함 없애보자
-//    @EqualsAndHashCode.Exclude
-//    @ToString.Exclude
-//    @JsonIgnoreProperties({"member"})
-//    @OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
-//    private Set<Comment> memberComments = new HashSet<>();
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @JsonIgnoreProperties({"member"})
+    @OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
+    private Set<Likes> likes = new HashSet<>();
+
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @JsonIgnoreProperties({"my"})
+    @OneToMany(mappedBy = "my", fetch = FetchType.EAGER)
+    private Set<Follow> followings = new HashSet<>();
+
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @JsonIgnoreProperties({"your"})
+    @OneToMany(mappedBy = "your", fetch = FetchType.EAGER)
+    private Set<Follow> followers = new HashSet<>();
 
     public Member(String memberName, String memberId, String password, String passwordHint) {
         this.memberName = memberName;

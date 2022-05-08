@@ -1,20 +1,15 @@
 package com.example.backend.service;
 
 import com.example.backend.controller.MemberRequest;
-import com.example.backend.entity.Board;
-import com.example.backend.entity.Comment;
-import com.example.backend.entity.Likes;
-import com.example.backend.entity.Member;
-import com.example.backend.repository.BoardRepository;
-import com.example.backend.repository.CommentRepository;
-import com.example.backend.repository.LikesRepository;
-import com.example.backend.repository.MemberRepository;
+import com.example.backend.entity.*;
+import com.example.backend.repository.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,23 +18,56 @@ import java.util.Optional;
 public class MemberServiceImpl implements MemberService{
 
     @Autowired
+    private PasswordEncoder passwordEncoder;
+
+
+    @Autowired
     private MemberRepository memberRepository;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private BoardRepository boardRepository;
 
     @Autowired
-    BoardRepository boardRepository;
+    private LikesRepository likesRepository;
 
     @Autowired
-    LikesRepository likesRepository;
+    private CommentRepository commentRepository;
 
     @Autowired
-    CommentRepository commentRepository;
+    FollowRepository followRepository;
 
     @Override
     public List<Member> list() {
-        return memberRepository.findAll(Sort.by(Sort.Direction.DESC, "memberNo"));
+        List<Member> randomList = new ArrayList<>();
+        List<Member> memberList = memberRepository.findAll();
+
+        int randIdx;
+        int[] arr = new int[5];
+        boolean isDuplicate = true;
+        arr[0] = (int)(Math.random()* memberList.size()+1);
+        for (int i=1; i<5; i++) {
+            do {
+                randIdx = (int)(Math.random()* memberList.size()+1);
+                for(int j=0; j<i; j++) {
+                    if(arr[j] == randIdx) {
+                        isDuplicate = true;
+                        break;
+                    }
+                    isDuplicate = false;
+                }
+
+            } while (isDuplicate);
+            arr[i] = randIdx;
+        }
+
+        for (int i=0; i<5; i++) {
+            if (memberRepository.findByMemberNo(Long.valueOf(arr[i]))!=null) {
+                Member member = memberRepository.findByMemberNo(Long.valueOf(arr[i]));
+                randomList.add(member);
+            }
+        }
+        return randomList;
+
     }
 
     @Override
@@ -174,18 +202,50 @@ public class MemberServiceImpl implements MemberService{
 
     @Override
     public void remove(Long memberNo) {
-        Member member = memberRepository.findById(memberNo).orElseThrow();
-        Optional<Board> maybeBoard = boardRepository.findByMember(member);
+        List<Comment> memberComment = commentRepository.findAllCommentsMemberNo(memberNo);
+        if(!memberComment.isEmpty()) {
+            for (Comment comment : memberComment) {
+                commentRepository.delete(comment);
+            }
+        }
+        List<Likes> memberLikes = likesRepository.findAllLikesMemberNo(memberNo);
+        if(!memberLikes.isEmpty()) {
+            for (Likes likes : memberLikes) {
+                likesRepository.delete(likes);
+            }
+        }
+
+        List<Follow> memberFollowings = followRepository.findAllFollowingsMemberNo(memberNo);
+        if(!memberFollowings.isEmpty()) {
+            for (Follow follow : memberFollowings) {
+                followRepository.delete(follow);
+            }
+        }
+
+        List<Follow> memberFollowers = followRepository.findAllFollowersMemberNo(memberNo);
+        if(!memberFollowers.isEmpty()) {
+            for (Follow follow : memberFollowers) {
+                followRepository.delete(follow);
+            }
+        }
+
+        List<Board> maybeBoard = boardRepository.findAllBoardsMemberNo(memberNo);
         if(!maybeBoard.isEmpty()) {
-            Optional<Comment> maybeComment = commentRepository.findByBoard(maybeBoard.get());
-            if(!maybeComment.isEmpty()) {
-                commentRepository.deleteById(maybeComment.get().getCommentNo());
+            for (Board board : maybeBoard) {
+                List<Comment> maybeComment = commentRepository.findAllCommentsBoardNo(board.getBoardNo());
+                if(!maybeComment.isEmpty()) {
+                    for (Comment comment : maybeComment) {
+                        commentRepository.delete(comment);
+                    }
+                }
+                List<Likes> maybeLikes = likesRepository.findAllLikesBoardNo(board.getBoardNo());
+                if(!maybeLikes.isEmpty()) {
+                    for (Likes likes : maybeLikes) {
+                        likesRepository.delete(likes);
+                    }
+                }
+                boardRepository.delete(board);
             }
-            Optional<Likes> maybeLikes = likesRepository.findByBoard(maybeBoard.get());
-            if(!maybeLikes.isEmpty()) {
-                likesRepository.deleteById(maybeLikes.get().getLikedNo());
-            }
-            boardRepository.deleteById(maybeBoard.get().getBoardNo());
         }
         memberRepository.deleteById(Long.valueOf(memberNo));
     }

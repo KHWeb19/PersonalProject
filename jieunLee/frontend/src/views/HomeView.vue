@@ -1,18 +1,28 @@
 <template>
-  <div>
-    <div style="z-index: 1; position: fixed; top: 0; left: 0; right: 0;">
-      <menu-bar/>
-      <hr style="border: 0; height: 1px; background: #d8d8d8; "/>
-    </div>
-    <!-- <my-likes-list :loginLikes="loginLikes"/> -->
-    <board-list :boards="boards" :loginLikes="loginLikes" @click="onDelete" @submit="onSubmit"/>
-  </div>
+    <v-container style="width: 930px;">
+        <v-flex>
+            <div>
+                <div style="z-index: 1; position: fixed; top: 0; left: 0; right: 0;">
+                <menu-bar/>
+                <hr style="border: 0; height: 1px; background: #d8d8d8; "/>
+                </div>
+                <div style="display: flex;">
+                    <my-follow-list :followBoards="followBoards" @click="onDelete" @submit="onSubmit"/>
+                    <div>
+                        <recommend-list :members="members" style="padding: 100px 0px 0px 15px;"/>
+                        <footer-bar style="padding: 10px 0px 0px 10px"/>
+                    </div>
+                </div>
+            </div>
+        </v-flex>
+    </v-container>
 </template>
 
 <script>
 import MenuBar from '@/components/MenuBar.vue'
-import BoardList from '@/components/board/BoardList.vue'
-// import MyLikesList from '@/components/member/MyLikesList.vue'
+import FooterBar from '@/components/FooterBar'
+import MyFollowList from '@/components/board/MyFollowList.vue'
+import RecommendList from '@/components/member/RecommendList.vue'
 import { mapState, mapActions } from 'vuex'
 import axios from 'axios'
 
@@ -20,8 +30,9 @@ export default {
   name: 'HomeView',
   components: {
     MenuBar,
-    BoardList,
-    // MyLikesList
+    MyFollowList,
+    FooterBar,
+    RecommendList
     },
     data() {
         return {
@@ -29,21 +40,18 @@ export default {
         }
     },
     computed: {
-        ...mapState(['boards']),
-            // ...mapState(['loginLikes']),
+        ...mapState(['followBoards']),
+        ...mapState(['members']),
         // ...mapState(['twoComments']),
     },
-    // created() {
-    //       this.fetchLoginLikes(this.loginInfo.memberNo)
-    // },
     mounted () {
-        this.fetchBoardList()
-            this.fetchLoginLikes(this.loginInfo.memberNo)
+        this.fetchFollowBoardList(this.loginInfo.memberNo)
+        this.fetchMemberList()
         // this.fetchTwoCommentList(this.boardNo)
     },
     methods: {
-        ...mapActions(['fetchBoardList']),
-              ...mapActions(['fetchLoginLikes']),
+        ...mapActions(['fetchFollowBoardList']),
+        ...mapActions(['fetchMemberList']),
         // ...mapActions(['fetchTwoCommentList']),
         onDelete(payload) {
             const {boardNo} = payload
@@ -82,6 +90,8 @@ export default {
 </script>
 
 <style>
-
-
+#app { background-color: #fafafa; }
+.v-toolbar__content{
+    padding: 4px 170px;
+}
 </style>
