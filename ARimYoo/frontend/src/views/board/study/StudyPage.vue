@@ -8,9 +8,6 @@
         <v-row justify="center">
             <study-list :studies="studies" :list-array="pageArray" />
         </v-row>
-        <br/>
-        <br/>
-        <br/>
     </v-container>
 </template>
 

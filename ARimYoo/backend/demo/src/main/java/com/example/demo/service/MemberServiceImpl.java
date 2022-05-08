@@ -7,9 +7,16 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 
+import java.io.FileOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Optional;
+import java.util.UUID;
 
 @Slf4j
 @Service
@@ -31,6 +38,17 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    public Boolean checkId(String id) {
+        Optional<Member> checkId = repository.findByUserId(id);
+
+        if (checkId.isPresent()){
+            return false;
+        }else {
+            return true;
+        }
+    }
+
+    @Override
     public MemberRequest login(MemberRequest memberRequest) {
         Optional<Member> maybeMember = repository.findByUserId(memberRequest.getId());
 
@@ -46,18 +64,19 @@ public class MemberServiceImpl implements MemberService {
             return null;
         }
         // 로그인 하는 순간 해당 회원의 멤버번호 가져오기
-        if (loginMember.getId().equals(memberRequest.getId())) {
 
             memberRequest.setMemberNo(loginMember.getMemberNo());
             memberRequest.setName(loginMember.getName());
             memberRequest.setBirth(loginMember.getBirth());
             memberRequest.setIntro(loginMember.getIntro());
-        }
+            memberRequest.setProfilePic(loginMember.getProfilePic());
 
-        MemberRequest response = new MemberRequest(memberRequest.getMemberNo(), memberRequest.getId(), null,
-                memberRequest.getName(),memberRequest.getBirth(),memberRequest.getIntro());
+            log.info("check" + memberRequest.getBirth());
+            log.info("check" + memberRequest.getIntro());
+            MemberRequest response = new MemberRequest(memberRequest.getMemberNo(), memberRequest.getId(), null,
+                memberRequest.getName(),memberRequest.getBirth(), memberRequest.getIntro(), memberRequest.getProfilePic());
 
-        return response;
+            return response;
     }
 
     @Override
@@ -68,10 +87,22 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public void modify(Member member) {
+    public void modify(Member member, @RequestParam(required = false) MultipartFile file) throws Exception {
 
         String encodedPassword = passwordEncoder.encode(member.getPw());
         member.setPw(encodedPassword);
+
+        if (file != null) {
+
+            UUID uuid = UUID.randomUUID();
+            String fileName = uuid + "_" + file.getOriginalFilename();
+            FileOutputStream saveFile = new FileOutputStream("../../frontend/src/assets/back/member/" + fileName);
+
+            saveFile.write(file.getBytes());
+            saveFile.close();
+
+            member.setProfilePic(fileName);
+        }
 
         repository.save(member);
     }

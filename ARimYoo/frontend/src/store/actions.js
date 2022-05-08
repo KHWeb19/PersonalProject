@@ -21,6 +21,13 @@
     FETCH_MARKET_LIST,
     FETCH_MARKET,
     FETCH_MARKET_COMMENTS_LIST,
+
+    FETCH_MAIN_COMMUNITY_LIST,
+    FETCH_MAIN_MARKET_LIST,
+    FETCH_MAIN_REVIEW_LIST,
+    FETCH_MAIN_STUDY_LIST,
+    FETCH_MAIN_PROJECT_LIST,
+
  } from './mutation-types'
 
 import axios from 'axios'
@@ -161,6 +168,38 @@ export default {
         return axios.get(`http://localhost:7777/board/market/${boardNo}/comment/list`)
             .then((res) => {
                 commit(FETCH_MARKET_COMMENTS_LIST, res.data)
+            })
+    },
+
+    fetchMainCommunityList({ commit } , keyword) {
+        return axios.post('http://localhost:7777/board/community/search', {keyword})
+            .then((res) => {
+                console.log(keyword)
+                commit(FETCH_MAIN_COMMUNITY_LIST, res.data)
+            })
+    },
+    fetchMainMarketList({ commit }, keyword) {
+        return axios.post('http://localhost:7777/board/market/search', {keyword})
+            .then((res) => {
+                commit(FETCH_MAIN_MARKET_LIST, res.data)
+            })
+    },
+    fetchMainReviewList({ commit }, keyword) {
+        return axios.post('http://localhost:7777/board/review/search' ,{keyword} )
+            .then((res) => {
+                commit(FETCH_MAIN_REVIEW_LIST, res.data)
+            })
+    },
+    fetchMainStudyList({ commit }, keyword) {
+        return axios.post('http://localhost:7777/board/study/search', {keyword})
+            .then((res) => {
+                commit(FETCH_MAIN_STUDY_LIST, res.data)
+            })
+    },
+    fetchMainProjectList({ commit }, keyword) {
+        return axios.post('http://localhost:7777/board/project/search', {keyword})
+            .then((res) => {
+                commit(FETCH_MAIN_PROJECT_LIST, res.data)
             })
     }
 }

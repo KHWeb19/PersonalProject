@@ -98,13 +98,10 @@ export default {
     data () {
         return {
         fileName1: this.market.fileName1,
-        files : [
-            this.market.fileName1, this.market.fileName2, this.market.fileName3, this.market.fileName4, this.market.fileName5
-        ]
+        files:[]
         }
     },
     created () {
-        this.boardNo = this.market.boardNo
         this.who = this.$store.state.userInfo.id
     },
     methods: {
@@ -125,15 +122,16 @@ export default {
                     })
         },
         checkFile () {
-            for(var i = 0; i < this.files.length; i++) {
+            var files = [ this.market.fileName1, this.market.fileName2, this.market.fileName3, this.market.fileName4, this.market.fileName5]
+            for(var i = 0; i < files.length; i++) {
                 console.log(i)
-                if(this.files[i] != null) {
+                if(files[i] != null) {
                     console.log(this.files[i])
                 } else {
-                    this.files.splice(i)
+                    files.splice(i)
                 }
             }
-            return this.files
+            return files
         }
     }
 }

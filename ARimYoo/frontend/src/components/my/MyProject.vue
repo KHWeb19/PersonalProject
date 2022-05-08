@@ -43,7 +43,7 @@
         </v-form>
         <v-row justify="center" class="mt-3">
             <v-col  cols="8" class="openLink mb-10">
-            Open Link : {{memberProject.openLink}}
+            Open Link : <a @click="goLink()"> {{memberProject.openLink}} </a>
             </v-col>
         </v-row>
     </v-card>
@@ -86,6 +86,11 @@ export default {
                     .catch(() => {
                         alert('문제 발생!')
                     })
+
+        },
+         goLink() {
+            var newWindow = window.open("about:blank");
+            newWindow.location.href = this.memberProject.openLink
 
         },
         check(){

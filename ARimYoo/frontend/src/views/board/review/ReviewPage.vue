@@ -8,9 +8,6 @@
         <v-row justify="center">
             <review-list :reviews="reviews"/>
         </v-row>
-        <br/>
-        <br/>
-        <br/>
     </v-container>
 </template>
 

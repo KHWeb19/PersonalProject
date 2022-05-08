@@ -8,9 +8,6 @@
         <v-row justify="center">
             <community-board-list :communityBoards="communityBoards"/>
         </v-row>
-        <br/>
-        <br/>
-        <br/>
     </v-container>
 </template>
 

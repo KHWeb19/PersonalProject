@@ -17,34 +17,26 @@
                         <v-btn small color="red darken-3" dark @click="goSearch()"><v-icon>mdi-magnify</v-icon></v-btn>
                     </v-col>
         </v-row>
-        <v-row justify="center" v-else>
-            <v-col cols="10">
-                <v-dialog 
-                    v-model="dialog"
-                    fullscreen
-                    hide-overlay
-                    transition="dialog-bottom-transition"
-                    >
-                
-                <template v-slot:activator="{ on, attrs }">
-                    <v-col v-for="study in memberStudies" :key="study.studyNo">
+        <v-row justify="center" v-else v-for="study in memberStudies" :key="study.studyNo">
+            <v-col cols="10" >
                     <button class="studyBtn"
-                            v-bind="attrs"
-                            v-on="on" 
                             @click="bindStudyNo(study.studyNo)"
                             >
                         <v-icon x-small >mdi-circle</v-icon>
                                         &nbsp;&nbsp;&nbsp;
                                     {{study.studyName}}
-                        <v-divider/>
                     </button>
-                    <p/>
-                    </v-col>
-                </template>
-                    <my-study :memberStudy="memberStudy" @close="returnFalse"/>
-                </v-dialog>
+                    <v-divider/>
             </v-col>
         </v-row>
+        <v-dialog 
+                    v-model="dialog"
+                    fullscreen
+                    hide-overlay
+                    transition="dialog-bottom-transition"
+                    >
+                    <my-study :memberStudy="memberStudy" @close="returnFalse"/>
+                </v-dialog>
     </v-container>
 </template>
 
@@ -56,19 +48,20 @@ export default {
     name:'MyWithInfo',
     props : {
         memberStudies : {
-            type: Array
-        }
+            type: Array,
+            required:true
+        },
     },
     data () {
         return {
             dialog: false,
+            studyName:'',
             studyNo:''
         }
     },
     computed: {
         ...mapState(['memberStudy']),
     },
-
     methods : {
          ...mapActions(['fetchMemberStudy']),
         check () {
@@ -84,6 +77,7 @@ export default {
                     console.log(studyNo)
                     this.$router.push()
                 })     
+            this.dialog = true
         },
         returnFalse () {
 
@@ -108,6 +102,6 @@ export default {
 .studyBtn{
     font-family: 'Noto Sans KR', sans-serif;
     margin-left:2%;
-    margin-bottom:4%;
+    margin-bottom:2%;
 }
 </style>

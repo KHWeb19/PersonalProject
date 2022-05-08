@@ -8,9 +8,6 @@
         <v-row justify="center">
             <market-list :markets="markets"/>
         </v-row>
-        <br/>
-        <br/>
-        <br/>
     </v-container>
 </template>
 

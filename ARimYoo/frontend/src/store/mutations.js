@@ -21,6 +21,12 @@
     FETCH_MARKET_LIST,
     FETCH_MARKET,
     FETCH_MARKET_COMMENTS_LIST,
+
+    FETCH_MAIN_COMMUNITY_LIST,
+    FETCH_MAIN_MARKET_LIST,
+    FETCH_MAIN_REVIEW_LIST,
+    FETCH_MAIN_STUDY_LIST,
+    FETCH_MAIN_PROJECT_LIST,
     
  } from './mutation-types'
 
@@ -91,6 +97,23 @@ export default {
     },
     [FETCH_MARKET_COMMENTS_LIST](state, marketComments) {
         state.marketComments = marketComments
-    }
+    },
+    [FETCH_MAIN_COMMUNITY_LIST](state, mainCommunityList) {
+        state.mainCommunityList = mainCommunityList
+    },
+    [FETCH_MAIN_MARKET_LIST](state, mainMarketList) {
+        state.mainMarketList = mainMarketList
+    },
+    [FETCH_MAIN_REVIEW_LIST](state, mainReviewList) {
+        state.mainReviewList = mainReviewList
+    },
+    [FETCH_MAIN_STUDY_LIST](state, mainStudyList) {
+        state.mainStudyList = mainStudyList
+    },
+    [FETCH_MAIN_PROJECT_LIST](state, mainProjectList) {
+        state.mainProjectList = mainProjectList
+    },
+
+
 
 }

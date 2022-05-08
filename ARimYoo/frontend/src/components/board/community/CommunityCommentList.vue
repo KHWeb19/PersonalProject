@@ -15,10 +15,15 @@
                 </v-row>
                     <v-row v-for="commentList in communityComments" 
                         :key="commentList.commentId" justify="center" class="commentList">
-                        <v-col cols="2">
-                            {{ commentList.commentWriter}}
+                        <v-col cols="1">
+                            <img v-if="commentList.commentProfile" :src="require(`@/assets/back/member/${commentList.commentProfile}`)" width="30">
+                            <img v-else src="@/assets/profile.png" width="30">
                         </v-col>
-                        <v-col cols="5">
+                        <v-col cols="2">
+                            
+                                {{ commentList.commentWriter}}
+                        </v-col>
+                        <v-col cols="4">
                             {{ commentList.comment }}
                         </v-col>
                         <v-col cols="3">
@@ -104,8 +109,7 @@ table {
 }
 .comDeleteBtn {
     position:absolute;
-    margin-top:0.8%;
     left:86%;
- 
+    margin-top:7px;
 }
 </style>

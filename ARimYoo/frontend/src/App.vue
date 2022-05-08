@@ -5,7 +5,9 @@
             <v-layout row>
                 <div class="btnSet2">
                     <div class="float">
-                        <router-link to="/myPage"><img src="@/assets/profile.png" width="30"/></router-link>
+                        <router-link to="/myPage">
+                        <img v-if="user.profile" :src="require(`@/assets/back/member/${user.profile}`)" width="30">
+                        <img v-else src="@/assets/profile.png" width="30"/></router-link>
                     </div>
                     <div class="float">
                         <v-menu offset-y>
@@ -18,7 +20,7 @@
                                     dark
                                     v-for="(item,idx) in items"
                                     :key="idx"
-                                    :to ="item.route"
+                                    :to="item.route"
                                     >
                                     {{ item.title }}
                                 </v-list-item>
@@ -79,14 +81,9 @@ export default {
   data () {
     return {
      user: {
-         message: decodeURIComponent(this.$store.state.userInfo.id),
+         message: decodeURIComponent(this.$store.state.userInfo.name),
+         profile: this.$store.state.userInfo.profilePic,
      },
-     icons: [
-        'mdi-facebook',
-        'mdi-twitter',
-        'mdi-linkedin',
-        'mdi-instagram',
-      ],
      items: [
          {title: 'My Page', route:'/myPage'},
          {title: 'My With', route:'/myWith'}
@@ -123,7 +120,7 @@ export default {
 }
 .btnSet2{
   position: absolute;
-  left: 71%;
+  left: 72%;
   padding-top:1%;
 }
 .v-footer{

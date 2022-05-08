@@ -36,15 +36,28 @@ export default  {
     methods: {
         ...mapActions(['fetchMember']),
         onSubmit (payload) {
-            const { pw, name, birth, intro } = payload
+            const { pw, name, birth, intro, file } = payload
+
+              let formData = new FormData()
+
+            if (file != null ){ formData.append('file', file) } 
+            formData.append('profilePic', this.$store.state.userInfo.profilePic)
+            formData.append('id', this.$store.state.userInfo.id)
+            formData.append('pw', pw)
+            formData.append('name', name)
+            formData.append('birth', birth)
+            formData.append('intro', intro)
 
             axios.put(`http://localhost:7777/Member/${this.$store.state.userInfo.memberNo}`,
-                { id: this.$store.state.userInfo.id, pw, name, birth, intro})
+                formData, { headers: {
+                    'Content-Type': 'multipart/form-data'
+                }})
                     .then(res => {
                         alert('회원정보 수정 성공!')
                         localStorage.removeItem("userInfo")
                         localStorage.setItem("userInfo", JSON.stringify(res.data))
                         history.go(0)
+                        this.userInfo.pw=''
                     })
                     .catch(() => {
                         alert('회원정보 수정 실패!')

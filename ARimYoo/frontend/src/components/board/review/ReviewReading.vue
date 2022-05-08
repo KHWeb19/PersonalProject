@@ -124,7 +124,6 @@ export default {
         }
     },
     created () {
-        this.reviewNo = this.review.reviewNo
         this.who = this.$store.state.userInfo.id
     },
     methods: {
@@ -145,7 +144,8 @@ export default {
                     })
         },
         like () {
-            const { reviewNo, who } = this
+            const { who } = this
+            const { reviewNo } = this.review
             console.log(reviewNo, who)
             if (this.iLike == true ){
                 alert("이미 좋아요 하셨습니다 !")

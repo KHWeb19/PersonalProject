@@ -22,18 +22,21 @@ import MyProjectInfo from '@/components/my/MyProjectInfo.vue'
 export default {
   components: { MyWithInfo, MyProjectInfo },
     name:'MyWith',
+    created() {
+        this.memberNo=this.$store.state.userInfo.memberNo
+    },
     computed: {
         ...mapState(['memberStudies', 'memberProjects'])
     },
-    created () {
-        this.memberNo = this.$store.state.userInfo.memberNo
-    },
-    mounted () {
+    mounted() {
         this.fetchMemberStudyList(this.memberNo)
         this.fetchMemberProjectList(this.memberNo)
     },
     methods: {
-        ...mapActions(['fetchMemberStudyList', 'fetchMemberProjectList'])
+        ...mapActions(['fetchMemberStudyList', 'fetchMemberProjectList']),
+        check() {
+            console.log(this.memberNo)
+        }
     }
   }
 </script>

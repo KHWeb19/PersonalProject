@@ -13,31 +13,26 @@ import CommunityPage from '../views/board/communityBoard/CommunityPage.vue'
 import CommunityWritePage from '../views/board/communityBoard/CommunityWritePage.vue'
 import CommunityReadPage from '../views/board/communityBoard/CommunityReadPage.vue'
 import CommunityModifyPage from '../views/board/communityBoard/CommunityModifyPage.vue'
-import CommunityBoardSearchPage from '../views/board/communityBoard/CommunityBoardSearchPage.vue'
 
 import ReviewPage from '../views/board/review/ReviewPage.vue'
 import ReviewWritePage from '../views/board/review/ReviewWritePage.vue'
 import ReviewReadPage from '../views/board/review/ReviewReadPage.vue'
 import ReviewModifyPage from '../views/board/review/ReviewModifyPage.vue'
-import ReviewSearchPage from '../views/board/review/ReviewSearchPage.vue'
 
 import StudyPage from '../views/board/study/StudyPage.vue'
 import StudyWritePage from '../views/board/study/StudyWritePage.vue'
 import StudyReadPage from '../views/board/study/StudyReadPage.vue'
 import StudyModifyPage from '../views/board/study/StudyModifyPage.vue'
-import StudySearchPage from '../views/board/study/StudySearchPage.vue'
 
 import ProjectPage from '../views/board/project/ProjectPage.vue'
 import ProjectWritePage from '../views/board/project/ProjectWritePage.vue'
 import ProjectReadPage from '../views/board/project/ProjectReadPage.vue'
 import ProjectModifyPage from '../views/board/project/ProjectModifyPage.vue'
-import ProjectSearchPage from '../views/board/project/ProjectSearchPage.vue'
 
 import MarketPage from '../views/board/market/MarketPage.vue'
 import MarketWritePage from '../views/board/market/MarketWritePage.vue'
 import MarketReadPage from '../views/board/market/MarketReadPage.vue'
 import MarketModifyPage from '../views/board/market/MarketModifyPage.vue'
-import MarketSearchPage from '../views/board/market/MarketSearchPage.vue'
 
 Vue.use(VueRouter)
 
@@ -66,8 +61,7 @@ const routes = [
     path: '/main',
     name: 'MainVellupPage',
     component: MainVellupPage
-  },
-
+    },
   {
     path: '/join',
     name: 'JoinPage',
@@ -87,7 +81,13 @@ const routes = [
     {
         path: '/myWith',
         name: 'MyWith',
-        component: MyWith,
+        components: {
+            default:
+                MyWith
+        },
+        props: {
+            default: true
+        },
         beforeEnter: requireLogin()
     },
     
@@ -120,17 +120,6 @@ const routes = [
         name: 'CommunityModifyPage',
         components: {
             default: CommunityModifyPage
-        },
-        props: {
-            default: true
-        },
-        beforeEnter: requireLogin()
-    },
-    {
-        path: '/community/search',
-        name: 'CommunityBoardSearchPage',
-        components: {
-            default: CommunityBoardSearchPage
         },
         props: {
             default: true
@@ -173,17 +162,6 @@ const routes = [
         beforeEnter: requireLogin()
     },
     {
-        path: '/review/search',
-        name: 'ReviewSearchPage',
-        components: {
-            default: ReviewSearchPage
-        },
-        props: {
-            default: true
-        },
-        beforeEnter: requireLogin()
-    },
-    {
         path: '/study',
         name: 'StudyPage',
         component: StudyPage,
@@ -212,17 +190,6 @@ const routes = [
         name: 'StudyModifyPage',
         components: {
             default: StudyModifyPage
-        },
-        props: {
-            default: true
-        },
-        beforeEnter: requireLogin()
-    },
-    {
-        path: '/study/search',
-        name: 'StudySearchPage',
-        components: {
-            default: StudySearchPage
         },
         props: {
             default: true
@@ -265,17 +232,6 @@ const routes = [
         beforeEnter: requireLogin()
     },
     {
-        path: '/project/search',
-        name: 'ProjectSearchPage',
-        components: {
-            default: ProjectSearchPage
-        },
-        props: {
-            default: true
-        },
-        beforeEnter: requireLogin()
-    },
-    {
         path: '/market',
         name: 'MarketPage',
         component: MarketPage,
@@ -304,17 +260,6 @@ const routes = [
         name: 'MarketModifyPage',
         components: {
             default: MarketModifyPage
-        },
-        props: {
-            default: true
-        },
-        beforeEnter: requireLogin()
-    },
-    {
-        path: '/market/search',
-        name: 'MarketSearchPage',
-        components: {
-            default: MarketSearchPage
         },
         props: {
             default: true
