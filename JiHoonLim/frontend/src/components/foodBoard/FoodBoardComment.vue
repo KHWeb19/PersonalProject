@@ -1,13 +1,9 @@
 <template>
-  <div
-    class="grey lighten-3"
-    align="center"
-    style="font-family: 'Noto Sans KR', sans-serif"
-  >
+  <div align="center" style="font-family: 'Noto Sans KR', sans-serif">
     <v-container class="white" style="width: 1700px">
       <v-row justify="center">
         <v-col>
-          <v-card width="1200px">
+          <v-card width="1475px">
             <form @submit.prevent="onSubmit">
               <v-divider></v-divider>
               <div class="comment_title">
@@ -34,7 +30,7 @@
                         {{ commentList.commentWriter }}
                       </h3>
                       <v-spacer></v-spacer>
-                      <h3 class="pb-2 pr-5 pt-2">{{ commentList.regDate }}</h3>
+                      <h4 class="pb-2 pr-5 pt-2">{{ commentList.regDate }}</h4>
                       <v-btn
                         class="ml-5 mr-5"
                         text
@@ -75,7 +71,7 @@
                     class="ml-5 mt-5"
                   />
                   <v-btn
-                    color="orange lighten-3"
+                    color="orange lighten-1"
                     style="width: 128px; height: 128px"
                     class="mr-5 mt-5"
                     type="submit"
@@ -124,7 +120,7 @@ export default {
         const { comment, commentWriter } = this;
         this.$emit("submit", { comment, commentWriter });
       } else {
-        alert("로그인 해주세요.");
+        alert("로그인 후 이용해주세요.");
       }
     },
     onDelete(commentNo) {

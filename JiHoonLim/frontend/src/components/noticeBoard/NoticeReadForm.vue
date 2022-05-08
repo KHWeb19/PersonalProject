@@ -1,18 +1,9 @@
 <template>
-  <div
-    class="grey lighten-3"
-    align="center"
-    style="font-family: 'Noto Sans KR', sans-serif"
-  >
-    <v-container class="white" style="width: 1240px">
-      <v-row class="orange lighten-5">
-        <v-col>
-          <div class="main_tit_box">공지사항</div>
-        </v-col>
-      </v-row>
+  <div align="center" style="font-family: 'Noto Sans KR', sans-serif">
+    <v-container class="white" style="width: 1200px">
       <v-row justify="center">
         <v-col>
-          <v-card class="elevation-5">
+          <v-card>
             <div class="wrap">
               <div style="display: flex">
                 <v-text-field
@@ -26,7 +17,8 @@
                   style="height: 100px"
                 />
               </div>
-              <div style="display: flex; height: 50px">
+              <v-divider></v-divider>
+              <div style="display: flex; height: 50px" class="mt-3 mb-3">
                 <div>
                   <v-text-field
                     flat
@@ -96,6 +88,7 @@
                       </v-card-text>
                       <v-container class="pt-0 pb-0" fluid>
                         <v-checkbox
+                          color="orange"
                           v-model="checkbox"
                           label="삭제 동의 버튼."
                         ></v-checkbox>
@@ -137,9 +130,8 @@
                   style="font-size: 20px"
                 />
               </div>
-              <v-divider></v-divider>
               <v-btn
-                class="mt-3 mb-3 orange lighten-2"
+                class="mt-3 mb-3 orange lighten-1"
                 style="float: right"
                 @click="goList"
                 >목록</v-btn
@@ -175,6 +167,9 @@ export default {
     if (this.$store.state.userInfo != null) {
       this.userInfo = this.$store.state.userInfo;
       this.nickName = this.userInfo.nickName;
+    } else {
+      alert("로그인 후 이용해주세요.");
+      this.$router.push("/login");
     }
   },
   methods: {

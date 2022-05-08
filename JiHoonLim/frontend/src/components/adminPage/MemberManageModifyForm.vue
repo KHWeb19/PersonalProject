@@ -1,5 +1,5 @@
 <template>
-  <div class="grey lighten-3" style="font-family: 'Noto Sans KR', sans-serif">
+  <div class="grey lighten-5" style="font-family: 'Noto Sans KR', sans-serif">
     <v-container class="white" style="width: 1240px">
       <v-row justify="center">
         <v-col cols="auto" style="padding-bottom: 90px">
@@ -115,6 +115,7 @@
                           <v-checkbox
                             v-model="checkbox"
                             label="동의합니다."
+                            color="orange"
                           ></v-checkbox>
                         </v-container>
                         <v-divider></v-divider>
@@ -172,7 +173,19 @@ export default {
       radioGroup: "",
       kindsAuth: ["개인", "매니저", "관리자"],
       memberNo: this.registerMember.memberNo,
+      userInfo: "",
+      userAuth: "",
     };
+  },
+  created() {
+    if (this.$store.state.userInfo != null) {
+      this.userInfo = this.$store.state.userInfo;
+      this.userAuth = this.userInfo.auth;
+    }
+    if (this.userAuth != "관리자") {
+      alert("관리자 권한 페이지입니다.");
+      this.$router.push("/");
+    }
   },
   methods: {
     onSubmit() {

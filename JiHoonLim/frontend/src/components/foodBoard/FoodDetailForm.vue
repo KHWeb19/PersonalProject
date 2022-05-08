@@ -1,9 +1,5 @@
 <template>
-  <div
-    class="grey lighten-3"
-    align="center"
-    style="font-family: 'Noto Sans KR', sans-serif"
-  >
+  <div align="center" style="font-family: 'Noto Sans KR', sans-serif">
     <v-container class="white" style="width: 1700px">
       <v-row justify="center">
         <v-col>
@@ -80,6 +76,7 @@
                                 <v-checkbox
                                   v-model="checkbox"
                                   label="삭제 동의 버튼."
+                                  color="orange"
                                 ></v-checkbox>
                               </v-container>
                               <v-divider></v-divider>
@@ -225,7 +222,7 @@
                 </div>
               </div>
               <v-btn
-                class="mt-3 mb-3 orange lighten-2"
+                class="mt-3 mb-3 orange lighten-1"
                 style="float: right"
                 to="/foodList"
                 >목록</v-btn
@@ -280,11 +277,9 @@ export default {
       this.userId = this.userInfo.id;
       this.auth = this.userInfo.auth;
     }
-    if (
-      this.nickName == this.foodBoard.writer ||
-      this.auth == "관리자" ||
-      this.auth == "매니저"
-    ) {
+    if (this.nickName == this.foodBoard.writer) {
+      this.checkWriteUser = true;
+    } else if (this.auth == "관리자" || this.auth == "매니저") {
       this.checkWriteUser = true;
     } else {
       this.checkWriteUser = false;

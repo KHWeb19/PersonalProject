@@ -1,5 +1,5 @@
 <template>
-  <div class="grey lighten-3" style="font-family: 'Noto Sans KR', sans-serif">
+  <div class="grey lighten-5" style="font-family: 'Noto Sans KR', sans-serif">
     <v-container class="white" style="width: 1240px">
       <v-row justify="center">
         <v-col cols="auto" style="padding-bottom: 90px">
@@ -77,6 +77,7 @@
                                     :error-messages="errors"
                                     :counter="10"
                                     class="mr-5"
+                                    color="orange"
                                   />
                                 </validation-provider>
                                 <v-btn
@@ -158,6 +159,7 @@
                                     prepend-icon="mdi-email"
                                     :error-messages="errors"
                                     class="mr-5"
+                                    color="orange"
                                   />
                                 </validation-provider>
                                 <v-btn
@@ -234,6 +236,7 @@
                                   prepend-icon="mdi-lock-outline"
                                   :error-messages="errors"
                                   :counter="15"
+                                  color="orange"
                                 />
                               </validation-provider>
                               <validation-provider
@@ -253,6 +256,7 @@
                                   prepend-icon="mdi-lock-check-outline"
                                   :error-messages="errors"
                                   :counter="15"
+                                  color="orange"
                                 />
                               </validation-provider>
                             </v-card-text>
@@ -314,6 +318,7 @@
                             <v-checkbox
                               v-model="checkbox"
                               label="동의합니다."
+                              color="orange"
                             ></v-checkbox>
                           </v-container>
                           <v-divider></v-divider>
@@ -368,6 +373,8 @@ export default {
       pw: "",
       pwConfirm: "",
       checkbox: false,
+
+      memberNo: "",
     };
   },
   props: {
@@ -377,7 +384,11 @@ export default {
     },
   },
   created() {
-    this.memberNo = this.userInfo.memberNo;
+    if (this.$store.state.userInfo != null) {
+      this.userInfo = this.$store.state.userInfo;
+      this.memberNo = this.userInfo.memberNo;
+      this.userAuth = this.userInfo.auth;
+    }
   },
   methods: {
     checkDuplicateNickName() {

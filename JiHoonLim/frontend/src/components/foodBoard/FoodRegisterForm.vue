@@ -1,9 +1,9 @@
 <template>
-  <div class="grey lighten-3" style="font-family: 'Noto Sans KR', sans-serif">
-    <v-container class="white" style="width: 1240px">
+  <div style="font-family: 'Noto Sans KR', sans-serif">
+    <v-container class="white">
       <v-row justify="center">
-        <v-col cols="auto" style="padding-bottom: 90px">
-          <v-card width="1000">
+        <v-col cols="auto">
+          <v-card width="1300" style="margin: 30px">
             <v-card-text>
               <validation-observer v-slot="{ invalid }">
                 <form @submit.prevent="onSubmit">
@@ -287,7 +287,12 @@ export default {
       ],
     };
   },
-
+  created() {
+    if (this.$store.state.userInfo == null) {
+      alert("로그인 후 이용해주세요.");
+      this.$router.push("/login");
+    }
+  },
   methods: {
     onSubmit() {
       this.writer = this.userInfo.nickName;
@@ -334,20 +339,20 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400&display=swap");
 
 .preview {
-  max-width: 250px;
-  max-height: 125px;
-  width: 250px;
-  height: 125px;
+  max-width: 500px;
+  max-height: 250px;
+  width: 500px;
+  height: 250px;
   position: absolute;
-  left: 700px;
-  top: 95px;
+  right: 55px;
+  top: 45px;
   border: 1px dotted black;
   background-color: lightgray;
 }
 .previewText {
   position: absolute;
-  right: 125px;
-  top: 135px;
+  right: 250px;
+  top: 150px;
   text-align: center;
 }
 </style>

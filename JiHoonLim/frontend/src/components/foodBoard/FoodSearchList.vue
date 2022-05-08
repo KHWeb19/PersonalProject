@@ -1,6 +1,30 @@
 <template>
-  <div class="grey lighten-3" style="font-family: 'Noto Sans KR', sans-serif">
-    <v-container class="white" style="width: 1240px">
+  <div style="font-family: 'Noto Sans KR', sans-serif">
+    <v-container class="white" style="width: 1400px">
+      <v-row>
+        <v-col>
+          <div
+            style="
+              font-size: 70px;
+              text-align: center;
+              font-weight: bold;
+              margin-bottom: 10px;
+            "
+          >
+            S E A R C H
+          </div>
+          <div
+            style="
+              font-size: 20px;
+              text-align: center;
+              font-weight: bold;
+              color: grey;
+            "
+          >
+            다양한 레시피를 검색해보세요.
+          </div>
+        </v-col>
+      </v-row>
       <v-row>
         <v-col>
           <div class="text_field">
@@ -170,7 +194,7 @@ export default {
   color: orange;
 }
 .countFoodWrap {
-  font-size: 16px;
+  font-size: 25px;
   color: #333;
   padding: 5px 0 20px 8px;
 }

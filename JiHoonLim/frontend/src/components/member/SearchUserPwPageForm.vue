@@ -1,5 +1,5 @@
 <template>
-  <div class="grey lighten-3" style="font-family: 'Noto Sans KR', sans-serif">
+  <div class="grey lighten-5" style="font-family: 'Noto Sans KR', sans-serif">
     <v-container class="white" style="width: 1240px">
       <v-row justify="center">
         <v-col cols="auto" style="padding-bottom: 90px">
@@ -27,6 +27,7 @@
                       prepend-icon="mdi-account-outline"
                       :error-messages="errors"
                       :counter="12"
+                      color="orange"
                     />
                   </validation-provider>
                   <validation-provider
@@ -40,6 +41,7 @@
                       clearable
                       prepend-icon="mdi-email"
                       :error-messages="errors"
+                      color="orange"
                     />
                   </validation-provider>
                   <v-btn
@@ -79,6 +81,7 @@
                       prepend-icon="mdi-lock-outline"
                       :error-messages="errors"
                       :counter="15"
+                      color="orange"
                     />
                   </validation-provider>
                   <validation-provider
@@ -94,6 +97,7 @@
                       prepend-icon="mdi-lock-check-outline"
                       :error-messages="errors"
                       :counter="15"
+                      color="orange"
                     />
                   </validation-provider>
 
