@@ -1,5 +1,7 @@
 package com.example.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -18,13 +20,13 @@ public class MemberAuth {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long memberAuthNo;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonBackReference
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "member_no")
     private Member member;
 
     @Column(length = 64, nullable = false)
     private String auth;
-
 
     @CreationTimestamp
     private Date regDate;

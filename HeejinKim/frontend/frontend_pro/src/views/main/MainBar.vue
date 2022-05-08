@@ -1,6 +1,6 @@
 <template>
     <div class="main_bar">
-        <v-toolbar white height="120px">
+        <v-toolbar white height="150px">
 
             <v-app-bar-nav-icon @click="nav_drawer = !nav_drawer">
             </v-app-bar-nav-icon>
@@ -25,14 +25,17 @@
         
         </v-toolbar>
 
-        <div :session="session" v-if="this.$store.state.isAuth" >
-            
+        <!-- 관리자 페이지 만들때 
+        <div :session="session" v-if="this.$store.state.isAuth" >-->
+            <!--
+        <div v-if="isLogin">-->
+            <div>    
             <v-navigation-drawer app v-model="nav_drawer" temporary>
                 <v-list nav dense>
                     <v-list-item-group v-model="group" active-class="grey--text  ">
                         <v-list-item v-for="link in category" :key="link.name" router :to="link.route">
                             <v-list-item-action>
-                                <v-icon left>
+                                <v-icon right>
                                     {{ link.icon }}
                                 </v-icon>
                             </v-list-item-action>
@@ -115,7 +118,7 @@ export default {
                 {  
                     icon: 'mdi-home',
                     name: 'Home',
-                    route: '/'
+                    route: '/Home'
                   
                 },
                 {   
@@ -126,13 +129,19 @@ export default {
                 { 
                     text: 'Community',
                     name: 'Community',
-                    route:'/freeBoard'
+                    route:'/communityBoard'
                     
                 },
-
+                /*
                 {
                     text: 'Reservation',
-                    name: 'Reservation',
+                    name: 'ReservationPage',
+                    route:'/reservation',
+                },*/
+                {
+                    text: 'Reservation',
+                    name: 'SeatForm',
+                    route:'/seat',
                 },
                 {
                     text: 'Notice',
@@ -196,12 +205,13 @@ export default {
                         if (res.data != "") {
                             
                             alert("Welcome" +"  "+res.data.userId )
+
                             this.isLogin = true;
                             this.$store.state.session = res.data                               
-                            this.$cookies.set("user", res.data, 60) 
+                            this.$cookies.set("user", res.data, 3600) 
+                            this.$cookies.set("auth", res.data.auth, 3600)
+                            this.$router.push({ name: 'Home' })
 
-                            //this.$cookies.set("auth", res.data.auth, 60)
-                            
                             if (res.data.auth == 'manager') {
                                 this.$store.state.isAuth = true
                                 alert('운영자 아이디로 로그인')
@@ -209,9 +219,6 @@ export default {
                                 this.$store.state.isAuth = false
                             }
                             
-                            this.$router.push({
-                            name: 'Home'
-                        })
                             
                         } else {
                             alert('아이디와 비밀번호를 확인해주세요. ' + res.data)
@@ -233,6 +240,7 @@ export default {
             this.$store.state.session = null
             this.$store.state.auth = null
             //window.location.reload();
+            this.$router.push({ name: 'Home' })
         },
      
     
@@ -247,10 +255,16 @@ export default {
 <style scoped>
  
  @import url('https://fonts.googleapis.com/css2?family=Poiret+One&display=swap');
+ @import url("https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Poiret+One&family=Sunflower:wght@300&family=Ubuntu:wght@300&display=swap");
 
 *{  margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+.main_bar{
+   font-family: 'Ubuntu', sans-serif; 
+   font-weight: bold;
+      
 }
 
 #logo {

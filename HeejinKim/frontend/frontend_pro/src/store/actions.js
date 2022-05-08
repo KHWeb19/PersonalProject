@@ -1,18 +1,22 @@
 import{
     FETCH_BOARD,
-    FETCH_BOARD_LIST
+    FETCH_BOARD_LIST,
+    FETCH_BOARD_COMMENTS_LIST,
+
+    FETCH_RESERVATION,
+    FETCH_RESERVATION_LIST
 
 
 
     //FETCH_MEMBER_LIST,
     //FETCH_MEMBER,
     
-    //COOKIE_SESSION,
+    
     //REMOVE_IS_LOGIN,
-   // REMOVE_SESSION,
-    //SET_IS_LOGIN,
+    //REMOVE_SESSION,
+    
 
-    //SET_AUTH,
+    
     //SET_MEMBER_NO
 
 
@@ -28,15 +32,33 @@ Vue.use(cookies)
 export default {
 
     fetchBoardList ({ commit }) {
-        return axios.get(`http://localhost:7777/board/lists`)
+        return axios.get(`http://localhost:7777/board/community/list`)
             .then((res) => {
                 commit(FETCH_BOARD_LIST, res.data)
             })
     },
     fetchBoard ({ commit }, boardNo) {
-        return axios.get(`http://localhost:7777/board/${boardNo}`)
+        return axios.get(`http://localhost:7777/board/community/${boardNo}`)
             .then((res) => {
                 commit(FETCH_BOARD, res.data)
+            })
+    },
+    fetchBoardCommentsList({ commit }, boardNo ) {
+        return axios.get(`http://localhost:7777/boardComments/list/${boardNo}`)
+                .then((res) => {
+                    commit(FETCH_BOARD_COMMENTS_LIST, res.data)
+                })
+    },
+    fetchReservation ({ commit }, reservationNo) {
+        return axios.get(`http://localhost:7777/reservation/checkBooking/${reservationNo}`)
+            .then((res) => {
+                commit(FETCH_RESERVATION, res.data)
+            })
+    },
+    fetchReservationList ({ commit }) {
+        return axios.get(`http://localhost:7777/reservation/reservationList`)
+            .then((res) => {
+                commit(FETCH_RESERVATION_LIST, res.data)
             })
     },
 

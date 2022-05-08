@@ -4,8 +4,19 @@ import {
 
     FETCH_AUTH,
     FETCH_AUTH_LIST,
-    FETCH_MEMBERAUTH,
-    FETCH_MEMBERAUTH_LIST,
+   
+
+    FETCH_BOARD,
+    FETCH_BOARD_LIST,
+
+    FETCH_BOARD_COMMENTS_LIST,
+
+    FETCH_RESERVATION,
+    FETCH_RESERVATION_LIST,
+
+    FETCH_RESERVATION_ID_LISTS 
+
+
 /*
     COOKIE_SESSION,
     REMOVE_IS_LOGIN,
@@ -19,6 +30,20 @@ import {
 }from './mutation-types'
 
 export default {
+
+    [FETCH_BOARD_LIST] (state,boards) {
+        state.boards = boards;
+    },
+    [FETCH_BOARD] (state, board) {
+        state.board = board
+    },
+    [FETCH_BOARD_COMMENTS_LIST] (state, boardComments) {
+        state.boardComments = boardComments
+    },
+
+
+
+
     [FETCH_MEMBER_LIST] (state, members) {
         state.boards = members
     },
@@ -31,12 +56,18 @@ export default {
     [FETCH_AUTH_LIST] (state, auths) {
         state.auths = auths;
     },
-    [FETCH_MEMBERAUTH_LIST] (state, memberAuths) {
-        state.memberAuths = memberAuths;
+
+    [FETCH_RESERVATION] (state, reservation) {
+        state.reservation = reservation
     },
-    [FETCH_MEMBERAUTH] (state, memberAuth) {
-        state.memberAuth = memberAuth
+    [FETCH_RESERVATION_LIST] (state, reservations) {
+        state.reservations = reservations
     },
+
+    [FETCH_RESERVATION_ID_LISTS] (state, reservationIdLists) {
+        state.reservationIdLists = reservationIdLists
+    },
+  
 
 /*
     [COOKIE_SESSION](state, payload) {
