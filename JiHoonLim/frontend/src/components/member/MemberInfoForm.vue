@@ -373,6 +373,8 @@ export default {
       pw: "",
       pwConfirm: "",
       checkbox: false,
+
+      memberNo: "",
     };
   },
   props: {
@@ -382,7 +384,11 @@ export default {
     },
   },
   created() {
-    this.memberNo = this.userInfo.memberNo;
+    if (this.$store.state.userInfo != null) {
+      this.userInfo = this.$store.state.userInfo;
+      this.memberNo = this.userInfo.memberNo;
+      this.userAuth = this.userInfo.auth;
+    }
   },
   methods: {
     checkDuplicateNickName() {

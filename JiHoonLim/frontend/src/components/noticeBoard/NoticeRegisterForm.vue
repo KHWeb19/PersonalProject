@@ -117,20 +117,27 @@ export default {
     return {
       title: "",
       content: "",
-      userInfo: JSON.parse(localStorage.getItem("userInfo")),
+      userInfo: "",
+      userNick: "",
+      userAuth: "",
     };
   },
   methods: {
     onSubmit() {
-      this.writer = this.userInfo.nickName;
+      this.writer = this.userNick;
       const { title, content, writer } = this;
       this.$emit("submit", { title, content, writer });
     },
   },
   created() {
-    if (this.$store.state.userInfo == null) {
-      alert("로그인 후 이용해주세요.");
-      this.$router.push("/login");
+    if (this.$store.state.userInfo != null) {
+      this.userInfo = this.$store.state.userInfo;
+      this.userNick = this.userInfo.nickName;
+      this.userAuth = this.userInfo.auth;
+    }
+    if (this.userAuth != "관리자" || this.userAuth != "매니저") {
+      alert("권한이 없습니다.");
+      this.$router.push("/noticeList");
     }
   },
 };

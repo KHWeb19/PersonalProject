@@ -310,6 +310,8 @@ export default {
         { value: "무침 / 비빔" },
         { value: "기타" },
       ],
+
+      userNick: "",
     };
   },
   created() {
@@ -325,9 +327,14 @@ export default {
     this.filename = this.foodBoard.filename;
     this.viewCount = this.foodBoard.viewCount;
 
-    if (this.$store.state.userInfo == null) {
-      alert("로그인 후 이용해주세요.");
-      this.$router.push("/login");
+    if (this.$store.state.userInfo != null) {
+      this.userInfo = this.$store.state.userInfo;
+      this.userNick = this.userInfo.nickName;
+    }
+
+    if (this.userNick != this.writer) {
+      alert("작성자만 접근 가능합니다.");
+      this.$router.push("/");
     }
   },
   methods: {

@@ -120,7 +120,7 @@ export default {
         const { comment, commentWriter } = this;
         this.$emit("submit", { comment, commentWriter });
       } else {
-        alert("로그인 해주세요.");
+        alert("로그인 후 이용해주세요.");
       }
     },
     onDelete(commentNo) {

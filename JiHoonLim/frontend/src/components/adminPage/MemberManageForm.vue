@@ -114,8 +114,18 @@ export default {
       type: Array,
     },
   },
+  data() {
+    return {
+      userInfo: "",
+      userAuth: "",
+    };
+  },
   created() {
-    if (this.$store.state.userInfo.auth != "관리자") {
+    if (this.$store.state.userInfo != null) {
+      this.userInfo = this.$store.state.userInfo;
+      this.userAuth = this.userInfo.auth;
+    }
+    if (this.userAuth != "관리자") {
       alert("관리자 권한 페이지입니다.");
       this.$router.push("/");
     }
