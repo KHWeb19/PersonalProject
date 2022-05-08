@@ -277,11 +277,9 @@ export default {
       this.userId = this.userInfo.id;
       this.auth = this.userInfo.auth;
     }
-    if (
-      this.nickName == this.foodBoard.writer ||
-      this.auth == "관리자" ||
-      this.auth == "매니저"
-    ) {
+    if (this.nickName == this.foodBoard.writer) {
+      this.checkWriteUser = true;
+    } else if (this.auth == "관리자" || this.auth == "매니저") {
       this.checkWriteUser = true;
     } else {
       this.checkWriteUser = false;
