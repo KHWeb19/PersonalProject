@@ -43,18 +43,16 @@ export default {
 
     onSubmit(payload) { 
       
-      const{seatNumber} = payload
+      const{id, seatNumber} = payload
 
-      axios.post(`http://localhost:7777/reservation/finish`,{seatNumber})
+     
+
+      axios.post(`http://localhost:7777/reservation/finish`,{id,seatNumber})
         .then(() => {
 
           this.seatNumber ='' 
-          //this.$router.push({name: 'ReservationCheckPage', params:{ seatNumber}})
-
-          //window.location.reload();   
-        
           alert('Reservation complete')
-          this.$router.push({name: 'Home'})
+          this.$router.push({name: 'ReservationMyListPage'})
          
         })
         .catch(() => {

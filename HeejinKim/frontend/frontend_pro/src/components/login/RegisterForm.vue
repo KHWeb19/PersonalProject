@@ -85,7 +85,7 @@ export default {
 
                 rulesPassword:[
                     v => !!v || 'Enter your password',
-                    v => v.length >= 3 || 'Password must be less than 3 characters'     
+                    v => v.length >= 3 || 'Password must be more than 3 characters'     
                 ],
 
                 rulesPWCheck:[

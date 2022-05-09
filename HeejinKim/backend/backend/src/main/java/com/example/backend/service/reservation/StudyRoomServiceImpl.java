@@ -1,5 +1,5 @@
 
-/*package com.example.backend.service.reservation;
+/*package com.example.backend.senter.reservation;
 
 import com.example.backend.entity.StudyRoom;
 import com.example.backend.repository.reservation.ReservationRepository;
@@ -7,13 +7,13 @@ import com.example.backend.repository.reservation.StudyRoomRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Senter;
 
 import javax.transaction.Transactional;
 import java.util.List;
 
 @Slf4j
-@Service
+@Senter
 public class StudyRoomServiceImpl implements StudyRoomService {
 
     @Autowired
