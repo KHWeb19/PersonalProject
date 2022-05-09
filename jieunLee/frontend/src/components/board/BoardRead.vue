@@ -24,13 +24,14 @@
                     <tr height="60px">
                         <td style="width: 32px; padding: 10px 14px 10px 16px; ">
                             <div style="border-radius: 70%; overflow: hidden; width: 32px ">
+
                                 <router-link style="text-decoration: none; color: black" :to="{
                                     name: 'MyProfilePage',
                                     params: {memberNo: board.member.memberNo.toString()}}">
                                     <v-img v-if="board.member.imageName" width="32" :src="require(`@/assets/mImage/${board.member.imageName}`)"/>
                                     <v-img v-else width="32" src="@/assets/profile.jpg"/>
                                 </router-link>
-                                
+
                             </div>
                         </td>
                         <td style="font-weight: bold;">
@@ -86,6 +87,8 @@
                     </tr>
                     <tr align="left">
                         <td style="width: 32px; padding: 5px 14px 16px 16px; ">
+                            
+                            <div>
                             <div style="border-radius: 70%; overflow: hidden; width: 32px ">
                                 <router-link style="text-decoration: none; color: black" :to="{
                                     name: 'MyProfilePage',
@@ -93,6 +96,7 @@
                                     <v-img v-if="board.member.imageName" width="32" :src="require(`@/assets/mImage/${board.member.imageName}`)"/>
                                     <v-img v-else width="32" src="@/assets/profile.jpg"/>
                                 </router-link>
+                            </div>
                             </div>
                         </td>
                         <td colspan="3" style="height: 50px;  padding: 14px 0px 16px 0px; max-width: 30px">

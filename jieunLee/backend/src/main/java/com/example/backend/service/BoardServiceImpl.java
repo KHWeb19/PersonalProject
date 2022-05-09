@@ -1,8 +1,5 @@
 package com.example.backend.service;
 
-import com.example.backend.controller.BoardRequest;
-import com.example.backend.controller.CommentRequest;
-import com.example.backend.controller.MemberRequest;
 import com.example.backend.entity.*;
 import com.example.backend.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,17 +41,17 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public List<Board> memberBoardList(Long memberNo) {
-        List<Board> boards = repository.findAllByMemberNo(Long.valueOf(memberNo));
+        List<Board> boards = repository.findByMemberNoOrderByBoardNoDesc(Long.valueOf(memberNo));
         return boards;
     }
 
     @Override
     public List<Board> followBoardList(Long memberNo) {
         List<Follow> followList = followRepository.findByMy(Long.valueOf(memberNo));
-        List<Board> myBoards = repository.findAllByMemberNo(Long.valueOf(memberNo));
+        List<Board> myBoards = repository.findByMemberNoOrderByBoardNoDesc(Long.valueOf(memberNo));
 
         for (Follow f : followList) {
-            List<Board> boards = repository.findAllByMemberNo(Long.valueOf(f.getYour().getMemberNo()));
+            List<Board> boards = repository.findByMemberNoOrderByBoardNoDesc(Long.valueOf(f.getYour().getMemberNo()));
             for (Board b : boards) {
                 myBoards.add(b);
             }

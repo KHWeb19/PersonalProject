@@ -53,7 +53,7 @@ export default {
       axios.put(`http://localhost:7777/member/${this.memberNo}`, 
       {memberName, memberId, password: this.member.password, passwordHint, imageName, memberWeb, memberIntro, regDate: this.member.regDate})
         .then(res => {
-            alert('프로필 수정 성공')
+            // alert('프로필 수정 성공')
             localStorage.removeItem("userInfo")
             localStorage.setItem("userInfo", JSON.stringify(res.data))
               this.$router.push({

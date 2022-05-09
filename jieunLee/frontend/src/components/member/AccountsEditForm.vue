@@ -6,7 +6,8 @@
             <div style="display: flex; justify-content: center; padding-top: 25px; padding-bottom:20px">
               <td style="padding-left: 120px;  margin: 6px 0px 0px 62px;">
                 <div style="border-radius: 70%; overflow: hidden;">
-                  <v-img v-if="member.imageName" width="38" :src="require(`@/assets/mImage/${member.imageName}`)"/>
+                  <v-img v-if="priview" width="38" :src="priview"/>
+                  <v-img v-else-if="member.imageName" width="38" :src="require(`@/assets/mImage/${member.imageName}`)"/>
                   <v-img v-else width="38" src="@/assets/profile.jpg"/>
                 </div>
               </td>
@@ -128,6 +129,7 @@ export default {
     data() {
       return {
         files: '',
+        priview: '',
         imageName: '',
         memberName: '',
         memberId: '',
@@ -137,6 +139,7 @@ export default {
     methods: {
       handleFileUpload () {
             this.files = this.$refs.files.files
+            this.priview = URL.createObjectURL(this.files[0])
         },
       onSubmit() {
         let formData = new FormData()
@@ -148,8 +151,8 @@ export default {
                   'Content-Type': 'multipart/form-data',
               }
           })
-          .then (res => {
-              alert('처리 결과: ' + res.data)
+          .then (() => {
+              // alert('처리 결과: ' + res.data)
               console.log(this.files[0].name)
               this.imageName = this.files[0].name
               //
@@ -157,8 +160,8 @@ export default {
               this.$emit('submit', { memberName, memberId, imageName, memberWeb, memberIntro, passwordHint})
               localStorage.setItem("imageChange", JSON.stringify(imageName))
           })
-          .catch (res => {
-              alert('처리 결과: ' + res.message)
+          .catch (() => {
+              // alert('처리 결과: ' + res.message)
               this.imageName = this.member.imageName
               const { memberName, memberId, imageName, memberWeb, memberIntro, passwordHint } = this
               this.$emit('submit', { memberName, memberId, imageName, memberWeb, memberIntro, passwordHint})

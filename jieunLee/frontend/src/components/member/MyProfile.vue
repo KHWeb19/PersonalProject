@@ -3,12 +3,12 @@
         <v-container style="max-width: 1000px; margin-top: 85px;">
         <v-flex>
             <div style="display: flex; justify-content: center;">
-
-                <div style="border-radius: 70%; overflow: hidden;  margin-right: 45px;">
-                    <v-img v-if="member.imageName" width="150px" height="150px" :src="require(`@/assets/mImage/${member.imageName}`)"/>
-                    <v-img v-else width="150px" height="150px" src="@/assets/profile.jpg"/>
+                <div>
+                    <div style="border-radius: 70%; overflow: hidden;  margin-right: 45px;">
+                        <v-img v-if="member.imageName" width="150px" height="150px" :src="require(`@/assets/mImage/${member.imageName}`)"/>
+                        <v-img v-else width="150px" height="150px" src="@/assets/profile.jpg"/>
+                    </div>
                 </div>
-
                 <div style="width: 620px;  padding-left: 50px;">
                     <div style="display: flex;">
                         <div style="font-size: 28px;">{{member.memberId}}</div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -22,7 +22,9 @@
                             <v-btn text color="red" style="margin-top: 4px" @click="onFollow(member.memberNo)" v-else>팔로우 취소</v-btn> 
                         </span>
                     </div>
+                    
                     <br/>
+                
                     <div style="padding-bottom: 20px;">
                         게시물 <b style="padding-right: 30px">{{myBoards.length}}</b>
                         <v-dialog persisten max-width="400">
@@ -35,17 +37,16 @@
                                         팔로워
                                     </v-card-title>
                                     <v-card-text>
-                                        <v-row>
                                             <v-col style="height: 320px; text-align: center;" v-if="!member.followers || (Array.isArray(member.followers) && member.followers.length === 0)">
                                             팔로우한 회원이 없습니다!
                                             </v-col>
-                                            <v-col style="height: 320px;" v-else v-for="follow in member.followers" :key="follow.no"  cols="4">
-                                                    <div style="display: flex; padding: 3px 0px">
+                                            <v-col v-else v-for="follow in member.followers" :key="follow.no"  cols="4">
+                                                    <div style="display: flex; padding: 3px 0px; height: 25px;">
                                                         <div>
                                                             <td style="padding-top: 1px">
                                                                 <div style="border-radius: 70%; overflow: hidden; width: 33px ">
-                                                                    <v-img v-if="follow.my.imageName" width="33" :src="require(`@/assets/mImage/${myFollow.my.imageName}`)"/>
-                                                                    <v-img v-else width="33" src="@/assets/profile.jpg"/>
+                                                                    <!-- <v-img v-if="follow.my.imageName" width="33" :src="require(`@/assets/mImage/${myFollow.my.imageName}`)"/> -->
+                                                                    <v-img  width="33" src="@/assets/profile.jpg"/>
                                                                 </div>
                                                             </td>
                                                         </div>
@@ -60,10 +61,7 @@
                                                             </td>
                                                         </div>
                                                     </div>
-
-                                                <!-- </router-link> -->
                                             </v-col>
-                                        </v-row>
                                     </v-card-text>
                                     <v-card-actions>
                                         <v-spacer></v-spacer>
@@ -84,17 +82,17 @@
                                         팔로우
                                     </v-card-title>
                                     <v-card-text>
-                                        <v-row>
+                                        <!-- <v-row> -->
                                             <v-col style="height: 320px; text-align: center;" v-if="!member.followings || (Array.isArray(member.followings) && member.followings.length === 0)">
                                             팔로우한 회원이 없습니다!
                                             </v-col>
-                                            <v-col style="height: 320px;" v-else v-for="follow in member.followings" :key="follow.no"  cols="4">
-                                                    <div style="display: flex; padding: 3px 0px">
+                                            <v-col v-else v-for="follow in member.followings" :key="follow.no"  cols="4">
+                                                    <div style="display: flex; padding: 3px 0px; height: 25px;">
                                                         <div>
                                                             <td style="padding-top: 1px">
                                                                 <div style="border-radius: 70%; overflow: hidden; width: 33px ">
-                                                                    <v-img v-if="follow.your.imageName" width="33" :src="require(`@/assets/mImage/${myFollow.your.imageName}`)"/>
-                                                                    <v-img v-else width="33" src="@/assets/profile.jpg"/>
+                                                                    <!-- <v-img v-if="follow.your.imageName" width="33" :src="require(`@/assets/mImage/${myFollow.your.imageName}`)"/> -->
+                                                                    <v-img  width="33" src="@/assets/profile.jpg"/>
                                                                 </div>
                                                             </td>
                                                         </div>
@@ -109,10 +107,8 @@
                                                             </td>
                                                         </div>
                                                     </div>
-
-                                                <!-- </router-link> -->
                                             </v-col>
-                                        </v-row>
+                                        <!-- </v-row> -->
                                     </v-card-text>
                                     <v-card-actions>
                                         <v-spacer></v-spacer>
@@ -136,9 +132,8 @@
 
                 </div>
             </div>
-            <br/>
-            <br/>
-            
+            <!-- <br/>
+            <br/> -->
         </v-flex>
         </v-container>
     </div>    

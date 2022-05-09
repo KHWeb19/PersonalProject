@@ -1,8 +1,10 @@
 <template>
     <v-container style="width: 643px; margin-top: 85px; font-size: 14px">
       <v-flex>
-            <v-card style="height: 320px; text-align: center" v-if="!followBoards || (Array.isArray(followBoards) && followBoards.length === 0)">
-                    피드를 둘러보고 팔로우하거나 사진을 업로드 하세요
+            <v-card style="width: 643px; height: 415px; text-align: center;" v-if="!followBoards || (Array.isArray(followBoards) && followBoards.length === 0)">
+                <br/><br/><br/>
+                <div style="font-size: 18px">Vuestagram에 오신 것을 환영합니다</div>
+                <div style="color: gray">다른 사람을 팔로우하면 피드에서 상대방의 사진을 볼 수 있습니다.</div>
             </v-card>
             <v-card style="margin-bottom: 30px;" v-else v-for="board in followBoards" :key="board.boardNo">
                 <form @submit.prevent="onSubmit(board.boardNo)">
@@ -111,15 +113,12 @@
                                 </router-link>
                             </td>
                         </tr>
-                        <tr>
-                            <!-- <comment-list :boardNo="board.boardNo"/> -->
-                            <!-- <td>
-                                <div v-for="comment in twoComments" :key="comment.commentNo">
-                                    <span style="font-weight: bold;">{{ comment.member.memberId }}&nbsp;</span>
-                                    {{ comment.content }}
-                                </div>
-                            </td> -->
-                        </tr>
+                        <!-- <tr v-if="board.comments.length>1"> 
+                            <td colspan="3" style="padding-left: 16px;">
+                                <b v-if="board.comments[board.comments.length-2]">{{ board.comments[board.comments.length-2].member.memberId }}</b>&nbsp;{{board.comments[board.comments.length-2].content}} <br/>
+                                <b v-if="board.comments[board.comments.length-1]">{{ board.comments[board.comments.length-1].member.memberId }}</b>&nbsp;{{board.comments[board.comments.length-1].content}}
+                            </td>
+                        </tr> -->
                         <tr align="left" style="font-size: 10px">
                             <td colspan="3" style="padding: 8px 0px 16px 16px; color: grey">
                                 {{ board.regDate }}
@@ -175,10 +174,10 @@ export default {
             swiperOption: {
                 effect: 'coverflow',
                 grabCursor: true,
-                pagination: {
-                    el: '.swiper-pagination',
-                    dynamicBullets: false
-                },
+                // pagination: {
+                //     el: '.swiper-pagination',
+                //     dynamicBullets: false
+                // },
                 navigation: {
                     nextEl: '.swiper-button-next',
                     prevEl: '.swiper-button-prev',

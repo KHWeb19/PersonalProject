@@ -65,8 +65,7 @@ export default {
             const { memberNo} = payload
             axios.post(`http://localhost:7777/follow/${this.loginInfo.memberNo}/${memberNo}`, {loginNo: this.loginInfo.memberNo, memberNo})
                 .then(() => {
-                    // history.go(0);
-                    
+                    history.go(0);
                 })
                 .catch(() => {
                     alert('문제 발생!')

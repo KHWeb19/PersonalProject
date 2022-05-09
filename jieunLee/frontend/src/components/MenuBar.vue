@@ -27,7 +27,7 @@
     <v-btn icon large>
       <router-link style="text-decoration: none;" :to="{name: 'HomeView'}">
         <v-icon color="black">
-          mdi-home
+          mdi-home-outline
         </v-icon>
       </router-link>
     </v-btn>

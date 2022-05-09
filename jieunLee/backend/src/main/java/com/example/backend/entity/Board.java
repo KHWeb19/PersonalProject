@@ -3,12 +3,10 @@ package com.example.backend.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
-import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
-import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -58,7 +56,6 @@ public class Board {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @JsonIgnoreProperties({"boards", "board"})
-//    @JsonIgnoreProperties({"boards", "member"})
     @OneToMany(mappedBy = "board", fetch = FetchType.EAGER)
     private Set<Likes> likes = new HashSet<>();
 }

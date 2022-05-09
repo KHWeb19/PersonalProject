@@ -7,7 +7,6 @@ import com.example.backend.repository.BoardRepository;
 import com.example.backend.repository.LikesRepository;
 import com.example.backend.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,7 +30,6 @@ public class LikesServiceImpl implements LikesService {
         Member member = memberRepository.findById(memberNo).orElseThrow();
 
         if(repository.findByMemberAndBoard(member, board).isEmpty()) {
-//            repository.save(new Likes(board, member));
             likes.setMember(member);
             likes.setBoard(board);
             repository.save(likes);
