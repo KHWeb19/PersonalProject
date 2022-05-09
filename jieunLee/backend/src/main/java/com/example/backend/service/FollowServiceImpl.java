@@ -1,7 +1,6 @@
 package com.example.backend.service;
 
 import com.example.backend.entity.Follow;
-import com.example.backend.entity.Likes;
 import com.example.backend.entity.Member;
 import com.example.backend.repository.FollowRepository;
 import com.example.backend.repository.MemberRepository;
@@ -38,9 +37,6 @@ public class FollowServiceImpl implements FollowService{
 
     @Override
     public List<Follow> followList(Long memberNo) {
-//        return followRepository.findFollowingsByMemberNo(Long.valueOf(memberNo));
         return followRepository.findByMy(Long.valueOf(memberNo));
     }
-
-
 }

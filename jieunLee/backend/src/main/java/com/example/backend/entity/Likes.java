@@ -20,7 +20,6 @@ public class Likes {
     private Long likedNo;
 
     @JsonIgnoreProperties({"likes", "boards", "comments", "followings", "followers"})
-//    @JsonBackReference
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name= "member_no")
     private Member member;

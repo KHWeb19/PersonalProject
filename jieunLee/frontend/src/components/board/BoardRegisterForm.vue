@@ -113,7 +113,7 @@ export default {
             if(this.files[1]) {
                 this.priview2 = URL.createObjectURL(this.files[1])
                 if(this.files[2]) {
-                    this.priview3 = URL.createObjectURL(this.files[3])
+                    this.priview3 = URL.createObjectURL(this.files[2])
             }
             }
 
@@ -128,8 +128,8 @@ export default {
                     'Content-Type': 'multipart/form-data',
                 }
             })
-            .then (res => {
-                alert('처리 결과: ' + res.data)
+            .then (()=> {
+                // alert('처리 결과: ' + res.data)
                 this.boardImage = this.files[0].name
                 if(this.files[1]) {
                     this.boardImage2 = this.files[1].name

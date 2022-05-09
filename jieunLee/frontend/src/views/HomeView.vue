@@ -68,7 +68,7 @@ export default {
             const { boardNo, memberNo, content} = payload
             axios.post(`http://localhost:7777/comment/register/${boardNo}/${memberNo}`, {boardNo, memberNo, content})
                 .then(() => {
-                    alert('댓글 등록 성공!')
+                    // alert('댓글 등록 성공!')
                     history.go(0);
                 })
                 .catch(() => {

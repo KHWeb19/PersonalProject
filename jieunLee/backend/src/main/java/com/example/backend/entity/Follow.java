@@ -1,6 +1,5 @@
 package com.example.backend.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,7 +24,6 @@ public class Follow {
     @JoinColumn(name= "my_no")
     private Member my;
 
-//    @JsonBackReference
     @JsonIgnoreProperties({"boards", "comments", "likes", "followings", "followers"})
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name= "your_no")

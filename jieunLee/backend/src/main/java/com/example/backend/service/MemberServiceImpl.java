@@ -5,7 +5,6 @@ import com.example.backend.entity.*;
 import com.example.backend.repository.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +18,6 @@ public class MemberServiceImpl implements MemberService{
 
     @Autowired
     private PasswordEncoder passwordEncoder;
-
 
     @Autowired
     private MemberRepository memberRepository;

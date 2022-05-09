@@ -1,16 +1,12 @@
 package com.example.backend.service;
 
-import com.example.backend.controller.CommentRequest;
 import com.example.backend.entity.Board;
 import com.example.backend.entity.Comment;
 import com.example.backend.entity.Member;
 import com.example.backend.repository.BoardRepository;
 import com.example.backend.repository.CommentRepository;
 import com.example.backend.repository.MemberRepository;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -42,11 +38,6 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public List<Comment> list(Integer boardNo) {
         return repository.findAllByBoardNo(Long.valueOf(boardNo));
-    }
-
-    @Override
-    public List<Comment> twoList(Integer boardNo) {
-        return repository.findTop2ByBoardNo(Long.valueOf(boardNo));
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.example.backend.controller;
 
-import com.example.backend.entity.Board;
 import com.example.backend.entity.Likes;
 import com.example.backend.service.LikesService;
 import lombok.extern.slf4j.Slf4j;

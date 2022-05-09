@@ -1,8 +1,5 @@
 package com.example.backend.service;
 
-import com.example.backend.controller.BoardRequest;
-import com.example.backend.controller.CommentRequest;
-import com.example.backend.controller.MemberRequest;
 import com.example.backend.entity.Board;
 
 import java.util.List;

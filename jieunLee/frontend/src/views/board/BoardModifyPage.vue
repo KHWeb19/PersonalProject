@@ -29,7 +29,7 @@ export default {
     },
     data () {
         return {
-                        loginInfo: JSON.parse(localStorage.getItem('loginInfo')),
+            loginInfo: JSON.parse(localStorage.getItem('loginInfo')),
         }
     },
     computed: {
@@ -43,7 +43,7 @@ export default {
             axios.put(`http://localhost:7777/board/${memberNo}/${this.boardNo}`, 
             { boardImage, content, regDate: this.board.regDate})
                 .then(res => {
-                    alert('게시물 수정 성공')
+                    // alert('게시물 수정 성공')
                     console.log(this.board)
                     this.$router.push({
                         name: 'BoardReadPage',

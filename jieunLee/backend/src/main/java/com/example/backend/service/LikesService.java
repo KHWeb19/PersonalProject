@@ -3,7 +3,6 @@ package com.example.backend.service;
 import com.example.backend.entity.Likes;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface LikesService {
     public boolean register (Long boardNo, Long memberNo, Likes likes);
