@@ -39,13 +39,18 @@ export default {
     ...mapActions(['fetchBoardList']),
     sendSearchBoard(){
       const {searchBoard} = this
-      console.log(searchBoard)
 
-      axios.post('http://localhost:7777/board/search', {searchBoard})
+      if(searchBoard !== "") {
+        console.log(searchBoard)
+
+        axios.post('http://localhost:7777/board/search', {searchBoard})
             .then((res) => {
               console.log(res + '성공!')
               this.$store.commit(FETCH_BOARD_LIST, res.data);
             })
+      }else{
+        this.$router.go();
+      }
     }
   },
   mounted() {

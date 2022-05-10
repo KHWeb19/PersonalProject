@@ -101,8 +101,8 @@ export default {
     return{
       mapOption: {
         center: {
-          lat: 33.450701,
-          lng: 126.570667,
+          lat: 37.541,
+          lng: 126.986,
         },
         level: 8
       },

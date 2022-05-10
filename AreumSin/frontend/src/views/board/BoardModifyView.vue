@@ -32,21 +32,27 @@ export default {
           //alert('게시물 수정 성공' + res)
         })
 
-      let formData = new FormData;
 
-      for(let i = 0; i < board.length; i++) {
-        formData.append('boardNo', board[i]);
-      }
+      if(board.length > 0) {
+        let formData = new FormData;
 
-      /*alert(board[0])
+        for (let i = 0; i < board.length; i++) {
+          formData.append('boardNo', board[i]);
+        }
+
+        /*alert(board[0])
       alert(typeof board);
       alert(board.length)*/
-      await axios.post(`http://localhost:7777/board/img/${this.boardNo}`, formData)
-        .then(() => {
-          //alert('이미지 게시물 수정 성공' + res)
-          this.$router.push({ name: 'BoardView' })
-        })
+        await axios.post(`http://localhost:7777/board/img/${this.boardNo}`, formData)
+            .then(() => {
+              //alert('이미지 게시물 수정 성공' + res)
+
+            })
+      }
+
+      this.$router.push({name: 'BoardView'})
     }
+
   },
   created() {
     this.fetchBoardRead(this.boardNo);

@@ -33,7 +33,6 @@ export default {
         { icon: 'mdi-account', text: '회원 관리', name: 'MyPage', route: '/myPage' },
         { icon: 'mdi-book', text: '일기', name: 'MyPageDiary', route: '/myPageDiary' },
         { icon: 'mdi-map-marker', text: '저장된 장소', name: 'MyPagePlaceList', route: '/myPagePlaceList' },
-        { icon: 'mdi-delete', text: '회원 탈퇴', name: 'IndexPage', route: '/index' },
       ],
     }
   }

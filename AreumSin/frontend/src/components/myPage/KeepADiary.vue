@@ -94,13 +94,18 @@ export default {
         })
             .then((res) => {
               this.response = res.data
+
+              setTimeout(function (){
+
+              },2000);
+              this.$router.push({name: 'MyPageDiary'});
             })
             .catch((res) => {
               this.response = res.message
             })
 
         //alert('처리 완료!')
-        this.$router.push({name: 'MyPageDiary'})
+
       }
     }
   }

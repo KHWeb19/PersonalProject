@@ -87,7 +87,7 @@ export default {
         infowindow.open(map, marker);
       };
     },
-  }
+  },
 }
 </script>
 

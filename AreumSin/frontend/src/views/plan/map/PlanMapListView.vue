@@ -171,7 +171,8 @@ export default {
       axios.post('http://localhost:7777/planDay/savePlaceDay', {favoritePlaceNo, day})
           .then((res) => {
             console.log(res + '성공')
-            this.$router.go();
+            //this.$router.go();
+            this.saveFavoriteDialog.dialog = false
           })
     }
   },

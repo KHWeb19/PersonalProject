@@ -165,6 +165,9 @@ export default {
         })
             .then((res) => {
               this.response = res.data
+              setTimeout(function (){
+              },2000);
+              this.$router.go();
             })
             .catch((res) => {
               this.response = res.message

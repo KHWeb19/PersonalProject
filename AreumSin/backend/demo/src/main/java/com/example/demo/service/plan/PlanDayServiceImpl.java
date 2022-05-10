@@ -88,12 +88,21 @@ public class PlanDayServiceImpl implements PlanDayService{
 
         int i = 0;
 
-        for (PlanDayImg planDayImg : planDayImgList){
-            PlanDayResponse test = planDayResponses.get(i);
+        for(PlanDayResponse planDay : planDayResponses) {
+            for (PlanDayImg planDayImg : planDayImgList) {
 
-            test.setImgSrc(planDayImg.getImgSrc());
+                if(Objects.equals(planDay.getPlanDayNo(), planDayImg.getPlanDay().getPlanDayNo())){
+                    PlanDayResponse test = planDayResponses.get(i);
+                    System.out.println(test);
+                    test.setImgSrc(planDayImg.getImgSrc());
 
-            planDayResponses.set(i, test);
+                    planDayResponses.set(i, test);
+                }
+
+                /*PlanDayResponse test = planDayResponses.get(i);
+                System.out.println(test);*/
+
+            }
             i++;
         }
 

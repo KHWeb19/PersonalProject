@@ -54,7 +54,7 @@
                   <tr v-else>
                     <div v-if="isCheck" style="font-size: 25px">
                       <td>
-                        id&nbsp;:&nbsp;<input type="text" style="width: 50px" :value="findId" readonly> &nbsp;
+                        id&nbsp;:&nbsp;<input type="text" style="width: 80px" :value="findId" readonly> &nbsp;
                       </td>
                       <td>
                         이름&nbsp;:&nbsp;<input type="text" :value="findName" readonly>

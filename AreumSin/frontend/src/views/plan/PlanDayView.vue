@@ -74,6 +74,7 @@ export default {
       axios.post('http://localhost:7777/planDay/like', {planDayNo, id})
       .then(() => {
         //alert('성공' + res.data.likeCount);
+        this.$router.go();
       })
     },
     clickHate(payload){
@@ -83,6 +84,7 @@ export default {
       axios.post('http://localhost:7777/planDay/hate', {planDayNo, id})
           .then(() => {
             //alert('성공' + res);
+            this.$router.go();
           })
     },
     clickRemove(payload){
@@ -94,6 +96,7 @@ export default {
             if(!res.data){
               //alert('지울 수 없습니다. ')
             }
+            this.$router.go();
           })
     }
   },
