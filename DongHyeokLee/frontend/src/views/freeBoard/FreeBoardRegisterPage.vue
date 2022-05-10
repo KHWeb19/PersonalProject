@@ -36,8 +36,5 @@ export default {
 </script>
 
 <style scoped>
-#register {
-    background-image: url(@/assets/img/homeBackground.png);
-    height: 100vh;
-}
+
 </style>

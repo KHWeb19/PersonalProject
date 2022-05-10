@@ -1,8 +1,10 @@
 package com.example.demo.controller.board.videoBoard;
 
-import com.example.demo.controller.board.videoBoard.request.VideoBoardCommentsRequest;
-import com.example.demo.entitiy.board.videoBoard.VideoBoardComments;
-import com.example.demo.service.board.videoBoard.VideoBoardCommentsService;
+import com.example.demo.dto.request.CommentRequest;
+import com.example.demo.dto.request.ReplyRequest;
+import com.example.demo.dto.response.CommentResponse;
+import com.example.demo.service.board.BaseCommentService;
+import com.example.demo.service.board.videoBoard.VideoBoardCommentsServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -17,38 +19,35 @@ import java.util.List;
 public class VideoBoardCommentsController {
 
     @Autowired
-    private VideoBoardCommentsService service;
+    private BaseCommentService videoBoardCommentsServiceImpl;
 
     //댓글 등록
     @PostMapping("/register/{boardNo}")
     public void VideoBoardCommentsRegister ( @PathVariable("boardNo") Integer boardNo,
-                                            @Validated @RequestBody VideoBoardCommentsRequest commentsRequest) {
+                                            @Validated @RequestBody CommentRequest commentsRequest) {
 
         log.info("FreeBoardCommentsRegister()" + commentsRequest);
-        commentsRequest.setBoardNo(Long.valueOf(boardNo));
 
-        service.register(commentsRequest);
+
+        videoBoardCommentsServiceImpl.register(boardNo, commentsRequest);
     }
 
     //댓글 목록
     @GetMapping("/list/{boardNo}")
-    public List<VideoBoardComments> VideoBoardCommentsList (@PathVariable("boardNo") Integer boardNo) {
+    public Object VideoBoardCommentsList (@PathVariable("boardNo") Integer boardNo) {
         log.info("VideoBoardCommentsList()");
 
-        return service.list(boardNo);
+        return videoBoardCommentsServiceImpl.list(boardNo);
     }
 
     //댓글 수정
     @PutMapping("/{commentNo}")
-    public VideoBoardComments VideoBoardCommentModify (
+    public Object VideoBoardCommentModify (
             @PathVariable("commentNo") Integer commentNo,
-            @RequestBody VideoBoardComments videoBoardComments) {
-        log.info("freeBoardCommentModify(): " + videoBoardComments);
+            @Validated @RequestBody CommentRequest commentRequest) {
+        log.info("freeBoardCommentModify(): " + commentRequest);
 
-        videoBoardComments.setCommentNo(Long.valueOf(commentNo));
-        service.modify(videoBoardComments);
-
-        return videoBoardComments;
+        return videoBoardCommentsServiceImpl.modify(commentNo, commentRequest);
     }
 
 
@@ -58,6 +57,15 @@ public class VideoBoardCommentsController {
             @PathVariable("commentNo") Integer commentNo) {
         log.info("commentRemove()");
 
-        service.remove(commentNo);
+        videoBoardCommentsServiceImpl.remove(commentNo);
+    }
+
+    @PostMapping("reply/register/{boardNo}")
+    public void photoBoardReplyRegister (@PathVariable("boardNo") Integer boardNo,
+                                         @Validated @RequestBody ReplyRequest commentRequest) {
+
+        log.info("FreeBoardReplyRegister()" + commentRequest);
+
+        videoBoardCommentsServiceImpl.replyRegister(boardNo, commentRequest);
     }
 }

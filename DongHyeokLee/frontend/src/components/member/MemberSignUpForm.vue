@@ -2,7 +2,7 @@
 <!-- 회원 가입 -->
     <v-dialog v-model="signUpDialog" persisten max-width="400px">
         <template v-slot:activator="{ on }">
-            <v-btn color="white" style="font-size: 0.7em;" dark v-on="on" text>
+            <v-btn color="amber lighten-2" style="font-size: 0.7em;" dark v-on="on" text>
                 <v-icon style="font-size: 1.3em;">
                 mdi-account-plus
                 </v-icon>

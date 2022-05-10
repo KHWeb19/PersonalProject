@@ -1,16 +1,12 @@
 <template>
-    <div id="photoBoard">
+    <div id="videoBoard">
         <h2>영상게시판</h2>
-        <div>
-        <video-board-list :videoBoards="videoBoards"/>
-        </div>
-       
-        <router-link :to="{ name: 'VideoBoardRegisterPage'}">
-            <v-btn v-if="$store.state.isLogin == true" class="blue" dark>
-                <v-icon>mdi-pencil-plus</v-icon>
-                <span>등록</span>
-            </v-btn>
-        </router-link>
+        <board-list :boards="videoBoards" 
+                    :registerPage="`${registerPage}`"
+                    :accept="accept" 
+                    :boardName="`${this.boardName}`"
+                    :readPage="`${readPage}`"/>
+        
     </div>
 </template>
 
@@ -18,22 +14,35 @@
 
 
 import { mapActions, mapState } from 'vuex'
-import VideoBoardList from '@/components/videoBoard/VideoBoardList.vue'
+import BoardList from '@/components/common/board/BoardList.vue'
 
 
 
 export default {
     name: 'VideoBoardListPage',
     components: {
-        VideoBoardList
-        
+        BoardList  
+    },
+    data () {
+        return {
+            registerPage : 'VideoBoardRegisterPage',
+            readPage: 'VideoBoardReadPage',
+            accept: 'mp4',
+            boardName: "videoBoard",
+            writer : this.$store.state.userInfo.nickname,
+        }
     },
     computed: {
-        ...mapState(['videoBoards'])
-        
+        ...mapState(['videoBoards']),
     },
     mounted () {
-        this.fetchVideoBoardList()
+         if(!this.$store.state.isLogin){
+            alert('로그인하세요')
+            this.$router.push({name: "HomeView"});
+        }else{
+            const writer = this.writer
+        this.fetchVideoBoardList(writer)
+        }  
         
     },
     methods: {
@@ -47,14 +56,15 @@ export default {
 <style scoped>
 
 h2 {
-    text-align: center;
-    padding: 15px;
+   text-align: center;
+    padding:20px;
+    background-color: #FFD54F;
+    margin-bottom:50px;
+    font-family: 'Nanum Brush Script', cursive;
 }
-
 a {
     text-decoration: none;
     margin-left: 1230px;
-
 }
 
     

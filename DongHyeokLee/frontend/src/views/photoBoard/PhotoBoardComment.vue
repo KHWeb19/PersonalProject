@@ -1,12 +1,15 @@
 <template>
     <div>
-        <photo-board-comment-form :photoBoardComments="photoBoardComments" :boardNo="boardNo" @submit="onSubmit"/>
+        <board-comment-form :commentList="photoBoardComments" 
+                            :boardNo="boardNo"
+                            :boardName="`${this.boardName}`"
+                             @submit="onSubmit"/>
     </div>
 </template>
 
 <script>
 
-import PhotoBoardCommentForm from '@/components/photoBoard/PhotoBoardCommentForm.vue'
+import BoardCommentForm from '@/components/common/comment/BoardCommentForm.vue'
 import { mapActions, mapState } from 'vuex'
 import axios from 'axios'
 
@@ -18,9 +21,13 @@ export default {
             required: true
         }
     },
-
+    data () {
+        return {
+            boardName: "photoBoardComments"
+        }
+    },
     components: {
-        PhotoBoardCommentForm
+        BoardCommentForm
     },
         computed: {
         ...mapState(['photoBoardComments'])
@@ -36,9 +43,9 @@ export default {
        methods: {
         ...mapActions(['fetchPhotoBoardCommentsList']),
          onSubmit (payload) {
-            const { writer, content } = payload
+            const { writer, comment } = payload
             const boardNo = this.boardNo
-            axios.post(`http://localhost:7777/photoBoardComments/register/${boardNo}`, { writer, content })
+            axios.post(`http://localhost:7777/photoBoardComments/register/${boardNo}`, { writer, comment })
                     .then(() => {
                         alert('댓글 등록')
                         this.$router.go()

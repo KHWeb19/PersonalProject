@@ -1,15 +1,17 @@
 package com.example.demo.controller.board.photoBoard;
 
-import com.example.demo.entitiy.board.photoBoard.PhotoBoard;
-import com.example.demo.service.board.photoBoard.PhotoBoardService;
+import com.example.demo.dto.response.BoardResponse;
+import com.example.demo.dto.request.BoardRequest;
+import com.example.demo.dto.request.CommentRequest;
+import com.example.demo.dto.request.LikeRequest;
+import com.example.demo.service.board.BaseBoardService;
+import com.example.demo.service.board.photoBoard.PhotoBoardServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.annotation.Validated;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.FileOutputStream;
-import java.time.LocalDate;
 import java.util.List;
 
 
@@ -20,89 +22,50 @@ import java.util.List;
 public class PhotoBoardController {
 
     @Autowired
-    private PhotoBoardService service;
+    private BaseBoardService photoBoardServiceImpl;
 
     //등록
-    @PostMapping("/register")
-    public void PhotoBoardRegister (@Validated @RequestBody PhotoBoard photoBoard) {
-        log.info("PhotoBoardRegister()");
-        LocalDate now = LocalDate.now();
-        String fileName = now + photoBoard.getFileName();
-        photoBoard.setFileName(fileName);
-        service.register(photoBoard);
+    @PostMapping(value = "/register",
+                consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
+    public void PhotoBoardRegister ( @RequestPart(value="board") BoardRequest board,
+                                     @RequestPart(value="files") MultipartFile files) throws Exception {
+        log.info("PhotoBoardRegister()" + board + "file" + files);
+
+        photoBoardServiceImpl.register(board, files);
     }
     //목록
-    @GetMapping("/list")
-    public List<PhotoBoard> PhotoBoardList () {
-        log.info("PhotoBoardList()");
+   @PostMapping("/list")
+    public Object PhotoBoardList (@RequestBody CommentRequest commentRequest) {
+        log.info("PhotoBoardList()" + commentRequest);
 
-        return service.list();
+        String writer = commentRequest.getWriter();
+
+       photoBoardServiceImpl.likeCheck(writer);
+
+        return photoBoardServiceImpl.list();
     }
     //읽기
-    @GetMapping("/{boardNo}")
-    public PhotoBoard photoBoardRead (
+   @GetMapping("/{boardNo}")
+    public Object photoBoardRead (
             @PathVariable("boardNo") Integer boardNo) {
         log.info("photoBoardRead()");
 
-        return service.read(boardNo);
+        return photoBoardServiceImpl.read(boardNo);
     }
-    //파일 업로드
-    @ResponseBody
-    @PostMapping("/uploadImg")
-    public String requestUploadFile (
-            @RequestParam("fileList") List<MultipartFile> fileList) {
 
-        log.info("requestUploadFile(): " + fileList);
-
-        try {
-            for (MultipartFile multipartFile : fileList) {
-                log.info("requestUploadFile() - Make file: " +
-                        multipartFile.getOriginalFilename());
-
-                //일단 저장된 위치에 이름 중복 될까봐 앞에 날짜 붙였는데 더좋은 방법 없나
-                //혹시 하루에 똑같은 이름 될 수도 있으니 시간까지 할려다가 너무 길어져서 일단 보류 함함
-               LocalDate now = LocalDate.now();
-                //LocalTime now = LocalTime.now();
-
-
-                FileOutputStream writer = new FileOutputStream(
-                        "../../frontend/src/assets/uploadImg/"+ now + multipartFile.getOriginalFilename());
-
-
-                log.info("디렉토리에 파일 배치 성공!");
-
-                writer.write(multipartFile.getBytes());
-                writer.close();
-            }
-        } catch (Exception e) {
-            return "Upload Fail!!!";
-        }
-
-        log.info("requestUploadFile(): Success!!!");
-
-        return "Upload Success!!!";
-    }
     //수정
-    @PutMapping("/{boardNo}")
-    public PhotoBoard photoBoardModify (
+    @PutMapping(value = "/{boardNo}",
+            consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
+    public BoardRequest photoBoardModify (
             @PathVariable("boardNo") Integer boardNo,
-            @RequestBody PhotoBoard photoBoard) {
-        log.info("photoBoardModify(): " + photoBoard);
+            @RequestPart(value="board") BoardRequest board,
+            @RequestPart(value="files", required = false) MultipartFile files) throws Exception {
+        log.info("photoBoardModify(): " + board + "boardNo" + boardNo);
 
-        photoBoard.setBoardNo(Long.valueOf(boardNo));
-        //수정 할 때 파일은 첨부하지 않고 넣었을 경우가 있어 db에서 파일명 가져올 수 있도록 하기
-        String checkFileName = photoBoard.getFileName();
+            board.setBoardNo(Long.valueOf(boardNo));
+        photoBoardServiceImpl.modify(boardNo, board, files);
 
-            if(checkFileName != null){
-            LocalDate now = LocalDate.now();
-            String fileName = now + photoBoard.getFileName();
-            photoBoard.setFileName(fileName);
-
-            }
-
-            service.modify(photoBoard,boardNo);
-
-        return photoBoard;
+        return board;
     }
 
     @DeleteMapping("/{boardNo}")
@@ -110,7 +73,25 @@ public class PhotoBoardController {
             @PathVariable("boardNo") Integer boardNo) {
         log.info("photoBoardRemove()");
 
-        service.remove(boardNo);
+        //service.removeFile(boardNo);
+        photoBoardServiceImpl.remove(boardNo);
     }
 
+    @PostMapping("/like")
+    public void photoBoardLike(@RequestBody LikeRequest like){
+        log.info("xxlikeRequest" + like);
+
+        photoBoardServiceImpl.doLike(like);
+
+    }
+
+    @PostMapping("/unlike")
+    public void photoBoardUnlike(@RequestBody LikeRequest like){
+    // like에 boardNo의 writer이 같으면 삭제 해야되는데 이건 그럼 id값으로 삭제해야되나??
+    //id값을 어디서 구해야하오?? 두개 같으면 쿼리문이 되나??ㅋㅋㅋ
+    //만약에 writer로 보드값 쫙 가져왔는데 거기서 boardNo 가져 온거랑 똑같으면 삭제 하도록??
+    // 아이다 아이디가 있어야 삭제를 하지
+        log.info("liek" + like);
+        photoBoardServiceImpl.unDoLike(like);
+    }
 }

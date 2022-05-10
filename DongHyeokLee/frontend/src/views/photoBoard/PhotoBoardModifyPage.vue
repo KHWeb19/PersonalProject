@@ -1,7 +1,11 @@
 <template>
     <div align="center">
-        <h2>게시물 수정</h2>
-        <photo-board-modify-form v-if="photoBoard" :photoBoard="photoBoard" @submit="onSubmit"/>
+        <board-modify-form v-if="photoBoard" 
+                                :board="photoBoard"
+                                :boardNo="boardNo"
+                                :readPage="`${this.readPage}`" 
+                                :accept ="accept"
+                                @submit="onSubmit"/>
         <p v-else>로딩중 .......</p>
     </div>
 </template>
@@ -9,17 +13,25 @@
 <script>
 import axios from 'axios'
 import { mapActions, mapState } from 'vuex'
-import PhotoBoardModifyForm from '@/components/photoBoard/PhotoBoardModifyForm.vue'
+import BoardModifyForm from '@/components/common/board/BoardModifyForm.vue'
 
 export default {
     name: 'PhotoBoardModifyPage',
     components: {
-        PhotoBoardModifyForm
+        BoardModifyForm
     },
     props: {
         boardNo: {
             type: String,
             required: true
+        }
+    },
+    data () {
+        return {
+            readPage: 'PhotoBoardReadPage',
+            accept: '.jpg',
+           
+
         }
     },
     computed: {
@@ -29,51 +41,40 @@ export default {
         ...mapActions(['fetchPhotoBoard']),
         onSubmit (payload) {
             const { title, content, files } = payload
-            if(files){
+            // 파일 다시 첨부 했을 경우
+           
                 let formData = new FormData()
-                const fileName = files[0].name
-                for (let idx = 0; idx < files.length; idx++) {
-                    formData.append('fileList', files[idx])
-                }  
-            
-            axios.all([
-                axios.put(`http://localhost:7777/photoBoard/${this.boardNo}`,
-                { title, writer: this.photoBoard.writer, content, regDate: this.photoBoard.regDate, fileName }),
-                axios.post('http://localhost:7777/photoBoard/uploadImg', formData,{
+                let board = {
+                    title,
+                    content,
+                    writer: this.photoBoard.writer,
+                    regDate: this.photoBoard.regDate,
+                    count: this.photoBoard.count,
+                    fileName: this.photoBoard.fileName
+                }
+               
+                if(files != null) {formData.append('files',files)}
+                formData.append('board',new Blob([JSON.stringify(board)],{type: "application/json"}))
+             
+                 axios.put(`http://localhost:7777/photoBoard/${this.boardNo}`, formData,{
                      headers: {
                          'Content-Type' : 'multipart/form-data'
-                     }
-                })
-            ])
-                    .then(axios.spread((res) => {
-                        alert('게시물 수정 성공!')
-                        this.$router.push({
-                            name: 'PhotoBoardReadPage',
+                        }
+                    }).then((res)=>{
+                           alert('등록 완료')
+                           this.$router.push({
+                            name: 'PhotoBoardReadPage', 
                             params: { boardNo: res.data.boardNo.toString() }
                         })
-                    })
-                )
-                    .catch(() => {
-                        alert('게시물 수정 실패!')
-                    })
-            }else{
-                   axios.put(`http://localhost:7777/photoBoard/${this.boardNo}`,
-                { title, writer: this.photoBoard.writer, content, regDate: this.photoBoard.regDate })
-                    .then(res => {
-                        alert('게시물 수정 성공!')
-                        this.$router.push({
-                            name: 'PhotoBoardReadPage',
-                            params: { boardNo: res.data.boardNo.toString() }
-                        })
+                   
+                           
                     })
                     .catch(() => {
-                        alert('게시물 수정 실패!')
+                        alert('문제 발생!')
                     })
-
-            }
+        
         
         }
-        
     },
     created () {
         this.fetchPhotoBoard(this.boardNo)
@@ -88,8 +89,4 @@ export default {
 
 <style scoped>
 
-h1 {
-    padding:15px;
-}
-    
 </style>

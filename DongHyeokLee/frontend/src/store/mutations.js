@@ -7,10 +7,12 @@ import {
     FETCH_PHOTO_BOARD_LIST,
     FETCH_PHOTO_BOARD,
     FETCH_PHOTO_BOARD_COMMENTS_LIST,
+    FETCH_PHOTO_BOARD_LIKE,
     //영상게시판
     FETCH_VIDEO_BOARD_LIST,
     FETCH_VIDEO_BOARD,
-    FETCH_VIDEO_BOARD_COMMENTS_LIST
+    FETCH_VIDEO_BOARD_COMMENTS_LIST,
+    FETCH_VIDEO_BOARD_LIKE
 
     
 } from './mutation-types'
@@ -36,6 +38,9 @@ export default {
     [FETCH_PHOTO_BOARD_COMMENTS_LIST] (state, photoBoardComments) {
         state.photoBoardComments = photoBoardComments
     },
+    [FETCH_PHOTO_BOARD_LIKE](state, photoBoardLike){
+        state.photoBoardLike = photoBoardLike
+    },
     //영상게시판
     [FETCH_VIDEO_BOARD_LIST] (state, videoBoards) {
         state.videoBoards = videoBoards
@@ -45,5 +50,8 @@ export default {
     },
     [FETCH_VIDEO_BOARD_COMMENTS_LIST] (state, videoBoardComments) {
         state.videoBoardComments = videoBoardComments
-    }
+    },
+    [FETCH_VIDEO_BOARD_LIKE](state, videoBoardLike){
+        state.videoBoardLike = videoBoardLike
+    },
 }

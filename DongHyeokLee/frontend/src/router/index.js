@@ -19,6 +19,8 @@ import VideoBoardReadPage from '@/views/videoBoard/VideoBoardReadPage.vue'
 import VideoBoardModifyPage from '@/views/videoBoard/VideoBoardModifyPage.vue'
 //PLAYLIST
 import PlayListPage from '@/views/music/PlayListPage.vue'
+//검색기능
+import SearchResult from '@/views/freeBoard/SearchListPage.vue'
 
 Vue.use(VueRouter)
 const routes = [
@@ -27,6 +29,17 @@ const routes = [
     name: 'HomeView',
     component: HomeView
   },
+  {
+    path: '/searchList',
+    name: 'SearchResult',
+    components: {
+      default: SearchResult
+  },
+    props: {
+      default: true
+    }
+  },
+
    //영상게시판
    {
     path: '/videoBoardModify/:boardNo',

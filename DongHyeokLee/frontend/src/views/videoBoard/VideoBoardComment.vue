@@ -1,12 +1,15 @@
 <template>
     <div>
-        <video-board-comment-form :videoBoardComments="videoBoardComments" :boardNo="boardNo" @submit="onSubmit"/>
+       <board-comment-form :commentList="videoBoardComments" 
+                            :boardNo="boardNo"
+                            :boardName="`${this.boardName}`"
+                             @submit="onSubmit"/>
     </div>
 </template>
 
 <script>
 
-import VideoBoardCommentForm from '@/components/videoBoard/VideoBoardCommentForm.vue'
+import BoardCommentForm from '@/components/common/comment/BoardCommentForm.vue'
 import { mapActions, mapState } from 'vuex'
 import axios from 'axios'
 
@@ -18,9 +21,13 @@ export default {
             required: true
         }
     },
-
+    data () {
+    return {
+        boardName: 'videoBoardComments'
+    }
+    },
     components: {
-        VideoBoardCommentForm
+        BoardCommentForm
     },
         computed: {
         ...mapState(['videoBoardComments'])
@@ -36,9 +43,9 @@ export default {
        methods: {
         ...mapActions(['fetchVideoBoardCommentsList']),
          onSubmit (payload) {
-            const { writer, content } = payload
+            const { writer, comment } = payload
             const boardNo = this.boardNo
-            axios.post(`http://localhost:7777/videoBoardComments/register/${boardNo}`, { writer, content })
+            axios.post(`http://localhost:7777/videoBoardComments/register/${boardNo}`, { writer, comment })
                     .then(() => {
                         alert('댓글 등록')
                         this.$router.go()

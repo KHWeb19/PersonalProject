@@ -1,11 +1,11 @@
 <template>
-    <div id="read">
+    <div class="read">
+        <h2 class="bar"></h2>
         <!-- 리스트로 돌아가기 -->
-        <router-link id="list-btn" :to="{ name: 'FreeBoardListPage' }">
-            <v-icon id="list-icon">
-                mdi-format-list-bulleted
-            </v-icon>
-           <strong>자유게시판</strong>
+        <router-link class="list-btn-wrap" :to="{ name: 'FreeBoardListPage' }">
+            <v-btn class="list-btn" color="amber lighten-2">
+               <strong class="text">자유게시판</strong>
+            </v-btn>
         </router-link>
         
         <free-board-read v-if="freeBoard" :freeBoard="freeBoard"/>
@@ -14,12 +14,12 @@
         <div class = "button">
             <router-link v-if="$store.state.userInfo.nickname == freeBoard.writer" 
                             :to="{ name: 'FreeBoardModifyPage', params: { boardNo } }">
-                <v-btn class="modify-btn" text>
+                <v-btn class="modify-btn" color="amber lighten-2">
                 <strong>수정</strong>
                 </v-btn>
             </router-link>
             
-            <v-btn class="delete-btn" v-if="$store.state.userInfo.nickname == freeBoard.writer" @click="onDelete" text>
+            <v-btn class="delete-btn" v-if="$store.state.userInfo.nickname == freeBoard.writer" @click="onDelete">
                 <strong>삭제</strong>
             </v-btn>
         </div>
@@ -88,12 +88,6 @@ export default {
 
 <style scoped>
 
-#read{
-    background-image: url(@/assets/img/homeBackground.png);
-    background-size: cover;
-    padding: 20px;
-}
-
 .button {
     padding: 10px;
     margin-left: 900px;
@@ -106,19 +100,29 @@ a:hover{
 }
 
 .modify-btn {
-    color: white;   
+    color: black;
+    margin-right: 5px;   
 }
 .delete-btn{
     color: grey;  
 }
-#list-btn{
+.list-btn-wrap{
     padding: 20px;
-    margin-left:425px;
-    color:white;
-}
-#list-icon{
-    color:white;
-}
+    margin-left:425px; 
     
+}
+.bar{
+    height:80px;
+    padding: 20px;   
+    background-color:#FFD54F;
+    margin-bottom:50px;
+}
+.text{
+     font-family: 'Nanum Brush Script', cursive;
+     font-size: 18px;
+}
+
+
+
     
 </style>

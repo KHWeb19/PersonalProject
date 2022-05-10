@@ -1,5 +1,6 @@
 <template>
-    <div id="music"> 
+    <div id="music">
+      <h2 id="title">MUSIC</h2> 
       <play-list-form/>
       <v-carousel cycle hide-delimiters class="cover">
         <v-carousel-item  v-for="(item,i) in items" :key="i" :src="item.src" >
@@ -46,7 +47,7 @@ export default {
 
 <style scoped>
 #music {
-  background-image: url(@/assets/img/homeBackground.png);
+  
    height: 100vh;
 }
 .img {
@@ -57,6 +58,13 @@ export default {
   width: 600px;
   height: 300px;
   margin-left: 30%;
-  
+}
+h2 {
+  text-align: center;
+  padding:20px;
+  background-color: #FFD54F;
+  margin-bottom:50px;
+  font-family: 'Nanum Brush Script', cursive;
+
 }
 </style>

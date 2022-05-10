@@ -1,9 +1,9 @@
 package com.example.demo.service.member;
 
-import com.example.demo.controller.member.request.MemberRequest;
-import com.example.demo.response.DuplicationCheck;
-import com.example.demo.entitiy.member.MemberInfo;
-import com.example.demo.entitiy.member.MemberAuth;
+import com.example.demo.dto.request.MemberRequest;
+import com.example.demo.dto.response.DuplicationCheck;
+import com.example.demo.entity.member.MemberInfo;
+import com.example.demo.entity.member.MemberAuth;
 import com.example.demo.repository.member.MemberAuthRepository;
 import com.example.demo.repository.member.MemberRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -36,7 +36,7 @@ public class MemberServiceImpl implements MemberService {
     public DuplicationCheck register(MemberRequest memberRequest) {
 
             Optional<MemberInfo> checkUserId = memberRepository.checkUserId(memberRequest.getUserId());
-            if(!checkUserId.equals(Optional.empty())){
+            if(!checkUserId.equals(Optional.empty())) {
                 DuplicationCheck message = new DuplicationCheck("아이디 중복입니다");
                 return message;
             }
@@ -113,7 +113,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public void remove(MemberInfo member) {
-            Optional<MemberInfo> maybeMember = memberRepository.findMemberNo(member.getUserId());
+            Optional<MemberInfo> maybeMember = memberRepository.findByUserId(member.getUserId());
             MemberInfo removeMember = maybeMember.get();
             memberRepository.deleteById(removeMember.getMemberNo());
     }

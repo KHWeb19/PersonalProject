@@ -1,16 +1,12 @@
 package com.example.demo.controller.board.freeBoard;
 
-
-
-import com.example.demo.controller.board.freeBoard.request.FreeBoardCommentsRequest;
-import com.example.demo.entitiy.board.freeBoard.FreeBoardComments;
-import com.example.demo.service.board.freeBoard.FreeBoardCommentsService;
+import com.example.demo.dto.request.CommentRequest;
+import com.example.demo.dto.request.ReplyRequest;
+import com.example.demo.service.board.BaseCommentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Slf4j
 @RestController
@@ -19,38 +15,37 @@ import java.util.List;
 public class FreeBoardCommentsController {
 
     @Autowired
-    private FreeBoardCommentsService service;
+    private BaseCommentService freeBoardCommentsServiceImpl;
 
     //댓글 등록
     @PostMapping("/register/{boardNo}")
     public void freeBoardCommentsRegister ( @PathVariable("boardNo") Integer boardNo,
-                                            @Validated @RequestBody FreeBoardCommentsRequest commentsRequest) {
+                                            @Validated @RequestBody CommentRequest commentRequest) {
 
-        log.info("FreeBoardCommentsRegister()" + commentsRequest);
-        commentsRequest.setBoardNo(Long.valueOf(boardNo));
+        log.info("FreeBoardCommentsRegister()" + commentRequest);
+        //commentsRequest.setBoardNo(Long.valueOf(boardNo));
 
-        service.register(commentsRequest);
+        freeBoardCommentsServiceImpl.register(boardNo, commentRequest);
     }
 
     //댓글 목록
     @GetMapping("/list/{boardNo}")
-    public List<FreeBoardComments> FreeBoardCommentsList (@PathVariable("boardNo") Integer boardNo) {
+    public Object FreeBoardCommentsList (@PathVariable("boardNo") Integer boardNo) {
         log.info("FreeBoardCommentsList()");
 
-        return service.list(boardNo);
+        return freeBoardCommentsServiceImpl.list(boardNo);
     }
 
     //댓글 수정
-    @PutMapping("/{commentNo}")
-    public FreeBoardComments freeBoardCommentModify (
+   @PutMapping("/{commentNo}")
+    public Object freeBoardCommentModify (
             @PathVariable("commentNo") Integer commentNo,
-            @RequestBody FreeBoardComments freeBoardComments) {
-        log.info("freeBoardCommentModify(): " + freeBoardComments);
+            @Validated @RequestBody CommentRequest commentRequest) {
+        log.info("freeBoardCommentModify(): " + commentRequest);
 
-        freeBoardComments.setCommentNo(Long.valueOf(commentNo));
-        service.modify(freeBoardComments);
 
-        return freeBoardComments;
+       return freeBoardCommentsServiceImpl.modify(commentNo, commentRequest);
+
     }
 
 
@@ -60,6 +55,16 @@ public class FreeBoardCommentsController {
             @PathVariable("commentNo") Integer commentNo) {
         log.info("commentRemove()");
 
-        service.remove(commentNo);
+        freeBoardCommentsServiceImpl.remove(commentNo);
+    }
+
+    //대댓글
+    @PostMapping("reply/register/{boardNo}")
+    public void freeBoardReplyRegister (@PathVariable("boardNo") Integer boardNo,
+                                        @Validated @RequestBody ReplyRequest commentRequest) {
+
+        log.info("FreeBoardReplyRegister()" + commentRequest);
+
+        freeBoardCommentsServiceImpl.replyRegister(boardNo, commentRequest);
     }
 }

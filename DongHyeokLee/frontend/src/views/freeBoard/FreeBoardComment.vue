@@ -1,12 +1,15 @@
 <template>
     <div>
-        <free-board-comment-form :freeBoardComments="freeBoardComments" :boardNo="boardNo" @submit="onSubmit"/>
+        <board-comment-form :commentList="freeBoardComments" 
+                            :boardNo="boardNo"
+                            :boardName="`${this.boardName}`"
+                             @submit="onSubmit"/>
     </div>
 </template>
 
 <script>
 
-import FreeBoardCommentForm from '@/components/freeBoard/FreeBoardCommentForm.vue'
+import BoardCommentForm from '@/components/common/comment/BoardCommentForm.vue'
 import { mapActions, mapState } from 'vuex'
 import axios from 'axios'
 
@@ -17,9 +20,13 @@ export default {
             required: true
         }
     },
-
+     data () {
+        return {
+            boardName: "freeBoardComments"
+        }
+    },
     components: {
-        FreeBoardCommentForm
+        BoardCommentForm
     },
         computed: {
         ...mapState(['freeBoardComments'])
@@ -35,9 +42,9 @@ export default {
        methods: {
         ...mapActions(['fetchFreeBoardCommentsList']),
          onSubmit (payload) {
-            const { writer, content } = payload
+            const { writer, comment } = payload
             const boardNo = this.boardNo
-            axios.post(`http://localhost:7777/freeBoardComments/register/${boardNo}`, { writer, content })
+            axios.post(`http://localhost:7777/freeBoardComments/register/${boardNo}`, { writer, comment })
                     .then(() => {
                         alert('댓글 등록')
                         this.$router.go()
@@ -46,6 +53,6 @@ export default {
                         alert('문제 발생!')
                     })
         }
-    },
+    }
 }
 </script>

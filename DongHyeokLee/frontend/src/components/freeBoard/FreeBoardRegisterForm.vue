@@ -4,12 +4,12 @@
         <table align="center" border="1">
             <tr>
                 <th>
-                   <strong> {{ this.writer }} </strong> 
+                   <strong class="writer"> {{ this.writer }} </strong> 
                 </th>
             </tr>
             <tr> 
                 <td>
-                    <input id="title" type="text" v-model="title" cols="70" placeholder="제목을 입력하세요"/>
+                    <input id="title" type="text" v-model="title" cols="70" placeholder="제목을 입력하세요(~18자)"/>
                 </td>
             </tr>
              <tr>
@@ -22,13 +22,16 @@
         
 
         <div class="button">
-            <v-btn type="submit" text dark>
-                등록
+            <v-btn type="submit"
+                   class="register"
+                   color="amber lighten-2">
+               <strong>등록</strong>
             </v-btn>
-            <v-btn text>
-            <router-link id="cancel" :to="{ name: 'FreeBoardListPage' }">
-               <strong>취소</strong>
-            </router-link>
+            <v-btn>
+                <router-link class="cancel" 
+                            :to="{ name: 'FreeBoardListPage' }">
+                <strong>취소</strong>
+                </router-link>
             </v-btn>
         </div>
     </form>
@@ -61,29 +64,38 @@ export default {
 
 <style scoped>
 #theme{
-    padding:20px;
-    color: white;
+    padding:30px;
+    color: black;
+    background-color:#FFD54F;
+    margin-bottom:50px;
+    font-family: 'Nanum Brush Script', cursive;
 }
 #title{
-    color:white;
+    color:black;
 }
 th {
     padding: 10px;
-    border-bottom: 3px solid white;
-    color: white;
+    border-bottom: 1px solid #EEEEEE;
+    color: black;
 }
 td {
     padding: 10px;
-    border-bottom: 3px solid white;
-    color: white;
+    border-bottom: 1px solid #EEEEEE;
+    color: black;
 }
 textarea {
     border: 1px solid transparent;
-    color: white;
+    color: black;
     outline: none;    
 }
 table {
     border-color:  transparent ;
+}
+a{
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: none; 
 }
 input {
     outline: none;
@@ -92,14 +104,15 @@ input {
 .button {
     padding: 20px;
 }
-a{
-    text-decoration: none;
+.cancel{
+    color: grey;
 }
-a:hover{
-    text-decoration: none; 
+.writer{
+    background-color:#EEEEEE;
 }
-#cancel{
-    color: black;
+.register{
+    margin-right:5px;
+
 }
 
 </style>

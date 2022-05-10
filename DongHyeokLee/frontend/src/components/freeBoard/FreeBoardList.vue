@@ -2,11 +2,11 @@
     <div id="free-board" align="center">
         <table>
             <tr class="list">
-                <th align="center" width="100">번호</th> 
-                <th align="center" width="600">제목</th>
-                <th align="center" width="100">작성자</th>
-                <th align="center" width="150">등록일자</th>
-                <th align="center" width="80">조회수</th>
+                <td align="center" width="100"><strong>번호</strong></td> 
+                <td align="center" width="600"><strong>제목</strong></td>
+                <td align="center" width="100"><strong>작성자</strong></td>
+                <td align="center" width="150"><strong>등록일자</strong></td>
+                <td align="center" width="80"><strong>조회수</strong></td>
             </tr>
             <tr v-if="!freeBoards || (Array.isArray(freeBoards) && freeBoards.length === 0)">
                 <td colspan="5">
@@ -19,9 +19,9 @@
                     {{ freeBoard.boardNo }}
                 </th>
                 <th>
-                    <router-link :to="{ name: 'FreeBoardReadPage',
-                                        params: { boardNo: freeBoard.boardNo.toString() } }" style="color:white;">
-                       {{ freeBoard.title}} 
+                    <router-link class="read" :to="{ name: 'FreeBoardReadPage',
+                                        params: { boardNo: freeBoard.boardNo.toString() } }">
+                       {{ freeBoard.title}} [{{freeBoard.commentCnt}}]
                     </router-link>
                 </th>
             
@@ -38,7 +38,7 @@
         </table> 
 
     <!-- 페이징 참고 https://pewww.tistory.com/5 -->
-    <div class="btn-cover">
+    <div class="page-btn">
       <v-btn :disabled="pageNum === 0" @click="prevPage" class="page-prev" text>
         <v-icon>
             mdi-chevron-left
@@ -50,16 +50,27 @@
               mdi-chevron-right
           </v-icon>
       </v-btn>
-        <!-- 등록 버튼 -->
-    <router-link :to="{ name: 'FreeBoardRegisterPage'}">
-        <v-btn v-if="$store.state.isLogin == true" class="register-btn" text>
-            <v-icon class="register-icon">mdi-pencil-plus</v-icon>
+    </div>
+
+    <!-- 검색 기능 -->
+    <div class="btn-cover">
+    <input type="text" 
+           class="search" 
+           v-model="keyWord" 
+           cols="70" 
+           placeholder="Search" />
+    <v-btn @click="searchBtn()" 
+            class="search-btn"
+            depressed small>
+        <strong>검색</strong>
+        </v-btn>
+          <!-- 등록 버튼 -->
+    <router-link class="register-btn" :to="{ name: 'FreeBoardRegisterPage'}">
+        <v-btn v-if="$store.state.isLogin == true" class="amber lighten-2">
+          <strong>등록</strong>
         </v-btn>
     </router-link>
-    
     </div>
-     
-        
      
          
         
@@ -67,18 +78,21 @@
 </template>
 
 <script>
+import axios from 'axios';
 
 export default {
     name: 'FreeBoardList',
     props: {
       freeBoards: {
             type: Array
-        }   
+        },
     },
     data () {
         return {
             pageNum: 0,
-            pageSize:10
+            pageSize:10,
+            searchList:[],
+            keyWord:''
         }
     },
     methods: {
@@ -87,6 +101,17 @@ export default {
         },
         prevPage () {
             this.pageNum -= 1;
+        },
+        searchBtn() {
+            const keyWord = this.keyWord
+            console.log(keyWord)
+            axios.post('http://localhost:7777/freeBoard/search',  { keyWord })
+                    .then((res) => {
+                        console.log("검색 성공")
+                        console.log(res.data)
+                        this.$router.push({name: 'SearchResult',
+                                    params: { searchList: res.data} })
+                    })
         }
     },
     computed: {
@@ -102,8 +127,8 @@ export default {
                 return page
         },
          paginatedData () {
-             const start = this.pageNum * this.pageSize,
-             end = start + this.pageSize
+            const start = this.pageNum * this.pageSize,
+                    end = start + this.pageSize
       
             return this.freeBoards.slice(start, end);
         }
@@ -115,6 +140,7 @@ export default {
 
 
 <style scoped>
+
 a{
     text-decoration: none;
     
@@ -124,7 +150,6 @@ a:hover{
     
 }
 table {
-   
     margin-top: 10px;
     text-align: center;
     border-collapse: collapse;
@@ -132,33 +157,50 @@ table {
 
 th {
     padding: 10px;
-    color: white;
+    color: black;
+    
+}
+td{
+    background-color:#FFD54F;
+    padding: 10px;
+    color: black;
+    
 }
 
 .list{
     /*background-color: #FAFAFA;*/
-    border-bottom: 1px solid white;
-    color: white
+    border-bottom: 1px solid black;
+    color: black;
 }
 
 .page-next {
-    color: white;    
+    color: #FFD54F;    
 }
 
 .page-prev {
-    color:white;
+    color:#FFD54F;
 }
 .page-count{
-    color:white;
+    color:black;
 }
 
-.btn-cover {
+.page-btn {
     margin-top: 15px;
+    margin-bottom:15px;
 }
 .register-btn{
-    color:white;
-    }
-.register-icon{
-    font-size:1.7em;
+    margin-left: 250px;
+}
+.read{
+    color:black;
+}
+.search{
+    border-bottom: 3px solid grey;
+    outline: none;
+    margin-left: 360px;
+    
+}
+.search-btn{
+    margin-left:5px;
 }
 </style>

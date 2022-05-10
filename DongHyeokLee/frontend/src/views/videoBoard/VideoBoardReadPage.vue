@@ -1,28 +1,13 @@
 <template>
     <div>   
-         <!-- 리스트로 돌아가기 -->
-        <router-link :to="{ name: 'VideoBoardListPage' }">
-            <p>사진게시판</p>
-        </router-link>
-        
-        <video-board-read v-if=videoBoard :videoBoard="videoBoard"/>
-
-         <!-- 댓글-->
+      <board-read v-if=videoBoard   :board="videoBoard"
+                                    :boardNo="boardNo"
+                                    :boardName="`${this.boardName}`"
+                                    :listPage="listPage"
+                                    :accept="accept"
+                                    :modifyPage="modifyPage"/>
+        <!-- 댓글 -->              
         <video-board-comment :boardNo="this.boardNo"/>
-
-        <div class = "button">
-            <router-link v-if="$store.state.userInfo.nickname == videoBoard.writer" 
-                            :to="{ name: 'VideoBoardModifyPage', params: { boardNo } }">
-                게시물 수정
-            </router-link>
-            <!-- 삭제해도 db에서 fileName은 날아가는데 vue에 저장 된 파일 자체는 안 날아가는 형태라 고민되네 -->
-            <button v-if="$store.state.userInfo.nickname == videoBoard.writer" @click="onDelete">삭제</button>
-            
-            <router-link :to="{ name: 'VideoBoardListPage' }">
-                목록 보기
-            </router-link>
-        </div>
-        
     </div>
 </template>
 
@@ -31,7 +16,7 @@
 import { mapActions, mapState } from 'vuex'
 import axios from 'axios'
 
-import VideoBoardRead from '@/components/videoBoard/VideoBoardRead.vue'
+import BoardRead from '@/components/common/board/BoardRead.vue'
 import VideoBoardComment from '@/views/videoBoard/VideoBoardComment.vue'
 
 export default {
@@ -42,8 +27,16 @@ export default {
             required: true
         }
     },
+    data () {
+    return {
+        listPage: 'VideoBoardListPage',
+        modifyPage: 'VideoBoardModifyPage',
+        boardName: 'videoBoard',
+        accept: 'mp4'
+    }
+    },
     components: {
-        VideoBoardRead,
+        BoardRead,
         VideoBoardComment
     },
     computed: {
@@ -76,18 +69,36 @@ export default {
 <style scoped>
 
 .button {
-    margin-left: 30%;
+    padding: 5px;
+    margin-left: 60%;
 }
-
 a{
-    text-decoration: none;
-    
+    text-decoration: none;  
 }
-
 p{
     font-size: 1em;
-    padding:  15px;
-    margin-left:400px;
+    margin-top:25px;
+    margin-left:450px;
+}
+.list-btn{
+    margin-top:20px;
+    margin-left:30%;
+}
+.modify-btn{
+    margin-right: 5px;
+}
+.remove-btn{
+    color:grey;
+}
+.bar{
+    height:80px;
+    padding: 20px;   
+    background-color:#FFD54F;
+    margin-bottom:50px;
+}
+.text{
+    font-family: 'Nanum Brush Script', cursive;
+    font-size:18px;
 }
 
     

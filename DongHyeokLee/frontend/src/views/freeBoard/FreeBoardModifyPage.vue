@@ -28,9 +28,9 @@ export default {
         ...mapActions(['fetchFreeBoard']),
         onSubmit (payload) {
             const { title, content } = payload
-
+            console.log(title)
             axios.put(`http://localhost:7777/freeBoard/${this.boardNo}`,
-                { title, writer: this.freeBoard.writer, content, regDate: this.freeBoard.regDate })
+                { title, writer: this.freeBoard.writer, content, regDate: this.freeBoard.regDate, count: this.freeBoard.count })
                     .then(res => {
                         alert('게시물 수정 성공!')
                         this.$router.push({
@@ -56,9 +56,5 @@ export default {
 
 <style scoped>
 
-#modify{
-    background-image: url(@/assets/img/homeBackground.png);
-    height: 100vh;
-}
     
 </style>

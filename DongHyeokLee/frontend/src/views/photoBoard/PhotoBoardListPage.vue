@@ -1,36 +1,46 @@
 <template>
     <div id="photo-board">
         <h2>사진게시판</h2>
-        <div>
-        <photo-board-list :photoBoards="photoBoards"/>
-        </div>
-    </div>
+        <board-list :boards="photoBoards" 
+                    :accept="accept" 
+                    :registerPage="`${registerPage}`"
+                    :boardName="`${this.boardName}`"
+                    :readPage="`${readPage}`"/>
+    </div>   
 </template>
 
 <script>
 
 
 import { mapActions, mapState } from 'vuex'
-import PhotoBoardList from '@/components/photoBoard/PhotoBoardList.vue'
+import BoardList from '@/components/common/board/BoardList.vue'
 
 
 
 export default {
     name: 'PhotoBoardListPage',
     components: {
-        PhotoBoardList,
-        
+        BoardList,     
+    },
+    data () {
+        return {
+            registerPage : 'PhotoBoardRegisterPage',
+            readPage: 'PhotoBoardReadPage',
+            accept: 'jpg',
+            boardName: "photoBoard",
+            writer : this.$store.state.userInfo.nickname,
+        }
     },
     computed: {
         ...mapState(['photoBoards'])
-        
     },
     mounted () {
         if(!this.$store.state.isLogin){
             alert('로그인하세요')
             this.$router.push({name: "HomeView"});
         }else{
-        this.fetchPhotoBoardList()
+            const writer = this.writer
+        this.fetchPhotoBoardList(writer)
         }  
     },
     methods: {
@@ -45,16 +55,15 @@ export default {
 
 h2 {
     text-align: center;
-    margin-top: 20px;
+    padding:20px;
+    background-color: #FFD54F;
+    margin-bottom:50px;
+    font-family: 'Nanum Brush Script', cursive;
+
 }
 a {
     text-decoration: none;
     margin-left: 1230px;
-}
-#photo-board{
-     background-image: url(@/assets/img/XL.jpg);
-     background-size: cover;
-
 }
 
     

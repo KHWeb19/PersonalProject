@@ -44,7 +44,6 @@ export default {
 <style scoped>
 
 #board{
- background-image: url(@/assets/img/homeBackground.png);
  height: 100vh;
 }
 a{
@@ -56,11 +55,12 @@ a:hover{
 }
 
 #title {
-    color: white;
+    color: black;
     text-align: center;
-    padding: 30px;   
+    padding: 20px;   
+    background-color:#FFD54F;
+    margin-bottom:50px;
+    font-family: 'Nanum Brush Script', cursive;
 }
-
-
 
 </style>

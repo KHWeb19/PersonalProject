@@ -1,22 +1,12 @@
 <template>
     <div>   
-         <!-- 리스트로 돌아가기 -->
-        <router-link :to="{ name: 'PhotoBoardListPage' }">
-            <p>사진게시판</p>
-        </router-link>
-        
-        <photo-board-read v-if=photoBoard :photoBoard="photoBoard"/>
-        <!-- 버튼 -->
-        <div class = "button">
-            <router-link v-if="$store.state.userInfo.nickname == photoBoard.writer" 
-                            :to="{ name: 'PhotoBoardModifyPage', params: { boardNo } }">
-                 수정
-            </router-link>
-            <!-- 삭제해도 db에서 fileName은 날아가는데 vue에 저장 된 파일 자체는 안 날아가는 형태라 고민되네 -->
-            <button v-if="$store.state.userInfo.nickname == photoBoard.writer" @click="onDelete">삭제</button>
-            
-        </div>
-        <!-- 댓글-->
+        <board-read v-if=photoBoard :board="photoBoard"
+                                    :boardNo="boardNo"
+                                    :boardName="`${this.boardName}`"
+                                    :listPage="listPage"
+                                    :accept="accept" 
+                                    :modifyPage="modifyPage"/>
+        <!-- 댓글 -->              
         <photo-board-comment :boardNo="this.boardNo"/>
         
     </div>
@@ -25,9 +15,8 @@
 <script>
 
 import { mapActions, mapState } from 'vuex'
-import axios from 'axios'
 
-import PhotoBoardRead from '@/components/photoBoard/PhotoBoardRead.vue'
+import BoardRead from '@/components/common/board/BoardRead.vue'
 import PhotoBoardComment from '@/views/photoBoard/PhotoBoardComment.vue'
 
 export default {
@@ -38,8 +27,16 @@ export default {
             required: true
         }
     },
+    data () {
+        return {
+            listPage: 'PhotoBoardListPage',
+            modifyPage: 'PhotoBoardModifyPage',
+            boardName: 'photoBoard',
+            accept: 'jpg'
+        }
+    },
     components: {
-        PhotoBoardRead,
+        BoardRead,
         PhotoBoardComment
     },
     computed: {
@@ -53,39 +50,7 @@ export default {
                 })   
     },
     methods: {
-        ...mapActions(['fetchPhotoBoard']),
-          onDelete () {
-            const boardNo= this.boardNo
-            axios.delete(`http://localhost:7777/photoBoard/${boardNo}`)
-                    .then(() => {
-                        alert('삭제 성공!')
-                        this.$router.push({ name: 'PhotoBoardListPage' })
-                    })
-                    .catch(() => {
-                        alert('삭제 실패! 문제 발생!')
-                    })
-        }
+        ...mapActions(['fetchPhotoBoard'])
     }
 }
 </script>
-
-<style scoped>
-
-.button {
-    padding: 10px;
-    margin-left: 64%;
-}
-
-a{
-    text-decoration: none;
-    
-}
-
-p{
-    font-size: 1em;
-    margin-top:25px;
-    margin-left:450px;
-}
-
-    
-</style>
