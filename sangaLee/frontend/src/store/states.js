@@ -1,4 +1,9 @@
 export default {
-    boards: [],
-    board: null
+    QuestionBoards: [],
+    QuestionBoard: null,
+    jpaBoards: [],
+    jpaBoard: null,
+    dataBoards: [],
+    dataBoard: null,
+    member: null
 }

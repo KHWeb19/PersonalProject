@@ -4,10 +4,10 @@
     <!-- 프로젝트명, 프로젝트 개요 -->
     <h1>개인, 그룹 스터디 관리 도구 사이트</h1>
     <br>
-    <p class="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-         Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-         Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-         Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <p class="text">평소 친구들과 다같이 모여서 공부를 할때가 자주 있다.<br>
+                            만남을 가질때마다 오프라인 뿐만 아니라 온라인 상에서 여러 친구들과 <br>
+                            소통하며 같이 스터디를 할 수 있는 사이트를 직접 만들어보면 좋을 것 같다고 생각했다.<br>
+                            그리하여 이번 개인프로젝트에서 스터디 사이트를 만들게 되었다.</p>
     <br>
 
     <div class="btnAB">

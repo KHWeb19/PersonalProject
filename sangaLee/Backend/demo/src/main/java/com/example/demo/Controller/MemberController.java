@@ -44,7 +44,7 @@ public class MemberController {
     }
 
     // 프로필 변경
-    @PutMapping("/{memberNo}")
+    @PutMapping("/modify/{memberNo}")
     public Member modify (
             @PathVariable("memberNo") Long memberNo,
             @RequestBody Member member) {

@@ -1,8 +1,8 @@
 <template>
-    <div align="center">
-        <h2>게시물 작성</h2>
+<div class="main">
+    <h2>질문을 작성해주세요.</h2>
         <question-board-register-form @submit="onSubmit"/>
-    </div>
+</div>
 </template>
 
 <script>
@@ -11,19 +11,19 @@ import QuestionBoardRegisterForm from '@/components/QuestionBoard/QuestionBoardR
 import axios from 'axios'
 
 export default {
-    name: 'BoardRegisterPage',
+    name: 'QuestionBoardRegisterPage',
     components: {
         QuestionBoardRegisterForm
     },
     methods: {
         onSubmit (payload) {
-            const { title, content, writer } = payload
+            const { title, writer, content } = payload
             axios.post('http://localhost:7777/QuestionBoard/register', { title, writer, content })
                     .then(() => {
                         alert('게시물 등록 성공!')
 
                         this.$router.push({
-                            name: 'BoardListPage'
+                            name: 'QuestionBoardListPage'
                         })
                     })
                     .catch(() => {
@@ -34,3 +34,14 @@ export default {
 }
 
 </script>
+<style scoped>
+.main {
+background-color: #EBECF0;
+height: 100vh;
+}
+h2 {
+    text-align: center;
+    padding: 60px;
+    color: #6768ab;
+}
+</style>

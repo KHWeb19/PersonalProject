@@ -30,7 +30,7 @@ export default {
         onSubmit (payload) {
             const { title, content } = payload
 
-            axios.put(`http://localhost:7777/Questionboard/${this.boardNo}`, { title, content })
+            axios.put(`http://localhost:7777/QuestionBoard/${this.boardNo}`, { title, content })
                     .then(res => {
                         alert('게시물 수정 성공!')
                         this.$router.push({

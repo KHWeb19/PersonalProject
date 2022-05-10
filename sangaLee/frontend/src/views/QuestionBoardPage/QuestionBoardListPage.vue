@@ -1,38 +1,58 @@
 <template>
+  <div class="mainbg">
+    <!-- sidebar -->
+    <v-navigation-drawer app fixed permanent :width="150">
+      <side-bar/>
+    </v-navigation-drawer>
 
-    <div id="QuestionBoard">
-        <h1>질문 게시판</h1>
-        <router-link :to="{ name: 'QuestionBoardRegisterPage' }">
-            게시물 작성
-        </router-link>
-        <board-list :boards="boards"/>
-    </div>
+    <h1>질문 게시판</h1>
+    
+    <!-- 게시물 작성 버튼 -->
+    <router-link :to="{ name: 'QuestionBoardRegisterPage' }">
+        <button>글쓰기　<i class="fas fa-pencil-alt"></i></button>
+    </router-link>
 
+    <!-- 게시물 목록 -->
+    <question-board-list :QuestionBoards="QuestionBoards"/>
+  </div>
 </template>
 
 
 <script>
 
-import DashBoardSideBar from '@/components/DashBoard/DashBoardSideBar.vue'
-
-import QuestionBoardList from '@/components/QuestionBoard/QuestionBoardList.vue'
+import SideBar from '../../components/Layout/SideBar.vue'
+import QuestionBoardList from '../../components/QuestionBoard/QuestionBoardList.vue'
 import { mapState, mapActions } from 'vuex'
 
 export default {
     name: 'QuestionBoardListPage',
     components: {
-        DashBoardSideBar,
-        QuestionBoardList
+        QuestionBoardList,
+        SideBar
     },
     computed: {
-        ...mapState(['boards'])
+        ...mapState(['QuestionBoards'])
     },
     mounted () {
-        this.fetchBoardList()
+        this.fetchQuestionBoardList()
     },
     methods: {
-        ...mapActions(['fetchBoardList'])
+        ...mapActions(['fetchQuestionBoardList'])
     }
 }
 
 </script>
+
+<style scoped>
+.mainbg {
+  height: 100vh;
+  padding: 55px;
+  color: #6768ab;
+}
+button {
+color: #6768ab;
+letter-spacing: 0.1em;
+font-weight: bold;
+margin-left: 980px;
+}
+</style>

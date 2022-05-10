@@ -19,45 +19,45 @@ public class QuestionBoardController {
     private QuestionBoardService service;
 
     @PostMapping("/register")
-    public void jpaBoardRegister (@Validated @RequestBody QuestionBoard board) {
-        log.info("jpaBoardRegister()");
+    public void QuestionBoardRegister (@Validated @RequestBody QuestionBoard board) {
+        log.info("QuestionBoardRegister()");
 
         service.register(board);
     }
 
     @GetMapping("/list")
-    public List<QuestionBoard> jpaBoardList () {
-        log.info("jpaBoardList()");
+    public List<QuestionBoard> QuestionBoardList () {
+        log.info("QuestionBoardList()");
 
         return service.list();
     }
 
     @GetMapping("/{boardNo}")
-    public QuestionBoard jpaBoardRead (
-            @PathVariable("boardNo") Integer boardNo) {
-        log.info("jpaBoardRead()");
+    public QuestionBoard QuestionBoardRead (
+            @PathVariable("QuestionBoardNo") Integer BoardNo) {
+        log.info("QuestionBoardRead()");
 
-        return service.read(boardNo);
+        return service.read(BoardNo);
     }
 
     @PutMapping("/{boardNo}")
-    public QuestionBoard jpaBoardModify (
-            @PathVariable("boardNo") Integer boardNo,
-            @RequestBody QuestionBoard jpaBoard) {
-        log.info("jpaBoardModify(): " + jpaBoard);
+    public QuestionBoard QuestionBoardModify (
+            @PathVariable("QuestionBoardNo") Integer BoardNo,
+            @RequestBody QuestionBoard QuestionBoard) {
+        log.info("QuestionBoardModify(): " + QuestionBoard);
 
-        jpaBoard.setQuestionBoardNo(Long.valueOf(boardNo));
-        service.modify(jpaBoard);
+        QuestionBoard.setBoardNo(Long.valueOf(BoardNo));
+        service.modify(QuestionBoard);
 
-        return jpaBoard;
+        return QuestionBoard;
     }
 
     @DeleteMapping("/{boardNo}")
-    public void jpaBoardRemove (
-            @PathVariable("boardNo") Integer boardNo) {
-        log.info("jpaBoardRemove()");
+    public void QuestionBoardRemove (
+            @PathVariable("QuestionBoardNo") Integer BoardNo) {
+        log.info("QuestionBoardRemove()");
 
-        service.remove(boardNo);
+        service.remove(BoardNo);
     }
 
 }

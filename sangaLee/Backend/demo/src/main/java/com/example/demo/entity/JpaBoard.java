@@ -9,9 +9,9 @@ import java.util.Date;
 
 @Data
 @Entity
-public class QuestionBoard {
+public class JpaBoard {
     @Id
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long boardNo;
 
     @Column(length = 128, nullable = false)

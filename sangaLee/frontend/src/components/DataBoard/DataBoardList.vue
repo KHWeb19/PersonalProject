@@ -1,12 +1,11 @@
 <template>
-    <div>
-        <h3>게시물 목록</h3>
-        <table border="1">
+    <div class="box">
+        <table class="boardbox">
             <tr>
-                <th align="center" width="100">번호</th>
-                <th align="center" width="640">제목</th>
-                <th align="center" width="150">작성자</th>
-                <th align="center" width="240">등록일자</th>
+                <th width="100">NO</th>
+                <th width="640">제목</th>
+                <th width="150">작성자</th>
+                <th width="240">등록일자</th>
             </tr>
             <tr v-if="!jpaBoards || (Array.isArray(jpaBoards) && jpaBoards.length === 0)">
                 <td colspan="4">
@@ -37,7 +36,7 @@
 <script>
 
 export default {
-    name: 'DataBoardListPage.vue',
+    name: 'DataBoardList.vue',
     props: {
       jpaBoards: {
             type: Array
@@ -46,3 +45,7 @@ export default {
 }
 
 </script>
+
+<style scoped>
+
+</style>
