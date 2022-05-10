@@ -28,15 +28,14 @@ public class AttachmentUtility {
             for (MultipartFile multipartFile : fileList) {
 
                 String randomUUID = UUID.randomUUID().toString();
-
                 String newName = randomUUID + '_' + multipartFile.getOriginalFilename();
 
                 String url = amazonS3Service.uploadFile(multipartFile, randomUUID);
 
                 log.info("Returned URL: {}", url);
 
-                post.setContent(post.getContent().replaceFirst(strUUID, "<img src=\"" + url + "\">"));
-
+                post.setContent(post.getContent().replaceFirst(strUUID, "<img src=\"" + url +
+                        "\" style =\"max-width:80%; display: block" +"\">"));
                 System.out.println(post.getContent());
 
                 Attachment attachment = new Attachment(null, newName, url, post);
@@ -56,7 +55,7 @@ public class AttachmentUtility {
                     filesToRemove.add(file);
                 }
             });
-            // ConcurrentModificationException 임시방편
+            // ConcurrentModificationException
             filesToRemove.forEach((file) -> {
                 post.getAttachments().remove(file);
             });

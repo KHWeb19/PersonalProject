@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -42,6 +43,8 @@ public class PostController {
         log.info("Creating Post");
 
         log.info("UUID: {}", strUUID);
+
+        post.setRegdate(LocalDateTime.now());
 
         AttachmentUtility attachmentUtility = new AttachmentUtility(amazonS3Service);
         PostUtility postUtility = new PostUtility(userService);
@@ -91,7 +94,7 @@ public class PostController {
         String user = principal.getName();
 
         // 로그인유저 vs Post 작성자 검사
-        if (postService.readPost(no).getAuthor().equals(principal.getName())){
+        if (author.equals(user)){
             log.info("Author Validated");
             result = true;
         }

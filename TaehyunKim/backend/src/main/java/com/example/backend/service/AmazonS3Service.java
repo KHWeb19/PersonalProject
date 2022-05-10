@@ -26,7 +26,7 @@ public class AmazonS3Service {
 
         File convertedFile = convertMultiToFile(file);
         String fileName = strUUID  + '_' + file.getOriginalFilename();
-        log.info("filename super duper: {}", fileName);
+        log.info("filename: {}", fileName);
         amazonS3Client.putObject(new PutObjectRequest(bucketName, fileName, convertedFile));
         if (convertedFile.delete()){
             log.info("File Deleted");

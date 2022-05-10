@@ -1,7 +1,16 @@
 <template>
     <v-container>
-        <div class="main-div" v-if="post">
-            <p>{{post.title}}</p>
+        <div class="div-top">
+            <div class="div-top div-top__flex_between">
+                <span class="div-top__title">{{post.title}}</span>
+                <span>{{post.regdate}}</span>
+            </div>
+            <hr>
+            <div class="div-top div-top__flex_between">
+                <span>Author: {{post.author}}</span>
+                <span>Views: {{post.hits}}</span>
+            </div>
+            <hr>
         </div>
         
         <div class="btn-container">
@@ -14,12 +23,11 @@
 
         <v-row justify="center">
             <v-col cols="12">
-                <div contenteditable="true" id="the-content" @input="contentChanged" class="section-one section-one__editor">
-                </div>
+                <div contenteditable="true" id="the-content" @input="contentChanged" class="section-one section-one__editor"></div>
             </v-col>
         </v-row>
 
-        <input id="inputImg" type="file" multiple ref="files" accept="image/*" style="display: none">
+        <input id="inputImg" type="file" multiple ref="files" accept="image/*" style="display: none" onclick="this.value=null">
         <div class="section-one section-one__div-flex">
             <v-btn class="primary" @click="modifyPost()">Update Post</v-btn>
         </div>
@@ -43,7 +51,6 @@ export default{
         }
     },
 
-    
     computed:{
         ...mapState(['post'])
     },
@@ -59,6 +66,7 @@ export default{
     },
     methods:{
         ...mapActions(['read_post']),
+        
          contentChanged(e){
             this.content = e.target.innerHTML
         },
@@ -90,9 +98,9 @@ export default{
         replaceImgTags(){
             this.strUUID = uuidv4()
             this.previews.forEach(() => {
-                let startIdx = this.content.indexOf("<img src=\"")
-                let endIdx = this.content.indexOf("\">")
-                let strToReplace = this.content.substring(startIdx, endIdx+2)
+                let startIdx = this.content.indexOf("<img src=\"data")
+                let endIdx = this.content.indexOf("9%;\">")
+                let strToReplace = this.content.substring(startIdx, endIdx+5)
                 this.content = this.content.replace(strToReplace, this.strUUID)
             })
         },
@@ -112,7 +120,8 @@ export default{
             .then(() => this.$router.push("/readpost/" + this.$route.params.no))
             .catch(() => console.log("Unable to modify post"))
 
-        }
+            }
+
  
     },
 
@@ -121,6 +130,7 @@ export default{
     },
 
     mounted(){
+        
             document.getElementById("inputImg").addEventListener('change',
             (e) => {
                 let files = e.target.files
@@ -134,13 +144,13 @@ export default{
 
                 Promise.all(promises).then((values) => {
                     values.forEach((item) => {
+                        this.previews.push(item)
                         document.getElementById('the-content').focus({preventScroll: true})
 
-                        //let imgWithTag = "<img src=\"" + item + "\">"
-                        //document.execCommand('insertHTML', false, imgWithTag)
-                        document.execCommand('insertImage', false, item)
+                        let imgWithTag = "<img src=\"" + item + "\" style=\"display: block; max-width:79%;" + "\">"
 
-                        this.previews.push(item)})
+                        document.execCommand('insertHTML', false, imgWithTag)})
+
                     })
                 })
     },
@@ -148,6 +158,7 @@ export default{
     beforeUpdate(){
         var htmlObj = document.getElementById("the-content")
         htmlObj.innerHTML = this.post.content
+        this.content = this.post.content
     },
 
     async beforeRouteEnter(to, from, next){
@@ -167,4 +178,5 @@ export default{
 </script>
 
 <style src="../../assets/css/create.css" scoped>
+    
 </style>

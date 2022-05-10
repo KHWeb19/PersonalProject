@@ -35,6 +35,8 @@
                             <v-col cols="12">
                               <input type="text" placeholder="Email" @blur="v$.email.$touch" v-model.lazy="email">
                               <p v-if="v$.email.$errors.length">{{v$.email.$errors[0].$message}}</p>
+
+
                             </v-col>
                             <v-col cols="12">
                                 <label>Username</label>

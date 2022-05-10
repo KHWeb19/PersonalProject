@@ -12,7 +12,8 @@ export default new Vuex.Store({
     post: null,
     posts: {content: ''},
     isLoggedIn: false,
-    errorLoggingIn: false
+    errorLoggingIn: false,
+    comments: {content: ''}
   },
   getters: {
   },
@@ -34,6 +35,9 @@ export default new Vuex.Store({
     },
     READ_POST(state, payload){
       state.post = payload
+    },
+    LIST_COMMENTS(state, payload){
+      state.comments = payload
     }
   },
   actions: {
@@ -76,7 +80,7 @@ export default new Vuex.Store({
     list_posts({commit}, config){
       axios.get("freepost/list/", config)
       .then((res) => commit('LIST_POSTS', res.data))
-      .catch(() => "FAILED TO GET POST LISTS")
+      .catch(() => console.log("FAILED TO GET POST LISTS"))
     },
     
     read_post({commit},no){
@@ -85,6 +89,11 @@ export default new Vuex.Store({
       .catch(() => alert("Error loading a page"))
     },
 
+    list_comments({commit}, config){
+      axios.get('comments/list/', config)
+      .then((res) => commit('LIST_COMMENTS', res.data))
+      .catch(()=> console.log("FAILED TO GET COMMENTS"))
+    }
   }
   
 })

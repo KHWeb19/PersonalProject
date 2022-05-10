@@ -28,7 +28,14 @@ public class PostServiceImpl implements PostService{
 
         Optional<Post> result = postRepository.findById(Long.valueOf(post_id));
 
-        return result.isEmpty() ? null : result.get();
+        if (result.isEmpty()){
+            return null;
+        }
+        else{
+            Post post = result.get();
+            post.setHits((post.getHits()+1));
+            return post;
+        }
 
     }
 

@@ -77,7 +77,7 @@ public class UserController {
 
                 String access_token = JWT.create()
                         .withSubject(user.getUsername())
-                        .withExpiresAt(new Date(System.currentTimeMillis() + 1000 * 10 * 1))
+                        .withExpiresAt(new Date(System.currentTimeMillis() + 1000 * 60 * 15))
                         .withIssuer(request.getRequestURL().toString())
                         .withClaim("roles", user.getRoles().stream().map(Role::getName).collect(Collectors.toList()))
                         .sign(algorithm);
