@@ -9,19 +9,19 @@
             </div>
 
             <div>
-                <v-text-field label="닉네임/상호명" style="width:350px" v-model="sn" readonly/>
+                <v-text-field label="닉네임/상호명" style="width:350px" :value="userInfo.storeName"> </v-text-field>
             </div>
 
             <div>
-                <v-text-field label="거주 시" style="width:350px" v-model="city" readonly/>
+                <v-text-field label="거주 시" style="width:350px" v-model="city" > </v-text-field>
             </div>
 
             <div>
-                <v-text-field label="거주 동" style="width:350px" v-model="dong" readonly/>
+                <v-text-field label="거주 동" style="width:350px" v-model="dong" > </v-text-field>
             </div>
 
             <div>
-                <v-text-field label="나머지 주소" style="width:350px" v-model="address" readonly/>
+                <v-text-field label="나머지 주소" style="width:350px" v-model="address" > </v-text-field>
             </div>
         </form>
 <!--

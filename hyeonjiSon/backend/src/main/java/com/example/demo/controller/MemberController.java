@@ -94,17 +94,17 @@ public class MemberController {
         return memberservice.read(memberNo);
     }
 
-    /*
-    @PutMapping("/modify")
-    public MemberRequest modify (@RequestBody MemberRequest memberRequest){
-        log.info("modify:" + memberRequest.getId());
+    @PutMapping("/{memberNo}")
+    public Member memberModify (
+            @PathVariable("memberNo") Long memberNo,
+            @RequestBody Member member){
+        log.info("memberModify(): " + member);
 
-        memberservice.modify(memberRequest);
+        member.setMemberNo(Long.valueOf(memberNo));
+        memberservice.modify(member);
 
-        return memberRequest;
+        return member;
     }
-
-     */
 
     @DeleteMapping("/{memberNo}")
     public void remove(
