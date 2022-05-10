@@ -2,7 +2,7 @@
 <div>
    <h1> Modify Page </h1>
    
-   <modify-form/>
+   <modify-form @submit="onSubmit"/>
 </div>
 </template>
 
@@ -10,7 +10,7 @@
 import ModifyForm from '@/components/jpaMember/ModifyForm.vue'
 
 export default {
-    name: "MemberModifyPage" ,
+    name: 'memberModifyPage' ,
     components: {
        ModifyForm
     }

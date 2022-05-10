@@ -13,4 +13,6 @@ public interface MemberService {
     List<Member> findBusiness ();
   //  List<Member> findDong (String auth, String keyWord);
    public List<Member> searchList (String keyWord);
+   public void modify(Member member);
+   public void remove(Long memberNo);
 }

@@ -5,6 +5,7 @@ import HomeView from '@/views/HomeView.vue'
 import MemberLoginPage from '@/views/jpaMember/MemberLoginPage.vue'
 import MemberRegisterPage from '@/views/jpaMember/MemberRegisterPage.vue'
 import MemberMyPage from '@/views/jpaMember/MemberMyPage.vue'
+import MemberModifyPage from '@/views/jpaMember/MemberModifyPage.vue'
 
 import ProjectIntroducePage from '@/views/introduce/ProjectIntroducePage.vue'
 
@@ -65,6 +66,12 @@ const routes = [
     name: 'memberMyPage',
     component: MemberMyPage 
   },
+  {
+    path: '/memberModifyPage',
+    name: 'memberModifyPage',
+    component: MemberModifyPage 
+  },
+
   {
     path: '/projectIntroducePage',
     name: 'projectIntroducePage',
