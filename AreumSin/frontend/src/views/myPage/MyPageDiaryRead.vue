@@ -23,7 +23,7 @@ import {mapActions, mapState} from "vuex";
 import DiaryRead from "@/components/myPage/DiaryRead";
 import axios from "axios";
 export default {
-  name: "MyPage",
+  name: "MyPageDiaryRead",
   components: {DiaryRead, MenuList, MainCategory},
   data(){
     return{

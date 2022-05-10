@@ -116,4 +116,10 @@ export default {
   }
 }
 
+#img {
+  width: auto; height: auto;
+  max-width: 1200px;
+  max-height: 900px;
+}
+
 </style>

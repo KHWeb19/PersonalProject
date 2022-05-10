@@ -35,7 +35,7 @@
 
       <v-row v-else v-for="(boardImg,index) in boardReadImg" :key="index">
         <v-col>
-          {{boardReadImg}}
+          <!--{{boardReadImg}}-->
           <input type="checkbox" v-model="checkbox" :value="index">
           <v-img :src="require(`@/assets/uploadImg/${boardImg.imgSrc}`)" id="img"></v-img>
         </v-col>

@@ -111,4 +111,10 @@ td{
     align-items: center;
   }
 }
+
+#img {
+  width: auto; height: auto;
+  max-width: 900px;
+  max-height: 900px;
+}
 </style>

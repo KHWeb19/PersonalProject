@@ -38,26 +38,29 @@ export default {
   },
   methods:{
     ...mapActions(['fetchDiary', 'fetchDiaryImg']),
-    async onModify(payload){
+    onModify(payload){
       const {title, planName, content, diaryImg} = payload;
 
-      await axios.put(`http://localhost:7777/myPage/diaryModify/${this.diaryNo}`,  {title, planName, content})
+      axios.put(`http://localhost:7777/myPage/diaryModify/${this.diaryNo}`,  {title, planName, content})
         .then(() => {
           /*alert ("성공" + res)*/
         })
 
-      let formData = new FormData;
+      if(diaryImg.length !== 0) {
+        let formData = new FormData;
 
-      for(let i = 0; i < diaryImg.length; i++){
-        /*alert(diaryImg[i])*/
-        formData.append('diaryImgNo', diaryImg[i]);
+        for(let i = 0; i < diaryImg.length; i++){
+          /*alert(diaryImg[i])*/
+          formData.append('diaryImgNo', diaryImg[i]);
+        }
+
+        axios.post(`http://localhost:7777/myPage/diaryModifyImg/${this.diaryNo}`, formData, {})
+            .then(() => {
+              //alert('이미지 수정' + res);
+            })
       }
 
-      await axios.post(`http://localhost:7777/myPage/diaryModifyImg/${this.diaryNo}`, formData)
-        .then(() => {
-          /*alert('이미지 수정' + res);*/
-          this.$router.push({name: 'MyPageDiary'})
-        })
+      this.$router.push({name: 'MyPageDiaryRead'})
     }
   },
   computed: {

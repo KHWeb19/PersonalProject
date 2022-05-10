@@ -15,7 +15,7 @@ export default {
     searchId(payload){
       const {nameId, birth} =  payload;
       let name = nameId
-      alert(name + ', '+ birth)
+      //alert(name + ', '+ birth)
       axios.put('http://localhost:7777/search/id', {name, birth})
         .then((res) => {
 
@@ -36,10 +36,10 @@ export default {
 
       axios.put('http://localhost:7777/search/pw', {name, id})
         .then((res) => {
-          alert('성공' + res.data)
+          //alert('성공' + res.data)
 
           if(res.data === true){
-            alert(id)
+            //alert(id)
             this.$router.push({name: 'ChangePw', params: {id: id}});
           }else{
             alert('찾으시는 비밀번호가 없습니다.')

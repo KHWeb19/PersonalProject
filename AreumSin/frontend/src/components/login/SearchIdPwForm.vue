@@ -87,7 +87,7 @@ export default {
   methods:{
     searchId(){
       const {nameId , birth} = this
-      alert(nameId);
+      //alert(nameId);
       this.$emit('searchId', {nameId, birth})
     },
     searchPw(){

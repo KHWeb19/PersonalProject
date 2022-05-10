@@ -26,7 +26,7 @@
             </td>
             <td><v-icon>mdi-arrow-right-bottom-bold</v-icon></td>
           </v-col>
-          <td style="font-size: 25px; width: 150px">
+          <td style="font-size: 25px; width: 240px">
             {{boardComment.writer}}
           </td>
           <td style="font-size: 25px;">

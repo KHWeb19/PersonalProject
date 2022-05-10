@@ -9,15 +9,15 @@
           <form>
             <table>
               <tr>
-                <td>변경하실 비밀번호를 적어주세요</td>
+                <td style="font-size: 25px">변경하실 비밀번호를 적어주세요</td>
               </tr>
 
               <tr>
-                <td><input type="text" style="border: black solid 1px" v-model="pw"></td>
+                <td style="padding-left: 15px"><input type="password" style="border: black solid 1px; font-size: 22px" v-model="pw"></td>
               </tr>
 
               <tr>
-                <td style="padding-top: 10px"><v-btn width="100%" color="green" @click="changePw()">확인</v-btn></td>
+                <td style="padding-top: 10px;"><v-btn width="100%" color="green" @click="changePw()">확인</v-btn></td>
               </tr>
             </table>
           </form>
@@ -55,7 +55,7 @@ export default {
     }
   },
   created() {
-    alert(this.id)
+    //alert(this.id)
   }
 }
 </script>
