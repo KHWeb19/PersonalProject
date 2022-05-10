@@ -1,4 +1,4 @@
-package com.example.demo.service.presonalProject;
+package com.example.demo.service.personalProject;
 
 import com.example.demo.controller.request.MemberDto;
 import com.example.demo.entity.personalProject.Member;
@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.GenericDeclaration;
 import java.util.Optional;
 
 @Slf4j
@@ -41,6 +40,8 @@ public class MemberServiceImpl implements MemberService{
             log.info("Find id");
 
             Member loginMember = maybeMember.get();
+
+            log.info(String.valueOf(loginMember));
 
             if(!passwordEncoder.matches(member.getPw(), loginMember.getPw())){
                 return false;
@@ -75,12 +76,13 @@ public class MemberServiceImpl implements MemberService{
 
     @Override
     public void modify(Member member, MemberDto memberDto) throws Exception {
+        // modify를 할 때 패스워드가 한 번 더 암호화돼서 덮어써지니까 재로그인이 안됨
 //        String encodedPassword = passwordEncoder.encode(memberDto.getPw());
 //        memberDto.setPw(encodedPassword);
-//
-//        member.updateMember(memberDto);
-//
-//        memberRepository.save(member);
+
+        member.updateMember(memberDto);
+
+        memberRepository.save(member);
     }
 
     @Override

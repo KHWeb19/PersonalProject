@@ -1,7 +1,7 @@
 <template>
       <v-card color="basil">
           <v-card-title>
-            <h1 class="font-weight-bold text-h2 basil--text" @click="mainPageLink">
+            <h1 plain class="font-weight-bold text-h2 basil--text" @click="btnMainPage">
               SELECTSHOP
             </h1>
           
@@ -27,40 +27,38 @@
   </v-container>
           -->
 
-          <!-- 로그인, 장바구니, 마이페이지, 게시판--> 
+
+            <!-- 로그인, 장바구니, 마이페이지, 게시판--> 
+
+            <div id="cart" style="position:relative">
+            <v-btn v-if="isLogin === true" router :to="{path: '/cart'}" icon>
+              <span id="nav-cart-count">{{ cartCount }}</span>
+              <v-icon>mdi-cart</v-icon>
+            </v-btn>
+            </div>
+
             <v-btn v-if="isLogin === false" router :to="{path: '/loginPage'}" plain background-color="transparent" color="basil"> 
               LOGIN 
             </v-btn>
-            <v-btn v-else @click="logout"  plain background-color="transparent" color="basil"> 
+            <v-btn v-else @click="logout" router :to="{path: '/mainPage'}" plain background-color="transparent" color="basil"> 
               LOGOUT 
             </v-btn>
 
-
             <v-btn router :to="{path: '/myPage'}" plain background-color="transparent" color="basil">
               MY PAGE
-            </v-btn>     
-          
-            
+            </v-btn>   
 
-          <!-- 그 중 게시판(BOARD)을 클릭하면 드롭다운으로 공지사항, 1:1문의 페이지로 이동하게 --> 
-            <v-menu open-on-hover bottom offset-y>
-              <template v-slot:activator="{ on, attrs }">
-                <v-btn plain background-color="transparent" color="basil" v-bind="attrs" v-on="on">
-                  <v-icon left>
-                    mdi-view-dashboard-edit-outline
-                  </v-icon>
-                  <span> BOARD </span>
-                </v-btn>
-              </template>
+            <v-btn plain background-color="transparent" color="basil" router :to="{path: '/noticeListPage'}">
+              NOTICE
+            </v-btn>
 
-              <v-list background-color="transparent" color="basil">
-                <v-list-item v-for="(board, i) in boards" :key="i" :to="board.route">
-                  <v-list-item-title>
-                    {{ board.text }}
-                  </v-list-item-title>
-                </v-list-item>
-              </v-list>
-            </v-menu>
+            <v-btn plain background-color="transparent" color="basil" router :to="{path: '/qnaListPage'}">
+              Q&A
+            </v-btn>
+
+            <v-btn v-if="this.userInfo.id === 'admin'" router :to="{ path : '/adminPage'}" plain background-color="transparent" color="basil">
+            ADMIN
+            </v-btn>
               
           </v-card-title>
 
@@ -75,9 +73,9 @@
                 </template>
 
                 <v-list background-color="transparent" color="basil">
-                  <v-list-item v-for="(category, i) in womenCategories" :key="i" :to="category.route">
+                  <v-list-item v-for="(wcategory, i) in womenCategories" :key="i" :to="wcategory.route">
                     <v-list-item-title>
-                      {{ category.item }}
+                      {{ wcategory.item }}
                     </v-list-item-title>
                   </v-list-item>
                 </v-list>
@@ -93,9 +91,9 @@
                 </template>
 
                 <v-list background-color="transparent" color="basil">
-                  <v-list-item v-for="(category, i) in menCategories" :key="i" :to="category.route">
+                  <v-list-item v-for="(mcategory, i) in menCategories" :key="i" :to="mcategory.route">
                     <v-list-item-title>
-                      {{ category.item }}
+                      {{ mcategory.item }}
                     </v-list-item-title>
                   </v-list-item>
                 </v-list> 
@@ -120,10 +118,15 @@
 
 <script>
 
-import axios from 'axios'
-import { mapState } from 'vuex'
+// import axios from 'axios'
+import { mapState, mapActions } from 'vuex'
 
 export default {
+  props: {
+    cartCount: {
+
+    }
+  },
    data () {
         return {
             tab: null,
@@ -135,15 +138,11 @@ export default {
               { icon: 'mdi-cart', text: 'CART', name: 'cart', route: '/cartPage' },
               { icon: 'mdi-account-cowboy-hat-outline', text: 'MYPAGE', name: 'myPage', route: '/myPage' },
             ],
-            boards: [
-              {text: '1:1 문의', name: 'inquiry', route: '/inquiryPage'},
-              {text: 'NOTICE', name: 'notice', route: '/noticeListPage'}
-            ],
             womenCategories: [
               { item: 'Outer', route: '/womenOuterCategoryPage'},
-              { item: 'Top'},
-              { item: 'Bottom'},
-              { item: 'Accessories'},
+              { item: 'Top', route: '/womenOuterCategoryPage'},
+              { item: 'Bottom', route: '/womenOuterCategoryPage'},
+              { item: 'Accessories', route: '/womenOuterCategoryPage'},
             ],
             menCategories: [
               { item: 'Outer'},
@@ -155,23 +154,45 @@ export default {
 
     },
     computed: {
-      ...mapState(['isLogin'])
+      ...mapState(['userInfo','isLogin'])
     },
     methods: {
-        mainPageLink() {
-            this.$router.push({ path: '/mainPage' })
+      ...mapActions(['fetchSession']),
+        btnMainPage() {
+          this.$router.push({name: 'MainPage'})
         },
         logout() {
-            axios.post('http://localhost:7777/member/logout').then(res => {
-            this.$store.commit('USER_LOGIN', res.data)
+            // axios.post('http://localhost:7777/member/logout')
+            // .then(res => {
+            // this.$store.commit('USER_LOGIN', res.data)
+            // this.fetchSession(this.$cookies.remove('session'))
+            // this.$store.commit('FETCH_USER_INFO', [])
+            // })
+
+            this.$store.commit('USER_LOGIN', !this.isLogin)
             this.fetchSession(this.$cookies.remove('session'))
             this.$store.commit('FETCH_USER_INFO', [])
-      })
+            this.$emit('resetCartCount')
+            alert("로그아웃 되었습니다.")
+            
         }
     }
 }
 </script>
 
 <style scoped>
-  
+#nav-cart-count {
+  background-color: rgba(249, 11, 11);
+  color: white;
+  border-radius: 50%;
+  height: 15px;
+  width: 15px;
+  font-size: 14px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  margin-left: 15px;
+  margin-bottom: 25px;
+}
 </style>

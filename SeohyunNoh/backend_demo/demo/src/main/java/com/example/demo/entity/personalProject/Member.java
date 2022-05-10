@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.Date;
 
+@Data
 @Builder
 @Entity
 @Getter
@@ -20,9 +21,9 @@ public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long memberNo;
-    private String auth;
+
     private String name;
-    private String gender;
+//    private String gender;
     private Date birth;
     private String id;
     private String pw;
@@ -40,8 +41,5 @@ public class Member {
         this.birth = memberDto.getBirth();
         this.address = memberDto.getAddress();
     }
-
-
-
 
 }

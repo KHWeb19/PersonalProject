@@ -29,4 +29,20 @@ export default {
     //NOTICE
     noticeBoards: [],
     noticeBoard: null, 
+
+    //QNA
+    qnaBoards: [],
+    qnaBoard: null,
+
+    // //COMMENT
+    // comments: [],
+    // comment: [],
+
+    // //PRODUCT
+    // products: [],
+    // product: [],
+
+    // category: [],
+    // categories: []
+   
 }

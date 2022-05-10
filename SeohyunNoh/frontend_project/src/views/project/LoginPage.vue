@@ -1,24 +1,21 @@
 <template>
     <div>
-        <div>
-            <Header/>
-        </div>
+        <v-container fluid fill-height stlye="max-width:600px;">
 
-         <v-container fluid fill-height stlye="max-width:600px;">
-            <form ref="form" @submit.prevent="login">
+            <form ref="form" @submit.prevent="login" lazy-validation>
                 <v-layout align-content-center>
                     <v-flex md12>               
                             <v-toolbar flat>
                                 <v-toolbar-title>로그인</v-toolbar-title>
                             </v-toolbar>
 
-                            <div class="row">
+                            <!-- <div class="row">
                                 <v-radio-group ref="auth" v-model="auth" row>
                                     <v-radio :label="`${kindsOfMember[0]}`" :value="`${kindsOfMember[0]}`"></v-radio>
                                     <v-radio :label="`${kindsOfMember[1]}`" :value="`${kindsOfMember[1]}`"></v-radio>
                                     <v-radio :label="`${kindsOfMember[2]}`" :value="`${kindsOfMember[2]}`"></v-radio>
                                 </v-radio-group>
-                            </div>
+                            </div> -->
 
                             <div class="pa-3">
                                 <v-text-field ref="id" v-model="id" :rules="idRules" label="아이디">
@@ -37,9 +34,8 @@
                     </v-flex>
                 </v-layout>
             </form>
-    </v-container>
 
-
+        </v-container>
     </div>
 </template>
 
@@ -48,6 +44,7 @@
 import { mapState, mapActions } from 'vuex'
 import axios from 'axios'
 
+
 export default {
     name: "LoginPage.vue",
     components: {
@@ -55,14 +52,14 @@ export default {
     },
     data () {
         return {
-           auth: 0,
-            kindsOfMember : [
-                '개인',
-                '판매자',
-                '관리자'
-            ],
-            id: '',
-            pw: '',
+        //    auth: 0,
+        //     kindsOfMember : [
+        //         '개인',
+        //         '판매자',
+        //         '관리자'
+        //     ],
+            id: null,
+            pw: null,
             formError: false
         }
     },
@@ -77,7 +74,7 @@ export default {
     computed: {
         form() {
             return {
-                auth: this.auth,
+                // auth: this.auth,
                 id: this.id,
                 pw: this.pw
             }
@@ -94,11 +91,13 @@ export default {
                 this.$refs[f].validate(true)
             })
 
-            const auth = this.auth
+
+            // const auth = this.auth
             const id = this.id
             const pw = this.pw
 
-             axios.post('http://localhost:7777/member/login', { auth, id, pw }).then(res => {
+             axios.post('http://localhost:7777/member/login', { id, pw })
+                .then(res => {
         
                 if (res.data) {
                 
@@ -107,8 +106,8 @@ export default {
                 this.fetchUserInfo(id)
                 alert('로그인이 완료되었습니다!')
                 
-                // recommend(together) 로 보냄
-                this.$emit('onLogin')
+                this.$router.push({ path: '/mainPage' })
+                
                 } else if (res.data == false) {
                 alert('아이디와 비밀번호를 확인해주세요!')
                 console.log('isLogin: ' + res.data)

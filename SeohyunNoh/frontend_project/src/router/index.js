@@ -8,16 +8,40 @@ import LoginPage from '@/views/project/LoginPage.vue'
 import JoinPage from '@/views/project/JoinPage.vue'
 import MyPage from '@/views/project/MyPage.vue'
 
-import WomenCategoryPage from '@/views/project/WomenCategoryPage.vue'
-import MenCategoryPage from '@/views/project/MenCategoryPage.vue'
-import SaleCategoryPage from '@/views/project/SaleCategoryPage.vue'
+import AdminPage from '@/views/admin/AdminPage.vue'
+
+import AddCategory from '@/views/category/AddCategory.vue'
+import Category from '@/views/category/Category.vue'
+import ListProducts from '@/views/category/ListProducts.vue'
+import EditCategory from '@/views/category/EditCategory.vue'
+
+import Product from '@/views/product/Product.vue'
+import AddProduct from '@/views/product/AddProduct.vue'
+import EditProduct from '@/views/product/EditProduct.vue'
+import ShowDetails from '@/views/product/ShowDetails.vue'
+import TopProducts from '@/views/product/TopProducts.vue'
+
+import Cart from '@/views/cart/Cart.vue'
+import Checkout from '@/views/cart/Checkout.vue'
+
+
+import LookBookPage from '@/views/project/LookBookPage.vue'
 
 import NoticeListPage from '@/views/notice/NoticeListPage.vue'
 import NoticeReadPage from '@/views/notice/NoticeReadPage.vue'
 import NoticeRegisterPage from '@/views/notice/NoticeRegisterPage.vue'
 import NoticeModifyPage from '@/views/notice/NoticeModifyPage.vue'
 
-import WomenOuterCategoryPage from '@/views/womenCategory/WomenOuterCategoryPage.vue'
+import QnAListPage from '@/views/qna/QnAListPage.vue'
+import QnARegisterPage from '@/views/qna/QnARegisterPage.vue'
+import QnAReadPage from '@/views/qna/QnAReadPage.vue'
+import QnAModifyPage from '@/views/qna/QnAModifyPage.vue'
+
+
+
+// import WomenOuterCategoryPage from '@/views/womenCategory/WomenOuterCategoryPage.vue'
+// import ProductDetailPage from '@/views/womenCategory/ProductDetailPage.vue'
+
 
 
 
@@ -83,19 +107,85 @@ const routes = [
     component: MyPage
   },
   {
-    path: '/womenCategoryPage',
-    name: 'WomenCategoryPage',
-    component: WomenCategoryPage
+    path: '/adminPage',
+    name: 'AdminPage',
+    component: AdminPage
   },
   {
-    path: '/menCategoryPage',
-    name: 'MenCategoryPage',
-    component: MenCategoryPage
+    path: '/addCategory',
+    name: 'AddCategory',
+    component: AddCategory
   },
   {
-    path: '/saleCategoryPage',
-    name: 'SaleCategoryPage',
-    component: SaleCategoryPage
+    path: '/category',
+    name: 'Category',
+    component: Category
+  },
+  {
+    path: '/listProducts/:id',
+    name: 'ListProducts',
+    components: {
+      default: ListProducts
+    },
+    props: {
+      default: true
+    }
+  },
+  {
+    path: '/editCategory/:id',
+    name: 'EditCategory',
+    components: {
+      default: EditCategory
+    },
+    props: {
+      default: true
+    }
+  },
+  {
+    path: '/addProduct',
+    name: 'AddProduct',
+    component: AddProduct
+  },
+  {
+    path: '/product',
+    name: 'Product',
+    component: Product
+  },
+  {
+    path: '/topProducts',
+    name: 'TopProducts',
+    component: TopProducts
+  },
+  {
+    path: '/editProduct/:id',
+    name: 'EditProduct',
+    components: {
+      default: EditProduct
+    },
+    props: {
+      default: true
+    }
+  },
+  {
+    path: '/showDetails/:id',
+    name: 'ShowDetails',
+    components: {
+      default: ShowDetails
+    },
+    props: {
+      default: true
+    }
+  },
+  {
+    path: '/cart',
+    name: 'Cart',
+    component: Cart
+  },
+  {
+    path: '/checkout',
+    name: 'Checkout',
+    beforeEnter: onlyAuthUser,
+    component: Checkout
   },
   {
     path: '/noticeListPage',
@@ -126,12 +216,52 @@ const routes = [
     props: {
       default: true
     }
-
   },
   {
-    path: '/womenoOuterCategoryPage',
-    name: 'WomenOuterCategoryPage',
-    component: WomenOuterCategoryPage
+    path: '/qnaListPage',
+    name: 'QnAListPage',
+    beforeEnter: onlyAuthUser,
+    component: QnAListPage
+  },
+  {
+    path: '/qnaRegisterPage',
+    name: 'QnARegisterPage',
+    component: QnARegisterPage
+  },
+  {
+    path: '/qnaReadPage/:qnaNo',
+    name: 'QnAReadPage',
+    components: {
+      default: QnAReadPage
+    },
+    props: {
+      default: true
+    }
+  },
+  {
+    path: '/qnaModifyPage/:qnaNo',
+    name: 'QnAModifyPage',
+    components: {
+      default: QnAModifyPage
+    },
+    props: {
+      default: true
+    }
+  },
+  // {
+  //   path: '/womenOuterCategoryPage',
+  //   name: 'WomenOuterCategoryPage',
+  //   component: WomenOuterCategoryPage
+  // },
+  // {
+  //   path: '/productDetail',
+  //   name: 'ProductDetailPage',
+  //   component: ProductDetailPage
+  // },
+  {
+    path: '/lookBookPage',
+    name: 'LookBookPage',
+    component: LookBookPage
   }
 
 ]

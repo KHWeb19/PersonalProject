@@ -7,7 +7,22 @@ import {
 
     //NOTICE
     FETCH_NOTICE_BOARD_LIST,
-    FETCH_NOTICE
+    FETCH_NOTICE,
+
+    //QNA
+    FETCH_QNA_BOARD_LIST,
+    FETCH_QNA,
+
+    //COMMENT
+    FETCH_COMMENTS,
+    FETCH_COMMENT,
+
+    // //PRODUCT
+    // FETCH_CATEGORIES,
+    // FETCH_CATEGORY,
+
+    // FETCH_PRODUCTS,
+    // FETCH_PRODUCT,
    
 } from './mutation-types'
 
@@ -32,4 +47,35 @@ export default {
     [FETCH_NOTICE] (state, noticeBoard) {
         state.noticeBoard = noticeBoard
     },
+
+    //QNA
+    [FETCH_QNA_BOARD_LIST] (state, qnaBoards) {
+        state.qnaBoards = qnaBoards
+    },
+    [FETCH_QNA] (state, qnaBoard) {
+        state.qnaBoard = qnaBoard
+    },
+
+    //COMMENT
+    [FETCH_COMMENTS] (state, comments) {
+        state.comments = comments
+    },
+    [FETCH_COMMENT] (state, comment) {
+        state.comment = comment
+    },
+
+    // //PRODUCT
+    // [FETCH_CATEGORY] (state, category) {
+    //     state.category = category
+    // },
+    // [FETCH_CATEGORIES] (state, categories) {
+    //     state.categories = categories
+    // },
+
+    // [FETCH_PRODUCT] (state, product) {
+    //     state.product = product
+    // },
+    // [FETCH_PRODUCTS] (state, products) {
+    //     state.products = products
+    // }
 }
