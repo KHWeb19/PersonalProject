@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "sweetalert": "^2.1.2",
     "vee-validate": "^3.4.11",
     "vue": "^2.6.11",
     "vue-awesome-swiper": "^3.1.3",
