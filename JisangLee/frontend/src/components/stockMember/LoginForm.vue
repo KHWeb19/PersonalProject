@@ -1,25 +1,14 @@
 <style scope>
-table {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); 
-  width : 270px;
-  height: 200px;
-  background-color: whitesmoke;
-  border: 1px solid #CCC;
-  
-}
- .wrapper { 
+ .wrapperl { 
   background-color: #FFF;
   border-radius: 2px;
   box-sizing: border-box;
-  height: 230px;
+  height: 200px;
   left: 50%;
   margin: -150px 0 0 -150px;
   position: absolute;
-  top: 60%;
-  width: 270px;
+  top: 35%;
+  width: 250px;
 }
 .input {
   background-color: transparent;
@@ -31,15 +20,16 @@ table {
   font-family: 'Arvo';
   font-size: 18px;
   height: 50px;
-  left: 40%;
+  left: 45%;
   margin: -120px 0 0 -100px;
   padding: 10px 0px;
   position: relative;
   top: 50%;
-  width: 220px;
+  width: 190px;
 }
 #wrapper{
   text-align: center;
+  font-size: 120%;
   margin:auto;
   color:white;
 }
@@ -52,24 +42,14 @@ input[class=input]::placeholder {
 img { background:#ffe993; display: block;  margin: 0 auto;}
 </style>
 <template>
-<div class="Main">
-  <header>
-  <a href="http://localhost:8080/stock/"><img src='../../assets/img/logo.png'></a>
-   <br>
-   <hr>
-     <div id=article>      
-        <v-btn class="grey darken-1 white--text" width="325px">국내 주식 분석</v-btn>
-        <v-btn class="grey darken-2 white--text" width="325px">해외 주식 분석</v-btn>
-        <v-btn class="grey darken-3 white--text" width="325px">질문</v-btn>
-        <v-btn class="grey darken-4 white--text" width="325px">하소연</v-btn>
-     </div>
+<div>
      <div id=vb>
      <v-container v-if="this.$store.state.userInfo == null">
-                <v-btn tile color="grey darken-3 white--text" onclick="location.href='http://localhost:8080/stock/register'" width="125">
+                <v-btn tile color="grey darken-3 white--text" onclick="location.href='http://localhost:8080/stock/register'" width="125" :style="{fontSize:'x-large'}">
                     <v-icon left>mdi-account-plus-outline</v-icon>
                     회원 가입 
                 </v-btn> 
-                <v-btn tile color="grey darken-2 white--text" onclick="location.href='http://localhost:8080/stock/login'" width="100"> 
+                <v-btn tile color="grey darken-2 white--text" onclick="location.href='http://localhost:8080/stock/login'" width="100" :style="{fontSize:'x-large'}"> 
                     <v-icon left>mdi-login</v-icon>
                     로그인 
                 </v-btn>
@@ -77,7 +57,7 @@ img { background:#ffe993; display: block;  margin: 0 auto;}
     </div>
   <v-container aline>
     <form @submit.prevent="onSubmit">
-     <div class="wrapper" align="center">
+     <div class="wrapperl" align="center">
        <table> 
          <br>
           <h3 align = "center">로그인</h3> 
@@ -90,20 +70,16 @@ img { background:#ffe993; display: block;  margin: 0 auto;}
           <td><v-icon color="black" right>mdi-lock</v-icon><a href="#"><input class="input" type="password" v-model="pw" placeholder="비밀번호"></a></td>
         </tr>    
         <hr>    
-        <br>
         <div id="wrapper">
-        <button type="submit" style="width:115px; border: 0; background-color: #3c3d3e"> 
+        <button type="submit" style="width:115px; border: 0; background-color: #3c3d3e" :style="{fontSize:'x-large'}"> 
         <v-icon color="white" left>mdi-login</v-icon>로그인</button>
-        <button type="button" style="width:115px; border: 0; background-color: #808080" onclick="location.href='http://localhost:8080/stock/'" >
+        <button type="button" style="width:115px; border: 0; background-color: #808080" onclick="location.href='http://localhost:8080/stock/'" :style="{fontSize:'x-large'}">
         <v-icon color="white" left>mdi-close-circle-outline</v-icon>취소</button>
-        </div>
-        <br>                                                                      
-      </table>
-      
+        </div>                                                                      
+      </table>     
       </div>
     </form>
   </v-container>
-  </header>
 </div>
 </template>
 
@@ -114,7 +90,7 @@ export default {
   data () {
     return {
       id: '',
-      pw: ''
+      pw: '',
     }
   },
   methods: {

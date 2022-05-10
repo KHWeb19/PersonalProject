@@ -7,7 +7,7 @@
 </template>
 
 <script>
-
+import swal from 'sweetalert';
 import LoginForm from '@/components/stockMember/LoginForm.vue'
 import Vue from 'vue'
 import axios from 'axios'
@@ -37,11 +37,14 @@ export default {
   methods: {
     onSubmit (payload) {
       if (!this.isLogin) {
-        const {id, pw} = payload
-        axios.post('http://localhost:7777/vueJpaMember/login', {id, pw})
-            .then(res => {
+        const {id, pw, auth} = payload
+        axios.post('http://localhost:7777/vueJpaMember/login', {id, pw, auth})
+            .then(res => { 
               if (res.data) {
-                alert('로그인 되었습니다.')
+                swal({
+                text: "로그인 되었습니다.",
+                icon: "success"
+                })
                 this.$store.state.userInfo = res.data
                 this.$cookies.set("user", res.data, 1200 )
                 this.isLogin = true
@@ -50,14 +53,20 @@ export default {
                 })
               }
               else{
-              alert('아이디 또는 비밀번호를 잘못 입력하셨습니다.')
+              swal({
+                text: "아이디 또는 비밀번호를 잘못 입력하셨습니다.",
+                icon:"warning"
+                })
               }
             })
             .catch(() => {
-              alert('아이디 또는 비밀번호를 잘못 입력하셨습니다.')
+              swal({
+                text: "아이디 또는 비밀번호를 잘못 입력하셨습니다.",
+                icon:"warning"
+                })
             })
       } else {
-        alert('이미 로그인이 되어 있습니다!')
+        swal('이미 로그인이 되어 있습니다!')
       }
     }
   }
