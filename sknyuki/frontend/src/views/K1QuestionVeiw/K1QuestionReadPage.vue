@@ -1,4 +1,5 @@
 <template>
+<div>
     <v-container>
         <header-view></header-view>
         <br>
@@ -39,6 +40,8 @@
         </div>
     
     </v-container>
+    <footer-view/>
+</div>
 </template>
 <script>
 import { mapState, mapActions } from 'vuex'
@@ -46,12 +49,14 @@ import axios from 'axios'
 import HeaderView from '@/components/home/headerView.vue'
 import QuestionBoardRead from '@/components/QuestionBoard/QuestionBoardRead.vue'
 import ReadQuestionComment from '@/components/comment/ReadQuestionComment'
+import FooterView from '@/components/home/footerView.vue'
 export default {
     name:'K1QuestionReadPage',
     components:{ 
     HeaderView,
     QuestionBoardRead,
     ReadQuestionComment,
+        FooterView,
     },
    
     props: {

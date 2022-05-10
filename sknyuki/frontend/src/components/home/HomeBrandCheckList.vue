@@ -1,7 +1,6 @@
 
 <template>
     <v-container>
-     <p>proto type</p>
     <v-row align="center" justify="center">
     <router-link style="text-decoration: none;" :to="{name:'K1CheckBrandView'}">
     <v-btn class="blue lighten-5">상품 판별 보러가기 </v-btn>

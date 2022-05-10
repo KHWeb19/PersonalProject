@@ -1,10 +1,13 @@
 <template>
+<div>
 <v-container>
       <header-view></header-view>
       <product-board-register @submitContents="contentsSubmit"
          @submitFiles="filesSubmit"/>
    
 </v-container>
+<footer-view/>
+</div>
 </template>
 
 <script>
@@ -12,11 +15,13 @@ import HeaderView from '@/components/home/headerView.vue'
 import ProductBoardRegister from '@/components/ProductBoard/ProductBoardRegister.vue'
 import axios from 'axios'
 import { mapState } from 'vuex'
+import FooterView from '@/components/home/footerView.vue'
 export default {
     name:'K2ProductRegisterPage',
     components:{ 
     HeaderView,
     ProductBoardRegister,
+        FooterView,
        },
        data () {
     return {

@@ -1,8 +1,8 @@
 
 <template>
-<v-container>
-  <div>
+<div>
         <header-view></header-view>
+<v-container>
         <home-banner></home-banner>
         <br>
         <home-sell-list></home-sell-list>
@@ -10,8 +10,10 @@
         <home-brand-check-list></home-brand-check-list>
         <br>
         <home-question-board :QuestionBoards="QuestionBoards"/>
-  </div>
+        <br>
 </v-container>
+        <footer-view></footer-view>
+</div>
 </template>
 
 <script>
@@ -21,6 +23,7 @@ import HomeSellList from '../../components/home/HomeSellList.vue'
 import HomeBrandCheckList from '../../components/home/HomeBrandCheckList.vue'
 import HomeQuestionBoard from '../../components/home/HomeQuestionboard.vue'
 import { mapState, mapActions } from 'vuex'
+import FooterView from '@/components/home/footerView.vue'
 
   export default {
     name: 'HomeView',
@@ -31,6 +34,7 @@ import { mapState, mapActions } from 'vuex'
         HomeSellList,
         HomeBrandCheckList,
         HomeQuestionBoard,
+        FooterView,
     },
  computed: {
         ...mapState(['QuestionBoards'])

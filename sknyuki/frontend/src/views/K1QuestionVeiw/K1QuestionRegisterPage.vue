@@ -1,4 +1,5 @@
 <template>
+<div>
     <v-container>
         <header-view></header-view>
         <br>
@@ -9,17 +10,21 @@
     </div>
 
         </v-container>
+        <footer-view/>
+</div>
 </template>
 <script>
 import QuestionBoardRegester from '@/components/QuestionBoard/QuestionBoardRegister.vue'
 import HeaderView from '@/components/home/headerView.vue'
 import axios from 'axios'
 import { mapState } from 'vuex'
+import FooterView from '@/components/home/footerView.vue'
 export default {
     name:'K1QuestionRegisterPage',
     components:{ 
     HeaderView,
-    QuestionBoardRegester
+    QuestionBoardRegester,
+        FooterView
     },
 data () {
     return {

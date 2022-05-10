@@ -1,6 +1,5 @@
 <template>
  <v-container>
- <p>proto type</p>
     <v-row align="center" justify="center">
     <router-link style="text-decoration: none;" :to="{name:'K1QuestionView'}">
     <v-btn class="blue lighten-5">질문 게시판 보러가기 </v-btn>
@@ -25,15 +24,7 @@
             </v-simple-table>
                  
     <br>
-            <div class="text-center pt-2">
-            <v-pagination
-                v-model="page"
-                :length="pageCount"
-                dark
-            ></v-pagination>
-          
- 
-            </div>
+            
  </v-container>
 
 </template>

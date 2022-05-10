@@ -1,4 +1,5 @@
 <template>
+<div>
     <v-container>
         <header-view></header-view>
         <br>
@@ -41,6 +42,8 @@
     
 
     </v-container>
+    <footer-view></footer-view>
+</div>
 </template>
 <script>
 import { mapState, mapActions } from 'vuex'
@@ -48,12 +51,14 @@ import axios from 'axios'
 import HeaderView from '@/components/home/headerView.vue'
 import K1CheckBrandRead from '@/components/BrandCheckBoard/K1CheckBrandRead.vue'
 import ReadCheckBrandComment from '@/components/comment/ReadCheckBrandComment'
+import FooterView from '@/components/home/footerView.vue'
 export default {
     name:'K1CheckBrandReadPage',
     components:{ 
     HeaderView,
     K1CheckBrandRead,
     ReadCheckBrandComment,
+        FooterView,
     },
    
     props: {

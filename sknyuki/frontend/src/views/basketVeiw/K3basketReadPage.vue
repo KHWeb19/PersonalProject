@@ -4,49 +4,23 @@
         <header-view></header-view>
         <br>
      <div align="center">
-
+        <basket-read :ProductBoardS="ProductBoardS" :boardNo=" boardNo"/>
         
-        
-        <product-board-read  :ProductBoardS="ProductBoardS" :boardNo=" boardNo"/>
+            <br>
 
-       <!-- <read-question-comment :boardNo="boardNo"/>-->
-
-        <div v-if="userInfo.id == ProductBoardS.id" style="padding:20px;">
-            <div v-if="ProductBoardS.soldCheck">
-            <router-link style="text-decoration: none; color:black" 
-            :to="{ name: 'K2ProductModifyPage', params: { boardNo } }">
-                <v-btn text color="black" rounded x-large
-                        style="padding: 10px; width: 90px;">
-                    수정하기
-                </v-btn>
-            </router-link>
-
-
-            <v-btn text color="black" rounded x-large
-                style="padding: 10px; width: 90px;" 
-                @click="onDelete">
-                    삭제하기
-            </v-btn>
-            </div>
-        </div>
-
-        <div v-else style="padding:20px;">
-            <div v-if="ProductBoardS.soldCheck">
+            <div v-if="ProductBoardS.soldCheck" style="padding:20px;">
              <v-layout justify-center>
             <v-dialog v-model="dialog" persisten max-width="400">
                 <template v-slot:activator="{ on }">
                     <v-btn text color="black" rounded x-large
                         style="padding: 10px; width: 90px;" v-on="on">결제하기</v-btn>
 
-                                
-         <v-btn text color="black" rounded x-large
-                style="padding: 10px; width: 90px;" 
-                @click="toBasket">
-                    장바구니
-            </v-btn>
-            
-        
-                </template>
+                <v-btn text color="black" rounded x-large
+                       style="padding: 10px; width: 130px;"
+                       @click="onDelete()">
+                장바구니 삭제
+                </v-btn>
+                 </template>
                 <v-card class=" rounded-xl pa-4">
                     <v-card-title class="headline secondary--text font-weight-bold">
                         상품 구매
@@ -74,18 +48,6 @@
             </v-dialog>
         </v-layout>
             </div>
-              
-           
-        </div>
-            <br>
-
-            <router-link style="text-decoration: none; color:black"
-            :to="{ name: 'K2ProductView' }">
-                <v-btn text color="black" rounded x-large
-                        style="padding: 10px; width: 90px;">
-                목록으로
-                </v-btn>
-            </router-link>
         </div>
     
     </v-container>   
@@ -93,49 +55,59 @@
 </div>
 </template>
 <script>
-import { mapState, mapActions } from 'vuex'
 import axios from 'axios'
+import { mapState, mapActions } from 'vuex'
 import HeaderView from '@/components/home/headerView.vue'
-import  ProductBoardRead from '@/components/ProductBoard/ProductBoardRead.vue'
+import BasketRead from '@/components/BasketBoard/BasketRead.vue'
 import FooterView from '@/components/home/footerView.vue'
-//import ReadQuestionComment from '@/components/comment/ReadQuestionComment'
 
 export default {
-    name:'K2ProductReadPage',
+    name:'K3basketReadPage',
     components:{ 
     HeaderView,
-    ProductBoardRead,
+    BasketRead,
         FooterView,
-    //ReadQuestionComment,
     },
-    data(){
+     data(){
         return{
             dialog: false,
         }
     },
     props: {
-        boardNo: {
+        basketNo: {
+            type: String,
+            required: true
+        },
+         boardNo: {
             type: String,
             required: true
         }   
+
     },
     computed: {
-        ...mapState(['ProductBoardS','userInfo'])
+        ...mapState(['BasketBoard','userInfo','ProductBoardS'])
     },
     created () {
-        this.fetchProductBoards(this.boardNo)
+           this.fetchProductBoards(this.boardNo)
+                .catch(err => {
+                    alert(err.response.data.message)
+                    this.$router.push()
+                })     
+            this.fetchBasketBoard(this.basketNo)
                 .catch(err => {
                     alert(err.response.data.message)
                     this.$router.push()
                 })
+                
     },
-    methods: {
+     methods: {
+        ...mapActions(['fetchBasketBoard']),
         ...mapActions(['fetchProductBoards']),
-        onDelete () {
+                onDelete () {
             var result = confirm('삭제 하시겠습니까?')
             if(result) {
-                const { boardNo } = this.ProductBoardS
-                axios.delete(`http://localhost:7777/ProductBoardS/${boardNo}`)
+                const { basketNo } = this.BasketBoard
+                axios.delete(`http://localhost:7777/BasketBoard/${basketNo}`)
                         .then(() => {
                             alert('삭제 되었습니다.')
                             this.$router.push({ name: 'K2ProductView' })
@@ -143,9 +115,10 @@ export default {
                         .catch(err => {
                             alert(err.response.data.message)
                         })
-            }
-        },
-        buyProduct(){
+        
+        }
+},
+ buyProduct(){
             this.ProductBoardS.soldCheck=false
             const soldCheck=this.ProductBoardS.soldCheck
             axios.put(`http://localhost:7777/ProductBoardS/${this.boardNo}`,
@@ -182,28 +155,9 @@ export default {
                             name: 'K2ProductView'
                         })
                     },
-        
-        toBasket(){
-            var result = confirm('장바구니에 등록 하시겠습니까?')
-            if(result){
-           const id=this.userInfo.id
-           const type=this.ProductBoardS.type
-           const name=this.ProductBoardS.name
-           const size=this.ProductBoardS.size
-           const price=this.ProductBoardS.price
-           const brandrank=this.ProductBoardS.brandrank
-           const accessories=this.ProductBoardS.accessories
-           const status=this.ProductBoardS.status
-           const boardNo=this.ProductBoardS.boardNo
-            axios.post('http://localhost:7777/BasketBoard/register', { id, type, name, size, price ,brandrank ,accessories ,status ,boardNo})
-                        this.$router.push({
-                            name: 'K2ProductView'
-            }
-                        )}
-        },
         cancel(){
             this.dialog=false
         },
-    }
-    }
+     }
+}
 </script>

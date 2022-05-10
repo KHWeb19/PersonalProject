@@ -99,6 +99,31 @@
   </v-card>
   </v-col>
 
+
+<v-col>
+  <v-card class="mr-6 my-3" v-if="isLogin" width="300">
+ <v-card-text>
+      <v-list-item-title>
+        <p>나의 장바구니</p>
+      </v-list-item-title>
+      <v-divider></v-divider>
+<v-list-item-title  
+        v-if="!BasketBoardList || (Array.isArray(BasketBoardList) && BasketBoardList.length ===0)">
+        <p>장바구니 내역이 없습니다.</p>
+      </v-list-item-title>
+      <v-list v-else v-for="list in BasketBoardList" :key="list.index">
+        <v-list-item-group>
+          <v-list-item @click="readBasketPage(list.basketNo, list.boardNo)">
+            <v-list-item-title>
+              {{ list.name }}
+            </v-list-item-title>
+          </v-list-item>
+        </v-list-item-group>
+      </v-list>
+    </v-card-text>
+  </v-card>
+  </v-col>
+
   </v-row>
 </v-container>
 </template>
@@ -115,6 +140,7 @@ export default {
       QuestionBoardList:[],
       ProductBoardSList:[],
       ProductBoardBList:[],
+      BasketBoardList:[],
     }
   },
   mounted () {
@@ -164,6 +190,18 @@ export default {
       
       
       console.log(this.ProductBoardBList)
+    }),
+
+     axios.get(`http://localhost:7777/BasketBoard/userRead/${id}`).then(res => {
+      let list = res.data.reverse()
+
+     
+       for (let i = 0; i < list.length; i++) {
+          this.BasketBoardList.push({ boardNo: list[i].boardNo ,basketNo: list[i].basketNo, name: list[i].name })
+        }      
+      
+      
+      console.log(this.ProductBoardBList)
     })
     
   },
@@ -190,7 +228,13 @@ export default {
         this.$router.push(
         { name: 'K2SoldReadPage', params: { boardNo: boardNo} }
       )
-     }
+     },
+
+     readBasketPage(basketNo,boardNo){
+        this.$router.push(
+        { name: 'K3basketReadPage', params: { basketNo: basketNo, boardNo:boardNo} }
+      )
+     },
   }
 }
 </script>

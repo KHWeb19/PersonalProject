@@ -17,7 +17,7 @@ import K2ProductReadPage from '@/views/K2ProductView/K2ProductReadPage.vue'
 import K2ProductModifyPage from '@/views/K2ProductView/K2ProductModifyPage.vue'
 import K2SoldReadPage from '@/views/K2SoldView/K2SoldReadPage.vue'
 import K2SoldView from '@/views/K2SoldView/K2SoldView.vue'
-
+import K3basketReadPage from '@/views/basketVeiw/K3basketReadPage.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -143,6 +143,17 @@ props: {
     name:'K2SoldView',
     component:K2SoldView
   },
+  {
+    path:'/K3basketReadPage/:basketNo',
+    name:'K3basketReadPage',
+    components: {
+      default: K3basketReadPage
+  },
+  props: {
+    default: true
+  }
+  },
+
 
 
 ]

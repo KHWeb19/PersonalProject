@@ -19,7 +19,10 @@ import {
     FETCH_PRODUCT_BOARDS,
 
     FETCH_PRODUCT_BOARDB_LIST,
-    FETCH_PRODUCT_BOARDB
+    FETCH_PRODUCT_BOARDB,
+
+    FETCH_BASKET_BOARD_LIST,
+    FETCH_BASKET_BOARD,
 
 } from './mutation-types'
 
@@ -87,4 +90,13 @@ export default {
       [FETCH_PRODUCT_BOARDB] (state, ProductBoardB) {
         state.ProductBoardB = ProductBoardB
     },
+
+
+    [FETCH_BASKET_BOARD_LIST] (state, BasketBoards) {
+      state.BasketBoards = BasketBoards
+  },
+
+    [FETCH_BASKET_BOARD] (state, BasketBoard) {
+      state.BasketBoard = BasketBoard
+  },
 }

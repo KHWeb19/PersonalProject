@@ -1,6 +1,5 @@
 <template>
 <v-container>
-     <p>proto type</p>
     <v-row align="center" justify="center">
         <!--name:homeview변경예정-->
     <router-link style="text-decoration: none;" :to="{name:'K2ProductView'}">
