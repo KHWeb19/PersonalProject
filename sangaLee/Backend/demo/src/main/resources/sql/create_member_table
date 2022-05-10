@@ -1,0 +1,7 @@
+create table member(
+	id varchar(20) not null,
+	pw varchar(15) not null,
+	pn varchar(11) not null,
+	email varchar(50) not null,
+	PRIMARY KEY (memberNo)
+);

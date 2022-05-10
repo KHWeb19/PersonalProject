@@ -1,61 +1,50 @@
 <template>
   <v-app>
-    <!--
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar> -->
-
     <v-main>
       <router-view/>
+        <div id="app">
+    <TodoHeader></TodoHeader>
+    <TodoInput></TodoInput>
+    <TodoList></TodoList>
+    <TodoFooter></TodoFooter>
+  </div>
     </v-main>
-    <!--
-    <div id="app">
-      <router-view/>
-    </div>
-    -->
   </v-app>
 </template>
 
-<script>
 
+<script>
+import TodoHeader from './components/Todo/TodoHeader.vue'
+import TodoInput from './components/Todo/TodoInput.vue'
+import TodoList from './components/Todo/TodoList.vue'
+import TodoFooter from './components/Todo/TodoFooter.vue'
 export default {
   name: 'App',
-
+  components: {
+    TodoHeader,
+    TodoInput,
+    TodoList,
+    TodoFooter
+  },
   data: () => ({
     //
-  }),
-};
+  })
+}; 
 </script>
+
+<style scoped>
+body {
+  text-align: center;
+  background-color: #F6F6F6;
+}
+input {
+  border-style: groove;
+  width: 200px;
+}
+button {
+  border-style: groove;
+}
+.shadow {
+  box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.03);
+}
+</style>
