@@ -1,10 +1,10 @@
-
 <template>
 <div class="p-3 mb-2 bg-light text-dark">
 <div>
   <v-card color="basil">
 
-    <div class=" big ">
+    
+      <div class=" big ">
    &emsp;&emsp; <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
     </div>
 
@@ -58,18 +58,12 @@
     </v-navigation-drawer>
 
 
-
     <v-card-title class="text-center justify-center py-6">
       <h1 class="font-weight-bold text-h2 basil--text"  >
       Note
       </h1>
     </v-card-title>
-  
 
-
-     
-    
-  
     <v-tabs
       v-model="tab"
       background-color="transparent"
@@ -79,54 +73,106 @@
 
     
     
-   
     </v-tabs>
+
+    <v-tabs-items v-model="tab">
+      <v-tab-item
+        v-for="item in items"
+        :key="item"
+      >
+        <v-card
+          color="basil"
+          flat
+        >
+          <v-card-text>{{ text }}</v-card-text>
+        </v-card>
+      </v-tab-item>
+      
+    </v-tabs-items>
+
+    
+
   </v-card>
-
-
- <v-carousel>
-    <v-carousel-item
-      v-for="(item,i) in items"
-      :key="i"
-      :src="item.src"
-      reverse-transition="fade-transition"
-      transition="fade-transition"
-    ></v-carousel-item>
-  </v-carousel>
 
  <v-row>
 
-
-
-    <v-col
-      cols="6"
-      sm="4"
-    >
-      <v-img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxODEwMTFfNDAg%2FMDAxNTM5MjQzNjE0Mjc2.E9f6MHo6N_DyAZq8HCyAVdtUqPk_c3zI_yy3whF4eWEg.zr9BDHXx5mnBfAGdz_KKxXjebDZnqWx_fMbI9b5ueo4g.JPEG.gnsdl_-09%2F20181011163635.jpg&type=sc960_832">
-        <div class="fill-height bottom-gradient"></div>
-      </v-img>
-    </v-col>
-
-    <v-col
-      cols="6"
-      sm="4"
-    >
-      <v-img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxODEwMTBfMjI5%2FMDAxNTM5MTczNTUxOTg3.MGtfKnJC0IjFFLN68qUgVbzV3o-1iNTVz2g2nfFT4wEg.wTgpBemaSs7AiIv_iRAMwnktvZZxjHOG9aO_IUDzHhMg.JPEG.gnsdl_-09%2F20181010211025.jpg&type=sc960_832">
-        <div class="fill-height bottom-gradient"></div>
-      </v-img>
-    </v-col>
-
-    <v-col
-      cols="6"
-      sm="4"
+<v-col
+      cols="4"
+      sm="7"
     >
      
-      <v-img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxODEwMDhfODYg%2FMDAxNTM4OTk4NDgxODgz.RpGphxHu-T06qio_-bPBpi9huczJPBVUs_B8XzMwd4Ag.5yNi3qRPnlsMP2W_k68jhXReZROIRqP4VfIstNzmbgQg.JPEG.gnsdl_-09%2F20181008203144.jpg&type=sc960_832">
-        <div class="fill-height bottom-gradient"></div>
+      <v-img
+  lazy-src="https://picsum.photos/id/11/10/6"
+  max-height="900"
+  max-width="1000"
+  src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA0MDNfMTYy%2FMDAxNjQ4OTg5NjY0MDU3.BonsM_0cJlr-YbAnACMLNNCReFIlgOwYZbuWNAD4Rpcg.s9LddKP0NiBqYWPZ7FJklUILetjTMUuJO7E-1T6NHxEg.JPEG.cuddlyidiots%2FCUDI_%25C6%25F9%25B9%25E8%25B0%25E6%25C8%25AD%25B8%25E9_%25A3%25AD_2.jpg&type=sc960_832"
+> 
       </v-img>
-    </v-col>
-  </v-row>
 
+</v-col>
+  
+    
+     <v-col
+      cols="6"
+      sm="4"
+    >
+    <ul>
+    <br>
+     <br>
+      <br>
+  <font size=5> 4.1 ~ 4.3 메인화면(FRONTEND) </font>
+<br>
+<br>
+ <font size=5>4.4 ~ 4.5 로그인 회원가입(FROTEND)   </font>
+
+<br>
+<br>
+<font size=5> 4.6 ~ 4.7 로그인 회원가입(BACKEND) </font>
+<br>
+<br>
+
+<font size=5> 4.11 ~ 4.12 텍스트 메모 계시판(FROTNEND,BACKEND)</font>
+<br>
+<br>
+
+<font size=5> 4.13 ~ 4.14 계좌번호 계시판(FROTNEND,BACKEND)</font>
+<br>
+<br>
+
+<font size=5> 4.15 장보기 계시판(FROTNEND,BACKEND)</font>
+<br>
+<br>
+
+<font size=5> 4.19 생일관리 계시판(FROTNEND,BACKEND)</font>
+<br>
+<br>
+
+<font size=5> 4.20 사이트아이디 계시판(FROTNEND,BACKEND)</font>
+<br>
+<br>
+
+<font size=5> 4.21 ~ 4.22  부가기능 추가(FROTNEND,BACKEND)</font>
+<br>
+<br>
+
+<font size=5> 4.25 ~ 4.27  UL수정 작업(FROTNEND)</font>
+<br>
+<br>
+
+
+
+
+
+    </ul>
+    
+    </v-col>
+    <br>
+ 
+<br>
+  
+    
+  </v-row>
+   
 
    <v-footer
     color="primary lighten-1"
@@ -165,20 +211,6 @@
     data: () => ({
       drawer: false,
       group: null,
-       items: [
-          {
-            src: 'https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F584%2F2021%2F08%2F28%2F0000015734_001_20210828101023352.jpg&type=sc960_832',
-          },
-          {
-            src: 'https://search.pstatic.net/common/?src=http%3A%2F%2Fcafefiles.naver.net%2FMjAxNzA5MTdfODUg%2FMDAxNTA1NjAzMTQzMTYw.AYaWuWvqDossv-68BKOtChp-_A9AaEKsYUiOXXWpzQcg.GnW8lbFJWhu-w7TgNBSskLpjcj29I1F7IneE6jHG6EYg.JPEG.shlope%2Fp1020650.jpg&type=sc960_832',
-          },
-          {
-            src: 'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMDAxMDVfMTgx%2FMDAxNTc4MTg0NTc0OTYy.VQk-pMUR_AqOyVRiGvqaeBHpuOH94GuFd0jgz5aO1PYg.KzhkGMas0KN1SzZ608tTYRXpwvvVpPr51SnuU77ekHQg.JPEG.musicalian%2Fbook-730479_1920.jpg&type=sc960_832',
-          },
-          {
-            src: 'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20120120_262%2Fsusemi_9_1327031445583vMlxz_JPEG%2F%25C7%25CF%25B4%25C311.jpg&type=sc960_832',
-          },
-        ],
     }),
        
       
@@ -203,11 +235,4 @@ h5{color: green;}
 .basil--text {
   color: #356859 !important;
 }
-
-.big {
- width: 300;
- height: 500;
-}
-
-
 </style>

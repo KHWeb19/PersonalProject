@@ -30,6 +30,11 @@
                      <input type="text" class="form-control" :value="jpaBoard4.writer" readonly/>
                 </td>
             </tr>
+            
+            <tr>
+                <td>
+                      <v-img  class="form-control" :value="jpaBoard.files" > </v-img>
+                </td>
             <tr>
               
                 <td>

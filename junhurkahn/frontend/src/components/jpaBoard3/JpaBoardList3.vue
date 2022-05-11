@@ -1,23 +1,24 @@
 <template>
  <div class="bx">
   <div>
-        <br>
+       
     <div class="input-group mb-3">
   
   <span class="input-group-text"  id="inputGroup-sizing-default" @click="findSearch">Find</span>
 
+<div class="box">
   <input type="text" 
         class="form-control" 
         ref="keyword"
         aria-label="Sizing example input" 
         aria-describedby="inputGroup-sizing-default">
-
+</div>
 </div>
 
 
-  <table class="table table-success table-striped">
-
-            <tr align="center"  >
+  <table class="table table-succes table-striped">
+ 
+ <tr align="center" table class="table-success"  >
                 <th scope="col" >번호</th>
                <th scope="col">아름</th>
                <th scope="col">생년월일</th>
@@ -53,7 +54,29 @@
                      <button type="button" class="btn btn-outline-danger" @click="onDelete(board)">Delete</button>
                 </td>
             </tr>
-            
+
+             <hr/>
+               <nav aria-label="Page navigation example" >
+      <ul class="pagination">
+        <li class="page-item">
+          <a class="page-link" href="#">
+            Previous
+          </a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">1</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">2</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">3</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">Next</a>
+        </li>
+      </ul>
+    </nav> 
    </table>
     </div>
  </div>
@@ -122,8 +145,9 @@ export default {
   background-color: #FFFBE6 !important;
 }
 
-.box {
-    background: #FFFBE6;
-}
-
+.box{
+          background:white;
+          width: 50%
+        
+        }
 </style>

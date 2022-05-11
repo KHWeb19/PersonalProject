@@ -1,10 +1,9 @@
-
 <template>
 <div class="p-3 mb-2 bg-light text-dark">
 <div>
   <v-card color="basil">
 
-    <div class=" big ">
+      <div class=" big ">
    &emsp;&emsp; <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
     </div>
 
@@ -57,19 +56,13 @@
       </v-list>
     </v-navigation-drawer>
 
-
-
+    
     <v-card-title class="text-center justify-center py-6">
       <h1 class="font-weight-bold text-h2 basil--text"  >
       Note
       </h1>
     </v-card-title>
-  
 
-
-     
-    
-  
     <v-tabs
       v-model="tab"
       background-color="transparent"
@@ -78,55 +71,75 @@
     >
 
     
+
     
-   
+    
+     
     </v-tabs>
+
+    <v-tabs-items v-model="tab">
+      <v-tab-item
+        v-for="item in items"
+        :key="item"
+      >
+        <v-card
+          color="basil"
+          flat
+        >
+          <v-card-text>{{ text }}</v-card-text>
+        </v-card>
+      </v-tab-item>
+      
+    </v-tabs-items>
+
+    
+
   </v-card>
-
-
- <v-carousel>
-    <v-carousel-item
-      v-for="(item,i) in items"
-      :key="i"
-      :src="item.src"
-      reverse-transition="fade-transition"
-      transition="fade-transition"
-    ></v-carousel-item>
-  </v-carousel>
 
  <v-row>
 
+<v-col
+      cols="3"
+      sm="6"
+    >
 
-
+    
+     <v-img
+  lazy-src="https://picsum.photos/id/11/10/6"
+  max-height="500"
+  max-width="1000"
+  src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxOTA2MTdfMjcy%2FMDAxNTYwNzM5NzUxNTMw.bDOFEJyLHg69SKMoFJNYv62ChN7pHg6yivNolBb9xKgg.TQ3i-h8GlaYhqtbSp_vN_F18QiFPUaGQ4J01ACyQOGYg.JPEG.sundesign5482%2F5.jpg&type=sc960_832"
+>  </v-img>
+        <div class="fill-height bottom-gradient"></div>
+</v-col>
+  
+    
     <v-col
       cols="6"
       sm="4"
     >
-      <v-img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxODEwMTFfNDAg%2FMDAxNTM5MjQzNjE0Mjc2.E9f6MHo6N_DyAZq8HCyAVdtUqPk_c3zI_yy3whF4eWEg.zr9BDHXx5mnBfAGdz_KKxXjebDZnqWx_fMbI9b5ueo4g.JPEG.gnsdl_-09%2F20181011163635.jpg&type=sc960_832">
-        <div class="fill-height bottom-gradient"></div>
-      </v-img>
-    </v-col>
+    <ul>
+    <br>
+  <font size=5> 사람들이 요즘 메모를 하지 않는 다고 한다 하지만 메모는 굉장히 중요한 하나의 습관이다 </font>
+<br>
+<br>
+ <font size=5>사람은 하루에도 수천 가지 수만 가지의 생각을 무의식적으로 한다고 한다  </font>
 
-    <v-col
-      cols="6"
-      sm="4"
-    >
-      <v-img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxODEwMTBfMjI5%2FMDAxNTM5MTczNTUxOTg3.MGtfKnJC0IjFFLN68qUgVbzV3o-1iNTVz2g2nfFT4wEg.wTgpBemaSs7AiIv_iRAMwnktvZZxjHOG9aO_IUDzHhMg.JPEG.gnsdl_-09%2F20181010211025.jpg&type=sc960_832">
-        <div class="fill-height bottom-gradient"></div>
-      </v-img>
-    </v-col>
+<br>
+<br>
+<font size=5> 그렇다면 그것을 메모로 남기는 일은 그것을 인지하고 실행하다 보면 계획이 되고 그걸 반복하면 </font>
+<br>
+<br>
 
-    <v-col
-      cols="6"
-      sm="4"
-    >
-     
-      <v-img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxODEwMDhfODYg%2FMDAxNTM4OTk4NDgxODgz.RpGphxHu-T06qio_-bPBpi9huczJPBVUs_B8XzMwd4Ag.5yNi3qRPnlsMP2W_k68jhXReZROIRqP4VfIstNzmbgQg.JPEG.gnsdl_-09%2F20181008203144.jpg&type=sc960_832">
-        <div class="fill-height bottom-gradient"></div>
-      </v-img>
+<font size=5> 시간과 인생을 계획적으로 살아가는 사람이 될 것이다. 그것을 실행하기 위해 간단하게 사용 할수 있는 개인 메모장을 만들게 되었다.</font>
+<br>
+<br>
+    </ul>
+    
     </v-col>
+    
   </v-row>
-
+   
 
    <v-footer
     color="primary lighten-1"
@@ -158,27 +171,11 @@
 </div>
 </template>
 
-
-
 <script>
   export default {
     data: () => ({
       drawer: false,
       group: null,
-       items: [
-          {
-            src: 'https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F584%2F2021%2F08%2F28%2F0000015734_001_20210828101023352.jpg&type=sc960_832',
-          },
-          {
-            src: 'https://search.pstatic.net/common/?src=http%3A%2F%2Fcafefiles.naver.net%2FMjAxNzA5MTdfODUg%2FMDAxNTA1NjAzMTQzMTYw.AYaWuWvqDossv-68BKOtChp-_A9AaEKsYUiOXXWpzQcg.GnW8lbFJWhu-w7TgNBSskLpjcj29I1F7IneE6jHG6EYg.JPEG.shlope%2Fp1020650.jpg&type=sc960_832',
-          },
-          {
-            src: 'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMDAxMDVfMTgx%2FMDAxNTc4MTg0NTc0OTYy.VQk-pMUR_AqOyVRiGvqaeBHpuOH94GuFd0jgz5aO1PYg.KzhkGMas0KN1SzZ608tTYRXpwvvVpPr51SnuU77ekHQg.JPEG.musicalian%2Fbook-730479_1920.jpg&type=sc960_832',
-          },
-          {
-            src: 'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20120120_262%2Fsusemi_9_1327031445583vMlxz_JPEG%2F%25C7%25CF%25B4%25C311.jpg&type=sc960_832',
-          },
-        ],
     }),
        
       
@@ -203,11 +200,4 @@ h5{color: green;}
 .basil--text {
   color: #356859 !important;
 }
-
-.big {
- width: 300;
- height: 500;
-}
-
-
 </style>

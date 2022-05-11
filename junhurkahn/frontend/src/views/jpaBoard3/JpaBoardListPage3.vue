@@ -8,6 +8,60 @@
 
 <body>
   <v-card color="basil">
+
+     <div class=" big ">
+   &emsp;&emsp; <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+    </div>
+
+       <v-navigation-drawer
+      v-model="drawer"
+      absolute
+      bottom
+      temporary
+    >
+      <v-list
+        nav
+        dense
+      >
+        <v-list-item-group
+          v-model="group"
+          active-class="deep-purple--text text--accent-4"
+        >
+          <v-list-item>
+
+          <router-link style="text-decoration: none;" :to="{ name: 'JpaBoardListPage' }">  
+      <h5>텍스트 메모</h5>
+    </router-link>
+
+          </v-list-item>
+
+          <v-list-item>
+
+        <router-link style="text-decoration: none;" :to="{ name: 'JpaBoardListPage1' }">
+      <h5>계좌번호 메모</h5>
+    </router-link>
+
+          </v-list-item>
+
+          <v-list-item>
+
+           <router-link style="text-decoration: none;" :to="{ name: 'JpaBoardListPage2' }">
+      <h5>장보기 메모</h5>
+    </router-link>
+
+          </v-list-item>
+
+          <v-list-item>
+
+          <router-link style="text-decoration: none;" :to="{ name: 'JpaBoardListPage4' }">
+      <h5>사이트아이디 메모</h5>
+    </router-link>
+    
+          </v-list-item>
+        </v-list-item-group>
+      </v-list>
+    </v-navigation-drawer>
+
     <v-card-title class="text-center justify-center py-6">
       <h1 class="font-weight-bold text-h2 basil--text"  >
       Note
@@ -20,28 +74,7 @@
       color="basil"
       grow
     >
-      <v-tab
-      >  
-           <router-link style="text-decoration: none;" :to="{ name: 'JpaBoardListPage' }">  
-      <h3>&nbsp;&nbsp;&nbsp;&nbsp;텍스트 메모&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</h3>
-    </router-link>
-
-      <router-link style="text-decoration: none;" :to="{ name: 'JpaBoardListPage1' }">
-      <h3>&nbsp;&nbsp;&nbsp;&nbsp;계좌번호 메모 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</h3>
-    </router-link>
-
-          <router-link style="text-decoration: none;" :to="{ name: 'JpaBoardListPage2' }">
-      <h3>&nbsp;&nbsp;&nbsp;&emsp;장보기 메모&nbsp;&nbsp;&nbsp;&nbsp;</h3>
-    </router-link>
-
-     <router-link style="text-decoration: none;" :to="{ name: 'JpaBoardListPage4' }">
-      <h3>&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;사이트아이디 메모&nbsp;</h3>
-    </router-link>
-    
-
-
-
-      </v-tab>
+   
     </v-tabs>
 
     <v-tabs-items v-model="tab">

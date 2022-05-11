@@ -10,12 +10,16 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 
+
+
 import java.util.List;
+
+
 
 @Slf4j
 @RestController
 @RequestMapping("/62th/board4")
-@CrossOrigin(origins = "http://localhost:8081", allowedHeaders = "*")
+@CrossOrigin(origins = "http://localhost:8080", allowedHeaders = "*")
 public class SmartNoteController4 {
 
     @Autowired
@@ -27,7 +31,6 @@ public class SmartNoteController4 {
 
         service.register(board);
     }
-
     @GetMapping("/list4")
     public List<JpaBoards4> jpaBoardList (String keyword) {
         log.info("jpaBoardList4()");
@@ -39,6 +42,8 @@ public class SmartNoteController4 {
         }
 
     }
+
+
 
     @GetMapping("/{boardNo}")
     public JpaBoards4 jpaBoardRead (

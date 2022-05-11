@@ -5,6 +5,60 @@
 
 <div>
   <v-card color="basil">
+
+       <div class=" big ">
+   &emsp;&emsp; <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+    </div>
+
+       <v-navigation-drawer
+      v-model="drawer"
+      absolute
+      bottom
+      temporary
+    >
+      <v-list
+        nav
+        dense
+      >
+        <v-list-item-group
+          v-model="group"
+          active-class="deep-purple--text text--accent-4"
+        >
+          <v-list-item>
+
+          <router-link style="text-decoration: none;" :to="{ name: 'IntentionPlan' }">
+      <h5>기획의도</h5>
+    </router-link>
+
+          </v-list-item>
+
+          <v-list-item>
+
+         <router-link style="text-decoration: none;" :to="{ name: 'PlanningStage' }">
+      <h5>기획단계</h5>
+    </router-link>
+
+          </v-list-item>
+
+          <v-list-item>
+
+                <router-link style="text-decoration: none;" :to="{ name: 'LoginTestPage' }">
+      <h5>로그인</h5>
+    </router-link>
+
+          </v-list-item>
+
+          <v-list-item>
+
+            <router-link style="text-decoration: none;" :to="{ name: 'VuetifyMemberJoinColumnTestPage' }">
+      <h5>회원가입</h5>
+    </router-link>
+    
+          </v-list-item>
+        </v-list-item-group>
+      </v-list>
+    </v-navigation-drawer>
+
     <v-card-title class="text-center justify-center py-6">
       <h1 class="font-weight-bold text-h2 basil--text"  >
        Note
@@ -76,6 +130,15 @@ import router from '@/router'
 
 export default {
   name: "VuetifyMemberJoinColumnTestPage",
+
+  data () {
+    return {
+      
+        drawer: false,
+      group: null,
+    }
+  },
+
   components: {
     VuetifyMemberJoinColumnTestForm,
     

@@ -14,7 +14,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("/62th/board")
-@CrossOrigin(origins = "http://localhost:8081", allowedHeaders = "*")
+@CrossOrigin(origins = "http://localhost:8080", allowedHeaders = "*")
 public class SmartNoteController {
 
     @Autowired
@@ -33,11 +33,14 @@ public class SmartNoteController {
 
         if (keyword == null) {
             return service.list();
+
         } else {
             return service.search(keyword);
         }
 
     }
+
+
 
     @GetMapping("/{boardNo}")
     public JpaBoards jpaBoardRead (
