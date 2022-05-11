@@ -27,6 +27,8 @@
         
         <div class="right_content">
             <h4>케이크 정보 확인</h4>
+            <br>
+            <manager-page-cake-upload-form></manager-page-cake-upload-form>
 
             <v-card>
             <v-card-title>
@@ -109,6 +111,8 @@
 
 <script>
 import axios from 'axios'
+import ManagerPageCakeUploadForm from '@/components/manager/ManagerPageCakeUploadForm.vue'
+
     export default {
         name: 'ManagerPageCakeForm',
         props: {
@@ -116,6 +120,9 @@ import axios from 'axios'
                 type: Array,
                 required: true
             }
+        },
+        components: {
+            ManagerPageCakeUploadForm
         },
         data () {
             return {
@@ -140,6 +147,9 @@ import axios from 'axios'
                 size: '',
                 price:'', 
                 search:'',
+                uploadDesign:'',
+                uploadSize:'',
+                uploadPrice:'',
                 
             }
         },

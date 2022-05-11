@@ -26,7 +26,7 @@
 
         <div class="right_content">
             <h4>예약 정보 확인</h4><br>
-            <v-select class="selectCake" v-model="findList" :items="selectProcess" label="디자인 선택" style="width: 200px;" @change="findDesign"></v-select>
+            <v-select class="selectCake" v-model="findList" :items="selectProcess" label="예약 현황" style="width: 200px;" @change="findDesign"></v-select>
             
             <v-data-table :headers="headerTitle1" :items="bookingLists"  class="elevation-0" v-if="this.chooseDesBol != 'mine'">
                 <template v-slot:[`item.title`]="{ item }">
