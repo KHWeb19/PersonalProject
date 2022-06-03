@@ -1,0 +1,9 @@
+.main{
+    box-shadow: 0 0 8px 0 rgba(0,0,0,0.2);
+    font-family: 'Roboto', sans-serif;
+}
+
+.header{
+    font-family: 'Raleway', sans-serif;
+    font-weight: bold;
+}
