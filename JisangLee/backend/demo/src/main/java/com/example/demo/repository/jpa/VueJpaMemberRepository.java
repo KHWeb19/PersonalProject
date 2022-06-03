@@ -13,4 +13,5 @@ public interface VueJpaMemberRepository extends JpaRepository<VueJpaMember, Long
 
     @Query(value = "select * from Vue_Jpa_Member where nickname = :userNickname", nativeQuery = true)
     Optional<VueJpaMember> findByUserNickname(String userNickname);
+
 }

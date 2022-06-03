@@ -16,6 +16,7 @@ public class VueJPAMemberController {
 
     @Autowired
     private VueJpaMemberService service;
+    private com.example.demo.controller.jpa.request.MemberRequest MemberRequest;
 
     @PostMapping("/register")
     public VueJpaMember register (@Validated @RequestBody VueJpaMember member) {
@@ -55,6 +56,15 @@ public class VueJPAMemberController {
         Boolean maybeMember = service.checkUserNicknameValidation(nickname);
 
         return maybeMember;
+    }
+
+    @PostMapping("/vipjoin")
+    public void jpaMemberAuthRegister (@Validated @RequestBody MemberRequest memberRequest) {
+        log.info("jpaMemberAuthRegister(): " + memberRequest.getId() + ", " +
+                memberRequest.getNickname() + ", " +
+                (memberRequest.getAuth().equals("vip") ? "vip" : "general"));
+
+        service.register(memberRequest);
     }
 }
 

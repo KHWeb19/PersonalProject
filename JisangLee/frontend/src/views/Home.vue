@@ -1,6 +1,6 @@
 <template>
   <div class="app">
-    <router-link style="text-decoration: none;" :to="{ name: 'Home' }">
+    <!-- <router-link style="text-decoration: none;" :to="{ name: 'Home' }">
         &nbsp;Home&nbsp;
     </router-link>
     <router-link style="text-decoration: none;" :to="{ name: 'MainPage' }">
@@ -12,9 +12,9 @@
     <router-link style="text-decoration: none;" :to="{ name: 'LoginPage' }">
       &nbsp;Login&nbsp;
     </router-link>
-    <router-link style="text-decoration: none;" :to="{ name: 'AwesomeSwiperPage' }">
-        &nbsp;Awesome Swiper&nbsp;
-    </router-link>
+    <router-link style="text-decoration: none;" :to="{ name: 'LocalBoardListPage' }">
+      &nbsp;Local Board List&nbsp;
+    </router-link> -->
   </div>
 </template>
 

@@ -11,4 +11,6 @@ public interface VueJpaMemberService {
     public Boolean checkUserIdValidation(String id);
 
     public Boolean checkUserNicknameValidation(String nickname);
+
+    public void register(MemberRequest memberRequest);
 }

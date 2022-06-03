@@ -8,24 +8,30 @@
 
 <script>
 
+import swal from 'sweetalert';
 import RegisterForm from '@/components/stockMember/RegisterForm.vue'
 import axios from 'axios'
 
 export default {
   name: "RegisterPage.vue",
   components: {
-    // eslint-disable-next-line vue/no-unused-components
     RegisterForm
   },
   methods: {
     onSubmit (payload) {
-      const { id, pw, nickname, email, phonenumber } = payload
-      axios.post('http://localhost:7777/vueJpaMember/register', { id, pw, nickname, email, phonenumber })
-        .then(res => {
-          alert('회원가입이 완료되었습니다.' + res)
+      const { id, pw, nickname, email, phonenumber, auth } = payload
+      axios.post('http://localhost:7777/vueJpaMember/register', { id, pw, nickname, email, phonenumber, auth })
+        .then(() => {
+          swal({
+                text: "회원가입이 완료되었습니다!",
+                icon: "success"
+                })
+          this.$router.push({
+                            name: 'LoginPage'
+                        })
         })
         .catch(res => {
-          alert(res.response.data.message)
+          swal(res.response.data.message)
         })
     }
   }

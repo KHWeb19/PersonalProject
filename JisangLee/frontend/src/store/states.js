@@ -1,7 +1,15 @@
 export default {
-    boards: [],
-    board: null,
-    productBoards: [],
-    productBoard: null,
-    userInfo: null
+    userInfo: null,
+    localBoards:[],
+    localBoard: null,
+    localComments: [],
+    foreignBoards:[],
+    foreignBoard: null,
+    foreignComments: [],
+    questionBoards:[],
+    questionBoard: null,
+    questionComments: [],
+    complaintBoards:[],
+    complaintBoard: null,
+    complaintComments: [],
 }
