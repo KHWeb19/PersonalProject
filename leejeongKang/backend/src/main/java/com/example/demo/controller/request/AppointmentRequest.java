@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -33,4 +34,8 @@ public class AppointmentRequest {
 
         this.memberNo = memberNo;
     }*/
+
+    public AppointmentRequest (Long memberNo) {
+        this.memberNo = memberNo;
+    }
 }

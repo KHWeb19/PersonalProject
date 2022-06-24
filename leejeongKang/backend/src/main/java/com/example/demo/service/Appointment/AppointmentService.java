@@ -11,7 +11,7 @@ public interface AppointmentService {
 
     //예약 등록, 읽기, 삭제
     public void register (AppointmentRequest appointmentRequest);
-    public List<Appointment> list();
-    public Appointment read (Long aptNo);
+    public List<Appointment> list(Long memberNo);
+    public Appointment read (Long memberNo);
     public void remove (Long aptNo);
 }

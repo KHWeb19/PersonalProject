@@ -43,14 +43,14 @@ public class AppointmentServiceImpl implements AppointmentService{
 
     @Override
     @Transactional
-    public List<Appointment> list() {
-        return repository.findAll(Sort.by(Sort.Direction.DESC, "aptNo"));
-
+    public List<Appointment> list(Long memberNo) {
+        return repository.findAllByMemberNo(Long.valueOf(memberNo));
     }
 
     @Override
-    public Appointment read (Long aptNo) {
-        Optional<Appointment> maybeReadAppointment = repository.findById(Long.valueOf(aptNo));
+    @Transactional
+    public Appointment read (Long memberNo) {
+        Optional<Appointment> maybeReadAppointment = repository.readById(memberNo);
 
         if(maybeReadAppointment.equals(Optional.empty())) {
             log.info("Can't read appointment!");

@@ -29,21 +29,21 @@ public class AppointmentController {
         service.register(appointmentRequest);
     }
 
-    @GetMapping("/list")
-    public List<Appointment> AptList() {
+    @GetMapping("/{memberNo}")
+    public List<Appointment> AptList(@PathVariable("memberNo") Long memberNo) {
         log.info("AptList()");
 
-        return service.list();
+        return service.list(memberNo);
     }
 
-    @GetMapping("/{aptNo}")
-    public Appointment AptRead (@PathVariable("aptNo") Long aptNo) {
+    /*@GetMapping("/{memberNo}")
+    public Appointment AptRead (@PathVariable("memberNo") Long memberNo) {
         log.info("AptRead()");
 
-        return service.read(aptNo);
+        return service.read(memberNo);
     }
-
-    @DeleteMapping("/{aptNo}")
+*/
+    @DeleteMapping("/{memberNo}")
     public void AptDelete (@PathVariable("aptNo") Long aptNo) {
         log.info("AptDelete()");
 
