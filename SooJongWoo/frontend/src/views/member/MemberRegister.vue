@@ -10,7 +10,6 @@
 <script>
 import MemberRegisterForm from "@/components/member/MemberRegisterForm.vue";
 import axios from "axios";
-
 export default {
   name: "MemberRegister",
   components: {
@@ -33,7 +32,7 @@ export default {
           .then((res) => {
             if (res.data != "") {
               alert("회원가입이 완료됐습니다." + res);
-              this.$$router.push({
+              this.$router.push({
                 name: "MemberLogin",
               });
             } else {
@@ -51,32 +50,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.comp-login {
-  width: 500px;
-  height: 500px;
-}
-.img {
-  position: relative;
-  background-image: url("https://images.pexels.com/photos/533923/pexels-photo-533923.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
-  height: 100vh;
-  background-size: cover;
-}
-.img-cover {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
-  z-index: 1;
-}
-.img .content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-  z-index: 2;
-  text-align: center;
-}
-</style>

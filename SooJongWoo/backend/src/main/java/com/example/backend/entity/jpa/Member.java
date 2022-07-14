@@ -3,18 +3,18 @@ package com.example.backend.entity.jpa;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "member")
+@Table(name="member")
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,14 +24,17 @@ public class Member {
     @Column(length = 64, nullable = false)
     private String userId;
 
-    @Column(length = 128, nullable = false)
+    @Column(length = 64, nullable = false)
     private String password;
 
-    @Column(length = 128, nullable = false)
+    @Column(length = 64, nullable = false)
     private String passwordReInput;
 
     @Column(length = 64, nullable = false)
     private String userName;
+
+    @Column(length = 64, nullable = false)
+    private String userPhone;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm", timezone = "Asia/Seoul")
     @CreationTimestamp
@@ -44,11 +47,12 @@ public class Member {
     @JoinColumn(name = "member_no")
     private List<MemberAuth> authList = new ArrayList<MemberAuth>();
 
-    public Member(String userId, String password, String passwordReInput, String userName) {
+    public Member(String userId, String password, String passwordReInput, String userNam, String userPhone) {
         this.userId = userId;
         this.password = password;
         this.passwordReInput = passwordReInput;
-        this.userName = userName;
+        this.userName = userNam;
+        this.userPhone = userPhone;
     }
 
     public void addAuth(MemberAuth auth) {

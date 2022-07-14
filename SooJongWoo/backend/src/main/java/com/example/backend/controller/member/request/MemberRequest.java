@@ -13,5 +13,6 @@ public class MemberRequest {
     private String password;
     private String passwordReInput;
     private String userName;
+    private String userPhone;
     private String auth;
 }

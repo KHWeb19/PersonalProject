@@ -35,3 +35,6 @@ export default {
   },
 };
 </script>
+
+<style Footere>
+</style>
