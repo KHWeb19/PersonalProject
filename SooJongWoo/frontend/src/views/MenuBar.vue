@@ -4,10 +4,6 @@
       <v-app-bar-nav-icon
         @click="nav_drawer = !nav_drawer"
       ></v-app-bar-nav-icon>
-      <v-btn text router :to="'/hawul'" class="home-btn" plain>
-        <v-icon>mdi-home</v-icon>
-      </v-btn>
-
       <v-toolbar-items class="login-locate">
         <v-btn plain text v-if="this.cookie === false" router :to="'/login'">
           <v-icon>mdi-export</v-icon>
@@ -19,12 +15,31 @@
         >
           <template v-slot:activator="{ on, attrs }">
             <v-btn text v-bind="attrs" v-on="on">
-              <v-icon>mdi-account-circle</v-icon>
+              <v-icon>mdi-account</v-icon>
             </v-btn>
           </template>
           <v-list>
             <v-list-item router :to="{ name: 'UserList' }">
               <v-list-item-title>마이페이지</v-list-item-title>
+            </v-list-item>
+            <v-list-item @click="logout">
+              <v-list-item-title>로그아웃</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+
+        <v-menu
+          offset-y
+          v-if="this.cookie === true && this.individual != '개인'"
+        >
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn text v-bind="attrs" v-on="on">
+              <v-icon>mdi-account</v-icon>
+            </v-btn>
+          </template>
+          <v-list>
+            <v-list-item router :to="{ name: 'MemberListPage' }">
+              <v-list-item-title>관리자페이지</v-list-item-title>
             </v-list-item>
             <v-list-item @click="logout">
               <v-list-item-title>로그아웃</v-list-item-title>
@@ -47,7 +62,7 @@
             :to="link.route"
           >
             <v-list-item-content>
-              <v-list-title>{{ link.text }}</v-list-title>
+              <v-list-item-title>{{ link.text }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-list-item-group>
@@ -58,7 +73,6 @@
 
 <script>
 import { mapActions, mapState } from "vuex";
-
 export default {
   name: "MenuBar",
   computed: {
@@ -72,11 +86,31 @@ export default {
       individual: this.$cookies.get("auth"),
       userId: this.$cookies.get("user"),
       links: [
-        { text: "Home", name: "home", route: "/hawul" },
-        { text: "객실안내", name: "room", route: "/rooms" },
-        { text: "예약안내", name: "reservation", route: "/reservation" },
-        { text: "부대시설", name: "service", route: "/service" },
-        { text: "공지사항", name: "notice", route: "/notice" },
+        {
+          text: "Home",
+          name: "Hawul",
+          route: "/hawul",
+        },
+        {
+          text: "객실 안내",
+          name: "ROOMS",
+          route: "/rooms",
+        },
+        {
+          text: "예약 안내",
+          name: "ReservationPage",
+          route: "/reservationPage",
+        },
+        {
+          text: "부대 시설",
+          name: "ServicePage",
+          route: "/servicePage",
+        },
+        {
+          text: "공지사항",
+          name: "BOARD",
+          route: "/board",
+        },
       ],
     };
   },
@@ -84,42 +118,51 @@ export default {
     group() {
       this.nav_drawer = false;
     },
-    methods: {
-      ...mapActions(["logout"]),
-    },
+  },
+  methods: {
+    ...mapActions(["logout"]),
   },
 };
 </script>
 
-<style lang="scss" scoped>
-@import url("https://fonts.googleapis.com/css2?family=Cinzel+Decorative&display=swap");
+<style scoped>
 .menubar {
   padding-top: 100px;
   padding-left: 40px;
 }
+
 .nav-menu {
   position: absolute;
   top: 3%;
   left: 1%;
 }
-.logo {
-  font-family: "Cinzel Decorative";
-  font-size: 40px;
-  margin: 0 auto;
-}
+
 .account {
   padding-left: 40vw;
 }
+
 .login-locate {
   padding: 10px 0px 10px 0px;
   position: absolute;
   right: 0.5%;
   top: 1%;
 }
+
 .home-btn {
   padding: 10px 0px 10px 0px;
   position: absolute;
   right: 5%;
   top: 22%;
+}
+
+.main-bar {
+  position: absolute;
+  top: 2%;
+  left: 1%;
+}
+
+.main-colorbox {
+  margin: 3% 0% 3% 0%;
+  background-color: #ececec;
 }
 </style>

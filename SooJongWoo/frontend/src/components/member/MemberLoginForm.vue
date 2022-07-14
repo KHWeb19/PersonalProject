@@ -9,7 +9,7 @@
       </v-alert>
       <h1>Welcome</h1>
       <h2>to</h2>
-      <h1>Hawul</h1>
+      <h1>Cinzel</h1>
 
       <div>
         <v-icon class="mail-icon" color="white">email</v-icon>
@@ -55,8 +55,6 @@
             class="white--text"
             route
             :to="'/memberRegister'"
-            text
-            plain
           >
             회원가입
           </v-btn>
@@ -68,7 +66,7 @@
 
 <script>
 export default {
-  name: "MemberLoginForm.vue",
+  name: "MemberLoginForm",
   data() {
     return {
       userId: "",
@@ -83,25 +81,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Cinzel&display=swap");
-.btn-size {
-  position: relative;
-  left: 15%;
-}
-.mail-icon {
-  float: left;
-  padding: 10px 20px 10px 20px;
-}
-h1 {
-  font-family: "Cinzel";
-  font-size: 80px;
-  margin: 0;
-}
-h2 {
-  font-family: "Cinzel";
-  font-size: 40px;
-  margin: -3%;
-}
-</style>
