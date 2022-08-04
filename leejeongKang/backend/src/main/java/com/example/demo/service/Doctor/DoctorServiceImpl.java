@@ -45,4 +45,5 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public void remove (Long doctorNo) { repository.deleteById(Long.valueOf(doctorNo));}
+
 }

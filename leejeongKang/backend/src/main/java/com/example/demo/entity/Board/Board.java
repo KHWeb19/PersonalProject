@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -39,17 +40,10 @@ public class Board {
         this.regDate = LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT));
 
     }
-   /*@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id")
-    private Member member;
 
-    @OneToMany(mappedBy = "")
+    @OneToMany(mappedBy = "board", fetch = FetchType.EAGER)
+    private List<Comment> commentList;
 
-    public Board (String title, String writer, String content){
-        this.title = title;
-        this.writer = writer;
-        this.content = content;
-    }*/
 
 }
 

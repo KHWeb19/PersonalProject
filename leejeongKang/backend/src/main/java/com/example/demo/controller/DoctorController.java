@@ -1,7 +1,5 @@
 package com.example.demo.controller;
 
-import com.example.demo.controller.request.DoctorRequest;
-import com.example.demo.entity.Board.Board;
 import com.example.demo.entity.Doctor.Doctor;
 import com.example.demo.service.Doctor.DoctorService;
 import lombok.extern.slf4j.Slf4j;
@@ -51,4 +49,9 @@ public class DoctorController {
 
         return doctor;
     }
+
+
+
+
+
 }

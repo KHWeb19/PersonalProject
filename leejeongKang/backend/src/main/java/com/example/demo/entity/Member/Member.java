@@ -5,8 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+
 
 @Data
 @Entity
@@ -31,9 +30,6 @@ public class Member {
 
     @Column(length = 20, nullable = false)
     private String phone;
-
-   /*@OneToMany(mappedBy = "member")
-    private Appointment appointment;*/
 
     public Member(String id, String password, String name, String birth, String phone) {
         this.id = id;

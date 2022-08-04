@@ -1,6 +1,4 @@
 package com.example.demo.controller;
-
-
 import com.example.demo.entity.Board.Board;
 import com.example.demo.service.Board.BoardService;
 import lombok.extern.slf4j.Slf4j;
@@ -49,6 +47,13 @@ public class BoardController {
         service.modify(board);
 
         return board;
+    }
+
+    @DeleteMapping("/delete/{boardNo}")
+    public void BoardDelete (@PathVariable("boardNo") Long boardNo, Board board) throws Exception {
+        log.info("BoardDelete()");
+
+        service.remove(boardNo);
     }
 
 }

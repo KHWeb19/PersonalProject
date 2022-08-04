@@ -7,15 +7,15 @@ import org.springframework.data.repository.query.Param;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 
 public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
 
-    @Query(value = "select * from appointment where memberNo in(select memberNo from member where memberNo = :memberNo)", nativeQuery = true)
+    /*@Transactional
+    @Query(value = "select a from Appointment as a join a.memberNo m where m.memberNo = :memberNo")
     List<Appointment> findAllByMemberNo (@Param("memberNo") Long memberNo);
 
     @Transactional
     @Query(value = "select * from appointment as a where a.memberNo = member.memberNo", nativeQuery = true)
     Optional<Appointment> readById (@Param("memberNo") Long memberNo);
-
+*/
 }
