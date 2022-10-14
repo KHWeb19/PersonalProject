@@ -3,13 +3,16 @@ package com.example.demo.entity.Appointment;
 
 import com.example.demo.entity.Doctor.Doctor;
 import com.example.demo.entity.Member.Member;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -31,10 +34,10 @@ public class Appointment {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "memberNo")
-    @NotNull
+    @JsonIgnore
     private Member member;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "doctorNo")
     @NotNull
     private Doctor doctor;

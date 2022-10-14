@@ -45,12 +45,18 @@ public class AppointmentServiceImpl implements AppointmentService{
     @Transactional
     public List<Appointment> list() {
         return repository.findAll(Sort.by(Sort.Direction.DESC, "aptNo"));
-
     }
 
-    @Override
-    public Appointment read (Long aptNo) {
-        Optional<Appointment> maybeReadAppointment = repository.findById(Long.valueOf(aptNo));
+    /*@Override
+    @Transactional
+    public List<Appointment> list(Long memberNo) {
+        return repository.findAllByMemberNo(Long.valueOf(memberNo));
+    }*/
+
+    /*@Override
+    @Transactional
+    public Appointment read (Long memberNo) {
+        Optional<Appointment> maybeReadAppointment = repository.readById(memberNo);
 
         if(maybeReadAppointment.equals(Optional.empty())) {
             log.info("Can't read appointment!");
@@ -59,7 +65,7 @@ public class AppointmentServiceImpl implements AppointmentService{
 
         return maybeReadAppointment.get();
     }
-
+*/
     @Override
     public void remove (Long aptNo) {
         repository.deleteById(Long.valueOf(aptNo));

@@ -2,12 +2,9 @@ package com.example.demo.controller;
 
 import com.example.demo.controller.request.AppointmentRequest;
 import com.example.demo.entity.Appointment.Appointment;
-import com.example.demo.entity.Doctor.Doctor;
-import com.example.demo.entity.Member.Member;
 import com.example.demo.service.Appointment.AppointmentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.parameters.P;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,29 +21,30 @@ public class AppointmentController {
 
     @PostMapping("/register")
     public void AptRegister (@Validated @RequestBody AppointmentRequest appointmentRequest) {
-        log.info("AppointmentRegister()");
+        log.info("AppointmentRegister()" + appointmentRequest);
 
         service.register(appointmentRequest);
     }
 
     @GetMapping("/list")
-    public List<Appointment> AptList() {
-        log.info("AptList()");
+    public List<Appointment> AppointmentList() {
+        log.info("AppointmentList()");
 
         return service.list();
     }
 
-    @GetMapping("/{aptNo}")
-    public Appointment AptRead (@PathVariable("aptNo") Long aptNo) {
-        log.info("AptRead()");
 
-        return service.read(aptNo);
-    }
+    /*@GetMapping("/{memberNo}")
+    public List<Appointment> AptList(@PathVariable("memberNo") Long memberNo) {
+        log.info("AptList()");
 
-    @DeleteMapping("/{aptNo}")
+        return service.list(memberNo);
+    }*/
+
+    @DeleteMapping("/{memberNo}")
     public void AptDelete (@PathVariable("aptNo") Long aptNo) {
         log.info("AptDelete()");
 
-        service.read(aptNo);
+        service.remove(aptNo);
     }
 }

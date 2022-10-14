@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -27,10 +28,14 @@ public class AppointmentRequest {
     private String phone;
 
     //예약 등록시 사용
-    /*public AppointmentRequest (Date date, String time, Long doctorNo, Long memberNo) {
+    public AppointmentRequest (Date date, String time, Long doctorNo, Long memberNo) {
         this.date = date;
         this.time = time;
-
+        this.doctorNo = doctorNo;
         this.memberNo = memberNo;
-    }*/
+    }
+
+    public AppointmentRequest (Long memberNo) {
+        this.memberNo = memberNo;
+    }
 }

@@ -1,11 +1,11 @@
 package com.example.demo.entity.Member;
 
+import com.example.demo.entity.Appointment.Appointment;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+
 
 @Data
 @Entity
@@ -31,12 +31,6 @@ public class Member {
     @Column(length = 20, nullable = false)
     private String phone;
 
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<MemberAuth> authList = new ArrayList<>();
-
-    /*@OneToMany(mappedBy = "appointment")
-    private List<Appointment> apt = new ArrayList<>(); */
-
     public Member(String id, String password, String name, String birth, String phone) {
         this.id = id;
         this.password = password;
@@ -54,14 +48,4 @@ public class Member {
         this.phone = phone;
     }
 
-    public void addAuth (MemberAuth auth) {
-        if (authList == null) {
-            authList = new ArrayList<MemberAuth>();
-        }
-        authList.add(auth);
-    }
-
-    public void clearAuthList () {
-        authList.clear();
-    }
 }
